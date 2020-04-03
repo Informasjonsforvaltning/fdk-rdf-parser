@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "fdk-rdf-parser"
+version = "0.1.0"
+description = ""
+authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+rdflib = "^4.2.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
