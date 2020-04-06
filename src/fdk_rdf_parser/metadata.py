@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-import isodate
+from datetime import datetime
 
 @dataclass
 class HarvestMetaData:
-    firstHarvested: isodate
+    firstHarvested: datetime
     """changed: List[str]"""

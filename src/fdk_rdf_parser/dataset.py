@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
-from rdflib.namespace import RDF, DCTERMS
+from rdflib.namespace import RDF, DCTERMS, FOAF
 from dataclasses import dataclass
-from typing import List
+from typing import Dict
 from .metadata import HarvestMetaData
 
 @dataclass
@@ -12,15 +12,16 @@ class Dataset:
 def parseDatasets(rdfData: str):
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
 
-    datasets: List[Dataset] = []
+    datasets: Dict[str, Dataset] = {}
 
     for record in datasetsGraph.subjects(predicate=RDF.type, object=URIRef(u'http://www.w3.org/ns/dcat#record')):
-        datasets.append(Dataset(
+        datasetURI = objectValue(datasetsGraph, record, FOAF.primaryTopic)
+        datasets[datasetURI] = Dataset(
             id = objectValue(datasetsGraph, record, predicate=DCTERMS.identifier),
             harvest = HarvestMetaData(
                 firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued)
             )
-        ))
+        )
 
     return datasets
 

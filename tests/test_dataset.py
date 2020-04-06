@@ -61,16 +61,16 @@ def test_rdf():
         dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
 
-    expected = [
-        Dataset(
-            id='4667277a-9d27-32c1-aed5-612fa601f393',
-            harvest=HarvestMetaData(firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"))
-        ), 
-        Dataset(
+    expected = {
+        'https://testdirektoratet.no/model/dataset/0': Dataset(
             id='a1c680ca-62d7-34d5-aa4c-d39b5db033ae',
             harvest=HarvestMetaData(firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"))
+        ), 
+        'https://testdirektoratet.no/model/dataset/1': Dataset(
+            id='4667277a-9d27-32c1-aed5-612fa601f393',
+            harvest=HarvestMetaData(firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"))
         )
-    ]
+    }
 
 
     assert parseDatasets(src0) == expected
