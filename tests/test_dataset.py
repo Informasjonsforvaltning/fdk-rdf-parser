@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import parseDatasets
+from fdk_rdf_parser import parseDatasets, Dataset
 
 def test_rdf():
 
@@ -60,4 +60,4 @@ def test_rdf():
         dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
 
-    assert parseDatasets(src0) == 44
+    assert parseDatasets(src0) == [Dataset(id='4667277a-9d27-32c1-aed5-612fa601f393'), Dataset(id='a1c680ca-62d7-34d5-aa4c-d39b5db033ae')]

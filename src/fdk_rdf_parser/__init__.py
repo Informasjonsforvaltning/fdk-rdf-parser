@@ -1,2 +1,2 @@
 
-from .dataset import parseDatasets
+from .dataset import parseDatasets, Dataset
