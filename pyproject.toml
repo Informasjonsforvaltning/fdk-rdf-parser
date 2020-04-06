@@ -7,6 +7,7 @@ authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 rdflib = "^4.2.2"
+isodate = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.1"
