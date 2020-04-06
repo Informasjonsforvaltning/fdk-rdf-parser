@@ -12,10 +12,14 @@ def parseDatasets(rdfData: str):
 
     datasets: List = []
 
-    for subject in datasetsGraph.subjects(predicate=RDF.type, object=URIRef(u'http://www.w3.org/ns/dcat#record')):
+    for datasetSubject in datasetsGraph.subjects(predicate=RDF.type, object=URIRef(u'http://www.w3.org/ns/dcat#record')):
         dataset = Dataset(
-            id = datasetsGraph.value(subject, predicate=DCTERMS.identifier).toPython()
+            id = objectValue(datasetsGraph, datasetSubject, predicate=DCTERMS.identifier)
         )
         datasets.append(dataset)
 
     return datasets
+
+def objectValue(graph: Graph, subject: URIRef, predicate: URIRef):
+    value = graph.value(subject, predicate)
+    return value.toPython() if value != None else None
