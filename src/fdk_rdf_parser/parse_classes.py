@@ -10,9 +10,12 @@ class HarvestMetaData:
 @dataclass
 class Dataset:
     id: str
+    publisher: str
     harvest: HarvestMetaData
     title: Dict[str, str]
     description: Dict[str, str]
     uri: str
     accessRights: str
     accessRightsComment: str
+    theme: List[str]
+    keyword: List[str]

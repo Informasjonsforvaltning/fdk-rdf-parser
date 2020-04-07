@@ -18,6 +18,7 @@ def test_rdf():
         dct:accessRights          <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
         dct:description           "Beskrivelse av datasett 0"@nb , "Description of dataset 0"@en ;
         dct:identifier            "adb4cf00-31c8-460c-9563-55f204cf8221" ;
+        dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/987654321> ;
         dct:title                 "Datasett 0"@nb , "Dataset 0"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
                                     vcard:hasOrganizationName  "Testdirektoratet"@nb ;
@@ -45,6 +46,7 @@ def test_rdf():
 <https://testdirektoratet.no/model/dataset/1>
         a                         dcat:Dataset ;
         dct:description           "Beskrivelse av datasett 1"@nb , "Description of dataset 1"@en ;
+        dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/123456789> ;
         dct:title                 "Datasett 1"@nb , "Dataset 1"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
                                     vcard:hasOrganizationName  "Testdirektoratet"@nb ;
@@ -80,7 +82,10 @@ def test_rdf():
             description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
             uri='https://testdirektoratet.no/model/dataset/0',
             accessRights='http://publications.europa.eu/resource/authority/access-right/PUBLIC',
-            accessRightsComment=None
+            accessRightsComment=None,
+            publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
+            theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
+            keyword=['fest', 'test']
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -91,7 +96,10 @@ def test_rdf():
             description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"},
             uri='https://testdirektoratet.no/model/dataset/1',
             accessRights=None,
-            accessRightsComment=None
+            accessRightsComment=None,
+            publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
+            theme=[],
+            keyword=[]
         )
     }
 

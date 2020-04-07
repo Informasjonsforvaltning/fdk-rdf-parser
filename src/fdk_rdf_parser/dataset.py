@@ -16,15 +16,18 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
         if datasetURI != None:
             datasets[datasetURI.toPython()] = Dataset(
                 id = objectValue(datasetsGraph, record, DCTERMS.identifier),
+                publisher = objectValue(datasetsGraph, datasetURI, DCTERMS.publisher),
                 harvest = HarvestMetaData(
                     firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
                     changed = valueList(datasetsGraph, record, DCTERMS.modified)
                 ),
                 title = valueTranslations(datasetsGraph, datasetURI, DCTERMS.title),
                 description = valueTranslations(datasetsGraph, datasetURI, DCTERMS.description),
-                uri=datasetURI.toPython(),
-                accessRights=objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
-                accessRightsComment=objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment'))
+                uri = datasetURI.toPython(),
+                accessRights = objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
+                accessRightsComment = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment')),
+                theme = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#theme')),
+                keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword'))
             )
 
     return datasets
