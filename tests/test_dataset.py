@@ -16,9 +16,9 @@ def test_rdf():
 <https://testdirektoratet.no/model/dataset/0>
         a                         dcat:Dataset ;
         dct:accessRights          <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
-        dct:description           "Description of dataset 0"@nb ;
+        dct:description           "Beskrivelse av datasett 0"@nb , "Description of dataset 0"@en ;
         dct:identifier            "adb4cf00-31c8-460c-9563-55f204cf8221" ;
-        dct:title                 "Dataset 0"@nb ;
+        dct:title                 "Datasett 0"@nb , "Dataset 0"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
                                     vcard:hasOrganizationName  "Testdirektoratet"@nb ;
                                     vcard:hasURL               <https://testdirektoratet.no>
@@ -44,8 +44,8 @@ def test_rdf():
 
 <https://testdirektoratet.no/model/dataset/1>
         a                         dcat:Dataset ;
-        dct:description           "Description of dataset 1"@nb ;
-        dct:title                 "Dataset 1"@nb ;
+        dct:description           "Beskrivelse av datasett 1"@nb , "Description of dataset 1"@en ;
+        dct:title                 "Datasett 1"@nb , "Dataset 1"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
                                     vcard:hasOrganizationName  "Testdirektoratet"@nb ;
                                     vcard:hasURL               <https://testdirektoratet.no>
@@ -68,13 +68,17 @@ def test_rdf():
             id='a1c680ca-62d7-34d5-aa4c-d39b5db033ae',
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")])
+                changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
+            title={'nb':'Datasett 0','en':"Dataset 0"},
+            description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"}
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")])
+                changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
+            title={'nb':'Datasett 1','en':"Dataset 1"},
+            description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"}
         )
     }
 
