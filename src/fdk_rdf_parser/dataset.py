@@ -1,8 +1,11 @@
-from rdflib import Graph, URIRef
-from rdflib.namespace import RDF, DCTERMS, FOAF
 from dataclasses import dataclass
 from typing import Dict
+
+from rdflib import Graph, URIRef
+from rdflib.namespace import RDF, DCTERMS, FOAF
+
 from .metadata import HarvestMetaData
+from .rdf_utils import objectValue, objectList
 
 @dataclass
 class Dataset:
@@ -19,12 +22,9 @@ def parseDatasets(rdfData: str):
         datasets[datasetURI] = Dataset(
             id = objectValue(datasetsGraph, record, predicate=DCTERMS.identifier),
             harvest = HarvestMetaData(
-                firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued)
+                firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
+                changed = objectList(datasetsGraph, record, DCTERMS.modified)
             )
         )
 
     return datasets
-
-def objectValue(graph: Graph, subject: URIRef, predicate: URIRef):
-    value = graph.value(subject, predicate)
-    return value.toPython() if value != None else None
