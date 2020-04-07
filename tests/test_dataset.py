@@ -61,7 +61,14 @@ def test_rdf():
         dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
-        foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
+        foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+<https://datasets.fellesdatakatalog.digdir.no/datasets/123>
+        a                  dcat:record ;
+        dct:identifier     "123" ;
+        dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+        dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+        dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ."""
 
     expected = {
         'https://testdirektoratet.no/model/dataset/0': Dataset(
@@ -70,7 +77,8 @@ def test_rdf():
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
             title={'nb':'Datasett 0','en':"Dataset 0"},
-            description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"}
+            description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
+            uri='https://testdirektoratet.no/model/dataset/0'
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -78,7 +86,8 @@ def test_rdf():
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
             title={'nb':'Datasett 1','en':"Dataset 1"},
-            description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"}
+            description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"},
+            uri='https://testdirektoratet.no/model/dataset/1'
         )
     }
 

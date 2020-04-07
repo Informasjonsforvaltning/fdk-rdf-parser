@@ -13,3 +13,4 @@ class Dataset:
     harvest: HarvestMetaData
     title: Dict[str, str]
     description: Dict[str, str]
+    uri: str

@@ -13,14 +13,16 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
 
     for record in datasetsGraph.subjects(predicate=RDF.type, object=URIRef(u'http://www.w3.org/ns/dcat#record')):
         datasetURI = datasetsGraph.value(record, FOAF.primaryTopic)
-        datasets[datasetURI.toPython()] = Dataset(
-            id = objectValue(datasetsGraph, record, predicate=DCTERMS.identifier),
-            harvest = HarvestMetaData(
-                firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
-                changed = valueList(datasetsGraph, record, DCTERMS.modified)
-            ),
-            title = valueTranslations(datasetsGraph, datasetURI, DCTERMS.title),
-            description = valueTranslations(datasetsGraph, datasetURI, DCTERMS.description)
-        )
+        if datasetURI != None:
+            datasets[datasetURI.toPython()] = Dataset(
+                id = objectValue(datasetsGraph, record, predicate=DCTERMS.identifier),
+                harvest = HarvestMetaData(
+                    firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
+                    changed = valueList(datasetsGraph, record, DCTERMS.modified)
+                ),
+                title = valueTranslations(datasetsGraph, datasetURI, DCTERMS.title),
+                description = valueTranslations(datasetsGraph, datasetURI, DCTERMS.description),
+                uri=datasetURI.toPython()
+            )
 
     return datasets
