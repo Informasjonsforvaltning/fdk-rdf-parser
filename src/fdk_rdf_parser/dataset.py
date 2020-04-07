@@ -15,14 +15,16 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
         datasetURI = datasetsGraph.value(record, FOAF.primaryTopic)
         if datasetURI != None:
             datasets[datasetURI.toPython()] = Dataset(
-                id = objectValue(datasetsGraph, record, predicate=DCTERMS.identifier),
+                id = objectValue(datasetsGraph, record, DCTERMS.identifier),
                 harvest = HarvestMetaData(
                     firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
                     changed = valueList(datasetsGraph, record, DCTERMS.modified)
                 ),
                 title = valueTranslations(datasetsGraph, datasetURI, DCTERMS.title),
                 description = valueTranslations(datasetsGraph, datasetURI, DCTERMS.description),
-                uri=datasetURI.toPython()
+                uri=datasetURI.toPython(),
+                accessRights=objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
+                accessRightsComment=objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment'))
             )
 
     return datasets

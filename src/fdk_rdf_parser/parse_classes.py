@@ -14,3 +14,5 @@ class Dataset:
     title: Dict[str, str]
     description: Dict[str, str]
     uri: str
+    accessRights: str
+    accessRightsComment: str

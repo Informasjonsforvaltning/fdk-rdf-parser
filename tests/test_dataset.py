@@ -78,7 +78,9 @@ def test_rdf():
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
             title={'nb':'Datasett 0','en':"Dataset 0"},
             description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
-            uri='https://testdirektoratet.no/model/dataset/0'
+            uri='https://testdirektoratet.no/model/dataset/0',
+            accessRights='http://publications.europa.eu/resource/authority/access-right/PUBLIC',
+            accessRightsComment=None
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -87,7 +89,9 @@ def test_rdf():
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
             title={'nb':'Datasett 1','en':"Dataset 1"},
             description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"},
-            uri='https://testdirektoratet.no/model/dataset/1'
+            uri='https://testdirektoratet.no/model/dataset/1',
+            accessRights=None,
+            accessRightsComment=None
         )
     }
 
