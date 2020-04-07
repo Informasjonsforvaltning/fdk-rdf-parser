@@ -1,10 +1,11 @@
 from typing import Dict
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, URIRef, BNode
 from rdflib.namespace import RDF, DCTERMS, FOAF
 
-from .parse_classes import HarvestMetaData, Dataset
+from .parse_classes import HarvestMetaData, Dataset, ContactPoint
 from .rdf_utils import objectValue, valueList, valueTranslations
+from .contactpoint import extractContactPoints
 
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
@@ -27,7 +28,8 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 accessRights = objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
                 accessRightsComment = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment')),
                 theme = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#theme')),
-                keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword'))
+                keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword')),
+                contactPoint = extractContactPoints(datasetsGraph, datasetURI)
             )
 
     return datasets

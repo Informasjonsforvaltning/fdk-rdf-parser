@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData
+from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData, ContactPoint
 import isodate
 
 def test_rdf():
@@ -21,7 +21,8 @@ def test_rdf():
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/987654321> ;
         dct:title                 "Datasett 0"@nb , "Dataset 0"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
-                                    vcard:hasOrganizationName  "Testdirektoratet"@nb ;
+                                    vcard:hasTelephone         <tel:23453345> ;
+                                    vcard:hasOrganizationName  "Testdirektoratet" ;
                                     vcard:hasURL               <https://testdirektoratet.no>
                                   ] ;
         dcat:endpointDescription  <https://testdirektoratet.no/openapi/dataset/0.yaml> ;
@@ -49,9 +50,11 @@ def test_rdf():
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/123456789> ;
         dct:title                 "Datasett 1"@nb , "Dataset 1"@en ;
         dcat:contactPoint         [ a                          vcard:Organization ;
-                                    vcard:hasOrganizationName  "Testdirektoratet"@nb ;
+                                    vcard:hasEmail             <mailto:post@mail.com> ;
+                                    vcard:hasOrganizationName  "Testdirektoratet" ;
                                     vcard:hasURL               <https://testdirektoratet.no>
                                   ] ;
+        dcat:contactPoint         <https://testdirektoratet.no/kontakt/testmann> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
         dcat:distribution         <https://testdirektoratet.no/model/distribution/1>, <https://testdirektoratet.no/model/distribution/2> ;
@@ -85,7 +88,12 @@ def test_rdf():
             accessRightsComment=None,
             publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
-            keyword=['fest', 'test']
+            keyword=['fest', 'test'],
+            contactPoint=[ContactPoint(
+                organizationName='Testdirektoratet',
+                hasURL='https://testdirektoratet.no',
+                hasTelephone='23453345')
+            ]
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -99,7 +107,14 @@ def test_rdf():
             accessRightsComment=None,
             publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
             theme=[],
-            keyword=[]
+            keyword=[],
+            contactPoint=[
+                ContactPoint(
+                    email='post@mail.com',
+                    organizationName='Testdirektoratet',
+                    hasURL='https://testdirektoratet.no'),
+                ContactPoint(uri='https://testdirektoratet.no/kontakt/testmann')
+            ]
         )
     }
 

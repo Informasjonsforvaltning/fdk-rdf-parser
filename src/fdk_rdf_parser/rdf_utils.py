@@ -18,3 +18,10 @@ def valueTranslations(graph: Graph, subject: URIRef, predicate: URIRef) -> Dict[
     for obj in graph.objects(subject, predicate):
         values[obj.language] = obj.toPython()
     return values
+
+def resourceList(graph: Graph, subject: URIRef, predicate: URIRef):
+    values = []
+    for obj in graph.objects(subject, predicate):
+        values.append(obj)
+    values.sort()
+    return values

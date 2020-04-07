@@ -19,3 +19,14 @@ class Dataset:
     accessRightsComment: str
     theme: List[str]
     keyword: List[str]
+    contactPoint: List
+
+@dataclass
+class ContactPoint:
+    uri: str = None
+    fullname: str = None
+    email: str = None
+    organizationName: str = None
+    organizationUnit: str = None
+    hasURL: str = None
+    hasTelephone: str = None
