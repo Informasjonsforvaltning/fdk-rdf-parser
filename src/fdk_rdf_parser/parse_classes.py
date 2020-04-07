@@ -6,3 +6,8 @@ from typing import List
 class HarvestMetaData:
     firstHarvested: datetime
     changed: List[str]
+
+@dataclass
+class Dataset:
+    id: str
+    harvest: HarvestMetaData

@@ -1,3 +1,3 @@
 
-from .dataset import parseDatasets, Dataset
-from .metadata import HarvestMetaData
+from .dataset import parseDatasets
+from .parse_classes import HarvestMetaData, Dataset
