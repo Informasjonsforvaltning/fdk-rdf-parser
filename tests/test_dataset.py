@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData, ContactPoint
+from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData, ContactPoint, Distribution
 import isodate
 
 def test_rdf():
@@ -57,7 +57,13 @@ def test_rdf():
         dcat:contactPoint         <https://testdirektoratet.no/kontakt/testmann> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
-        dcat:distribution         <https://testdirektoratet.no/model/distribution/1>, <https://testdirektoratet.no/model/distribution/2> ;
+        dcat:distribution         <https://testdirektoratet.no/model/distribution/1>,
+                                  [ a                   dcat:Distribution ;
+                                    dct:format          "CSV JSON JSONP YAML XML" ;
+                                    dct:license         <https://data.norge.no/nlod/no> ;
+                                    dct:title           "Test distribution 2"@en ;
+                                    dct:description     "Description of distribution 2"@en ;
+                                    dcat:accessURL      <http://testdirektoratet.no/data/test/2> ] ;
         dcat:endpointDescription  <https://testdirektoratet.no/openapi/dataset/1.yaml> .
 
 <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca-62d7-34d5-aa4c-d39b5db033ae>
@@ -67,6 +73,12 @@ def test_rdf():
         dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
         foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+<https://testdirektoratet.no/model/distribution/0>
+        a                  dcat:Distribution ;
+        dct:title          "Test distribution 0"@en ;
+        dcat:accessURL     <http://testdirektoratet.no/data/test/0> ;
+        dct:format          "JSON" , "XML" .
 
 <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
         a                  dcat:record ;
@@ -93,7 +105,13 @@ def test_rdf():
                 organizationName='Testdirektoratet',
                 hasURL='https://testdirektoratet.no',
                 hasTelephone='23453345')
-            ]
+            ],
+            distribution=[
+                Distribution(
+                    uri='https://testdirektoratet.no/model/distribution/0',
+                    title={'en':'Test distribution 0'},
+                    accessURL=['http://testdirektoratet.no/data/test/0'],
+                    format=['JSON', 'XML'])]
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -114,6 +132,15 @@ def test_rdf():
                     organizationName='Testdirektoratet',
                     hasURL='https://testdirektoratet.no'),
                 ContactPoint(uri='https://testdirektoratet.no/kontakt/testmann')
+            ],
+            distribution=[
+                Distribution(
+                    title={'en':'Test distribution 2'},
+                    description={'en':'Description of distribution 2'},
+                    accessURL=['http://testdirektoratet.no/data/test/2'],
+                    license='https://data.norge.no/nlod/no',
+                    format=['CSV JSON JSONP YAML XML']),
+                Distribution(uri='https://testdirektoratet.no/model/distribution/1')
             ]
         )
     }

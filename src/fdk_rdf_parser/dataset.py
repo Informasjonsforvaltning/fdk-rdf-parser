@@ -6,6 +6,7 @@ from rdflib.namespace import RDF, DCTERMS, FOAF
 from .parse_classes import HarvestMetaData, Dataset, ContactPoint
 from .rdf_utils import objectValue, valueList, valueTranslations
 from .contactpoint import extractContactPoints
+from .distribution import extractDistributions
 
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
@@ -29,7 +30,8 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 accessRightsComment = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment')),
                 theme = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#theme')),
                 keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword')),
-                contactPoint = extractContactPoints(datasetsGraph, datasetURI)
+                contactPoint = extractContactPoints(datasetsGraph, datasetURI),
+                distribution = extractDistributions(datasetsGraph, datasetURI)
             )
 
     return datasets
