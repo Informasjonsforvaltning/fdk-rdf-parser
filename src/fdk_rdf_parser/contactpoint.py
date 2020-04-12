@@ -7,19 +7,19 @@ from .parse_classes import ContactPoint
 def extractContactPoints(graph: Graph, subject: URIRef) -> List[ContactPoint]:
     values = []
     for resource in resourceList(graph, subject, URIRef(u'http://www.w3.org/ns/dcat#contactPoint')):
-        if isinstance(resource, BNode):
-            values.append(ContactPoint(
-                fullname = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#fn')),
-                email = extractHasEmail(graph, resource),
-                organizationName = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#hasOrganizationName')),
-                organizationUnit = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#organization-unit')),
-                hasURL = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#hasURL')),
-                hasTelephone = extractHasTelephone(graph, resource)
-            ))
-        elif isinstance(resource, URIRef):
-            values.append(ContactPoint(
-                uri = resource.toPython()
-            ))
+        resourceUri = None
+        if isinstance(resource, URIRef):
+            resourceUri = resource.toPython()
+
+        values.append(ContactPoint(
+            uri = resourceUri,
+            fullname = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#fn')),
+            email = extractHasEmail(graph, resource),
+            organizationName = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#hasOrganizationName')),
+            organizationUnit = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#organization-unit')),
+            hasURL = objectValue(graph, resource, URIRef(u'http://www.w3.org/2006/vcard/ns#hasURL')),
+            hasTelephone = extractHasTelephone(graph, resource)
+        ))
 
     return values
 
