@@ -18,6 +18,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
         if datasetURI != None:
             datasets[datasetURI.toPython()] = Dataset(
                 id = objectValue(datasetsGraph, record, DCTERMS.identifier),
+                identifier = objectValue(datasetsGraph, datasetURI, DCTERMS.identifier),
                 publisher = objectValue(datasetsGraph, datasetURI, DCTERMS.publisher),
                 harvest = HarvestMetaData(
                     firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
@@ -31,7 +32,8 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 theme = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#theme')),
                 keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword')),
                 contactPoint = extractContactPoints(datasetsGraph, datasetURI),
-                distribution = extractDistributions(datasetsGraph, datasetURI)
+                distribution = extractDistributions(datasetsGraph, datasetURI),
+                spatial = valueList(datasetsGraph, datasetURI, DCTERMS.spatial)
             )
 
     return datasets

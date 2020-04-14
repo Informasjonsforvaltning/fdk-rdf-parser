@@ -5,7 +5,7 @@ from typing import List, Dict
 @dataclass
 class HarvestMetaData:
     firstHarvested: datetime
-    changed: List[str]
+    changed: List[str] = field(default_factory=list)
 
 @dataclass
 class ContactPoint:
@@ -34,14 +34,16 @@ class Distribution:
 @dataclass
 class Dataset:
     id: str
-    publisher: str
     harvest: HarvestMetaData
-    title: Dict[str, str]
-    description: Dict[str, str]
-    uri: str
-    accessRights: str
-    accessRightsComment: str
-    theme: List[str]
-    keyword: List[str]
-    contactPoint: List[ContactPoint]
-    distribution: List[Distribution]
+    identifier: str = None
+    publisher: str = None
+    title: Dict[str, str] = field(default_factory=dict)
+    description: Dict[str, str] = field(default_factory=dict)
+    uri: str = None
+    accessRights: str = None
+    accessRightsComment: str = None
+    theme: List[str] = field(default_factory=list)
+    keyword: List[str] = field(default_factory=list)
+    contactPoint: List[ContactPoint] = field(default_factory=list)
+    distribution: List[Distribution] = field(default_factory=list)
+    spatial: List[str] = field(default_factory=list)
