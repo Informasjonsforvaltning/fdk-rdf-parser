@@ -111,7 +111,8 @@ def test_rdf():
                     uri='https://testdirektoratet.no/model/distribution/0',
                     title={'en':'Test distribution 0'},
                     accessURL=['http://testdirektoratet.no/data/test/0'],
-                    format=['JSON', 'XML'])]
+                    format=['JSON', 'XML'])],
+            page=['https://testdirektoratet.no']
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',

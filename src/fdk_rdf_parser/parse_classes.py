@@ -49,3 +49,6 @@ class Dataset:
     spatial: List[str] = field(default_factory=list)
     source: str = None
     objective: Dict[str, str] = field(default_factory=dict)
+    type: str = None
+    page: List[str] = field(default_factory=list)
+    admsIdentifier: List[str] = field(default_factory=list)

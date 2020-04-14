@@ -19,6 +19,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
             datasets[datasetURI.toPython()] = Dataset(
                 id = objectValue(datasetsGraph, record, DCTERMS.identifier),
                 identifier = valueList(datasetsGraph, datasetURI, DCTERMS.identifier),
+                admsIdentifier = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/adms#identifier')),
                 publisher = objectValue(datasetsGraph, datasetURI, DCTERMS.publisher),
                 harvest = HarvestMetaData(
                     firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),
@@ -35,7 +36,9 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 distribution = extractDistributions(datasetsGraph, datasetURI),
                 spatial = valueList(datasetsGraph, datasetURI, DCTERMS.spatial),
                 source = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#source')),
-                objective = valueTranslations(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#objective'))
+                objective = valueTranslations(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#objective')),
+                type = objectValue(datasetsGraph, datasetURI, DCTERMS.type),
+                page = valueList(datasetsGraph, datasetURI, FOAF.page)
             )
 
     return datasets
