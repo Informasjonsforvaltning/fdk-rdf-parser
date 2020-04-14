@@ -28,7 +28,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 description = valueTranslations(datasetsGraph, datasetURI, DCTERMS.description),
                 uri = datasetURI.toPython(),
                 accessRights = objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
-                accessRightsComment = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment')),
+                accessRightsComment = valueList(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#accessRightsComment')),
                 theme = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#theme')),
                 keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword')),
                 contactPoint = extractContactPoints(datasetsGraph, datasetURI),

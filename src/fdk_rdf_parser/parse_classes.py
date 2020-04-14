@@ -41,7 +41,7 @@ class Dataset:
     description: Dict[str, str] = field(default_factory=dict)
     uri: str = None
     accessRights: str = None
-    accessRightsComment: str = None
+    accessRightsComment: List[str] = field(default_factory=list)
     theme: List[str] = field(default_factory=list)
     keyword: List[str] = field(default_factory=list)
     contactPoint: List[ContactPoint] = field(default_factory=list)
