@@ -33,7 +33,9 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 keyword = valueList(datasetsGraph, datasetURI, URIRef(u'http://www.w3.org/ns/dcat#keyword')),
                 contactPoint = extractContactPoints(datasetsGraph, datasetURI),
                 distribution = extractDistributions(datasetsGraph, datasetURI),
-                spatial = valueList(datasetsGraph, datasetURI, DCTERMS.spatial)
+                spatial = valueList(datasetsGraph, datasetURI, DCTERMS.spatial),
+                source = objectValue(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#source')),
+                objective = valueTranslations(datasetsGraph, datasetURI, URIRef(u'http://difi.no/dcatno#objective'))
             )
 
     return datasets

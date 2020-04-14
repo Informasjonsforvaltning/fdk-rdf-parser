@@ -98,7 +98,6 @@ def test_rdf():
             description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
             uri='https://testdirektoratet.no/model/dataset/0',
             accessRights='http://publications.europa.eu/resource/authority/access-right/PUBLIC',
-            accessRightsComment=None,
             publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
             keyword=['fest', 'test'],
@@ -122,8 +121,6 @@ def test_rdf():
             title={'nb':'Datasett 1','en':"Dataset 1"},
             description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"},
             uri='https://testdirektoratet.no/model/dataset/1',
-            accessRights=None,
-            accessRightsComment=None,
             publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
             contactPoint=[
                 ContactPoint(

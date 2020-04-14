@@ -47,3 +47,5 @@ class Dataset:
     contactPoint: List[ContactPoint] = field(default_factory=list)
     distribution: List[Distribution] = field(default_factory=list)
     spatial: List[str] = field(default_factory=list)
+    source: str = None
+    objective: Dict[str, str] = field(default_factory=dict)
