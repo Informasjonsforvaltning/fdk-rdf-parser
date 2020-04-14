@@ -18,7 +18,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
         if datasetURI != None:
             datasets[datasetURI.toPython()] = Dataset(
                 id = objectValue(datasetsGraph, record, DCTERMS.identifier),
-                identifier = objectValue(datasetsGraph, datasetURI, DCTERMS.identifier),
+                identifier = valueList(datasetsGraph, datasetURI, DCTERMS.identifier),
                 publisher = objectValue(datasetsGraph, datasetURI, DCTERMS.publisher),
                 harvest = HarvestMetaData(
                     firstHarvested = objectValue(datasetsGraph, record, DCTERMS.issued),

@@ -35,7 +35,7 @@ class Distribution:
 class Dataset:
     id: str
     harvest: HarvestMetaData
-    identifier: str = None
+    identifier: List[str] = field(default_factory=list)
     publisher: str = None
     title: Dict[str, str] = field(default_factory=dict)
     description: Dict[str, str] = field(default_factory=dict)

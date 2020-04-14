@@ -93,7 +93,7 @@ def test_rdf():
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
-            identifier='adb4cf00-31c8-460c-9563-55f204cf8221',
+            identifier=['adb4cf00-31c8-460c-9563-55f204cf8221'],
             title={'nb':'Datasett 0','en':"Dataset 0"},
             description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
             uri='https://testdirektoratet.no/model/dataset/0',
@@ -125,8 +125,6 @@ def test_rdf():
             accessRights=None,
             accessRightsComment=None,
             publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
-            theme=[],
-            keyword=[],
             contactPoint=[
                 ContactPoint(
                     email='post@mail.com',
