@@ -20,11 +20,6 @@ def test_rdf():
         dct:identifier            "adb4cf00-31c8-460c-9563-55f204cf8221" ;
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/987654321> ;
         dct:title                 "Datasett 0"@nb , "Dataset 0"@en ;
-        dcat:contactPoint         [ a                          vcard:Organization ;
-                                    vcard:hasTelephone         <tel:23453345> ;
-                                    vcard:hasOrganizationName  "Testdirektoratet" ;
-                                    vcard:hasURL               <https://testdirektoratet.no>
-                                  ] ;
         dcat:endpointDescription  <https://testdirektoratet.no/openapi/dataset/0.yaml> ;
         dct:issued                "2019-03-22T13:11:16.546902"^^xsd:dateTime ;
         dct:language              <http://publications.europa.eu/resource/authority/language/NOR> ;
@@ -49,11 +44,6 @@ def test_rdf():
         dct:description           "Beskrivelse av datasett 1"@nb , "Description of dataset 1"@en ;
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/123456789> ;
         dct:title                 "Datasett 1"@nb , "Dataset 1"@en ;
-        dcat:contactPoint         [ a                          vcard:Organization ;
-                                    vcard:hasEmail             <mailto:post@mail.com> ;
-                                    vcard:hasOrganizationName  "Testdirektoratet" ;
-                                    vcard:hasURL               <https://testdirektoratet.no>
-                                  ] ;
         dcat:contactPoint         <https://testdirektoratet.no/kontakt/testmann> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
@@ -101,11 +91,6 @@ def test_rdf():
             publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
             keyword=[{'nb': 'test'}],
-            contactPoint=[ContactPoint(
-                organizationName='Testdirektoratet',
-                hasURL='https://testdirektoratet.no',
-                hasTelephone='23453345')
-            ],
             distribution=[
                 Distribution(
                     uri='https://testdirektoratet.no/model/distribution/0',
@@ -125,13 +110,7 @@ def test_rdf():
             description={'nb':'Beskrivelse av datasett 1','en':"Description of dataset 1"},
             uri='https://testdirektoratet.no/model/dataset/1',
             publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
-            contactPoint=[
-                ContactPoint(
-                    email='post@mail.com',
-                    organizationName='Testdirektoratet',
-                    hasURL='https://testdirektoratet.no'),
-                ContactPoint(uri='https://testdirektoratet.no/kontakt/testmann')
-            ],
+            contactPoint=[ContactPoint(uri='https://testdirektoratet.no/kontakt/testmann')],
             distribution=[
                 Distribution(
                     title={'en':'Test distribution 2'},
