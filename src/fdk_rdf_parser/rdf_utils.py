@@ -17,6 +17,12 @@ def owlTimeURI(subString) -> URIRef:
 def schemaURI(subString) -> URIRef:
     return URIRef(u'http://schema.org/' + subString)
 
+def vcardURI(subString) -> URIRef:
+    return URIRef(u'http://www.w3.org/2006/vcard/ns#' + subString)
+
+def dctURI(subString) -> URIRef:
+    return URIRef(u'http://purl.org/dc/terms/' + subString)
+
 def objectValue(graph: Graph, subject: URIRef, predicate: URIRef):
     value = graph.value(subject, predicate)
     return value.toPython() if value != None else None
