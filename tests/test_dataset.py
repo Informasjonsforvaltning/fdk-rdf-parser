@@ -31,7 +31,7 @@ def test_rdf():
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
         dcat:distribution         <https://testdirektoratet.no/model/distribution/0> ;
-        dcat:keyword              "test", "fest" ;
+        dcat:keyword              "test"@nb ;
         dcat:theme                <http://publications.europa.eu/resource/authority/data-theme/GOVE>,
                                   <http://publications.europa.eu/resource/authority/data-theme/TECH> ;
         foaf:page                 <https://testdirektoratet.no> .
@@ -100,7 +100,7 @@ def test_rdf():
             accessRights='http://publications.europa.eu/resource/authority/access-right/PUBLIC',
             publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
-            keyword=['fest', 'test'],
+            keyword=[{'nb': 'test'}],
             contactPoint=[ContactPoint(
                 organizationName='Testdirektoratet',
                 hasURL='https://testdirektoratet.no',

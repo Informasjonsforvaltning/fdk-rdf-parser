@@ -57,7 +57,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 accessRights = objectValue(datasetsGraph, datasetURI, DCTERMS.accessRights),
                 accessRightsComment = valueList(datasetsGraph, datasetURI, dcatApNoURI(u'accessRightsComment')),
                 theme = valueList(datasetsGraph, datasetURI, dcatURI(u'theme')),
-                keyword = valueList(datasetsGraph, datasetURI, dcatURI(u'keyword')),
+                keyword = extractKeyWords(datasetsGraph, datasetURI),
                 contactPoint = extractContactPoints(datasetsGraph, datasetURI),
                 distribution = extractDistributions(datasetsGraph, datasetURI),
                 spatial = valueList(datasetsGraph, datasetURI, DCTERMS.spatial),
@@ -71,3 +71,11 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
             )
 
     return datasets
+
+def extractKeyWords(graph: Graph, subject: URIRef):
+    values = []
+    for keyword in graph.objects(subject, dcatURI(u'keyword')):
+        translation = {}
+        translation[keyword.language] = keyword.toPython()
+        values.append(translation)
+    return values
