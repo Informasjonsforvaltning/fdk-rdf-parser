@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Dict
 
+from .temporal import Temporal
+
 @dataclass
 class HarvestMetaData:
     firstHarvested: datetime
@@ -52,3 +54,6 @@ class Dataset:
     type: str = None
     page: List[str] = field(default_factory=list)
     admsIdentifier: List[str] = field(default_factory=list)
+    issued: datetime = None
+    modified: datetime = None
+    temporal: List[Temporal] = field(default_factory=list)

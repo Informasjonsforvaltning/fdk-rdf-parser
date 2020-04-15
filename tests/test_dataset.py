@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData, ContactPoint, Distribution
+from fdk_rdf_parser import parseDatasets, Dataset, HarvestMetaData, ContactPoint, Distribution, Temporal
 import isodate
 
 def test_rdf():
@@ -112,7 +112,9 @@ def test_rdf():
                     title={'en':'Test distribution 0'},
                     accessURL=['http://testdirektoratet.no/data/test/0'],
                     format=['JSON', 'XML'])],
-            page=['https://testdirektoratet.no']
+            page=['https://testdirektoratet.no'],
+            issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),
+            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -138,7 +140,8 @@ def test_rdf():
                     license='https://data.norge.no/nlod/no',
                     format=['CSV JSON JSONP YAML XML']),
                 Distribution(uri='https://testdirektoratet.no/model/distribution/1')
-            ]
+            ],
+            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
         )
     }
 
