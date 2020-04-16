@@ -16,6 +16,7 @@ def test_rdf():
 <https://testdirektoratet.no/model/dataset/0>
         a                         dcat:Dataset ;
         dct:accessRights          <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+        dct:accrualPeriodicity    <http://publications.europa.eu/resource/authority/frequency> ;
         dct:description           "Beskrivelse av datasett 0"@nb , "Description of dataset 0"@en ;
         dct:identifier            "adb4cf00-31c8-460c-9563-55f204cf8221" ;
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/987654321> ;
@@ -29,6 +30,8 @@ def test_rdf():
         dcat:keyword              "test"@nb ;
         dcat:theme                <http://publications.europa.eu/resource/authority/data-theme/GOVE>,
                                   <http://publications.europa.eu/resource/authority/data-theme/TECH> ;
+        dct:subject               <https://testdirektoratet.no/model/concept/0> ,
+                                  <https://testdirektoratet.no/model/concept/1> ;
         foaf:page                 <https://testdirektoratet.no> .
 
 <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a-9d27-32c1-aed5-612fa601f393>
@@ -45,6 +48,7 @@ def test_rdf():
         dct:publisher             <http://data.brreg.no/enhetsregisteret/enhet/123456789> ;
         dct:title                 "Datasett 1"@nb , "Dataset 1"@en ;
         dcat:contactPoint         <https://testdirektoratet.no/kontakt/testmann> ;
+        dct:spatial               <https://data.geonorge.no/administrativeEnheter/fylke/id/173142> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
         dcat:distribution         <https://testdirektoratet.no/model/distribution/1>,
@@ -54,6 +58,8 @@ def test_rdf():
                                     dct:title           "Test distribution 2"@en ;
                                     dct:description     "Description of distribution 2"@en ;
                                     dcat:accessURL      <http://testdirektoratet.no/data/test/2> ] ;
+        dct:provenance            <http://data.brreg.no/datakatalog/provinens/tredjepart> ;
+        dcat:landingPage          <https://testdirektoratet.no> ;
         dcat:endpointDescription  <https://testdirektoratet.no/openapi/dataset/1.yaml> .
 
 <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca-62d7-34d5-aa4c-d39b5db033ae>
@@ -99,7 +105,10 @@ def test_rdf():
                     format=['JSON', 'XML'])],
             page=['https://testdirektoratet.no'],
             issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),
-            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
+            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))],
+            subject=['https://testdirektoratet.no/model/concept/0','https://testdirektoratet.no/model/concept/1'],
+            language=['http://publications.europa.eu/resource/authority/language/NOR'],
+            accrualPeriodicity='http://publications.europa.eu/resource/authority/frequency'
         ), 
         'https://testdirektoratet.no/model/dataset/1': Dataset(
             id='4667277a-9d27-32c1-aed5-612fa601f393',
@@ -120,7 +129,10 @@ def test_rdf():
                     format=['CSV JSON JSONP YAML XML']),
                 Distribution(uri='https://testdirektoratet.no/model/distribution/1')
             ],
-            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
+            temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))],
+            landingPage=['https://testdirektoratet.no'],
+            spatial=['https://data.geonorge.no/administrativeEnheter/fylke/id/173142'],
+            provenance='http://data.brreg.no/datakatalog/provinens/tredjepart'
         )
     }
 

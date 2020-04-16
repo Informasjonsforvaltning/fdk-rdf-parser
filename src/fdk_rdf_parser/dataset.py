@@ -36,6 +36,12 @@ class Dataset:
     issued: datetime = None
     modified: datetime = None
     temporal: List[Temporal] = field(default_factory=list)
+    landingPage: List[str] = field(default_factory=list)
+    subject: List[str] = field(default_factory=list)
+    language: List[str] = field(default_factory=list)
+    spatial: List[str] = field(default_factory=list)
+    provenance: str = None
+    accrualPeriodicity: str = None
 
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
@@ -67,7 +73,12 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
                 page = valueList(datasetsGraph, datasetURI, FOAF.page),
                 issued = objectValue(datasetsGraph, datasetURI, DCTERMS.issued),
                 modified = objectValue(datasetsGraph, datasetURI, DCTERMS.modified),
-                temporal = extractTemporal(datasetsGraph, datasetURI)
+                temporal = extractTemporal(datasetsGraph, datasetURI),
+                subject = valueList(datasetsGraph, datasetURI, DCTERMS.subject),
+                landingPage = valueList(datasetsGraph, datasetURI, dcatURI(u'landingPage')),
+                language = valueList(datasetsGraph, datasetURI, DCTERMS.language),
+                provenance = objectValue(datasetsGraph, datasetURI, DCTERMS.provenance),
+                accrualPeriodicity = objectValue(datasetsGraph, datasetURI, DCTERMS.accrualPeriodicity)
             )
 
     return datasets
