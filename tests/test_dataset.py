@@ -26,7 +26,6 @@ def test_rdf():
         dct:language              <http://publications.europa.eu/resource/authority/language/NOR> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
-        dcat:distribution         <https://testdirektoratet.no/model/distribution/0> ;
         dcat:keyword              "test"@nb ;
         dcat:theme                <http://publications.europa.eu/resource/authority/data-theme/GOVE>,
                                   <http://publications.europa.eu/resource/authority/data-theme/TECH> ;
@@ -51,13 +50,7 @@ def test_rdf():
         dct:spatial               <https://data.geonorge.no/administrativeEnheter/fylke/id/173142> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate           "2019-04-02T00:00:00"^^xsd:dateTime ] ;
-        dcat:distribution         <https://testdirektoratet.no/model/distribution/1>,
-                                  [ a                   dcat:Distribution ;
-                                    dct:format          "CSV JSON JSONP YAML XML" ;
-                                    dct:license         <https://data.norge.no/nlod/no> ;
-                                    dct:title           "Test distribution 2"@en ;
-                                    dct:description     "Description of distribution 2"@en ;
-                                    dcat:accessURL      <http://testdirektoratet.no/data/test/2> ] ;
+        dcat:distribution         <https://testdirektoratet.no/model/distribution/1> , <http://testdirektoratet.no/data/test/2> ;
         dct:provenance            <http://data.brreg.no/datakatalog/provinens/tredjepart> ;
         dcat:landingPage          <https://testdirektoratet.no> ;
         dcat:endpointDescription  <https://testdirektoratet.no/openapi/dataset/1.yaml> .
@@ -69,12 +62,6 @@ def test_rdf():
         dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
         dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
         foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
-
-<https://testdirektoratet.no/model/distribution/0>
-        a                  dcat:Distribution ;
-        dct:title          "Test distribution 0"@en ;
-        dcat:accessURL     <http://testdirektoratet.no/data/test/0> ;
-        dct:format          "JSON" , "XML" .
 
 <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
         a                  dcat:record ;
@@ -97,12 +84,6 @@ def test_rdf():
             publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
             keyword=[{'nb': 'test'}],
-            distribution=[
-                Distribution(
-                    uri='https://testdirektoratet.no/model/distribution/0',
-                    title={'en':'Test distribution 0'},
-                    accessURL=['http://testdirektoratet.no/data/test/0'],
-                    format=['JSON', 'XML'])],
             page=['https://testdirektoratet.no'],
             issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),
             temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))],
@@ -121,12 +102,7 @@ def test_rdf():
             publisher='http://data.brreg.no/enhetsregisteret/enhet/123456789',
             contactPoint=[ContactPoint(uri='https://testdirektoratet.no/kontakt/testmann')],
             distribution=[
-                Distribution(
-                    title={'en':'Test distribution 2'},
-                    description={'en':'Description of distribution 2'},
-                    accessURL=['http://testdirektoratet.no/data/test/2'],
-                    license='https://data.norge.no/nlod/no',
-                    format=['CSV JSON JSONP YAML XML']),
+                Distribution(uri='http://testdirektoratet.no/data/test/2'),
                 Distribution(uri='https://testdirektoratet.no/model/distribution/1')
             ],
             temporal=[Temporal(startDate=isodate.parse_datetime("2019-04-02T00:00:00"))],
