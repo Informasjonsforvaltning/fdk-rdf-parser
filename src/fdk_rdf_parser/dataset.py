@@ -3,7 +3,7 @@ from typing import Dict, List
 from datetime import datetime
 
 from rdflib import Graph, URIRef, BNode
-from rdflib.namespace import RDF, DCTERMS, FOAF
+from rdflib.namespace import DCTERMS, FOAF
 
 from .rdf_utils import objectValue, valueList, valueTranslations, dcatURI, admsURI, dcatApNoURI
 
@@ -44,18 +44,6 @@ class Dataset(DcatResource):
         self.modified = values.modified
         self.landingPage = values.landingPage
         self.language = values.language
-
-def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
-    datasetsGraph = Graph().parse(data=rdfData, format="turtle")
-
-    datasets: Dict[str, Dataset] = {}
-
-    for recordURI in datasetsGraph.subjects(predicate=RDF.type, object=dcatURI(u'record')):
-        datasetURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
-        if datasetURI != None:
-            datasets[datasetURI.toPython()] = parseDataset(datasetsGraph, recordURI, datasetURI)
-
-    return datasets
 
 def parseDataset(datasetsGraph: Graph, recordURI: URIRef, datasetURI: URIRef) -> Dataset:
     dataset = Dataset(

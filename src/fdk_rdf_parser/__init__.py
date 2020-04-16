@@ -1,5 +1,5 @@
-
-from .dataset import Dataset, parseDatasets, parseDataset
+from .fdk_rdf_parser import parseDatasets
+from .dataset import Dataset, parseDataset
 from .harvest_meta_data import HarvestMetaData
 from .contactpoint import ContactPoint, extractContactPoints
 from .distribution import Distribution, extractDistributions
