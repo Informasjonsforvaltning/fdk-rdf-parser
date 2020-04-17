@@ -5,3 +5,4 @@ from .contactpoint import ContactPoint, extractContactPoints
 from .distribution import Distribution, extractDistributions
 from .temporal import Temporal, extractTemporal
 from .dcat_resource import DcatResource, parseDcatResource
+from .references import Reference, extractReferences
