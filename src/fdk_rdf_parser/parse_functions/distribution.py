@@ -8,7 +8,7 @@ from fdk_rdf_parser.rdf_utils import objectValue, resourceList, valueList, value
 
 def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
     values = []
-    for resource in resourceList(graph, subject, dcatURI(u'distribution')):
+    for resource in resourceList(graph, subject, dcatURI('distribution')):
         resourceUri = None
         if isinstance(resource, URIRef):
             resourceUri = resource.toPython()
@@ -18,14 +18,14 @@ def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
                 uri = resourceUri,
                 title = valueTranslations(graph, resource, DCTERMS.title),
                 description = valueTranslations(graph, resource, DCTERMS.description),
-                downloadURL = valueList(graph, resource, dcatURI(u'downloadURL')),
-                accessURL = valueList(graph, resource, dcatURI(u'accessURL')),
+                downloadURL = valueList(graph, resource, dcatURI('downloadURL')),
+                accessURL = valueList(graph, resource, dcatURI('accessURL')),
                 license = objectValue(graph, resource, DCTERMS.license),
                 conformsTo = valueList(graph, resource, DCTERMS.conformsTo),
                 page = valueList(graph, resource, FOAF.page),
-                format = valueList(graph, resource, dctURI(u'format')),
+                format = valueList(graph, resource, dctURI('format')),
                 type = objectValue(graph, resource, DCTERMS.type),
-                accessService = objectValue(graph, resource, dcatURI(u'accessService'))
+                accessService = objectValue(graph, resource, dcatURI('accessService'))
             )
         )
 

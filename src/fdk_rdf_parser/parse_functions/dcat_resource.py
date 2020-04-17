@@ -15,19 +15,19 @@ def parseDcatResource(graph: Graph, subject: URIRef) -> DcatResource:
             description = valueTranslations(graph, subject, DCTERMS.description),
             uri = subject.toPython(),
             accessRights = objectValue(graph, subject, DCTERMS.accessRights),
-            theme = valueList(graph, subject, dcatURI(u'theme')),
+            theme = valueList(graph, subject, dcatURI('theme')),
             keyword = extractKeyWords(graph, subject),
             contactPoint = extractContactPoints(graph, subject),
             type = objectValue(graph, subject, DCTERMS.type),
             issued = objectValue(graph, subject, DCTERMS.issued),
             modified = objectValue(graph, subject, DCTERMS.modified),
-            landingPage = valueList(graph, subject, dcatURI(u'landingPage')),
+            landingPage = valueList(graph, subject, dcatURI('landingPage')),
             language = valueList(graph, subject, DCTERMS.language)
         )
 
 def extractKeyWords(graph: Graph, subject: URIRef):
     values = []
-    for keyword in graph.objects(subject, dcatURI(u'keyword')):
+    for keyword in graph.objects(subject, dcatURI('keyword')):
         translation = {}
         translation[keyword.language] = keyword.toPython()
         values.append(translation)

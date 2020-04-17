@@ -5,3 +5,4 @@ from .distribution import extractDistributions
 from .temporal import extractTemporal
 from .dcat_resource import parseDcatResource
 from .references import extractReferences
+from .quality_annotation import extractQualityAnnotation

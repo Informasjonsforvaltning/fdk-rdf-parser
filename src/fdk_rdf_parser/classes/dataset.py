@@ -5,6 +5,7 @@ from .dcat_resource import DcatResource
 from .harvest_meta_data import HarvestMetaData
 from .distribution import Distribution
 from .temporal import Temporal
+from .quality_annotation import QualityAnnotation
 
 @dataclass
 class Dataset(DcatResource):
@@ -21,6 +22,11 @@ class Dataset(DcatResource):
     spatial: List[str] = field(default_factory=list)
     provenance: str = None
     accrualPeriodicity: str = None
+    hasAccuracyAnnotation: QualityAnnotation = None
+    hasCompletenessAnnotation: QualityAnnotation = None
+    hasCurrentnessAnnotation: QualityAnnotation = None
+    hasAvailabilityAnnotation: QualityAnnotation = None
+    hasRelevanceAnnotation: QualityAnnotation = None
 
     def addValuesFromDcatResource(self, values: DcatResource):
         self.identifier = values.identifier

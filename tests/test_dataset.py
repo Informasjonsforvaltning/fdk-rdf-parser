@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser.classes import Dataset, HarvestMetaData
+from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation
 from fdk_rdf_parser.parse_functions import parseDataset
 from fdk_rdf_parser import parseDatasets
 from rdflib import Graph, URIRef
@@ -112,3 +112,57 @@ def test_parse_dataset():
     recordURI = URIRef(u'https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca-62d7-34d5-aa4c-d39b5db033ae')
 
     assert parseDataset(datasetsGraph, recordURI, datasetURI) == expected
+
+def test_dataset_has_quality_annotations():
+
+    src = """
+        @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix dqv:   <http://www.w3.org/ns/dqvNS#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix prov:  <http://www.w3.org/ns/prov#> .
+
+        <https://testdirektoratet.no/model/dataset/quality>
+                a                   dcat:Dataset ;
+                dqv:hasQualityAnnotation  [ 
+                    a                dqv:QualityAnnotation ;
+                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Currentness> ;
+                    prov:hasBody     [] ] ;
+                dqv:hasQualityAnnotation  [ 
+                    a                dqv:QualityAnnotation ;
+                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Availability> ;
+                    prov:hasBody     [ rdf:value  "availability"@en ] ] ;
+                dqv:hasQualityAnnotation  [ 
+                    a                dqv:QualityAnnotation ;
+                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Relevance> ;
+                    prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
+                dqv:hasQualityAnnotation  [ 
+                    a                dqv:QualityAnnotation ;
+                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Completeness> ;
+                    prov:hasBody     [ rdf:value  "Completeness"@en ] ] ."""
+
+    expected = Dataset(
+        uri='https://testdirektoratet.no/model/dataset/quality',
+        harvest=HarvestMetaData(),
+        hasCurrentnessAnnotation=QualityAnnotation(
+            inDimension='http://iso.org/25012/2008/dataquality/Currentness',
+            hasBody={}
+        ),
+        hasAvailabilityAnnotation=QualityAnnotation(
+            inDimension='http://iso.org/25012/2008/dataquality/Availability',
+            hasBody={'en':'availability'}
+        ),
+        hasRelevanceAnnotation=QualityAnnotation(
+            inDimension='http://iso.org/25012/2008/dataquality/Relevance',
+            hasBody={'nb':'relevans'}
+        ),
+        hasCompletenessAnnotation=QualityAnnotation(
+            inDimension='http://iso.org/25012/2008/dataquality/Completeness',
+            hasBody={'en':'Completeness'}
+        )
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u'https://testdirektoratet.no/model/dataset/quality')
+
+
+    assert parseDataset(graph, URIRef('record'), subject) == expected
