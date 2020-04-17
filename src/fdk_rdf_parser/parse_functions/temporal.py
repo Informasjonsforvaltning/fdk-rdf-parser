@@ -1,17 +1,10 @@
 from typing import List
-from dataclasses import dataclass
-from datetime import datetime
 
 from rdflib import Graph, URIRef, BNode
 from rdflib.namespace import DCTERMS
 
-from .rdf_utils import objectValue, resourceList, dcatURI, schemaURI, owlTimeURI
-
-@dataclass
-class Temporal:
-    uri: str = None
-    startDate: datetime = None
-    endDate: datetime = None
+from fdk_rdf_parser.classes import Temporal
+from fdk_rdf_parser.rdf_utils import objectValue, resourceList, dcatURI, schemaURI, owlTimeURI
 
 def extractTemporal(graph: Graph, subject: URIRef) -> List[Temporal]:
     values = []

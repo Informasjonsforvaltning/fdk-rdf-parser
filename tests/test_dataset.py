@@ -1,7 +1,9 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import parseDatasets, parseDataset, Dataset, HarvestMetaData
+from fdk_rdf_parser.classes import Dataset, HarvestMetaData
+from fdk_rdf_parser.parse_functions import parseDataset
+from fdk_rdf_parser import parseDatasets
 from rdflib import Graph, URIRef
 import isodate
 

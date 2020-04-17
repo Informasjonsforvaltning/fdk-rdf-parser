@@ -1,18 +1,8 @@
-from dataclasses import dataclass, field
 from typing import List
 from rdflib import Graph, URIRef, BNode
 
-from .rdf_utils import objectValue, resourceList, dcatURI, vcardURI
-
-@dataclass
-class ContactPoint:
-    uri: str = None
-    fullname: str = None
-    email: str = None
-    organizationName: str = None
-    organizationUnit: str = None
-    hasURL: str = None
-    hasTelephone: str = None
+from fdk_rdf_parser.classes import ContactPoint
+from fdk_rdf_parser.rdf_utils import objectValue, resourceList, dcatURI, vcardURI
 
 def extractContactPoints(graph: Graph, subject: URIRef) -> List[ContactPoint]:
     values = []

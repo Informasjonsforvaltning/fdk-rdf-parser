@@ -2,8 +2,8 @@ from typing import Dict
 from rdflib import Graph
 from rdflib.namespace import RDF, FOAF
 
-from .dataset import Dataset, parseDataset
-from .rdf_utils import dcatURI
+from fdk_rdf_parser.parse_functions.dataset import Dataset, parseDataset
+from fdk_rdf_parser.rdf_utils import dcatURI
 
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")

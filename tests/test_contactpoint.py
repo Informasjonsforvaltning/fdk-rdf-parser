@@ -1,7 +1,8 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import ContactPoint, extractContactPoints
+from fdk_rdf_parser.classes import ContactPoint
+from fdk_rdf_parser.parse_functions import extractContactPoints
 from rdflib import Graph, URIRef
 
 def test_single_contact_point():

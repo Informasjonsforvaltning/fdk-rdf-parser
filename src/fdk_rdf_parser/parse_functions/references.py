@@ -1,14 +1,9 @@
-from dataclasses import dataclass, field
 from typing import List
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from .rdf_utils import objectValue
-
-@dataclass
-class Reference:
-    referenceType: str = None
-    source: str = None
+from fdk_rdf_parser.classes import Reference
+from fdk_rdf_parser.rdf_utils import objectValue
 
 def extractReferences(graph: Graph, subject: URIRef) -> List[Reference]:
     referenceProperties = [

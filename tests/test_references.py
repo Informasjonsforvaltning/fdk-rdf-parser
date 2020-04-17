@@ -1,7 +1,8 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import Reference, extractReferences
+from fdk_rdf_parser.classes import Reference
+from fdk_rdf_parser.parse_functions import extractReferences
 from rdflib import Graph, URIRef
 
 def test_references():

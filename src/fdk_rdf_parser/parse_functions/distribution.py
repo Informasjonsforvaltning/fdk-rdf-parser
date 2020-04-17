@@ -1,24 +1,10 @@
-from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import List
 
-from rdflib import Graph, URIRef, BNode
+from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
 
-from .rdf_utils import objectValue, resourceList, valueList, valueTranslations, dcatURI, dctURI
-
-@dataclass
-class Distribution:
-    uri: str = None
-    title: Dict[str, str] = field(default_factory=dict)
-    description: Dict[str, str] = field(default_factory=dict)
-    downloadURL: List[str] = field(default_factory=list)
-    accessURL: List[str] = field(default_factory=list)
-    license: str = None
-    conformsTo: List[str] = field(default_factory=list)
-    page: List[str] = field(default_factory=list)
-    format: List[str] = field(default_factory=list)
-    type: str = None
-    accessService: str = None
+from fdk_rdf_parser.classes import Distribution
+from fdk_rdf_parser.rdf_utils import objectValue, resourceList, valueList, valueTranslations, dcatURI, dctURI
 
 def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
     values = []

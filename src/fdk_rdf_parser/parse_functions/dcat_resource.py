@@ -1,32 +1,10 @@
-from dataclasses import dataclass, field
-from typing import Dict, List
-from datetime import datetime
-
-from rdflib import Graph, URIRef, BNode
+from rdflib import Graph, URIRef
 from rdflib.namespace import RDF, DCTERMS, FOAF
 
-from .rdf_utils import objectValue, valueList, valueTranslations, dcatURI, admsURI, dcatApNoURI
+from fdk_rdf_parser.classes import DcatResource
+from fdk_rdf_parser.rdf_utils import objectValue, valueList, valueTranslations, dcatURI, admsURI, dcatApNoURI
 
-from .contactpoint import ContactPoint, extractContactPoints
-from .distribution import Distribution, extractDistributions
-from .temporal import Temporal, extractTemporal
-
-@dataclass
-class DcatResource:
-    identifier: List[str] = field(default_factory=list)
-    publisher: str = None
-    title: Dict[str, str] = field(default_factory=dict)
-    description: Dict[str, str] = field(default_factory=dict)
-    uri: str = None
-    accessRights: str = None
-    theme: List[str] = field(default_factory=list)
-    keyword: List[str] = field(default_factory=list)
-    contactPoint: List[ContactPoint] = field(default_factory=list)
-    type: str = None
-    issued: datetime = None
-    modified: datetime = None
-    landingPage: List[str] = field(default_factory=list)
-    language: List[str] = field(default_factory=list)
+from .contactpoint import extractContactPoints
 
 def parseDcatResource(graph: Graph, subject: URIRef) -> DcatResource:
 

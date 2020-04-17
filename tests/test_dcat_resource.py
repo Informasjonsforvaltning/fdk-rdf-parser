@@ -1,7 +1,8 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import DcatResource, parseDcatResource
+from fdk_rdf_parser.classes import DcatResource
+from fdk_rdf_parser.parse_functions import parseDcatResource
 from rdflib import Graph, URIRef
 import isodate
 

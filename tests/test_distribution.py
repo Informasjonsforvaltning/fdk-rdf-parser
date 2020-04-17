@@ -1,7 +1,8 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser import Distribution, extractDistributions
+from fdk_rdf_parser.classes import Distribution
+from fdk_rdf_parser.parse_functions import extractDistributions
 from rdflib import Graph, URIRef
 
 def test_single_distribution():
