@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation
+from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation, SkosConcept
 from fdk_rdf_parser.parse_functions import parseDataset
 from fdk_rdf_parser import parseDatasets
 from rdflib import Graph, URIRef
@@ -144,8 +144,7 @@ def test_dataset_has_quality_annotations():
         uri='https://testdirektoratet.no/model/dataset/quality',
         harvest=HarvestMetaData(),
         hasCurrentnessAnnotation=QualityAnnotation(
-            inDimension='http://iso.org/25012/2008/dataquality/Currentness',
-            hasBody={}
+            inDimension='http://iso.org/25012/2008/dataquality/Currentness'
         ),
         hasAvailabilityAnnotation=QualityAnnotation(
             inDimension='http://iso.org/25012/2008/dataquality/Availability',
@@ -163,6 +162,100 @@ def test_dataset_has_quality_annotations():
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u'https://testdirektoratet.no/model/dataset/quality')
+
+
+    assert parseDataset(graph, URIRef('record'), subject) == expected
+
+def test_legal_basis_fields():
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dcatno: <http://difi.no/dcatno#> .
+        @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                dcatno:legalBasisForRestriction
+                [ a               skos:Concept , dct:RightsStatement ;
+                  dct:source      "https://restriction.no" ;
+                  skos:prefLabel  "skjermingshjemmel"@nb
+                ] ;
+                dcatno:legalBasisForProcessing
+                [ a               skos:Concept , dct:RightsStatement ;
+                  dct:source      "https://processing.no" ;
+                  skos:prefLabel  "behandlingsgrunnlag"@nb
+                ] ;
+                dcatno:legalBasisForAccess
+                [ a               skos:Concept , dct:RightsStatement ;
+                  dct:source      "https://access.no" ;
+                  skos:prefLabel  "utleveringshjemmel"@nb
+                ] ."""
+
+    expected = Dataset(
+        uri='https://testdirektoratet.no/model/dataset/0',
+        harvest=HarvestMetaData(),
+        legalBasisForRestriction=[SkosConcept(
+            uri = 'https://restriction.no',
+            prefLabel = {'nb':'skjermingshjemmel'},
+            extraType = 'http://purl.org/dc/terms/RightsStatement'
+        )],
+        legalBasisForProcessing=[SkosConcept(
+            uri = 'https://processing.no',
+            prefLabel = {'nb':'behandlingsgrunnlag'},
+            extraType = 'http://purl.org/dc/terms/RightsStatement'
+        )],
+        legalBasisForAccess=[SkosConcept(
+            uri = 'https://access.no',
+            prefLabel = {'nb':'utleveringshjemmel'},
+            extraType = 'http://purl.org/dc/terms/RightsStatement'
+        )]
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u'https://testdirektoratet.no/model/dataset/0')
+
+
+    assert parseDataset(graph, URIRef('record'), subject) == expected
+
+def test_informationmodel_and_conformsto():
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dcatno: <http://difi.no/dcatno#> .
+        @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                dct:conformsTo
+                [ a               skos:Concept , dct:Standard ;
+                  dct:source      "https://conformsto.no" ;
+                  skos:prefLabel  "conforms to"@en
+                ] ;
+                dcatno:informationModel
+                [ a               skos:Concept , dct:Standard ;
+                  dct:source      "https://informationmodel.no" ;
+                  skos:prefLabel  "information model"@en
+                ] ."""
+
+    expected = Dataset(
+        uri='https://testdirektoratet.no/model/dataset/0',
+        harvest=HarvestMetaData(),
+        conformsTo=[SkosConcept(
+            uri = 'https://conformsto.no',
+            prefLabel = {'en':'conforms to'},
+            extraType = 'http://purl.org/dc/terms/Standard'
+        )],
+        informationModel=[SkosConcept(
+            uri = 'https://informationmodel.no',
+            prefLabel = {'en':'information model'},
+            extraType = 'http://purl.org/dc/terms/Standard'
+        )]
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u'https://testdirektoratet.no/model/dataset/0')
 
 
     assert parseDataset(graph, URIRef('record'), subject) == expected

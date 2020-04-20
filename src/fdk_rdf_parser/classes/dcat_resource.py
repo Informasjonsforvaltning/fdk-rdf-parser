@@ -8,8 +8,8 @@ from .contactpoint import ContactPoint
 class DcatResource:
     identifier: List[str] = field(default_factory=list)
     publisher: str = None
-    title: Dict[str, str] = field(default_factory=dict)
-    description: Dict[str, str] = field(default_factory=dict)
+    title: Dict[str, str] = None
+    description: Dict[str, str] = None
     uri: str = None
     accessRights: str = None
     theme: List[str] = field(default_factory=list)

@@ -38,8 +38,7 @@ def test_quality_annotations():
 
     expected = {
         'http://iso.org/25012/2008/dataquality/Currentness': QualityAnnotation(
-            inDimension='http://iso.org/25012/2008/dataquality/Currentness',
-            hasBody={}
+            inDimension='http://iso.org/25012/2008/dataquality/Currentness'
         ),
         'http://iso.org/25012/2008/dataquality/Availability': QualityAnnotation(
             inDimension='http://iso.org/25012/2008/dataquality/Availability',

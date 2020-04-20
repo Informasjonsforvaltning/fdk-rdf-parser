@@ -9,6 +9,7 @@ from .harvest_meta_data import extractMetaData
 from .distribution import extractDistributions
 from .temporal import extractTemporal
 from .quality_annotation import extractQualityAnnotation
+from .skos_concept import extractSkosConcept
 
 def parseDataset(datasetsGraph: Graph, recordURI: URIRef, datasetURI: URIRef) -> Dataset:
     qualityAnnotations = extractQualityAnnotation(datasetsGraph, datasetURI)
@@ -31,7 +32,12 @@ def parseDataset(datasetsGraph: Graph, recordURI: URIRef, datasetURI: URIRef) ->
         hasCompletenessAnnotation = qualityAnnotations.get(dqvIsoURI('Completeness').toPython()),
         hasCurrentnessAnnotation = qualityAnnotations.get(dqvIsoURI('Currentness').toPython()),
         hasAvailabilityAnnotation = qualityAnnotations.get(dqvIsoURI('Availability').toPython()),
-        hasRelevanceAnnotation = qualityAnnotations.get(dqvIsoURI('Relevance').toPython())
+        hasRelevanceAnnotation = qualityAnnotations.get(dqvIsoURI('Relevance').toPython()),
+        legalBasisForRestriction = extractSkosConcept(datasetsGraph, datasetURI, dcatApNoURI('legalBasisForRestriction')),
+        legalBasisForProcessing = extractSkosConcept(datasetsGraph, datasetURI, dcatApNoURI('legalBasisForProcessing')),
+        legalBasisForAccess = extractSkosConcept(datasetsGraph, datasetURI, dcatApNoURI('legalBasisForAccess')),
+        conformsTo = extractSkosConcept(datasetsGraph, datasetURI, DCTERMS.conformsTo),
+        informationModel = extractSkosConcept(datasetsGraph, datasetURI, dcatApNoURI('informationModel'))
     )
     
     dataset.addValuesFromDcatResource(parseDcatResource(graph=datasetsGraph, subject=datasetURI))

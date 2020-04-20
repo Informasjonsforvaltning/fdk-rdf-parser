@@ -6,6 +6,7 @@ from .harvest_meta_data import HarvestMetaData
 from .distribution import Distribution
 from .temporal import Temporal
 from .quality_annotation import QualityAnnotation
+from .skos_concept import SkosConcept
 
 @dataclass
 class Dataset(DcatResource):
@@ -14,7 +15,7 @@ class Dataset(DcatResource):
     accessRightsComment: List[str] = field(default_factory=list)
     distribution: List[Distribution] = field(default_factory=list)
     source: str = None
-    objective: Dict[str, str] = field(default_factory=dict)
+    objective: Dict[str, str] = None
     page: List[str] = field(default_factory=list)
     admsIdentifier: List[str] = field(default_factory=list)
     temporal: List[Temporal] = field(default_factory=list)
@@ -27,6 +28,11 @@ class Dataset(DcatResource):
     hasCurrentnessAnnotation: QualityAnnotation = None
     hasAvailabilityAnnotation: QualityAnnotation = None
     hasRelevanceAnnotation: QualityAnnotation = None
+    legalBasisForRestriction: List[SkosConcept] = None
+    legalBasisForProcessing: List[SkosConcept] = None
+    legalBasisForAccess: List[SkosConcept] = None
+    conformsTo: List[SkosConcept] = None
+    informationModel: List[SkosConcept] = None
 
     def addValuesFromDcatResource(self, values: DcatResource):
         self.identifier = values.identifier

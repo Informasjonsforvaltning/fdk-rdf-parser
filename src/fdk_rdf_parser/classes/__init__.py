@@ -6,3 +6,4 @@ from .temporal import Temporal
 from .dcat_resource import DcatResource
 from .references import Reference
 from .quality_annotation import QualityAnnotation
+from .skos_concept import SkosConcept

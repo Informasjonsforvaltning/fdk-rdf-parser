@@ -17,7 +17,7 @@ def valueTranslations(graph: Graph, subject: URIRef, predicate: URIRef) -> Dict[
     values = {}
     for obj in graph.objects(subject, predicate):
         values[obj.language] = obj.toPython()
-    return values
+    return values if len(values) > 0 else None
 
 def resourceList(graph: Graph, subject: URIRef, predicate: URIRef):
     values = []
