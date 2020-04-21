@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser.classes import DcatResource
+from fdk_rdf_parser.classes import DcatResource, Publisher
 from fdk_rdf_parser.parse_functions import parseDcatResource
 from rdflib import Graph, URIRef
 import isodate
@@ -43,7 +43,7 @@ def test_dcat_resource_parser():
             description={'nb':'Beskrivelse av datasett 0','en':"Description of dataset 0"},
             uri='https://testdirektoratet.no/model/dataset/dcatresource',
             accessRights='http://publications.europa.eu/resource/authority/access-right/PUBLIC',
-            publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
+            publisher=Publisher(uri='http://data.brreg.no/enhetsregisteret/enhet/987654321'),
             theme=['http://publications.europa.eu/resource/authority/data-theme/GOVE', 'http://publications.europa.eu/resource/authority/data-theme/TECH'],
             keyword=[{'nb': 'test'}],
             issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),

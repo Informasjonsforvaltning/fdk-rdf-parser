@@ -9,4 +9,3 @@ class ContactPoint:
     organizationUnit: str = None
     hasURL: str = None
     hasTelephone: str = None
-

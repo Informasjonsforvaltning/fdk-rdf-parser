@@ -3,11 +3,12 @@ from typing import Dict, List
 from datetime import datetime
 
 from .contactpoint import ContactPoint
+from .publisher import Publisher
 
 @dataclass
 class DcatResource:
     identifier: List[str] = field(default_factory=list)
-    publisher: str = None
+    publisher: Publisher = None
     title: Dict[str, str] = None
     description: Dict[str, str] = None
     uri: str = None

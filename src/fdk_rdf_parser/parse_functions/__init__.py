@@ -7,3 +7,4 @@ from .dcat_resource import parseDcatResource
 from .references import extractReferences
 from .quality_annotation import extractQualityAnnotation
 from .skos_concept import extractSkosConcept
+from .publisher import extractPublisher

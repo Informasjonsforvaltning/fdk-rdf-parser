@@ -5,12 +5,13 @@ from fdk_rdf_parser.classes import DcatResource
 from fdk_rdf_parser.rdf_utils import objectValue, valueList, valueTranslations, dcatURI, admsURI, dcatApNoURI
 
 from .contactpoint import extractContactPoints
+from .publisher import extractPublisher
 
 def parseDcatResource(graph: Graph, subject: URIRef) -> DcatResource:
 
     return DcatResource(
             identifier = valueList(graph, subject, DCTERMS.identifier),
-            publisher = objectValue(graph, subject, DCTERMS.publisher),
+            publisher = extractPublisher(graph, subject),
             title = valueTranslations(graph, subject, DCTERMS.title),
             description = valueTranslations(graph, subject, DCTERMS.description),
             uri = subject.toPython(),

@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation, SkosConcept
+from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation, SkosConcept, Publisher
 from fdk_rdf_parser.parse_functions import parseDataset
 from fdk_rdf_parser import parseDatasets
 from rdflib import Graph, URIRef
@@ -99,7 +99,7 @@ def test_parse_dataset():
                 changed=[isodate.parse_datetime("2020-03-12T11:52:16.122Z"), isodate.parse_datetime("2020-03-12T11:52:16.123Z")]),
             identifier=['adb4cf00-31c8-460c-9563-55f204cf8221'],
             uri='https://testdirektoratet.no/model/dataset/0',
-            publisher='http://data.brreg.no/enhetsregisteret/enhet/987654321',
+            publisher=Publisher(uri='http://data.brreg.no/enhetsregisteret/enhet/987654321'),
             page=['https://testdirektoratet.no'],
             subject=['https://testdirektoratet.no/model/concept/0','https://testdirektoratet.no/model/concept/1'],
             accrualPeriodicity='http://publications.europa.eu/resource/authority/frequency',
