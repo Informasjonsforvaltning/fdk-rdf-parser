@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List
 
 from .dcat_resource import DcatResource
@@ -12,15 +12,15 @@ from .skos_concept import SkosConcept
 class Dataset(DcatResource):
     id: str = None
     harvest: HarvestMetaData = None
-    accessRightsComment: List[str] = field(default_factory=list)
-    distribution: List[Distribution] = field(default_factory=list)
+    accessRightsComment: List[str] = None
+    distribution: List[Distribution] = None
     source: str = None
     objective: Dict[str, str] = None
-    page: List[str] = field(default_factory=list)
-    admsIdentifier: List[str] = field(default_factory=list)
-    temporal: List[Temporal] = field(default_factory=list)
-    subject: List[str] = field(default_factory=list)
-    spatial: List[str] = field(default_factory=list)
+    page: List[str] = None
+    admsIdentifier: List[str] = None
+    temporal: List[Temporal] = None
+    subject: List[str] = None
+    spatial: List[str] = None
     provenance: str = None
     accrualPeriodicity: str = None
     hasAccuracyAnnotation: QualityAnnotation = None

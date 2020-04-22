@@ -21,7 +21,7 @@ def extractContactPoints(graph: Graph, subject: URIRef) -> List[ContactPoint]:
             hasTelephone = extractHasTelephone(graph, resource)
         ))
 
-    return values
+    return values if len(values) > 0 else None
 
 def extractHasTelephone(graph: Graph, subject: BNode):
     telephone: str = objectValue(graph, subject, vcardURI('hasTelephone'))

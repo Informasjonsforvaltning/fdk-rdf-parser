@@ -29,4 +29,4 @@ def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
             )
         )
 
-    return values
+    return values if len(values) > 0 else None

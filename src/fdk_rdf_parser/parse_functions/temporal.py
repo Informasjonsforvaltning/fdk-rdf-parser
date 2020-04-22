@@ -30,7 +30,7 @@ def extractTemporal(graph: Graph, subject: URIRef) -> List[Temporal]:
                     endDate = endValue)
             )
 
-    return values
+    return values if len(values) > 0 else None
 
 def extractOwlTimeInstant(graph: Graph, subject: URIRef):
     dateValue = graph.value(subject, owlTimeURI('inXSDDateTime'))

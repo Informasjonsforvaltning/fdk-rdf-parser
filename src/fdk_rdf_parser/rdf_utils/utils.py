@@ -11,7 +11,7 @@ def valueList(graph: Graph, subject: URIRef, predicate: URIRef):
     for obj in graph.objects(subject, predicate):
         values.append(obj.toPython())
     values.sort()
-    return values
+    return values if len(values) > 0 else None
 
 def valueTranslations(graph: Graph, subject: URIRef, predicate: URIRef) -> Dict[str, str]:
     values = {}

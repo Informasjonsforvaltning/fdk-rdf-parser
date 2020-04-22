@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List
 
 @dataclass
@@ -6,11 +6,11 @@ class Distribution:
     uri: str = None
     title: Dict[str, str] = None
     description: Dict[str, str] = None
-    downloadURL: List[str] = field(default_factory=list)
-    accessURL: List[str] = field(default_factory=list)
+    downloadURL: List[str] = None
+    accessURL: List[str] = None
     license: str = None
-    conformsTo: List[str] = field(default_factory=list)
-    page: List[str] = field(default_factory=list)
-    format: List[str] = field(default_factory=list)
+    conformsTo: List[str] = None
+    page: List[str] = None
+    format: List[str] = None
     type: str = None
     accessService: str = None

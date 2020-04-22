@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List
 from datetime import datetime
 
@@ -7,17 +7,17 @@ from .publisher import Publisher
 
 @dataclass
 class DcatResource:
-    identifier: List[str] = field(default_factory=list)
+    identifier: List[str] = None
     publisher: Publisher = None
     title: Dict[str, str] = None
     description: Dict[str, str] = None
     uri: str = None
     accessRights: str = None
-    theme: List[str] = field(default_factory=list)
-    keyword: List[str] = field(default_factory=list)
-    contactPoint: List[ContactPoint] = field(default_factory=list)
+    theme: List[str] = None
+    keyword: List[str] = None
+    contactPoint: List[ContactPoint] = None
     type: str = None
     issued: datetime = None
     modified: datetime = None
-    landingPage: List[str] = field(default_factory=list)
-    language: List[str] = field(default_factory=list)
+    landingPage: List[str] = None
+    language: List[str] = None

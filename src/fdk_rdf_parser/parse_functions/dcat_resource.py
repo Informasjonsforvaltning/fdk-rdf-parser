@@ -32,4 +32,4 @@ def extractKeyWords(graph: Graph, subject: URIRef):
         translation = {}
         translation[keyword.language] = keyword.toPython()
         values.append(translation)
-    return values
+    return values if len(values) > 0 else None

@@ -26,4 +26,4 @@ def extractReferences(graph: Graph, subject: URIRef) -> List[Reference]:
                     referenceType = predicate.toPython(),
                     source = referenceURI ))
 
-    return values
+    return values if len(values) > 0 else None
