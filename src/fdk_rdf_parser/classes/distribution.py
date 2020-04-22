@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict, List
 
+from .data_distribution_service import DataDistributionService
+
 @dataclass
 class Distribution:
     uri: str = None
@@ -13,4 +15,4 @@ class Distribution:
     page: List[str] = None
     format: List[str] = None
     type: str = None
-    accessService: str = None
+    accessService: List[DataDistributionService] = None

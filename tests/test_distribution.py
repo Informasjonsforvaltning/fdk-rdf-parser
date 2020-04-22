@@ -23,8 +23,7 @@ def test_single_distribution():
                                   dct:type           "Feed" ;
                                   dcat:accessURL     <https://testdistribusjon.no/access> ;
                                   foaf:page          <https://testdistribusjon.no> ;
-                                  dcat:downloadURL   <https://testdistribusjon.no/download> ;
-                                  dcat:accessService <https://testdistribusjon.no/service>
+                                  dcat:downloadURL   <https://testdistribusjon.no/download>
                                 ] ."""
 
     expected = [
@@ -37,8 +36,7 @@ def test_single_distribution():
             type='Feed',
             accessURL=['https://testdistribusjon.no/access'],
             page=['https://testdistribusjon.no'],
-            downloadURL=['https://testdistribusjon.no/download'],
-            accessService='https://testdistribusjon.no/service'
+            downloadURL=['https://testdistribusjon.no/download']
         )
     ]
 

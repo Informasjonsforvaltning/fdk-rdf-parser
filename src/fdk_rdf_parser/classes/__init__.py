@@ -8,3 +8,4 @@ from .references import Reference
 from .quality_annotation import QualityAnnotation
 from .skos_concept import SkosConcept
 from .publisher import Publisher
+from .data_distribution_service import DataDistributionService

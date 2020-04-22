@@ -29,3 +29,6 @@ def dqvIsoURI(subString) -> URIRef:
 
 def provURI(subString) -> URIRef:
     return URIRef('http://www.w3.org/ns/prov#' + subString)
+
+def dcatApiURI(subString) -> URIRef:
+    return URIRef('http://dcat.no/dcatapi/' + subString)

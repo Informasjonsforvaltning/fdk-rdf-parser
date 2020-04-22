@@ -6,6 +6,8 @@ from rdflib.namespace import DCTERMS, FOAF
 from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import objectValue, resourceList, valueList, valueTranslations, dcatURI, dctURI
 
+from .data_distribution_service import extractDataDistributionServices
+
 def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
     values = []
     for resource in resourceList(graph, subject, dcatURI('distribution')):
@@ -25,7 +27,7 @@ def extractDistributions(graph: Graph, subject: URIRef) -> List[Distribution]:
                 page = valueList(graph, resource, FOAF.page),
                 format = valueList(graph, resource, dctURI('format')),
                 type = objectValue(graph, resource, DCTERMS.type),
-                accessService = objectValue(graph, resource, dcatURI('accessService'))
+                accessService = extractDataDistributionServices(graph, resource)
             )
         )
 
