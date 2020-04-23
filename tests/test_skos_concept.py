@@ -1,12 +1,10 @@
-"""Test cases."""
-import pytest
-
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.parse_functions import extractSkosConcept
 from fdk_rdf_parser.rdf_utils import dcatApNoURI
+
 
 def test_legal_basis_for_restriction():
 
@@ -26,18 +24,18 @@ def test_legal_basis_for_restriction():
 
     expected = [
         SkosConcept(
-            uri = 'https://vg.no',
-            prefLabel = {'nb':'En tittel', 'nn':'Ein tittel'},
-            extraType = 'http://purl.org/dc/terms/RightsStatement'
+            uri="https://vg.no",
+            prefLabel={"nb": "En tittel", "nn": "Ein tittel"},
+            extraType="http://purl.org/dc/terms/RightsStatement",
         )
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef('https://testdirektoratet.no/model/dataset/0')
-    predicate = dcatApNoURI('legalBasisForRestriction')
-
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
+    predicate = dcatApNoURI("legalBasisForRestriction")
 
     assert extractSkosConcept(graph, subject, predicate) == expected
+
 
 def test_ref_uri_used_when_missing_source():
 
@@ -50,25 +48,25 @@ def test_ref_uri_used_when_missing_source():
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
                 dcatno:informationModel   <https://testdirektoratet.no/model/info/0> .
-                
+
         <https://testdirektoratet.no/model/info/0>
                 a               skos:Concept , dct:Standard ;
                 skos:prefLabel  "Informasjonsmodell"@nb ."""
 
     expected = [
         SkosConcept(
-            uri = 'https://testdirektoratet.no/model/info/0',
-            prefLabel = {'nb':'Informasjonsmodell'},
-            extraType = 'http://purl.org/dc/terms/Standard'
+            uri="https://testdirektoratet.no/model/info/0",
+            prefLabel={"nb": "Informasjonsmodell"},
+            extraType="http://purl.org/dc/terms/Standard",
         )
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef('https://testdirektoratet.no/model/dataset/0')
-    predicate = dcatApNoURI('informationModel')
-
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
+    predicate = dcatApNoURI("informationModel")
 
     assert extractSkosConcept(graph, subject, predicate) == expected
+
 
 def test_source_is_prioritized_uri():
 
@@ -79,8 +77,9 @@ def test_source_is_prioritized_uri():
 
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
-                dct:conformsTo            <https://testdirektoratet.no/model/conforms/0> .
-                
+                dct:conformsTo
+                    <https://testdirektoratet.no/model/conforms/0> .
+
         <https://testdirektoratet.no/model/conforms/0>
                 a               skos:Concept ;
                 dct:source      "https://www.test.no/source/" ;
@@ -88,18 +87,16 @@ def test_source_is_prioritized_uri():
 
     expected = [
         SkosConcept(
-            uri = 'https://www.test.no/source/',
-            prefLabel = {'nb':'Kilde'},
-            extraType = None
+            uri="https://www.test.no/source/", prefLabel={"nb": "Kilde"}, extraType=None
         )
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef('https://testdirektoratet.no/model/dataset/0')
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
     predicate = DCTERMS.conformsTo
 
-
     assert extractSkosConcept(graph, subject, predicate) == expected
+
 
 def test_handles_literal_uri():
 
@@ -111,15 +108,10 @@ def test_handles_literal_uri():
                 a                 dcat:Distribution ;
                 dct:conformsTo    "http://hotell.difi.no/application.wadl" ."""
 
-    expected = [
-        SkosConcept(
-            uri = 'http://hotell.difi.no/application.wadl'
-        )
-    ]
+    expected = [SkosConcept(uri="http://hotell.difi.no/application.wadl")]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef('https://testdirektoratet.no/model/distribution/0')
+    subject = URIRef("https://testdirektoratet.no/model/distribution/0")
     predicate = DCTERMS.conformsTo
-
 
     assert extractSkosConcept(graph, subject, predicate) == expected

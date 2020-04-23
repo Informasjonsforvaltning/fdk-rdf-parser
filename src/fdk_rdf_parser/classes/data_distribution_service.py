@@ -3,6 +3,7 @@ from typing import List
 
 from .skos_concept import SkosConcept
 
+
 @dataclass
 class DataDistributionService:
     uri: str = None

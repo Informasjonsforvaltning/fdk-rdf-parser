@@ -4,6 +4,7 @@ from typing import Dict, List
 from .data_distribution_service import DataDistributionService
 from .skos_concept import SkosConcept
 
+
 @dataclass
 class Distribution:
     uri: str = None

@@ -5,6 +5,7 @@ from datetime import datetime
 from .contactpoint import ContactPoint
 from .publisher import Publisher
 
+
 @dataclass
 class DcatResource:
     identifier: List[str] = None

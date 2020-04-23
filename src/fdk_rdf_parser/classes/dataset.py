@@ -8,6 +8,7 @@ from .temporal import Temporal
 from .quality_annotation import QualityAnnotation
 from .skos_concept import SkosConcept
 
+
 @dataclass
 class Dataset(DcatResource):
     id: str = None

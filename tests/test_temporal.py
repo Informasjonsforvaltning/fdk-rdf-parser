@@ -1,10 +1,8 @@
-"""Test cases."""
-import pytest
-
 from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.parse_functions import extractTemporal
 from rdflib import Graph, URIRef
 import isodate
+
 
 def test_temporal_dcat():
 
@@ -15,20 +13,25 @@ def test_temporal_dcat():
 
         <https://testdirektoratet.no/model/dataset/temporal>
                 a               dcat:Dataset ;
-                dct:temporal    [ a                 dct:PeriodOfTime ;
-                                dcat:startDate    "2019-04-02T00:00:00"^^xsd:dateTime ;
-                                dcat:endDate      "2020-04-02T00:00:00"^^xsd:dateTime] ."""
+                dct:temporal    [
+                    a                 dct:PeriodOfTime ;
+                    dcat:startDate    "2019-04-02T00:00:00"^^xsd:dateTime ;
+                    dcat:endDate      "2020-04-02T00:00:00"^^xsd:dateTime
+                ] ."""
 
     expected = [
         Temporal(
             uri=None,
             endDate=isodate.parse_datetime("2020-04-02T00:00:00"),
-            startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
+            startDate=isodate.parse_datetime("2019-04-02T00:00:00"),
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u'https://testdirektoratet.no/model/dataset/temporal')
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
     assert extractTemporal(graph, subject) == expected
+
 
 def test_temporal_uri():
 
@@ -48,14 +51,17 @@ def test_temporal_uri():
 
     expected = [
         Temporal(
-            uri='https://testdirektoratet.no/model/temporal/0',
+            uri="https://testdirektoratet.no/model/temporal/0",
             endDate=isodate.parse_datetime("2020-04-02T00:00:00"),
-            startDate=isodate.parse_datetime("2019-04-02T00:00:00"))]
+            startDate=isodate.parse_datetime("2019-04-02T00:00:00"),
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u'https://testdirektoratet.no/model/dataset/temporal')
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
     assert extractTemporal(graph, subject) == expected
+
 
 def test_temporal_owl_time():
 
@@ -67,25 +73,31 @@ def test_temporal_owl_time():
 
         <https://testdirektoratet.no/model/dataset/temporal>
                 a               dcat:Dataset ;
-                dct:temporal    [ a                  dct:PeriodOfTime ;
-                                   time:hasBeginning  [ a                   time:Instant ;
-                                                        time:inXSDDateTime  "2001-01-01T00:00:00Z"^^xsd:dateTime
-                                                      ] ;
-                                   time:hasEnd        [ a                   time:Instant ;
-                                                        time:inXSDDateTime  "2046-05-12T00:00:00Z"^^xsd:dateTime
-                                                      ]
-                                 ] ."""
+                dct:temporal    [
+                    a                  dct:PeriodOfTime ;
+                    time:hasBeginning  [
+                        a                   time:Instant ;
+                        time:inXSDDateTime  "2001-01-01T00:00:00Z"^^xsd:dateTime
+                    ] ;
+                    time:hasEnd        [
+                        a                   time:Instant ;
+                        time:inXSDDateTime  "2046-05-12T00:00:00Z"^^xsd:dateTime
+                    ]
+                ] ."""
 
     expected = [
         Temporal(
             uri=None,
             endDate=isodate.parse_datetime("2046-05-12T00:00:00Z"),
-            startDate=isodate.parse_datetime("2001-01-01T00:00:00Z"))]
+            startDate=isodate.parse_datetime("2001-01-01T00:00:00Z"),
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u'https://testdirektoratet.no/model/dataset/temporal')
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
     assert extractTemporal(graph, subject) == expected
+
 
 def test_temporal_schema():
 
@@ -105,9 +117,11 @@ def test_temporal_schema():
         Temporal(
             uri=None,
             endDate=isodate.parse_date("2020-04-02"),
-            startDate=isodate.parse_date("2019-04-02"))]
+            startDate=isodate.parse_date("2019-04-02"),
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u'https://testdirektoratet.no/model/dataset/temporal')
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
     assert extractTemporal(graph, subject) == expected
