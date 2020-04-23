@@ -33,8 +33,7 @@ def test_quality_annotations():
                     prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
                 dqv:hasQualityAnnotation  [ 
                     a                dqv:QualityAnnotation ;
-                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Completeness> ;
-                    prov:hasBody     [ rdf:value  "Completeness"@en ] ] ."""
+                    dqv:inDimension  <http://iso.org/25012/2008/dataquality/Completeness> ] ."""
 
     expected = {
         'http://iso.org/25012/2008/dataquality/Currentness': QualityAnnotation(
@@ -53,8 +52,7 @@ def test_quality_annotations():
             hasBody={'nb':'relevans'}
         ),
         'http://iso.org/25012/2008/dataquality/Completeness': QualityAnnotation(
-            inDimension='http://iso.org/25012/2008/dataquality/Completeness',
-            hasBody={'en':'Completeness'}
+            inDimension='http://iso.org/25012/2008/dataquality/Completeness'
         )
     }
 

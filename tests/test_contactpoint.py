@@ -14,7 +14,7 @@ def test_single_contact_point():
         <https://testdirektoratet.no/model/dataset/contact>
                 a                         dcat:Dataset ;
                 dcat:contactPoint         [ a                          vcard:Organization ;
-                                            vcard:hasTelephone         <tel:23453345> ;
+                                            vcard:hasTelephone         "23453345" ;
                                             vcard:hasOrganizationName  "Testdirektoratet" ;
                                             vcard:hasURL               <https://testdirektoratet.no>
                                         ] ."""
@@ -44,7 +44,7 @@ def test_several_contact_points():
         <https://testdirektoratet.no/model/dataset/contact>
                 a                         dcat:Dataset ;
                 dcat:contactPoint         [ a                          vcard:Organization ;
-                                            vcard:hasEmail             <mailto:post@mail.com> ;
+                                            vcard:hasEmail             "post@mail.com" ;
                                             vcard:hasOrganizationName  "Testdirektoratet" ;
                                             vcard:organization-unit    "Testenhet" ;
                                             vcard:hasURL               <https://testdirektoratet.no>
