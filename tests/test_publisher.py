@@ -1,6 +1,7 @@
+from rdflib import Graph, URIRef
+
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.parse_functions import extractPublisher
-from rdflib import Graph, URIRef
 
 
 def test_uriref_publisher():

@@ -1,7 +1,7 @@
 from typing import List
 
-from rdflib import Graph, URIRef, Literal
-from rdflib.namespace import DCTERMS, SKOS, RDF
+from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import DCTERMS, RDF, SKOS
 
 from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.rdf_utils import (

@@ -1,4 +1,5 @@
 from typing import List
+
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 

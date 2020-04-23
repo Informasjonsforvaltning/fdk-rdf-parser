@@ -3,21 +3,20 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Dataset
 from fdk_rdf_parser.rdf_utils import (
+    admsURI,
+    dcatApNoURI,
+    dcatURI,
+    dqvIsoURI,
     objectValue,
     valueList,
     valueTranslations,
-    dcatURI,
-    admsURI,
-    dcatApNoURI,
-    dqvIsoURI,
 )
-
 from .dcat_resource import parseDcatResource
-from .harvest_meta_data import extractMetaData
 from .distribution import extractDistributions
-from .temporal import extractTemporal
+from .harvest_meta_data import extractMetaData
 from .quality_annotation import extractQualityAnnotation
 from .skos_concept import extractSkosConcept
+from .temporal import extractTemporal
 
 
 def parseDataset(

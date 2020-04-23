@@ -5,11 +5,10 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DataDistributionService
 from fdk_rdf_parser.rdf_utils import (
+    dcatApiURI,
     resourceList,
     valueTranslations,
-    dcatApiURI,
 )
-
 from .skos_concept import extractSkosConcept
 
 

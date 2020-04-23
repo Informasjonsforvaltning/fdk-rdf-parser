@@ -1,6 +1,7 @@
+from rdflib import Graph, URIRef
+
 from fdk_rdf_parser.classes import QualityAnnotation
 from fdk_rdf_parser.parse_functions import extractQualityAnnotation
-from rdflib import Graph, URIRef
 
 
 def test_quality_annotations():

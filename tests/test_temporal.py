@@ -1,7 +1,8 @@
+import isodate
+from rdflib import Graph, URIRef
+
 from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.parse_functions import extractTemporal
-from rdflib import Graph, URIRef
-import isodate
 
 
 def test_temporal_dcat():

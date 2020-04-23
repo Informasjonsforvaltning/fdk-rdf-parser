@@ -5,14 +5,13 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import (
+    dcatURI,
+    dctURI,
     objectValue,
     resourceList,
     valueList,
     valueTranslations,
-    dcatURI,
-    dctURI,
 )
-
 from .data_distribution_service import extractDataDistributionServices
 from .skos_concept import extractSkosConcept
 

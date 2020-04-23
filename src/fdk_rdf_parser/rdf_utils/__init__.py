@@ -1,14 +1,14 @@
 from .ns import (
-    dcatURI,
     admsURI,
+    dcatApiURI,
     dcatApNoURI,
+    dcatURI,
+    dctURI,
+    dqvIsoURI,
+    dqvURI,
     owlTimeURI,
+    provURI,
     schemaURI,
     vcardURI,
-    dctURI,
-    dqvURI,
-    dqvIsoURI,
-    provURI,
-    dcatApiURI,
 )
-from .utils import objectValue, valueList, valueTranslations, resourceList
+from .utils import objectValue, resourceList, valueList, valueTranslations

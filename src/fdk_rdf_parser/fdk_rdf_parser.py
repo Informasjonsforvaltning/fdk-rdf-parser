@@ -1,6 +1,7 @@
 from typing import Dict
+
 from rdflib import Graph
-from rdflib.namespace import RDF, FOAF
+from rdflib.namespace import FOAF, RDF
 
 from fdk_rdf_parser.parse_functions.dataset import Dataset, parseDataset
 from fdk_rdf_parser.rdf_utils import dcatURI

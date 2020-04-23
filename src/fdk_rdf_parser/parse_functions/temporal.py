@@ -1,15 +1,15 @@
 from typing import List
 
-from rdflib import Graph, URIRef, BNode
+from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.rdf_utils import (
-    objectValue,
-    resourceList,
     dcatURI,
-    schemaURI,
+    objectValue,
     owlTimeURI,
+    resourceList,
+    schemaURI,
 )
 
 

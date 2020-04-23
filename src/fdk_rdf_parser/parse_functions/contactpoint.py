@@ -1,8 +1,9 @@
 from typing import List
-from rdflib import Graph, URIRef, BNode
+
+from rdflib import BNode, Graph, URIRef
 
 from fdk_rdf_parser.classes import ContactPoint
-from fdk_rdf_parser.rdf_utils import objectValue, resourceList, dcatURI, vcardURI
+from fdk_rdf_parser.rdf_utils import dcatURI, objectValue, resourceList, vcardURI
 
 
 def extractContactPoints(graph: Graph, subject: URIRef) -> List[ContactPoint]:

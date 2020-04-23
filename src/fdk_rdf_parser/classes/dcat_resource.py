@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from typing import Dict, List
 from datetime import datetime
+from typing import Dict, List
 
 from .contactpoint import ContactPoint
 from .publisher import Publisher

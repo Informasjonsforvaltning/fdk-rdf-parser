@@ -1,15 +1,16 @@
+import isodate
+from rdflib import Graph, URIRef
+
+from fdk_rdf_parser import parseDatasets
 from fdk_rdf_parser.classes import (
     Dataset,
+    Distribution,
     HarvestMetaData,
+    Publisher,
     QualityAnnotation,
     SkosConcept,
-    Publisher,
-    Distribution,
 )
 from fdk_rdf_parser.parse_functions import parseDataset
-from fdk_rdf_parser import parseDatasets
-from rdflib import Graph, URIRef
-import isodate
 
 
 def test_parse_multiple_datasets():

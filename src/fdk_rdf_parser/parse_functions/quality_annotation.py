@@ -1,14 +1,15 @@
 from typing import Dict
+
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDF
 
 from fdk_rdf_parser.classes import QualityAnnotation
 from fdk_rdf_parser.rdf_utils import (
+    dqvURI,
     objectValue,
+    provURI,
     resourceList,
     valueTranslations,
-    dqvURI,
-    provURI,
 )
 
 

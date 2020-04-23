@@ -3,12 +3,11 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DcatResource
 from fdk_rdf_parser.rdf_utils import (
+    dcatURI,
     objectValue,
     valueList,
     valueTranslations,
-    dcatURI,
 )
-
 from .contactpoint import extractContactPoints
 from .publisher import extractPublisher
 

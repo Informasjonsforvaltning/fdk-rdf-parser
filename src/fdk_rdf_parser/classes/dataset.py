@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 from .dcat_resource import DcatResource
-from .harvest_meta_data import HarvestMetaData
 from .distribution import Distribution
-from .temporal import Temporal
+from .harvest_meta_data import HarvestMetaData
 from .quality_annotation import QualityAnnotation
 from .skos_concept import SkosConcept
+from .temporal import Temporal
 
 
 @dataclass
