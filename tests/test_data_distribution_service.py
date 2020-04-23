@@ -4,6 +4,7 @@ import pytest
 from fdk_rdf_parser.classes import Distribution, DataDistributionService, SkosConcept
 from fdk_rdf_parser.parse_functions import extractDistributions
 from rdflib import Graph, URIRef
+from fdk_rdf_parser.rdf_utils import dcatURI
 
 def test_bnode_distribution_access_service():
 
@@ -45,7 +46,7 @@ def test_bnode_distribution_access_service():
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u'https://testdirektoratet.no/model/dataset/distributionservice')
 
-    assert extractDistributions(graph, subject) == expected
+    assert extractDistributions(graph, subject, dcatURI('distribution')) == expected
 
 def test_uriref_distribution_access_service():
     src = """
@@ -109,4 +110,4 @@ def test_uriref_distribution_access_service():
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u'https://testdirektoratet.no/model/dataset/distributionservice')
 
-    assert extractDistributions(graph, subject) == expected
+    assert extractDistributions(graph, subject, dcatURI('distribution')) == expected

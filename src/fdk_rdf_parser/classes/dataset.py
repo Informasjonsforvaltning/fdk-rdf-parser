@@ -14,6 +14,7 @@ class Dataset(DcatResource):
     harvest: HarvestMetaData = None
     accessRightsComment: List[str] = None
     distribution: List[Distribution] = None
+    sample: List[Distribution] = None
     source: str = None
     objective: Dict[str, str] = None
     page: List[str] = None

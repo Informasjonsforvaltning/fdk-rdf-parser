@@ -1,9 +1,10 @@
 """Test cases."""
 import pytest
-
-from fdk_rdf_parser.classes import Distribution
-from fdk_rdf_parser.parse_functions import extractDistributions
 from rdflib import Graph, URIRef
+
+from fdk_rdf_parser.classes import Distribution, SkosConcept
+from fdk_rdf_parser.parse_functions import extractDistributions
+from fdk_rdf_parser.rdf_utils import dcatURI
 
 def test_single_distribution():
 
@@ -28,14 +29,14 @@ def test_single_distribution():
 
     expected = [
         Distribution(
-            conformsTo=['https://testconformsto.org'],
+            conformsTo=[SkosConcept(uri = 'https://testconformsto.org')],
             title={'nb':'Testdistribusjon'},
             description={'en':'Description'},
             format=['json'],
-            license='https://creativecommons.org/licenses/by/4.0/deed.no',
+            license=[SkosConcept(uri = 'https://creativecommons.org/licenses/by/4.0/deed.no')],
             type='Feed',
             accessURL=['https://testdistribusjon.no/access'],
-            page=['https://testdistribusjon.no'],
+            page=[SkosConcept(uri = 'https://testdistribusjon.no')],
             downloadURL=['https://testdistribusjon.no/download']
         )
     ]
@@ -44,7 +45,7 @@ def test_single_distribution():
     subject = URIRef(u'https://testdirektoratet.no/model/dataset/distribution')
 
 
-    assert extractDistributions(graph, subject) == expected
+    assert extractDistributions(graph, subject, dcatURI('distribution')) == expected
 
 def test_multiple_distributions():
     src = """
@@ -76,7 +77,7 @@ def test_multiple_distributions():
             title={'nb':'Testdistribusjon'},
             description={'nb':'Distribusjon json'},
             format=['json'],
-            license='https://creativecommons.org/licenses/by/4.0/deed.no',
+            license=[SkosConcept(uri = 'https://creativecommons.org/licenses/by/4.0/deed.no')],
             accessURL=['https://testdistribusjon.no/access']
         ),
         Distribution(
@@ -84,10 +85,16 @@ def test_multiple_distributions():
             title={'nb':'Testdistribusjon'},
             description={'nb':'Distribusjon xml'},
             format=['xml'],
-            license='https://creativecommons.org/licenses/by/4.0/deed.no',
+            license=[SkosConcept(uri = 'https://creativecommons.org/licenses/by/4.0/deed.no')],
             accessURL=['https://testdistribusjon.no/access']
         ),
         Distribution(
             uri='https://testdirektoratet.no/model/distribution/1'
         )
     ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u'https://testdirektoratet.no/model/dataset/distribution')
+
+
+    assert extractDistributions(graph, subject, dcatURI('distribution')) == expected

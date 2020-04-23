@@ -1,7 +1,7 @@
 """Test cases."""
 import pytest
 
-from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation, SkosConcept, Publisher
+from fdk_rdf_parser.classes import Dataset, HarvestMetaData, QualityAnnotation, SkosConcept, Publisher, Distribution
 from fdk_rdf_parser.parse_functions import parseDataset
 from fdk_rdf_parser import parseDatasets
 from rdflib import Graph, URIRef
@@ -251,6 +251,72 @@ def test_informationmodel_and_conformsto():
             uri = 'https://informationmodel.no',
             prefLabel = {'en':'information model'},
             extraType = 'http://purl.org/dc/terms/Standard'
+        )]
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u'https://testdirektoratet.no/model/dataset/0')
+
+
+    assert parseDataset(graph, URIRef('record'), subject) == expected
+
+def test_distribution_and_sample():
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dcatno: <http://difi.no/dcatno#> .
+        @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix adms:  <http://www.w3.org/ns/adms#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                adms:sample               [ a                dcat:Distribution ;
+                                            dct:description  "adsgjkv  cghj     dghdh"@nb ;
+                                            dct:format       "application/ATF" ;
+                                            dcat:accessURL   <https://application/ATF.com>
+                                          ] ;
+                dcat:distribution         [ a                dcat:Distribution ;
+                                            dct:conformsTo   [ a               dct:Standard , skos:Concept ;
+                                                               dct:source      "https://hopp.no" ;
+                                                               skos:prefLabel  "standard1"@nb
+                                                             ] ;
+                                            dct:description  "asdadrtyrtydfghdgh  dgh dfgh dh"@nb ;
+                                            dct:format       "application/ATF" ;
+                                            dct:license      [ a           dct:LicenseDocument , skos:Concept ;
+                                                               dct:source  "http://creativecommons.org/publicdomain/zero/1.0/"
+                                                             ] ;
+                                            dct:type         "Feed" ;
+                                            dcat:accessURL   <https://distribusjonsentralen.no> ;
+                                            foaf:page        [ a           foaf:Document , skos:Concept ;
+                                                               dct:source  "https://dokumentsjon.com"
+                                                             ]
+                                          ] ."""
+
+    expected = Dataset(
+        uri='https://testdirektoratet.no/model/dataset/0',
+        harvest=HarvestMetaData(),
+        sample=[Distribution(
+            description={'nb':'adsgjkv  cghj     dghdh'},
+            format=['application/ATF'],
+            accessURL=['https://application/ATF.com']
+        )],
+        distribution=[Distribution(
+            conformsTo=[SkosConcept(
+                uri = 'https://hopp.no',
+                prefLabel = {'nb':'standard1'},
+                extraType = 'http://purl.org/dc/terms/Standard')],
+            description={'nb':'asdadrtyrtydfghdgh  dgh dfgh dh'},
+            format=['application/ATF'],
+            license=[SkosConcept(
+                uri = 'http://creativecommons.org/publicdomain/zero/1.0/',
+                extraType = 'http://purl.org/dc/terms/LicenseDocument')],
+            type='Feed',
+            accessURL=['https://distribusjonsentralen.no'],
+            page=[SkosConcept(
+                uri = 'https://dokumentsjon.com',
+                extraType = 'http://xmlns.com/foaf/0.1/Document')]
         )]
     )
 
