@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import DCTERMS
@@ -53,7 +53,7 @@ def extractTemporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
     return values if len(values) > 0 else None
 
 
-def extractOwlTimeInstant(graph: Graph, subject: URIRef):
+def extractOwlTimeInstant(graph: Graph, subject: Any) -> Any:
     dateValue = graph.value(subject, owlTimeURI("inXSDDateTime"))
     dateValue = (
         graph.value(subject, owlTimeURI("inXSDDateTimeStamp"))
@@ -72,7 +72,7 @@ def extractOwlTimeInstant(graph: Graph, subject: URIRef):
         return None
 
 
-def extractOwlTimeStart(graph: Graph, subject: URIRef):
+def extractOwlTimeStart(graph: Graph, subject: Any) -> Any:
     hasBeginning = graph.value(subject, owlTimeURI("hasBeginning"))
     if hasBeginning is not None:
         return extractOwlTimeInstant(graph, hasBeginning)
@@ -80,7 +80,7 @@ def extractOwlTimeStart(graph: Graph, subject: URIRef):
         return None
 
 
-def extractOwlTimeEnd(graph: Graph, subject: URIRef):
+def extractOwlTimeEnd(graph: Graph, subject: Any) -> Any:
     hasEnd = graph.value(subject, owlTimeURI("hasEnd"))
     if hasEnd is not None:
         return extractOwlTimeInstant(graph, hasEnd)

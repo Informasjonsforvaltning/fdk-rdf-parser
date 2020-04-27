@@ -5,7 +5,7 @@ from fdk_rdf_parser.parse_functions import extractDistributions
 from fdk_rdf_parser.rdf_utils import dcatURI
 
 
-def test_single_distribution():
+def test_single_distribution() -> None:
 
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -58,7 +58,7 @@ def test_single_distribution():
     assert extractDistributions(graph, subject, dcatURI("distribution")) == expected
 
 
-def test_multiple_distributions():
+def test_multiple_distributions() -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .

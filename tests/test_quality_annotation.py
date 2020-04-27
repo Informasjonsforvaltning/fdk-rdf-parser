@@ -4,7 +4,7 @@ from fdk_rdf_parser.classes import QualityAnnotation
 from fdk_rdf_parser.parse_functions import extractQualityAnnotation
 
 
-def test_quality_annotations():
+def test_quality_annotations() -> None:
 
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .

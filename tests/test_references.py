@@ -4,7 +4,7 @@ from fdk_rdf_parser.classes import Reference
 from fdk_rdf_parser.parse_functions import extractReferences
 
 
-def test_references():
+def test_references() -> None:
 
     src = """
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .

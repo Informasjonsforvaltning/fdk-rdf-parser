@@ -5,7 +5,7 @@ from fdk_rdf_parser.classes import DcatResource, Publisher
 from fdk_rdf_parser.parse_functions import parseDcatResource
 
 
-def test_dcat_resource_parser():
+def test_dcat_resource_parser() -> None:
 
     src = """
 @prefix dct: <http://purl.org/dc/terms/> .

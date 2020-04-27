@@ -1,14 +1,14 @@
-from typing import Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from rdflib import Graph, URIRef
 
 
-def objectValue(graph: Graph, subject: URIRef, predicate: URIRef):
+def objectValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return value.toPython() if value is not None else None
 
 
-def valueList(graph: Graph, subject: URIRef, predicate: URIRef):
+def valueList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
     values = []
     for obj in graph.objects(subject, predicate):
         values.append(obj.toPython())
@@ -25,7 +25,7 @@ def valueTranslations(
     return values if len(values) > 0 else None
 
 
-def resourceList(graph: Graph, subject: URIRef, predicate: URIRef):
+def resourceList(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
     values = []
     for obj in graph.objects(subject, predicate):
         values.append(obj)

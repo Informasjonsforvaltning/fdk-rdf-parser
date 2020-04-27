@@ -4,7 +4,7 @@ from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.parse_functions import extractPublisher
 
 
-def test_uriref_publisher():
+def test_uriref_publisher() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -39,7 +39,7 @@ def test_uriref_publisher():
     assert extractPublisher(graph, subject) == expected
 
 
-def test_bnode_publisher():
+def test_bnode_publisher() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .

@@ -1,45 +1,45 @@
 from rdflib import URIRef
 
 
-def dcatURI(subString) -> URIRef:
+def dcatURI(subString: str) -> URIRef:
     return URIRef("http://www.w3.org/ns/dcat#" + subString)
 
 
-def admsURI(subString) -> URIRef:
+def admsURI(subString: str) -> URIRef:
     return URIRef("http://www.w3.org/ns/adms#" + subString)
 
 
-def dcatApNoURI(subString) -> URIRef:
+def dcatApNoURI(subString: str) -> URIRef:
     return URIRef("http://difi.no/dcatno#" + subString)
 
 
-def owlTimeURI(subString) -> URIRef:
+def owlTimeURI(subString: str) -> URIRef:
     return URIRef("https://www.w3.org/TR/owl-time/" + subString)
 
 
-def schemaURI(subString) -> URIRef:
+def schemaURI(subString: str) -> URIRef:
     return URIRef("http://schema.org/" + subString)
 
 
-def vcardURI(subString) -> URIRef:
+def vcardURI(subString: str) -> URIRef:
     return URIRef("http://www.w3.org/2006/vcard/ns#" + subString)
 
 
-def dctURI(subString) -> URIRef:
+def dctURI(subString: str) -> URIRef:
     return URIRef("http://purl.org/dc/terms/" + subString)
 
 
-def dqvURI(subString) -> URIRef:
+def dqvURI(subString: str) -> URIRef:
     return URIRef("http://www.w3.org/ns/dqvNS#" + subString)
 
 
-def dqvIsoURI(subString) -> URIRef:
+def dqvIsoURI(subString: str) -> URIRef:
     return URIRef("http://iso.org/25012/2008/dataquality/" + subString)
 
 
-def provURI(subString) -> URIRef:
+def provURI(subString: str) -> URIRef:
     return URIRef("http://www.w3.org/ns/prov#" + subString)
 
 
-def dcatApiURI(subString) -> URIRef:
+def dcatApiURI(subString: str) -> URIRef:
     return URIRef("http://dcat.no/dcatapi/" + subString)

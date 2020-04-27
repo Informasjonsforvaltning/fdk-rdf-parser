@@ -15,7 +15,7 @@ class DcatResource:
     uri: Optional[str] = None
     accessRights: Optional[str] = None
     theme: Optional[List[str]] = None
-    keyword: Optional[List[str]] = None
+    keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
     type: Optional[str] = None
     issued: Optional[datetime] = None

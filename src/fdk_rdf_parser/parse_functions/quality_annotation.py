@@ -20,9 +20,10 @@ def extractQualityAnnotation(
 
     for annotation in resourceList(graph, subject, dqvURI("hasQualityAnnotation")):
         inDimensionValue = objectValue(graph, annotation, dqvURI("inDimension"))
-        annotations[inDimensionValue] = QualityAnnotation(
-            inDimension=inDimensionValue, hasBody=extractHasBody(graph, annotation)
-        )
+        if inDimensionValue is not None and isinstance(inDimensionValue, str):
+            annotations[inDimensionValue] = QualityAnnotation(
+                inDimension=inDimensionValue, hasBody=extractHasBody(graph, annotation)
+            )
 
     return annotations
 
