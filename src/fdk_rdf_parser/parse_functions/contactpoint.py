@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import BNode, Graph, URIRef
 
@@ -6,7 +6,7 @@ from fdk_rdf_parser.classes import ContactPoint
 from fdk_rdf_parser.rdf_utils import dcatURI, objectValue, resourceList, vcardURI
 
 
-def extractContactPoints(graph: Graph, subject: URIRef) -> List[ContactPoint]:
+def extractContactPoints(graph: Graph, subject: URIRef) -> Optional[List[ContactPoint]]:
     values = []
     for resource in resourceList(graph, subject, dcatURI("contactPoint")):
         resourceUri = None

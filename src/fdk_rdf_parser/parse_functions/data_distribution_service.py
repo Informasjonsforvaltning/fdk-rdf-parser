@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
@@ -14,7 +14,7 @@ from .skos_concept import extractSkosConcept
 
 def extractDataDistributionServices(
     graph: Graph, subject: URIRef
-) -> List[DataDistributionService]:
+) -> Optional[List[DataDistributionService]]:
     values = []
     for resource in resourceList(graph, subject, dcatApiURI("accessService")):
         resourceUri = None

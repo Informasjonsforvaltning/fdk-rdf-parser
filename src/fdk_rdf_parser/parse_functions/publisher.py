@@ -1,3 +1,5 @@
+from typing import Optional
+
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
@@ -5,7 +7,7 @@ from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import objectValue
 
 
-def extractPublisher(graph: Graph, subject: URIRef) -> Publisher:
+def extractPublisher(graph: Graph, subject: URIRef) -> Optional[Publisher]:
     publisherRef = graph.value(subject, DCTERMS.publisher)
 
     if publisherRef is None:

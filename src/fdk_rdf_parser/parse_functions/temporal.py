@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import DCTERMS
@@ -13,7 +13,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 
 
-def extractTemporal(graph: Graph, subject: URIRef) -> List[Temporal]:
+def extractTemporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
     values = []
     for temporalResource in resourceList(graph, subject, DCTERMS.temporal):
         temporalURI = None

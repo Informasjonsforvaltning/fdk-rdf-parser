@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, Optional
 
 
 @dataclass
 class SkosConcept:
-    uri: str = None
-    prefLabel: Dict[str, str] = None
-    extraType: str = None
+    uri: Optional[str] = None
+    prefLabel: Optional[Dict[str, str]] = None
+    extraType: Optional[str] = None

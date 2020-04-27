@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .data_distribution_service import DataDistributionService
 from .skos_concept import SkosConcept
@@ -7,14 +7,14 @@ from .skos_concept import SkosConcept
 
 @dataclass
 class Distribution:
-    uri: str = None
-    title: Dict[str, str] = None
-    description: Dict[str, str] = None
-    downloadURL: List[str] = None
-    accessURL: List[str] = None
-    license: List[SkosConcept] = None
-    conformsTo: List[SkosConcept] = None
-    page: List[SkosConcept] = None
-    format: List[str] = None
-    type: str = None
-    accessService: List[DataDistributionService] = None
+    uri: Optional[str] = None
+    title: Optional[Dict[str, str]] = None
+    description: Optional[Dict[str, str]] = None
+    downloadURL: Optional[List[str]] = None
+    accessURL: Optional[List[str]] = None
+    license: Optional[List[SkosConcept]] = None
+    conformsTo: Optional[List[SkosConcept]] = None
+    page: Optional[List[SkosConcept]] = None
+    format: Optional[List[str]] = None
+    type: Optional[str] = None
+    accessService: Optional[List[DataDistributionService]] = None

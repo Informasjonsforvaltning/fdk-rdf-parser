@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
 class Reference:
-    referenceType: str = None
-    source: str = None
+    referenceType: Optional[str] = None
+    source: Optional[str] = None

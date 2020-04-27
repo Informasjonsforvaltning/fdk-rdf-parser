@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 
 @dataclass
 class Temporal:
-    uri: str = None
-    startDate: datetime = None
-    endDate: datetime = None
+    uri: Optional[str] = None
+    startDate: Optional[datetime] = None
+    endDate: Optional[datetime] = None

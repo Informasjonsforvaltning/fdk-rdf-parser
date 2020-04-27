@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
@@ -18,7 +18,7 @@ from .skos_concept import extractSkosConcept
 
 def extractDistributions(
     graph: Graph, subject: URIRef, predicate: URIRef
-) -> List[Distribution]:
+) -> Optional[List[Distribution]]:
     values = []
     for resource in resourceList(graph, subject, predicate):
         resourceUri = None

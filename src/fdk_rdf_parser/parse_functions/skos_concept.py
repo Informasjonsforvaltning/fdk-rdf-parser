@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DCTERMS, RDF, SKOS
@@ -11,7 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 
 
-def extractExtraType(graph, skosConcept) -> str:
+def extractExtraType(graph, skosConcept) -> Optional[str]:
     extraType = None
 
     for typeURIRef in resourceList(graph, skosConcept, RDF.type):
@@ -23,7 +23,7 @@ def extractExtraType(graph, skosConcept) -> str:
 
 def extractSkosConcept(
     graph: Graph, subject: URIRef, predicate: URIRef
-) -> List[SkosConcept]:
+) -> Optional[List[SkosConcept]]:
     values = []
     for skosConcept in resourceList(graph, subject, predicate):
         skosConceptUri = None
