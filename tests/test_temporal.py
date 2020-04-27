@@ -5,7 +5,7 @@ from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.parse_functions import extractTemporal
 
 
-def test_temporal_dcat():
+def test_temporal_dcat() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -34,7 +34,7 @@ def test_temporal_dcat():
     assert extractTemporal(graph, subject) == expected
 
 
-def test_temporal_uri():
+def test_temporal_uri() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -64,7 +64,7 @@ def test_temporal_uri():
     assert extractTemporal(graph, subject) == expected
 
 
-def test_temporal_owl_time():
+def test_temporal_owl_time() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -100,7 +100,7 @@ def test_temporal_owl_time():
     assert extractTemporal(graph, subject) == expected
 
 
-def test_temporal_schema():
+def test_temporal_schema() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .

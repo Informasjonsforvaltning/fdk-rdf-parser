@@ -1,3 +1,5 @@
+from typing import Dict, List, Optional
+
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
@@ -32,7 +34,7 @@ def parseDcatResource(graph: Graph, subject: URIRef) -> DcatResource:
     )
 
 
-def extractKeyWords(graph: Graph, subject: URIRef):
+def extractKeyWords(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, str]]]:
     values = []
     for keyword in graph.objects(subject, dcatURI("keyword")):
         translation = {}

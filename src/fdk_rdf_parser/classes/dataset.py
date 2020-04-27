@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .dcat_resource import DcatResource
 from .distribution import Distribution
@@ -36,7 +36,7 @@ class Dataset(DcatResource):
     conformsTo: Optional[List[SkosConcept]] = None
     informationModel: Optional[List[SkosConcept]] = None
 
-    def addValuesFromDcatResource(self, values: DcatResource):
+    def addValuesFromDcatResource(self: Any, values: DcatResource) -> Any:
         self.identifier = values.identifier
         self.publisher = values.publisher
         self.title = values.title

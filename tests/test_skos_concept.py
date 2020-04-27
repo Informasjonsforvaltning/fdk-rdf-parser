@@ -6,7 +6,7 @@ from fdk_rdf_parser.parse_functions import extractSkosConcept
 from fdk_rdf_parser.rdf_utils import dcatApNoURI
 
 
-def test_legal_basis_for_restriction():
+def test_legal_basis_for_restriction() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -37,7 +37,7 @@ def test_legal_basis_for_restriction():
     assert extractSkosConcept(graph, subject, predicate) == expected
 
 
-def test_ref_uri_used_when_missing_source():
+def test_ref_uri_used_when_missing_source() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -68,7 +68,7 @@ def test_ref_uri_used_when_missing_source():
     assert extractSkosConcept(graph, subject, predicate) == expected
 
 
-def test_source_is_prioritized_uri():
+def test_source_is_prioritized_uri() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -98,7 +98,7 @@ def test_source_is_prioritized_uri():
     assert extractSkosConcept(graph, subject, predicate) == expected
 
 
-def test_handles_literal_uri():
+def test_handles_literal_uri() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .

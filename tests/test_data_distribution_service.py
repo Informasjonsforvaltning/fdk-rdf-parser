@@ -5,7 +5,7 @@ from fdk_rdf_parser.parse_functions import extractDistributions
 from fdk_rdf_parser.rdf_utils import dcatURI
 
 
-def test_bnode_distribution_access_service():
+def test_bnode_distribution_access_service() -> None:
 
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -50,7 +50,7 @@ def test_bnode_distribution_access_service():
     assert extractDistributions(graph, subject, dcatURI("distribution")) == expected
 
 
-def test_uriref_distribution_access_service():
+def test_uriref_distribution_access_service() -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dcatapi: <http://dcat.no/dcatapi/> .

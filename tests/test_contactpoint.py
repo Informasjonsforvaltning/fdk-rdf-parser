@@ -4,7 +4,7 @@ from fdk_rdf_parser.classes import ContactPoint
 from fdk_rdf_parser.parse_functions import extractContactPoints
 
 
-def test_single_contact_point():
+def test_single_contact_point() -> None:
 
     src = """
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
@@ -33,7 +33,7 @@ def test_single_contact_point():
     assert extractContactPoints(graph, subject) == expected
 
 
-def test_several_contact_points():
+def test_several_contact_points() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .

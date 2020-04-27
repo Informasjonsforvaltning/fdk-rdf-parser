@@ -23,6 +23,7 @@ safety = "^1.8.7"
 pytest-mock = "^3.1.0"
 codecov = "^2.0.22"
 mypy = "^0.770"
+flake8-annotations = "^2.1.0"
 
 [tool.coverage.paths]
 source = ["src"]

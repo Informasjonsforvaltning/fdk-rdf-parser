@@ -13,7 +13,7 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.parse_functions import parseDataset
 
 
-def test_parse_multiple_datasets():
+def test_parse_multiple_datasets() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -78,7 +78,7 @@ def test_parse_multiple_datasets():
     assert parseDatasets(src) == expected
 
 
-def test_parse_dataset():
+def test_parse_dataset() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -147,7 +147,7 @@ def test_parse_dataset():
     assert parseDataset(datasetsGraph, recordURI, datasetURI) == expected
 
 
-def test_dataset_has_quality_annotations():
+def test_dataset_has_quality_annotations() -> None:
 
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -204,7 +204,7 @@ def test_dataset_has_quality_annotations():
     assert parseDataset(graph, URIRef("record"), subject) == expected
 
 
-def test_legal_basis_fields():
+def test_legal_basis_fields() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -262,7 +262,7 @@ def test_legal_basis_fields():
     assert parseDataset(graph, URIRef("record"), subject) == expected
 
 
-def test_informationmodel_and_conformsto():
+def test_informationmodel_and_conformsto() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -308,7 +308,7 @@ def test_informationmodel_and_conformsto():
     assert parseDataset(graph, URIRef("record"), subject) == expected
 
 
-def test_distribution_and_sample():
+def test_distribution_and_sample() -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
