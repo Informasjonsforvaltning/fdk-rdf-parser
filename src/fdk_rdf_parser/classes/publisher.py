@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
 class Publisher:
-    uri: str = None
-    id: str = None
+    uri: Optional[str] = None
+    id: Optional[str] = None

@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 
 @dataclass
 class HarvestMetaData:
-    firstHarvested: datetime = None
-    changed: List[str] = None
+    firstHarvested: Optional[datetime] = None
+    changed: Optional[List[str]] = None

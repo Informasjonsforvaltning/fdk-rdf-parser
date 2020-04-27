@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from rdflib import Graph, URIRef
 
@@ -18,7 +18,7 @@ def valueList(graph: Graph, subject: URIRef, predicate: URIRef):
 
 def valueTranslations(
     graph: Graph, subject: URIRef, predicate: URIRef
-) -> Dict[str, str]:
+) -> Optional[Dict[str, str]]:
     values = {}
     for obj in graph.objects(subject, predicate):
         values[obj.language] = obj.toPython()

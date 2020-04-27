@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
@@ -7,7 +7,7 @@ from fdk_rdf_parser.classes import Reference
 from fdk_rdf_parser.rdf_utils import objectValue
 
 
-def extractReferences(graph: Graph, subject: URIRef) -> List[Reference]:
+def extractReferences(graph: Graph, subject: URIRef) -> Optional[List[Reference]]:
     referenceProperties = [
         DCTERMS.hasVersion,
         DCTERMS.isVersionOf,

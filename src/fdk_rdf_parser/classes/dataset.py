@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .dcat_resource import DcatResource
 from .distribution import Distribution
@@ -11,30 +11,30 @@ from .temporal import Temporal
 
 @dataclass
 class Dataset(DcatResource):
-    id: str = None
-    harvest: HarvestMetaData = None
-    accessRightsComment: List[str] = None
-    distribution: List[Distribution] = None
-    sample: List[Distribution] = None
-    source: str = None
-    objective: Dict[str, str] = None
-    page: List[str] = None
-    admsIdentifier: List[str] = None
-    temporal: List[Temporal] = None
-    subject: List[str] = None
-    spatial: List[str] = None
-    provenance: str = None
-    accrualPeriodicity: str = None
-    hasAccuracyAnnotation: QualityAnnotation = None
-    hasCompletenessAnnotation: QualityAnnotation = None
-    hasCurrentnessAnnotation: QualityAnnotation = None
-    hasAvailabilityAnnotation: QualityAnnotation = None
-    hasRelevanceAnnotation: QualityAnnotation = None
-    legalBasisForRestriction: List[SkosConcept] = None
-    legalBasisForProcessing: List[SkosConcept] = None
-    legalBasisForAccess: List[SkosConcept] = None
-    conformsTo: List[SkosConcept] = None
-    informationModel: List[SkosConcept] = None
+    id: Optional[str] = None
+    harvest: Optional[HarvestMetaData] = None
+    accessRightsComment: Optional[List[str]] = None
+    distribution: Optional[List[Distribution]] = None
+    sample: Optional[List[Distribution]] = None
+    source: Optional[str] = None
+    objective: Optional[Dict[str, str]] = None
+    page: Optional[List[str]] = None
+    admsIdentifier: Optional[List[str]] = None
+    temporal: Optional[List[Temporal]] = None
+    subject: Optional[List[str]] = None
+    spatial: Optional[List[str]] = None
+    provenance: Optional[str] = None
+    accrualPeriodicity: Optional[str] = None
+    hasAccuracyAnnotation: Optional[QualityAnnotation] = None
+    hasCompletenessAnnotation: Optional[QualityAnnotation] = None
+    hasCurrentnessAnnotation: Optional[QualityAnnotation] = None
+    hasAvailabilityAnnotation: Optional[QualityAnnotation] = None
+    hasRelevanceAnnotation: Optional[QualityAnnotation] = None
+    legalBasisForRestriction: Optional[List[SkosConcept]] = None
+    legalBasisForProcessing: Optional[List[SkosConcept]] = None
+    legalBasisForAccess: Optional[List[SkosConcept]] = None
+    conformsTo: Optional[List[SkosConcept]] = None
+    informationModel: Optional[List[SkosConcept]] = None
 
     def addValuesFromDcatResource(self, values: DcatResource):
         self.identifier = values.identifier
