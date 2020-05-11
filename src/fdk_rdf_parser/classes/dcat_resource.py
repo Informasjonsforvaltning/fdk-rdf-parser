@@ -3,13 +3,13 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from .contactpoint import ContactPoint
-from .publisher import Publisher
+from .publisher import PublisherId
 
 
 @dataclass
-class DcatResource:
+class PartialDcatResource:
     identifier: Optional[List[str]] = None
-    publisher: Optional[Publisher] = None
+    publisher: Optional[PublisherId] = None
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     uri: Optional[str] = None

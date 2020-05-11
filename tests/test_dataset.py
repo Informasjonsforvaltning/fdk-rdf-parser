@@ -3,10 +3,10 @@ from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parseDatasets
 from fdk_rdf_parser.classes import (
-    Dataset,
     Distribution,
     HarvestMetaData,
-    Publisher,
+    PartialDataset,
+    PublisherId,
     QualityAnnotation,
     SkosConcept,
 )
@@ -51,7 +51,7 @@ def test_parse_multiple_datasets() -> None:
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ."""
 
     expected = {
-        "https://testdirektoratet.no/model/dataset/0": Dataset(
+        "https://testdirektoratet.no/model/dataset/0": PartialDataset(
             id="a1c680ca",
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
@@ -62,7 +62,7 @@ def test_parse_multiple_datasets() -> None:
             ),
             uri="https://testdirektoratet.no/model/dataset/0",
         ),
-        "https://testdirektoratet.no/model/dataset/1": Dataset(
+        "https://testdirektoratet.no/model/dataset/1": PartialDataset(
             id="4667277a",
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
@@ -114,7 +114,7 @@ def test_parse_dataset() -> None:
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
 
-    expected = Dataset(
+    expected = PartialDataset(
         id="a1c680ca",
         harvest=HarvestMetaData(
             firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
@@ -125,7 +125,7 @@ def test_parse_dataset() -> None:
         ),
         identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
         uri="https://testdirektoratet.no/model/dataset/0",
-        publisher=Publisher(
+        publisher=PublisherId(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         page=["https://testdirektoratet.no"],
@@ -178,7 +178,7 @@ def test_dataset_has_quality_annotations() -> None:
                         <http://iso.org/25012/2008/dataquality/Completeness> ;
                     prov:hasBody     [ rdf:value  "Completeness"@en ] ] ."""
 
-    expected = Dataset(
+    expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/quality",
         harvest=HarvestMetaData(),
         hasCurrentnessAnnotation=QualityAnnotation(
@@ -230,7 +230,7 @@ def test_legal_basis_fields() -> None:
                   skos:prefLabel  "utleveringshjemmel"@nb
                 ] ."""
 
-    expected = Dataset(
+    expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/0",
         harvest=HarvestMetaData(),
         legalBasisForRestriction=[
@@ -283,7 +283,7 @@ def test_informationmodel_and_conformsto() -> None:
                   skos:prefLabel  "information model"@en
                 ] ."""
 
-    expected = Dataset(
+    expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/0",
         harvest=HarvestMetaData(),
         conformsTo=[
@@ -347,7 +347,7 @@ def test_distribution_and_sample() -> None:
                                        ]
                     ] ."""
 
-    expected = Dataset(
+    expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/0",
         harvest=HarvestMetaData(),
         sample=[

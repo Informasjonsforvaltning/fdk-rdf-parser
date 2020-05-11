@@ -3,6 +3,6 @@ from typing import Optional
 
 
 @dataclass
-class Publisher:
+class PublisherId:
     uri: Optional[str] = None
     id: Optional[str] = None

@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
 
-from fdk_rdf_parser.classes import Dataset
+from fdk_rdf_parser.classes import PartialDataset
 from fdk_rdf_parser.rdf_utils import (
     admsURI,
     dcatApNoURI,
@@ -21,10 +21,10 @@ from .temporal import extractTemporal
 
 def parseDataset(
     datasetsGraph: Graph, recordURI: URIRef, datasetURI: URIRef
-) -> Dataset:
+) -> PartialDataset:
     qualityAnnotations = extractQualityAnnotation(datasetsGraph, datasetURI)
 
-    dataset = Dataset(
+    dataset = PartialDataset(
         id=objectValue(datasetsGraph, recordURI, DCTERMS.identifier),
         admsIdentifier=valueList(datasetsGraph, datasetURI, admsURI("identifier")),
         harvest=extractMetaData(datasetsGraph, recordURI),

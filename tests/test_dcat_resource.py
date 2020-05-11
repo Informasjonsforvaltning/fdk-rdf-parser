@@ -1,7 +1,7 @@
 import isodate
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import DcatResource, Publisher
+from fdk_rdf_parser.classes import PartialDcatResource, PublisherId
 from fdk_rdf_parser.parse_functions import parseDcatResource
 
 
@@ -45,7 +45,7 @@ def test_dcat_resource_parser() -> None:
         dct:type                  "Kodelister" ;
         foaf:page                 <https://testdirektoratet.no> ."""
 
-    expected = DcatResource(
+    expected = PartialDcatResource(
         identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
         title={"nb": "Datasett 0", "en": "Dataset 0"},
         description={
@@ -54,7 +54,7 @@ def test_dcat_resource_parser() -> None:
         },
         uri="https://testdirektoratet.no/model/dataset/dcatresource",
         accessRights="http://pubs.europa.eu/resource/authority/access-right/PUBLIC",
-        publisher=Publisher(
+        publisher=PublisherId(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         theme=[

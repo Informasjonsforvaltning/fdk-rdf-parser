@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from .dcat_resource import DcatResource
+from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
 from .quality_annotation import QualityAnnotation
@@ -10,7 +10,7 @@ from .temporal import Temporal
 
 
 @dataclass
-class Dataset(DcatResource):
+class PartialDataset(PartialDcatResource):
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     accessRightsComment: Optional[List[str]] = None
@@ -36,7 +36,7 @@ class Dataset(DcatResource):
     conformsTo: Optional[List[SkosConcept]] = None
     informationModel: Optional[List[SkosConcept]] = None
 
-    def addValuesFromDcatResource(self: Any, values: DcatResource) -> Any:
+    def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
         self.publisher = values.publisher
         self.title = values.title
