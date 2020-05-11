@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import DcatResource
+from fdk_rdf_parser.classes import PartialDcatResource
 from fdk_rdf_parser.rdf_utils import (
     dcatURI,
     objectValue,
@@ -14,9 +14,9 @@ from .contactpoint import extractContactPoints
 from .publisher import extractPublisher
 
 
-def parseDcatResource(graph: Graph, subject: URIRef) -> DcatResource:
+def parseDcatResource(graph: Graph, subject: URIRef) -> PartialDcatResource:
 
-    return DcatResource(
+    return PartialDcatResource(
         identifier=valueList(graph, subject, DCTERMS.identifier),
         publisher=extractPublisher(graph, subject),
         title=valueTranslations(graph, subject, DCTERMS.title),
