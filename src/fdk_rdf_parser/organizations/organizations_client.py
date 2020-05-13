@@ -1,17 +1,13 @@
 from typing import Optional
 from urllib import error, request
 
-organizationsUrl = (
-    "https://organization-catalogue.staging.fellesdatakatalog.digdir.no/organizations"
-)
+from .utils import organizationUrl
 
 
 def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
 
     req = request.Request(
-        url=f"{organizationsUrl}/{orgnr}" if orgnr is not None else organizationsUrl,
-        headers={"Accept": "text/turtle"},
-        method="GET",
+        url=organizationUrl(orgnr), headers={"Accept": "text/turtle"}, method="GET",
     )
 
     try:

@@ -25,10 +25,13 @@ def install_with_constraints(session: Session, *args: str, **kwargs: Any) -> Non
 def tests(session: Session) -> None:
     args = session.posargs or ["--cov", "-m", "not e2e"]
     session.run("poetry", "install", "--no-dev", external=True)
+    env = {
+        "ORGANIZATION_CATALOGUE_BASE_URI": "https://organizations.fellestestkatalog.no"
+    }
     install_with_constraints(
         session, "coverage[toml]", "pytest", "pytest-cov", "pytest-mock"
     )
-    session.run("pytest", *args)
+    session.run("pytest", *args, env=env)
 
 
 @nox.session(python=["3.8", "3.7"])

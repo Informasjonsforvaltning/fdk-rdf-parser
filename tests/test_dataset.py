@@ -1,11 +1,15 @@
+from unittest.mock import Mock
+
 import isodate
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parseDatasets
 from fdk_rdf_parser.classes import (
+    Dataset,
     Distribution,
     HarvestMetaData,
     PartialDataset,
+    Publisher,
     PublisherId,
     QualityAnnotation,
     SkosConcept,
@@ -13,16 +17,19 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.parse_functions import parseDataset
 
 
-def test_parse_multiple_datasets() -> None:
+def test_parse_multiple_datasets(mock_organizations_client: Mock) -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
         <https://testdirektoratet.no/model/dataset/0>
-                a                         dcat:Dataset .
+                a               dcat:Dataset ;
+                dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
+                                  dct:identifier    "123456789" ] .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a>
                 a                  dcat:record ;
@@ -51,7 +58,7 @@ def test_parse_multiple_datasets() -> None:
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ."""
 
     expected = {
-        "https://testdirektoratet.no/model/dataset/0": PartialDataset(
+        "https://testdirektoratet.no/model/dataset/0": Dataset(
             id="a1c680ca",
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
@@ -60,9 +67,21 @@ def test_parse_multiple_datasets() -> None:
                     isodate.parse_datetime("2020-03-12T11:52:16.123Z"),
                 ],
             ),
+            publisher=Publisher(
+                uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                id="123456789",
+                name="Digitaliseringsdirektoratet",
+                orgPath="/STAT/987654321/123456789",
+                prefLabel={
+                    "nn": "Digitaliseringsdirektoratet",
+                    "nb": "Digitaliseringsdirektoratet",
+                    "en": "Norwegian Digitalisation Agency",
+                },
+                organisasjonsform="ORGL",
+            ),
             uri="https://testdirektoratet.no/model/dataset/0",
         ),
-        "https://testdirektoratet.no/model/dataset/1": PartialDataset(
+        "https://testdirektoratet.no/model/dataset/1": Dataset(
             id="4667277a",
             harvest=HarvestMetaData(
                 firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
