@@ -3,22 +3,33 @@ from typing import Dict
 from rdflib import Graph
 from rdflib.namespace import FOAF, RDF
 
-from fdk_rdf_parser.parse_functions.dataset import parseDataset, PartialDataset
-from fdk_rdf_parser.rdf_utils import dcatURI
+from .classes import Dataset
+from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
+from .parse_functions import parseDataset
+from .rdf_utils import dcatURI
 
 
-def parseDatasets(rdfData: str) -> Dict[str, PartialDataset]:
+def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
+    fdkOrgs = Graph().parse(data=getRdfOrgData(orgnr=None), format="turtle")
 
-    datasets: Dict[str, PartialDataset] = {}
+    datasets: Dict[str, Dataset] = {}
 
     for recordURI in datasetsGraph.subjects(
         predicate=RDF.type, object=dcatURI("record")
     ):
         datasetURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
         if datasetURI is not None:
-            datasets[datasetURI.toPython()] = parseDataset(
-                datasetsGraph, recordURI, datasetURI
+            partialDataset = parseDataset(datasetsGraph, recordURI, datasetURI)
+
+            dataset = Dataset(
+                publisher=publisherFromFDKOrgCatalog(partialDataset.publisher, fdkOrgs)
+                if partialDataset.publisher is not None
+                else None
             )
+
+            dataset.addValuesFromPartial(values=partialDataset)
+
+            datasets[datasetURI.toPython()] = dataset
 
     return datasets

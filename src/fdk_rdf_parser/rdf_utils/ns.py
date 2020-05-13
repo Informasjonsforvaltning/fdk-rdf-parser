@@ -43,3 +43,14 @@ def provURI(subString: str) -> URIRef:
 
 def dcatApiURI(subString: str) -> URIRef:
     return URIRef("http://dcat.no/dcatapi/" + subString)
+
+
+def rovURI(subString: str) -> URIRef:
+    return URIRef("http://www.w3.org/ns/regorg#" + subString)
+
+
+def brURI(subString: str) -> URIRef:
+    return URIRef(
+        "https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#"  # noqa: B950
+        + subString
+    )

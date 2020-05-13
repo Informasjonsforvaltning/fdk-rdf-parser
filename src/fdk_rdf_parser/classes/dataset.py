@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Optional
 from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
+from .publisher import Publisher
 from .quality_annotation import QualityAnnotation
 from .skos_concept import SkosConcept
 from .temporal import Temporal
@@ -51,3 +52,47 @@ class PartialDataset(PartialDcatResource):
         self.modified = values.modified
         self.landingPage = values.landingPage
         self.language = values.language
+
+
+@dataclass
+class Dataset(PartialDataset):
+    publisher: Optional[Publisher] = None
+
+    def addValuesFromPartial(self: Any, values: PartialDataset) -> None:
+        self.id = values.id
+        self.identifier = values.identifier
+        self.title = values.title
+        self.description = values.description
+        self.uri = values.uri
+        self.accessRights = values.accessRights
+        self.theme = values.theme
+        self.keyword = values.keyword
+        self.contactPoint = values.contactPoint
+        self.type = values.type
+        self.issued = values.issued
+        self.modified = values.modified
+        self.landingPage = values.landingPage
+        self.language = values.language
+        self.harvest = values.harvest
+        self.accessRightsComment = values.accessRightsComment
+        self.distribution = values.distribution
+        self.sample = values.sample
+        self.source = values.source
+        self.objective = values.objective
+        self.page = values.page
+        self.admsIdentifier = values.admsIdentifier
+        self.temporal = values.temporal
+        self.subject = values.subject
+        self.spatial = values.spatial
+        self.provenance = values.provenance
+        self.accrualPeriodicity = values.accrualPeriodicity
+        self.hasAccuracyAnnotation = values.hasAccuracyAnnotation
+        self.hasCompletenessAnnotation = values.hasCompletenessAnnotation
+        self.hasCurrentnessAnnotation = values.hasCurrentnessAnnotation
+        self.hasAvailabilityAnnotation = values.hasAvailabilityAnnotation
+        self.hasRelevanceAnnotation = values.hasRelevanceAnnotation
+        self.legalBasisForRestriction = values.legalBasisForRestriction
+        self.legalBasisForProcessing = values.legalBasisForProcessing
+        self.legalBasisForAccess = values.legalBasisForAccess
+        self.conformsTo = values.conformsTo
+        self.informationModel = values.informationModel

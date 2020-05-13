@@ -1,5 +1,6 @@
 from .ns import (
     admsURI,
+    brURI,
     dcatApiURI,
     dcatApNoURI,
     dcatURI,
@@ -8,6 +9,7 @@ from .ns import (
     dqvURI,
     owlTimeURI,
     provURI,
+    rovURI,
     schemaURI,
     vcardURI,
 )
