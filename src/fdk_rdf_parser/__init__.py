@@ -1,1 +1,1 @@
-from .fdk_rdf_parser import parseDatasets
+from .fdk_rdf_parser import parseDataServices, parseDatasets

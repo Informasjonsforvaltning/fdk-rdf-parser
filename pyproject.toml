@@ -35,3 +35,7 @@ source = ["fdk_rdf_parser"]
 
 [tool.coverage.report]
 show_missing = true
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
