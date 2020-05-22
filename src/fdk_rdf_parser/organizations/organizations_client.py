@@ -1,19 +1,17 @@
 from typing import Optional
-from urllib import error, request
+
+import requests
 
 from .utils import organizationUrl
 
 
 def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
 
-    req = request.Request(
-        url=organizationUrl(orgnr), headers={"Accept": "text/turtle"}, method="GET",
-    )
-
     try:
-        with request.urlopen(req) as response:
-            return response.read()
-    except error.HTTPError as err:
-        print(f"Error response from organization-catalogue ({err.code})")
+        req = requests.get(organizationUrl(orgnr), headers={"Accept": "text/turtle"},)
+
+        return req.text
+    except requests.HTTPError as err:
+        print(f"Error response from organization-catalogue ({err})")
 
     return None
