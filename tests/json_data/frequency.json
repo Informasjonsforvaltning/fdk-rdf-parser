@@ -1,0 +1,43 @@
+[
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency",
+        "prefLabel": {
+            "en": "Frequency"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+        "code": "ANNUAL",
+        "prefLabel": {
+            "en": "annual"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency/DAILY",
+        "code": "DAILY",
+        "prefLabel": {
+            "en": "daily"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency/MONTHLY",
+        "code": "MONTHLY",
+        "prefLabel": {
+            "en": "monthly"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency/NEVER",
+        "code": "NEVER",
+        "prefLabel": {
+            "en": "never"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/frequency/WEEKLY",
+        "code": "WEEKLY",
+        "prefLabel": {
+            "en": "weekly"
+        }
+    }
+]

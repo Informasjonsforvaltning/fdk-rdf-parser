@@ -1,0 +1,87 @@
+[
+    {
+        "uri": "http://purl.org/dc/terms/hasVersion",
+        "code": "hasVersion",
+        "prefLabel": {
+            "en": "Has version"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/isPartOf",
+        "code": "isPartOf",
+        "prefLabel": {
+            "en": "Is Part Of"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/isReferencedBy",
+        "code": "isReferencedBy",
+        "prefLabel": {
+            "en": "Is Referenced By",
+            "nn": "Er referert av",
+            "nb": "Er referert av"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/isReplacedBy",
+        "code": "isReplacedBy",
+        "prefLabel": {
+            "en": "Is replaced by"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/isRequiredBy",
+        "code": "requires",
+        "prefLabel": {
+            "en": "Is required by"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/isVersionOf",
+        "code": "isVersionOf",
+        "prefLabel": {
+            "en": "Is version of"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/reference-types",
+        "prefLabel": {
+            "nb": "Referanse typer"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/references",
+        "code": "references",
+        "prefLabel": {
+            "en": "References"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/relation",
+        "code": "relation",
+        "prefLabel": {
+            "en": "Has relation to"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/replaces",
+        "code": "replaces",
+        "prefLabel": {
+            "en": "Replaces"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/requires",
+        "code": "requires",
+        "prefLabel": {
+            "en": "Requires"
+        }
+    },
+    {
+        "uri": "http://purl.org/dc/terms/source",
+        "code": "source",
+        "prefLabel": {
+            "en": "Source"
+        }
+    }
+]
