@@ -1,6 +1,13 @@
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import Dataset, Distribution, Reference, SkosCode
+from fdk_rdf_parser.classes import (
+    Dataset,
+    Distribution,
+    Reference,
+    SkosCode,
+    ThemeEU,
+    ThemeLOS,
+)
 from .reference_data import ReferenceData
 
 
@@ -18,6 +25,10 @@ def extendDatasetWithReferenceData(dataset: Dataset, refData: ReferenceData) -> 
     dataset.references = extendReferenceTypes(
         dataset.references, refData.referencetypes
     )
+
+    splitThemes = splitLOSFromEUThemes(dataset.theme, refData.losThemes)
+    dataset.losTheme = extendLOSThemes(splitThemes["los"], refData.losThemes)
+    dataset.theme = extendEUThemes(splitThemes["eu"], refData.euThemes)
 
     return dataset
 
@@ -85,3 +96,47 @@ def extendReferenceTypes(
             ref.referenceType = extendSkosCode(ref.referenceType, referenceTypes)
             extendedReferences.append(ref)
         return extendedReferences
+
+
+def splitLOSFromEUThemes(
+    themes: Optional[List[ThemeEU]], los: Optional[Dict[str, ThemeLOS]],
+) -> Dict[str, List[ThemeEU]]:
+    splitThemes: Dict[str, List[ThemeEU]] = {}
+    splitThemes["los"] = []
+    splitThemes["eu"] = []
+    if themes is None:
+        return splitThemes
+    elif los is None:
+        splitThemes["eu"] = themes
+        return splitThemes
+    else:
+        for theme in themes:
+            if theme.id in los:
+                splitThemes["los"].append(theme)
+            else:
+                splitThemes["eu"].append(theme)
+        return splitThemes
+
+
+def extendLOSThemes(
+    themes: List[ThemeEU], los: Optional[Dict[str, ThemeLOS]]
+) -> Optional[List[ThemeLOS]]:
+    extended = []
+    if los is not None:
+        for theme in themes:
+            extended.append(los[str(theme.id)])
+    return extended if len(extended) > 0 else None
+
+
+def extendEUThemes(
+    themes: List[ThemeEU], euThemes: Optional[Dict[str, ThemeEU]]
+) -> Optional[List[ThemeEU]]:
+    extended = []
+    if euThemes is not None:
+        for theme in themes:
+            euTheme = euThemes.get(theme.id) if theme.id is not None else None
+            if euTheme is None:
+                extended.append(theme)
+            else:
+                extended.append(euTheme)
+    return extended if len(extended) > 0 else None

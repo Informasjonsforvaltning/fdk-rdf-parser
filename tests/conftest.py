@@ -60,6 +60,10 @@ def addReferenceResponseToMock(mock: Mock, url: str) -> Mock:
         mock.json.return_value = json.load(open("./tests/json_data/openlicenses.json"))
     elif "location" in url:
         mock.json.return_value = json.load(open("./tests/json_data/location.json"))
+    elif "los" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/los.json"))
+    elif "themes" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/eutheme.json"))
 
     return mock
 

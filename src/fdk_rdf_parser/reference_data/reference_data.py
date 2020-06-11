@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-
-from fdk_rdf_parser.classes import SkosCode
+from fdk_rdf_parser.classes import SkosCode, ThemeEU, ThemeLOS
 from .reference_data_client import getReferenceData
 
 
@@ -15,6 +14,8 @@ class ReferenceData:
     referencetypes: Optional[Dict[str, SkosCode]] = None
     openlicenses: Optional[Dict[str, SkosCode]] = None
     location: Optional[Dict[str, SkosCode]] = None
+    euThemes: Optional[Dict[str, ThemeEU]] = None
+    losThemes: Optional[Dict[str, ThemeLOS]] = None
 
 
 def getAllReferenceData() -> ReferenceData:
@@ -26,6 +27,8 @@ def getAllReferenceData() -> ReferenceData:
         referencetypes=getAndMapReferenceCodes("referencetypes"),
         openlicenses=getAndMapReferenceCodes("openlicenses"),
         location=getAndMapReferenceCodes("location"),
+        euThemes=getAndMapThemesEU(),
+        losThemes=getAndMapThemesLOS(),
     )
 
 
@@ -44,3 +47,25 @@ def getAndMapReferenceCodes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
         }
     else:
         return None
+
+
+def getAndMapThemesEU() -> Optional[Dict[str, ThemeEU]]:
+    mapped = {}
+    themes = getReferenceData("/themes")
+    if themes is not None:
+        for theme in themes:
+            euTheme = ThemeEU()
+            euTheme.addValuesFromDict(theme)
+            mapped[str(theme.get("id"))] = euTheme
+    return mapped if len(mapped) > 0 else None
+
+
+def getAndMapThemesLOS() -> Optional[Dict[str, ThemeLOS]]:
+    mapped = {}
+    themes = getReferenceData("/los")
+    if themes is not None:
+        for theme in themes:
+            losTheme = ThemeLOS()
+            losTheme.addValuesFromDict(theme)
+            mapped[str(theme.get("uri"))] = losTheme
+    return mapped if len(mapped) > 0 else None

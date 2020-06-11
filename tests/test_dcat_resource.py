@@ -1,7 +1,7 @@
 import isodate
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import PartialDcatResource, PublisherId, SkosCode
+from fdk_rdf_parser.classes import PartialDcatResource, PublisherId, SkosCode, ThemeEU
 from fdk_rdf_parser.parse_functions import parseDcatResource
 
 
@@ -60,8 +60,8 @@ def test_dcat_resource_parser() -> None:
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         theme=[
-            "http://pubs.europa.eu/resource/authority/data-theme/GOVE",
-            "http://pubs.europa.eu/resource/authority/data-theme/TECH",
+            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/GOVE"),
+            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
         ],
         keyword=[{"nb": "test"}],
         issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),

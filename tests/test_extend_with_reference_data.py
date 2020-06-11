@@ -1,9 +1,12 @@
 from fdk_rdf_parser.classes import (
+    ConceptSchema,
     Dataset,
     Distribution,
     Reference,
     SkosCode,
     SkosConcept,
+    ThemeEU,
+    ThemeLOS,
 )
 from fdk_rdf_parser.reference_data import extendDatasetWithReferenceData, ReferenceData
 from .testdata import reference_data
@@ -13,7 +16,8 @@ def test_handles_missing_reference_data() -> None:
     parsedDataset = Dataset(
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
-        )
+        ),
+        theme=[ThemeEU(id="https://psi.norge.no/los/tema/grunnskole")],
     )
 
     assert (
@@ -223,6 +227,54 @@ def test_extend_references() -> None:
                 ),
             )
         ]
+    )
+
+    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+
+
+def test_extend_themes() -> None:
+    parsedDataset = Dataset(
+        theme=[
+            ThemeEU(
+                id="http://publications.europa.eu/resource/authority/data-theme/ECON"
+            ),
+            ThemeEU(id="https://psi.norge.no/los/tema/kultur"),
+            ThemeEU(id="https://psi.norge.no/not/in/los/or/eu"),
+        ]
+    )
+
+    expected = Dataset(
+        theme=[
+            ThemeEU(
+                id="http://publications.europa.eu/resource/authority/data-theme/ECON",
+                code="ECON",
+                startUse="2015-10-01",
+                title={"nb": "Økonomi og finans", "en": "Economy and finance"},
+                conceptSchema=ConceptSchema(
+                    id="http://publications.europa.eu/resource/authority/data-theme",
+                    title={"en": "Dataset types Named Authority List"},
+                    versioninfo="20160921-0",
+                    versionnumber="20160921-0",
+                ),
+            ),
+            ThemeEU(id="https://psi.norge.no/not/in/los/or/eu"),
+        ],
+        losTheme=[
+            ThemeLOS(
+                children=[
+                    "https://psi.norge.no/los/ord/film-og-kino",
+                    "https://psi.norge.no/los/ord/kulturtilbud",
+                ],
+                parents=["https://psi.norge.no/los/tema/kultur-idrett-og-fritid"],
+                isTema=True,
+                losPaths=["kultur-idrett-og-fritid/kultur"],
+                name={"nn": "Kultur", "nb": "Kultur", "en": "Culture"},
+                definition=None,
+                uri="https://psi.norge.no/los/tema/kultur",
+                synonyms=[],
+                relatedTerms=None,
+            )
+        ],
     )
 
     assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected

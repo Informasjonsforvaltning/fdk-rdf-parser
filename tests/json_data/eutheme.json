@@ -1,0 +1,67 @@
+[
+    {
+        "id": "http://publications.europa.eu/resource/authority/data-theme/AGRI",
+        "code": "AGRI",
+        "startUse": "2015-10-01",
+        "title": {
+            "en": "Agriculture, fisheries, forestry and food"
+        },
+        "conceptSchema": {
+            "id": "http://publications.europa.eu/resource/authority/data-theme",
+            "title": {
+                "en": "Dataset types Named Authority List"
+            },
+            "versioninfo": "20160921-0",
+            "versionnumber": "20160921-0"
+        }
+    },
+    {
+        "id": "http://publications.europa.eu/resource/authority/data-theme/ECON",
+        "code": "ECON",
+        "startUse": "2015-10-01",
+        "title": {
+            "nb": "Økonomi og finans",
+            "en": "Economy and finance"
+        },
+        "conceptSchema": {
+            "id": "http://publications.europa.eu/resource/authority/data-theme",
+            "title": {
+                "en": "Dataset types Named Authority List"
+            },
+            "versioninfo": "20160921-0",
+            "versionnumber": "20160921-0"
+        }
+    },
+    {
+        "id": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
+        "code": "HEAL",
+        "startUse": "2015-10-01",
+        "title": {
+            "nb": "Helse"
+        },
+        "conceptSchema": {
+            "id": "http://publications.europa.eu/resource/authority/data-theme",
+            "title": {
+                "en": "Dataset types Named Authority List"
+            },
+            "versioninfo": "20160921-0",
+            "versionnumber": "20160921-0"
+        }
+    },
+    {
+        "id": "http://publications.europa.eu/resource/authority/data-theme/TRAN",
+        "code": "TRAN",
+        "startUse": "2015-10-01",
+        "title": {
+            "en": "Transport"
+        },
+        "conceptSchema": {
+            "id": "http://publications.europa.eu/resource/authority/data-theme",
+            "title": {
+                "en": "Dataset types Named Authority List"
+            },
+            "versioninfo": "20160921-0",
+            "versionnumber": "20160921-0"
+        }
+    }
+]

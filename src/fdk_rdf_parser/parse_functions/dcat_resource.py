@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import PartialDcatResource
+from fdk_rdf_parser.classes import PartialDcatResource, ThemeEU
 from fdk_rdf_parser.rdf_utils import (
     dcatURI,
     objectValue,
@@ -23,7 +23,7 @@ def parseDcatResource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         description=valueTranslations(graph, subject, DCTERMS.description),
         uri=subject.toPython(),
         accessRights=extractSkosCode(graph, subject, DCTERMS.accessRights),
-        theme=valueList(graph, subject, dcatURI("theme")),
+        theme=extractThemes(graph, subject),
         keyword=extractKeyWords(graph, subject),
         contactPoint=extractContactPoints(graph, subject),
         type=objectValue(graph, subject, DCTERMS.type),
@@ -32,6 +32,14 @@ def parseDcatResource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         landingPage=valueList(graph, subject, dcatURI("landingPage")),
         language=extractSkosCodeList(graph, subject, DCTERMS.language),
     )
+
+
+def extractThemes(graph: Graph, subject: URIRef) -> Optional[List[ThemeEU]]:
+    themes = valueList(graph, subject, dcatURI("theme"))
+    if themes is not None and len(themes) > 0:
+        return list(map(lambda themeURI: ThemeEU(id=themeURI), themes))
+    else:
+        return None
 
 
 def extractKeyWords(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, str]]]:

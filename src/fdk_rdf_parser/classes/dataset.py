@@ -10,6 +10,7 @@ from .references import Reference
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .temporal import Temporal
+from .theme import ThemeLOS
 
 
 @dataclass
@@ -60,6 +61,7 @@ class PartialDataset(PartialDcatResource):
 @dataclass
 class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
+    losTheme: Optional[List[ThemeLOS]] = None
 
     def addValuesFromPartial(self: Any, values: PartialDataset) -> None:
         self.id = values.id

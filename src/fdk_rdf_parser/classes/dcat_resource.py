@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 from .contactpoint import ContactPoint
 from .publisher import PublisherId
 from .skos_code import SkosCode
+from .theme import ThemeEU
 
 
 @dataclass
@@ -15,7 +16,7 @@ class PartialDcatResource:
     description: Optional[Dict[str, str]] = None
     uri: Optional[str] = None
     accessRights: Optional[SkosCode] = None
-    theme: Optional[List[str]] = None
+    theme: Optional[List[ThemeEU]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
     type: Optional[str] = None
