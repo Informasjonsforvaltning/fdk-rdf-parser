@@ -33,28 +33,35 @@ def reference_effect(*args: Any, **kwargs: Any) -> Mock:
     rsp = Mock(spec=requests.Response)
     rsp.status_code = 200
     rsp.raise_for_status.return_value = None
-    if "provenancestatement" in args[0]:
-        rsp.json.return_value = json.load(
+
+    return addReferenceResponseToMock(rsp, args[0])
+
+
+def addReferenceResponseToMock(mock: Mock, url: str) -> Mock:
+    if "provenancestatement" in url:
+        mock.json.return_value = json.load(
             open("./tests/json_data/provenancestatement.json")
         )
-    elif "rightsstatement" in args[0]:
-        rsp.json.return_value = json.load(
+    elif "rightsstatement" in url:
+        mock.json.return_value = json.load(
             open("./tests/json_data/rightsstatement.json")
         )
-    elif "frequency" in args[0]:
-        rsp.json.return_value = json.load(open("./tests/json_data/frequency.json"))
-    elif "linguisticsystem" in args[0]:
-        rsp.json.return_value = json.load(
+    elif "frequency" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/frequency.json"))
+    elif "linguisticsystem" in url:
+        mock.json.return_value = json.load(
             open("./tests/json_data/linguisticsystem.json")
         )
-    elif "referencetypes" in args[0]:
-        rsp.json.return_value = json.load(open("./tests/json_data/referencetypes.json"))
-    elif "openlicenses" in args[0]:
-        rsp.json.return_value = json.load(open("./tests/json_data/openlicenses.json"))
-    elif "location" in args[0]:
-        rsp.json.return_value = json.load(open("./tests/json_data/location.json"))
+    elif "referencetypes" in url:
+        mock.json.return_value = json.load(
+            open("./tests/json_data/referencetypes.json")
+        )
+    elif "openlicenses" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/openlicenses.json"))
+    elif "location" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/location.json"))
 
-    return rsp
+    return mock
 
 
 @pytest.fixture
@@ -77,4 +84,19 @@ def mock_reference_data_client_http_error(mocker: MockFixture) -> Mock:
 def mock_reference_data_client_parse_error(mocker: MockFixture) -> Mock:
     mock = mocker.patch("requests.get")
     mock.side_effect = json.JSONDecodeError(msg="reference-parse-error", doc="", pos=0)
+    return mock
+
+
+def organizations_and_reference_effect(*args: Any, **kwargs: Any) -> Mock:
+    rsp = Mock(spec=requests.Response)
+    rsp.status_code = 200
+    rsp.raise_for_status.return_value = None
+    rsp.text = org_response_0
+    return addReferenceResponseToMock(rsp, args[0])
+
+
+@pytest.fixture
+def mock_organizations_and_reference_data(mocker: MockFixture) -> Mock:
+    mock = mocker.patch("requests.get")
+    mock.side_effect = organizations_and_reference_effect
     return mock

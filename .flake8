@@ -2,6 +2,6 @@
 select = ANN,B,B9,BLK,C,E,F,I,S,W
 ignore = E203,E501,W503,S310
 max-line-length = 88
-per-file-ignores = __init__.py:F401,tests/*:S101,tests/testdata.py:B950
+per-file-ignores = __init__.py:F401,tests/*:S101,B950
 application-import-names = fdk_rdf_parser,tests
 import-order-style = google

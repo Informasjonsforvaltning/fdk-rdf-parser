@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 
 from .contactpoint import ContactPoint
 from .publisher import PublisherId
+from .skos_code import SkosCode
 
 
 @dataclass
@@ -13,7 +14,7 @@ class PartialDcatResource:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     uri: Optional[str] = None
-    accessRights: Optional[str] = None
+    accessRights: Optional[SkosCode] = None
     theme: Optional[List[str]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
@@ -21,4 +22,4 @@ class PartialDcatResource:
     issued: Optional[datetime] = None
     modified: Optional[datetime] = None
     landingPage: Optional[List[str]] = None
-    language: Optional[List[str]] = None
+    language: Optional[List[SkosCode]] = None

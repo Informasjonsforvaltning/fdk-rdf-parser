@@ -6,6 +6,8 @@ from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher
 from .quality_annotation import QualityAnnotation
+from .references import Reference
+from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .temporal import Temporal
 
@@ -23,9 +25,9 @@ class PartialDataset(PartialDcatResource):
     admsIdentifier: Optional[List[str]] = None
     temporal: Optional[List[Temporal]] = None
     subject: Optional[List[str]] = None
-    spatial: Optional[List[str]] = None
-    provenance: Optional[str] = None
-    accrualPeriodicity: Optional[str] = None
+    spatial: Optional[List[SkosCode]] = None
+    provenance: Optional[SkosCode] = None
+    accrualPeriodicity: Optional[SkosCode] = None
     hasAccuracyAnnotation: Optional[QualityAnnotation] = None
     hasCompletenessAnnotation: Optional[QualityAnnotation] = None
     hasCurrentnessAnnotation: Optional[QualityAnnotation] = None
@@ -36,6 +38,7 @@ class PartialDataset(PartialDcatResource):
     legalBasisForAccess: Optional[List[SkosConcept]] = None
     conformsTo: Optional[List[SkosConcept]] = None
     informationModel: Optional[List[SkosConcept]] = None
+    references: Optional[List[Reference]] = None
 
     def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier

@@ -3,8 +3,7 @@ from typing import List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import Reference
-from fdk_rdf_parser.rdf_utils import objectValue
+from fdk_rdf_parser.classes import Reference, SkosCode, SkosConcept
 
 
 def extractReferences(graph: Graph, subject: URIRef) -> Optional[List[Reference]]:
@@ -26,11 +25,14 @@ def extractReferences(graph: Graph, subject: URIRef) -> Optional[List[Reference]
     values = []
 
     for predicate in referenceProperties:
-        referenceURI = objectValue(graph, subject, predicate)
+        referenceURI = graph.value(subject, predicate)
 
         if referenceURI is not None:
             values.append(
-                Reference(referenceType=predicate.toPython(), source=referenceURI)
+                Reference(
+                    referenceType=SkosCode(uri=predicate.toPython()),
+                    source=SkosConcept(uri=referenceURI.toPython()),
+                )
             )
 
     return values if len(values) > 0 else None

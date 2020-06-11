@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import Reference
+from fdk_rdf_parser.classes import Reference, SkosCode, SkosConcept
 from fdk_rdf_parser.parse_functions import extractReferences
 
 
@@ -40,52 +40,72 @@ def test_references() -> None:
 
     expected = [
         Reference(
-            referenceType="http://purl.org/dc/terms/hasVersion",
-            source="https://testdirektoratet.no/model/dataset/hasVersion",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/hasVersion"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/hasVersion"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/isVersionOf",
-            source="https://testdirektoratet.no/model/dataset/isVersionOf",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isVersionOf"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isVersionOf"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/isPartOf",
-            source="https://testdirektoratet.no/model/dataset/isPartOf",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isPartOf"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isPartOf"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/hasPart",
-            source="https://testdirektoratet.no/model/dataset/hasPart",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/hasPart"),
+            source=SkosConcept(uri="https://testdirektoratet.no/model/dataset/hasPart"),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/references",
-            source="https://testdirektoratet.no/model/dataset/references",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/references"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/references"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/isReferencedBy",
-            source="https://testdirektoratet.no/model/dataset/isReferencedBy",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isReferencedBy"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isReferencedBy"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/replaces",
-            source="https://testdirektoratet.no/model/dataset/replaces",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/replaces"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/replaces"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/isReplacedBy",
-            source="https://testdirektoratet.no/model/dataset/isReplacedBy",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isReplacedBy"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isReplacedBy"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/requires",
-            source="https://testdirektoratet.no/model/dataset/requires",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/requires"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/requires"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/isRequiredBy",
-            source="https://testdirektoratet.no/model/dataset/isRequiredBy",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isRequiredBy"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isRequiredBy"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/relation",
-            source="https://testdirektoratet.no/model/dataset/relation",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation"
+            ),
         ),
         Reference(
-            referenceType="http://purl.org/dc/terms/source",
-            source="https://testdirektoratet.no/model/dataset/source",
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/source"),
+            source=SkosConcept(uri="https://testdirektoratet.no/model/dataset/source"),
         ),
     ]
 
