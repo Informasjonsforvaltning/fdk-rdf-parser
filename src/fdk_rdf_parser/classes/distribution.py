@@ -13,6 +13,7 @@ class Distribution:
     downloadURL: Optional[List[str]] = None
     accessURL: Optional[List[str]] = None
     license: Optional[List[SkosConcept]] = None
+    openLicense: bool = False
     conformsTo: Optional[List[SkosConcept]] = None
     page: Optional[List[SkosConcept]] = None
     format: Optional[List[str]] = None

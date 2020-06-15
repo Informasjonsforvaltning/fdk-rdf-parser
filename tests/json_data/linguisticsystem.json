@@ -1,0 +1,45 @@
+[
+    {
+        "uri": "http://publications.europa.eu/resource/authority/language",
+        "prefLabel": {
+            "en": "Languages Named Authority List"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/language/ENG",
+        "code": "ENG",
+        "prefLabel": {
+            "en": "English",
+            "nb": "Engelsk",
+            "nn": "Engelsk",
+            "no": "Engelsk"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/language/NOB",
+        "code": "NOB",
+        "prefLabel": {
+            "en": "Norwegian Bokmål",
+            "nb": "Norsk Bokmål",
+            "nn": "Norsk Bokmål",
+            "no": "Norsk Bokmål"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/language/NOR",
+        "code": "NOR",
+        "prefLabel": {
+            "nb": "Norsk",
+            "nn": "Norsk",
+            "no": "Norsk",
+            "en": "Norwegian"
+        }
+    },
+    {
+        "uri": "http://publications.europa.eu/resource/authority/language/SMI",
+        "code": "SMI",
+        "prefLabel": {
+            "en": "Sami languages"
+        }
+    }
+]

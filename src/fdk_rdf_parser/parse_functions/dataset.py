@@ -15,6 +15,8 @@ from .dcat_resource import parseDcatResource
 from .distribution import extractDistributions
 from .harvest_meta_data import extractMetaData
 from .quality_annotation import extractQualityAnnotation
+from .references import extractReferences
+from .skos_code import extractSkosCode, extractSkosCodeList
 from .skos_concept import extractSkosConcept
 from .temporal import extractTemporal
 
@@ -35,7 +37,7 @@ def parseDataset(
             datasetsGraph, datasetURI, dcatURI("distribution")
         ),
         sample=extractDistributions(datasetsGraph, datasetURI, admsURI("sample")),
-        spatial=valueList(datasetsGraph, datasetURI, DCTERMS.spatial),
+        spatial=extractSkosCodeList(datasetsGraph, datasetURI, DCTERMS.spatial),
         source=objectValue(datasetsGraph, datasetURI, dcatApNoURI("source")),
         objective=valueTranslations(
             datasetsGraph, datasetURI, dcatApNoURI("objective")
@@ -43,8 +45,8 @@ def parseDataset(
         page=valueList(datasetsGraph, datasetURI, FOAF.page),
         temporal=extractTemporal(datasetsGraph, datasetURI),
         subject=valueList(datasetsGraph, datasetURI, DCTERMS.subject),
-        provenance=objectValue(datasetsGraph, datasetURI, DCTERMS.provenance),
-        accrualPeriodicity=objectValue(
+        provenance=extractSkosCode(datasetsGraph, datasetURI, DCTERMS.provenance),
+        accrualPeriodicity=extractSkosCode(
             datasetsGraph, datasetURI, DCTERMS.accrualPeriodicity
         ),
         hasAccuracyAnnotation=qualityAnnotations.get(dqvIsoURI("Accuracy").toPython()),
@@ -73,6 +75,7 @@ def parseDataset(
         informationModel=extractSkosConcept(
             datasetsGraph, datasetURI, dcatApNoURI("informationModel")
         ),
+        references=extractReferences(datasetsGraph, datasetURI),
     )
 
     dataset.addValuesFromDcatResource(

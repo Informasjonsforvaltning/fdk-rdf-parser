@@ -12,12 +12,13 @@ from fdk_rdf_parser.classes import (
     Publisher,
     PublisherId,
     QualityAnnotation,
+    SkosCode,
     SkosConcept,
 )
 from fdk_rdf_parser.parse_functions import parseDataset
 
 
-def test_parse_multiple_datasets(mock_organizations_client: Mock) -> None:
+def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -40,7 +41,8 @@ def test_parse_multiple_datasets(mock_organizations_client: Mock) -> None:
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/1> .
 
         <https://testdirektoratet.no/model/dataset/1>
-                a                         dcat:Dataset .
+                a                  dcat:Dataset ;
+                dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
                 a                  dcat:record ;
@@ -89,6 +91,11 @@ def test_parse_multiple_datasets(mock_organizations_client: Mock) -> None:
                     isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
                     isodate.parse_datetime("2020-03-12T11:52:16.123Z"),
                 ],
+            ),
+            accessRights=SkosCode(
+                uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
+                code="PUBLIC",
+                prefLabel={"en": "Public"},
             ),
             uri="https://testdirektoratet.no/model/dataset/1",
         ),
@@ -152,9 +159,17 @@ def test_parse_dataset() -> None:
             "https://testdirektoratet.no/model/concept/0",
             "https://testdirektoratet.no/model/concept/1",
         ],
-        accrualPeriodicity="http://publications.europa.eu/resource/authority/freq",
-        provenance="http://data.brreg.no/datakatalog/provinens/tredjepart",
-        spatial=["https://data.geonorge.no/administrativeEnheter/fylke/id/173142"],
+        accrualPeriodicity=SkosCode(
+            "http://publications.europa.eu/resource/authority/freq"
+        ),
+        provenance=SkosCode(
+            uri="http://data.brreg.no/datakatalog/provinens/tredjepart"
+        ),
+        spatial=[
+            SkosCode(
+                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142"
+            )
+        ],
     )
 
     datasetsGraph = Graph().parse(data=src, format="turtle")

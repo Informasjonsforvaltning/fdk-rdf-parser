@@ -7,5 +7,7 @@ from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher, PublisherId
 from .quality_annotation import QualityAnnotation
 from .references import Reference
+from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .temporal import Temporal
+from .theme import ConceptSchema, ThemeEU, ThemeLOS

@@ -1,7 +1,7 @@
 import isodate
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import PartialDcatResource, PublisherId
+from fdk_rdf_parser.classes import PartialDcatResource, PublisherId, SkosCode, ThemeEU
 from fdk_rdf_parser.parse_functions import parseDcatResource
 
 
@@ -53,18 +53,22 @@ def test_dcat_resource_parser() -> None:
             "en": "Description of dataset 0",
         },
         uri="https://testdirektoratet.no/model/dataset/dcatresource",
-        accessRights="http://pubs.europa.eu/resource/authority/access-right/PUBLIC",
+        accessRights=SkosCode(
+            uri="http://pubs.europa.eu/resource/authority/access-right/PUBLIC"
+        ),
         publisher=PublisherId(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         theme=[
-            "http://pubs.europa.eu/resource/authority/data-theme/GOVE",
-            "http://pubs.europa.eu/resource/authority/data-theme/TECH",
+            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/GOVE"),
+            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
         ],
         keyword=[{"nb": "test"}],
         issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),
         modified=isodate.parse_datetime("2019-03-23T13:11:16.546902"),
-        language=["http://pubs.europa.eu/resource/authority/language/NOR"],
+        language=[
+            SkosCode(uri="http://pubs.europa.eu/resource/authority/language/NOR")
+        ],
         landingPage=["https://testdirektoratet.no"],
         type="Kodelister",
     )
