@@ -18,7 +18,7 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasets: Dict[str, Dataset] = {}
 
     for recordURI in datasetsGraph.subjects(
-        predicate=RDF.type, object=dcatURI("record")
+        predicate=RDF.type, object=dcatURI("CatalogRecord")
     ):
         datasetURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
         if datasetURI is not None:

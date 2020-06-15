@@ -33,7 +33,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                                   dct:identifier    "123456789" ] .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "4667277a" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -45,7 +45,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -53,7 +53,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -133,7 +133,7 @@ def test_parse_dataset() -> None:
                     <https://testdirektoratet.no> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
