@@ -1,3 +1,4 @@
+import logging
 from typing import Dict, List, Optional
 
 import requests
@@ -17,8 +18,8 @@ def getReferenceData(endpoint: str) -> Optional[List[Dict]]:
         return response.json()
 
     except requests.HTTPError as err:
-        print(f"Http error response from reference-data ({err})")
+        logging.error(f"Http error response from reference-data ({err})")
     except Exception as err:
-        print(f"Error occurred when getting data from reference-data: {err}")
+        logging.error(f"Error occurred when getting data from reference-data: {err}")
 
     return None
