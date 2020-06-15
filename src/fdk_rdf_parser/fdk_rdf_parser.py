@@ -1,13 +1,21 @@
 from typing import Dict
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.namespace import FOAF, RDF
 
 from .classes import Dataset
 from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
 from .parse_functions import parseDataset
-from .rdf_utils import dcatURI
+from .rdf_utils import dcatURI, resourceList
 from .reference_data import extendDatasetWithReferenceData, getAllReferenceData
+
+
+def isTypeDataset(graph: Graph, topic: URIRef) -> bool:
+    for typeURIRef in resourceList(graph, topic, RDF.type):
+        if typeURIRef == dcatURI("Dataset"):
+            return True
+
+    return False
 
 
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
@@ -20,9 +28,11 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     for recordURI in datasetsGraph.subjects(
         predicate=RDF.type, object=dcatURI("CatalogRecord")
     ):
-        datasetURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
-        if datasetURI is not None:
-            partialDataset = parseDataset(datasetsGraph, recordURI, datasetURI)
+        primaryTopicURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
+        if primaryTopicURI is not None and isTypeDataset(
+            datasetsGraph, primaryTopicURI
+        ):
+            partialDataset = parseDataset(datasetsGraph, recordURI, primaryTopicURI)
 
             dataset = Dataset(
                 publisher=publisherFromFDKOrgCatalog(partialDataset.publisher, fdkOrgs)
@@ -34,6 +44,6 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
 
             dataset = extendDatasetWithReferenceData(dataset, referenceData)
 
-            datasets[datasetURI.toPython()] = dataset
+            datasets[primaryTopicURI.toPython()] = dataset
 
     return datasets
