@@ -1,3 +1,4 @@
+import logging
 from typing import Optional
 
 import requests
@@ -12,6 +13,6 @@ def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
 
         return req.text
     except requests.HTTPError as err:
-        print(f"Error response from organization-catalogue ({err})")
+        logging.error(f"Error response from organization-catalogue ({err})")
 
     return None

@@ -1,3 +1,4 @@
+from typing import Dict
 from unittest.mock import Mock
 
 import isodate
@@ -33,7 +34,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                                   dct:identifier    "123456789" ] .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "4667277a" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -45,7 +46,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -53,7 +54,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
@@ -104,6 +105,35 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
     assert parseDatasets(src) == expected
 
 
+def test_does_not_parse_catalog_as_a_dataset(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+        <https://testdirektoratet.no/model/catalog/0>
+                a               dcat:Catalog ;
+                dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
+                                  dct:identifier    "123456789" ] .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "a1c680ca" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/catalog/0> ."""
+
+    expected: Dict = {}
+
+    assert parseDatasets(src) == expected
+
+
 def test_parse_dataset() -> None:
 
     src = """
@@ -133,7 +163,7 @@ def test_parse_dataset() -> None:
                     <https://testdirektoratet.no> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
-                a                  dcat:record ;
+                a                  dcat:CatalogRecord ;
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
