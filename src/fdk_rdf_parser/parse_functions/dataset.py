@@ -18,6 +18,7 @@ from .quality_annotation import extractQualityAnnotation
 from .references import extractReferences
 from .skos_code import extractSkosCode, extractSkosCodeList
 from .skos_concept import extractSkosConcept
+from .subject import extractSubjects
 from .temporal import extractTemporal
 
 
@@ -44,7 +45,7 @@ def parseDataset(
         ),
         page=valueList(datasetsGraph, datasetURI, FOAF.page),
         temporal=extractTemporal(datasetsGraph, datasetURI),
-        subject=valueList(datasetsGraph, datasetURI, DCTERMS.subject),
+        subject=extractSubjects(datasetsGraph, datasetURI),
         provenance=extractSkosCode(datasetsGraph, datasetURI, DCTERMS.provenance),
         accrualPeriodicity=extractSkosCode(
             datasetsGraph, datasetURI, DCTERMS.accrualPeriodicity

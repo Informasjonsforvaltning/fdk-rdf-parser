@@ -7,4 +7,5 @@ from .publisher import extractPublisher
 from .quality_annotation import extractQualityAnnotation
 from .references import extractReferences
 from .skos_concept import extractSkosConcept
+from .subject import extractSubjects
 from .temporal import extractTemporal

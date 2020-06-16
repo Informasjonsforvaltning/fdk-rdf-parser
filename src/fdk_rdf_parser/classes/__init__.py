@@ -9,5 +9,6 @@ from .quality_annotation import QualityAnnotation
 from .references import Reference
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
+from .subject import Subject
 from .temporal import Temporal
 from .theme import ConceptSchema, ThemeEU, ThemeLOS
