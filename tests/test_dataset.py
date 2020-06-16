@@ -15,6 +15,7 @@ from fdk_rdf_parser.classes import (
     QualityAnnotation,
     SkosCode,
     SkosConcept,
+    Subject,
 )
 from fdk_rdf_parser.parse_functions import parseDataset
 
@@ -186,8 +187,8 @@ def test_parse_dataset() -> None:
         ),
         page=["https://testdirektoratet.no"],
         subject=[
-            "https://testdirektoratet.no/model/concept/0",
-            "https://testdirektoratet.no/model/concept/1",
+            Subject(uri="https://testdirektoratet.no/model/concept/0"),
+            Subject(uri="https://testdirektoratet.no/model/concept/1"),
         ],
         accrualPeriodicity=SkosCode(
             "http://publications.europa.eu/resource/authority/freq"
