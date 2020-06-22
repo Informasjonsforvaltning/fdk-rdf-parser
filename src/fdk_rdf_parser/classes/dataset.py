@@ -5,6 +5,7 @@ from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher
+from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
 from .skos_code import SkosCode
@@ -41,6 +42,7 @@ class PartialDataset(PartialDcatResource):
     conformsTo: Optional[List[SkosConcept]] = None
     informationModel: Optional[List[SkosConcept]] = None
     references: Optional[List[Reference]] = None
+    qualifiedAttributions: Optional[List[QualifiedAttribution]] = None
 
     def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
@@ -102,3 +104,4 @@ class Dataset(PartialDataset):
         self.legalBasisForAccess = values.legalBasisForAccess
         self.conformsTo = values.conformsTo
         self.informationModel = values.informationModel
+        self.qualifiedAttributions = values.qualifiedAttributions

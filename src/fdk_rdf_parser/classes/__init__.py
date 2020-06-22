@@ -6,6 +6,7 @@ from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher, PublisherId
+from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
 from .skos_code import SkosCode

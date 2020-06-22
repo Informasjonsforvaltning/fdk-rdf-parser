@@ -8,12 +8,14 @@ from fdk_rdf_parser.rdf_utils import (
     dcatURI,
     dqvIsoURI,
     objectValue,
+    provURI,
     valueList,
     valueTranslations,
 )
 from .dcat_resource import parseDcatResource
 from .distribution import extractDistributions
 from .harvest_meta_data import extractMetaData
+from .qualified_attribution import extractQualifiedAttributions
 from .quality_annotation import extractQualityAnnotation
 from .references import extractReferences
 from .skos_code import extractSkosCode, extractSkosCodeList
@@ -77,6 +79,9 @@ def parseDataset(
             datasetsGraph, datasetURI, dcatApNoURI("informationModel")
         ),
         references=extractReferences(datasetsGraph, datasetURI),
+        qualifiedAttributions=extractQualifiedAttributions(
+            datasetsGraph, datasetURI, provURI("qualifiedAttribution")
+        ),
     )
 
     dataset.addValuesFromDcatResource(

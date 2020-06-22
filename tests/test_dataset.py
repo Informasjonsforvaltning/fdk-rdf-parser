@@ -12,6 +12,7 @@ from fdk_rdf_parser.classes import (
     PartialDataset,
     Publisher,
     PublisherId,
+    QualifiedAttribution,
     QualityAnnotation,
     SkosCode,
     SkosConcept,
@@ -455,3 +456,77 @@ def test_distribution_and_sample() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
 
     assert parseDataset(graph, URIRef("record"), subject) == expected
+
+
+def test_qualified_attributions(mock_organizations_client: Mock) -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix prov:  <http://www.w3.org/ns/prov#> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                prov:qualifiedAttribution  [ a             prov:Attribution ;
+                                             dcat:hadRole  <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor> ;
+                                             prov:agent    <https://data.brreg.no/enhetsregisteret/api/enheter/123456789>
+                                           ] ;
+                prov:qualifiedAttribution  [ a             prov:Attribution ;
+                                             dcat:hadRole  <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor> ;
+                                             prov:agent    <https://data.brreg.no/enhetsregisteret/api/enheter/111111111>
+                                           ] .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "a1c680ca" ;
+            dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+            dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+            dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+    """
+
+    expected = PartialDataset(
+        uri="https://testdirektoratet.no/model/dataset/0",
+        qualifiedAttributions=[
+            QualifiedAttribution(
+                agent=Publisher(
+                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    id="123456789",
+                    name="Digitaliseringsdirektoratet",
+                    orgPath="/STAT/987654321/123456789",
+                    prefLabel={
+                        "nn": "Digitaliseringsdirektoratet",
+                        "nb": "Digitaliseringsdirektoratet",
+                        "en": "Norwegian Digitalisation Agency",
+                    },
+                    organisasjonsform="ORGL",
+                ),
+                role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
+            ),
+            QualifiedAttribution(
+                agent=Publisher(
+                    uri="https://organizations.fellestestkatalog.no/organizations/111111111",
+                    id="111111111",
+                    name="Pythondirektoratet",
+                    orgPath="/STAT/987654321/111111111",
+                    prefLabel={
+                        "nn": "Pythondirektoratet",
+                        "nb": "Pythondirektoratet",
+                        "en": "Norwegian Python Agency",
+                    },
+                    organisasjonsform="ORGL",
+                ),
+                role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
+            ),
+        ],
+    )
+
+    actual = parseDatasets(src)["https://testdirektoratet.no/model/dataset/0"]
+
+    if isinstance(actual.qualifiedAttributions, list) and isinstance(
+        expected.qualifiedAttributions, list
+    ):
+        assert all(
+            x in actual.qualifiedAttributions for x in expected.qualifiedAttributions
+        )

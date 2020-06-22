@@ -5,6 +5,7 @@ from .dcat_resource import parseDcatResource
 from .distribution import extractDistributions
 from .harvest_meta_data import extractMetaData
 from .publisher import extractPublisher
+from .qualified_attribution import extractQualifiedAttributions
 from .quality_annotation import extractQualityAnnotation
 from .references import extractReferences
 from .skos_concept import extractSkosConcept
