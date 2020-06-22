@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Optional
 
 baseOrgUrl = os.getenv(
@@ -13,3 +14,10 @@ def organizationUrl(orgnr: Optional[str]) -> str:
         if orgnr is not None
         else f"{baseOrgUrl}/organizations"
     )
+
+
+def organisationNumberFromUri(uri: str) -> Optional[str]:
+    match = re.compile(
+        "https://data.brreg.no/enhetsregisteret/api/enheter/(\\d{9})$"
+    ).match(uri)
+    return match.group(1) if match else None

@@ -3,11 +3,10 @@ from typing import Dict
 from rdflib import Graph, URIRef
 from rdflib.namespace import FOAF, RDF
 
-from fdk_rdf_parser.parse_functions import parseDataService, parseDataset
-from fdk_rdf_parser.rdf_utils import dcatURI
-from .classes import DataService, Dataset
+from .classes import DataService, Dataset, Publisher, PublisherId, QualifiedAttribution
 from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
-from .rdf_utils import resourceList
+from .parse_functions import parseDataService, parseDataset
+from .rdf_utils import dcatURI, resourceList
 from .reference_data import extendDatasetWithReferenceData, getAllReferenceData
 
 
@@ -64,7 +63,34 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
             dataset.addValuesFromPartial(values=partialDataset)
 
             dataset = extendDatasetWithReferenceData(dataset, referenceData)
+            dataset = extendDatasetWithOrgsData(dataset, fdkOrgs)
 
             datasets[primaryTopicURI.toPython()] = dataset
 
     return datasets
+
+
+def extendDatasetWithOrgsData(dataset: Dataset, organizationsGraph: Graph) -> Dataset:
+    if isinstance(dataset.qualifiedAttributions, list):
+        dataset.qualifiedAttributions = list(
+            map(
+                lambda qa: enhanceQualifiedAttributionAgent(qa, organizationsGraph),
+                dataset.qualifiedAttributions,
+            )
+        )
+
+    return dataset
+
+
+def enhanceQualifiedAttributionAgent(
+    qa: QualifiedAttribution, organizationsGraph: Graph
+) -> QualifiedAttribution:
+    if isinstance(qa.agent, PublisherId):
+        publisher = publisherFromFDKOrgCatalog(
+            PublisherId(id=qa.agent.id, uri=qa.agent.uri,), organizationsGraph
+        )
+
+        if isinstance(publisher, Publisher):
+            qa.agent = publisher
+
+    return qa

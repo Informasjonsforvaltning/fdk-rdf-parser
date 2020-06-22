@@ -13,4 +13,9 @@ from .ns import (
     schemaURI,
     vcardURI,
 )
-from .utils import objectValue, resourceList, valueList, valueTranslations
+from .utils import (
+    objectValue,
+    resourceList,
+    valueList,
+    valueTranslations,
+)
