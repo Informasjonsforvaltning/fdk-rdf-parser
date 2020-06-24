@@ -10,9 +10,9 @@ from .rdf_utils import dcatURI, resourceList
 from .reference_data import extendDatasetWithReferenceData, getAllReferenceData
 
 
-def isTypeDataset(graph: Graph, topic: URIRef) -> bool:
+def isDcatType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
     for typeURIRef in resourceList(graph, topic, RDF.type):
-        if typeURIRef == dcatURI("Dataset"):
+        if typeURIRef == t:
             return True
 
     return False
@@ -28,11 +28,11 @@ def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
     ):
         primaryTopicURI = dataServicesGraph.value(recordURI, FOAF.primaryTopic)
 
-        for dataServiceURI in resourceList(
-            dataServicesGraph, primaryTopicURI, dcatURI("service")
+        if primaryTopicURI and isDcatType(
+            dcatURI("DataService"), dataServicesGraph, primaryTopicURI
         ):
-            dataServices[dataServiceURI.toPython()] = parseDataService(
-                dataServicesGraph, dataServiceURI, recordURI
+            dataServices[primaryTopicURI.toPython()] = parseDataService(
+                dataServicesGraph, recordURI, primaryTopicURI
             )
 
     return dataServices
@@ -49,8 +49,8 @@ def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
         predicate=RDF.type, object=dcatURI("CatalogRecord")
     ):
         primaryTopicURI = datasetsGraph.value(recordURI, FOAF.primaryTopic)
-        if primaryTopicURI is not None and isTypeDataset(
-            datasetsGraph, primaryTopicURI
+        if primaryTopicURI is not None and isDcatType(
+            dcatURI("Dataset"), datasetsGraph, primaryTopicURI
         ):
             partialDataset = parseDataset(datasetsGraph, recordURI, primaryTopicURI)
 

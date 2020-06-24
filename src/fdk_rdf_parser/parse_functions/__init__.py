@@ -1,5 +1,5 @@
 from .contactpoint import extractContactPoints
-from .data_service import parseDataService
+from .dataservice import parseDataService
 from .dataset import parseDataset
 from .dcat_resource import parseDcatResource
 from .distribution import extractDistributions
