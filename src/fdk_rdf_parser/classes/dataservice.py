@@ -2,12 +2,14 @@ from dataclasses import dataclass
 from typing import Any, List, Optional
 
 from .dcat_resource import PartialDcatResource
+from .harvest_meta_data import HarvestMetaData
 
 
 @dataclass
 class DataService(PartialDcatResource):
 
     id: Optional[str] = None
+    harvest: Optional[HarvestMetaData] = None
 
     endpointDescription: Optional[List[str]] = None
     endpointURL: Optional[List[str]] = None

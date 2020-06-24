@@ -1,6 +1,6 @@
 from .contactpoint import ContactPoint
 from .data_distribution_service import DataDistributionService
-from .data_service import DataService
+from .dataservice import DataService
 from .dataset import Dataset, PartialDataset
 from .dcat_resource import PartialDcatResource
 from .distribution import Distribution

@@ -8,14 +8,16 @@ from fdk_rdf_parser.rdf_utils import (
     valueList,
 )
 from .dcat_resource import parseDcatResource
+from .harvest_meta_data import extractMetaData
 
 
 def parseDataService(
-    dataServicesGraph: Graph, dataServiceURI: URIRef, recordURI: URIRef
+    dataServicesGraph: Graph, recordURI: URIRef, dataServiceURI: URIRef
 ) -> DataService:
 
     dataService = DataService(
         id=objectValue(dataServicesGraph, recordURI, DCTERMS.identifier),
+        harvest=extractMetaData(dataServicesGraph, recordURI),
         endpointURL=valueList(
             dataServicesGraph, dataServiceURI, dcatURI("endpointURL")
         ),
