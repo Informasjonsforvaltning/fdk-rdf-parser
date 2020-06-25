@@ -5,6 +5,7 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import PartialDcatResource, ThemeEU
 from fdk_rdf_parser.rdf_utils import (
+    dateValue,
     dcatURI,
     objectValue,
     valueList,
@@ -27,8 +28,8 @@ def parseDcatResource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         keyword=extractKeyWords(graph, subject),
         contactPoint=extractContactPoints(graph, subject),
         type=objectValue(graph, subject, DCTERMS.type),
-        issued=objectValue(graph, subject, DCTERMS.issued),
-        modified=objectValue(graph, subject, DCTERMS.modified),
+        issued=dateValue(graph, subject, DCTERMS.issued),
+        modified=dateValue(graph, subject, DCTERMS.modified),
         landingPage=valueList(graph, subject, dcatURI("landingPage")),
         language=extractSkosCodeList(graph, subject, DCTERMS.language),
     )

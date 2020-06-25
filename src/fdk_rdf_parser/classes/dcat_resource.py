@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Dict, List, Optional
 
 from .contactpoint import ContactPoint
@@ -20,7 +19,7 @@ class PartialDcatResource:
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
     type: Optional[str] = None
-    issued: Optional[datetime] = None
-    modified: Optional[datetime] = None
+    issued: Optional[str] = None
+    modified: Optional[str] = None
     landingPage: Optional[List[str]] = None
     language: Optional[List[SkosCode]] = None

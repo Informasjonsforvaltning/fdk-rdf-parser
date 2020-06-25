@@ -1,7 +1,6 @@
 from typing import Dict
 from unittest.mock import Mock
 
-import isodate
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parseDatasets
@@ -66,11 +65,8 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
         "https://testdirektoratet.no/model/dataset/0": Dataset(
             id="a1c680ca",
             harvest=HarvestMetaData(
-                firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                changed=[
-                    isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                    isodate.parse_datetime("2020-03-12T11:52:16.123Z"),
-                ],
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
             ),
             publisher=Publisher(
                 uri="https://organizations.fellestestkatalog.no/organizations/123456789",
@@ -89,11 +85,8 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
         "https://testdirektoratet.no/model/dataset/1": Dataset(
             id="4667277a",
             harvest=HarvestMetaData(
-                firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                changed=[
-                    isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                    isodate.parse_datetime("2020-03-12T11:52:16.123Z"),
-                ],
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
             ),
             accessRights=SkosCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
@@ -169,17 +162,14 @@ def test_parse_dataset() -> None:
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-13"^^xsd:date ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
 
     expected = PartialDataset(
         id="a1c680ca",
         harvest=HarvestMetaData(
-            firstHarvested=isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-            changed=[
-                isodate.parse_datetime("2020-03-12T11:52:16.122Z"),
-                isodate.parse_datetime("2020-03-12T11:52:16.123Z"),
-            ],
+            firstHarvested="2020-03-12T11:52:16Z",
+            changed=["2020-03-12T11:52:16Z", "2020-03-13"],
         ),
         identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
         uri="https://testdirektoratet.no/model/dataset/0",

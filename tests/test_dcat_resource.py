@@ -1,4 +1,3 @@
-import isodate
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import PartialDcatResource, PublisherId, SkosCode, ThemeEU
@@ -64,8 +63,8 @@ def test_dcat_resource_parser() -> None:
             ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
         ],
         keyword=[{"nb": "test"}],
-        issued=isodate.parse_datetime("2019-03-22T13:11:16.546902"),
-        modified=isodate.parse_datetime("2019-03-23T13:11:16.546902"),
+        issued="2019-03-22T13:11:16",
+        modified="2019-03-23T13:11:16",
         language=[
             SkosCode(uri="http://pubs.europa.eu/resource/authority/language/NOR")
         ],
