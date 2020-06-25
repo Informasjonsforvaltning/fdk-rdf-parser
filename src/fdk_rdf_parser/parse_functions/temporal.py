@@ -5,8 +5,8 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.rdf_utils import (
+    dateValue,
     dcatURI,
-    objectValue,
     owlTimeURI,
     resourceList,
     schemaURI,
@@ -21,16 +21,16 @@ def extractTemporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
             temporalURI = temporalResource.toPython()
 
         if isinstance(temporalResource, BNode) or temporalURI is not None:
-            startValue = objectValue(graph, temporalResource, dcatURI("startDate"))
-            endValue = objectValue(graph, temporalResource, dcatURI("endDate"))
+            startValue = dateValue(graph, temporalResource, dcatURI("startDate"))
+            endValue = dateValue(graph, temporalResource, dcatURI("endDate"))
 
             startValue = (
-                objectValue(graph, temporalResource, schemaURI("startDate"))
+                dateValue(graph, temporalResource, schemaURI("startDate"))
                 if startValue is None
                 else startValue
             )
             endValue = (
-                objectValue(graph, temporalResource, schemaURI("endDate"))
+                dateValue(graph, temporalResource, schemaURI("endDate"))
                 if endValue is None
                 else endValue
             )
@@ -53,23 +53,20 @@ def extractTemporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
     return values if len(values) > 0 else None
 
 
-def extractOwlTimeInstant(graph: Graph, subject: Any) -> Any:
-    dateValue = graph.value(subject, owlTimeURI("inXSDDateTime"))
-    dateValue = (
-        graph.value(subject, owlTimeURI("inXSDDateTimeStamp"))
-        if dateValue is None
-        else dateValue
+def extractOwlTimeInstant(graph: Graph, subject: Any) -> Optional[str]:
+    owlDate = dateValue(graph, subject, owlTimeURI("inXSDDateTime"))
+    owlDate = (
+        dateValue(graph, subject, owlTimeURI("inXSDDateTimeStamp"))
+        if owlDate is None
+        else owlDate
     )
-    dateValue = (
-        graph.value(subject, owlTimeURI("inXSDDate"))
-        if dateValue is None
-        else dateValue
+    owlDate = (
+        dateValue(graph, subject, owlTimeURI("inXSDDate"))
+        if owlDate is None
+        else owlDate
     )
 
-    if dateValue is not None:
-        return dateValue.toPython()
-    else:
-        return None
+    return owlDate
 
 
 def extractOwlTimeStart(graph: Graph, subject: Any) -> Any:

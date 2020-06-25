@@ -1,5 +1,7 @@
+from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
+from isodate import date_isoformat, datetime_isoformat
 from rdflib import Graph, URIRef
 
 
@@ -31,3 +33,29 @@ def resourceList(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
         values.append(obj)
     values.sort()
     return values
+
+
+def dateValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
+    value = graph.value(subject, predicate)
+    if value:
+        dateObject = value.toPython()
+        if isinstance(dateObject, datetime):
+            return datetime_isoformat(dateObject)
+        elif isinstance(dateObject, date):
+            return date_isoformat(dateObject)
+        else:
+            return None
+    else:
+        return None
+
+
+def dateList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[str]]:
+    values = []
+    for obj in graph.objects(subject, predicate):
+        dateObject = obj.toPython()
+        if isinstance(dateObject, datetime):
+            values.append(datetime_isoformat(dateObject))
+        elif isinstance(dateObject, date):
+            values.append(date_isoformat(dateObject))
+    values.sort()
+    return values if len(values) > 0 else None

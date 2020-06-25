@@ -14,6 +14,8 @@ from .ns import (
     vcardURI,
 )
 from .utils import (
+    dateList,
+    dateValue,
     objectValue,
     resourceList,
     valueList,
