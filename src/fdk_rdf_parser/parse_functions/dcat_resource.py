@@ -1,3 +1,4 @@
+import re
 from typing import Dict, List, Optional
 
 from rdflib import Graph, URIRef
@@ -17,11 +18,15 @@ from .skos_code import extractSkosCode, extractSkosCodeList
 
 
 def parseDcatResource(graph: Graph, subject: URIRef) -> PartialDcatResource:
+    formatted_description = valueTranslations(graph, subject, DCTERMS.description)
     return PartialDcatResource(
         identifier=valueList(graph, subject, DCTERMS.identifier),
         publisher=extractPublisher(graph, subject),
         title=valueTranslations(graph, subject, DCTERMS.title),
-        description=valueTranslations(graph, subject, DCTERMS.description),
+        description=description_html_cleaner(formatted_description)
+        if formatted_description
+        else None,
+        descriptionFormatted=formatted_description,
         uri=subject.toPython(),
         accessRights=extractSkosCode(graph, subject, DCTERMS.accessRights),
         theme=extractThemes(graph, subject),
@@ -50,3 +55,12 @@ def extractKeyWords(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, st
         translation[keyword.language] = keyword.toPython()
         values.append(translation)
     return values if len(values) > 0 else None
+
+
+def description_html_cleaner(formatted: Dict[str, str]) -> Optional[Dict[str, str]]:
+    cleaner_regex = re.compile("<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});")
+    description = {}
+    for language in formatted:
+        description[language] = re.sub(cleaner_regex, "", formatted[language])
+
+    return description if len(description) > 0 else None
