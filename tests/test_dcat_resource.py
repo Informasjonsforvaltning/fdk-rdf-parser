@@ -51,6 +51,10 @@ def test_dcat_resource_parser() -> None:
             "nb": "Beskrivelse av datasett 0",
             "en": "Description of dataset 0",
         },
+        descriptionFormatted={
+            "nb": "Beskrivelse av datasett 0",
+            "en": "Description of dataset 0",
+        },
         uri="https://testdirektoratet.no/model/dataset/dcatresource",
         accessRights=SkosCode(
             uri="http://pubs.europa.eu/resource/authority/access-right/PUBLIC"
@@ -70,6 +74,36 @@ def test_dcat_resource_parser() -> None:
         ],
         landingPage=["https://testdirektoratet.no"],
         type="Kodelister",
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
+
+    assert parseDcatResource(graph, subject) == expected
+
+
+def test_description_html_cleaner() -> None:
+
+    src = """
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+<https://testdirektoratet.no/model/dataset/dcatresource>
+        a                         dcat:Dataset ;
+        dct:description
+            "<p>Beskrivelse av &#60;<a>datasett&nbsp;0</a>&#62;</p>"@nb ,
+            "<p>Description of &#60;<a>dataset&nbsp;0</a>&#62;</p>"@en ."""
+
+    expected = PartialDcatResource(
+        uri="https://testdirektoratet.no/model/dataset/dcatresource",
+        description={
+            "nb": "Beskrivelse av datasett0",
+            "en": "Description of dataset0",
+        },
+        descriptionFormatted={
+            "nb": "<p>Beskrivelse av &#60;<a>datasett&nbsp;0</a>&#62;</p>",
+            "en": "<p>Description of &#60;<a>dataset&nbsp;0</a>&#62;</p>",
+        },
     )
 
     graph = Graph().parse(data=src, format="turtle")

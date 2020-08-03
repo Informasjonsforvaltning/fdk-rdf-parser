@@ -13,6 +13,7 @@ class PartialDcatResource:
     publisher: Optional[PublisherId] = None
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
+    descriptionFormatted: Optional[Dict[str, str]] = None
     uri: Optional[str] = None
     accessRights: Optional[SkosCode] = None
     theme: Optional[List[ThemeEU]] = None
