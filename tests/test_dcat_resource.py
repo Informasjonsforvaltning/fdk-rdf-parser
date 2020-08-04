@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import PartialDcatResource, PublisherId, SkosCode, ThemeEU
+from fdk_rdf_parser.classes import PartialDcatResource, Publisher, SkosCode, ThemeEU
 from fdk_rdf_parser.parse_functions import parseDcatResource
 
 
@@ -59,7 +59,7 @@ def test_dcat_resource_parser() -> None:
         accessRights=SkosCode(
             uri="http://pubs.europa.eu/resource/authority/access-right/PUBLIC"
         ),
-        publisher=PublisherId(
+        publisher=Publisher(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         theme=[

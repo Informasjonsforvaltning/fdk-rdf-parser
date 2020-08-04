@@ -10,7 +10,6 @@ from fdk_rdf_parser.classes import (
     HarvestMetaData,
     PartialDataset,
     Publisher,
-    PublisherId,
     QualifiedAttribution,
     QualityAnnotation,
     SkosCode,
@@ -173,7 +172,7 @@ def test_parse_dataset() -> None:
         ),
         identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
         uri="https://testdirektoratet.no/model/dataset/0",
-        publisher=PublisherId(
+        publisher=Publisher(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         page=["https://testdirektoratet.no"],

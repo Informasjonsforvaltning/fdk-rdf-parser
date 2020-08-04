@@ -3,7 +3,7 @@ from typing import Dict
 from rdflib import Graph, URIRef
 from rdflib.namespace import FOAF, RDF
 
-from .classes import DataService, Dataset, Publisher, PublisherId, QualifiedAttribution
+from .classes import DataService, Dataset, Publisher, QualifiedAttribution
 from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
 from .parse_functions import parseDataService, parseDataset
 from .rdf_utils import dcatURI, resourceList
@@ -85,9 +85,9 @@ def extendDatasetWithOrgsData(dataset: Dataset, organizationsGraph: Graph) -> Da
 def enhanceQualifiedAttributionAgent(
     qa: QualifiedAttribution, organizationsGraph: Graph
 ) -> QualifiedAttribution:
-    if isinstance(qa.agent, PublisherId):
+    if isinstance(qa.agent, Publisher):
         publisher = publisherFromFDKOrgCatalog(
-            PublisherId(id=qa.agent.id, uri=qa.agent.uri,), organizationsGraph
+            Publisher(id=qa.agent.id, uri=qa.agent.uri,), organizationsGraph
         )
 
         if isinstance(publisher, Publisher):
