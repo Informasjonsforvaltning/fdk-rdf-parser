@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from .contactpoint import ContactPoint
-from .publisher import PublisherId
+from .publisher import Publisher
 from .skos_code import SkosCode
 from .theme import ThemeEU
 
@@ -10,7 +10,7 @@ from .theme import ThemeEU
 @dataclass
 class PartialDcatResource:
     identifier: Optional[List[str]] = None
-    publisher: Optional[PublisherId] = None
+    publisher: Optional[Publisher] = None
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     descriptionFormatted: Optional[Dict[str, str]] = None

@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import PublisherId
+from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.parse_functions import extractPublisher
 
 
@@ -29,8 +29,10 @@ def test_uriref_publisher() -> None:
                 foaf:mbox                "mail@test.no" ;
                 foaf:name                "Norsk testorganisasjon" ."""
 
-    expected = PublisherId(
-        uri="https://blabla.no/organisasjoner/qwesadzx", id="112233445",
+    expected = Publisher(
+        uri="https://blabla.no/organisasjoner/qwesadzx",
+        id="112233445",
+        prefLabel={"nb": "Norsk testorganisasjon"},
     )
 
     graph = Graph().parse(data=src, format="turtle")
@@ -52,7 +54,7 @@ def test_bnode_publisher() -> None:
                 dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
                                   dct:identifier    "123456789" ] ."""
 
-    expected = PublisherId(id="123456789")
+    expected = Publisher(id="123456789")
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
