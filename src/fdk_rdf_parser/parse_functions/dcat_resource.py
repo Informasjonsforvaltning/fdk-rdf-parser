@@ -52,7 +52,10 @@ def extractKeyWords(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, st
     values = []
     for keyword in graph.objects(subject, dcatURI("keyword")):
         translation = {}
-        translation[keyword.language] = keyword.toPython()
+        if keyword.language:
+            translation[keyword.language] = keyword.toPython()
+        else:
+            translation["nb"] = keyword.toPython()
         values.append(translation)
     return values if len(values) > 0 else None
 
