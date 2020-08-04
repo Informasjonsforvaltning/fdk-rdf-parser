@@ -110,3 +110,31 @@ def test_description_html_cleaner() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
 
     assert parseDcatResource(graph, subject) == expected
+
+
+def test_nb_is_default_language() -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dcatno: <http://difi.no/dcatno#> .
+        @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                dct:title               "Språktest" ;
+                dct:description         "De som mangler språk-tag får tildelt bokmål" ;
+                dcat:keyword            "test" ."""
+
+    expected = PartialDcatResource(
+        uri="https://testdirektoratet.no/model/dataset/0",
+        title={"nb": "Språktest"},
+        description={"nb": "De som mangler språk-tag får tildelt bokmål"},
+        descriptionFormatted={"nb": "De som mangler språk-tag får tildelt bokmål"},
+        keyword=[{"nb": "test"}],
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+
+    assert parseDcatResource(graph, subject) == expected

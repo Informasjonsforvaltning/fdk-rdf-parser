@@ -23,7 +23,10 @@ def valueTranslations(
 ) -> Optional[Dict[str, str]]:
     values = {}
     for obj in graph.objects(subject, predicate):
-        values[obj.language] = obj.toPython()
+        if obj.language:
+            values[obj.language] = obj.toPython()
+        else:
+            values["nb"] = obj.toPython()
     return values if len(values) > 0 else None
 
 
