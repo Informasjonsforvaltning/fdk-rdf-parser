@@ -16,6 +16,10 @@ def organizationUrl(orgnr: Optional[str]) -> str:
     )
 
 
+def orgPathUrl(org: str) -> str:
+    return f"{baseOrgUrl}/organizations/orgpath/{org}"
+
+
 def organisationNumberFromUri(uri: str) -> Optional[str]:
     match = re.compile(
         "https://data.brreg.no/enhetsregisteret/api/enheter/(\\d{9})$"
