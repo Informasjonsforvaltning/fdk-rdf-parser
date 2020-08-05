@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-from .utils import organizationUrl
+from .utils import organizationUrl, orgPathUrl
 
 
 def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
@@ -13,6 +13,19 @@ def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
 
         return req.text
     except requests.HTTPError as err:
+        logging.error(f"Error response from organization-catalogue ({err})")
+
+    return None
+
+
+def getOrgPath(org: str) -> Optional[str]:
+
+    try:
+        req = requests.get(orgPathUrl(org), headers={"Accept": "text/plain"},)
+
+        return req.text
+    except requests.HTTPError as err:
+
         logging.error(f"Error response from organization-catalogue ({err})")
 
     return None

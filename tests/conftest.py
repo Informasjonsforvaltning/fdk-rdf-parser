@@ -17,6 +17,13 @@ def mock_organizations_client(mocker: MockFixture) -> Mock:
 
 
 @pytest.fixture
+def mock_orgpath_client(mocker: MockFixture) -> Mock:
+    mock = mocker.patch("requests.get")
+    mock.return_value.text = "/ANNET/orgpath"
+    return mock
+
+
+@pytest.fixture
 def mock_organizations_error(mocker: MockFixture) -> Mock:
     mock = mocker.patch("requests.get")
     mock.side_effect = requests.HTTPError(

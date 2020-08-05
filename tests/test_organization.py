@@ -3,7 +3,10 @@ from unittest.mock import Mock
 from rdflib import Graph
 
 from fdk_rdf_parser.classes import Publisher
-from fdk_rdf_parser.organizations import publisherFromFDKOrgCatalog
+from fdk_rdf_parser.organizations import (
+    addOrgPath,
+    publisherFromFDKOrgCatalog,
+)
 from .testdata import org_response_0, org_response_1
 
 
@@ -112,3 +115,20 @@ def test_original_pref_label_is_retained(mock_organizations_client: Mock) -> Non
         )
         == expected
     )
+
+
+def test_orgpath(mock_orgpath_client: Mock) -> None:
+    publisherID = Publisher(id="123456789")
+    publisherNB = Publisher(prefLabel={"nb": "nb"})
+    publisherNN = Publisher(prefLabel={"nn": "nn"})
+    publisherEN = Publisher(prefLabel={"en": "en"})
+
+    expectedID = Publisher(id="123456789", orgPath="/ANNET/orgpath")
+    expectedNB = Publisher(prefLabel={"nb": "nb"}, orgPath="/ANNET/orgpath")
+    expectedNN = Publisher(prefLabel={"nn": "nn"}, orgPath="/ANNET/orgpath")
+    expectedEN = Publisher(prefLabel={"en": "en"}, orgPath="/ANNET/orgpath")
+
+    assert addOrgPath(publisherID) == expectedID
+    assert addOrgPath(publisherNB) == expectedNB
+    assert addOrgPath(publisherNN) == expectedNN
+    assert addOrgPath(publisherEN) == expectedEN
