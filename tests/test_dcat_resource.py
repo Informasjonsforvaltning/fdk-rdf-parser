@@ -78,8 +78,9 @@ def test_dcat_resource_parser() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject) == expected
+    assert parseDcatResource(graph, subject, catalog_subject) == expected
 
 
 def test_description_html_cleaner() -> None:
@@ -108,8 +109,9 @@ def test_description_html_cleaner() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject) == expected
+    assert parseDcatResource(graph, subject, catalog_subject) == expected
 
 
 def test_nb_is_default_language() -> None:
@@ -136,5 +138,6 @@ def test_nb_is_default_language() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject) == expected
+    assert parseDcatResource(graph, subject, catalog_subject) == expected

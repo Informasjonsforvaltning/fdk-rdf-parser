@@ -4,6 +4,7 @@ from rdflib.namespace import DCTERMS, FOAF
 from fdk_rdf_parser.classes import PartialDataset
 from fdk_rdf_parser.rdf_utils import (
     admsURI,
+    catalogRef,
     dcatApNoURI,
     dcatURI,
     dqvIsoURI,
@@ -85,7 +86,11 @@ def parseDataset(
     )
 
     dataset.addValuesFromDcatResource(
-        parseDcatResource(graph=datasetsGraph, subject=datasetURI)
+        parseDcatResource(
+            graph=datasetsGraph,
+            subject=datasetURI,
+            catalog_subject=catalogRef(datasetsGraph, recordURI),
+        )
     )
 
     return dataset
