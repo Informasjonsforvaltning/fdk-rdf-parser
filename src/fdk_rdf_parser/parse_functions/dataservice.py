@@ -3,6 +3,7 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (
+    catalogRef,
     dcatURI,
     objectValue,
     valueList,
@@ -32,6 +33,10 @@ def parseDataService(
     )
 
     dataService.addValuesFromDcatResource(
-        parseDcatResource(dataServicesGraph, dataServiceURI)
+        parseDcatResource(
+            dataServicesGraph,
+            dataServiceURI,
+            catalog_subject=catalogRef(dataServicesGraph, recordURI),
+        )
     )
     return dataService

@@ -7,14 +7,19 @@ from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import objectValue, valueTranslations
 
 
-def extractPublisher(graph: Graph, subject: URIRef) -> Optional[Publisher]:
-    publisherRef = graph.value(subject, DCTERMS.publisher)
+def extractPublisher(
+    graph: Graph, subject: URIRef, catalog_subject: URIRef
+) -> Optional[Publisher]:
+    publisher = graph.value(subject, DCTERMS.publisher)
+    publisher = (
+        publisher if publisher else graph.value(catalog_subject, DCTERMS.publisher)
+    )
 
-    if publisherRef is None:
-        return None
-    else:
+    if publisher:
         return Publisher(
-            uri=publisherRef.toPython() if isinstance(publisherRef, URIRef) else None,
-            id=objectValue(graph, publisherRef, DCTERMS.identifier),
-            prefLabel=valueTranslations(graph, publisherRef, FOAF.name),
+            uri=publisher.toPython() if isinstance(publisher, URIRef) else None,
+            id=objectValue(graph, publisher, DCTERMS.identifier),
+            prefLabel=valueTranslations(graph, publisher, FOAF.name),
         )
+    else:
+        return None

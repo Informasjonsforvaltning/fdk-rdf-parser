@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional
 
 from isodate import date_isoformat, datetime_isoformat
 from rdflib import Graph, URIRef
+from rdflib.namespace import DCTERMS, FOAF
 
 
 def objectValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
@@ -62,3 +63,8 @@ def dateList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[
             values.append(date_isoformat(dateObject))
     values.sort()
     return values if len(values) > 0 else None
+
+
+def catalogRef(graph: Graph, subject: URIRef) -> URIRef:
+    catalog_meta_data_ref = graph.value(subject, DCTERMS.isPartOf)
+    return graph.value(catalog_meta_data_ref, FOAF.primaryTopic)

@@ -20,6 +20,7 @@ def isDcatType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
 
 def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
     dataServices: Dict[str, DataService] = {}
+    fdkOrgs = Graph().parse(data=getRdfOrgData(orgnr=None), format="turtle")
 
     dataServicesGraph = Graph().parse(data=dataServiceRDF, format="turtle")
 
@@ -31,9 +32,17 @@ def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
         if primaryTopicURI and isDcatType(
             dcatURI("DataService"), dataServicesGraph, primaryTopicURI
         ):
-            dataServices[primaryTopicURI.toPython()] = parseDataService(
+            data_service = parseDataService(
                 dataServicesGraph, recordURI, primaryTopicURI
             )
+
+            data_service.publisher = (
+                publisherFromFDKOrgCatalog(data_service.publisher, fdkOrgs)
+                if data_service.publisher
+                else None
+            )
+
+            dataServices[primaryTopicURI.toPython()] = data_service
 
     return dataServices
 

@@ -37,8 +37,9 @@ def test_uriref_publisher() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert extractPublisher(graph, subject) == expected
+    assert extractPublisher(graph, subject, catalog_subject) == expected
 
 
 def test_bnode_publisher() -> None:
@@ -58,5 +59,33 @@ def test_bnode_publisher() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert extractPublisher(graph, subject) == expected
+    assert extractPublisher(graph, subject, catalog_subject) == expected
+
+
+def test_uses_catalog_publisher_when_none_exists_on_resource() -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+        <https://testdirektoratet.no/dataservices/0>
+            a                         dcat:DataService ;
+            dcat:endpointDescription  <https://testdirektoratet.no/specification/dataservice-0.yaml> .
+
+        <https://testdirektoratet.no/catalogs/0>
+            a              dcat:Catalog ;
+            dct:publisher  <https://testdirektoratet.no/organizations/123456789> ;
+            dct:title      "Dataservicekatalog 0"@nb ;
+            dcat:service   <https://testdirektoratet.no/dataservices/0> ."""
+
+    expected = Publisher(uri="https://testdirektoratet.no/organizations/123456789")
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/dataservices/0")
+    catalog_subject = URIRef(u"https://testdirektoratet.no/catalogs/0")
+
+    assert extractPublisher(graph, subject, catalog_subject) == expected
