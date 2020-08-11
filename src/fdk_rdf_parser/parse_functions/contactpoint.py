@@ -33,20 +33,30 @@ def extractContactPoints(graph: Graph, subject: URIRef) -> Optional[List[Contact
 
 
 def extractHasTelephone(graph: Graph, subject: Any) -> Optional[Any]:
-    telephone: Optional[Any] = objectValue(graph, subject, vcardURI("hasTelephone"))
-    if telephone is None:
-        return None
-    elif "tel:" in telephone:
-        return telephone[4:]
+    tel_ref = graph.value(subject, vcardURI("hasTelephone"))
+    if tel_ref:
+        tel_value = objectValue(graph, tel_ref, vcardURI("hasValue"))
+        if tel_value is None:
+            tel_value = tel_ref.toPython()
+
+        if "tel:" in tel_value:
+            return tel_value[4:]
+        else:
+            return tel_value
     else:
-        return telephone
+        return None
 
 
 def extractHasEmail(graph: Graph, subject: Any) -> Optional[Any]:
-    email: Optional[Any] = objectValue(graph, subject, vcardURI("hasEmail"))
-    if email is None:
-        return None
-    elif "mailto:" in email:
-        return email[7:]
+    mail_ref = graph.value(subject, vcardURI("hasEmail"))
+    if mail_ref:
+        email = objectValue(graph, mail_ref, vcardURI("hasValue"))
+        if email is None:
+            email = mail_ref.toPython()
+
+        if "mailto:" in email:
+            return email[7:]
+        else:
+            return email
     else:
-        return email
+        return None

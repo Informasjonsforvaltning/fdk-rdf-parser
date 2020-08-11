@@ -82,3 +82,30 @@ def test_several_contact_points() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
 
     assert extractContactPoints(graph, subject) == expected
+
+
+def test_telephone_and_email_is_nodes() -> None:
+
+    src = """
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+        <https://testdirektoratet.no/model/dataset/contact>
+                a                         dcat:Dataset ;
+                dcat:contactPoint
+                    [ a                          vcard:Organization ;
+                      vcard:hasTelephone         <https://testdirektoratet.no/telephone> ;
+                      vcard:hasEmail             [ a               vcard:Email ;
+                                                   vcard:hasValue  "post@mail.com" ]
+                    ] .
+
+        <https://testdirektoratet.no/telephone>
+            a               vcard:TelephoneType ;
+            vcard:hasValue  <tel:99999999> ."""
+
+    expected = [ContactPoint(email="post@mail.com", hasTelephone="99999999",)]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
+
+    assert extractContactPoints(graph, subject) == expected
