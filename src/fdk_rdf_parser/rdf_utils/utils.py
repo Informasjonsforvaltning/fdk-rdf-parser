@@ -2,19 +2,20 @@ from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 from isodate import date_isoformat, datetime_isoformat
-from rdflib import Graph, URIRef
+from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
 
 
 def objectValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
-    return value.toPython() if value is not None else None
+    return value.toPython() if value and not isinstance(value, BNode) else None
 
 
 def valueList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
     values = []
     for obj in graph.objects(subject, predicate):
-        values.append(obj.toPython())
+        if not isinstance(obj, BNode):
+            values.append(obj.toPython())
     values.sort()
     return values if len(values) > 0 else None
 
