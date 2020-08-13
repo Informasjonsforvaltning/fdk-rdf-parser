@@ -10,7 +10,6 @@ class DataService(PartialDcatResource):
 
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
-
     endpointDescription: Optional[List[str]] = None
     endpointURL: Optional[List[str]] = None
     mediaType: Optional[List[str]] = None
@@ -22,6 +21,7 @@ class DataService(PartialDcatResource):
         self.publisher = values.publisher
         self.title = values.title
         self.description = values.description
+        self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
         self.accessRights = values.accessRights
         self.theme = values.theme
