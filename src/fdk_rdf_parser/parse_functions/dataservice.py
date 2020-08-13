@@ -26,7 +26,7 @@ def parseDataService(
             dataServicesGraph, dataServiceURI, dcatURI("endpointDescription")
         ),
         mediaType=valueList(dataServicesGraph, dataServiceURI, dcatURI("mediaType")),
-        conformsTo=valueList(dataServicesGraph, dataServiceURI, dcatURI("conformsTo")),
+        conformsTo=valueList(dataServicesGraph, dataServiceURI, DCTERMS.conformsTo),
         servesDataset=valueList(
             dataServicesGraph, dataServiceURI, dcatURI("servesDataset")
         ),

@@ -121,6 +121,11 @@ def test_parse_multiple_data_services(
                 "nb": "Beskrivelse for å benytte seg av en kaffemaskin",
                 "en": "Beskrivelse for å benytte seg av en kaffemaskin ENGELSK",
             },
+            descriptionFormatted={
+                "nn": "Beskrivelse for å benytte seg av en kaffemaskin NYNORSK",
+                "nb": "Beskrivelse for å benytte seg av en kaffemaskin",
+                "en": "Beskrivelse for å benytte seg av en kaffemaskin ENGELSK",
+            },
             uri="https://testutgiver.no/data-services/2",
             contactPoint=[
                 ContactPoint(
@@ -145,6 +150,7 @@ def test_parse_multiple_data_services(
                 "https://www.iana.org/assignments/media-types/text/turtle",
             ],
             servesDataset=["http://testutgiver.no/datasets/abc"],
+            conformsTo=["https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"],
         ),
         "https://testutgiver.no/dataservices/0": DataService(
             publisher=Publisher(
