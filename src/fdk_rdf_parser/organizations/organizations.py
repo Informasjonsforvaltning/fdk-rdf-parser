@@ -4,25 +4,38 @@ from rdflib.namespace import FOAF, SKOS
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import brURI, objectValue, rovURI, valueTranslations
 from .organizations_client import getOrgPath, getRdfOrgData
-from .utils import organizationUrl
+from .utils import organisationNumberFromUri, organizationUrl
 
 
 def publisherFromFDKOrgCatalog(publisher: Publisher, orgsGraph: Graph) -> Publisher:
-    if publisher.id is None:
-        return addOrgPath(publisher)
-    else:
-        orgRef = URIRef(organizationUrl(publisher.id))
+    if publisher.id:
+        return getPublisherDataFromOrganizationCatalogue(publisher, orgsGraph)
+    elif publisher.uri:
+        publisher.id = organisationNumberFromUri(publisher.uri)
 
-        if (orgRef, None, None) in orgsGraph:
-            return parsePublisher(orgsGraph, orgRef, publisher)
+        if publisher.id:
+            return getPublisherDataFromOrganizationCatalogue(publisher, orgsGraph)
         else:
-            fdkOrg = getRdfOrgData(orgnr=publisher.id)
+            return addOrgPath(publisher)
+    else:
+        return addOrgPath(publisher)
 
-            if fdkOrg is not None:
-                orgGraph = Graph().parse(data=fdkOrg, format="turtle")
-                return parsePublisher(orgGraph, orgRef, publisher)
-            else:
-                return addOrgPath(publisher)
+
+def getPublisherDataFromOrganizationCatalogue(
+    publisher: Publisher, orgsGraph: Graph
+) -> Publisher:
+    orgRef = URIRef(organizationUrl(publisher.id))
+
+    if (orgRef, None, None) in orgsGraph:
+        return parsePublisher(orgsGraph, orgRef, publisher)
+    else:
+        fdkOrg = getRdfOrgData(orgnr=publisher.id)
+
+        if fdkOrg is not None:
+            orgGraph = Graph().parse(data=fdkOrg, format="turtle")
+            return parsePublisher(orgGraph, orgRef, publisher)
+        else:
+            return addOrgPath(publisher)
 
 
 def parsePublisher(graph: Graph, orgRef: URIRef, publisher: Publisher) -> Publisher:
