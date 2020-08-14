@@ -77,20 +77,6 @@ def test_publisher_not_Found(mock_organizations_error: Mock) -> None:
     )
 
 
-def test_publisher_no_id() -> None:
-
-    expected = Publisher(uri="https://externalurl.org/123456789")
-
-    orgsGraph = Graph().parse(data=org_response_0, format="turtle")
-
-    assert (
-        publisherFromFDKOrgCatalog(
-            Publisher(uri="https://externalurl.org/123456789"), orgsGraph
-        )
-        == expected
-    )
-
-
 def test_original_pref_label_is_retained(mock_organizations_client: Mock) -> None:
 
     expected = Publisher(
@@ -132,3 +118,54 @@ def test_orgpath(mock_orgpath_client: Mock) -> None:
     assert addOrgPath(publisherNB) == expectedNB
     assert addOrgPath(publisherNN) == expectedNN
     assert addOrgPath(publisherEN) == expectedEN
+
+
+def test_extract_publisher_id_from_uri() -> None:
+
+    expected = Publisher(
+        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        id="123456789",
+        name="Digitaliseringsdirektoratet",
+        orgPath="/STAT/987654321/123456789",
+        prefLabel={
+            "nn": "Digitaliseringsdirektoratet",
+            "nb": "Digitaliseringsdirektoratet",
+            "en": "Norwegian Digitalisation Agency",
+        },
+        organisasjonsform="ORGL",
+    )
+
+    orgsGraph = Graph().parse(data=org_response_0, format="turtle")
+
+    assert (
+        publisherFromFDKOrgCatalog(
+            Publisher(
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/123456789"
+            ),
+            orgsGraph,
+        )
+        == expected
+    )
+
+
+def test_only_extract_publisher_id_from_brreg_uri() -> None:
+
+    expected = Publisher(uri="https://externalurl.org/123456789")
+
+    orgsGraph = Graph().parse(data=org_response_0, format="turtle")
+
+    assert (
+        publisherFromFDKOrgCatalog(
+            Publisher(uri="https://externalurl.org/123456789"), orgsGraph
+        )
+        == expected
+    )
+
+
+def test_handles_empty_publisher() -> None:
+
+    expected = Publisher()
+
+    orgsGraph = Graph().parse(data=org_response_0, format="turtle")
+
+    assert publisherFromFDKOrgCatalog(Publisher(), orgsGraph) == expected
