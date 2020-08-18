@@ -7,7 +7,7 @@ from .classes import DataService, Dataset, Publisher, QualifiedAttribution
 from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
 from .parse_functions import parseDataService, parseDataset
 from .rdf_utils import dcatURI, resourceList
-from .reference_data import extendDatasetWithReferenceData, getAllReferenceData
+from .reference_data import extendDatasetWithReferenceData, getDatasetReferenceData
 
 
 def isDcatType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
@@ -50,7 +50,7 @@ def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
 def parseDatasets(rdfData: str) -> Dict[str, Dataset]:
     datasetsGraph = Graph().parse(data=rdfData, format="turtle")
     fdkOrgs = Graph().parse(data=getRdfOrgData(orgnr=None), format="turtle")
-    referenceData = getAllReferenceData()
+    referenceData = getDatasetReferenceData()
 
     datasets: Dict[str, Dataset] = {}
 

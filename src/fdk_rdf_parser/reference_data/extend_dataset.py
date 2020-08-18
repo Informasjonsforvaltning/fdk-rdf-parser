@@ -8,10 +8,13 @@ from fdk_rdf_parser.classes import (
     ThemeEU,
     ThemeLOS,
 )
-from .reference_data import ReferenceData
+from .reference_data import DatasetReferenceData
+from .utils import extendSkosCode, extendSkosCodeList
 
 
-def extendDatasetWithReferenceData(dataset: Dataset, refData: ReferenceData) -> Dataset:
+def extendDatasetWithReferenceData(
+    dataset: Dataset, refData: DatasetReferenceData
+) -> Dataset:
     dataset.accessRights = extendSkosCode(dataset.accessRights, refData.rightsstatement)
     dataset.provenance = extendSkosCode(dataset.provenance, refData.provenancestatement)
     dataset.accrualPeriodicity = extendSkosCode(
@@ -31,35 +34,6 @@ def extendDatasetWithReferenceData(dataset: Dataset, refData: ReferenceData) -> 
     dataset.theme = extendEUThemes(splitThemes["eu"], refData.euThemes)
 
     return dataset
-
-
-def extendSkosCode(
-    skosCode: Optional[SkosCode], references: Optional[Dict[str, SkosCode]]
-) -> Optional[SkosCode]:
-    if references is not None:
-        uri = skosCode.uri if skosCode is not None else None
-        if uri is not None:
-            refCode = references.get(uri) if references is not None else None
-            if refCode is not None:
-                return refCode
-
-    return skosCode
-
-
-def extendSkosCodeList(
-    skosCodes: Optional[List[SkosCode]], references: Optional[Dict[str, SkosCode]]
-) -> Optional[List[SkosCode]]:
-    if skosCodes is None or references is None:
-        return skosCodes
-    else:
-        extendedCodes = []
-        for code in skosCodes:
-            refCode = references.get(code.uri) if code.uri is not None else None
-            if refCode is not None:
-                extendedCodes.append(refCode)
-            else:
-                extendedCodes.append(code)
-        return extendedCodes
 
 
 def extendDistributions(

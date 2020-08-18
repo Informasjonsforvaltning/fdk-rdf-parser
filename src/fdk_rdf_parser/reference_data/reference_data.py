@@ -6,7 +6,12 @@ from .reference_data_client import getReferenceData
 
 
 @dataclass
-class ReferenceData:
+class DataServiceReferenceData:
+    mediaTypes: Optional[Dict[str, SkosCode]] = None
+
+
+@dataclass
+class DatasetReferenceData:
     provenancestatement: Optional[Dict[str, SkosCode]] = None
     rightsstatement: Optional[Dict[str, SkosCode]] = None
     frequency: Optional[Dict[str, SkosCode]] = None
@@ -18,8 +23,12 @@ class ReferenceData:
     losThemes: Optional[Dict[str, ThemeLOS]] = None
 
 
-def getAllReferenceData() -> ReferenceData:
-    return ReferenceData(
+def getDataServiceReferenceData() -> DataServiceReferenceData:
+    return DataServiceReferenceData(mediaTypes=getAndMapMediaTypes())
+
+
+def getDatasetReferenceData() -> DatasetReferenceData:
+    return DatasetReferenceData(
         provenancestatement=getAndMapReferenceCodes("provenancestatement"),
         rightsstatement=getAndMapReferenceCodes("rightsstatement"),
         frequency=getAndMapReferenceCodes("frequency"),
@@ -69,3 +78,18 @@ def getAndMapThemesLOS() -> Optional[Dict[str, ThemeLOS]]:
             losTheme.addValuesFromDict(theme)
             mapped[str(theme.get("uri"))] = losTheme
     return mapped if len(mapped) > 0 else None
+
+
+def getAndMapMediaTypes() -> Optional[Dict[str, SkosCode]]:
+    mediaTypes = {}
+    codes = getReferenceData("/codes/mediatypes")
+    if codes is not None:
+        for code in codes:
+            if code.get("code"):
+                mediaTypes[str(code.get("code"))] = SkosCode(
+                    code=str(code.get("code")),
+                    prefLabel={"nb": str(code.get("name"))}
+                    if code.get("name")
+                    else None,
+                )
+    return mediaTypes if len(mediaTypes) > 0 else None

@@ -1,7 +1,13 @@
 from unittest.mock import Mock
 
 from fdk_rdf_parser import parseDataServices
-from fdk_rdf_parser.classes import ContactPoint, DataService, HarvestMetaData, Publisher
+from fdk_rdf_parser.classes import (
+    ContactPoint,
+    DataService,
+    HarvestMetaData,
+    Publisher,
+    SkosCode,
+)
 
 
 def test_parse_multiple_data_services(
@@ -145,9 +151,15 @@ def test_parse_multiple_data_services(
             ],
             endpointURL=["http://kaffe.no", "https://kaffemaskin.no"],
             mediaType=[
-                "https://www.iana.org/assignments/media-types/application/json",
-                "https://www.iana.org/assignments/media-types/application/rdf+xml",
-                "https://www.iana.org/assignments/media-types/text/turtle",
+                SkosCode(
+                    uri="https://www.iana.org/assignments/media-types/application/json"
+                ),
+                SkosCode(
+                    uri="https://www.iana.org/assignments/media-types/application/rdf+xml"
+                ),
+                SkosCode(
+                    uri="https://www.iana.org/assignments/media-types/text/turtle"
+                ),
             ],
             servesDataset=["http://testutgiver.no/datasets/abc"],
             conformsTo=["https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"],
@@ -179,8 +191,12 @@ def test_parse_multiple_data_services(
             endpointDescription=["http://example.com/"],
             endpointURL=["https://vg.no"],
             mediaType=[
-                "https://www.iana.org/assignments/media-types/application/vnd.geo+json",
-                "https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet",
+                SkosCode(
+                    uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json"
+                ),
+                SkosCode(
+                    uri="https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet"
+                ),
             ],
         ),
     }

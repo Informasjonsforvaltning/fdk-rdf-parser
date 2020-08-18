@@ -1,5 +1,5 @@
 from fdk_rdf_parser.classes import ConceptSchema, SkosCode, ThemeEU, ThemeLOS
-from fdk_rdf_parser.reference_data import ReferenceData
+from fdk_rdf_parser.reference_data import DataServiceReferenceData, DatasetReferenceData
 
 
 org_response_0 = """
@@ -71,7 +71,30 @@ org_response_1 = """
         br:sectorCode          "6100" .
 """
 
-reference_data = ReferenceData(
+data_service_reference_data = DataServiceReferenceData(
+    mediaTypes={
+        "text/csv": SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
+        "text/html": SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"}),
+        "application/json": SkosCode(
+            uri=None, code="application/json", prefLabel={"nb": "JSON"}
+        ),
+        "application/rdf+xml": SkosCode(
+            uri=None, code="application/rdf+xml", prefLabel={"nb": "RDF/XML"}
+        ),
+        "text/plain": SkosCode(uri=None, code="text/plain", prefLabel={"nb": "TXT"}),
+        "application/xml": SkosCode(
+            uri=None, code="application/xml", prefLabel={"nb": "XML"}
+        ),
+        "application/ld+json": SkosCode(
+            uri=None, code="application/ld+json", prefLabel={"nb": "JSON-LD"}
+        ),
+        "text/turtle": SkosCode(
+            uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}
+        ),
+    }
+)
+
+dataset_reference_data = DatasetReferenceData(
     provenancestatement={
         "http://data.brreg.no/datakatalog/provinens": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens",
