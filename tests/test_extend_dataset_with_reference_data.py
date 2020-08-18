@@ -8,8 +8,11 @@ from fdk_rdf_parser.classes import (
     ThemeEU,
     ThemeLOS,
 )
-from fdk_rdf_parser.reference_data import extendDatasetWithReferenceData, ReferenceData
-from .testdata import reference_data
+from fdk_rdf_parser.reference_data import (
+    DatasetReferenceData,
+    extendDatasetWithReferenceData,
+)
+from .testdata import dataset_reference_data
 
 
 def test_handles_missing_reference_data() -> None:
@@ -21,7 +24,8 @@ def test_handles_missing_reference_data() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, ReferenceData()) == parsedDataset
+        extendDatasetWithReferenceData(parsedDataset, DatasetReferenceData())
+        == parsedDataset
     )
 
 
@@ -38,7 +42,8 @@ def test_uri_not_present_in_reference_data() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, reference_data) == parsedDataset
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == parsedDataset
     )
 
 
@@ -57,7 +62,10 @@ def test_extend_access_rights() -> None:
         )
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_provenance() -> None:
@@ -77,7 +85,10 @@ def test_extend_provenance() -> None:
         )
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_accrual_periodicity() -> None:
@@ -95,7 +106,10 @@ def test_extend_accrual_periodicity() -> None:
         )
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_language() -> None:
@@ -122,7 +136,10 @@ def test_extend_language() -> None:
         ]
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_spatial() -> None:
@@ -144,7 +161,10 @@ def test_extend_spatial() -> None:
         ]
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_open_licenses() -> None:
@@ -199,7 +219,10 @@ def test_extend_open_licenses() -> None:
         ]
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_references() -> None:
@@ -229,7 +252,10 @@ def test_extend_references() -> None:
         ]
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )
 
 
 def test_extend_themes() -> None:
@@ -277,4 +303,7 @@ def test_extend_themes() -> None:
         ],
     )
 
-    assert extendDatasetWithReferenceData(parsedDataset, reference_data) == expected
+    assert (
+        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        == expected
+    )

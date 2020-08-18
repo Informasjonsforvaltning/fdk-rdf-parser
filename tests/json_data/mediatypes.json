@@ -1,0 +1,37 @@
+[
+    {
+        "code": "text/csv",
+        "name": "CSV"
+    },
+    {
+        "code": "text/html",
+        "name": "HTML"
+    },
+    {
+        "code": "application/json",
+        "name": "JSON"
+    },
+    {
+        "code": "application/rdf+xml",
+        "name": "RDF/XML"
+    },
+    {
+        "code": "text/plain",
+        "name": "TXT"
+    },
+    {
+        "code": "application/xml",
+        "name": "XML"
+    },
+    {
+        "code": "application/ld+json",
+        "name": "JSON-LD"
+    },
+    {
+        "code": "text/turtle",
+        "name": "Turtle"
+    },
+    {
+        "name": "UNKNOWN"
+    }
+]

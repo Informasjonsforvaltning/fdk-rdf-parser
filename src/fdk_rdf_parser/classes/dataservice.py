@@ -3,6 +3,7 @@ from typing import Any, List, Optional
 
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
+from .skos_code import SkosCode
 
 
 @dataclass
@@ -12,7 +13,7 @@ class DataService(PartialDcatResource):
     harvest: Optional[HarvestMetaData] = None
     endpointDescription: Optional[List[str]] = None
     endpointURL: Optional[List[str]] = None
-    mediaType: Optional[List[str]] = None
+    mediaType: Optional[List[SkosCode]] = None
     servesDataset: Optional[List[str]] = None
     conformsTo: Optional[List[str]] = None
 
