@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
 from .dcat_resource import parseDcatResource
 from .harvest_meta_data import extractMetaData
 from .skos_code import extractSkosCodeList
+from .skos_concept import extractSkosConcept
 
 
 def parseDataService(
@@ -29,7 +30,9 @@ def parseDataService(
         mediaType=extractSkosCodeList(
             dataServicesGraph, dataServiceURI, dcatURI("mediaType")
         ),
-        conformsTo=valueList(dataServicesGraph, dataServiceURI, DCTERMS.conformsTo),
+        conformsTo=extractSkosConcept(
+            dataServicesGraph, dataServiceURI, DCTERMS.conformsTo
+        ),
         servesDataset=valueList(
             dataServicesGraph, dataServiceURI, dcatURI("servesDataset")
         ),

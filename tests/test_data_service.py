@@ -7,6 +7,7 @@ from fdk_rdf_parser.classes import (
     HarvestMetaData,
     Publisher,
     SkosCode,
+    SkosConcept,
 )
 
 
@@ -162,7 +163,11 @@ def test_parse_multiple_data_services(
                 ),
             ],
             servesDataset=["http://testutgiver.no/datasets/abc"],
-            conformsTo=["https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"],
+            conformsTo=[
+                SkosConcept(
+                    uri="https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"
+                )
+            ],
         ),
         "https://testutgiver.no/dataservices/0": DataService(
             publisher=Publisher(
