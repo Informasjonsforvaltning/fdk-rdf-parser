@@ -4,6 +4,7 @@ from typing import Any, List, Optional
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
 from .skos_code import SkosCode
+from .skos_concept import SkosConcept
 
 
 @dataclass
@@ -15,7 +16,7 @@ class DataService(PartialDcatResource):
     endpointURL: Optional[List[str]] = None
     mediaType: Optional[List[SkosCode]] = None
     servesDataset: Optional[List[str]] = None
-    conformsTo: Optional[List[str]] = None
+    conformsTo: Optional[List[SkosConcept]] = None
 
     def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> Any:
         self.identifier = values.identifier
