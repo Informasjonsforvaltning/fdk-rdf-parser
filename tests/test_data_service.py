@@ -152,15 +152,11 @@ def test_parse_multiple_data_services(
             ],
             endpointURL=["http://kaffe.no", "https://kaffemaskin.no"],
             mediaType=[
+                SkosCode(uri=None, code="application/json", prefLabel={"nb": "JSON"}),
                 SkosCode(
-                    uri="https://www.iana.org/assignments/media-types/application/json"
+                    uri=None, code="application/rdf+xml", prefLabel={"nb": "RDF/XML"}
                 ),
-                SkosCode(
-                    uri="https://www.iana.org/assignments/media-types/application/rdf+xml"
-                ),
-                SkosCode(
-                    uri="https://www.iana.org/assignments/media-types/text/turtle"
-                ),
+                SkosCode(uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}),
             ],
             servesDataset=["http://testutgiver.no/datasets/abc"],
             conformsTo=[
@@ -195,14 +191,7 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription=["http://example.com/"],
             endpointURL=["https://vg.no"],
-            mediaType=[
-                SkosCode(
-                    uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json"
-                ),
-                SkosCode(
-                    uri="https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet"
-                ),
-            ],
+            mediaType=None,
         ),
     }
 
