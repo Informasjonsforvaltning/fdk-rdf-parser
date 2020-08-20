@@ -7,7 +7,12 @@ from .classes import DataService, Dataset, Publisher, QualifiedAttribution
 from .organizations import getRdfOrgData, publisherFromFDKOrgCatalog
 from .parse_functions import parseDataService, parseDataset
 from .rdf_utils import dcatURI, resourceList
-from .reference_data import extendDatasetWithReferenceData, getDatasetReferenceData
+from .reference_data import (
+    extendDataServiceWithReferenceData,
+    extendDatasetWithReferenceData,
+    getDataServiceReferenceData,
+    getDatasetReferenceData,
+)
 
 
 def isDcatType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
@@ -21,6 +26,7 @@ def isDcatType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
 def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
     dataServices: Dict[str, DataService] = {}
     fdkOrgs = Graph().parse(data=getRdfOrgData(orgnr=None), format="turtle")
+    referenceData = getDataServiceReferenceData()
 
     dataServicesGraph = Graph().parse(data=dataServiceRDF, format="turtle")
 
@@ -40,6 +46,10 @@ def parseDataServices(dataServiceRDF: str) -> Dict[str, DataService]:
                 publisherFromFDKOrgCatalog(data_service.publisher, fdkOrgs)
                 if data_service.publisher
                 else None
+            )
+
+            data_service = extendDataServiceWithReferenceData(
+                data_service, referenceData
             )
 
             dataServices[primaryTopicURI.toPython()] = data_service
