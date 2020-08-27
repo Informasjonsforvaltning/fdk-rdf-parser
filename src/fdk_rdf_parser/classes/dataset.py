@@ -106,4 +106,5 @@ class Dataset(PartialDataset):
         self.legalBasisForAccess = values.legalBasisForAccess
         self.conformsTo = values.conformsTo
         self.informationModel = values.informationModel
+        self.references = values.references
         self.qualifiedAttributions = values.qualifiedAttributions
