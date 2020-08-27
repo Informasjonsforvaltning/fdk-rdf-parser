@@ -12,6 +12,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     QualifiedAttribution,
     QualityAnnotation,
+    Reference,
     SkosCode,
     SkosConcept,
     Subject,
@@ -44,7 +45,8 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
         <https://testdirektoratet.no/model/dataset/1>
                 a                  dcat:Dataset ;
                 dct:spatial        [ <http://www.w3.org/ns/locn#geometry> "gmlLiteral"^^<http://www.opengis.net/ont/geosparql#gmlLiteral> ] ;
-                dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> .
+                dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+                dct:relation       <https://testdirektoratet.no/model/dataset/0> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
                 a                  dcat:CatalogRecord ;
@@ -94,6 +96,18 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 prefLabel={"en": "Public"},
             ),
             uri="https://testdirektoratet.no/model/dataset/1",
+            references=[
+                Reference(
+                    referenceType=SkosCode(
+                        uri="http://purl.org/dc/terms/relation",
+                        code="relation",
+                        prefLabel={"en": "Has relation to"},
+                    ),
+                    source=SkosConcept(
+                        uri="https://testdirektoratet.no/model/dataset/0"
+                    ),
+                )
+            ],
         ),
     }
 

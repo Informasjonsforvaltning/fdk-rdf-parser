@@ -113,3 +113,49 @@ def test_references() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
 
     assert extractReferences(graph, subject) == expected
+
+
+def test_several_of_same_reference_type() -> None:
+    src = """
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+        <https://testdirektoratet.no/model/dataset/reference-list>
+            a                   dcat:Dataset ;
+            dct:isPartOf        <https://testdirektoratet.no/model/dataset/isPartOf> ;
+            dct:relation        <https://testdirektoratet.no/model/dataset/relation0> ,
+                                <https://testdirektoratet.no/model/dataset/relation1> ,
+                                <https://testdirektoratet.no/model/dataset/relation2> ."""
+
+    expected = [
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/isPartOf"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/isPartOf"
+            ),
+        ),
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation0"
+            ),
+        ),
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation1"
+            ),
+        ),
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation2"
+            ),
+        ),
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference-list")
+
+    assert extractReferences(graph, subject) == expected
