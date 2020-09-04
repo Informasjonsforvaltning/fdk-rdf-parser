@@ -318,6 +318,36 @@ dataset_reference_data = DatasetReferenceData(
             code="NLOD20",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
         ),
+        "https://creativecommons.org/licenses/by/4.0/": SkosCode(
+            uri="http://creativecommons.org/licenses/by/4.0/",
+            code="CC BY 4.0",
+            prefLabel={"en": "Creative Commons Attribution 4.0 International"},
+        ),
+        "https://creativecommons.org/licenses/by/4.0/deed.no": SkosCode(
+            uri="http://creativecommons.org/licenses/by/4.0/deed.no",
+            code="CC BY 4.0 DEED",
+            prefLabel={"en": "Creative Commons Attribution 4.0 International"},
+        ),
+        "https://creativecommons.org/publicdomain/zero/1.0/": SkosCode(
+            uri="http://creativecommons.org/publicdomain/zero/1.0/",
+            code="CC0 1.0",
+            prefLabel={"en": "Creative Commons Universal Public Domain Dedication"},
+        ),
+        "https://data.norge.no/nlod/": SkosCode(
+            uri="http://data.norge.no/nlod/",
+            code="NLOD",
+            prefLabel={"en": "Norwegian Licence for Open Government Data"},
+        ),
+        "https://data.norge.no/nlod/no/1.0": SkosCode(
+            uri="http://data.norge.no/nlod/no/1.0",
+            code="NLOD10",
+            prefLabel={"en": "Norwegian Licence for Open Government Data"},
+        ),
+        "https://data.norge.no/nlod/no/2.0": SkosCode(
+            uri="http://data.norge.no/nlod/no/2.0",
+            code="NLOD20",
+            prefLabel={"en": "Norwegian Licence for Open Government Data"},
+        ),
     },
     location={
         "http://sws.geonames.org/3144096/": SkosCode(

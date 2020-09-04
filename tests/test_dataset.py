@@ -534,3 +534,64 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
         assert all(
             x in actual.qualifiedAttributions for x in expected.qualifiedAttributions
         )
+
+
+def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> None:
+    src = """
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "123" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+            a                  dcat:Dataset ;
+            dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+            dcat:distribution  <https://example.com/open-distribution> .
+
+        <https://example.com/open-distribution>
+            a               dcat:Distribution ;
+            dct:format      "HTML" ;
+            dct:license     <https://data.norge.no/nlod/> ;
+            dcat:accessURL  <http://example.com/access-url> .
+    """
+    expected = {
+        "https://testdirektoratet.no/model/dataset/0": Dataset(
+            uri="https://testdirektoratet.no/model/dataset/0",
+            accessRights=SkosCode(
+                uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
+                code="PUBLIC",
+                prefLabel={"en": "Public"},
+            ),
+            id="123",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+            ),
+            distribution=[
+                Distribution(
+                    uri="https://example.com/open-distribution",
+                    accessURL=["http://example.com/access-url"],
+                    license=[
+                        SkosConcept(
+                            uri="https://data.norge.no/nlod/",
+                            prefLabel={
+                                "en": "Norwegian Licence for Open Government Data"
+                            },
+                        )
+                    ],
+                    openLicense=True,
+                    format=["HTML"],
+                )
+            ],
+        ),
+    }
+
+    assert parseDatasets(src) == expected
