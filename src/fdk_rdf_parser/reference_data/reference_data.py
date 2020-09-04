@@ -34,7 +34,7 @@ def getDatasetReferenceData() -> DatasetReferenceData:
         frequency=getAndMapReferenceCodes("frequency"),
         linguisticsystem=getAndMapReferenceCodes("linguisticsystem"),
         referencetypes=getAndMapReferenceCodes("referencetypes"),
-        openlicenses=getAndMapReferenceCodes("openlicenses"),
+        openlicenses=getAndMapOpenLicenses(),
         location=getAndMapReferenceCodes("location"),
         euThemes=getAndMapThemesEU(),
         losThemes=getAndMapThemesLOS(),
@@ -93,3 +93,19 @@ def getAndMapMediaTypes() -> Optional[Dict[str, SkosCode]]:
                     else None,
                 )
     return mediaTypes if len(mediaTypes) > 0 else None
+
+
+def getAndMapOpenLicenses() -> Optional[Dict[str, SkosCode]]:
+    licensesWithBothProtocols = {}
+    licenses = getAndMapReferenceCodes("openlicenses")
+    if licenses:
+        for li in licenses:
+            licensesWithBothProtocols[li] = licenses[li]
+            if li.startswith("http://"):
+                https_uri = "https://" + li.split("http://")[1]
+                licensesWithBothProtocols[https_uri] = licenses[li]
+            elif li.startswith("https://"):
+                http_uri = "http://" + li.split("https://")[1]
+                licensesWithBothProtocols[http_uri] = licenses[li]
+
+    return licensesWithBothProtocols if len(licensesWithBothProtocols) > 0 else None
