@@ -19,7 +19,11 @@ def extendSkosCode(
     if references is not None:
         uri = skosCode.uri if skosCode is not None else None
         if uri is not None:
-            refCode = references.get(uri) if references is not None else None
+            refCode = (
+                references.get(removeTrailingSlash(uri))
+                if references is not None
+                else None
+            )
             if refCode is not None:
                 return refCode
 
@@ -34,9 +38,20 @@ def extendSkosCodeList(
     else:
         extendedCodes = []
         for code in skosCodes:
-            refCode = references.get(code.uri) if code.uri is not None else None
+            refCode = (
+                references.get(removeTrailingSlash(code.uri))
+                if code.uri is not None
+                else None
+            )
             if refCode is not None:
                 extendedCodes.append(refCode)
             else:
                 extendedCodes.append(code)
         return extendedCodes
+
+
+def removeTrailingSlash(uri: str) -> str:
+    if uri.endswith("/"):
+        return uri[:-1]
+    else:
+        return uri

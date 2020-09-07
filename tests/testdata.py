@@ -288,7 +288,7 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     openlicenses={
-        "http://creativecommons.org/licenses/by/4.0/": SkosCode(
+        "http://creativecommons.org/licenses/by/4.0": SkosCode(
             uri="http://creativecommons.org/licenses/by/4.0/",
             code="CC BY 4.0",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
@@ -298,12 +298,12 @@ dataset_reference_data = DatasetReferenceData(
             code="CC BY 4.0 DEED",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
         ),
-        "http://creativecommons.org/publicdomain/zero/1.0/": SkosCode(
+        "http://creativecommons.org/publicdomain/zero/1.0": SkosCode(
             uri="http://creativecommons.org/publicdomain/zero/1.0/",
             code="CC0 1.0",
             prefLabel={"en": "Creative Commons Universal Public Domain Dedication"},
         ),
-        "http://data.norge.no/nlod/": SkosCode(
+        "http://data.norge.no/nlod": SkosCode(
             uri="http://data.norge.no/nlod/",
             code="NLOD",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
@@ -318,7 +318,7 @@ dataset_reference_data = DatasetReferenceData(
             code="NLOD20",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
         ),
-        "https://creativecommons.org/licenses/by/4.0/": SkosCode(
+        "https://creativecommons.org/licenses/by/4.0": SkosCode(
             uri="http://creativecommons.org/licenses/by/4.0/",
             code="CC BY 4.0",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
@@ -328,12 +328,12 @@ dataset_reference_data = DatasetReferenceData(
             code="CC BY 4.0 DEED",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
         ),
-        "https://creativecommons.org/publicdomain/zero/1.0/": SkosCode(
+        "https://creativecommons.org/publicdomain/zero/1.0": SkosCode(
             uri="http://creativecommons.org/publicdomain/zero/1.0/",
             code="CC0 1.0",
             prefLabel={"en": "Creative Commons Universal Public Domain Dedication"},
         ),
-        "https://data.norge.no/nlod/": SkosCode(
+        "https://data.norge.no/nlod": SkosCode(
             uri="http://data.norge.no/nlod/",
             code="NLOD",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
@@ -350,7 +350,7 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     location={
-        "http://sws.geonames.org/3144096/": SkosCode(
+        "http://sws.geonames.org/3144096": SkosCode(
             uri="http://sws.geonames.org/3144096/",
             code="http://sws.geonames.org/3144096/",
             prefLabel={"no": "Norge"},

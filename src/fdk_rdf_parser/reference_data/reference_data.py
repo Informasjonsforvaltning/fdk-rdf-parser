@@ -3,6 +3,7 @@ from typing import Dict, Optional
 
 from fdk_rdf_parser.classes import SkosCode, ThemeEU, ThemeLOS
 from .reference_data_client import getReferenceData
+from .utils import removeTrailingSlash
 
 
 @dataclass
@@ -45,7 +46,7 @@ def getAndMapReferenceCodes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
     codes = getReferenceData(f"/codes/{endpoint}")
     if codes is not None:
         return {
-            str(code.get("uri")): SkosCode(
+            removeTrailingSlash(str(code.get("uri"))): SkosCode(
                 uri=str(code.get("uri")) if code.get("uri") is not None else None,
                 code=str(code.get("code")) if code.get("code") is not None else None,
                 prefLabel=code.get("prefLabel")
