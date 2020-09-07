@@ -9,7 +9,7 @@ from fdk_rdf_parser.classes import (
     ThemeLOS,
 )
 from .reference_data import DatasetReferenceData
-from .utils import extendSkosCode, extendSkosCodeList
+from .utils import extendSkosCode, extendSkosCodeList, removeTrailingSlash
 
 
 def extendDatasetWithReferenceData(
@@ -48,7 +48,11 @@ def extendDistributions(
             if dist.license is not None:
                 extendedLicenses = []
                 for lic in dist.license:
-                    refCode = openLicenses.get(lic.uri) if lic.uri is not None else None
+                    refCode = (
+                        openLicenses.get(removeTrailingSlash(lic.uri))
+                        if lic.uri is not None
+                        else None
+                    )
                     if refCode is not None:
                         dist.openLicense = True
                         if lic.prefLabel is None:
