@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
+from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
@@ -43,6 +44,7 @@ class PartialDataset(PartialDcatResource):
     informationModel: Optional[List[SkosConcept]] = None
     references: Optional[List[Reference]] = None
     qualifiedAttributions: Optional[List[QualifiedAttribution]] = None
+    catalog: Optional[Catalog] = None
 
     def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
@@ -108,3 +110,4 @@ class Dataset(PartialDataset):
         self.informationModel = values.informationModel
         self.references = values.references
         self.qualifiedAttributions = values.qualifiedAttributions
+        self.catalog = values.catalog

@@ -17,6 +17,7 @@ from .utils import (
     catalogRef,
     dateList,
     dateValue,
+    isType,
     objectValue,
     resourceList,
     valueList,

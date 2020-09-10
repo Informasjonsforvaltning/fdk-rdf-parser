@@ -1,3 +1,4 @@
+from .catalog import Catalog
 from .contactpoint import ContactPoint
 from .data_distribution_service import DataDistributionService
 from .dataservice import DataService

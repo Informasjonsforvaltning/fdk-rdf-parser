@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, List, Optional
 
+from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
 from .skos_code import SkosCode
@@ -17,6 +18,7 @@ class DataService(PartialDcatResource):
     mediaType: Optional[List[SkosCode]] = None
     servesDataset: Optional[List[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
+    catalog: Optional[Catalog] = None
 
     def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> Any:
         self.identifier = values.identifier

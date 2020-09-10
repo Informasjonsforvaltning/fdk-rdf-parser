@@ -13,6 +13,7 @@ from fdk_rdf_parser.rdf_utils import (
     valueList,
     valueTranslations,
 )
+from .catalog import parseCatalog
 from .dcat_resource import parseDcatResource
 from .distribution import extractDistributions
 from .harvest_meta_data import extractMetaData
@@ -83,6 +84,7 @@ def parseDataset(
         qualifiedAttributions=extractQualifiedAttributions(
             datasetsGraph, datasetURI, provURI("qualifiedAttribution")
         ),
+        catalog=parseCatalog(datasetsGraph, recordURI),
     )
 
     dataset.addValuesFromDcatResource(

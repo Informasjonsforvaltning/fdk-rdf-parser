@@ -1,3 +1,4 @@
+from .catalog import parseCatalog
 from .contactpoint import extractContactPoints
 from .dataservice import parseDataService
 from .dataset import parseDataset
