@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 from fdk_rdf_parser import parseDataServices
 from fdk_rdf_parser.classes import (
+    Catalog,
     ContactPoint,
     DataService,
     HarvestMetaData,
@@ -164,6 +165,23 @@ def test_parse_multiple_data_services(
                     uri="https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"
                 )
             ],
+            catalog=Catalog(
+                id="d07885d9-0925-339f-bb22-58c28dc30409",
+                uri="https://testutgiver.no/catalogs/123456789",
+                title={"en": "Data service catalog"},
+                publisher=Publisher(
+                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    id="123456789",
+                    name="Digitaliseringsdirektoratet",
+                    orgPath="/STAT/987654321/123456789",
+                    prefLabel={
+                        "nb": "Digitaliseringsdirektoratet",
+                        "nn": "Digitaliseringsdirektoratet",
+                        "en": "Norwegian Digitalisation Agency",
+                    },
+                    organisasjonsform="ORGL",
+                ),
+            ),
         ),
         "https://testutgiver.no/dataservices/0": DataService(
             publisher=Publisher(
@@ -177,6 +195,14 @@ def test_parse_multiple_data_services(
             endpointDescription=[
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml"
             ],
+            catalog=Catalog(
+                id="d6199127-8835-33e1-9108-233cd81e92f9",
+                uri="https://testutgiver.no/catalogs/987654321",
+                title={"nb": "Dataservicekatalog2 for Digitaliseringsdirektoratet"},
+                publisher=Publisher(
+                    uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                ),
+            ),
         ),
         "https://testutgiver.no/dataservices/1": DataService(
             publisher=Publisher(
@@ -191,7 +217,14 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription=["http://example.com/"],
             endpointURL=["https://vg.no"],
-            mediaType=None,
+            catalog=Catalog(
+                id="d6199127-8835-33e1-9108-233cd81e92f9",
+                uri="https://testutgiver.no/catalogs/987654321",
+                title={"nb": "Dataservicekatalog2 for Digitaliseringsdirektoratet"},
+                publisher=Publisher(
+                    uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                ),
+            ),
         ),
     }
 

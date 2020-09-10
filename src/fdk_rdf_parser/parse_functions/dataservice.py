@@ -8,6 +8,7 @@ from fdk_rdf_parser.rdf_utils import (
     objectValue,
     valueList,
 )
+from .catalog import parseCatalog
 from .dcat_resource import parseDcatResource
 from .harvest_meta_data import extractMetaData
 from .skos_code import extractSkosCodeList
@@ -36,6 +37,7 @@ def parseDataService(
         servesDataset=valueList(
             dataServicesGraph, dataServiceURI, dcatURI("servesDataset")
         ),
+        catalog=parseCatalog(dataServicesGraph, recordURI),
     )
 
     dataService.addValuesFromDcatResource(

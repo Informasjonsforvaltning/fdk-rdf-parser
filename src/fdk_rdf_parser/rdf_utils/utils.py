@@ -3,7 +3,15 @@ from typing import Any, Dict, List, Optional
 
 from isodate import date_isoformat, datetime_isoformat
 from rdflib import BNode, Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from rdflib.namespace import DCTERMS, FOAF, RDF
+
+
+def isType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
+    for typeURIRef in resourceList(graph, topic, RDF.type):
+        if typeURIRef == t:
+            return True
+
+    return False
 
 
 def objectValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:

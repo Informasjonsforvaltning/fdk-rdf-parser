@@ -5,6 +5,7 @@ from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parseDatasets
 from fdk_rdf_parser.classes import (
+    Catalog,
     Dataset,
     Distribution,
     HarvestMetaData,
@@ -109,6 +110,87 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 )
             ],
         ),
+    }
+
+    assert parseDatasets(src) == expected
+
+
+def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+        <https://testdirektoratet.no/model/catalog/0>
+                a                dcat:Catalog ;
+                dcat:dataset     <https://testdirektoratet.no/model/dataset/0> ;
+                dct:title        "Katalog"@nb ;
+                dct:description  "Beskrivelse av katalog"@nb ;
+                dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
+                                  dct:identifier    "123456789" ] .
+
+        <https://datasets.fellesdatakatalog.digdir.no/catalog/abc123>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "abc123" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/catalog/0> .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "a1c680ca" ;
+                dct:isPartOf       <https://datasets.fellesdatakatalog.digdir.no/catalog/abc123> ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-13"^^xsd:date ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ."""
+
+    expected = {
+        "https://testdirektoratet.no/model/dataset/0": Dataset(
+            id="a1c680ca",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-13"],
+            ),
+            uri="https://testdirektoratet.no/model/dataset/0",
+            publisher=Publisher(
+                uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                id="123456789",
+                name="Digitaliseringsdirektoratet",
+                orgPath="/STAT/987654321/123456789",
+                prefLabel={
+                    "nn": "Digitaliseringsdirektoratet",
+                    "nb": "Digitaliseringsdirektoratet",
+                    "en": "Norwegian Digitalisation Agency",
+                },
+                organisasjonsform="ORGL",
+            ),
+            catalog=Catalog(
+                id="abc123",
+                uri="https://testdirektoratet.no/model/catalog/0",
+                title={"nb": "Katalog"},
+                description={"nb": "Beskrivelse av katalog"},
+                publisher=Publisher(
+                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    id="123456789",
+                    name="Digitaliseringsdirektoratet",
+                    orgPath="/STAT/987654321/123456789",
+                    prefLabel={
+                        "nn": "Digitaliseringsdirektoratet",
+                        "nb": "Digitaliseringsdirektoratet",
+                        "en": "Norwegian Digitalisation Agency",
+                    },
+                    organisasjonsform="ORGL",
+                ),
+            ),
+        )
     }
 
     assert parseDatasets(src) == expected
