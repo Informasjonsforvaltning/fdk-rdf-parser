@@ -5,22 +5,22 @@ from rdflib.namespace import DCTERMS, SKOS
 
 from fdk_rdf_parser.classes import Subject
 from fdk_rdf_parser.rdf_utils import (
-    objectValue,
-    resourceList,
-    valueTranslations,
+    object_value,
+    resource_list,
+    value_translations,
 )
 
 
-def extractSubjects(graph: Graph, datasetRef: URIRef) -> Optional[List[Subject]]:
-    datasetSubjects = []
-    for subjectRef in resourceList(graph, datasetRef, DCTERMS.subject):
-        datasetSubjects.append(
+def extract_subjects(graph: Graph, dataset_ref: URIRef) -> Optional[List[Subject]]:
+    dataset_subjects = []
+    for subject_ref in resource_list(graph, dataset_ref, DCTERMS.subject):
+        dataset_subjects.append(
             Subject(
-                uri=subjectRef.toPython() if isinstance(subjectRef, URIRef) else None,
-                identifier=objectValue(graph, subjectRef, DCTERMS.identifier),
-                prefLabel=valueTranslations(graph, subjectRef, SKOS.prefLabel),
-                definition=valueTranslations(graph, subjectRef, SKOS.definition),
+                uri=subject_ref.toPython() if isinstance(subject_ref, URIRef) else None,
+                identifier=object_value(graph, subject_ref, DCTERMS.identifier),
+                prefLabel=value_translations(graph, subject_ref, SKOS.prefLabel),
+                definition=value_translations(graph, subject_ref, SKOS.definition),
             )
         )
 
-    return datasetSubjects if len(datasetSubjects) > 0 else None
+    return dataset_subjects if len(dataset_subjects) > 0 else None

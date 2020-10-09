@@ -5,29 +5,29 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DataDistributionService
 from fdk_rdf_parser.rdf_utils import (
-    dcatApiURI,
-    resourceList,
-    valueTranslations,
+    dcat_api_uri,
+    resource_list,
+    value_translations,
 )
-from .skos_concept import extractSkosConcept
+from .skos_concept import extract_skos_concept
 
 
-def extractDataDistributionServices(
+def extract_data_distribution_services(
     graph: Graph, subject: URIRef
 ) -> Optional[List[DataDistributionService]]:
     values = []
-    for resource in resourceList(graph, subject, dcatApiURI("accessService")):
-        resourceUri = None
+    for resource in resource_list(graph, subject, dcat_api_uri("accessService")):
+        resource_uri = None
         if isinstance(resource, URIRef):
-            resourceUri = resource.toPython()
+            resource_uri = resource.toPython()
 
         values.append(
             DataDistributionService(
-                uri=resourceUri,
-                title=valueTranslations(graph, resource, DCTERMS.title),
-                description=valueTranslations(graph, resource, DCTERMS.description),
-                endpointDescription=extractSkosConcept(
-                    graph, resource, dcatApiURI("endpointDescription")
+                uri=resource_uri,
+                title=value_translations(graph, resource, DCTERMS.title),
+                description=value_translations(graph, resource, DCTERMS.description),
+                endpointDescription=extract_skos_concept(
+                    graph, resource, dcat_api_uri("endpointDescription")
                 ),
             )
         )

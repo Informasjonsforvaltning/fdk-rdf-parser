@@ -3,54 +3,55 @@ from typing import Dict, List, Optional
 
 from fdk_rdf_parser.classes import SkosCode
 
-baseUrl = os.getenv(
+base_url = os.getenv(
     "REFERENCE_DATA_BASE_URI",
     "http://staging.fellesdatakatalog.digdir.no/reference-data",
 )
 
 
-def referenceDataUrl(endpoint: str) -> str:
-    return f"{baseUrl}{endpoint}"
+def reference_data_url(endpoint: str) -> str:
+    return f"{base_url}{endpoint}"
 
 
-def extendSkosCode(
-    skosCode: Optional[SkosCode], references: Optional[Dict[str, SkosCode]]
+def extend_skos_code(
+    skos_code: Optional[SkosCode], references: Optional[Dict[str, SkosCode]]
 ) -> Optional[SkosCode]:
+    ref_code = None
     if references is not None:
-        uri = skosCode.uri if skosCode is not None else None
+        uri = skos_code.uri if skos_code is not None else None
         if uri is not None:
-            refCode = (
-                references.get(removeTrailingSlash(uri))
+            ref_code = (
+                references.get(remove_trailing_slash(uri))
                 if references is not None
                 else None
             )
-            if refCode is not None:
-                return refCode
+            if ref_code is not None:
+                return ref_code
 
-    return skosCode
+    return ref_code
 
 
-def extendSkosCodeList(
-    skosCodes: Optional[List[SkosCode]], references: Optional[Dict[str, SkosCode]]
+def extend_skos_code_list(
+    skos_codes: Optional[List[SkosCode]], references: Optional[Dict[str, SkosCode]]
 ) -> Optional[List[SkosCode]]:
-    if skosCodes is None or references is None:
-        return skosCodes
+    if skos_codes is None or references is None:
+        return skos_codes
     else:
-        extendedCodes = []
-        for code in skosCodes:
-            refCode = (
-                references.get(removeTrailingSlash(code.uri))
+        extended_codes = []
+        for code in skos_codes:
+            ref_code = (
+                references.get(remove_trailing_slash(code.uri))
                 if code.uri is not None
                 else None
             )
-            if refCode is not None:
-                extendedCodes.append(refCode)
+            if ref_code is not None:
+                extended_codes.append(ref_code)
             else:
-                extendedCodes.append(code)
-        return extendedCodes
+                extended_codes.append(code)
+        return extended_codes
 
 
-def removeTrailingSlash(uri: str) -> str:
+def remove_trailing_slash(uri: str) -> str:
     if uri.endswith("/"):
         return uri[:-1]
     else:

@@ -3,48 +3,48 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (
-    catalogRef,
-    dcatURI,
-    objectValue,
-    valueList,
+    catalog_ref,
+    dcat_uri,
+    object_value,
+    value_list,
 )
-from .catalog import parseCatalog
-from .dcat_resource import parseDcatResource
-from .harvest_meta_data import extractMetaData
-from .skos_code import extractSkosCodeList
-from .skos_concept import extractSkosConcept
+from .catalog import parse_catalog
+from .dcat_resource import parse_dcat_resource
+from .harvest_meta_data import extract_meta_data
+from .skos_code import extract_skos_code_list
+from .skos_concept import extract_skos_concept
 
 
-def parseDataService(
-    dataServicesGraph: Graph, recordURI: URIRef, dataServiceURI: URIRef
+def parse_data_service(
+    data_services_graph: Graph, record_uri: URIRef, data_service_uri: URIRef
 ) -> DataService:
 
-    dataService = DataService(
-        id=objectValue(dataServicesGraph, recordURI, DCTERMS.identifier),
-        harvest=extractMetaData(dataServicesGraph, recordURI),
-        endpointURL=valueList(
-            dataServicesGraph, dataServiceURI, dcatURI("endpointURL")
+    data_service = DataService(
+        id=object_value(data_services_graph, record_uri, DCTERMS.identifier),
+        harvest=extract_meta_data(data_services_graph, record_uri),
+        endpointURL=value_list(
+            data_services_graph, data_service_uri, dcat_uri("endpointURL")
         ),
-        endpointDescription=valueList(
-            dataServicesGraph, dataServiceURI, dcatURI("endpointDescription")
+        endpointDescription=value_list(
+            data_services_graph, data_service_uri, dcat_uri("endpointDescription")
         ),
-        mediaType=extractSkosCodeList(
-            dataServicesGraph, dataServiceURI, dcatURI("mediaType")
+        mediaType=extract_skos_code_list(
+            data_services_graph, data_service_uri, dcat_uri("mediaType")
         ),
-        conformsTo=extractSkosConcept(
-            dataServicesGraph, dataServiceURI, DCTERMS.conformsTo
+        conformsTo=extract_skos_concept(
+            data_services_graph, data_service_uri, DCTERMS.conformsTo
         ),
-        servesDataset=valueList(
-            dataServicesGraph, dataServiceURI, dcatURI("servesDataset")
+        servesDataset=value_list(
+            data_services_graph, data_service_uri, dcat_uri("servesDataset")
         ),
-        catalog=parseCatalog(dataServicesGraph, recordURI),
+        catalog=parse_catalog(data_services_graph, record_uri),
     )
 
-    dataService.addValuesFromDcatResource(
-        parseDcatResource(
-            dataServicesGraph,
-            dataServiceURI,
-            catalog_subject=catalogRef(dataServicesGraph, recordURI),
+    data_service.add_values_from_dcat_resource(
+        parse_dcat_resource(
+            data_services_graph,
+            data_service_uri,
+            catalog_subject=catalog_ref(data_services_graph, record_uri),
         )
     )
-    return dataService
+    return data_service

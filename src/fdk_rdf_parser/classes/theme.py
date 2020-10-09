@@ -18,7 +18,7 @@ class ThemeEU:
     title: Optional[Dict[str, str]] = None
     conceptSchema: Optional[ConceptSchema] = None
 
-    def addValuesFromDict(self: Any, dict: Dict) -> None:
+    def add_values_from_dict(self: Any, dict: Dict) -> None:
         self.id = str(dict.get("id")) if dict.get("id") is not None else None
         self.code = str(dict.get("code")) if dict.get("code") is not None else None
         self.startUse = (
@@ -55,7 +55,7 @@ class ThemeLOS:
     synonyms: Optional[List[str]] = None
     relatedTerms: Optional[List[str]] = None
 
-    def addValuesFromDict(self: Any, dict: Dict) -> None:
+    def add_values_from_dict(self: Any, dict: Dict) -> None:
         self.children = dict.get("children")
         self.parents = dict.get("parents")
         self.isTema = dict.get("isTema")

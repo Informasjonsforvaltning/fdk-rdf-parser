@@ -46,7 +46,7 @@ class PartialDataset(PartialDcatResource):
     qualifiedAttributions: Optional[List[QualifiedAttribution]] = None
     catalog: Optional[Catalog] = None
 
-    def addValuesFromDcatResource(self: Any, values: PartialDcatResource) -> None:
+    def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
         self.publisher = values.publisher
         self.title = values.title
@@ -69,7 +69,7 @@ class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
     losTheme: Optional[List[ThemeLOS]] = None
 
-    def addValuesFromPartial(self: Any, values: PartialDataset) -> None:
+    def add_values_from_partial(self: Any, values: PartialDataset) -> None:
         self.id = values.id
         self.identifier = values.identifier
         self.title = values.title

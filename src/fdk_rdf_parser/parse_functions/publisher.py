@@ -4,10 +4,10 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Publisher
-from fdk_rdf_parser.rdf_utils import objectValue, valueTranslations
+from fdk_rdf_parser.rdf_utils import object_value, value_translations
 
 
-def extractPublisher(
+def extract_publisher(
     graph: Graph, subject: URIRef, catalog_subject: URIRef
 ) -> Optional[Publisher]:
     publisher = graph.value(subject, DCTERMS.publisher)
@@ -18,8 +18,8 @@ def extractPublisher(
     if publisher:
         return Publisher(
             uri=publisher.toPython() if isinstance(publisher, URIRef) else None,
-            id=objectValue(graph, publisher, DCTERMS.identifier),
-            prefLabel=valueTranslations(graph, publisher, FOAF.name),
+            id=object_value(graph, publisher, DCTERMS.identifier),
+            prefLabel=value_translations(graph, publisher, FOAF.name),
         )
     else:
         return None

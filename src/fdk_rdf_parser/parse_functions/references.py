@@ -4,11 +4,11 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Reference, SkosCode, SkosConcept
-from fdk_rdf_parser.rdf_utils import valueList
+from fdk_rdf_parser.rdf_utils import value_list
 
 
-def extractReferences(graph: Graph, subject: URIRef) -> Optional[List[Reference]]:
-    referenceProperties = [
+def extract_references(graph: Graph, subject: URIRef) -> Optional[List[Reference]]:
+    reference_properties = [
         DCTERMS.hasVersion,
         DCTERMS.isVersionOf,
         DCTERMS.isPartOf,
@@ -25,8 +25,8 @@ def extractReferences(graph: Graph, subject: URIRef) -> Optional[List[Reference]
 
     values = []
 
-    for predicate in referenceProperties:
-        references = valueList(graph, subject, predicate)
+    for predicate in reference_properties:
+        references = value_list(graph, subject, predicate)
         if references:
             for reference in references:
                 values.append(

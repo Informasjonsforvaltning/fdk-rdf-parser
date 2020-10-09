@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Temporal
-from fdk_rdf_parser.parse_functions import extractTemporal
+from fdk_rdf_parser.parse_functions import extract_temporal
 
 
 def test_temporal_dcat() -> None:
@@ -28,7 +28,7 @@ def test_temporal_dcat() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
-    assert extractTemporal(graph, subject) == expected
+    assert extract_temporal(graph, subject) == expected
 
 
 def test_temporal_uri() -> None:
@@ -57,7 +57,7 @@ def test_temporal_uri() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
-    assert extractTemporal(graph, subject) == expected
+    assert extract_temporal(graph, subject) == expected
 
 
 def test_temporal_owl_time() -> None:
@@ -91,7 +91,7 @@ def test_temporal_owl_time() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
-    assert extractTemporal(graph, subject) == expected
+    assert extract_temporal(graph, subject) == expected
 
 
 def test_temporal_schema() -> None:
@@ -113,4 +113,4 @@ def test_temporal_schema() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
-    assert extractTemporal(graph, subject) == expected
+    assert extract_temporal(graph, subject) == expected

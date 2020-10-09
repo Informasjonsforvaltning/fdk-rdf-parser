@@ -45,6 +45,7 @@ def lint(session: Session) -> None:
         "flake8-black",
         "flake8-bugbear",
         "flake8-import-order",
+        "pep8-naming",
     )
     session.run("flake8", *args)
 

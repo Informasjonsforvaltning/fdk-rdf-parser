@@ -10,13 +10,13 @@ from fdk_rdf_parser.classes import (
 )
 from fdk_rdf_parser.reference_data import (
     DatasetReferenceData,
-    extendDatasetWithReferenceData,
+    extend_dataset_with_reference_data,
 )
 from .testdata import dataset_reference_data
 
 
 def test_handles_missing_reference_data() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         ),
@@ -24,13 +24,13 @@ def test_handles_missing_reference_data() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, DatasetReferenceData())
-        == parsedDataset
+        extend_dataset_with_reference_data(parsed_dataset, DatasetReferenceData())
+        == parsed_dataset
     )
 
 
 def test_uri_not_present_in_reference_data() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/MISSING"
         ),
@@ -42,13 +42,13 @@ def test_uri_not_present_in_reference_data() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
-        == parsedDataset
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
+        == parsed_dataset
     )
 
 
 def test_extend_access_rights() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         )
@@ -63,13 +63,13 @@ def test_extend_access_rights() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_provenance() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         provenance=SkosCode(uri="http://data.brreg.no/datakatalog/provinens/bruker")
     )
 
@@ -86,13 +86,13 @@ def test_extend_provenance() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_accrual_periodicity() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         accrualPeriodicity=SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL"
         )
@@ -107,13 +107,13 @@ def test_extend_accrual_periodicity() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_language() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         language=[
             SkosCode(
                 uri="http://publications.europa.eu/resource/authority/language/ENG"
@@ -137,13 +137,13 @@ def test_extend_language() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_spatial() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         spatial=[
             SkosCode(
                 uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142"
@@ -162,13 +162,13 @@ def test_extend_spatial() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_open_licenses() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         distribution=[
             Distribution(
                 license=[
@@ -220,13 +220,13 @@ def test_extend_open_licenses() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_references() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         references=[
             Reference(
                 referenceType=SkosCode(uri="http://purl.org/dc/terms/hasVersion"),
@@ -253,13 +253,13 @@ def test_extend_references() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )
 
 
 def test_extend_themes() -> None:
-    parsedDataset = Dataset(
+    parsed_dataset = Dataset(
         theme=[
             ThemeEU(
                 id="http://publications.europa.eu/resource/authority/data-theme/ECON"
@@ -304,6 +304,6 @@ def test_extend_themes() -> None:
     )
 
     assert (
-        extendDatasetWithReferenceData(parsedDataset, dataset_reference_data)
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
         == expected
     )

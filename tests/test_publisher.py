@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Publisher
-from fdk_rdf_parser.parse_functions import extractPublisher
+from fdk_rdf_parser.parse_functions import extract_publisher
 
 
 def test_uriref_publisher() -> None:
@@ -39,7 +39,7 @@ def test_uriref_publisher() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
     catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert extractPublisher(graph, subject, catalog_subject) == expected
+    assert extract_publisher(graph, subject, catalog_subject) == expected
 
 
 def test_bnode_publisher() -> None:
@@ -61,7 +61,7 @@ def test_bnode_publisher() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
     catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert extractPublisher(graph, subject, catalog_subject) == expected
+    assert extract_publisher(graph, subject, catalog_subject) == expected
 
 
 def test_uses_catalog_publisher_when_none_exists_on_resource() -> None:
@@ -88,4 +88,4 @@ def test_uses_catalog_publisher_when_none_exists_on_resource() -> None:
     subject = URIRef(u"https://testdirektoratet.no/dataservices/0")
     catalog_subject = URIRef(u"https://testdirektoratet.no/catalogs/0")
 
-    assert extractPublisher(graph, subject, catalog_subject) == expected
+    assert extract_publisher(graph, subject, catalog_subject) == expected

@@ -2,8 +2,8 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import SkosConcept
-from fdk_rdf_parser.parse_functions import extractSkosConcept
-from fdk_rdf_parser.rdf_utils import dcatApNoURI
+from fdk_rdf_parser.parse_functions import extract_skos_concept
+from fdk_rdf_parser.rdf_utils import dcat_ap_no_uri
 
 
 def test_legal_basis_for_restriction() -> None:
@@ -32,9 +32,9 @@ def test_legal_basis_for_restriction() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
-    predicate = dcatApNoURI("legalBasisForRestriction")
+    predicate = dcat_ap_no_uri("legalBasisForRestriction")
 
-    assert extractSkosConcept(graph, subject, predicate) == expected
+    assert extract_skos_concept(graph, subject, predicate) == expected
 
 
 def test_ref_uri_used_when_missing_source() -> None:
@@ -63,9 +63,9 @@ def test_ref_uri_used_when_missing_source() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
-    predicate = dcatApNoURI("informationModel")
+    predicate = dcat_ap_no_uri("informationModel")
 
-    assert extractSkosConcept(graph, subject, predicate) == expected
+    assert extract_skos_concept(graph, subject, predicate) == expected
 
 
 def test_source_is_prioritized_uri() -> None:
@@ -95,7 +95,7 @@ def test_source_is_prioritized_uri() -> None:
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
     predicate = DCTERMS.conformsTo
 
-    assert extractSkosConcept(graph, subject, predicate) == expected
+    assert extract_skos_concept(graph, subject, predicate) == expected
 
 
 def test_handles_literal_uri() -> None:
@@ -114,4 +114,4 @@ def test_handles_literal_uri() -> None:
     subject = URIRef("https://testdirektoratet.no/model/distribution/0")
     predicate = DCTERMS.conformsTo
 
-    assert extractSkosConcept(graph, subject, predicate) == expected
+    assert extract_skos_concept(graph, subject, predicate) == expected

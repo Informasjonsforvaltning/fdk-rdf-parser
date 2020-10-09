@@ -3,7 +3,7 @@ from unittest.mock import Mock
 
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser import parseDatasets
+from fdk_rdf_parser import parse_datasets
 from fdk_rdf_parser.classes import (
     Catalog,
     Dataset,
@@ -18,7 +18,7 @@ from fdk_rdf_parser.classes import (
     SkosConcept,
     Subject,
 )
-from fdk_rdf_parser.parse_functions import parseDataset
+from fdk_rdf_parser.parse_functions import parse_dataset
 
 
 def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) -> None:
@@ -112,7 +112,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
         ),
     }
 
-    assert parseDatasets(src) == expected
+    assert parse_datasets(src) == expected
 
 
 def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -> None:
@@ -193,7 +193,7 @@ def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -
         )
     }
 
-    assert parseDatasets(src) == expected
+    assert parse_datasets(src) == expected
 
 
 def test_does_not_parse_catalog_as_a_dataset(
@@ -222,7 +222,7 @@ def test_does_not_parse_catalog_as_a_dataset(
 
     expected: Dict = {}
 
-    assert parseDatasets(src) == expected
+    assert parse_datasets(src) == expected
 
 
 def test_parse_dataset() -> None:
@@ -290,13 +290,13 @@ def test_parse_dataset() -> None:
         ],
     )
 
-    datasetsGraph = Graph().parse(data=src, format="turtle")
-    datasetURI = URIRef(u"https://testdirektoratet.no/model/dataset/0")
-    recordURI = URIRef(
+    datasets_graph = Graph().parse(data=src, format="turtle")
+    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    record_uri = URIRef(
         u"https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca"
     )
 
-    assert parseDataset(datasetsGraph, recordURI, datasetURI) == expected
+    assert parse_dataset(datasets_graph, record_uri, dataset_uri) == expected
 
 
 def test_dataset_has_quality_annotations() -> None:
@@ -353,7 +353,7 @@ def test_dataset_has_quality_annotations() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
 
-    assert parseDataset(graph, URIRef("record"), subject) == expected
+    assert parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_legal_basis_fields() -> None:
@@ -411,7 +411,7 @@ def test_legal_basis_fields() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
 
-    assert parseDataset(graph, URIRef("record"), subject) == expected
+    assert parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_informationmodel_and_conformsto() -> None:
@@ -457,7 +457,7 @@ def test_informationmodel_and_conformsto() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
 
-    assert parseDataset(graph, URIRef("record"), subject) == expected
+    assert parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_distribution_and_sample() -> None:
@@ -541,7 +541,7 @@ def test_distribution_and_sample() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
 
-    assert parseDataset(graph, URIRef("record"), subject) == expected
+    assert parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_qualified_attributions(mock_organizations_client: Mock) -> None:
@@ -608,7 +608,7 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
         ],
     )
 
-    actual = parseDatasets(src)["https://testdirektoratet.no/model/dataset/0"]
+    actual = parse_datasets(src)["https://testdirektoratet.no/model/dataset/0"]
 
     if isinstance(actual.qualifiedAttributions, list) and isinstance(
         expected.qualifiedAttributions, list
@@ -676,4 +676,4 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
         ),
     }
 
-    assert parseDatasets(src) == expected
+    assert parse_datasets(src) == expected

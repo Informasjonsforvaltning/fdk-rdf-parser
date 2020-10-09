@@ -5,38 +5,38 @@ from rdflib.namespace import DCTERMS, RDF, SKOS
 
 from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.rdf_utils import (
-    objectValue,
-    resourceList,
-    valueTranslations,
+    object_value,
+    resource_list,
+    value_translations,
 )
 
 
-def extractExtraType(graph: Graph, skosConcept: Any) -> Optional[str]:
-    extraType = None
+def extract_extra_type(graph: Graph, skos_concept: Any) -> Optional[str]:
+    extra_type = None
 
-    for typeURIRef in resourceList(graph, skosConcept, RDF.type):
-        if isinstance(typeURIRef, URIRef) and typeURIRef != SKOS.Concept:
-            extraType = typeURIRef.toPython()
+    for type_uri_ref in resource_list(graph, skos_concept, RDF.type):
+        if isinstance(type_uri_ref, URIRef) and type_uri_ref != SKOS.Concept:
+            extra_type = type_uri_ref.toPython()
 
-    return extraType
+    return extra_type
 
 
-def extractSkosConcept(
+def extract_skos_concept(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[SkosConcept]]:
     values = []
-    for skosConcept in resourceList(graph, subject, predicate):
-        skosConceptUri = None
-        if isinstance(skosConcept, URIRef) or isinstance(skosConcept, Literal):
-            skosConceptUri = skosConcept.toPython()
+    for skos_concept in resource_list(graph, subject, predicate):
+        skos_concept_uri = None
+        if isinstance(skos_concept, URIRef) or isinstance(skos_concept, Literal):
+            skos_concept_uri = skos_concept.toPython()
 
-        sourceValue = objectValue(graph, skosConcept, DCTERMS.source)
+        source_value = object_value(graph, skos_concept, DCTERMS.source)
 
         values.append(
             SkosConcept(
-                uri=sourceValue if sourceValue is not None else skosConceptUri,
-                prefLabel=valueTranslations(graph, skosConcept, SKOS.prefLabel),
-                extraType=extractExtraType(graph, skosConcept),
+                uri=source_value if source_value is not None else skos_concept_uri,
+                prefLabel=value_translations(graph, skos_concept, SKOS.prefLabel),
+                extraType=extract_extra_type(graph, skos_concept),
             )
         )
 
