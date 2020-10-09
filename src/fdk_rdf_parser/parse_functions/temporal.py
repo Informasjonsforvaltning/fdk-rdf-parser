@@ -5,81 +5,81 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.rdf_utils import (
-    dateValue,
-    dcatURI,
-    owlTimeURI,
-    resourceList,
-    schemaURI,
+    date_value,
+    dcat_uri,
+    owl_time_uri,
+    resource_list,
+    schema_uri,
 )
 
 
-def extractTemporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
+def extract_temporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
     values = []
-    for temporalResource in resourceList(graph, subject, DCTERMS.temporal):
-        temporalURI = None
-        if isinstance(temporalResource, URIRef):
-            temporalURI = temporalResource.toPython()
+    for temporal_resource in resource_list(graph, subject, DCTERMS.temporal):
+        temporal_uri = None
+        if isinstance(temporal_resource, URIRef):
+            temporal_uri = temporal_resource.toPython()
 
-        if isinstance(temporalResource, BNode) or temporalURI is not None:
-            startValue = dateValue(graph, temporalResource, dcatURI("startDate"))
-            endValue = dateValue(graph, temporalResource, dcatURI("endDate"))
+        if isinstance(temporal_resource, BNode) or temporal_uri is not None:
+            start_value = date_value(graph, temporal_resource, dcat_uri("startDate"))
+            end_value = date_value(graph, temporal_resource, dcat_uri("endDate"))
 
-            startValue = (
-                dateValue(graph, temporalResource, schemaURI("startDate"))
-                if startValue is None
-                else startValue
+            start_value = (
+                date_value(graph, temporal_resource, schema_uri("startDate"))
+                if start_value is None
+                else start_value
             )
-            endValue = (
-                dateValue(graph, temporalResource, schemaURI("endDate"))
-                if endValue is None
-                else endValue
+            end_value = (
+                date_value(graph, temporal_resource, schema_uri("endDate"))
+                if end_value is None
+                else end_value
             )
 
-            startValue = (
-                extractOwlTimeStart(graph, temporalResource)
-                if startValue is None
-                else startValue
+            start_value = (
+                extract_owl_time_start(graph, temporal_resource)
+                if start_value is None
+                else start_value
             )
-            endValue = (
-                extractOwlTimeEnd(graph, temporalResource)
-                if endValue is None
-                else endValue
+            end_value = (
+                extract_owl_time_end(graph, temporal_resource)
+                if end_value is None
+                else end_value
             )
 
             values.append(
-                Temporal(uri=temporalURI, startDate=startValue, endDate=endValue)
+                Temporal(uri=temporal_uri, startDate=start_value, endDate=end_value)
             )
 
     return values if len(values) > 0 else None
 
 
-def extractOwlTimeInstant(graph: Graph, subject: Any) -> Optional[str]:
-    owlDate = dateValue(graph, subject, owlTimeURI("inXSDDateTime"))
-    owlDate = (
-        dateValue(graph, subject, owlTimeURI("inXSDDateTimeStamp"))
-        if owlDate is None
-        else owlDate
+def extract_owl_time_instant(graph: Graph, subject: Any) -> Optional[str]:
+    owl_date = date_value(graph, subject, owl_time_uri("inXSDDateTime"))
+    owl_date = (
+        date_value(graph, subject, owl_time_uri("inXSDDateTimeStamp"))
+        if owl_date is None
+        else owl_date
     )
-    owlDate = (
-        dateValue(graph, subject, owlTimeURI("inXSDDate"))
-        if owlDate is None
-        else owlDate
+    owl_date = (
+        date_value(graph, subject, owl_time_uri("inXSDDate"))
+        if owl_date is None
+        else owl_date
     )
 
-    return owlDate
+    return owl_date
 
 
-def extractOwlTimeStart(graph: Graph, subject: Any) -> Any:
-    hasBeginning = graph.value(subject, owlTimeURI("hasBeginning"))
-    if hasBeginning is not None:
-        return extractOwlTimeInstant(graph, hasBeginning)
+def extract_owl_time_start(graph: Graph, subject: Any) -> Any:
+    has_beginning = graph.value(subject, owl_time_uri("hasBeginning"))
+    if has_beginning is not None:
+        return extract_owl_time_instant(graph, has_beginning)
     else:
         return None
 
 
-def extractOwlTimeEnd(graph: Graph, subject: Any) -> Any:
-    hasEnd = graph.value(subject, owlTimeURI("hasEnd"))
-    if hasEnd is not None:
-        return extractOwlTimeInstant(graph, hasEnd)
+def extract_owl_time_end(graph: Graph, subject: Any) -> Any:
+    has_end = graph.value(subject, owl_time_uri("hasEnd"))
+    if has_end is not None:
+        return extract_owl_time_instant(graph, has_end)
     else:
         return None

@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Reference, SkosCode, SkosConcept
-from fdk_rdf_parser.parse_functions import extractReferences
+from fdk_rdf_parser.parse_functions import extract_references
 
 
 def test_references() -> None:
@@ -112,7 +112,7 @@ def test_references() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
 
-    assert extractReferences(graph, subject) == expected
+    assert extract_references(graph, subject) == expected
 
 
 def test_several_of_same_reference_type() -> None:
@@ -158,4 +158,4 @@ def test_several_of_same_reference_type() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference-list")
 
-    assert extractReferences(graph, subject) == expected
+    assert extract_references(graph, subject) == expected

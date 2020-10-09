@@ -9,94 +9,99 @@ from fdk_rdf_parser.classes import (
     ThemeLOS,
 )
 from .reference_data import DatasetReferenceData
-from .utils import extendSkosCode, extendSkosCodeList, removeTrailingSlash
+from .utils import extend_skos_code, extend_skos_code_list, remove_trailing_slash
 
 
-def extendDatasetWithReferenceData(
-    dataset: Dataset, refData: DatasetReferenceData
+def extend_dataset_with_reference_data(
+    dataset: Dataset, ref_data: DatasetReferenceData
 ) -> Dataset:
-    dataset.accessRights = extendSkosCode(dataset.accessRights, refData.rightsstatement)
-    dataset.provenance = extendSkosCode(dataset.provenance, refData.provenancestatement)
-    dataset.accrualPeriodicity = extendSkosCode(
-        dataset.accrualPeriodicity, refData.frequency
+    dataset.accessRights = extend_skos_code(
+        dataset.accessRights, ref_data.rightsstatement
     )
-    dataset.language = extendSkosCodeList(dataset.language, refData.linguisticsystem)
-    dataset.spatial = extendSkosCodeList(dataset.spatial, refData.location)
-    dataset.distribution = extendDistributions(
-        dataset.distribution, refData.openlicenses
+    dataset.provenance = extend_skos_code(
+        dataset.provenance, ref_data.provenancestatement
     )
-    dataset.references = extendReferenceTypes(
-        dataset.references, refData.referencetypes
+    dataset.accrualPeriodicity = extend_skos_code(
+        dataset.accrualPeriodicity, ref_data.frequency
+    )
+    dataset.language = extend_skos_code_list(
+        dataset.language, ref_data.linguisticsystem
+    )
+    dataset.spatial = extend_skos_code_list(dataset.spatial, ref_data.location)
+    dataset.distribution = extend_distributions(
+        dataset.distribution, ref_data.openlicenses
+    )
+    dataset.references = extend_reference_types(
+        dataset.references, ref_data.referencetypes
     )
 
-    splitThemes = splitLOSFromEUThemes(dataset.theme, refData.losThemes)
-    dataset.losTheme = extendLOSThemes(splitThemes["los"], refData.losThemes)
-    dataset.theme = extendEUThemes(splitThemes["eu"], refData.euThemes)
+    split_themes = split_los_from_eu_themes(dataset.theme, ref_data.los_themes)
+    dataset.losTheme = extend_los_themes(split_themes["los"], ref_data.los_themes)
+    dataset.theme = extend_eu_themes(split_themes["eu"], ref_data.eu_themes)
 
     return dataset
 
 
-def extendDistributions(
+def extend_distributions(
     distributions: Optional[List[Distribution]],
-    openLicenses: Optional[Dict[str, SkosCode]],
+    open_licenses: Optional[Dict[str, SkosCode]],
 ) -> Optional[List[Distribution]]:
-    if distributions is None or openLicenses is None:
+    if distributions is None or open_licenses is None:
         return distributions
     else:
-        extendedDistributions = []
+        extended_distributions = []
         for dist in distributions:
             if dist.license is not None:
-                extendedLicenses = []
+                extended_licenses = []
                 for lic in dist.license:
-                    refCode = (
-                        openLicenses.get(removeTrailingSlash(lic.uri))
+                    ref_code = (
+                        open_licenses.get(remove_trailing_slash(lic.uri))
                         if lic.uri is not None
                         else None
                     )
-                    if refCode is not None:
+                    if ref_code is not None:
                         dist.openLicense = True
                         if lic.prefLabel is None:
-                            lic.prefLabel = refCode.prefLabel
-                    extendedLicenses.append(lic)
-                dist.license = extendedLicenses
-            extendedDistributions.append(dist)
-        return extendedDistributions
+                            lic.prefLabel = ref_code.prefLabel
+                    extended_licenses.append(lic)
+                dist.license = extended_licenses
+            extended_distributions.append(dist)
+        return extended_distributions
 
 
-def extendReferenceTypes(
-    references: Optional[List[Reference]], referenceTypes: Optional[Dict[str, SkosCode]]
+def extend_reference_types(
+    references: Optional[List[Reference]],
+    reference_types: Optional[Dict[str, SkosCode]],
 ) -> Optional[List[Reference]]:
-    if references is None or referenceTypes is None:
+    if references is None or reference_types is None:
         return references
     else:
-        extendedReferences = []
+        extended_references = []
         for ref in references:
-            ref.referenceType = extendSkosCode(ref.referenceType, referenceTypes)
-            extendedReferences.append(ref)
-        return extendedReferences
+            ref.referenceType = extend_skos_code(ref.referenceType, reference_types)
+            extended_references.append(ref)
+        return extended_references
 
 
-def splitLOSFromEUThemes(
+def split_los_from_eu_themes(
     themes: Optional[List[ThemeEU]], los: Optional[Dict[str, ThemeLOS]],
 ) -> Dict[str, List[ThemeEU]]:
-    splitThemes: Dict[str, List[ThemeEU]] = {}
-    splitThemes["los"] = []
-    splitThemes["eu"] = []
+    split_themes: Dict[str, List[ThemeEU]] = {"los": [], "eu": []}
     if themes is None:
-        return splitThemes
+        return split_themes
     elif los is None:
-        splitThemes["eu"] = themes
-        return splitThemes
+        split_themes["eu"] = themes
+        return split_themes
     else:
         for theme in themes:
             if theme.id in los:
-                splitThemes["los"].append(theme)
+                split_themes["los"].append(theme)
             else:
-                splitThemes["eu"].append(theme)
-        return splitThemes
+                split_themes["eu"].append(theme)
+        return split_themes
 
 
-def extendLOSThemes(
+def extend_los_themes(
     themes: List[ThemeEU], los: Optional[Dict[str, ThemeLOS]]
 ) -> Optional[List[ThemeLOS]]:
     extended = []
@@ -106,15 +111,15 @@ def extendLOSThemes(
     return extended if len(extended) > 0 else None
 
 
-def extendEUThemes(
-    themes: List[ThemeEU], euThemes: Optional[Dict[str, ThemeEU]]
+def extend_eu_themes(
+    themes: List[ThemeEU], eu_themes: Optional[Dict[str, ThemeEU]]
 ) -> Optional[List[ThemeEU]]:
     extended = []
-    if euThemes is not None:
+    if eu_themes is not None:
         for theme in themes:
-            euTheme = euThemes.get(theme.id) if theme.id is not None else None
-            if euTheme is None:
+            eu_theme = eu_themes.get(theme.id) if theme.id is not None else None
+            if eu_theme is None:
                 extended.append(theme)
             else:
-                extended.append(euTheme)
+                extended.append(eu_theme)
     return extended if len(extended) > 0 else None

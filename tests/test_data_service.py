@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from fdk_rdf_parser import parseDataServices
+from fdk_rdf_parser import parse_data_services
 from fdk_rdf_parser.classes import (
     Catalog,
     ContactPoint,
@@ -228,4 +228,4 @@ def test_parse_multiple_data_services(
         ),
     }
 
-    assert parseDataServices(src) == expected
+    assert parse_data_services(src) == expected

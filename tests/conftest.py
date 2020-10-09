@@ -41,10 +41,10 @@ def reference_effect(*args: Any, **kwargs: Any) -> Mock:
     rsp.status_code = 200
     rsp.raise_for_status.return_value = None
 
-    return addReferenceResponseToMock(rsp, args[0])
+    return add_reference_response_to_mock(rsp, args[0])
 
 
-def addReferenceResponseToMock(mock: Mock, url: str) -> Mock:
+def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
     if "provenancestatement" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/provenancestatement.json")
@@ -105,7 +105,7 @@ def organizations_and_reference_effect(*args: Any, **kwargs: Any) -> Mock:
     rsp.status_code = 200
     rsp.raise_for_status.return_value = None
     rsp.text = org_response_0
-    return addReferenceResponseToMock(rsp, args[0])
+    return add_reference_response_to_mock(rsp, args[0])
 
 
 @pytest.fixture

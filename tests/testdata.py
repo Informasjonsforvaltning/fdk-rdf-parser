@@ -72,7 +72,7 @@ org_response_1 = """
 """
 
 data_service_reference_data = DataServiceReferenceData(
-    mediaTypes={
+    media_types={
         "text/csv": SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
         "text/html": SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"}),
         "application/json": SkosCode(
@@ -386,7 +386,7 @@ dataset_reference_data = DatasetReferenceData(
             prefLabel={"no": "Oslo"},
         ),
     },
-    euThemes={
+    eu_themes={
         "http://publications.europa.eu/resource/authority/data-theme/AGRI": ThemeEU(
             id="http://publications.europa.eu/resource/authority/data-theme/AGRI",
             code="AGRI",
@@ -436,7 +436,7 @@ dataset_reference_data = DatasetReferenceData(
             ),
         ),
     },
-    losThemes={
+    los_themes={
         "https://psi.norge.no/los/tema/kultur": ThemeLOS(
             children=[
                 "https://psi.norge.no/los/ord/film-og-kino",

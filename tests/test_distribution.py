@@ -1,8 +1,8 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Distribution, SkosConcept
-from fdk_rdf_parser.parse_functions import extractDistributions
-from fdk_rdf_parser.rdf_utils import dcatURI
+from fdk_rdf_parser.parse_functions import extract_distributions
+from fdk_rdf_parser.rdf_utils import dcat_uri
 
 
 def test_single_distribution() -> None:
@@ -55,7 +55,7 @@ def test_single_distribution() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/distribution")
 
-    assert extractDistributions(graph, subject, dcatURI("distribution")) == expected
+    assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected
 
 
 def test_multiple_distributions() -> None:
@@ -114,4 +114,4 @@ def test_multiple_distributions() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/distribution")
 
-    assert extractDistributions(graph, subject, dcatURI("distribution")) == expected
+    assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected

@@ -3,14 +3,14 @@ from typing import Optional
 
 import requests
 
-from .utils import organizationUrl, orgPathUrl
+from .utils import org_path_url, organization_url
 
 
-def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
+def get_rdf_org_data(orgnr: Optional[str]) -> Optional[str]:
 
     try:
         response = requests.get(
-            organizationUrl(orgnr), headers={"Accept": "text/turtle"},
+            organization_url(orgnr), headers={"Accept": "text/turtle"},
         )
         response.raise_for_status()
 
@@ -21,10 +21,10 @@ def getRdfOrgData(orgnr: Optional[str]) -> Optional[str]:
     return None
 
 
-def getOrgPath(org: str) -> Optional[str]:
+def get_org_path(org: str) -> Optional[str]:
 
     try:
-        response = requests.get(orgPathUrl(org), headers={"Accept": "text/plain"},)
+        response = requests.get(org_path_url(org), headers={"Accept": "text/plain"},)
         response.raise_for_status()
 
         return response.text

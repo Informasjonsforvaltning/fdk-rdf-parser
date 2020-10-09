@@ -3,95 +3,99 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import PartialDataset
 from fdk_rdf_parser.rdf_utils import (
-    admsURI,
-    catalogRef,
-    dcatApNoURI,
-    dcatURI,
-    dqvIsoURI,
-    objectValue,
-    provURI,
-    valueList,
-    valueTranslations,
+    adms_uri,
+    catalog_ref,
+    dcat_ap_no_uri,
+    dcat_uri,
+    dqv_iso_uri,
+    object_value,
+    prov_uri,
+    value_list,
+    value_translations,
 )
-from .catalog import parseCatalog
-from .dcat_resource import parseDcatResource
-from .distribution import extractDistributions
-from .harvest_meta_data import extractMetaData
-from .qualified_attribution import extractQualifiedAttributions
-from .quality_annotation import extractQualityAnnotation
-from .references import extractReferences
-from .skos_code import extractSkosCode, extractSkosCodeList
-from .skos_concept import extractSkosConcept
-from .subject import extractSubjects
-from .temporal import extractTemporal
+from .catalog import parse_catalog
+from .dcat_resource import parse_dcat_resource
+from .distribution import extract_distributions
+from .harvest_meta_data import extract_meta_data
+from .qualified_attribution import extract_qualified_attributions
+from .quality_annotation import extract_quality_annotation
+from .references import extract_references
+from .skos_code import extract_skos_code, extract_skos_code_list
+from .skos_concept import extract_skos_concept
+from .subject import extract_subjects
+from .temporal import extract_temporal
 
 
-def parseDataset(
-    datasetsGraph: Graph, recordURI: URIRef, datasetURI: URIRef
+def parse_dataset(
+    datasets_graph: Graph, record_uri: URIRef, dataset_uri: URIRef
 ) -> PartialDataset:
-    qualityAnnotations = extractQualityAnnotation(datasetsGraph, datasetURI)
+    quality_annotations = extract_quality_annotation(datasets_graph, dataset_uri)
 
     dataset = PartialDataset(
-        id=objectValue(datasetsGraph, recordURI, DCTERMS.identifier),
-        admsIdentifier=valueList(datasetsGraph, datasetURI, admsURI("identifier")),
-        harvest=extractMetaData(datasetsGraph, recordURI),
-        accessRightsComment=valueList(
-            datasetsGraph, datasetURI, dcatApNoURI("accessRightsComment")
+        id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
+        admsIdentifier=value_list(datasets_graph, dataset_uri, adms_uri("identifier")),
+        harvest=extract_meta_data(datasets_graph, record_uri),
+        accessRightsComment=value_list(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("accessRightsComment")
         ),
-        distribution=extractDistributions(
-            datasetsGraph, datasetURI, dcatURI("distribution")
+        distribution=extract_distributions(
+            datasets_graph, dataset_uri, dcat_uri("distribution")
         ),
-        sample=extractDistributions(datasetsGraph, datasetURI, admsURI("sample")),
-        spatial=extractSkosCodeList(datasetsGraph, datasetURI, DCTERMS.spatial),
-        source=objectValue(datasetsGraph, datasetURI, dcatApNoURI("source")),
-        objective=valueTranslations(
-            datasetsGraph, datasetURI, dcatApNoURI("objective")
+        sample=extract_distributions(datasets_graph, dataset_uri, adms_uri("sample")),
+        spatial=extract_skos_code_list(datasets_graph, dataset_uri, DCTERMS.spatial),
+        source=object_value(datasets_graph, dataset_uri, dcat_ap_no_uri("source")),
+        objective=value_translations(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("objective")
         ),
-        page=valueList(datasetsGraph, datasetURI, FOAF.page),
-        temporal=extractTemporal(datasetsGraph, datasetURI),
-        subject=extractSubjects(datasetsGraph, datasetURI),
-        provenance=extractSkosCode(datasetsGraph, datasetURI, DCTERMS.provenance),
-        accrualPeriodicity=extractSkosCode(
-            datasetsGraph, datasetURI, DCTERMS.accrualPeriodicity
+        page=value_list(datasets_graph, dataset_uri, FOAF.page),
+        temporal=extract_temporal(datasets_graph, dataset_uri),
+        subject=extract_subjects(datasets_graph, dataset_uri),
+        provenance=extract_skos_code(datasets_graph, dataset_uri, DCTERMS.provenance),
+        accrualPeriodicity=extract_skos_code(
+            datasets_graph, dataset_uri, DCTERMS.accrualPeriodicity
         ),
-        hasAccuracyAnnotation=qualityAnnotations.get(dqvIsoURI("Accuracy").toPython()),
-        hasCompletenessAnnotation=qualityAnnotations.get(
-            dqvIsoURI("Completeness").toPython()
+        hasAccuracyAnnotation=quality_annotations.get(
+            dqv_iso_uri("Accuracy").toPython()
         ),
-        hasCurrentnessAnnotation=qualityAnnotations.get(
-            dqvIsoURI("Currentness").toPython()
+        hasCompletenessAnnotation=quality_annotations.get(
+            dqv_iso_uri("Completeness").toPython()
         ),
-        hasAvailabilityAnnotation=qualityAnnotations.get(
-            dqvIsoURI("Availability").toPython()
+        hasCurrentnessAnnotation=quality_annotations.get(
+            dqv_iso_uri("Currentness").toPython()
         ),
-        hasRelevanceAnnotation=qualityAnnotations.get(
-            dqvIsoURI("Relevance").toPython()
+        hasAvailabilityAnnotation=quality_annotations.get(
+            dqv_iso_uri("Availability").toPython()
         ),
-        legalBasisForRestriction=extractSkosConcept(
-            datasetsGraph, datasetURI, dcatApNoURI("legalBasisForRestriction")
+        hasRelevanceAnnotation=quality_annotations.get(
+            dqv_iso_uri("Relevance").toPython()
         ),
-        legalBasisForProcessing=extractSkosConcept(
-            datasetsGraph, datasetURI, dcatApNoURI("legalBasisForProcessing")
+        legalBasisForRestriction=extract_skos_concept(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForRestriction")
         ),
-        legalBasisForAccess=extractSkosConcept(
-            datasetsGraph, datasetURI, dcatApNoURI("legalBasisForAccess")
+        legalBasisForProcessing=extract_skos_concept(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForProcessing")
         ),
-        conformsTo=extractSkosConcept(datasetsGraph, datasetURI, DCTERMS.conformsTo),
-        informationModel=extractSkosConcept(
-            datasetsGraph, datasetURI, dcatApNoURI("informationModel")
+        legalBasisForAccess=extract_skos_concept(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForAccess")
         ),
-        references=extractReferences(datasetsGraph, datasetURI),
-        qualifiedAttributions=extractQualifiedAttributions(
-            datasetsGraph, datasetURI, provURI("qualifiedAttribution")
+        conformsTo=extract_skos_concept(
+            datasets_graph, dataset_uri, DCTERMS.conformsTo
         ),
-        catalog=parseCatalog(datasetsGraph, recordURI),
+        informationModel=extract_skos_concept(
+            datasets_graph, dataset_uri, dcat_ap_no_uri("informationModel")
+        ),
+        references=extract_references(datasets_graph, dataset_uri),
+        qualifiedAttributions=extract_qualified_attributions(
+            datasets_graph, dataset_uri, prov_uri("qualifiedAttribution")
+        ),
+        catalog=parse_catalog(datasets_graph, record_uri),
     )
 
-    dataset.addValuesFromDcatResource(
-        parseDcatResource(
-            graph=datasetsGraph,
-            subject=datasetURI,
-            catalog_subject=catalogRef(datasetsGraph, recordURI),
+    dataset.add_values_from_dcat_resource(
+        parse_dcat_resource(
+            graph=datasets_graph,
+            subject=dataset_uri,
+            catalog_subject=catalog_ref(datasets_graph, record_uri),
         )
     )
 

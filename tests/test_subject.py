@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Subject
-from fdk_rdf_parser.parse_functions import extractSubjects
+from fdk_rdf_parser.parse_functions import extract_subjects
 
 
 def test_uriref_subject() -> None:
@@ -46,10 +46,10 @@ def test_uriref_subject() -> None:
         ),
     ]
 
-    datasetsGraph = Graph().parse(data=src, format="turtle")
-    datasetURI = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
+    datasets_graph = Graph().parse(data=src, format="turtle")
+    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
 
-    assert extractSubjects(datasetsGraph, datasetURI) == expected
+    assert extract_subjects(datasets_graph, dataset_uri) == expected
 
 
 def test_blank_node_subject() -> None:
@@ -75,7 +75,7 @@ def test_blank_node_subject() -> None:
         ),
     ]
 
-    datasetsGraph = Graph().parse(data=src, format="turtle")
-    datasetURI = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
+    datasets_graph = Graph().parse(data=src, format="turtle")
+    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
 
-    assert extractSubjects(datasetsGraph, datasetURI) == expected
+    assert extract_subjects(datasets_graph, dataset_uri) == expected

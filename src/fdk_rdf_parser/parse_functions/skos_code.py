@@ -3,24 +3,24 @@ from typing import List, Optional
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import SkosCode
-from fdk_rdf_parser.rdf_utils import objectValue, valueList
+from fdk_rdf_parser.rdf_utils import object_value, value_list
 
 
-def extractSkosCode(
+def extract_skos_code(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[SkosCode]:
-    uri = objectValue(graph, subject, predicate)
+    uri = object_value(graph, subject, predicate)
     return SkosCode(uri=uri) if uri is not None else None
 
 
-def extractSkosCodeList(
+def extract_skos_code_list(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[SkosCode]]:
-    skosCodes = []
-    uriList = valueList(graph, subject, predicate)
-    if uriList is None:
+    skos_codes = []
+    uri_list = value_list(graph, subject, predicate)
+    if uri_list is None:
         return None
     else:
-        for uri in uriList:
-            skosCodes.append(SkosCode(uri=uri))
-        return skosCodes if len(skosCodes) > 0 else None
+        for uri in uri_list:
+            skos_codes.append(SkosCode(uri=uri))
+        return skos_codes if len(skos_codes) > 0 else None

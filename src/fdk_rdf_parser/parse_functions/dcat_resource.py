@@ -6,53 +6,53 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import PartialDcatResource, ThemeEU
 from fdk_rdf_parser.rdf_utils import (
-    dateValue,
-    dcatURI,
-    objectValue,
-    valueList,
-    valueTranslations,
+    date_value,
+    dcat_uri,
+    object_value,
+    value_list,
+    value_translations,
 )
-from .contactpoint import extractContactPoints
-from .publisher import extractPublisher
-from .skos_code import extractSkosCode, extractSkosCodeList
+from .contactpoint import extract_contact_points
+from .publisher import extract_publisher
+from .skos_code import extract_skos_code, extract_skos_code_list
 
 
-def parseDcatResource(
+def parse_dcat_resource(
     graph: Graph, subject: URIRef, catalog_subject: URIRef
 ) -> PartialDcatResource:
-    formatted_description = valueTranslations(graph, subject, DCTERMS.description)
+    formatted_description = value_translations(graph, subject, DCTERMS.description)
     return PartialDcatResource(
-        identifier=valueList(graph, subject, DCTERMS.identifier),
-        publisher=extractPublisher(graph, subject, catalog_subject),
-        title=valueTranslations(graph, subject, DCTERMS.title),
+        identifier=value_list(graph, subject, DCTERMS.identifier),
+        publisher=extract_publisher(graph, subject, catalog_subject),
+        title=value_translations(graph, subject, DCTERMS.title),
         description=description_html_cleaner(formatted_description)
         if formatted_description
         else None,
         descriptionFormatted=formatted_description,
         uri=subject.toPython(),
-        accessRights=extractSkosCode(graph, subject, DCTERMS.accessRights),
-        theme=extractThemes(graph, subject),
-        keyword=extractKeyWords(graph, subject),
-        contactPoint=extractContactPoints(graph, subject),
-        type=objectValue(graph, subject, DCTERMS.type),
-        issued=dateValue(graph, subject, DCTERMS.issued),
-        modified=dateValue(graph, subject, DCTERMS.modified),
-        landingPage=valueList(graph, subject, dcatURI("landingPage")),
-        language=extractSkosCodeList(graph, subject, DCTERMS.language),
+        accessRights=extract_skos_code(graph, subject, DCTERMS.accessRights),
+        theme=extract_themes(graph, subject),
+        keyword=extract_key_words(graph, subject),
+        contactPoint=extract_contact_points(graph, subject),
+        type=object_value(graph, subject, DCTERMS.type),
+        issued=date_value(graph, subject, DCTERMS.issued),
+        modified=date_value(graph, subject, DCTERMS.modified),
+        landingPage=value_list(graph, subject, dcat_uri("landingPage")),
+        language=extract_skos_code_list(graph, subject, DCTERMS.language),
     )
 
 
-def extractThemes(graph: Graph, subject: URIRef) -> Optional[List[ThemeEU]]:
-    themes = valueList(graph, subject, dcatURI("theme"))
+def extract_themes(graph: Graph, subject: URIRef) -> Optional[List[ThemeEU]]:
+    themes = value_list(graph, subject, dcat_uri("theme"))
     if themes is not None and len(themes) > 0:
-        return list(map(lambda themeURI: ThemeEU(id=themeURI), themes))
+        return list(map(lambda theme_uri: ThemeEU(id=theme_uri), themes))
     else:
         return None
 
 
-def extractKeyWords(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, str]]]:
+def extract_key_words(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, str]]]:
     values = []
-    for keyword in graph.objects(subject, dcatURI("keyword")):
+    for keyword in graph.objects(subject, dcat_uri("keyword")):
         translation = {}
         if keyword.language:
             translation[keyword.language] = keyword.toPython()

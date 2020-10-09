@@ -3,14 +3,14 @@ from typing import Dict, List, Optional
 
 import requests
 
-from .utils import referenceDataUrl
+from .utils import reference_data_url
 
 
-def getReferenceData(endpoint: str) -> Optional[List[Dict]]:
+def get_reference_data(endpoint: str) -> Optional[List[Dict]]:
 
     try:
         response = requests.get(
-            referenceDataUrl(endpoint), headers={"Accept": "application/json"}
+            reference_data_url(endpoint), headers={"Accept": "application/json"}
         )
 
         response.raise_for_status()

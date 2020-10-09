@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import QualityAnnotation
-from fdk_rdf_parser.parse_functions import extractQualityAnnotation
+from fdk_rdf_parser.parse_functions import extract_quality_annotation
 
 
 def test_quality_annotations() -> None:
@@ -63,4 +63,4 @@ def test_quality_annotations() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
 
-    assert extractQualityAnnotation(graph, subject) == expected
+    assert extract_quality_annotation(graph, subject) == expected

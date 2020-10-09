@@ -2,68 +2,70 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import FOAF, SKOS
 
 from fdk_rdf_parser.classes import Publisher
-from fdk_rdf_parser.rdf_utils import brURI, objectValue, rovURI, valueTranslations
-from .organizations_client import getOrgPath, getRdfOrgData
-from .utils import organisationNumberFromUri, organizationUrl
+from fdk_rdf_parser.rdf_utils import br_uri, object_value, rov_uri, value_translations
+from .organizations_client import get_org_path, get_rdf_org_data
+from .utils import organization_number_from_uri, organization_url
 
 
-def publisherFromFDKOrgCatalog(publisher: Publisher, orgsGraph: Graph) -> Publisher:
+def publisher_from_fdk_org_catalog(
+    publisher: Publisher, orgs_graph: Graph
+) -> Publisher:
     if publisher.id:
-        return getPublisherDataFromOrganizationCatalogue(publisher, orgsGraph)
+        return get_publisher_data_from_organization_catalogue(publisher, orgs_graph)
     elif publisher.uri:
-        publisher.id = organisationNumberFromUri(publisher.uri)
+        publisher.id = organization_number_from_uri(publisher.uri)
 
         if publisher.id:
-            return getPublisherDataFromOrganizationCatalogue(publisher, orgsGraph)
+            return get_publisher_data_from_organization_catalogue(publisher, orgs_graph)
         else:
-            return addOrgPath(publisher)
+            return add_org_path(publisher)
     else:
-        return addOrgPath(publisher)
+        return add_org_path(publisher)
 
 
-def getPublisherDataFromOrganizationCatalogue(
-    publisher: Publisher, orgsGraph: Graph
+def get_publisher_data_from_organization_catalogue(
+    publisher: Publisher, orgs_graph: Graph
 ) -> Publisher:
-    orgRef = URIRef(organizationUrl(publisher.id))
+    org_ref = URIRef(organization_url(publisher.id))
 
-    if (orgRef, None, None) in orgsGraph:
-        return parsePublisher(orgsGraph, orgRef, publisher)
+    if (org_ref, None, None) in orgs_graph:
+        return parse_publisher(orgs_graph, org_ref, publisher)
     else:
-        fdkOrg = getRdfOrgData(orgnr=publisher.id)
+        fdk_org = get_rdf_org_data(orgnr=publisher.id)
 
-        if fdkOrg is not None:
-            orgGraph = Graph().parse(data=fdkOrg, format="turtle")
-            return parsePublisher(orgGraph, orgRef, publisher)
+        if fdk_org is not None:
+            org_graph = Graph().parse(data=fdk_org, format="turtle")
+            return parse_publisher(org_graph, org_ref, publisher)
         else:
-            return addOrgPath(publisher)
+            return add_org_path(publisher)
 
 
-def parsePublisher(graph: Graph, orgRef: URIRef, publisher: Publisher) -> Publisher:
-    regDataRef = graph.value(orgRef, rovURI("registration"))
+def parse_publisher(graph: Graph, org_ref: URIRef, publisher: Publisher) -> Publisher:
+    reg_data_ref = graph.value(org_ref, rov_uri("registration"))
 
     return Publisher(
-        id=objectValue(graph, regDataRef, SKOS.notation),
-        uri=orgRef.toPython(),
-        name=objectValue(graph, orgRef, rovURI("legalName")),
-        orgPath=objectValue(graph, orgRef, brURI("orgPath")),
+        id=object_value(graph, reg_data_ref, SKOS.notation),
+        uri=org_ref.toPython(),
+        name=object_value(graph, org_ref, rov_uri("legalName")),
+        orgPath=object_value(graph, org_ref, br_uri("orgPath")),
         prefLabel=publisher.prefLabel
         if publisher.prefLabel
-        else valueTranslations(graph, orgRef, FOAF.name),
-        organisasjonsform=objectValue(graph, orgRef, rovURI("orgType")),
+        else value_translations(graph, org_ref, FOAF.name),
+        organisasjonsform=object_value(graph, org_ref, rov_uri("orgType")),
     )
 
 
-def addOrgPath(publisher: Publisher) -> Publisher:
-    orgPath = None
+def add_org_path(publisher: Publisher) -> Publisher:
+    org_path = None
     if publisher.id:
-        orgPath = getOrgPath(publisher.id)
+        org_path = get_org_path(publisher.id)
     elif publisher.prefLabel:
         if publisher.prefLabel.get("nb"):
-            orgPath = getOrgPath(publisher.prefLabel["nb"])
+            org_path = get_org_path(publisher.prefLabel["nb"])
         elif publisher.prefLabel.get("nn"):
-            orgPath = getOrgPath(publisher.prefLabel["nn"])
+            org_path = get_org_path(publisher.prefLabel["nn"])
         elif publisher.prefLabel.get("en"):
-            orgPath = getOrgPath(publisher.prefLabel["en"])
+            org_path = get_org_path(publisher.prefLabel["en"])
 
-    publisher.orgPath = orgPath
+    publisher.orgPath = org_path
     return publisher

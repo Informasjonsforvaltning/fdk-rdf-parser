@@ -1,8 +1,8 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Publisher, QualifiedAttribution
-from fdk_rdf_parser.parse_functions import extractQualifiedAttributions
-from fdk_rdf_parser.rdf_utils import provURI
+from fdk_rdf_parser.parse_functions import extract_qualified_attributions
+from fdk_rdf_parser.rdf_utils import prov_uri
 
 
 def test_single_qualified_attribution() -> None:
@@ -34,8 +34,8 @@ def test_single_qualified_attribution() -> None:
         u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
     )
 
-    actual = extractQualifiedAttributions(
-        graph, subject, provURI("qualifiedAttribution")
+    actual = extract_qualified_attributions(
+        graph, subject, prov_uri("qualifiedAttribution")
     )
 
     if isinstance(actual, list):
@@ -82,8 +82,8 @@ def test_multiple_qualified_attributions() -> None:
         u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attributions"
     )
 
-    actual = extractQualifiedAttributions(
-        graph, subject, provURI("qualifiedAttribution")
+    actual = extract_qualified_attributions(
+        graph, subject, prov_uri("qualifiedAttribution")
     )
 
     if isinstance(actual, list):

@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import PartialDcatResource, Publisher, SkosCode, ThemeEU
-from fdk_rdf_parser.parse_functions import parseDcatResource
+from fdk_rdf_parser.parse_functions import parse_dcat_resource
 
 
 def test_dcat_resource_parser() -> None:
@@ -80,7 +80,7 @@ def test_dcat_resource_parser() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
     catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject, catalog_subject) == expected
+    assert parse_dcat_resource(graph, subject, catalog_subject) == expected
 
 
 def test_description_html_cleaner() -> None:
@@ -111,7 +111,7 @@ def test_description_html_cleaner() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/dcatresource")
     catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject, catalog_subject) == expected
+    assert parse_dcat_resource(graph, subject, catalog_subject) == expected
 
 
 def test_nb_is_default_language() -> None:
@@ -140,4 +140,4 @@ def test_nb_is_default_language() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
     catalog_subject = URIRef(u"https://testdirektoratet.no/model/dataset/catalog")
 
-    assert parseDcatResource(graph, subject, catalog_subject) == expected
+    assert parse_dcat_resource(graph, subject, catalog_subject) == expected

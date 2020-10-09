@@ -1,7 +1,7 @@
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import ContactPoint
-from fdk_rdf_parser.parse_functions import extractContactPoints
+from fdk_rdf_parser.parse_functions import extract_contact_points
 
 
 def test_single_contact_point() -> None:
@@ -30,7 +30,7 @@ def test_single_contact_point() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
 
-    assert extractContactPoints(graph, subject) == expected
+    assert extract_contact_points(graph, subject) == expected
 
 
 def test_several_contact_points() -> None:
@@ -81,7 +81,7 @@ def test_several_contact_points() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
 
-    assert extractContactPoints(graph, subject) == expected
+    assert extract_contact_points(graph, subject) == expected
 
 
 def test_telephone_and_email_is_nodes() -> None:
@@ -108,4 +108,4 @@ def test_telephone_and_email_is_nodes() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
 
-    assert extractContactPoints(graph, subject) == expected
+    assert extract_contact_points(graph, subject) == expected

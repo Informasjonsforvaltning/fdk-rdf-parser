@@ -6,20 +6,20 @@ from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF, RDF
 
 
-def isType(t: URIRef, graph: Graph, topic: URIRef) -> bool:
-    for typeURIRef in resourceList(graph, topic, RDF.type):
-        if typeURIRef == t:
+def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
+    for type_uri_ref in resource_list(graph, topic, RDF.type):
+        if type_uri_ref == t:
             return True
 
     return False
 
 
-def objectValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
+def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return value.toPython() if value and not isinstance(value, BNode) else None
 
 
-def valueList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
+def value_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
     values = []
     for obj in graph.objects(subject, predicate):
         if not isinstance(obj, BNode):
@@ -28,7 +28,7 @@ def valueList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List
     return values if len(values) > 0 else None
 
 
-def valueTranslations(
+def value_translations(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[Dict[str, str]]:
     values = {}
@@ -40,7 +40,7 @@ def valueTranslations(
     return values if len(values) > 0 else None
 
 
-def resourceList(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
+def resource_list(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
     values = []
     for obj in graph.objects(subject, predicate):
         values.append(obj)
@@ -48,32 +48,32 @@ def resourceList(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
     return values
 
 
-def dateValue(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
+def date_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
     value = graph.value(subject, predicate)
     if value:
-        dateObject = value.toPython()
-        if isinstance(dateObject, datetime):
-            return datetime_isoformat(dateObject)
-        elif isinstance(dateObject, date):
-            return date_isoformat(dateObject)
+        date_object = value.toPython()
+        if isinstance(date_object, datetime):
+            return datetime_isoformat(date_object)
+        elif isinstance(date_object, date):
+            return date_isoformat(date_object)
         else:
             return None
     else:
         return None
 
 
-def dateList(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[str]]:
+def date_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[str]]:
     values = []
     for obj in graph.objects(subject, predicate):
-        dateObject = obj.toPython()
-        if isinstance(dateObject, datetime):
-            values.append(datetime_isoformat(dateObject))
-        elif isinstance(dateObject, date):
-            values.append(date_isoformat(dateObject))
+        date_object = obj.toPython()
+        if isinstance(date_object, datetime):
+            values.append(datetime_isoformat(date_object))
+        elif isinstance(date_object, date):
+            values.append(date_isoformat(date_object))
     values.sort()
     return values if len(values) > 0 else None
 
 
-def catalogRef(graph: Graph, subject: URIRef) -> URIRef:
+def catalog_ref(graph: Graph, subject: URIRef) -> URIRef:
     catalog_meta_data_ref = graph.value(subject, DCTERMS.isPartOf)
     return graph.value(catalog_meta_data_ref, FOAF.primaryTopic)

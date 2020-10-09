@@ -1,55 +1,55 @@
 from rdflib import URIRef
 
 
-def dcatURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/dcat#{subString}")
+def dcat_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/dcat#{sub_string}")
 
 
-def admsURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/adms#{subString}")
+def adms_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/adms#{sub_string}")
 
 
-def dcatApNoURI(subString: str) -> URIRef:
-    return URIRef(f"http://difi.no/dcatno#{subString}")
+def dcat_ap_no_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://difi.no/dcatno#{sub_string}")
 
 
-def owlTimeURI(subString: str) -> URIRef:
-    return URIRef(f"https://www.w3.org/TR/owl-time/{subString}")
+def owl_time_uri(sub_string: str) -> URIRef:
+    return URIRef(f"https://www.w3.org/TR/owl-time/{sub_string}")
 
 
-def schemaURI(subString: str) -> URIRef:
-    return URIRef(f"http://schema.org/{subString}")
+def schema_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://schema.org/{sub_string}")
 
 
-def vcardURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/2006/vcard/ns#{subString}")
+def vcard_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/2006/vcard/ns#{sub_string}")
 
 
-def dctURI(subString: str) -> URIRef:
-    return URIRef(f"http://purl.org/dc/terms/{subString}")
+def dct_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://purl.org/dc/terms/{sub_string}")
 
 
-def dqvURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/dqvNS#{subString}")
+def dqv_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/dqvNS#{sub_string}")
 
 
-def dqvIsoURI(subString: str) -> URIRef:
-    return URIRef(f"http://iso.org/25012/2008/dataquality/{subString}")
+def dqv_iso_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://iso.org/25012/2008/dataquality/{sub_string}")
 
 
-def provURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/prov#{subString}")
+def prov_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/prov#{sub_string}")
 
 
-def dcatApiURI(subString: str) -> URIRef:
-    return URIRef(f"http://dcat.no/dcatapi/{subString}")
+def dcat_api_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://dcat.no/dcatapi/{sub_string}")
 
 
-def rovURI(subString: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/regorg#{subString}")
+def rov_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/regorg#{sub_string}")
 
 
-def brURI(subString: str) -> URIRef:
+def br_uri(sub_string: str) -> URIRef:
     return URIRef(
-        f"https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#{subString}"  # noqa: B950
+        f"https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#{sub_string}"  # noqa: B950
     )

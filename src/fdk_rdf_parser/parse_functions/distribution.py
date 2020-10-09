@@ -5,39 +5,39 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import (
-    dcatURI,
-    dctURI,
-    objectValue,
-    resourceList,
-    valueList,
-    valueTranslations,
+    dcat_uri,
+    dct_uri,
+    object_value,
+    resource_list,
+    value_list,
+    value_translations,
 )
-from .data_distribution_service import extractDataDistributionServices
-from .skos_concept import extractSkosConcept
+from .data_distribution_service import extract_data_distribution_services
+from .skos_concept import extract_skos_concept
 
 
-def extractDistributions(
+def extract_distributions(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[Distribution]]:
     values = []
-    for resource in resourceList(graph, subject, predicate):
-        resourceUri = None
+    for resource in resource_list(graph, subject, predicate):
+        resource_uri = None
         if isinstance(resource, URIRef):
-            resourceUri = resource.toPython()
+            resource_uri = resource.toPython()
 
         values.append(
             Distribution(
-                uri=resourceUri,
-                title=valueTranslations(graph, resource, DCTERMS.title),
-                description=valueTranslations(graph, resource, DCTERMS.description),
-                downloadURL=valueList(graph, resource, dcatURI("downloadURL")),
-                accessURL=valueList(graph, resource, dcatURI("accessURL")),
-                license=extractSkosConcept(graph, resource, DCTERMS.license),
-                conformsTo=extractSkosConcept(graph, resource, DCTERMS.conformsTo),
-                page=extractSkosConcept(graph, resource, FOAF.page),
-                format=valueList(graph, resource, dctURI("format")),
-                type=objectValue(graph, resource, DCTERMS.type),
-                accessService=extractDataDistributionServices(graph, resource),
+                uri=resource_uri,
+                title=value_translations(graph, resource, DCTERMS.title),
+                description=value_translations(graph, resource, DCTERMS.description),
+                downloadURL=value_list(graph, resource, dcat_uri("downloadURL")),
+                accessURL=value_list(graph, resource, dcat_uri("accessURL")),
+                license=extract_skos_concept(graph, resource, DCTERMS.license),
+                conformsTo=extract_skos_concept(graph, resource, DCTERMS.conformsTo),
+                page=extract_skos_concept(graph, resource, FOAF.page),
+                format=value_list(graph, resource, dct_uri("format")),
+                type=object_value(graph, resource, DCTERMS.type),
+                accessService=extract_data_distribution_services(graph, resource),
             )
         )
 
