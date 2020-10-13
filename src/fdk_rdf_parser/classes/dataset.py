@@ -68,6 +68,7 @@ class PartialDataset(PartialDcatResource):
 class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
     losTheme: Optional[List[ThemeLOS]] = None
+    type: str = "datasets"
 
     def add_values_from_partial(self: Any, values: PartialDataset) -> None:
         self.id = values.id
