@@ -19,6 +19,7 @@ class DataService(PartialDcatResource):
     servesDataset: Optional[List[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
     catalog: Optional[Catalog] = None
+    type: str = "dataservices"
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> Any:
         self.identifier = values.identifier
