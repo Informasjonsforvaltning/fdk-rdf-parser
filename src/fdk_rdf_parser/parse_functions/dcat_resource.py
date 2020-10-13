@@ -34,7 +34,7 @@ def parse_dcat_resource(
         theme=extract_themes(graph, subject),
         keyword=extract_key_words(graph, subject),
         contactPoint=extract_contact_points(graph, subject),
-        type=object_value(graph, subject, DCTERMS.type),
+        dctType=object_value(graph, subject, DCTERMS.type),
         issued=date_value(graph, subject, DCTERMS.issued),
         modified=date_value(graph, subject, DCTERMS.modified),
         landingPage=value_list(graph, subject, dcat_uri("landingPage")),

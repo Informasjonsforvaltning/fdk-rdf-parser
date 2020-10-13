@@ -73,7 +73,7 @@ def test_dcat_resource_parser() -> None:
             SkosCode(uri="http://pubs.europa.eu/resource/authority/language/NOR")
         ],
         landingPage=["https://testdirektoratet.no"],
-        type="Kodelister",
+        dctType="Kodelister",
     )
 
     graph = Graph().parse(data=src, format="turtle")
