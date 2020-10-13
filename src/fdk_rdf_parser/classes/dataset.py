@@ -57,7 +57,7 @@ class PartialDataset(PartialDcatResource):
         self.theme = values.theme
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
-        self.type = values.type
+        self.dctType = values.dctType
         self.issued = values.issued
         self.modified = values.modified
         self.landingPage = values.landingPage
@@ -80,7 +80,7 @@ class Dataset(PartialDataset):
         self.theme = values.theme
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
-        self.type = values.type
+        self.dctType = values.dctType
         self.issued = values.issued
         self.modified = values.modified
         self.landingPage = values.landingPage

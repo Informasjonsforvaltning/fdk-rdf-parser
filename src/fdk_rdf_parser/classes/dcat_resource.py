@@ -19,7 +19,7 @@ class PartialDcatResource:
     theme: Optional[List[ThemeEU]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
-    type: Optional[str] = None
+    dctType: Optional[str] = None
     issued: Optional[str] = None
     modified: Optional[str] = None
     landingPage: Optional[List[str]] = None
