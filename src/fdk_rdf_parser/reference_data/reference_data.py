@@ -24,6 +24,15 @@ class DatasetReferenceData:
     los_themes: Optional[Dict[str, ThemeLOS]] = None
 
 
+@dataclass
+class InformationModelReferenceData:
+    linguisticsystem: Optional[Dict[str, SkosCode]] = None
+    openlicenses: Optional[Dict[str, SkosCode]] = None
+    location: Optional[Dict[str, SkosCode]] = None
+    eu_themes: Optional[Dict[str, ThemeEU]] = None
+    los_themes: Optional[Dict[str, ThemeLOS]] = None
+
+
 def get_data_service_reference_data() -> DataServiceReferenceData:
     return DataServiceReferenceData(media_types=get_and_map_media_types())
 
@@ -35,6 +44,16 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         frequency=get_and_map_reference_codes("frequency"),
         linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
         referencetypes=get_and_map_reference_codes("referencetypes"),
+        openlicenses=get_and_map_open_licenses(),
+        location=get_and_map_reference_codes("location"),
+        eu_themes=get_and_map_themes_eu(),
+        los_themes=get_and_map_themes_los(),
+    )
+
+
+def get_info_model_reference_data() -> InformationModelReferenceData:
+    return InformationModelReferenceData(
+        linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_reference_codes("location"),
         eu_themes=get_and_map_themes_eu(),

@@ -7,16 +7,19 @@ from .classes import (
     Catalog,
     DataService,
     Dataset,
+    InformationModel,
     QualifiedAttribution,
 )
 from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
-from .parse_functions import parse_data_service, parse_dataset
-from .rdf_utils import dcat_uri, is_type
+from .parse_functions import parse_data_service, parse_dataset, parse_information_model
+from .rdf_utils import dcat_uri, is_type, model_dcat_ap_no_uri
 from .reference_data import (
     extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
+    extend_info_model_with_reference_data,
     get_data_service_reference_data,
     get_dataset_reference_data,
+    get_info_model_reference_data,
 )
 
 
@@ -92,6 +95,45 @@ def parse_datasets(rdf_data: str) -> Dict[str, Dataset]:
             datasets[primary_topic_uri.toPython()] = dataset
 
     return datasets
+
+
+def parse_information_models(info_models_rdf: str) -> Dict[str, InformationModel]:
+    info_models: Dict[str, InformationModel] = {}
+    fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format="turtle")
+    reference_data = get_info_model_reference_data()
+
+    info_models_graph = Graph().parse(data=info_models_rdf, format="turtle")
+
+    for record_uri in info_models_graph.subjects(
+        predicate=RDF.type, object=dcat_uri("CatalogRecord")
+    ):
+        primary_topic_uri = info_models_graph.value(record_uri, FOAF.primaryTopic)
+
+        if primary_topic_uri and is_type(
+            model_dcat_ap_no_uri("InformationModel"),
+            info_models_graph,
+            primary_topic_uri,
+        ):
+            info_model = parse_information_model(
+                info_models_graph, record_uri, primary_topic_uri
+            )
+
+            info_model.publisher = (
+                publisher_from_fdk_org_catalog(info_model.publisher, fdk_orgs)
+                if info_model.publisher
+                else None
+            )
+
+            info_model.catalog = extend_catalog_with_orgs_data(
+                info_model.catalog, fdk_orgs
+            )
+            info_model = extend_info_model_with_reference_data(
+                info_model, reference_data
+            )
+
+            info_models[primary_topic_uri.toPython()] = info_model
+
+    return info_models
 
 
 def extend_catalog_with_orgs_data(
