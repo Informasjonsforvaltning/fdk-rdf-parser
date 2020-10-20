@@ -37,7 +37,9 @@ def test_quality_annotations() -> None:
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
-                        <http://iso.org/25012/2008/dataquality/Completeness> ] ."""
+                        <http://iso.org/25012/2008/dataquality/Completeness> ] ;
+                dqv:hasQualityAnnotation  [
+                    a                dqv:QualityAnnotation ] ."""
 
     expected = {
         "http://iso.org/25012/2008/dataquality/Currentness": QualityAnnotation(

@@ -1,6 +1,6 @@
 from typing import Any, List, Optional
 
-from rdflib import BNode, Graph, URIRef
+from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Temporal
@@ -20,35 +20,34 @@ def extract_temporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
         if isinstance(temporal_resource, URIRef):
             temporal_uri = temporal_resource.toPython()
 
-        if isinstance(temporal_resource, BNode) or temporal_uri is not None:
-            start_value = date_value(graph, temporal_resource, dcat_uri("startDate"))
-            end_value = date_value(graph, temporal_resource, dcat_uri("endDate"))
+        start_value = date_value(graph, temporal_resource, dcat_uri("startDate"))
+        end_value = date_value(graph, temporal_resource, dcat_uri("endDate"))
 
-            start_value = (
-                date_value(graph, temporal_resource, schema_uri("startDate"))
-                if start_value is None
-                else start_value
-            )
-            end_value = (
-                date_value(graph, temporal_resource, schema_uri("endDate"))
-                if end_value is None
-                else end_value
-            )
+        start_value = (
+            date_value(graph, temporal_resource, schema_uri("startDate"))
+            if start_value is None
+            else start_value
+        )
+        end_value = (
+            date_value(graph, temporal_resource, schema_uri("endDate"))
+            if end_value is None
+            else end_value
+        )
 
-            start_value = (
-                extract_owl_time_start(graph, temporal_resource)
-                if start_value is None
-                else start_value
-            )
-            end_value = (
-                extract_owl_time_end(graph, temporal_resource)
-                if end_value is None
-                else end_value
-            )
+        start_value = (
+            extract_owl_time_start(graph, temporal_resource)
+            if start_value is None
+            else start_value
+        )
+        end_value = (
+            extract_owl_time_end(graph, temporal_resource)
+            if end_value is None
+            else end_value
+        )
 
-            values.append(
-                Temporal(uri=temporal_uri, startDate=start_value, endDate=end_value)
-            )
+        values.append(
+            Temporal(uri=temporal_uri, startDate=start_value, endDate=end_value)
+        )
 
     return values if len(values) > 0 else None
 

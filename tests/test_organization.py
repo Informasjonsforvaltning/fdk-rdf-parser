@@ -108,6 +108,7 @@ def test_orgpath(mock_orgpath_client: Mock) -> None:
     publisher_nb = Publisher(prefLabel={"nb": "nb"})
     publisher_nn = Publisher(prefLabel={"nn": "nn"})
     publisher_en = Publisher(prefLabel={"en": "en"})
+    publisher_other = Publisher(prefLabel={"other": "other"})
 
     expected_id = Publisher(id="123456789", orgPath="/ANNET/orgpath")
     expected_nb = Publisher(prefLabel={"nb": "nb"}, orgPath="/ANNET/orgpath")
@@ -118,6 +119,7 @@ def test_orgpath(mock_orgpath_client: Mock) -> None:
     assert add_org_path(publisher_nb) == expected_nb
     assert add_org_path(publisher_nn) == expected_nn
     assert add_org_path(publisher_en) == expected_en
+    assert add_org_path(publisher_other) == Publisher(prefLabel={"other": "other"})
 
 
 def test_extract_publisher_id_from_uri() -> None:
@@ -169,3 +171,10 @@ def test_handles_empty_publisher() -> None:
     orgs_graph = Graph().parse(data=org_response_0, format="turtle")
 
     assert publisher_from_fdk_org_catalog(Publisher(), orgs_graph) == expected
+
+
+def test_responds_with_none_when_none_input() -> None:
+
+    orgs_graph = Graph().parse(data=org_response_0, format="turtle")
+
+    assert publisher_from_fdk_org_catalog(None, orgs_graph) is None

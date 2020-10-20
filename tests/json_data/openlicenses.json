@@ -14,7 +14,7 @@
         }
     },
     {
-        "uri": "http://creativecommons.org/publicdomain/zero/1.0/",
+        "uri": "https://creativecommons.org/publicdomain/zero/1.0/",
         "code": "CC0 1.0",
         "prefLabel": {
             "en": "Creative Commons Universal Public Domain Dedication"
@@ -28,7 +28,7 @@
         }
     },
     {
-        "uri": "http://data.norge.no/nlod/no/1.0",
+        "uri": "https://data.norge.no/nlod/no/1.0",
         "code": "NLOD10",
         "prefLabel": {
             "en": "Norwegian Licence for Open Government Data"
@@ -39,6 +39,13 @@
         "code": "NLOD20",
         "prefLabel": {
             "en": "Norwegian Licence for Open Government Data"
+        }
+    },
+    {
+        "uri": "ftp://data.norge.no/no/protocol",
+        "code": "NOPROTOCOL",
+        "prefLabel": {
+            "en": "No protocol example"
         }
     }
 ]
