@@ -1,9 +1,14 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from rdflib import Graph
 from rdflib.namespace import FOAF, RDF
 
-from .classes import DataService, Dataset, Publisher, QualifiedAttribution
+from .classes import (
+    Catalog,
+    DataService,
+    Dataset,
+    QualifiedAttribution,
+)
 from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
 from .parse_functions import parse_data_service, parse_dataset
 from .rdf_utils import dcat_uri, is_type
@@ -40,11 +45,9 @@ def parse_data_services(data_service_rdf: str) -> Dict[str, DataService]:
                 else None
             )
 
-            if data_service.catalog and data_service.catalog.publisher:
-                data_service.catalog.publisher = publisher_from_fdk_org_catalog(
-                    data_service.catalog.publisher, fdk_orgs
-                )
-
+            data_service.catalog = extend_catalog_with_orgs_data(
+                data_service.catalog, fdk_orgs
+            )
             data_service = extend_data_service_with_reference_data(
                 data_service, reference_data
             )
@@ -82,17 +85,24 @@ def parse_datasets(rdf_data: str) -> Dict[str, Dataset]:
 
             dataset.add_values_from_partial(values=partial_dataset)
 
-            if dataset.catalog and dataset.catalog.publisher:
-                dataset.catalog.publisher = publisher_from_fdk_org_catalog(
-                    dataset.catalog.publisher, fdk_orgs
-                )
-
             dataset = extend_dataset_with_reference_data(dataset, reference_data)
             dataset = extend_dataset_with_orgs_data(dataset, fdk_orgs)
+            dataset.catalog = extend_catalog_with_orgs_data(dataset.catalog, fdk_orgs)
 
             datasets[primary_topic_uri.toPython()] = dataset
 
     return datasets
+
+
+def extend_catalog_with_orgs_data(
+    catalog: Optional[Catalog], organizations_graph: Graph
+) -> Optional[Catalog]:
+    if catalog:
+        catalog.publisher = publisher_from_fdk_org_catalog(
+            catalog.publisher, organizations_graph
+        )
+
+    return catalog
 
 
 def extend_dataset_with_orgs_data(
@@ -112,12 +122,6 @@ def extend_dataset_with_orgs_data(
 def enhance_qualified_attribution_agent(
     qa: QualifiedAttribution, organizations_graph: Graph
 ) -> QualifiedAttribution:
-    if isinstance(qa.agent, Publisher):
-        publisher = publisher_from_fdk_org_catalog(
-            Publisher(id=qa.agent.id, uri=qa.agent.uri,), organizations_graph
-        )
-
-        if isinstance(publisher, Publisher):
-            qa.agent = publisher
+    qa.agent = publisher_from_fdk_org_catalog(qa.agent, organizations_graph)
 
     return qa

@@ -88,3 +88,35 @@ def test_multiple_qualified_attributions() -> None:
 
     if isinstance(actual, list):
         assert all(x in actual for x in expected)
+
+
+def test_handles_missing_agent() -> None:
+    src = """
+        @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix prov:  <http://www.w3.org/ns/prov#> .
+
+        <https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution>
+            a                          dcat:Dataset ;
+            prov:qualifiedAttribution  [ a             prov:Attribution ;
+                                         dcat:hadRole  <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor>
+                                       ] .
+      """
+
+    expected = [
+        QualifiedAttribution(
+            role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
+        )
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(
+        u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
+    )
+
+    actual = extract_qualified_attributions(
+        graph, subject, prov_uri("qualifiedAttribution")
+    )
+
+    if isinstance(actual, list):
+        assert all(x in actual for x in expected)

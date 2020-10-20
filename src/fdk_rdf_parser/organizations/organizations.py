@@ -1,3 +1,5 @@
+from typing import Optional
+
 from rdflib import Graph, URIRef
 from rdflib.namespace import FOAF, SKOS
 
@@ -8,19 +10,24 @@ from .utils import organization_number_from_uri, organization_url
 
 
 def publisher_from_fdk_org_catalog(
-    publisher: Publisher, orgs_graph: Graph
-) -> Publisher:
-    if publisher.id:
-        return get_publisher_data_from_organization_catalogue(publisher, orgs_graph)
-    elif publisher.uri:
-        publisher.id = organization_number_from_uri(publisher.uri)
-
+    publisher: Optional[Publisher], orgs_graph: Graph
+) -> Optional[Publisher]:
+    if publisher:
         if publisher.id:
             return get_publisher_data_from_organization_catalogue(publisher, orgs_graph)
+        elif publisher.uri:
+            publisher.id = organization_number_from_uri(publisher.uri)
+
+            if publisher.id:
+                return get_publisher_data_from_organization_catalogue(
+                    publisher, orgs_graph
+                )
+            else:
+                return add_org_path(publisher)
         else:
             return add_org_path(publisher)
     else:
-        return add_org_path(publisher)
+        return None
 
 
 def get_publisher_data_from_organization_catalogue(

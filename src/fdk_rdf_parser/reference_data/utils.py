@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import SkosCode
+from fdk_rdf_parser.classes import Reference, SkosCode, ThemeEU, ThemeLOS
 
 base_url = os.getenv(
     "REFERENCE_DATA_BASE_URI",
@@ -11,6 +11,62 @@ base_url = os.getenv(
 
 def reference_data_url(endpoint: str) -> str:
     return f"{base_url}{endpoint}"
+
+
+def extend_reference_types(
+    references: Optional[List[Reference]],
+    reference_types: Optional[Dict[str, SkosCode]],
+) -> Optional[List[Reference]]:
+    if references is None or reference_types is None:
+        return references
+    else:
+        extended_references = []
+        for ref in references:
+            ref.referenceType = extend_skos_code(ref.referenceType, reference_types)
+            extended_references.append(ref)
+        return extended_references
+
+
+def split_los_from_eu_themes(
+    themes: Optional[List[ThemeEU]], los: Optional[Dict[str, ThemeLOS]],
+) -> Dict[str, List[ThemeEU]]:
+    split_themes: Dict[str, List[ThemeEU]] = {"los": [], "eu": []}
+    if themes is None:
+        return split_themes
+    elif los is None:
+        split_themes["eu"] = themes
+        return split_themes
+    else:
+        for theme in themes:
+            if theme.id in los:
+                split_themes["los"].append(theme)
+            else:
+                split_themes["eu"].append(theme)
+        return split_themes
+
+
+def extend_los_themes(
+    themes: List[ThemeEU], los: Optional[Dict[str, ThemeLOS]]
+) -> Optional[List[ThemeLOS]]:
+    extended = []
+    if los is not None:
+        for theme in themes:
+            extended.append(los[str(theme.id)])
+    return extended if len(extended) > 0 else None
+
+
+def extend_eu_themes(
+    themes: List[ThemeEU], eu_themes: Optional[Dict[str, ThemeEU]]
+) -> Optional[List[ThemeEU]]:
+    extended = []
+    if eu_themes is not None:
+        for theme in themes:
+            eu_theme = eu_themes.get(theme.id) if theme.id is not None else None
+            if eu_theme is None:
+                extended.append(theme)
+            else:
+                extended.append(eu_theme)
+    return extended if len(extended) > 0 else None
 
 
 def extend_skos_code(

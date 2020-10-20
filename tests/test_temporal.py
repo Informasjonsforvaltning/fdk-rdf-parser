@@ -114,3 +114,23 @@ def test_temporal_schema() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
+
+
+def test_handles_missing_node() -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix schema:  <http://schema.org/> .
+
+        <https://testdirektoratet.no/model/dataset/temporal>
+                a               dcat:Dataset ;
+                dct:temporal    [ ] ."""
+
+    expected = [Temporal()]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+
+    assert extract_temporal(graph, subject) == expected
