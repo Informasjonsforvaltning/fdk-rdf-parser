@@ -53,3 +53,11 @@ def br_uri(sub_string: str) -> URIRef:
     return URIRef(
         f"https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#{sub_string}"  # noqa: B950
     )
+
+
+def model_dcat_ap_no_uri(sub_string: str) -> URIRef:
+    return URIRef(f"https://data.norge.no/vocabulary/modelldcatno#{sub_string}")
+
+
+def xkos_uri(sub_string: str) -> URIRef:
+    return URIRef(f"https://rdf-vocabulary.ddialliance.org/xkos/{sub_string}")

@@ -48,6 +48,16 @@ def resource_list(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]
     return values
 
 
+def identifier_list(graph: Graph, subjects: List[URIRef]) -> Optional[List[str]]:
+    values = []
+    for subj in subjects:
+        identifier = graph.value(subj, DCTERMS.identifier)
+        if identifier:
+            values.append(identifier.toPython())
+    values.sort()
+    return values if len(values) > 0 else None
+
+
 def date_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
     value = graph.value(subject, predicate)
     if value:

@@ -5,6 +5,7 @@ from .dataset import parse_dataset
 from .dcat_resource import parse_dcat_resource
 from .distribution import extract_distributions
 from .harvest_meta_data import extract_meta_data
+from .info_model import parse_information_model
 from .publisher import extract_publisher
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
