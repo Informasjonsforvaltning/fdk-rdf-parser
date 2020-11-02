@@ -122,7 +122,7 @@ def test_orgpath(mock_orgpath_client: Mock) -> None:
     assert add_org_path(publisher_other) == Publisher(prefLabel={"other": "other"})
 
 
-def test_extract_publisher_id_from_uri() -> None:
+def test_extract_publisher_id_from_enhetsregisteret_uri() -> None:
 
     expected = Publisher(
         uri="https://organizations.fellestestkatalog.no/organizations/123456789",
@@ -143,6 +143,34 @@ def test_extract_publisher_id_from_uri() -> None:
         publisher_from_fdk_org_catalog(
             Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/123456789"
+            ),
+            orgs_graph,
+        )
+        == expected
+    )
+
+
+def test_extract_publisher_id_from_org_uri() -> None:
+
+    expected = Publisher(
+        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        id="123456789",
+        name="Digitaliseringsdirektoratet",
+        orgPath="/STAT/987654321/123456789",
+        prefLabel={
+            "nn": "Digitaliseringsdirektoratet",
+            "nb": "Digitaliseringsdirektoratet",
+            "en": "Norwegian Digitalisation Agency",
+        },
+        organisasjonsform="ORGL",
+    )
+
+    orgs_graph = Graph().parse(data=org_response_0, format="turtle")
+
+    assert (
+        publisher_from_fdk_org_catalog(
+            Publisher(
+                uri="https://organizations.fellestestkatalog.no/organizations/123456789"
             ),
             orgs_graph,
         )
