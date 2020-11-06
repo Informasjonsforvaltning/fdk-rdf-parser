@@ -12,7 +12,7 @@ locations = "src", "tests", "noxfile.py"
 def tests(session: Session) -> None:
     args = session.posargs or ["--cov", "-m", "not e2e"]
     env = {
-        "ORGANIZATION_CATALOGUE_BASE_URI": "https://organizations.fellestestkatalog.no"
+        "ORGANIZATION_CATALOGUE_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
     }
     nox_poetry.install(session, nox_poetry.WHEEL)
     nox_poetry.install(session, "coverage[toml]", "pytest", "pytest-cov", "pytest-mock")

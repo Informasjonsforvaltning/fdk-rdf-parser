@@ -108,7 +108,7 @@ def test_parse_multiple_data_services(
     expected = {
         "https://testutgiver.no/data-services/2": DataService(
             publisher=Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                 id="123456789",
                 name="Digitaliseringsdirektoratet",
                 orgPath="/STAT/987654321/123456789",
@@ -170,7 +170,7 @@ def test_parse_multiple_data_services(
                 uri="https://testutgiver.no/catalogs/123456789",
                 title={"en": "Data service catalog"},
                 publisher=Publisher(
-                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",

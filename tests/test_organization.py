@@ -13,7 +13,7 @@ from .testdata import org_response_0, org_response_1
 def test_publisher_from_get_all() -> None:
 
     expected = Publisher(
-        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         id="123456789",
         name="Digitaliseringsdirektoratet",
         orgPath="/STAT/987654321/123456789",
@@ -39,7 +39,7 @@ def test_publisher_from_get_all() -> None:
 def test_publisher_not_present_in_get_all(mock_organizations_client: Mock) -> None:
 
     expected = Publisher(
-        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         id="123456789",
         name="Digitaliseringsdirektoratet",
         orgPath="/STAT/987654321/123456789",
@@ -80,7 +80,7 @@ def test_publisher_not_found(mock_organizations_error: Mock) -> None:
 def test_original_pref_label_is_retained(mock_organizations_client: Mock) -> None:
 
     expected = Publisher(
-        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         id="123456789",
         name="Digitaliseringsdirektoratet",
         orgPath="/STAT/987654321/123456789",
@@ -125,7 +125,7 @@ def test_orgpath(mock_orgpath_client: Mock) -> None:
 def test_extract_publisher_id_from_enhetsregisteret_uri() -> None:
 
     expected = Publisher(
-        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         id="123456789",
         name="Digitaliseringsdirektoratet",
         orgPath="/STAT/987654321/123456789",
@@ -153,7 +153,7 @@ def test_extract_publisher_id_from_enhetsregisteret_uri() -> None:
 def test_extract_publisher_id_from_org_uri() -> None:
 
     expected = Publisher(
-        uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+        uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         id="123456789",
         name="Digitaliseringsdirektoratet",
         orgPath="/STAT/987654321/123456789",
@@ -170,7 +170,7 @@ def test_extract_publisher_id_from_org_uri() -> None:
     assert (
         publisher_from_fdk_org_catalog(
             Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/123456789"
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789"
             ),
             orgs_graph,
         )

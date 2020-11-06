@@ -11,9 +11,9 @@ org_response_0 = """
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 
-<https://organizations.fellestestkatalog.no/organizations/123456789>
+<https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
         a                      rov:RegisteredOrganization ;
-        org:subOrganizationOf  <https://organizations.fellestestkatalog.no/organizations/987654321> ;
+        org:subOrganizationOf  <https://organizations.fellesdatakatalog.digdir.no/organizations/987654321> ;
         rov:legalName          "Digitaliseringsdirektoratet" ;
         rov:orgType            "ORGL" ;
         rov:registration       [ a                  adms:Identifier ;
@@ -28,9 +28,9 @@ org_response_0 = """
         br:orgPath             "/STAT/987654321/123456789" ;
         br:sectorCode          "6100" .
 
-<https://organizations.fellestestkatalog.no/organizations/111111111>
+<https://organizations.fellesdatakatalog.digdir.no/organizations/111111111>
         a                      rov:RegisteredOrganization ;
-        org:subOrganizationOf  <https://organizations.fellestestkatalog.no/organizations/111111111> ;
+        org:subOrganizationOf  <https://organizations.fellesdatakatalog.digdir.no/organizations/111111111> ;
         rov:legalName          "Pythondirektoratet" ;
         rov:orgType            "ORGL" ;
         rov:registration       [ a                  adms:Identifier ;
@@ -55,7 +55,7 @@ org_response_1 = """
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 
-<https://organizations.fellestestkatalog.no/organizations/987654321>
+<https://organizations.fellesdatakatalog.digdir.no/organizations/987654321>
         a                      rov:RegisteredOrganization ;
         rov:legalName          "Testdirektoratet" ;
         rov:orgType            "ORGL" ;
