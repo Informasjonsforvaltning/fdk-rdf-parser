@@ -101,7 +101,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
             ],
             publisher=Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/991825827",
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             title={"nb": "Diversemodell"},
@@ -284,7 +284,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
     expected = {
         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
             publisher=Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/991825827",
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
@@ -295,7 +295,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
             catalog=Catalog(
                 id="03953a9d-5b6b-34ec-b41c-dcdcb21874d9",
                 publisher=Publisher(
-                    uri="https://organizations.fellestestkatalog.no/organizations/991825827",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
                     prefLabel={"nb": "Digitaliseringsdirektoratet"},
                 ),
                 title={"nb": "Digitaliseringsdirektoratets modellkatalog"},

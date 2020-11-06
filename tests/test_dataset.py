@@ -72,7 +72,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
             ),
             publisher=Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                 id="123456789",
                 name="Digitaliseringsdirektoratet",
                 orgPath="/STAT/987654321/123456789",
@@ -161,7 +161,7 @@ def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -
             ),
             uri="https://testdirektoratet.no/model/dataset/0",
             publisher=Publisher(
-                uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                 id="123456789",
                 name="Digitaliseringsdirektoratet",
                 orgPath="/STAT/987654321/123456789",
@@ -178,7 +178,7 @@ def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -
                 title={"nb": "Katalog"},
                 description={"nb": "Beskrivelse av katalog"},
                 publisher=Publisher(
-                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
@@ -577,7 +577,7 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
         qualifiedAttributions=[
             QualifiedAttribution(
                 agent=Publisher(
-                    uri="https://organizations.fellestestkatalog.no/organizations/123456789",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
@@ -592,7 +592,7 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
             ),
             QualifiedAttribution(
                 agent=Publisher(
-                    uri="https://organizations.fellestestkatalog.no/organizations/111111111",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/111111111",
                     id="111111111",
                     name="Pythondirektoratet",
                     orgPath="/STAT/987654321/111111111",

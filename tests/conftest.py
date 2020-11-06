@@ -27,7 +27,7 @@ def mock_orgpath_client(mocker: MockFixture) -> Mock:
 def mock_organizations_error(mocker: MockFixture) -> Mock:
     mock = mocker.patch("requests.get")
     mock.side_effect = requests.HTTPError(
-        "https://organizations.fellestestkatalog.no/organizations/123456789",
+        "https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
         404,
         "Not Found",
         {},
