@@ -8,11 +8,17 @@ from .classes import (
     DataService,
     Dataset,
     InformationModel,
+    PublicService,
     QualifiedAttribution,
 )
 from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
-from .parse_functions import parse_data_service, parse_dataset, parse_information_model
-from .rdf_utils import dcat_uri, is_type, model_dcat_ap_no_uri
+from .parse_functions import (
+    parse_data_service,
+    parse_dataset,
+    parse_information_model,
+    parse_public_service,
+)
+from .rdf_utils import cpsv_uri, dcat_uri, is_type, model_dcat_ap_no_uri
 from .reference_data import (
     extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
@@ -134,6 +140,30 @@ def parse_information_models(info_models_rdf: str) -> Dict[str, InformationModel
             info_models[primary_topic_uri.toPython()] = info_model
 
     return info_models
+
+
+def parse_public_services(public_service_rdf: str) -> Dict[str, PublicService]:
+    public_services: Dict[str, PublicService] = {}
+
+    public_services_graph = Graph().parse(data=public_service_rdf, format="turtle")
+
+    for catalog_record_uri in public_services_graph.subjects(
+        predicate=RDF.type, object=dcat_uri("CatalogRecord")
+    ):
+        primary_topic_uri = public_services_graph.value(
+            catalog_record_uri, FOAF.primaryTopic
+        )
+
+        if primary_topic_uri and is_type(
+            cpsv_uri("PublicService"), public_services_graph, primary_topic_uri,
+        ):
+            public_service = parse_public_service(
+                public_services_graph, catalog_record_uri, primary_topic_uri
+            )
+
+            public_services[primary_topic_uri.toPython()] = public_service
+
+    return public_services
 
 
 def extend_catalog_with_orgs_data(

@@ -61,3 +61,11 @@ def model_dcat_ap_no_uri(sub_string: str) -> URIRef:
 
 def xkos_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://rdf-vocabulary.ddialliance.org/xkos/{sub_string}")
+
+
+def cv_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://data.europa.eu/m8g/{sub_string}")
+
+
+def cpsv_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://purl.org/vocab/cpsv#{sub_string}")
