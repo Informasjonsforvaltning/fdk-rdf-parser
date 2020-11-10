@@ -7,6 +7,7 @@ from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
+from .public_service import PublicService
 from .publisher import Publisher
 from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
