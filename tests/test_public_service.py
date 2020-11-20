@@ -19,7 +19,7 @@ def test_parse_multiple_public_services(
                 dct:identifier "1" ;
                 dct:title "Ei offentleg teneste"@nb ;
                 dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
-                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/991825827> .
+                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> .
 
         <http://localhost:5000/services/fdk-1>
                 a                  dcat:CatalogRecord ;
@@ -75,12 +75,16 @@ def test_parse_multiple_public_services(
             },
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/991825827",
-                    id=None,
-                    name=None,
-                    orgPath=None,
-                    prefLabel=None,
-                    organisasjonsform=None,
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                    id="123456789",
+                    name="Digitaliseringsdirektoratet",
+                    orgPath="/STAT/987654321/123456789",
+                    prefLabel={
+                        "en": "Norwegian Digitalisation Agency",
+                        "nn": "Digitaliseringsdirektoratet",
+                        "nb": "Digitaliseringsdirektoratet",
+                    },
+                    organisasjonsform="ORGL",
                 )
             ],
             harvest=HarvestMetaData(
@@ -98,7 +102,7 @@ def test_parse_multiple_public_services(
             },
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/991825827",
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
                     id=None,
                     name=None,
                     orgPath=None,

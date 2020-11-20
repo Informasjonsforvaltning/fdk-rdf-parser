@@ -150,6 +150,7 @@ def parse_public_services(
     public_service_rdf: str, rdf_format: str = "turtle"
 ) -> Dict[str, PublicService]:
     public_services: Dict[str, PublicService] = {}
+    fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format=rdf_format)
 
     public_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
@@ -166,6 +167,22 @@ def parse_public_services(
             public_service = parse_public_service(
                 public_services_graph, catalog_record_uri, primary_topic_uri
             )
+
+            if (
+                public_service.hasCompetentAuthority is not None
+                and len(public_service.hasCompetentAuthority) > 0
+            ):
+                public_service.hasCompetentAuthority = list(
+                    filter(
+                        None,
+                        map(
+                            lambda authority: publisher_from_fdk_org_catalog(
+                                authority, fdk_orgs
+                            ),
+                            public_service.hasCompetentAuthority,
+                        ),
+                    )
+                )
 
             public_services[primary_topic_uri.toPython()] = public_service
 
