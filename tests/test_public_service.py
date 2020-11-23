@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
 from fdk_rdf_parser import parse_public_services
-from fdk_rdf_parser.classes import HarvestMetaData, PublicService, Publisher
+from fdk_rdf_parser.classes import Event, HarvestMetaData, PublicService, Publisher
 
 
 def test_parse_multiple_public_services(
@@ -19,7 +19,16 @@ def test_parse_multiple_public_services(
                 dct:identifier "1" ;
                 dct:title "Ei offentleg teneste"@nb ;
                 dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
-                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> .
+                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
+                a                cv:Event ;
+                dct:description  "Elektronisk prosess for etablering og oppstart av restaurantdrift."@nb ;
+                dct:identifier   "1" ;
+                dct:relation     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> ;
+                dct:title        "Starte og drive restaurant"@nb ;
+                dct:type         <https://data.norge.no/concpets/livshendelse> .
 
         <http://localhost:5000/services/fdk-1>
                 a                  dcat:CatalogRecord ;
@@ -73,6 +82,17 @@ def test_parse_multiple_public_services(
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
+            isGroupedBy=[
+                Event(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
+                    identifier="1",
+                    title={"nb": "Starte og drive restaurant"},
+                    description={
+                        "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
+                    },
+                    type="https://data.norge.no/concpets/livshendelse",
+                )
+            ],
             hasCompetentAuthority=[
                 Publisher(
                     uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",

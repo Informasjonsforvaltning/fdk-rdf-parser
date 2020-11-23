@@ -10,6 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_list,
     value_translations,
 )
+from .event import extract_events
 from .harvest_meta_data import extract_meta_data
 from .publisher import Publisher
 
@@ -47,6 +48,7 @@ def parse_public_service(
         description=value_translations(
             public_services_graph, public_service_uri, DCTERMS.description
         ),
+        isGroupedBy=extract_events(public_services_graph, public_service_uri),
         hasCompetentAuthority=extract_publishers(
             public_services_graph, public_service_uri
         ),

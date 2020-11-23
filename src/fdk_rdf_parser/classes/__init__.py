@@ -5,6 +5,7 @@ from .dataservice import DataService
 from .dataset import Dataset, PartialDataset
 from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
+from .event import Event
 from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
 from .public_service import PublicService
