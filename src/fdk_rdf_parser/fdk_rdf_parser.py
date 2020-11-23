@@ -29,12 +29,14 @@ from .reference_data import (
 )
 
 
-def parse_data_services(data_service_rdf: str) -> Dict[str, DataService]:
+def parse_data_services(
+    data_service_rdf: str, rdf_format: str = "turtle"
+) -> Dict[str, DataService]:
     data_services: Dict[str, DataService] = {}
     fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format="turtle")
     reference_data = get_data_service_reference_data()
 
-    data_services_graph = Graph().parse(data=data_service_rdf, format="turtle")
+    data_services_graph = Graph().parse(data=data_service_rdf, format=rdf_format)
 
     for record_uri in data_services_graph.subjects(
         predicate=RDF.type, object=dcat_uri("CatalogRecord")
@@ -66,8 +68,8 @@ def parse_data_services(data_service_rdf: str) -> Dict[str, DataService]:
     return data_services
 
 
-def parse_datasets(rdf_data: str) -> Dict[str, Dataset]:
-    datasets_graph = Graph().parse(data=rdf_data, format="turtle")
+def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Dataset]:
+    datasets_graph = Graph().parse(data=rdf_data, format=rdf_format)
     fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format="turtle")
     reference_data = get_dataset_reference_data()
 
@@ -103,12 +105,14 @@ def parse_datasets(rdf_data: str) -> Dict[str, Dataset]:
     return datasets
 
 
-def parse_information_models(info_models_rdf: str) -> Dict[str, InformationModel]:
+def parse_information_models(
+    info_models_rdf: str, rdf_format: str = "turtle"
+) -> Dict[str, InformationModel]:
     info_models: Dict[str, InformationModel] = {}
     fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format="turtle")
     reference_data = get_info_model_reference_data()
 
-    info_models_graph = Graph().parse(data=info_models_rdf, format="turtle")
+    info_models_graph = Graph().parse(data=info_models_rdf, format=rdf_format)
 
     for record_uri in info_models_graph.subjects(
         predicate=RDF.type, object=dcat_uri("CatalogRecord")
@@ -142,10 +146,12 @@ def parse_information_models(info_models_rdf: str) -> Dict[str, InformationModel
     return info_models
 
 
-def parse_public_services(public_service_rdf: str) -> Dict[str, PublicService]:
+def parse_public_services(
+    public_service_rdf: str, rdf_format: str = "turtle"
+) -> Dict[str, PublicService]:
     public_services: Dict[str, PublicService] = {}
 
-    public_services_graph = Graph().parse(data=public_service_rdf, format="turtle")
+    public_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
     for catalog_record_uri in public_services_graph.subjects(
         predicate=RDF.type, object=dcat_uri("CatalogRecord")

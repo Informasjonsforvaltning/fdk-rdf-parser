@@ -540,6 +540,96 @@ def test_elements_are_not_added_twice() -> None:
     assert input_model == expected
 
 
+def test_parse_handles_escaped_double_quote(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
+
+    src = """
+<rdf:RDF
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:modelldcatno="https://data.norge.no/vocabulary/modelldcatno#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:digdir="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <dcat:CatalogRecord rdf:about="https://informationmodels.staging.fellesdatakatalog.digdir.no/informationmodels/77e07f69-5fb4-30c7-afca-bffe179dc3b3">
+    <foaf:primaryTopic>
+      <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell">
+        <dct:description xml:lang="nb">handles escaped \"double quote\"</dct:description>
+        <rdf:type rdf:resource="https://data.norge.no/vocabulary/modelldcatno#InformationModel"/>
+      </owl:NamedIndividual>
+    </foaf:primaryTopic>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-10-13T11:35:47.394Z</dct:modified>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-10-13T11:35:47.394Z</dct:issued>
+    <dct:isPartOf rdf:resource="https://informationmodels.staging.fellesdatakatalog.digdir.no/catalogs/03953a9d-5b6b-34ec-b41c-dcdcb21874d9"/>
+    <dct:identifier>77e07f69-5fb4-30c7-afca-bffe179dc3b3</dct:identifier>
+  </dcat:CatalogRecord>
+</rdf:RDF>"""
+
+    expected = {
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
+            description={"nb": 'handles escaped "double quote"'},
+            descriptionFormatted={"nb": 'handles escaped "double quote"'},
+            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
+            id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+            ),
+            type="informationmodels",
+        )
+    }
+
+    assert parse_information_models(src, rdf_format="xml") == expected
+
+
+def test_parse_handles_newline(mock_organizations_and_reference_data: Mock,) -> None:
+
+    src = """
+<rdf:RDF
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:modelldcatno="https://data.norge.no/vocabulary/modelldcatno#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:digdir="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <dcat:CatalogRecord rdf:about="https://informationmodels.staging.fellesdatakatalog.digdir.no/informationmodels/77e07f69-5fb4-30c7-afca-bffe179dc3b3">
+    <foaf:primaryTopic>
+      <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell">
+        <dct:description xml:lang="nb">handles \n newline</dct:description>
+        <rdf:type rdf:resource="https://data.norge.no/vocabulary/modelldcatno#InformationModel"/>
+      </owl:NamedIndividual>
+    </foaf:primaryTopic>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-10-13T11:35:47.394Z</dct:modified>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-10-13T11:35:47.394Z</dct:issued>
+    <dct:isPartOf rdf:resource="https://informationmodels.staging.fellesdatakatalog.digdir.no/catalogs/03953a9d-5b6b-34ec-b41c-dcdcb21874d9"/>
+    <dct:identifier>77e07f69-5fb4-30c7-afca-bffe179dc3b3</dct:identifier>
+  </dcat:CatalogRecord>
+</rdf:RDF>"""
+
+    expected = {
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
+            description={"nb": "handles \n newline"},
+            descriptionFormatted={"nb": "handles \n newline"},
+            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
+            id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+            ),
+            type="informationmodels",
+        )
+    }
+
+    assert parse_information_models(src, rdf_format="xml") == expected
+
+
 def test_elements_from_properties_are_added_to_model() -> None:
     src = """@prefix owl:   <http://www.w3.org/2002/07/owl#> .
     @prefix dct:   <http://purl.org/dc/terms/> .
