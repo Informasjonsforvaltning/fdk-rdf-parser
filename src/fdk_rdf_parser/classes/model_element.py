@@ -22,7 +22,9 @@ class ModelCodeElement:
     altLabel: Optional[Dict[str, str]] = None
 
     def __lt__(self: Any, other: Any) -> bool:
-        return self.identifier < other.identifier
+        self_identifier = self.identifier if self.identifier else ""
+        other_identifier = other.identifier if other.identifier else ""
+        return self_identifier < other_identifier
 
 
 @dataclass
