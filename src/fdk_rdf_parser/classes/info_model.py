@@ -55,10 +55,12 @@ class InformationModel(PartialDcatResource):
         if self.modelElements is None:
             self.modelElements = {}
 
-        self.modelElements[element.identifier] = element
+        element_key = element.uri if element.uri else element.identifier
+        self.modelElements[element_key] = element
 
     def add_model_property(self: Any, prop: ModelProperty) -> Any:
         if self.modelProperties is None:
             self.modelProperties = {}
 
-        self.modelProperties[prop.identifier] = prop
+        prop_key = prop.uri if prop.uri else prop.identifier
+        self.modelProperties[prop_key] = prop

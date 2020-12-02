@@ -380,7 +380,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                     sequenceNumber=3,
                     hasValueFrom="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
                 ),
-                "sivilstand": ModelProperty(
+                "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#sivilstand": ModelProperty(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#sivilstand",
                     identifier="sivilstand",
                     title={"nb": "sivilstand"},
@@ -416,6 +416,10 @@ def test_handles_missing_elements() -> None:
             modelldcatno:containsModelElement
                     [ a                modelldcatno:ObjectType , <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#EditorialObject> , owl:NamedIndividual ;
                       dct:identifier   "http://example.com/test_abstraksjon#EBU_EditorialObject" ;
+                      modelldcatno:hasProperty  [ a owl:NamedIndividual , modelldcatno:Attribute ;
+                                                  dct:title                    "kjønn"@nb ] ] ;
+            modelldcatno:containsModelElement
+                    [ a                modelldcatno:ObjectType , <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#EditorialObject> , owl:NamedIndividual ;
                       modelldcatno:hasProperty  digdir:kjønn ] ;
             modelldcatno:containsModelElement
                     digdir:Kjønn ;
@@ -442,6 +446,9 @@ def test_handles_missing_elements() -> None:
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#ObjectType",
                 ],
+            ),
+            "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn": ModelElement(
+                uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn"
             ),
         },
     )
@@ -655,7 +662,7 @@ def test_elements_from_properties_are_added_to_model() -> None:
         harvest=HarvestMetaData(),
         informationModelIdentifier="https://www.digdir.no/diversemodell",
         modelElements={
-            "missing-element": ModelElement(
+            "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn": ModelElement(
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
                 identifier="missing-element",
                 title={"en": "Sex", "nn": "Kjønn", "nb": "Kjønn"},
