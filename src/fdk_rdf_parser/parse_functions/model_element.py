@@ -61,6 +61,7 @@ def parse_model_code_list(
     for code_ref in graph.subjects(SKOS.inScheme, element_ref):
         codes.append(
             ModelCodeElement(
+                uri=code_ref.toPython() if isinstance(code_ref, URIRef) else None,
                 identifier=object_value(graph, code_ref, DCTERMS.identifier),
                 prefLabel=value_translations(graph, code_ref, SKOS.prefLabel),
                 inScheme=value_list(graph, code_ref, SKOS.inScheme),

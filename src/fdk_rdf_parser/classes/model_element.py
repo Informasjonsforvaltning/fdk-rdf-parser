@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Optional
 
 @dataclass
 class ModelCodeElement:
+    uri: Optional[str] = None
     identifier: Optional[str] = None
     prefLabel: Optional[Dict[str, str]] = None
     inScheme: Optional[List[str]] = None

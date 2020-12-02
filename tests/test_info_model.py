@@ -342,6 +342,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                     ],
                     codes=[
                         ModelCodeElement(
+                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kvinne",
                             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kvinne",
                             prefLabel={"en": "woman", "nn": "kvinne", "nb": "kvinne"},
                             inScheme=[
@@ -355,6 +356,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                             ],
                         ),
                         ModelCodeElement(
+                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Mann",
                             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Mann",
                             prefLabel={"en": "man", "nb": "mann"},
                             inScheme=[
