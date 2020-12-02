@@ -3,10 +3,10 @@ from rdflib.namespace import DCTERMS, RDF, XSD
 
 from fdk_rdf_parser.classes.model_property import ModelProperty
 from fdk_rdf_parser.rdf_utils import (
-    identifier_list,
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    uri_or_identifier_list,
     value_list,
     value_translations,
 )
@@ -52,7 +52,7 @@ def parse_model_property(graph: Graph, prop_ref: URIRef) -> ModelProperty:
         belongsToModule=object_value(
             graph, prop_ref, model_dcat_ap_no_uri("belongsToModule")
         ),
-        hasType=identifier_list(graph, has_type_refs),
+        hasType=uri_or_identifier_list(graph, has_type_refs),
         formsSymmetryWith=object_value(graph, symmetry_ref, DCTERMS.identifier),
         hasDataType=object_value(graph, data_type_ref, DCTERMS.identifier),
         hasSimpleType=object_value(graph, simple_type_ref, DCTERMS.identifier),
@@ -60,7 +60,7 @@ def parse_model_property(graph: Graph, prop_ref: URIRef) -> ModelProperty:
         hasValueFrom=object_value(graph, value_from_ref, DCTERMS.identifier),
         isAbstractionOf=object_value(graph, abstraction_ref, DCTERMS.identifier),
         refersTo=object_value(graph, refers_to_ref, DCTERMS.identifier),
-        hasSome=identifier_list(graph, has_some_refs),
+        hasSome=uri_or_identifier_list(graph, has_some_refs),
         hasMember=object_value(graph, member_ref, DCTERMS.identifier),
         contains=object_value(graph, contains_ref, DCTERMS.identifier),
         hasSupplier=object_value(graph, supplier_ref, DCTERMS.identifier),
