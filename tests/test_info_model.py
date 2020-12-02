@@ -323,7 +323,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                     },
                     hasProperty=[
                         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#kjønn",
-                        "sivilstand",
+                        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#sivilstand",
                         "statsborgerskap",
                     ],
                     elementTypes=[
@@ -436,7 +436,8 @@ def test_handles_missing_elements() -> None:
         harvest=HarvestMetaData(),
         informationModelIdentifier="https://www.digdir.no/diversemodell",
         containsModelElements=[
-            "http://example.com/test_abstraksjon#EBU_EditorialObject"
+            "http://example.com/test_abstraksjon#EBU_EditorialObject",
+            "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
         ],
         modelElements={
             "http://example.com/test_abstraksjon#EBU_EditorialObject": ModelElement(

@@ -6,10 +6,10 @@ from fdk_rdf_parser.classes.model_element import (
     ModelElement,
 )
 from fdk_rdf_parser.rdf_utils import (
-    identifier_list,
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    uri_or_identifier_list,
     value_list,
     value_translations,
     xkos_uri,
@@ -40,7 +40,7 @@ def parse_model_element(graph: Graph, element_ref: URIRef) -> ModelElement:
         belongsToModule=object_value(
             graph, element_ref, model_dcat_ap_no_uri("belongsToModule")
         ),
-        hasProperty=identifier_list(graph, has_property_refs),
+        hasProperty=uri_or_identifier_list(graph, has_property_refs),
     )
 
     if element.elementTypes is None:

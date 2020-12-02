@@ -21,10 +21,10 @@ from .utils import (
     catalog_ref,
     date_list,
     date_value,
-    identifier_list,
     is_type,
     object_value,
     resource_list,
+    uri_or_identifier_list,
     value_list,
     value_translations,
 )

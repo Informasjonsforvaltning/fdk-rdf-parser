@@ -7,10 +7,10 @@ from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     catalog_ref,
-    identifier_list,
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    uri_or_identifier_list,
     value_list,
 )
 from .catalog import parse_catalog
@@ -49,7 +49,7 @@ def parse_information_model(
         status=object_value(graph, info_model_uri, adms_uri("status")),
         versionInfo=object_value(graph, info_model_uri, OWL.versionInfo),
         versionNotes=object_value(graph, info_model_uri, OWL.versionNotes),
-        containsModelElements=identifier_list(graph, model_element_refs),
+        containsModelElements=uri_or_identifier_list(graph, model_element_refs),
     )
 
     info_model.add_values_from_dcat_resource(
