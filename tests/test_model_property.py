@@ -61,7 +61,7 @@ def test_parse_property_type_note() -> None:
             "https://data.norge.no/vocabulary/modelldcatno#Attribute",
             "https://data.norge.no/vocabulary/modelldcatno#Note",
         ],
-        hasSimpleType="groenn",
+        hasSimpleType="https://testdirektoratet.no/model#groenn",
     )
 
     graph = Graph().parse(data=src, format="turtle")
@@ -95,5 +95,85 @@ def test_parse_property_type_abstraction() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model#lapp")
+
+    assert parse_model_property(graph, subject) == expected
+
+
+def test_parse_has_data_type() -> None:
+    src = """
+    @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
+    @prefix testdir: <https://testdirektoratet.no/model#> .
+
+    testdir:gyldighetsperiode
+        a                         owl:NamedIndividual , modelldcatno:Role ;
+        modelldcatno:hasDataType  testdir:Periode ."""
+
+    expected = ModelProperty(
+        uri="https://testdirektoratet.no/model#gyldighetsperiode",
+        hasDataType="https://testdirektoratet.no/model#Periode",
+        propertyTypes=[
+            "http://www.w3.org/2002/07/owl#NamedIndividual",
+            "https://data.norge.no/vocabulary/modelldcatno#Role",
+        ],
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model#gyldighetsperiode")
+
+    assert parse_model_property(graph, subject) == expected
+
+
+def test_parse_has_value_from_bnode() -> None:
+    src = """
+    @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
+    @prefix testdir: <https://testdirektoratet.no/model#> .
+
+    testdir:sivilstand  a                 owl:NamedIndividual , modelldcatno:Attribute ;
+        modelldcatno:hasValueFrom    [ a  owl:NamedIndividual , modelldcatno:CodeList ;
+                                       dct:identifier    "Sivilstand" ] ."""
+
+    expected = ModelProperty(
+        uri="https://testdirektoratet.no/model#sivilstand",
+        hasValueFrom="Sivilstand",
+        propertyTypes=[
+            "http://www.w3.org/2002/07/owl#NamedIndividual",
+            "https://data.norge.no/vocabulary/modelldcatno#Attribute",
+        ],
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model#sivilstand")
+
+    assert parse_model_property(graph, subject) == expected
+
+
+def test_has_value_from_not_added_when_bnode_and_missing_identifier() -> None:
+    src = """
+    @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
+    @prefix testdir: <https://testdirektoratet.no/model#> .
+
+    testdir:sivilstand  a                 owl:NamedIndividual , modelldcatno:Attribute ;
+        modelldcatno:hasValueFrom    [ a  owl:NamedIndividual , modelldcatno:CodeList ;
+                                       dct:title    "Sivilstand"@nb ] ."""
+
+    expected = ModelProperty(
+        uri="https://testdirektoratet.no/model#sivilstand",
+        propertyTypes=[
+            "http://www.w3.org/2002/07/owl#NamedIndividual",
+            "https://data.norge.no/vocabulary/modelldcatno#Attribute",
+        ],
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model#sivilstand")
 
     assert parse_model_property(graph, subject) == expected

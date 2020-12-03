@@ -10,6 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    uri_or_identifier,
     uri_or_identifier_list,
     value_list,
 )
@@ -66,11 +67,7 @@ def add_elements_to_model(
 ) -> InformationModel:
     for element_ref in element_refs:
 
-        element_id_optional = (
-            element_ref.toPython()
-            if isinstance(element_ref, URIRef)
-            else object_value(graph, element_ref, DCTERMS.identifier)
-        )
+        element_id_optional = uri_or_identifier(graph, element_ref)
         if element_id_optional:
             element_id = str(element_id_optional)
             if (
@@ -94,11 +91,7 @@ def add_properties_to_model(
 ) -> InformationModel:
     for prop_ref in prop_refs:
 
-        prop_id_optional = (
-            prop_ref.toPython()
-            if isinstance(prop_ref, URIRef)
-            else object_value(graph, prop_ref, DCTERMS.identifier)
-        )
+        prop_id_optional = uri_or_identifier(graph, prop_ref)
         if prop_id_optional:
             prop_id = str(prop_id_optional)
             if (

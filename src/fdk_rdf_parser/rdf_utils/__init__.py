@@ -24,6 +24,7 @@ from .utils import (
     is_type,
     object_value,
     resource_list,
+    uri_or_identifier,
     uri_or_identifier_list,
     value_list,
     value_translations,

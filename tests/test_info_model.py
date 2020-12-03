@@ -685,7 +685,7 @@ def test_elements_from_properties_are_added_to_model() -> None:
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#Attribute",
                 ],
-                hasValueFrom="missing-element",
+                hasValueFrom="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
             )
         },
     )

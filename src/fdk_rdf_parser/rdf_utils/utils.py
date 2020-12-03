@@ -51,15 +51,19 @@ def resource_list(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]
 def uri_or_identifier_list(graph: Graph, subjects: List[URIRef]) -> Optional[List[str]]:
     values = []
     for subject_ref in subjects:
-        uri_or_identifier = (
-            subject_ref
-            if isinstance(subject_ref, URIRef)
-            else graph.value(subject_ref, DCTERMS.identifier)
-        )
-        if uri_or_identifier:
-            values.append(uri_or_identifier.toPython())
+        value = uri_or_identifier(graph, subject_ref)
+        if value:
+            values.append(value)
     values.sort()
     return values if len(values) > 0 else None
+
+
+def uri_or_identifier(graph: Graph, subject: URIRef) -> Optional[str]:
+    return (
+        subject.toPython()
+        if isinstance(subject, URIRef)
+        else object_value(graph, subject, DCTERMS.identifier)
+    )
 
 
 def date_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
