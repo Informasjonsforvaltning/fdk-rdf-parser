@@ -26,6 +26,16 @@
         }
     },
     {
+        "uri": "http://publications.europa.eu/resource/authority/language/NNO",
+        "code": "NNO",
+        "prefLabel": {
+            "en": "Norwegian Nynorsk",
+            "nb": "Norsk Nynorsk",
+            "nn": "Norsk Nynorsk",
+            "no": "Norsk Nynorsk"
+        }
+    },
+    {
         "uri": "http://publications.europa.eu/resource/authority/language/NOR",
         "code": "NOR",
         "prefLabel": {
