@@ -14,7 +14,7 @@ def tests(session: Session) -> None:
     env = {
         "ORGANIZATION_CATALOGUE_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
     }
-    nox_poetry.install(session, nox_poetry.WHEEL)
+    nox_poetry.installroot(session, distribution_format=nox_poetry.WHEEL)
     nox_poetry.install(session, "coverage[toml]", "pytest", "pytest-cov", "pytest-mock")
     session.run("pytest", env=env, *args)
 
