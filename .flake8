@@ -2,6 +2,6 @@
 select = ANN,B,B9,BLK,C,E,F,I,S,W,N
 ignore = E203,E501,W503,S310
 max-line-length = 120
-per-file-ignores = __init__.py:F401,src/fdk_rdf_parser/classes/__init__.py:F401,tests/*:S101,B950,src/fdk_rdf_parser/classes/*:N815
+per-file-ignores = __init__.py:F401,src/fdk_rdf_parser/classes/__init__.py:F401,tests/*:S101,B950,src/fdk_rdf_parser/classes/*:N815,.nox/lint/tmp/requirements.txt
 application-import-names = fdk_rdf_parser,tests
 import-order-style = google
