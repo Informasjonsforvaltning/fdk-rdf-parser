@@ -23,9 +23,11 @@ from .reference_data import (
     extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
     extend_info_model_with_reference_data,
+    extend_public_service_with_reference_data,
     get_data_service_reference_data,
     get_dataset_reference_data,
     get_info_model_reference_data,
+    get_public_service_reference_data,
 )
 
 
@@ -151,6 +153,7 @@ def parse_public_services(
 ) -> Dict[str, PublicService]:
     public_services: Dict[str, PublicService] = {}
     fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format=rdf_format)
+    reference_data = get_public_service_reference_data()
 
     public_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
@@ -183,6 +186,10 @@ def parse_public_services(
                         ),
                     )
                 )
+
+            public_service = extend_public_service_with_reference_data(
+                public_service, reference_data
+            )
 
             public_services[primary_topic_uri.toPython()] = public_service
 

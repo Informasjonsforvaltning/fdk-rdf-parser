@@ -10,9 +10,15 @@ from fdk_rdf_parser.rdf_utils import (
     value_list,
     value_translations,
 )
+from .criterion_requirement import extract_criterion_requirements
+from .dcat_resource import extract_key_words, extract_skos_code_list
 from .event import extract_events
+from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
+from .output import extract_outputs
+from .participation import extract_participations
 from .publisher import Publisher
+from .skos_concept import extract_skos_concept
 
 
 def extract_publishers(
@@ -53,5 +59,23 @@ def parse_public_service(
             public_services_graph, public_service_uri
         ),
         harvest=extract_meta_data(public_services_graph, catalog_record_uri),
+        keyword=extract_key_words(public_services_graph, public_service_uri),
+        sector=extract_skos_concept(
+            public_services_graph, public_service_uri, cv_uri("sector")
+        ),
+        isClassifiedBy=extract_skos_concept(
+            public_services_graph, public_service_uri, cv_uri("isClassifiedBy")
+        ),
+        language=extract_skos_code_list(
+            public_services_graph, public_service_uri, DCTERMS.language
+        ),
+        hasCriterion=extract_criterion_requirements(
+            public_services_graph, public_service_uri
+        ),
+        hasParticipation=extract_participations(
+            public_services_graph, public_service_uri
+        ),
+        hasInput=extract_evidences(public_services_graph, public_service_uri),
+        produces=extract_outputs(public_services_graph, public_service_uri),
     )
     return public_service
