@@ -1,5 +1,9 @@
 from fdk_rdf_parser.classes import ConceptSchema, SkosCode, ThemeEU, ThemeLOS
-from fdk_rdf_parser.reference_data import DataServiceReferenceData, DatasetReferenceData
+from fdk_rdf_parser.reference_data import (
+    DataServiceReferenceData,
+    DatasetReferenceData,
+    PublicServiceReferenceData,
+)
 
 
 org_response_0 = """
@@ -92,6 +96,56 @@ data_service_reference_data = DataServiceReferenceData(
             uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}
         ),
     }
+)
+
+public_service_reference_data = PublicServiceReferenceData(
+    linguisticsystem={
+        "http://publications.europa.eu/resource/authority/language": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language",
+            code=None,
+            prefLabel={"en": "Languages Named Authority List"},
+        ),
+        "http://publications.europa.eu/resource/authority/language/ENG": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/ENG",
+            code="ENG",
+            prefLabel={
+                "en": "English",
+                "nb": "Engelsk",
+                "nn": "Engelsk",
+                "no": "Engelsk",
+            },
+        ),
+        "http://publications.europa.eu/resource/authority/language/NOB": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/NOB",
+            code="NOB",
+            prefLabel={
+                "en": "Norwegian Bokmål",
+                "nb": "Norsk Bokmål",
+                "nn": "Norsk Bokmål",
+                "no": "Norsk Bokmål",
+            },
+        ),
+        "http://publications.europa.eu/resource/authority/language/NNO": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/NNO",
+            code="NNO",
+            prefLabel={
+                "en": "Norwegian Nynorsk",
+                "nb": "Norsk Nynorsk",
+                "nn": "Norsk Nynorsk",
+                "no": "Norsk Nynorsk",
+            },
+        ),
+        "http://publications.europa.eu/resource/authority/language/NOR": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/NOR",
+            code="NOR",
+            prefLabel={"nb": "Norsk", "nn": "Norsk", "no": "Norsk", "en": "Norwegian"},
+        ),
+        "http://publications.europa.eu/resource/authority/language/SMI": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/SMI",
+            code="SMI",
+            prefLabel={"en": "Sami languages"},
+        ),
+    },
 )
 
 dataset_reference_data = DatasetReferenceData(
@@ -208,6 +262,16 @@ dataset_reference_data = DatasetReferenceData(
                 "nb": "Norsk Bokmål",
                 "nn": "Norsk Bokmål",
                 "no": "Norsk Bokmål",
+            },
+        ),
+        "http://publications.europa.eu/resource/authority/language/NNO": SkosCode(
+            uri="http://publications.europa.eu/resource/authority/language/NNO",
+            code="NNO",
+            prefLabel={
+                "en": "Norwegian Nynorsk",
+                "nb": "Norsk Nynorsk",
+                "nn": "Norsk Nynorsk",
+                "no": "Norsk Nynorsk",
             },
         ),
         "http://publications.europa.eu/resource/authority/language/NOR": SkosCode(

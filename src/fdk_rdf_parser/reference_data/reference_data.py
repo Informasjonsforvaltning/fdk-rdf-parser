@@ -33,6 +33,11 @@ class InformationModelReferenceData:
     los_themes: Optional[Dict[str, ThemeLOS]] = None
 
 
+@dataclass
+class PublicServiceReferenceData:
+    linguisticsystem: Optional[Dict[str, SkosCode]] = None
+
+
 def get_data_service_reference_data() -> DataServiceReferenceData:
     return DataServiceReferenceData(media_types=get_and_map_media_types())
 
@@ -58,6 +63,12 @@ def get_info_model_reference_data() -> InformationModelReferenceData:
         location=get_and_map_reference_codes("location"),
         eu_themes=get_and_map_themes_eu(),
         los_themes=get_and_map_themes_los(),
+    )
+
+
+def get_public_service_reference_data() -> PublicServiceReferenceData:
+    return PublicServiceReferenceData(
+        linguisticsystem=get_and_map_reference_codes("linguisticsystem")
     )
 
 
