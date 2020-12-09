@@ -10,7 +10,8 @@ def get_rdf_org_data(orgnr: Optional[str]) -> Optional[str]:
 
     try:
         response = requests.get(
-            organization_url(orgnr), headers={"Accept": "text/turtle"},
+            organization_url(orgnr),
+            headers={"Accept": "text/turtle"},
         )
         response.raise_for_status()
 
@@ -24,7 +25,10 @@ def get_rdf_org_data(orgnr: Optional[str]) -> Optional[str]:
 def get_org_path(org: str) -> Optional[str]:
 
     try:
-        response = requests.get(org_path_url(org), headers={"Accept": "text/plain"},)
+        response = requests.get(
+            org_path_url(org),
+            headers={"Accept": "text/plain"},
+        )
         response.raise_for_status()
 
         return response.text

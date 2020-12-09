@@ -88,7 +88,11 @@ def mock_reference_data_client(mocker: MockFixture) -> Mock:
 def mock_reference_data_client_http_error(mocker: MockFixture) -> Mock:
     mock = mocker.patch("requests.get")
     mock.side_effect = requests.HTTPError(
-        "reference-data-not-found", 404, "Not Found", {}, None,
+        "reference-data-not-found",
+        404,
+        "Not Found",
+        {},
+        None,
     )
     return mock
 

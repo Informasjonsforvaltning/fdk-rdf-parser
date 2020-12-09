@@ -165,7 +165,9 @@ def parse_public_services(
         )
 
         if primary_topic_uri and is_type(
-            cpsv_uri("PublicService"), public_services_graph, primary_topic_uri,
+            cpsv_uri("PublicService"),
+            public_services_graph,
+            primary_topic_uri,
         ):
             public_service = parse_public_service(
                 public_services_graph, catalog_record_uri, primary_topic_uri

@@ -21,7 +21,9 @@ def test_temporal_dcat() -> None:
 
     expected = [
         Temporal(
-            uri=None, endDate="2020-04-02T00:00:00", startDate="2019-04-02T00:00:00",
+            uri=None,
+            endDate="2020-04-02T00:00:00",
+            startDate="2019-04-02T00:00:00",
         )
     ]
 
@@ -84,7 +86,9 @@ def test_temporal_owl_time() -> None:
 
     expected = [
         Temporal(
-            uri=None, endDate="2046-05-12T00:00:00Z", startDate="2001-01-01T00:00:00Z",
+            uri=None,
+            endDate="2046-05-12T00:00:00Z",
+            startDate="2001-01-01T00:00:00Z",
         )
     ]
 
@@ -108,7 +112,13 @@ def test_temporal_schema() -> None:
                                 schema:startDate    "2019-04-02"^^xsd:date ;
                                 schema:endDate      "2020-04-02"^^xsd:date] ."""
 
-    expected = [Temporal(uri=None, endDate="2020-04-02", startDate="2019-04-02",)]
+    expected = [
+        Temporal(
+            uri=None,
+            endDate="2020-04-02",
+            startDate="2019-04-02",
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")

@@ -103,7 +103,12 @@ def test_telephone_and_email_is_nodes() -> None:
             a               vcard:TelephoneType ;
             vcard:hasValue  <tel:99999999> ."""
 
-    expected = [ContactPoint(email="post@mail.com", hasTelephone="99999999",)]
+    expected = [
+        ContactPoint(
+            email="post@mail.com",
+            hasTelephone="99999999",
+        )
+    ]
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")

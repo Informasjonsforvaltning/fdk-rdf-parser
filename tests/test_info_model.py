@@ -594,7 +594,9 @@ def test_parse_handles_escaped_double_quote(
     assert parse_information_models(src, rdf_format="xml") == expected
 
 
-def test_parse_handles_newline(mock_organizations_and_reference_data: Mock,) -> None:
+def test_parse_handles_newline(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
     src = """
 <rdf:RDF
     xmlns:dct="http://purl.org/dc/terms/"
