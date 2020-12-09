@@ -269,12 +269,12 @@ def test_parse_dataset() -> None:
             firstHarvested="2020-03-12T11:52:16Z",
             changed=["2020-03-12T11:52:16Z", "2020-03-13"],
         ),
-        identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
+        identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
         uri="https://testdirektoratet.no/model/dataset/0",
         publisher=Publisher(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
-        page=["https://testdirektoratet.no"],
+        page={"https://testdirektoratet.no"},
         subject=[
             Subject(uri="https://testdirektoratet.no/model/concept/0"),
             Subject(uri="https://testdirektoratet.no/model/concept/1"),
@@ -495,7 +495,7 @@ def test_distribution_and_sample() -> None:
                             "http://creativecommons.org/publicdomain/zero/1.0/"
                         ] ;
                       dct:type         "Feed" ;
-                      dcat:accessURL   <https://distribusjonsentralen.no> ;
+                      dcat:accessURL   <https://distribusjonsentralen.no> , [ ] ;
                       foaf:page        [ a           foaf:Document , skos:Concept ;
                                          dct:source  "https://dokumentsjon.com"
                                        ]
@@ -507,8 +507,8 @@ def test_distribution_and_sample() -> None:
         sample=[
             Distribution(
                 description={"nb": "adsgjkv  cghj     dghdh"},
-                format=["application/ATF"],
-                accessURL=["https://application/ATF.com"],
+                format={"application/ATF"},
+                accessURL={"https://application/ATF.com"},
             )
         ],
         distribution=[
@@ -521,7 +521,7 @@ def test_distribution_and_sample() -> None:
                     )
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
-                format=["application/ATF"],
+                format={"application/ATF"},
                 license=[
                     SkosConcept(
                         uri="http://creativecommons.org/publicdomain/zero/1.0/",
@@ -529,7 +529,7 @@ def test_distribution_and_sample() -> None:
                     )
                 ],
                 type="Feed",
-                accessURL=["https://distribusjonsentralen.no"],
+                accessURL={"https://distribusjonsentralen.no"},
                 page=[
                     SkosConcept(
                         uri="https://dokumentsjon.com",
@@ -662,7 +662,7 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
             distribution=[
                 Distribution(
                     uri="https://example.com/open-distribution",
-                    accessURL=["http://example.com/access-url"],
+                    accessURL={"http://example.com/access-url"},
                     license=[
                         SkosConcept(
                             uri="https://data.norge.no/nlod/",
@@ -672,7 +672,7 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                         )
                     ],
                     openLicense=True,
-                    format=["HTML"],
+                    format={"HTML"},
                 )
             ],
         ),

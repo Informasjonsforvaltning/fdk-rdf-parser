@@ -96,9 +96,9 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
 
     expected = {
         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
-            identifier=[
+            identifier={
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
-            ],
+            },
             publisher=Publisher(
                 uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
@@ -162,9 +162,9 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                     startDate="2016-02-11T00:00:00+01:00",
                 )
             ],
-            hasFormat=[
+            hasFormat={
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#AlternativModellformat"
-            ],
+            },
             homepage="https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell",
             status="http://purl.org/adms/status/Completed",
             versionInfo="1.0",
@@ -325,45 +325,45 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#sivilstand",
                         "statsborgerskap",
                     ],
-                    elementTypes=[
+                    elementTypes={
                         "http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#EditorialObject",
                         "http://www.w3.org/2002/07/owl#NamedIndividual",
                         "https://data.norge.no/vocabulary/modelldcatno#ObjectType",
-                    ],
+                    },
                 ),
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn": ModelElement(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
                     identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
                     title={"nb": "Kjønn", "en": "Sex", "nn": "Kjønn"},
-                    elementTypes=[
+                    elementTypes={
                         "http://www.w3.org/2002/07/owl#NamedIndividual",
                         "https://data.norge.no/vocabulary/modelldcatno#CodeList",
-                    ],
+                    },
                     codes=[
                         ModelCodeElement(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kvinne",
                             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kvinne",
                             prefLabel={"en": "woman", "nn": "kvinne", "nb": "kvinne"},
-                            inScheme=[
+                            inScheme={
                                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn"
-                            ],
-                            topConceptOf=[
+                            },
+                            topConceptOf={
                                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn"
-                            ],
-                            nextElement=[
+                            },
+                            nextElement={
                                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Mann"
-                            ],
+                            },
                         ),
                         ModelCodeElement(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Mann",
                             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Mann",
                             prefLabel={"en": "man", "nb": "mann"},
-                            inScheme=[
+                            inScheme={
                                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn"
-                            ],
-                            nextElement=[
+                            },
+                            nextElement={
                                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Ubestemt"
-                            ],
+                            },
                         ),
                     ],
                 ),
@@ -373,10 +373,10 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#kjønn",
                     identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#kjønn",
                     title={"nb": "kjønn"},
-                    propertyTypes=[
+                    propertyTypes={
                         "http://www.w3.org/2002/07/owl#NamedIndividual",
                         "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-                    ],
+                    },
                     maxOccurs=1,
                     sequenceNumber=3,
                     hasValueFrom="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
@@ -385,18 +385,18 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#sivilstand",
                     identifier="sivilstand",
                     title={"nb": "sivilstand"},
-                    propertyTypes=[
+                    propertyTypes={
                         "http://www.w3.org/2002/07/owl#NamedIndividual",
                         "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-                    ],
+                    },
                 ),
                 "statsborgerskap": ModelProperty(
                     identifier="statsborgerskap",
                     title={"nb": "statsborgerskap"},
-                    propertyTypes=[
+                    propertyTypes={
                         "http://www.w3.org/2002/07/owl#NamedIndividual",
                         "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-                    ],
+                    },
                 ),
             },
             type="informationmodels",
@@ -443,11 +443,11 @@ def test_handles_missing_elements() -> None:
         modelElements={
             "http://example.com/test_abstraksjon#EBU_EditorialObject": ModelElement(
                 identifier="http://example.com/test_abstraksjon#EBU_EditorialObject",
-                elementTypes=[
+                elementTypes={
                     "http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#EditorialObject",
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#ObjectType",
-                ],
+                },
             ),
             "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn": ModelElement(
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn"
@@ -668,10 +668,10 @@ def test_elements_from_properties_are_added_to_model() -> None:
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
                 identifier="missing-element",
                 title={"en": "Sex", "nn": "Kjønn", "nb": "Kjønn"},
-                elementTypes=[
+                elementTypes={
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#CodeList",
-                ],
+                },
                 codes=[],
             )
         },
@@ -680,10 +680,10 @@ def test_elements_from_properties_are_added_to_model() -> None:
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#kjønn",
                 identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#kjønn",
                 title={"nb": "kjønn"},
-                propertyTypes=[
+                propertyTypes={
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-                ],
+                },
                 hasValueFrom="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Kjønn",
             )
         },
@@ -730,10 +730,10 @@ def test_subjects_from_elements_and_properties_added_to_contains_subjects() -> N
     expected = InformationModel(
         uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
         harvest=HarvestMetaData(),
-        subjects=[
+        subjects={
             "http://example.com/test_abstraksjon#begrep0",
             "http://example.com/test_abstraksjon#begrep1",
-        ],
+        },
         containsSubjects={
             "http://example.com/test_abstraksjon#begrep0",
             "http://example.com/test_abstraksjon#begrep1",
@@ -746,20 +746,20 @@ def test_subjects_from_elements_and_properties_added_to_contains_subjects() -> N
                 uri="http://example.com/test_abstraksjon#Elm",
                 subject="http://example.com/test_abstraksjon#begrep2",
                 hasProperty=["http://example.com/test_abstraksjon#prop"],
-                elementTypes=[
+                elementTypes={
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#ObjectType",
-                ],
+                },
             )
         },
         modelProperties={
             "http://example.com/test_abstraksjon#prop": ModelProperty(
                 uri="http://example.com/test_abstraksjon#prop",
                 subject="http://example.com/test_abstraksjon#begrep3",
-                propertyTypes=[
+                propertyTypes={
                     "http://www.w3.org/2002/07/owl#NamedIndividual",
                     "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-                ],
+                },
             )
         },
         type="informationmodels",

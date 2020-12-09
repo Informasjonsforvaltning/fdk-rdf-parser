@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from isodate import date_isoformat, datetime_isoformat
 from rdflib import BNode, Graph, URIRef
@@ -25,6 +25,14 @@ def value_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Lis
         if not isinstance(obj, BNode):
             values.append(obj.toPython())
     values.sort()
+    return values if len(values) > 0 else None
+
+
+def value_set(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Set[Any]]:
+    values = set()
+    for obj in graph.objects(subject, predicate):
+        if not isinstance(obj, BNode):
+            values.add(obj.toPython())
     return values if len(values) > 0 else None
 
 

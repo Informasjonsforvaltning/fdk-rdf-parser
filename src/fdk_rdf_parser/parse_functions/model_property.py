@@ -8,7 +8,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     uri_or_identifier,
     uri_or_identifier_list,
-    value_list,
+    value_set,
     value_translations,
 )
 
@@ -38,7 +38,7 @@ def parse_model_property(graph: Graph, prop_ref: URIRef) -> ModelProperty:
     return ModelProperty(
         uri=prop_uri,
         identifier=object_value(graph, prop_ref, DCTERMS.identifier),
-        propertyTypes=value_list(graph, prop_ref, RDF.type),
+        propertyTypes=value_set(graph, prop_ref, RDF.type),
         title=value_translations(graph, prop_ref, DCTERMS.title),
         description=value_translations(graph, prop_ref, DCTERMS.description),
         subject=object_value(graph, prop_ref, DCTERMS.subject),

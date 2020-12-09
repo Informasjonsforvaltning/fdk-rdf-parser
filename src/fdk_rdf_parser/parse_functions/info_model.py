@@ -12,7 +12,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     uri_or_identifier,
     uri_or_identifier_list,
-    value_list,
+    value_set,
 )
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
@@ -27,7 +27,7 @@ def parse_information_model(
     graph: Graph, fdk_record_uri: URIRef, info_model_uri: URIRef
 ) -> InformationModel:
 
-    subjects = value_list(graph, info_model_uri, DCTERMS.subject)
+    subjects = value_set(graph, info_model_uri, DCTERMS.subject)
     model_element_refs = resource_list(
         graph, info_model_uri, model_dcat_ap_no_uri("containsModelElement")
     )
@@ -46,13 +46,13 @@ def parse_information_model(
         hasPart=object_value(graph, info_model_uri, DCTERMS.hasPart),
         isReplacedBy=object_value(graph, info_model_uri, DCTERMS.isReplacedBy),
         replaces=object_value(graph, info_model_uri, DCTERMS.replaces),
-        hasFormat=value_list(graph, info_model_uri, DCTERMS.hasFormat),
+        hasFormat=value_set(graph, info_model_uri, DCTERMS.hasFormat),
         homepage=object_value(graph, info_model_uri, FOAF.homepage),
         status=object_value(graph, info_model_uri, adms_uri("status")),
         versionInfo=object_value(graph, info_model_uri, OWL.versionInfo),
         versionNotes=object_value(graph, info_model_uri, OWL.versionNotes),
         subjects=subjects,
-        containsSubjects=set(subjects) if subjects else None,
+        containsSubjects=subjects.copy() if subjects else None,
         containsModelElements=uri_or_identifier_list(graph, model_element_refs),
     )
 

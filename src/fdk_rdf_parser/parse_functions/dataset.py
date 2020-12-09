@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
     object_value,
     prov_uri,
     value_list,
+    value_set,
     value_translations,
 )
 from .catalog import parse_catalog
@@ -33,7 +34,7 @@ def parse_dataset(
 
     dataset = PartialDataset(
         id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
-        admsIdentifier=value_list(datasets_graph, dataset_uri, adms_uri("identifier")),
+        admsIdentifier=value_set(datasets_graph, dataset_uri, adms_uri("identifier")),
         harvest=extract_meta_data(datasets_graph, record_uri),
         accessRightsComment=value_list(
             datasets_graph, dataset_uri, dcat_ap_no_uri("accessRightsComment")
@@ -47,7 +48,7 @@ def parse_dataset(
         objective=value_translations(
             datasets_graph, dataset_uri, dcat_ap_no_uri("objective")
         ),
-        page=value_list(datasets_graph, dataset_uri, FOAF.page),
+        page=value_set(datasets_graph, dataset_uri, FOAF.page),
         temporal=extract_temporal(datasets_graph, dataset_uri),
         subject=extract_subjects(datasets_graph, dataset_uri),
         provenance=extract_skos_code(datasets_graph, dataset_uri, DCTERMS.provenance),

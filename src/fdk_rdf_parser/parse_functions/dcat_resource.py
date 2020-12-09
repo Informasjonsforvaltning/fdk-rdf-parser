@@ -10,6 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     object_value,
     value_list,
+    value_set,
     value_translations,
 )
 from .contactpoint import extract_contact_points
@@ -22,7 +23,7 @@ def parse_dcat_resource(
 ) -> PartialDcatResource:
     formatted_description = value_translations(graph, subject, DCTERMS.description)
     return PartialDcatResource(
-        identifier=value_list(graph, subject, DCTERMS.identifier),
+        identifier=value_set(graph, subject, DCTERMS.identifier),
         publisher=extract_publisher(graph, subject, catalog_subject),
         title=value_translations(graph, subject, DCTERMS.title),
         description=description_html_cleaner(formatted_description)
@@ -37,7 +38,7 @@ def parse_dcat_resource(
         dctType=object_value(graph, subject, DCTERMS.type),
         issued=date_value(graph, subject, DCTERMS.issued),
         modified=date_value(graph, subject, DCTERMS.modified),
-        landingPage=value_list(graph, subject, dcat_uri("landingPage")),
+        landingPage=value_set(graph, subject, dcat_uri("landingPage")),
         language=extract_skos_code_list(graph, subject, DCTERMS.language),
     )
 

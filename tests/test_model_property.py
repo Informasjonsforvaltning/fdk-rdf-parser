@@ -57,11 +57,11 @@ def test_parse_property_type_note() -> None:
             "nb": "Fargen gjelder rammen (en note tekst)",
             "en": "The color applies to the frame (a note text)",
         },
-        propertyTypes=[
+        propertyTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#Attribute",
             "https://data.norge.no/vocabulary/modelldcatno#Note",
-        ],
+        },
         hasSimpleType="https://testdirektoratet.no/model#groenn",
     )
 
@@ -88,10 +88,10 @@ def test_parse_property_type_abstraction() -> None:
         uri="https://testdirektoratet.no/model#lapp",
         identifier="http://example.com/test_note#lapp",
         title={"nn": "Merk", "nb": "Bemerk!", "en": "Notice"},
-        propertyTypes=[
+        propertyTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#Note",
-        ],
+        },
     )
 
     graph = Graph().parse(data=src, format="turtle")
@@ -115,10 +115,10 @@ def test_parse_has_data_type() -> None:
     expected = ModelProperty(
         uri="https://testdirektoratet.no/model#gyldighetsperiode",
         hasDataType="https://testdirektoratet.no/model#Periode",
-        propertyTypes=[
+        propertyTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#Role",
-        ],
+        },
     )
 
     graph = Graph().parse(data=src, format="turtle")
@@ -142,10 +142,10 @@ def test_parse_has_value_from_bnode() -> None:
     expected = ModelProperty(
         uri="https://testdirektoratet.no/model#sivilstand",
         hasValueFrom="Sivilstand",
-        propertyTypes=[
+        propertyTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-        ],
+        },
     )
 
     graph = Graph().parse(data=src, format="turtle")
@@ -168,10 +168,10 @@ def test_has_value_from_not_added_when_bnode_and_missing_identifier() -> None:
 
     expected = ModelProperty(
         uri="https://testdirektoratet.no/model#sivilstand",
-        propertyTypes=[
+        propertyTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#Attribute",
-        ],
+        },
     )
 
     graph = Graph().parse(data=src, format="turtle")

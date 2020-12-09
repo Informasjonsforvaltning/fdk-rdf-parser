@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 
 @dataclass
@@ -7,18 +7,18 @@ class ModelCodeElement:
     uri: Optional[str] = None
     identifier: Optional[str] = None
     prefLabel: Optional[Dict[str, str]] = None
-    inScheme: Optional[List[str]] = None
+    inScheme: Optional[Set[str]] = None
     subject: Optional[str] = None
     notation: Optional[str] = None
-    topConceptOf: Optional[List[str]] = None
-    definition: Optional[List[str]] = None
-    example: Optional[List[str]] = None
+    topConceptOf: Optional[Set[str]] = None
+    definition: Optional[Set[str]] = None
+    example: Optional[Set[str]] = None
     exclusionNote: Optional[Dict[str, str]] = None
-    previousElement: Optional[List[str]] = None
+    previousElement: Optional[Set[str]] = None
     hiddenLabel: Optional[Dict[str, str]] = None
     inclusionNote: Optional[Dict[str, str]] = None
     note: Optional[Dict[str, str]] = None
-    nextElement: Optional[List[str]] = None
+    nextElement: Optional[Set[str]] = None
     scopeNote: Optional[Dict[str, str]] = None
     altLabel: Optional[Dict[str, str]] = None
 
@@ -37,7 +37,7 @@ class ModelElement:
     subject: Optional[str] = None
     hasProperty: Optional[List[str]] = None
     belongsToModule: Optional[str] = None
-    elementTypes: Optional[List[str]] = None
+    elementTypes: Optional[Set[str]] = None
     codeListReference: Optional[str] = None
     codes: Optional[List[ModelCodeElement]] = None
     typeDefinitionReference: Optional[str] = None

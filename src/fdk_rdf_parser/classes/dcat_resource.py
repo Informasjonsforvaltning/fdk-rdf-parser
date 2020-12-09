@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
 from .contactpoint import ContactPoint
 from .publisher import Publisher
@@ -9,7 +9,7 @@ from .theme import ThemeEU
 
 @dataclass
 class PartialDcatResource:
-    identifier: Optional[List[str]] = None
+    identifier: Optional[Set[str]] = None
     publisher: Optional[Publisher] = None
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
@@ -22,5 +22,5 @@ class PartialDcatResource:
     dctType: Optional[str] = None
     issued: Optional[str] = None
     modified: Optional[str] = None
-    landingPage: Optional[List[str]] = None
+    landingPage: Optional[Set[str]] = None
     language: Optional[List[SkosCode]] = None
