@@ -210,7 +210,11 @@ def test_parse_multiple_data_services(
             ),
             title={"nb": "Testing Testing"},
             uri="https://testutgiver.no/dataservices/1",
-            contactPoint=[ContactPoint(fullname="Contact information",)],
+            contactPoint=[
+                ContactPoint(
+                    fullname="Contact information",
+                )
+            ],
             id="1",
             harvest=HarvestMetaData(
                 firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]

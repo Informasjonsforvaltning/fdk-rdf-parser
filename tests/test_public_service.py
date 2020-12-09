@@ -15,7 +15,9 @@ from fdk_rdf_parser.classes import (
 )
 
 
-def test_complete_public_services(mock_organizations_and_reference_data: Mock,) -> None:
+def test_complete_public_services(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
     src = """
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .

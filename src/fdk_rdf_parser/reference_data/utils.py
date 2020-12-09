@@ -28,7 +28,8 @@ def extend_reference_types(
 
 
 def split_los_from_eu_themes(
-    themes: Optional[List[ThemeEU]], los: Optional[Dict[str, ThemeLOS]],
+    themes: Optional[List[ThemeEU]],
+    los: Optional[Dict[str, ThemeLOS]],
 ) -> Dict[str, List[ThemeEU]]:
     split_themes: Dict[str, List[ThemeEU]] = {"los": [], "eu": []}
     if themes is None:

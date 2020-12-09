@@ -58,7 +58,9 @@ def parse_information_model(
 
     info_model.add_values_from_dcat_resource(
         parse_dcat_resource(
-            graph, info_model_uri, catalog_subject=catalog_ref(graph, fdk_record_uri),
+            graph,
+            info_model_uri,
+            catalog_subject=catalog_ref(graph, fdk_record_uri),
         )
     )
 

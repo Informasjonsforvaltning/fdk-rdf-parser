@@ -115,7 +115,9 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
     assert parse_datasets(src) == expected
 
 
-def test_adds_catalog_to_dataset(mock_organizations_and_reference_data: Mock,) -> None:
+def test_adds_catalog_to_dataset(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
 
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .

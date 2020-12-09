@@ -20,7 +20,9 @@ def test_handles_missing_references() -> None:
 
 
 def test_handles_empty_media_type() -> None:
-    parsed_data_service = DataService(mediaType=[SkosCode()],)
+    parsed_data_service = DataService(
+        mediaType=[SkosCode()],
+    )
 
     assert (
         extend_data_service_with_reference_data(
