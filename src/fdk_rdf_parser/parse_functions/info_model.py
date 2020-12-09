@@ -27,6 +27,7 @@ def parse_information_model(
     graph: Graph, fdk_record_uri: URIRef, info_model_uri: URIRef
 ) -> InformationModel:
 
+    subjects = value_list(graph, info_model_uri, DCTERMS.subject)
     model_element_refs = resource_list(
         graph, info_model_uri, model_dcat_ap_no_uri("containsModelElement")
     )
@@ -50,6 +51,8 @@ def parse_information_model(
         status=object_value(graph, info_model_uri, adms_uri("status")),
         versionInfo=object_value(graph, info_model_uri, OWL.versionInfo),
         versionNotes=object_value(graph, info_model_uri, OWL.versionNotes),
+        subjects=subjects,
+        containsSubjects=set(subjects) if subjects else None,
         containsModelElements=uri_or_identifier_list(graph, model_element_refs),
     )
 

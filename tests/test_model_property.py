@@ -1,5 +1,6 @@
 from rdflib import Graph, URIRef
 
+from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.classes.model_property import ModelProperty
 from fdk_rdf_parser.parse_functions.model_property import parse_model_property
 
@@ -177,3 +178,18 @@ def test_has_value_from_not_added_when_bnode_and_missing_identifier() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model#sivilstand")
 
     assert parse_model_property(graph, subject) == expected
+
+
+def test_subject_added_to_infomodel_contains_subjects() -> None:
+    prop = ModelProperty(
+        uri="https://example.com/element", subject="https://example.com/subject"
+    )
+    expected = InformationModel(
+        containsSubjects={"https://example.com/subject"},
+        modelProperties={"https://example.com/element": prop},
+    )
+
+    infomodel = InformationModel()
+    infomodel.add_model_property(prop)
+
+    assert infomodel == expected
