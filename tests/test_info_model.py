@@ -28,7 +28,6 @@ from fdk_rdf_parser.parse_functions.info_model import (
 def test_parse_info_model_no_elements(
     mock_organizations_and_reference_data: Mock,
 ) -> None:
-
     src = """@prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -553,7 +552,6 @@ def test_elements_are_not_added_twice() -> None:
 def test_parse_handles_escaped_double_quote(
     mock_organizations_and_reference_data: Mock,
 ) -> None:
-
     src = """
 <rdf:RDF
     xmlns:dct="http://purl.org/dc/terms/"
@@ -597,7 +595,6 @@ def test_parse_handles_escaped_double_quote(
 
 
 def test_parse_handles_newline(mock_organizations_and_reference_data: Mock,) -> None:
-
     src = """
 <rdf:RDF
     xmlns:dct="http://purl.org/dc/terms/"
@@ -706,3 +703,71 @@ def test_elements_from_properties_are_added_to_model() -> None:
     input_model = add_properties_to_model(input_model, graph, props)
 
     assert input_model == expected
+
+
+def test_subjects_from_elements_and_properties_added_to_contains_subjects() -> None:
+    src = """@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+    @prefix ex-abstrakt: <http://example.com/test_abstraksjon#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
+    @prefix digdir: <https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#> .
+
+    digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
+        dct:subject             ex-abstrakt:begrep0 , ex-abstrakt:begrep1 ;
+        modelldcatno:containsModelElement
+                ex-abstrakt:Elm .
+
+    ex-abstrakt:prop  a             owl:NamedIndividual , modelldcatno:Attribute ;
+        dct:subject                   ex-abstrakt:begrep3 .
+
+    ex-abstrakt:Elm  a              modelldcatno:ObjectType , owl:NamedIndividual ;
+        modelldcatno:hasProperty      ex-abstrakt:prop ;
+        dct:subject                   ex-abstrakt:begrep2 ."""
+
+    expected = InformationModel(
+        uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
+        harvest=HarvestMetaData(),
+        subjects=[
+            "http://example.com/test_abstraksjon#begrep0",
+            "http://example.com/test_abstraksjon#begrep1",
+        ],
+        containsSubjects={
+            "http://example.com/test_abstraksjon#begrep0",
+            "http://example.com/test_abstraksjon#begrep1",
+            "http://example.com/test_abstraksjon#begrep2",
+            "http://example.com/test_abstraksjon#begrep3",
+        },
+        containsModelElements=["http://example.com/test_abstraksjon#Elm"],
+        modelElements={
+            "http://example.com/test_abstraksjon#Elm": ModelElement(
+                uri="http://example.com/test_abstraksjon#Elm",
+                subject="http://example.com/test_abstraksjon#begrep2",
+                hasProperty=["http://example.com/test_abstraksjon#prop"],
+                elementTypes=[
+                    "http://www.w3.org/2002/07/owl#NamedIndividual",
+                    "https://data.norge.no/vocabulary/modelldcatno#ObjectType",
+                ],
+            )
+        },
+        modelProperties={
+            "http://example.com/test_abstraksjon#prop": ModelProperty(
+                uri="http://example.com/test_abstraksjon#prop",
+                subject="http://example.com/test_abstraksjon#begrep3",
+                propertyTypes=[
+                    "http://www.w3.org/2002/07/owl#NamedIndividual",
+                    "https://data.norge.no/vocabulary/modelldcatno#Attribute",
+                ],
+            )
+        },
+        type="informationmodels",
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(
+        u"https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
+    )
+
+    result = parse_information_model(graph, URIRef("record"), subject)
+
+    assert result == expected

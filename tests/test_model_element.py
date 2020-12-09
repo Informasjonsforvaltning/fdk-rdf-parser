@@ -1,5 +1,6 @@
 from rdflib import Graph, URIRef
 
+from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.classes.model_element import ModelElement
 from fdk_rdf_parser.parse_functions.model_element import parse_model_element
 
@@ -66,3 +67,18 @@ def test_parse_text_simple_type() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model#SomeTextType")
 
     assert parse_model_element(graph, subject) == expected
+
+
+def test_subject_added_to_infomodel_contains_subjects() -> None:
+    element = ModelElement(
+        uri="https://example.com/element", subject="https://example.com/subject"
+    )
+    expected = InformationModel(
+        containsSubjects={"https://example.com/subject"},
+        modelElements={"https://example.com/element": element},
+    )
+
+    infomodel = InformationModel()
+    infomodel.add_model_element(element)
+
+    assert infomodel == expected

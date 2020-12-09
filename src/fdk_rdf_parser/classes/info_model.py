@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
@@ -30,6 +30,8 @@ class InformationModel(PartialDcatResource):
     status: Optional[str] = None
     versionInfo: Optional[str] = None
     versionNotes: Optional[str] = None
+    subjects: Optional[List[str]] = None
+    containsSubjects: Optional[Set[str]] = None
     containsModelElements: Optional[List[str]] = None
     modelElements: Optional[Dict[str, ModelElement]] = None
     modelProperties: Optional[Dict[str, ModelProperty]] = None
@@ -55,6 +57,8 @@ class InformationModel(PartialDcatResource):
         if self.modelElements is None:
             self.modelElements = {}
 
+        self.add_subject_from_element_or_property(element.subject)
+
         element_key = element.uri if element.uri else element.identifier
         self.modelElements[element_key] = element
 
@@ -62,5 +66,14 @@ class InformationModel(PartialDcatResource):
         if self.modelProperties is None:
             self.modelProperties = {}
 
+        self.add_subject_from_element_or_property(prop.subject)
+
         prop_key = prop.uri if prop.uri else prop.identifier
         self.modelProperties[prop_key] = prop
+
+    def add_subject_from_element_or_property(self: Any, subject: Optional[str]) -> Any:
+        if subject:
+            if self.containsSubjects is None:
+                self.containsSubjects = {subject}
+            else:
+                self.containsSubjects.add(subject)
