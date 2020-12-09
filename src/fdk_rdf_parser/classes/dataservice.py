@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Set
 
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
@@ -13,10 +13,10 @@ class DataService(PartialDcatResource):
 
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
-    endpointDescription: Optional[List[str]] = None
-    endpointURL: Optional[List[str]] = None
+    endpointDescription: Optional[Set[str]] = None
+    endpointURL: Optional[Set[str]] = None
     mediaType: Optional[List[SkosCode]] = None
-    servesDataset: Optional[List[str]] = None
+    servesDataset: Optional[Set[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
     catalog: Optional[Catalog] = None
     type: str = "dataservices"

@@ -27,5 +27,6 @@ from .utils import (
     uri_or_identifier,
     uri_or_identifier_list,
     value_list,
+    value_set,
     value_translations,
 )

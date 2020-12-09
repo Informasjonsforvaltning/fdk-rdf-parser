@@ -25,12 +25,12 @@ class InformationModel(PartialDcatResource):
     isReplacedBy: Optional[str] = None
     replaces: Optional[str] = None
     temporal: Optional[List[Temporal]] = None
-    hasFormat: Optional[List[str]] = None
+    hasFormat: Optional[Set[str]] = None
     homepage: Optional[str] = None
     status: Optional[str] = None
     versionInfo: Optional[str] = None
     versionNotes: Optional[str] = None
-    subjects: Optional[List[str]] = None
+    subjects: Optional[Set[str]] = None
     containsSubjects: Optional[Set[str]] = None
     containsModelElements: Optional[List[str]] = None
     modelElements: Optional[Dict[str, ModelElement]] = None

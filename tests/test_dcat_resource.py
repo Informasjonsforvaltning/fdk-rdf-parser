@@ -45,7 +45,7 @@ def test_dcat_resource_parser() -> None:
         foaf:page                 <https://testdirektoratet.no> ."""
 
     expected = PartialDcatResource(
-        identifier=["adb4cf00-31c8-460c-9563-55f204cf8221"],
+        identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
         title={"nb": "Datasett 0", "en": "Dataset 0"},
         description={
             "nb": "Beskrivelse av datasett 0",
@@ -72,7 +72,7 @@ def test_dcat_resource_parser() -> None:
         language=[
             SkosCode(uri="http://pubs.europa.eu/resource/authority/language/NOR")
         ],
-        landingPage=["https://testdirektoratet.no"],
+        landingPage={"https://testdirektoratet.no"},
         dctType="Kodelister",
     )
 

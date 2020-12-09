@@ -41,14 +41,14 @@ def test_single_distribution() -> None:
             conformsTo=[SkosConcept(uri="https://testconformsto.org")],
             title={"nb": "Testdistribusjon"},
             description={"en": "Description"},
-            format=["json"],
+            format={"json"},
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
             type="Feed",
-            accessURL=["https://testdistribusjon.no/access"],
+            accessURL={"https://testdistribusjon.no/access"},
             page=[SkosConcept(uri="https://testdistribusjon.no")],
-            downloadURL=["https://testdistribusjon.no/download"],
+            downloadURL={"https://testdistribusjon.no/download"},
         )
     ]
 
@@ -92,21 +92,21 @@ def test_multiple_distributions() -> None:
         Distribution(
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon json"},
-            format=["json"],
+            format={"json"},
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
-            accessURL=["https://testdistribusjon.no/access"],
+            accessURL={"https://testdistribusjon.no/access"},
         ),
         Distribution(
             uri="https://testdirektoratet.no/model/distribution/0",
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon xml"},
-            format=["xml"],
+            format={"xml"},
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
-            accessURL=["https://testdistribusjon.no/access"],
+            accessURL={"https://testdistribusjon.no/access"},
         ),
         Distribution(uri="https://testdirektoratet.no/model/distribution/1"),
     ]

@@ -52,10 +52,10 @@ def test_parse_text_simple_type() -> None:
         uri="https://testdirektoratet.no/model#SomeTextType",
         identifier="SomeTextType",
         title={"en": "Some text"},
-        elementTypes=[
+        elementTypes={
             "http://www.w3.org/2002/07/owl#NamedIndividual",
             "https://data.norge.no/vocabulary/modelldcatno#SimpleType",
-        ],
+        },
         typeDefinitionReference="http://www.w3.org/2001/XMLSchema#string",
         length=9,
         maxLength=9,

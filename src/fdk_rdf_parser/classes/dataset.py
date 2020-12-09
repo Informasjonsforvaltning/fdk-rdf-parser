@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
@@ -25,8 +25,8 @@ class PartialDataset(PartialDcatResource):
     sample: Optional[List[Distribution]] = None
     source: Optional[str] = None
     objective: Optional[Dict[str, str]] = None
-    page: Optional[List[str]] = None
-    admsIdentifier: Optional[List[str]] = None
+    page: Optional[Set[str]] = None
+    admsIdentifier: Optional[Set[str]] = None
     temporal: Optional[List[Temporal]] = None
     subject: Optional[List[Subject]] = None
     spatial: Optional[List[SkosCode]] = None

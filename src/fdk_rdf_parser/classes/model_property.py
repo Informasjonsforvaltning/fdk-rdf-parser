@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
 
 @dataclass
@@ -9,7 +9,7 @@ class ModelProperty:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     subject: Optional[str] = None
-    propertyTypes: Optional[List[str]] = None
+    propertyTypes: Optional[Set[str]] = None
     minOccurs: Optional[int] = None
     maxOccurs: Optional[int] = None
     hasType: Optional[List[str]] = None

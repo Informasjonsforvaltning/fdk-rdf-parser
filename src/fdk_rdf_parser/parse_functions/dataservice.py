@@ -6,7 +6,7 @@ from fdk_rdf_parser.rdf_utils import (
     catalog_ref,
     dcat_uri,
     object_value,
-    value_list,
+    value_set,
 )
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
@@ -22,10 +22,10 @@ def parse_data_service(
     data_service = DataService(
         id=object_value(data_services_graph, record_uri, DCTERMS.identifier),
         harvest=extract_meta_data(data_services_graph, record_uri),
-        endpointURL=value_list(
+        endpointURL=value_set(
             data_services_graph, data_service_uri, dcat_uri("endpointURL")
         ),
-        endpointDescription=value_list(
+        endpointDescription=value_set(
             data_services_graph, data_service_uri, dcat_uri("endpointDescription")
         ),
         mediaType=extract_skos_code_list(
@@ -34,7 +34,7 @@ def parse_data_service(
         conformsTo=extract_skos_concept(
             data_services_graph, data_service_uri, DCTERMS.conformsTo
         ),
-        servesDataset=value_list(
+        servesDataset=value_set(
             data_services_graph, data_service_uri, dcat_uri("servesDataset")
         ),
         catalog=parse_catalog(data_services_graph, record_uri),

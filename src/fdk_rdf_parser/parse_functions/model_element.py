@@ -10,7 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     object_value,
     resource_list,
     uri_or_identifier_list,
-    value_list,
+    value_set,
     value_translations,
     xkos_uri,
 )
@@ -33,7 +33,7 @@ def parse_model_element(graph: Graph, element_ref: URIRef) -> ModelElement:
     element = ModelElement(
         uri=element_uri,
         identifier=object_value(graph, element_ref, DCTERMS.identifier),
-        elementTypes=value_list(graph, element_ref, RDF.type),
+        elementTypes=value_set(graph, element_ref, RDF.type),
         title=value_translations(graph, element_ref, DCTERMS.title),
         description=value_translations(graph, element_ref, DCTERMS.description),
         subject=object_value(graph, element_ref, DCTERMS.subject),
@@ -64,22 +64,22 @@ def parse_model_code_list(
                 uri=code_ref.toPython() if isinstance(code_ref, URIRef) else None,
                 identifier=object_value(graph, code_ref, DCTERMS.identifier),
                 prefLabel=value_translations(graph, code_ref, SKOS.prefLabel),
-                inScheme=value_list(graph, code_ref, SKOS.inScheme),
+                inScheme=value_set(graph, code_ref, SKOS.inScheme),
                 subject=object_value(graph, code_ref, DCTERMS.subject),
                 notation=object_value(graph, code_ref, SKOS.notation),
-                topConceptOf=value_list(graph, code_ref, SKOS.topConceptOf),
-                definition=value_list(graph, code_ref, SKOS.definition),
-                example=value_list(graph, code_ref, SKOS.example),
+                topConceptOf=value_set(graph, code_ref, SKOS.topConceptOf),
+                definition=value_set(graph, code_ref, SKOS.definition),
+                example=value_set(graph, code_ref, SKOS.example),
                 exclusionNote=value_translations(
                     graph, code_ref, xkos_uri("exclusionNote")
                 ),
-                previousElement=value_list(graph, code_ref, xkos_uri("previous")),
+                previousElement=value_set(graph, code_ref, xkos_uri("previous")),
                 hiddenLabel=value_translations(graph, code_ref, SKOS.hiddenLabel),
                 inclusionNote=value_translations(
                     graph, code_ref, xkos_uri("inclusionNote")
                 ),
                 note=value_translations(graph, code_ref, SKOS.note),
-                nextElement=value_list(graph, code_ref, xkos_uri("next")),
+                nextElement=value_set(graph, code_ref, xkos_uri("next")),
                 scopeNote=value_translations(graph, code_ref, SKOS.scopeNote),
                 altLabel=value_translations(graph, code_ref, SKOS.altLabel),
             )

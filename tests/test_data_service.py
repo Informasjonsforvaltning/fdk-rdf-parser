@@ -147,11 +147,11 @@ def test_parse_multiple_data_services(
             harvest=HarvestMetaData(
                 firstHarvested="2020-08-07T09:56:01Z", changed=["2020-08-07T10:02:26Z"]
             ),
-            endpointDescription=[
+            endpointDescription={
                 "http://example.com/Dette%20er%20en%20test",
                 "http://example.com/dette%20skal%20v%C3%A6re%20en%20lenke",
-            ],
-            endpointURL=["http://kaffe.no", "https://kaffemaskin.no"],
+            },
+            endpointURL={"http://kaffe.no", "https://kaffemaskin.no"},
             mediaType=[
                 SkosCode(uri=None, code="application/json", prefLabel={"nb": "JSON"}),
                 SkosCode(
@@ -159,7 +159,7 @@ def test_parse_multiple_data_services(
                 ),
                 SkosCode(uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}),
             ],
-            servesDataset=["http://testutgiver.no/datasets/abc"],
+            servesDataset={"http://testutgiver.no/datasets/abc"},
             conformsTo=[
                 SkosConcept(
                     uri="https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"
@@ -192,9 +192,9 @@ def test_parse_multiple_data_services(
             harvest=HarvestMetaData(
                 firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
             ),
-            endpointDescription=[
+            endpointDescription={
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml"
-            ],
+            },
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",
@@ -219,8 +219,8 @@ def test_parse_multiple_data_services(
             harvest=HarvestMetaData(
                 firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
             ),
-            endpointDescription=["http://example.com/"],
-            endpointURL=["https://vg.no"],
+            endpointDescription={"http://example.com/"},
+            endpointURL={"https://vg.no"},
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",
