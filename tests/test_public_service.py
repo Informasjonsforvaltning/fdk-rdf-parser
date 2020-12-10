@@ -27,8 +27,15 @@ def test_complete_public_services(
             @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
+                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
+                    cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
+                    dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
+                    dct:identifier              "4" ;
+                    dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb .
+
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
-                    cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                    cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
@@ -37,6 +44,7 @@ def test_complete_public_services(
                     dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
                     dct:identifier "1" ;
                     dct:language <http://publications.europa.eu/resource/authority/language/NOB>;
+                    dct:requires <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
                     dct:title "Ei offentleg teneste"@nb ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
@@ -208,6 +216,16 @@ def test_complete_public_services(
                     name={"nb": "Serveringsbevilling"},
                     description={"nb": "Serveringsbevilling"},
                 ),
+            ],
+            requires=[
+                PublicService(
+                    id="4",
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
+                    identifier="4",
+                    title={
+                        "nb": "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"
+                    },
+                )
             ],
             type="publicservices",
         ),
