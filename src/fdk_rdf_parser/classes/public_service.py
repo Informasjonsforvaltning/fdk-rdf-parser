@@ -30,4 +30,5 @@ class PublicService:
     hasParticipation: Optional[List[Participation]] = None
     hasInput: Optional[List[Evidence]] = None
     produces: Optional[List[Output]] = None
+    requires: Optional[List["PublicService"]] = None
     type: str = "publicservices"

@@ -7,6 +7,7 @@ from fdk_rdf_parser.classes import PublicService
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
+    resource_list,
     value_list,
     value_translations,
 )
@@ -36,6 +37,24 @@ def extract_publishers(
         )
     else:
         return None
+
+
+def extract_public_services(
+    graph: Graph, subject: URIRef
+) -> Optional[List[PublicService]]:
+    values = []
+    for resource in resource_list(graph, subject, DCTERMS.requires):
+        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
+        values.append(
+            PublicService(
+                uri=resource_uri,
+                identifier=object_value(graph, resource, DCTERMS.identifier),
+                id=object_value(graph, resource, DCTERMS.identifier),
+                title=value_translations(graph, resource, DCTERMS.title),
+            )
+        )
+
+    return values if len(values) > 0 else None
 
 
 def parse_public_service(
@@ -77,5 +96,6 @@ def parse_public_service(
         ),
         hasInput=extract_evidences(public_services_graph, public_service_uri),
         produces=extract_outputs(public_services_graph, public_service_uri),
+        requires=extract_public_services(public_services_graph, public_service_uri),
     )
     return public_service
