@@ -16,9 +16,12 @@ from .dcat_resource import extract_key_words, extract_skos_code_list
 from .event import extract_events
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
+from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .participation import extract_participations
 from .publisher import Publisher
+from .rule import extract_rules
+from .schema_contact_point import extract_schema_contact_points
 from .skos_concept import extract_skos_concept
 
 
@@ -97,5 +100,12 @@ def parse_public_service(
         hasInput=extract_evidences(public_services_graph, public_service_uri),
         produces=extract_outputs(public_services_graph, public_service_uri),
         requires=extract_public_services(public_services_graph, public_service_uri),
+        hasContactPoint=extract_schema_contact_points(
+            public_services_graph, public_service_uri
+        ),
+        follows=extract_rules(public_services_graph, public_service_uri),
+        hasLegalResource=extract_legal_resources(
+            public_services_graph, public_service_uri
+        ),
     )
     return public_service

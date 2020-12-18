@@ -3,28 +3,27 @@ from typing import List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import CriterionRequirement
+from fdk_rdf_parser.classes import Rule
 from fdk_rdf_parser.rdf_utils import (
-    cv_uri,
+    cpsv_uri,
     object_value,
     resource_list,
     value_translations,
 )
-from .skos_concept import extract_skos_concept
+from .dcat_resource import extract_skos_code_list
 
 
-def extract_criterion_requirements(
-    graph: Graph, subject: URIRef
-) -> Optional[List[CriterionRequirement]]:
+def extract_rules(graph: Graph, subject: URIRef) -> Optional[List[Rule]]:
     values = []
-    for resource in resource_list(graph, subject, cv_uri("hasCriterion")):
+    for resource in resource_list(graph, subject, cpsv_uri("follows")):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
-            CriterionRequirement(
+            Rule(
                 uri=resource_uri,
                 identifier=object_value(graph, resource, DCTERMS.identifier),
-                name=value_translations(graph, resource, DCTERMS.title),
-                type=extract_skos_concept(graph, resource, DCTERMS.type),
+                description=value_translations(graph, resource, DCTERMS.description),
+                language=extract_skos_code_list(graph, resource, DCTERMS.language),
+                name=value_translations(graph, resource, DCTERMS.name),
             )
         )
 
