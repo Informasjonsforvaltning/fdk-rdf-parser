@@ -6,10 +6,13 @@ from fdk_rdf_parser.classes import (
     Event,
     Evidence,
     HarvestMetaData,
+    LegalResource,
     Output,
     Participation,
     PublicService,
     Publisher,
+    Rule,
+    SchemaContactPoint,
     SkosCode,
     SkosConcept,
 )
@@ -26,6 +29,8 @@ def test_complete_public_services(
             @prefix dcat:  <http://www.w3.org/ns/dcat#> .
             @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+            @prefix schema:  <http://schema.org/> .
+            @prefix eli: <http://data.europa.eu/eli/ontology#> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
                     cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
@@ -36,7 +41,9 @@ def test_complete_public_services(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
                     cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                    cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
+                    cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
                     cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>;
@@ -46,6 +53,7 @@ def test_complete_public_services(
                     dct:language <http://publications.europa.eu/resource/authority/language/NOB>;
                     dct:requires <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
                     dct:title "Ei offentleg teneste"@nb ;
+                    cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     dcat:keyword "Serveringsbevilling"@nb .
@@ -78,10 +86,19 @@ def test_complete_public_services(
                     a               skos:Concept ;
                     skos:prefLabel  "Nacekode: 56.1"@nb .
 
+            <https://data.norge.no/concepts/153>
+                    a skos:Concept ;
+                    skos:prefLabel "Attest"@nb .
+
+            <https://data.norge.no/concepts/205>
+                    a skos:Concept ;
+                    skos:prefLabel "Tillatelse"@nb, "Permit"@en .
+
             <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>
                     a               cv:CriterionRequirement ;
                     dct:identifier  "5" ;
-                    dct:title       "Krav om vandel"@nb .
+                    dct:title       "Krav om vandel"@nb ;
+                    dct:type        <https://data.norge.no/concepts/153> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
                     a                cv:Participation ;
@@ -99,7 +116,24 @@ def test_complete_public_services(
                     a                cv:Output ;
                     dct:description  "Serveringsbevilling"@nb ;
                     dct:identifier   "4" ;
-                    dct:title        "Serveringsbevilling"@nb .
+                    dct:title        "Serveringsbevilling"@nb ;
+                    dct:type         <https://data.norge.no/concepts/205> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> a schema:ContactPoint ;
+                    schema:contactType  "Kontakt brukerveiledning ved Brønnøysundregistrene"@nb ;
+                    schema:telephone    "75 00 75 00" ;
+                    schema:url          <https://www.altinn.no/skjemaoversikt/bronnoysundregistrene/registrere-nye-og-endre-eksisterende-foretak-og-enheter---samordnet-registermelding/> ; .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> a cpsv:Rule ;
+                    dct:description     "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"@nb ;
+                    dct:identifier      "1" ;
+                    dct:language        <http://publications.europa.eu/resource/authority/language/NOB> ;
+                    dct:title           "Lov om behandlingsmåten i forvaltningssaker"@nb ;
+                    cpsv:implements     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
+                    dct:description     "Lov om Enhetsregisteret"@nb ;
+                    xsd:seeAlso         <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ; .
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -182,7 +216,12 @@ def test_complete_public_services(
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5",
                     identifier="5",
                     name={"nb": "Krav om vandel"},
-                    type=None,
+                    type=[
+                        SkosConcept(
+                            uri="https://data.norge.no/concepts/153",
+                            prefLabel={"nb": "Attest"},
+                        )
+                    ],
                 ),
             ],
             hasParticipation=[
@@ -194,7 +233,6 @@ def test_complete_public_services(
                         SkosConcept(
                             uri="https://data.norge.no/concepts/15",
                             prefLabel={"nb": "Daglig leder"},
-                            extraType=None,
                         )
                     ],
                 ),
@@ -215,6 +253,12 @@ def test_complete_public_services(
                     identifier="4",
                     name={"nb": "Serveringsbevilling"},
                     description={"nb": "Serveringsbevilling"},
+                    type=[
+                        SkosConcept(
+                            uri="https://data.norge.no/concepts/205",
+                            prefLabel={"nb": "Tillatelse", "en": "Permit"},
+                        )
+                    ],
                 ),
             ],
             requires=[
@@ -224,6 +268,41 @@ def test_complete_public_services(
                     identifier="4",
                     title={
                         "nb": "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"
+                    },
+                )
+            ],
+            hasContactPoint=[
+                SchemaContactPoint(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1",
+                    contactType={
+                        "nb": "Kontakt brukerveiledning ved Brønnøysundregistrene"
+                    },
+                    telephone="75 00 75 00",
+                    url="https://www.altinn.no/skjemaoversikt/bronnoysundregistrene/registrere-nye-og-endre-eksisterende-foretak-og-enheter---samordnet-registermelding/",
+                )
+            ],
+            follows=[
+                Rule(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1",
+                    identifier="1",
+                    description={
+                        "nb": "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"
+                    },
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code=None,
+                            prefLabel=None,
+                        )
+                    ],
+                    name=None,
+                )
+            ],
+            hasLegalResource=[
+                LegalResource(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1",
+                    description={
+                        "nb": "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"
                     },
                 )
             ],

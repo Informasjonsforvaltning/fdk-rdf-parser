@@ -5,9 +5,12 @@ from .criterion_requirement import CriterionRequirement
 from .event import Event
 from .evidence import Evidence
 from .harvest_meta_data import HarvestMetaData
+from .legal_resource import LegalResource
 from .output import Output
 from .participation import Participation
 from .publisher import Publisher
+from .rule import Rule
+from .schema_contact_point import SchemaContactPoint
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 
@@ -31,4 +34,7 @@ class PublicService:
     hasInput: Optional[List[Evidence]] = None
     produces: Optional[List[Output]] = None
     requires: Optional[List["PublicService"]] = None
+    hasContactPoint: Optional[List[SchemaContactPoint]] = None
+    follows: Optional[List[Rule]] = None
+    hasLegalResource: Optional[List[LegalResource]] = None
     type: str = "publicservices"

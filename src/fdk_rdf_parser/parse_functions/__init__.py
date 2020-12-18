@@ -9,12 +9,14 @@ from .event import extract_events
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .info_model import parse_information_model
+from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .public_service import parse_public_service
 from .publisher import extract_publisher
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
 from .references import extract_references
+from .rule import extract_rules
 from .skos_concept import extract_skos_concept
 from .subject import extract_subjects
 from .temporal import extract_temporal
