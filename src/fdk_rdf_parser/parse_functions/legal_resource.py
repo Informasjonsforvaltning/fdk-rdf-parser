@@ -5,7 +5,7 @@ from rdflib.namespace import DCTERMS, XSD
 
 from fdk_rdf_parser.classes import LegalResource
 from fdk_rdf_parser.rdf_utils import (
-    cpsv_uri,
+    cv_uri,
     object_value,
     resource_list,
     value_translations,
@@ -16,7 +16,7 @@ def extract_legal_resources(
     graph: Graph, subject: URIRef
 ) -> Optional[List[LegalResource]]:
     values = []
-    for resource in resource_list(graph, subject, cpsv_uri("follows")):
+    for resource in resource_list(graph, subject, cv_uri("hasLegalResource")):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             LegalResource(

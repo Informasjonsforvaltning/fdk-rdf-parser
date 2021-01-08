@@ -300,10 +300,9 @@ def test_complete_public_services(
             ],
             hasLegalResource=[
                 LegalResource(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1",
-                    description={
-                        "nb": "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"
-                    },
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1",
+                    description={"nb": "Lov om Enhetsregisteret"},
+                    url="https://lovdata.no/eli/lov/1994/06/03/15/nor/html",
                 )
             ],
             type="publicservices",
