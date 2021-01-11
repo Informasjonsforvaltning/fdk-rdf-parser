@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_list,
     value_translations,
 )
+from .channel import extract_channels
 from .criterion_requirement import extract_criterion_requirements
 from .dcat_resource import extract_key_words, extract_skos_code_list
 from .event import extract_events
@@ -107,5 +108,6 @@ def parse_public_service(
         hasLegalResource=extract_legal_resources(
             public_services_graph, public_service_uri
         ),
+        hasChannel=extract_channels(public_services_graph, public_service_uri),
     )
     return public_service

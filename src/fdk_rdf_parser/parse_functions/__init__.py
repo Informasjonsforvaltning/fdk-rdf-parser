@@ -1,4 +1,5 @@
 from .catalog import parse_catalog
+from .channel import extract_channels
 from .contactpoint import extract_contact_points
 from .criterion_requirement import extract_criterion_requirements
 from .dataservice import parse_data_service
