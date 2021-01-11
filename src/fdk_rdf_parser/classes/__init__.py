@@ -1,4 +1,5 @@
 from .catalog import Catalog
+from .channel import Channel
 from .contactpoint import ContactPoint
 from .criterion_requirement import CriterionRequirement
 from .data_distribution_service import DataDistributionService

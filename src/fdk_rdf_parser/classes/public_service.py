@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 
+from .channel import Channel
 from .criterion_requirement import CriterionRequirement
 from .event import Event
 from .evidence import Evidence
@@ -37,4 +38,5 @@ class PublicService:
     hasContactPoint: Optional[List[SchemaContactPoint]] = None
     follows: Optional[List[Rule]] = None
     hasLegalResource: Optional[List[LegalResource]] = None
+    hasChannel: Optional[List[Channel]] = None
     type: str = "publicservices"

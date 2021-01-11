@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
+    Channel,
     CriterionRequirement,
     Event,
     Evidence,
@@ -40,6 +41,7 @@ def test_complete_public_services(
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
+                    cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
                     cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
@@ -93,6 +95,16 @@ def test_complete_public_services(
             <https://data.norge.no/concepts/205>
                     a skos:Concept ;
                     skos:prefLabel "Tillatelse"@nb, "Permit"@en .
+
+            <https://data.norge.no/concepts/257>
+                    a skos:Concept ;
+                    skos:prefLabel  "Post"@nb , "Mail"@en .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
+                    a cv:Channel ;
+                    cv:ownedBy      <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
+                    dct:identifier  "2" ;
+                    dct:type        <https://data.norge.no/concepts/257> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>
                     a               cv:CriterionRequirement ;
@@ -303,6 +315,16 @@ def test_complete_public_services(
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1",
                     description={"nb": "Lov om Enhetsregisteret"},
                     url="https://lovdata.no/eli/lov/1994/06/03/15/nor/html",
+                )
+            ],
+            hasChannel=[
+                Channel(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2",
+                    identifier="2",
+                    type=SkosConcept(
+                        uri="https://data.norge.no/concepts/257",
+                        prefLabel={"nb": "Post", "en": "Mail"},
+                    ),
                 )
             ],
             type="publicservices",
