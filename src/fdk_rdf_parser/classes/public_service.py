@@ -39,4 +39,5 @@ class PublicService:
     follows: Optional[List[Rule]] = None
     hasLegalResource: Optional[List[LegalResource]] = None
     hasChannel: Optional[List[Channel]] = None
+    processingTime: Optional[str] = None
     type: str = "publicservices"

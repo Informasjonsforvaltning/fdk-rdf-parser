@@ -49,6 +49,7 @@ def test_complete_public_services(
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
                     cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>;
+                    cv:processingTime "P1D" ;
                     cv:sector <https://data.norge.no/concepts/2> ;
                     dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
                     dct:identifier "1" ;
@@ -327,6 +328,7 @@ def test_complete_public_services(
                     ),
                 )
             ],
+            processingTime="P1D",
             type="publicservices",
         ),
     }
