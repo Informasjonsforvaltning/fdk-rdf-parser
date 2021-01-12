@@ -42,4 +42,5 @@ class PublicService:
     hasChannel: Optional[List[Channel]] = None
     processingTime: Optional[str] = None
     hasCost: Optional[List[Cost]] = None
+    relation: Optional[List["PublicService"]] = None
     type: str = "publicservices"

@@ -116,5 +116,8 @@ def parse_public_service(
             public_services_graph, public_service_uri, cv_uri("processingTime")
         ),
         hasCost=extract_costs(public_services_graph, public_service_uri),
+        relation=extract_public_services(
+            public_services_graph, public_service_uri, DCTERMS.relation
+        ),
     )
     return public_service
