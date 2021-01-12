@@ -3,6 +3,7 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Channel,
+    Cost,
     CriterionRequirement,
     Event,
     Evidence,
@@ -44,6 +45,7 @@ def test_complete_public_services(
                     cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
                     cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
+                    cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
                     cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
@@ -100,6 +102,15 @@ def test_complete_public_services(
             <https://data.norge.no/concepts/257>
                     a skos:Concept ;
                     skos:prefLabel  "Post"@nb , "Mail"@en .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>
+                    a  cv:Cost ;
+                    cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
+                    cv:ifAccessedThrough  <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/3> ;
+                    cv:isDefinedBy        <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/2> ;
+                    cv:value              4.27 ;
+                    dct:description       "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3" ;
+                    dct:identifier        "15" .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
                     a cv:Channel ;
@@ -329,6 +340,19 @@ def test_complete_public_services(
                 )
             ],
             processingTime="P1D",
+            hasCost=[
+                Cost(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15",
+                    identifier="15",
+                    description={
+                        "nb": "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3"
+                    },
+                    currency=None,
+                    ifAccessedThrough=None,
+                    isDefinedBy=None,
+                    value=None,
+                )
+            ],
             type="publicservices",
         ),
     }

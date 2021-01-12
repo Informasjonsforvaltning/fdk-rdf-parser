@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from .channel import Channel
+from .cost import Cost
 from .criterion_requirement import CriterionRequirement
 from .event import Event
 from .evidence import Evidence
@@ -40,4 +41,5 @@ class PublicService:
     hasLegalResource: Optional[List[LegalResource]] = None
     hasChannel: Optional[List[Channel]] = None
     processingTime: Optional[str] = None
+    hasCost: Optional[List[Cost]] = None
     type: str = "publicservices"
