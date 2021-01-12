@@ -45,10 +45,10 @@ def extract_publishers(
 
 
 def extract_public_services(
-    graph: Graph, subject: URIRef
+    graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[PublicService]]:
     values = []
-    for resource in resource_list(graph, subject, DCTERMS.requires):
+    for resource in resource_list(graph, subject, predicate):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             PublicService(
@@ -101,7 +101,9 @@ def parse_public_service(
         ),
         hasInput=extract_evidences(public_services_graph, public_service_uri),
         produces=extract_outputs(public_services_graph, public_service_uri),
-        requires=extract_public_services(public_services_graph, public_service_uri),
+        requires=extract_public_services(
+            public_services_graph, public_service_uri, DCTERMS.requires
+        ),
         hasContactPoint=extract_schema_contact_points(
             public_services_graph, public_service_uri
         ),
