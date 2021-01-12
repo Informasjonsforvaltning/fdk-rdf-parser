@@ -56,6 +56,7 @@ def test_complete_public_services(
                     dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
                     dct:identifier "1" ;
                     dct:language <http://publications.europa.eu/resource/authority/language/NOB>;
+                    dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
                     dct:requires <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
                     dct:title "Ei offentleg teneste"@nb ;
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
@@ -351,6 +352,16 @@ def test_complete_public_services(
                     ifAccessedThrough=None,
                     isDefinedBy=None,
                     value=None,
+                )
+            ],
+            relation=[
+                PublicService(
+                    id="4",
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
+                    identifier="4",
+                    title={
+                        "nb": "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"
+                    },
                 )
             ],
             type="publicservices",
