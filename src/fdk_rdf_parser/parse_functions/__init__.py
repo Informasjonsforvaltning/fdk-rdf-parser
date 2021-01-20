@@ -1,3 +1,4 @@
+from .agent import extract_agents_for_participation
 from .catalog import parse_catalog
 from .channel import extract_channels
 from .contactpoint import extract_contact_points
