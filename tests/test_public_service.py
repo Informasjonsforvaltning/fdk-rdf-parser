@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
+    Agent,
     Channel,
     Cost,
     CriterionRequirement,
@@ -48,7 +49,7 @@ def test_complete_public_services(
                     cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
                     cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
-                    cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
+                    cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
                     cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>;
                     cv:processingTime "P1D" ;
@@ -92,6 +93,10 @@ def test_complete_public_services(
                     a               skos:Concept ;
                     skos:prefLabel  "Nacekode: 56.1"@nb .
 
+            <https://data.norge.no/concepts/101>
+                    a               skos:Concept ;
+                    skos:prefLabel  "Datakonsument"@nb ; .
+
             <https://data.norge.no/concepts/153>
                     a skos:Concept ;
                     skos:prefLabel "Attest"@nb .
@@ -124,6 +129,12 @@ def test_complete_public_services(
                     dct:identifier  "5" ;
                     dct:title       "Krav om vandel"@nb ;
                     dct:type        <https://data.norge.no/concepts/153> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
+                    a               cv:Participation ;
+                    cv:role         <https://data.norge.no/concepts/101> ;
+                    dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
+                    dct:identifier  "1" ; .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
                     a                cv:Participation ;
@@ -159,6 +170,19 @@ def test_complete_public_services(
             <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
                     dct:description     "Lov om Enhetsregisteret"@nb ;
                     xsd:seeAlso         <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ; .
+
+            <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
+                    dct:identifier "971526920" ;
+                    dct:title "Statistisk sentralbyrå"@nb ;
+                    foaf:name "STATISTISK SENTRALBYRÅ" ;
+                    cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ; .
+
+            <https://data.brreg.no/enhetsregisteret/api/enheter/971526921> a dct:Agent ;
+                    dct:identifier "971526921" ;
+                    dct:title "Tull"@nb ;
+                    foaf:name "TULLEBYRÅ" ;
+                    cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
+
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -251,16 +275,30 @@ def test_complete_public_services(
             ],
             hasParticipation=[
                 Participation(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
-                    identifier="6",
-                    description={"nb": "Mattilsynet"},
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
+                    identifier="1",
+                    description={
+                        "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
+                    },
                     role=[
                         SkosConcept(
-                            uri="https://data.norge.no/concepts/15",
-                            prefLabel={"nb": "Daglig leder"},
+                            uri="https://data.norge.no/concepts/101",
+                            prefLabel={"nb": "Datakonsument"},
+                            extraType=None,
                         )
                     ],
-                ),
+                    agents=[
+                        Agent(
+                            uri="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
+                            identifier="971526920",
+                            title={"nb": "Statistisk sentralbyrå"},
+                            name="STATISTISK SENTRALBYRÅ",
+                            playsRole=[
+                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1"
+                            ],
+                        )
+                    ],
+                )
             ],
             hasInput=[
                 Evidence(

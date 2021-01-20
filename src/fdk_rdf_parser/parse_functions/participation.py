@@ -10,6 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
+from .agent import extract_agents_for_participation
 from .skos_concept import extract_skos_concept
 
 
@@ -19,12 +20,14 @@ def extract_participations(
     values = []
     for resource in resource_list(graph, subject, cv_uri("hasParticipation")):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
+
         values.append(
             Participation(
                 uri=resource_uri,
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 description=value_translations(graph, resource, DCTERMS.description),
                 role=extract_skos_concept(graph, resource, cv_uri("role")),
+                agents=extract_agents_for_participation(graph, resource_uri),
             )
         )
 
