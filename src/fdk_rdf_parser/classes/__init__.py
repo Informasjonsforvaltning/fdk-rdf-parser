@@ -1,3 +1,4 @@
+from .agent import Agent
 from .catalog import Catalog
 from .channel import Channel
 from .contactpoint import ContactPoint
