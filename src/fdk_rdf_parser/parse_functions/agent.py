@@ -6,6 +6,7 @@ from rdflib.namespace import DCTERMS, FOAF, RDF
 from fdk_rdf_parser.classes import Agent
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
+    is_uri_in_list,
     object_value,
     value_list,
     value_translations,
@@ -18,8 +19,9 @@ def extract_agents_for_participation(
     values = []
     agents = graph.subjects(predicate=RDF.type, object=DCTERMS.Agent)
     filtered_agents = filter(
-        lambda agent: object_value(graph, agent, cv_uri("playsRole"))
-        == participation_ref,
+        lambda agent: is_uri_in_list(
+            participation_ref, graph, agent, cv_uri("playsRole")
+        ),
         agents,
     )
     for resource in filtered_agents:

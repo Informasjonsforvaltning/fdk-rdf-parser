@@ -22,6 +22,7 @@ from .utils import (
     date_list,
     date_value,
     is_type,
+    is_uri_in_list,
     object_value,
     resource_list,
     uri_or_identifier,
