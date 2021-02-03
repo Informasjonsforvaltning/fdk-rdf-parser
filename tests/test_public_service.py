@@ -51,6 +51,7 @@ def test_complete_public_services(
                     cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
+                    cv:isDescribedAt <https://data.norge.no/node/1127> ;
                     cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>;
                     cv:processingTime "P1D" ;
                     cv:sector <https://data.norge.no/concepts/2> ;
@@ -247,6 +248,11 @@ def test_complete_public_services(
                     prefLabel={"nb": "Spiserestaurant"},
                     extraType=None,
                 ),
+            ],
+            isDescribedAt=[
+                SkosConcept(
+                    uri="https://data.norge.no/node/1127",
+                )
             ],
             language=[
                 SkosCode(

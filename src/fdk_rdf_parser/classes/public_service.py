@@ -24,6 +24,7 @@ class PublicService:
     identifier: Optional[str] = None
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
+    isDescribedAt: Optional[List[SkosConcept]] = None
     isGroupedBy: Optional[List[Event]] = None
     hasCompetentAuthority: Optional[List[Publisher]] = None
     harvest: Optional[HarvestMetaData] = None
