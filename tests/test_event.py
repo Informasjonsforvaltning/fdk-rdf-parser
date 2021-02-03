@@ -2,9 +2,10 @@ from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import Event
 from fdk_rdf_parser.parse_functions import extract_events
+from fdk_rdf_parser.rdf_utils import cv_uri
 
 
-def test_single_contact_point() -> None:
+def test_extract_single_event() -> None:
 
     src = """
         @prefix cpsv: <http://purl.org/vocab/cpsv#> .
@@ -38,10 +39,10 @@ def test_single_contact_point() -> None:
         u"http://public-service-publisher.fellesdatakatalog.digdir.no/model/public-service/event"
     )
 
-    assert extract_events(graph, subject) == expected
+    assert extract_events(graph, subject, cv_uri("isGroupedBy")) == expected
 
 
-def test_several_events() -> None:
+def test_extract_several_events() -> None:
 
     src = """
         @prefix cpsv: <http://purl.org/vocab/cpsv#> .
@@ -94,4 +95,4 @@ def test_several_events() -> None:
         u"http://public-service-publisher.fellesdatakatalog.digdir.no/model/public-service/event"
     )
 
-    assert extract_events(graph, subject) == expected
+    assert extract_events(graph, subject, cv_uri("isGroupedBy")) == expected

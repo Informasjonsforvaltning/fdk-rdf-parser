@@ -5,16 +5,17 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Event
 from fdk_rdf_parser.rdf_utils import (
-    cv_uri,
     object_value,
     resource_list,
     value_translations,
 )
 
 
-def extract_events(graph: Graph, subject: URIRef) -> Optional[List[Event]]:
+def extract_events(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> Optional[List[Event]]:
     values = []
-    for resource in resource_list(graph, subject, cv_uri("isGroupedBy")):
+    for resource in resource_list(graph, subject, predicate):
         resource_uri = None
         if isinstance(resource, URIRef):
             resource_uri = resource.toPython()

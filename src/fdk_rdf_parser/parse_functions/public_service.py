@@ -78,7 +78,9 @@ def parse_public_service(
         description=value_translations(
             public_services_graph, public_service_uri, DCTERMS.description
         ),
-        isGroupedBy=extract_events(public_services_graph, public_service_uri),
+        isGroupedBy=extract_events(
+            public_services_graph, public_service_uri, cv_uri("isGroupedBy")
+        ),
         hasCompetentAuthority=extract_publishers(
             public_services_graph, public_service_uri
         ),
