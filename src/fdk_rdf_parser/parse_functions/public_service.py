@@ -90,6 +90,9 @@ def parse_public_service(
         isClassifiedBy=extract_skos_concept(
             public_services_graph, public_service_uri, cv_uri("isClassifiedBy")
         ),
+        isDescribedAt=extract_skos_concept(
+            public_services_graph, public_service_uri, cv_uri("isDescribedAt")
+        ),
         language=extract_skos_code_list(
             public_services_graph, public_service_uri, DCTERMS.language
         ),
