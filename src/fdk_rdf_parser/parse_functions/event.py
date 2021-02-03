@@ -9,6 +9,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
+from .skos_concept import extract_skos_concept
 
 
 def extract_events(
@@ -26,7 +27,7 @@ def extract_events(
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 title=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
-                type=object_value(graph, resource, DCTERMS.type),
+                type=extract_skos_concept(graph, resource, DCTERMS.type),
             )
         )
 

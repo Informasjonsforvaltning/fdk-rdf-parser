@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import Event
+from fdk_rdf_parser.classes import Event, SkosConcept
 from fdk_rdf_parser.parse_functions import extract_events
 from fdk_rdf_parser.rdf_utils import cv_uri
 
@@ -30,7 +30,11 @@ def test_extract_single_event() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type="https://data.norge.no/concpets/livshendelse",
+            type=[
+                SkosConcept(
+                    uri="https://data.norge.no/concpets/livshendelse",
+                )
+            ],
         )
     ]
 
@@ -77,7 +81,11 @@ def test_extract_several_events() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type="https://data.norge.no/concpets/livshendelse",
+            type=[
+                SkosConcept(
+                    uri="https://data.norge.no/concpets/livshendelse",
+                )
+            ],
         ),
         Event(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
@@ -86,7 +94,11 @@ def test_extract_several_events() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type="https://data.norge.no/concpets/livshendelse",
+            type=[
+                SkosConcept(
+                    uri="https://data.norge.no/concpets/livshendelse",
+                )
+            ],
         ),
     ]
 
