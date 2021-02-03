@@ -209,7 +209,13 @@ def test_complete_public_services(
                     description={
                         "nb": "Elektronisk prosess for etablering og oppstart av en bedrift."
                     },
-                    type="https://data.norge.no/concepts/1",
+                    type=[
+                        SkosConcept(
+                            uri="https://data.norge.no/concepts/1",
+                            prefLabel={"nb": "Starting business"},
+                            extraType=None,
+                        )
+                    ],
                 )
             ],
             hasCompetentAuthority=[
@@ -522,7 +528,11 @@ def test_parse_multiple_public_services(
                     description={
                         "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
                     },
-                    type="https://data.norge.no/concpets/livshendelse",
+                    type=[
+                        SkosConcept(
+                            uri="https://data.norge.no/concpets/livshendelse",
+                        )
+                    ],
                 )
             ],
             hasCompetentAuthority=[
