@@ -22,6 +22,13 @@ def test_extract_single_event() -> None:
                         dct:title        "Starte og drive restaurant"@nb ;
                         dct:type         <https://data.norge.no/concpets/livshendelse>
                     ],
+                    [ a                          cv:Event ;
+                        dct:description  "Elektronisk prosess for etablering og oppstart av restaurantdrift."@nb ;
+                        dct:identifier   "1" ;
+                        dct:relation     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> ;
+                        dct:title        "Starte og drive restaurant"@nb ;
+                        dct:type         <https://data.norge.no/concpets/livshendelse>
+                    ],
                     [ a                          cv:LifeEvent ;
                         dct:description  "Elektronisk prosess for etablering og oppstart av restaurantdrift."@nb ;
                         dct:identifier   "1" ;
