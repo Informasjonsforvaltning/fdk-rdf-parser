@@ -8,7 +8,7 @@ from .dataservice import parse_data_service
 from .dataset import parse_dataset
 from .dcat_resource import parse_dcat_resource
 from .distribution import extract_distributions
-from .event import extract_events
+from .event import extract_events, parse_event
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .info_model import parse_information_model
