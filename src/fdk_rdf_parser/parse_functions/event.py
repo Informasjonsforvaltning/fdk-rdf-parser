@@ -14,47 +14,48 @@ from fdk_rdf_parser.rdf_utils import (
 from .skos_concept import extract_skos_concept
 
 
+def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
+    subject_uri = None
+
+    if isinstance(subject, URIRef):
+        subject_uri = subject.toPython()
+
+    if is_type(
+        cv_uri("BusinessEvent"),
+        graph,
+        subject,
+    ):
+        return BusinessEvent(
+            uri=subject_uri,
+            identifier=object_value(graph, subject, DCTERMS.identifier),
+            title=value_translations(graph, subject, DCTERMS.title),
+            description=value_translations(graph, subject, DCTERMS.description),
+            type=extract_skos_concept(graph, subject, DCTERMS.type),
+        )
+
+    if is_type(
+        cv_uri("LifeEvent"),
+        graph,
+        subject,
+    ):
+        return LifeEvent(
+            uri=subject_uri,
+            identifier=object_value(graph, subject, DCTERMS.identifier),
+            title=value_translations(graph, subject, DCTERMS.title),
+            description=value_translations(graph, subject, DCTERMS.description),
+            type=extract_skos_concept(graph, subject, DCTERMS.type),
+        )
+
+    return None
+
+
 def extract_events(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[Event]]:
     values: List[Event] = []
     for resource in resource_list(graph, subject, predicate):
-        resource_uri = None
-        if isinstance(resource, URIRef):
-            resource_uri = resource.toPython()
-
-        if is_type(
-            cv_uri("BusinessEvent"),
-            graph,
-            resource,
-        ):
-            values.append(
-                BusinessEvent(
-                    uri=resource_uri,
-                    identifier=object_value(graph, resource, DCTERMS.identifier),
-                    title=value_translations(graph, resource, DCTERMS.title),
-                    description=value_translations(
-                        graph, resource, DCTERMS.description
-                    ),
-                    type=extract_skos_concept(graph, resource, DCTERMS.type),
-                )
-            )
-
-        if is_type(
-            cv_uri("LifeEvent"),
-            graph,
-            resource,
-        ):
-            values.append(
-                LifeEvent(
-                    uri=resource_uri,
-                    identifier=object_value(graph, resource, DCTERMS.identifier),
-                    title=value_translations(graph, resource, DCTERMS.title),
-                    description=value_translations(
-                        graph, resource, DCTERMS.description
-                    ),
-                    type=extract_skos_concept(graph, resource, DCTERMS.type),
-                )
-            )
+        event = parse_event(graph, resource)
+        if event:
+            values.append(event)
 
     return values if len(values) > 0 else None
