@@ -7,6 +7,7 @@ from .classes import (
     Catalog,
     DataService,
     Dataset,
+    Event,
     InformationModel,
     PublicService,
     QualifiedAttribution,
@@ -15,10 +16,11 @@ from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
 from .parse_functions import (
     parse_data_service,
     parse_dataset,
+    parse_event,
     parse_information_model,
     parse_public_service,
 )
-from .rdf_utils import cpsv_uri, dcat_uri, is_type, model_dcat_ap_no_uri
+from .rdf_utils import cpsv_uri, cv_uri, dcat_uri, is_type, model_dcat_ap_no_uri
 from .reference_data import (
     extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
@@ -196,6 +198,26 @@ def parse_public_services(
             public_services[primary_topic_uri.toPython()] = public_service
 
     return public_services
+
+
+def parse_events(
+    event_rdf: str, rdf_format: str = "turtle"
+) -> Dict[str, Optional[Event]]:
+    events: Dict[str, Optional[Event]] = {}
+
+    graph = Graph().parse(data=event_rdf, format=rdf_format)
+
+    for business_event_uri in graph.subjects(
+        predicate=RDF.type, object=cv_uri("BusinessEvent")
+    ):
+        events[business_event_uri.toPython()] = parse_event(graph, business_event_uri)
+
+    for business_event_uri in graph.subjects(
+        predicate=RDF.type, object=cv_uri("LifeEvent")
+    ):
+        events[business_event_uri.toPython()] = parse_event(graph, business_event_uri)
+
+    return events
 
 
 def extend_catalog_with_orgs_data(
