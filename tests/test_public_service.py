@@ -214,6 +214,7 @@ def test_complete_public_services(
             },
             isGroupedBy=[
                 BusinessEvent(
+                    id="1",
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
                     identifier="1",
                     title={"nb": "Starte og drive bedrift"},
@@ -232,6 +233,7 @@ def test_complete_public_services(
                     event_type="business_event",
                 ),
                 LifeEvent(
+                    id="3",
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/3",
                     identifier="3",
                     title={"nb": "Oppgjør etter dødsfall"},
@@ -548,6 +550,7 @@ def test_parse_multiple_public_services(
             },
             isGroupedBy=[
                 BusinessEvent(
+                    id="1",
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
                     identifier="1",
                     title={"nb": "Starte og drive restaurant"},
