@@ -7,6 +7,7 @@ from .skos_concept import SkosConcept
 
 @dataclass
 class Event:
+    id: Optional[str] = None
     uri: Optional[str] = None
     identifier: Optional[str] = None
     title: Optional[Dict[str, str]] = None

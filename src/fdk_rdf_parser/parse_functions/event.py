@@ -27,6 +27,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
         subject,
     ):
         return BusinessEvent(
+            id=object_value(graph, subject, DCTERMS.identifier),
             uri=subject_uri,
             identifier=object_value(graph, subject, DCTERMS.identifier),
             title=value_translations(graph, subject, DCTERMS.title),
@@ -41,6 +42,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
         subject,
     ):
         return LifeEvent(
+            id=object_value(graph, subject, DCTERMS.identifier),
             uri=subject_uri,
             identifier=object_value(graph, subject, DCTERMS.identifier),
             title=value_translations(graph, subject, DCTERMS.title),
