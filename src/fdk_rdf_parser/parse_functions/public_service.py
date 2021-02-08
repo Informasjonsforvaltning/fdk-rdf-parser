@@ -8,7 +8,6 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
     resource_list,
-    value_list,
     value_translations,
 )
 from .channel import extract_channels
@@ -21,27 +20,10 @@ from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .participation import extract_participations
-from .publisher import Publisher
+from .publisher import extract_authorities_as_publishers
 from .rule import extract_rules
 from .schema_contact_point import extract_schema_contact_points
 from .skos_concept import extract_skos_concept
-
-
-def extract_publishers(
-    public_services_graph: Graph, public_service_uri: URIRef
-) -> Optional[List[Publisher]]:
-    authorities = value_list(
-        public_services_graph, public_service_uri, cv_uri("hasCompetentAuthority")
-    )
-    if authorities is not None and len(authorities) > 0:
-        return list(
-            map(
-                lambda hasCompetentAuthority: Publisher(uri=hasCompetentAuthority),
-                authorities,
-            )
-        )
-    else:
-        return None
 
 
 def extract_public_services(
@@ -81,7 +63,7 @@ def parse_public_service(
         isGroupedBy=extract_events(
             public_services_graph, public_service_uri, cv_uri("isGroupedBy")
         ),
-        hasCompetentAuthority=extract_publishers(
+        hasCompetentAuthority=extract_authorities_as_publishers(
             public_services_graph, public_service_uri
         ),
         harvest=extract_meta_data(public_services_graph, catalog_record_uri),
