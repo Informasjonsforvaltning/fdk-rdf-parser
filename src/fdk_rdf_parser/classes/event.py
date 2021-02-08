@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 
+from .publisher import Publisher
 from .skos_concept import SkosConcept
 
 
@@ -11,3 +12,4 @@ class Event:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     type: Optional[List[SkosConcept]] = None
+    hasCompetentAuthority: Optional[List[Publisher]] = None
