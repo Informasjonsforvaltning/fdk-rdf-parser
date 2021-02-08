@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
+from .publisher import extract_authorities_as_publishers
 from .skos_concept import extract_skos_concept
 
 
@@ -31,6 +32,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             type=extract_skos_concept(graph, subject, DCTERMS.type),
+            hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
 
     if is_type(
@@ -44,6 +46,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             type=extract_skos_concept(graph, subject, DCTERMS.type),
+            hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
 
     return None

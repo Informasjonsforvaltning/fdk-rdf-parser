@@ -1,12 +1,16 @@
+from unittest.mock import Mock
+
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parse_events
-from fdk_rdf_parser.classes import BusinessEvent, LifeEvent, SkosConcept
+from fdk_rdf_parser.classes import BusinessEvent, LifeEvent, Publisher, SkosConcept
 from fdk_rdf_parser.parse_functions import extract_events
 from fdk_rdf_parser.rdf_utils import cv_uri
 
 
-def test_parse_events() -> None:
+def test_parse_events(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
     src = """
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -33,6 +37,7 @@ def test_parse_events() -> None:
                 dct:description "Elektronisk prosess for oppgjør etter dødsfall."@nb ;
                 dct:type <https://data.norge.no/concepts/308> ;
                 dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ;
+                cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
             .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
@@ -94,6 +99,16 @@ def test_parse_events() -> None:
                     uri="https://data.norge.no/concepts/308",
                     prefLabel={"nb": "Dødsfall og arv"},
                     extraType=None,
+                )
+            ],
+            hasCompetentAuthority=[
+                Publisher(
+                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
+                    id=None,
+                    name=None,
+                    orgPath=None,
+                    prefLabel=None,
+                    organisasjonsform=None,
                 )
             ],
             event_type="life_event",
