@@ -8,13 +8,13 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
     resource_list,
+    value_list,
     value_translations,
 )
 from .channel import extract_channels
 from .cost import extract_costs
 from .criterion_requirement import extract_criterion_requirements
 from .dcat_resource import extract_key_words, extract_skos_code_list
-from .event import extract_events
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
@@ -60,7 +60,7 @@ def parse_public_service(
         description=value_translations(
             public_services_graph, public_service_uri, DCTERMS.description
         ),
-        isGroupedBy=extract_events(
+        isGroupedBy=value_list(
             public_services_graph, public_service_uri, cv_uri("isGroupedBy")
         ),
         hasCompetentAuthority=extract_authorities_as_publishers(

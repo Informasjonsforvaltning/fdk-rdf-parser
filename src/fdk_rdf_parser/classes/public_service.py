@@ -4,7 +4,6 @@ from typing import Dict, List, Optional
 from .channel import Channel
 from .cost import Cost
 from .criterion_requirement import CriterionRequirement
-from .event import Event
 from .evidence import Evidence
 from .harvest_meta_data import HarvestMetaData
 from .legal_resource import LegalResource
@@ -25,7 +24,7 @@ class PublicService:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     isDescribedAt: Optional[List[SkosConcept]] = None
-    isGroupedBy: Optional[List[Event]] = None
+    isGroupedBy: Optional[List[str]] = None
     hasCompetentAuthority: Optional[List[Publisher]] = None
     harvest: Optional[HarvestMetaData] = None
     keyword: Optional[List[Dict[str, str]]] = None
