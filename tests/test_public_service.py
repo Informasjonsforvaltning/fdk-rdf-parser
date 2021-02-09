@@ -3,14 +3,12 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Agent,
-    BusinessEvent,
     Channel,
     Cost,
     CriterionRequirement,
     Evidence,
     HarvestMetaData,
     LegalResource,
-    LifeEvent,
     Output,
     Participation,
     PublicService,
@@ -66,20 +64,6 @@ def test_complete_public_services(
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     dcat:keyword "Serveringsbevilling"@nb .
-
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
-                    a                cv:BusinessEvent ;
-                    dct:description  "Elektronisk prosess for etablering og oppstart av en bedrift."@nb ;
-                    dct:identifier   "1" ;
-                    dct:relation     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> ;
-                    dct:title        "Starte og drive bedrift"@nb ;
-                    dct:type         <https://data.norge.no/concepts/1> .
-
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/events/3> a cv:LifeEvent ;
-                    dct:identifier "3" ;
-                    dct:title "Oppgjør etter dødsfall"@nb ;
-                    dct:type <https://data.norge.no/concepts/308> ;
-                    .
 
             <https://data.norge.no/concepts/1>
                     a               skos:Concept ;
@@ -213,38 +197,8 @@ def test_complete_public_services(
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
             isGroupedBy=[
-                BusinessEvent(
-                    id="1",
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
-                    identifier="1",
-                    title={"nb": "Starte og drive bedrift"},
-                    description={
-                        "nb": "Elektronisk prosess for etablering og oppstart av en bedrift."
-                    },
-                    type=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concepts/1",
-                            prefLabel={
-                                "nb": "Starte og drive en bedrift",
-                                "en": "Starting business",
-                            },
-                        )
-                    ],
-                    event_type="business_event",
-                ),
-                LifeEvent(
-                    id="3",
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/3",
-                    identifier="3",
-                    title={"nb": "Oppgjør etter dødsfall"},
-                    type=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concepts/308",
-                            prefLabel={"nb": "Dødsfall og arv"},
-                        )
-                    ],
-                    event_type="life_event",
-                ),
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/events/3",
             ],
             hasCompetentAuthority=[
                 Publisher(
@@ -468,14 +422,6 @@ def test_parse_multiple_public_services(
                 cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                 cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
 
-        <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
-                a                cv:BusinessEvent ;
-                dct:description  "Elektronisk prosess for etablering og oppstart av restaurantdrift."@nb ;
-                dct:identifier   "1" ;
-                dct:relation     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> ;
-                dct:title        "Starte og drive restaurant"@nb ;
-                dct:type         <https://data.norge.no/concpets/livshendelse> .
-
         <http://localhost:5000/services/fdk-1>
                 a                  dcat:CatalogRecord ;
                 dct:identifier     "fdk-1" ;
@@ -549,20 +495,7 @@ def test_parse_multiple_public_services(
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
             isGroupedBy=[
-                BusinessEvent(
-                    id="1",
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
-                    identifier="1",
-                    title={"nb": "Starte og drive restaurant"},
-                    description={
-                        "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
-                    },
-                    type=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concpets/livshendelse",
-                        )
-                    ],
-                )
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             ],
             hasCompetentAuthority=[
                 Publisher(
