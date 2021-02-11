@@ -88,7 +88,6 @@ def test_parse_events(
                     extraType=None,
                 )
             ],
-            event_type="business_event",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
             id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
@@ -113,7 +112,6 @@ def test_parse_events(
                     organisasjonsform=None,
                 )
             ],
-            event_type="life_event",
         ),
     }
 
@@ -164,7 +162,6 @@ def test_extract_single_event() -> None:
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
             ],
-            event_type="life_event",
         ),
         BusinessEvent(
             identifier="1",
@@ -177,7 +174,6 @@ def test_extract_single_event() -> None:
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
             ],
-            event_type="business_event",
         ),
     ]
 
@@ -229,7 +225,6 @@ def test_extract_several_events() -> None:
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
             ],
-            event_type="business_event",
         ),
         BusinessEvent(
             id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
@@ -244,7 +239,6 @@ def test_extract_several_events() -> None:
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
             ],
-            event_type="business_event",
         ),
     ]
 
