@@ -189,7 +189,7 @@ def test_complete_public_services(
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1": PublicService(
-            id="fdk-1",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
@@ -487,7 +487,7 @@ def test_parse_multiple_public_services(
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1": PublicService(
-            id="fdk-1",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
@@ -569,7 +569,7 @@ def test_parse_multiple_public_services(
             type="publicservices",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/2": PublicService(
-            id="fdk-2",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
             identifier="2",
             title={"nn": "Ei anna offentleg teneste"},
@@ -592,7 +592,7 @@ def test_parse_multiple_public_services(
             type="publicservices",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/3": PublicService(
-            id="fdk-3",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/services/3",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/3",
             identifier="3",
             title={"nn": "Ei anna offentleg teneste"},
