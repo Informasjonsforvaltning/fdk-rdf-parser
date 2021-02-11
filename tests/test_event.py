@@ -74,7 +74,7 @@ def test_parse_events(
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1": BusinessEvent(
-            id="1",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             identifier="1",
             title={"nb": "Starte og drive restaurant"},
@@ -91,7 +91,7 @@ def test_parse_events(
             event_type="business_event",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
-            id="2",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
             identifier="2",
             title={"nb": "Oppgjør etter dødsfall"},
@@ -154,7 +154,6 @@ def test_extract_single_event() -> None:
 
     expected = [
         LifeEvent(
-            id="1",
             identifier="1",
             title={"nb": "Starte og drive restaurant"},
             description={
@@ -168,7 +167,6 @@ def test_extract_single_event() -> None:
             event_type="life_event",
         ),
         BusinessEvent(
-            id="1",
             identifier="1",
             title={"nb": "Starte og drive restaurant"},
             description={
@@ -221,7 +219,6 @@ def test_extract_several_events() -> None:
 
     expected = [
         BusinessEvent(
-            id="1",
             identifier="1",
             title={"nb": "Starte og drive restaurant"},
             description={
@@ -235,7 +232,7 @@ def test_extract_several_events() -> None:
             event_type="business_event",
         ),
         BusinessEvent(
-            id="1",
+            id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             identifier="1",
             title={"nb": "Starte og drive restaurant"},
