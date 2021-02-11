@@ -32,7 +32,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
             identifier=object_value(graph, subject, DCTERMS.identifier),
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
-            type=extract_skos_concept(graph, subject, DCTERMS.type),
+            dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
 
@@ -47,7 +47,7 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
             identifier=object_value(graph, subject, DCTERMS.identifier),
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
-            type=extract_skos_concept(graph, subject, DCTERMS.type),
+            dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
 

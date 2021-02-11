@@ -81,7 +81,7 @@ def test_parse_events(
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av en bedrift."
             },
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concepts/300",
                     prefLabel={"nb": "Dødsfall og arv"},
@@ -95,7 +95,7 @@ def test_parse_events(
             identifier="2",
             title={"nb": "Oppgjør etter dødsfall"},
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concepts/308",
                     prefLabel={"nb": "Dødsfall og arv"},
@@ -157,7 +157,7 @@ def test_extract_single_event() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
@@ -169,7 +169,7 @@ def test_extract_single_event() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
@@ -220,7 +220,7 @@ def test_extract_several_events() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
@@ -234,7 +234,7 @@ def test_extract_several_events() -> None:
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av restaurantdrift."
             },
-            type=[
+            dctType=[
                 SkosConcept(
                     uri="https://data.norge.no/concpets/livshendelse",
                 )
