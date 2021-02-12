@@ -10,15 +10,14 @@ from fdk_rdf_parser.rdf_utils import (
     object_value,
     value_translations,
 )
+from .harvest_meta_data import extract_meta_data
 from .publisher import extract_authorities_as_publishers
 from .skos_concept import extract_skos_concept
 
 
-def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
-    subject_uri = None
-
-    if isinstance(subject, URIRef):
-        subject_uri = subject.toPython()
+def parse_event(
+    graph: Graph, catalog_record_uri: URIRef, subject: URIRef
+) -> Optional[Event]:
 
     if is_type(
         cv_uri("BusinessEvent"),
@@ -26,28 +25,24 @@ def parse_event(graph: Graph, subject: URIRef) -> Optional[Event]:
         subject,
     ):
         return BusinessEvent(
-            id=subject_uri,
-            uri=subject_uri,
+            id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
+            uri=subject.toPython(),
             identifier=object_value(graph, subject, DCTERMS.identifier),
+            harvest=extract_meta_data(graph, catalog_record_uri),
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
 
-    if is_type(
-        cv_uri("LifeEvent"),
-        graph,
-        subject,
-    ):
+    else:
         return LifeEvent(
-            id=subject_uri,
-            uri=subject_uri,
+            id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
+            uri=subject.toPython(),
             identifier=object_value(graph, subject, DCTERMS.identifier),
+            harvest=extract_meta_data(graph, catalog_record_uri),
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
         )
-
-    return None

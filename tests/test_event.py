@@ -1,7 +1,13 @@
 from unittest.mock import Mock
 
 from fdk_rdf_parser import parse_events
-from fdk_rdf_parser.classes import BusinessEvent, LifeEvent, Publisher, SkosConcept
+from fdk_rdf_parser.classes import (
+    BusinessEvent,
+    HarvestMetaData,
+    LifeEvent,
+    Publisher,
+    SkosConcept,
+)
 
 
 def test_parse_events(
@@ -36,22 +42,6 @@ def test_parse_events(
                 cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
             .
 
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
-                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
-                    cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
-                    dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
-                    dct:identifier              "2" ;
-                    dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
-            .
-
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
-                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
-                    cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
-                    dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
-                    dct:identifier              "1" ;
-                    dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
-            .
-
             <https://data.norge.no/concepts/300> a skos:Concept ;
                     skos:prefLabel "Dødsfall og arv"@nb ;
             .
@@ -60,19 +50,46 @@ def test_parse_events(
                     skos:prefLabel "Dødsfall og arv"@nb ;
             .
 
-            <http://localhost:5000/services/fdk-1>
+            <http://localhost:5000/events/fdk-2>
+                    a                  dcat:CatalogRecord ;
+                    dct:identifier     "fdk-2" ;
+                    dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/2>
+            .
+
+            <http://localhost:5000/events/fdk-1>
                     a                  dcat:CatalogRecord ;
                     dct:identifier     "fdk-1" ;
                     dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
+            .
+
+            <http://localhost:5000/events/fdk-4>
+                    a                  dcat:CatalogRecord ;
+                    dct:identifier     "fdk-4" ;
+                    dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1>
+            .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
+                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
+                    cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
+                    dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
+                    dct:identifier              "4" ;
+                    dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
             ."""
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1": BusinessEvent(
-            id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
+            id="fdk-1",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             identifier="1",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+            ),
             title={"nb": "Starte og drive restaurant"},
             description={
                 "nb": "Elektronisk prosess for etablering og oppstart av en bedrift."
@@ -86,9 +103,12 @@ def test_parse_events(
             ],
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
-            id="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
+            id="fdk-2",
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
             identifier="2",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+            ),
             title={"nb": "Oppgjør etter dødsfall"},
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
             dctType=[
