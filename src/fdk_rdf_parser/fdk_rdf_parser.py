@@ -207,15 +207,26 @@ def parse_events(
 
     graph = Graph().parse(data=event_rdf, format=rdf_format)
 
-    for business_event_uri in graph.subjects(
-        predicate=RDF.type, object=cv_uri("BusinessEvent")
+    for catalog_record_uri in graph.subjects(
+        predicate=RDF.type, object=dcat_uri("CatalogRecord")
     ):
-        events[business_event_uri.toPython()] = parse_event(graph, business_event_uri)
+        primary_topic_uri = graph.value(catalog_record_uri, FOAF.primaryTopic)
 
-    for business_event_uri in graph.subjects(
-        predicate=RDF.type, object=cv_uri("LifeEvent")
-    ):
-        events[business_event_uri.toPython()] = parse_event(graph, business_event_uri)
+        if primary_topic_uri and (
+            is_type(
+                cv_uri("BusinessEvent"),
+                graph,
+                primary_topic_uri,
+            )
+            or is_type(
+                cv_uri("LifeEvent"),
+                graph,
+                primary_topic_uri,
+            )
+        ):
+            events[primary_topic_uri.toPython()] = parse_event(
+                graph, catalog_record_uri, primary_topic_uri
+            )
 
     return events
 
