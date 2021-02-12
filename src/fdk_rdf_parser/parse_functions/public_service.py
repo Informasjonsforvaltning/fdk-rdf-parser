@@ -49,7 +49,7 @@ def parse_public_service(
 ) -> PublicService:
 
     public_service = PublicService(
-        id=public_service_uri.toPython(),
+        id=object_value(public_services_graph, catalog_record_uri, DCTERMS.identifier),
         uri=public_service_uri.toPython(),
         identifier=object_value(
             public_services_graph, public_service_uri, DCTERMS.identifier
