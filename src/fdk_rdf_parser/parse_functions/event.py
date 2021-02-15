@@ -8,6 +8,7 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     is_type,
     object_value,
+    value_list,
     value_translations,
 )
 from .harvest_meta_data import extract_meta_data
@@ -33,6 +34,7 @@ def parse_event(
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
+            relation=value_list(graph, subject, DCTERMS.relation),
         )
 
     else:
@@ -45,4 +47,5 @@ def parse_event(
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
+            relation=value_list(graph, subject, DCTERMS.relation),
         )
