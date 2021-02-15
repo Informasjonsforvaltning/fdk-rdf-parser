@@ -101,6 +101,10 @@ def test_parse_events(
                     extraType=None,
                 )
             ],
+            relation=[
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
+            ],
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
             id="fdk-2",
@@ -127,6 +131,9 @@ def test_parse_events(
                     prefLabel=None,
                     organisasjonsform=None,
                 )
+            ],
+            relation=[
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
             ],
         ),
     }
