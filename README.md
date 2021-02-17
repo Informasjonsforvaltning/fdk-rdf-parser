@@ -11,11 +11,11 @@ This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser
 
 ### Install software:
 ```
-% pyenv install 3.8.6
-% pyenv local 3.8.6
-% pip install poetry==1.1.3
-% pip install nox==2020.8.22
-% pip install nox-poetry==0.5.0
+% pyenv install 3.9.0
+% pyenv local 3.9.0
+% pip install poetry==1.1.4
+% pip install nox==2020.12.31
+% pip install nox-poetry==0.8.1
 % poetry install
 ```
 
