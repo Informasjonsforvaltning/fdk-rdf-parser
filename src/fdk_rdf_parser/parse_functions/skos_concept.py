@@ -7,6 +7,7 @@ from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.rdf_utils import (
     object_value,
     resource_list,
+    value_list,
     value_translations,
 )
 
@@ -37,6 +38,8 @@ def extract_skos_concept(
                 uri=source_value if source_value is not None else skos_concept_uri,
                 prefLabel=value_translations(graph, skos_concept, SKOS.prefLabel),
                 extraType=extract_extra_type(graph, skos_concept),
+                broader=value_list(graph, skos_concept, SKOS.broader),
+                narrower=value_list(graph, skos_concept, SKOS.narrower),
             )
         )
 
