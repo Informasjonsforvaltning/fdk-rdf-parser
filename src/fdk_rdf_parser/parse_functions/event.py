@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, SKOS
@@ -16,6 +16,15 @@ from fdk_rdf_parser.rdf_utils import (
 from .harvest_meta_data import extract_meta_data
 from .publisher import extract_authorities_as_publishers
 from .skos_concept import extract_skos_concept
+
+
+def extend_with_associated_broader_types(
+    events: Dict[str, Optional[Event]], event_uri: str, values: List[str]
+) -> List[str]:
+    current_event: Optional[Event] = events.get(event_uri)
+    if current_event and current_event.associatedBroaderTypes:
+        values.extend(current_event.associatedBroaderTypes)
+    return values
 
 
 def extract_all_broader_skos_concepts(
