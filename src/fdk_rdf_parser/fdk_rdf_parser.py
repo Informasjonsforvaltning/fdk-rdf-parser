@@ -1,4 +1,5 @@
-from typing import Dict, Optional
+from functools import reduce
+from typing import Dict, List, Optional
 
 from rdflib import Graph
 from rdflib.namespace import FOAF, RDF
@@ -14,6 +15,7 @@ from .classes import (
 )
 from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
 from .parse_functions import (
+    extend_with_associated_broader_types,
     parse_data_service,
     parse_dataset,
     parse_event,
@@ -151,11 +153,15 @@ def parse_information_models(
 
 
 def parse_public_services(
-    public_service_rdf: str, rdf_format: str = "turtle"
+    public_service_rdf: str, event_rdf: str = None, rdf_format: str = "turtle"
 ) -> Dict[str, PublicService]:
     public_services: Dict[str, PublicService] = {}
     fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format=rdf_format)
     reference_data = get_public_service_reference_data()
+
+    events: Dict[str, Optional[Event]] = (
+        parse_events(event_rdf) if event_rdf is not None else {}
+    )
 
     public_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
@@ -189,6 +195,25 @@ def parse_public_services(
                             public_service.hasCompetentAuthority,
                         ),
                     )
+                )
+
+            if (
+                public_service.isGroupedBy is not None
+                and len(public_service.isGroupedBy) > 0
+            ):
+                associated_skos_concepts_uris: List[str] = []
+                reduce(
+                    lambda output, current_event_uri: extend_with_associated_broader_types(
+                        events, current_event_uri, output
+                    ),
+                    public_service.isGroupedBy,
+                    associated_skos_concepts_uris,
+                )
+                public_service.associatedBroaderTypesByEvents = (
+                    associated_skos_concepts_uris
+                    if associated_skos_concepts_uris
+                    and len(associated_skos_concepts_uris) > 0
+                    else None
                 )
 
             public_service = extend_public_service_with_reference_data(
@@ -238,7 +263,6 @@ def extend_catalog_with_orgs_data(
         catalog.publisher = publisher_from_fdk_org_catalog(
             catalog.publisher, organizations_graph
         )
-
     return catalog
 
 

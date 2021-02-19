@@ -51,7 +51,7 @@ def test_complete_public_services(
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
                     cv:isDescribedAt <https://data.norge.no/node/1127> ;
-                    cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/events/3>;
+                    cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
                     cv:processingTime "P1D" ;
                     cv:sector <https://data.norge.no/concepts/2> ;
                     dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
@@ -187,6 +187,91 @@ def test_complete_public_services(
                     dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ."""
 
+    event_src = """
+            @prefix cpsv: <http://purl.org/vocab/cpsv#> .
+            @prefix dct: <http://purl.org/dc/terms/> .
+            @prefix cv: <http://data.europa.eu/m8g/> .
+            @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+            @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+            @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+            @prefix schema:  <http://schema.org/> .
+            @prefix eli: <http://data.europa.eu/eli/ontology#> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> a cv:BusinessEvent ;
+                dct:identifier "1" ;
+                dct:title "Starte og drive restaurant"@nb ;
+                dct:description "Elektronisk prosess for etablering og oppstart av en bedrift."@nb ;
+                dct:type <https://data.norge.no/concepts/306> ;
+                dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ,
+                            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
+            .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/events/2> a cv:LifeEvent ;
+                dct:identifier "2" ;
+                dct:title "Oppgjør etter dødsfall"@nb ;
+                dct:description "Elektronisk prosess for oppgjør etter dødsfall."@nb ;
+                dct:type <https://data.norge.no/concepts/308> ;
+                dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ;
+                cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+            .
+
+            <https://data.norge.no/concepts/300> a skos:Concept ;
+                    skos:prefLabel "Dødsfall og arv"@nb ;
+            .
+
+            <https://data.norge.no/concepts/304> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/310> ;
+                    skos:narrower   <https://data.norge.no/concepts/306> ;
+                    skos:prefLabel  "Drive en bedrift"@nb
+            .
+
+            <https://data.norge.no/concepts/306> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/304> ;
+                    skos:prefLabel  "Skatt og avgift"@nb
+            .
+
+            <https://data.norge.no/concepts/308> a skos:Concept ;
+                    skos:prefLabel "Dødsfall og arv"@nb ;
+            .
+
+            <https://data.norge.no/concepts/310> a skos:Concept ;
+                    skos:narrower   <https://data.norge.no/concepts/304> ;
+                    skos:prefLabel  "Starte og drive en bedrift"@nb
+            .
+
+            <http://localhost:5000/events/fdk-2>
+                    a                  dcat:CatalogRecord ;
+                    dct:identifier     "fdk-2" ;
+                    dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/2>
+            .
+
+            <http://localhost:5000/events/fdk-1>
+                    a                  dcat:CatalogRecord ;
+                    dct:identifier     "fdk-1" ;
+                    dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
+            .
+
+            <http://localhost:5000/events/fdk-4>
+                    a                  dcat:CatalogRecord ;
+                    dct:identifier     "fdk-4" ;
+                    dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1>
+            .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
+                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
+                    cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
+                    dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
+                    dct:identifier              "4" ;
+                    dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
+            ."""
+
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1": PublicService(
             id="fdk-1",
@@ -198,7 +283,6 @@ def test_complete_public_services(
             },
             isGroupedBy=[
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
-                "http://public-service-publisher.fellesdatakatalog.digdir.no/events/3",
             ],
             hasCompetentAuthority=[
                 Publisher(
@@ -396,11 +480,16 @@ def test_complete_public_services(
                     },
                 )
             ],
+            associatedBroaderTypesByEvents=[
+                "https://data.norge.no/concepts/306",
+                "https://data.norge.no/concepts/304",
+                "https://data.norge.no/concepts/310",
+            ],
             type="publicservices",
         ),
     }
 
-    assert parse_public_services(src) == expected
+    assert parse_public_services(src, event_src) == expected
 
 
 def test_parse_multiple_public_services(
