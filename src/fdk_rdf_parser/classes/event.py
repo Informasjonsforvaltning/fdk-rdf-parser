@@ -17,3 +17,4 @@ class Event:
     dctType: Optional[List[SkosConcept]] = None
     hasCompetentAuthority: Optional[List[Publisher]] = None
     relation: Optional[List[str]] = None
+    associatedBroaderTypes: Optional[List[str]] = None

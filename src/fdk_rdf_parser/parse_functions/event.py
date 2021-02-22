@@ -1,19 +1,60 @@
-from typing import Optional
+from functools import reduce
+from typing import List, Optional
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, SKOS
 
 from fdk_rdf_parser.classes import BusinessEvent, Event, LifeEvent
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     is_type,
     object_value,
+    resource_list,
     value_list,
     value_translations,
 )
 from .harvest_meta_data import extract_meta_data
 from .publisher import extract_authorities_as_publishers
 from .skos_concept import extract_skos_concept
+
+
+def extract_all_broader_skos_concepts(
+    graph: Graph, subject: URIRef, values: List[str]
+) -> List[str]:
+    broader_list_uris = resource_list(graph, subject, SKOS.broader)
+
+    values.append(subject.toPython())
+
+    for skos_concept_uri in broader_list_uris:
+        if skos_concept_uri.toPython() not in values:
+            extract_all_broader_skos_concepts(graph, skos_concept_uri, values)
+
+    return values
+
+
+def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[str]]:
+
+    broader_type_instances_from_event = resource_list(
+        graph, event_subject, DCTERMS.type
+    )
+    associated_skos_concepts_uris: List[str] = []
+    if (
+        broader_type_instances_from_event is not None
+        and len(broader_type_instances_from_event) > 0
+    ):
+        reduce(
+            lambda output, current: extract_all_broader_skos_concepts(
+                graph, current, output
+            ),
+            broader_type_instances_from_event,
+            associated_skos_concepts_uris,
+        )
+
+    return (
+        associated_skos_concepts_uris
+        if len(associated_skos_concepts_uris) > 0
+        else None
+    )
 
 
 def parse_event(
@@ -35,6 +76,7 @@ def parse_event(
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
             relation=value_list(graph, subject, DCTERMS.relation),
+            associatedBroaderTypes=extract_broader_types(graph, subject),
         )
 
     else:
@@ -48,4 +90,5 @@ def parse_event(
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
             hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
             relation=value_list(graph, subject, DCTERMS.relation),
+            associatedBroaderTypes=extract_broader_types(graph, subject),
         )

@@ -28,7 +28,7 @@ def test_parse_events(
                 dct:identifier "1" ;
                 dct:title "Starte og drive restaurant"@nb ;
                 dct:description "Elektronisk prosess for etablering og oppstart av en bedrift."@nb ;
-                dct:type <https://data.norge.no/concepts/300> ;
+                dct:type <https://data.norge.no/concepts/306>, <https://data.norge.no/concepts/312>;
                 dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ,
                             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
             .
@@ -37,7 +37,6 @@ def test_parse_events(
                 dct:identifier "2" ;
                 dct:title "Oppgjør etter dødsfall"@nb ;
                 dct:description "Elektronisk prosess for oppgjør etter dødsfall."@nb ;
-                dct:type <https://data.norge.no/concepts/308> ;
                 dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ;
                 cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
             .
@@ -46,8 +45,34 @@ def test_parse_events(
                     skos:prefLabel "Dødsfall og arv"@nb ;
             .
 
+            <https://data.norge.no/concepts/304> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/310> ;
+                    skos:narrower   <https://data.norge.no/concepts/306> ;
+                    skos:prefLabel  "Drive en bedrift"@nb
+            .
+
+            <https://data.norge.no/concepts/306> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/304> ;
+                    skos:prefLabel  "Skatt og avgift"@nb
+            .
+
             <https://data.norge.no/concepts/308> a skos:Concept ;
                     skos:prefLabel "Dødsfall og arv"@nb ;
+            .
+
+            <https://data.norge.no/concepts/310> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/306> ;
+                    skos:narrower   <https://data.norge.no/concepts/304> ;
+                    skos:prefLabel  "Starte og drive en bedrift"@nb
+            .
+
+            <https://data.norge.no/concepts/312> a skos:Concept ;
+                    skos:broader    <https://data.norge.no/concepts/313> ;
+                    skos:prefLabel  "Test type"@nb
+            .
+
+            <https://data.norge.no/concepts/313> a skos:Concept ;
+                    skos:prefLabel  "Test type"@nb
             .
 
             <http://localhost:5000/events/fdk-2>
@@ -96,14 +121,26 @@ def test_parse_events(
             },
             dctType=[
                 SkosConcept(
-                    uri="https://data.norge.no/concepts/300",
-                    prefLabel={"nb": "Dødsfall og arv"},
-                    extraType=None,
-                )
+                    uri="https://data.norge.no/concepts/306",
+                    prefLabel={"nb": "Skatt og avgift"},
+                    broader=["https://data.norge.no/concepts/304"],
+                ),
+                SkosConcept(
+                    uri="https://data.norge.no/concepts/312",
+                    prefLabel={"nb": "Test type"},
+                    broader=["https://data.norge.no/concepts/313"],
+                ),
             ],
             relation=[
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
+            ],
+            associatedBroaderTypes=[
+                "https://data.norge.no/concepts/306",
+                "https://data.norge.no/concepts/304",
+                "https://data.norge.no/concepts/310",
+                "https://data.norge.no/concepts/312",
+                "https://data.norge.no/concepts/313",
             ],
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
@@ -115,13 +152,6 @@ def test_parse_events(
             ),
             title={"nb": "Oppgjør etter dødsfall"},
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
-            dctType=[
-                SkosConcept(
-                    uri="https://data.norge.no/concepts/308",
-                    prefLabel={"nb": "Dødsfall og arv"},
-                    extraType=None,
-                )
-            ],
             hasCompetentAuthority=[
                 Publisher(
                     uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
