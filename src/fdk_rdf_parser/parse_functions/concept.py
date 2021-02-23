@@ -10,6 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     is_type,
     object_value,
+    skosno_old_uri,
     skosno_uri,
     skosxl_uri,
     value_set,
@@ -31,6 +32,8 @@ def parse_text_and_uri(graph: Graph, subject: URIRef) -> TextAndURI:
 def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[TextAndURI]:
     range_list = []
     for range_ref in graph.objects(definition_ref, skosno_uri("omfang")):
+        range_list.append(parse_text_and_uri(graph, range_ref))
+    for range_ref in graph.objects(definition_ref, skosno_old_uri("omfang")):
         range_list.append(parse_text_and_uri(graph, range_ref))
     return range_list[0] if len(range_list) == 1 else None
 
@@ -56,6 +59,11 @@ def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
 
 def extract_source_relationship(graph: Graph, definition_ref: URIRef) -> Optional[str]:
     uri = object_value(graph, definition_ref, skosno_uri("forholdTilKilde"))
+    uri = (
+        uri
+        if uri
+        else object_value(graph, definition_ref, skosno_old_uri("forholdTilKilde"))
+    )
     if not uri:
         return None
     if "sitatFraKilde" in uri:
@@ -68,22 +76,28 @@ def extract_source_relationship(graph: Graph, definition_ref: URIRef) -> Optiona
         return None
 
 
+def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
+    return Definition(
+        text=value_translations(graph, definition_ref, RDFS.label),
+        remark=value_translations(graph, definition_ref, SKOS.scopeNote),
+        targetGroup=extract_target_group(graph, definition_ref),
+        sourceRelationship=extract_source_relationship(graph, definition_ref),
+        range=extract_range(graph, definition_ref),
+        sources=extract_sources(graph, definition_ref),
+        lastUpdated=date_value(graph, definition_ref, DCTERMS.modified),
+    )
+
+
 def extract_definitions(
     graph: Graph, concept_uri: URIRef
 ) -> Optional[List[Definition]]:
     definitions = []
     for definition_ref in graph.objects(concept_uri, skosno_uri("definisjon")):
-        definitions.append(
-            Definition(
-                text=value_translations(graph, definition_ref, RDFS.label),
-                remark=value_translations(graph, definition_ref, SKOS.scopeNote),
-                targetGroup=extract_target_group(graph, definition_ref),
-                sourceRelationship=extract_source_relationship(graph, definition_ref),
-                range=extract_range(graph, definition_ref),
-                sources=extract_sources(graph, definition_ref),
-                lastUpdated=date_value(graph, definition_ref, DCTERMS.modified),
-            )
-        )
+        definitions.append(parse_definition(graph, definition_ref))
+    for definition_ref in graph.objects(
+        concept_uri, skosno_old_uri("betydningsbeskrivelse")
+    ):
+        definitions.append(parse_definition(graph, definition_ref))
     return definitions if len(definitions) > 0 else None
 
 
@@ -108,17 +122,23 @@ def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Colle
     return None
 
 
+def create_application_language_dict(application: URIRef) -> Dict[str, str]:
+    dict = {}
+    if application.language:
+        dict[application.language] = application.toPython()
+    else:
+        dict["nb"] = application.toPython()
+    return dict
+
+
 def parse_applications(
     graph: Graph, concept_uri: URIRef
 ) -> Optional[List[Dict[str, str]]]:
     applications = []
     for application in graph.objects(concept_uri, skosno_uri("bruksområde")):
-        dict = {}
-        if application.language:
-            dict[application.language] = application.toPython()
-        else:
-            dict["nb"] = application.toPython()
-        applications.append(dict)
+        applications.append(create_application_language_dict(application))
+    for application in graph.objects(concept_uri, skosno_old_uri("bruksområde")):
+        applications.append(create_application_language_dict(application))
     return applications if len(applications) > 0 else None
 
 
