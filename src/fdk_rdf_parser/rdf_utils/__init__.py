@@ -14,6 +14,8 @@ from .ns import (
     prov_uri,
     rov_uri,
     schema_uri,
+    skosno_uri,
+    skosxl_uri,
     vcard_uri,
     xkos_uri,
 )

@@ -69,3 +69,11 @@ def cv_uri(sub_string: str) -> URIRef:
 
 def cpsv_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://purl.org/vocab/cpsv#{sub_string}")
+
+
+def skosno_uri(sub_string: str) -> URIRef:
+    return URIRef(f"https://data.norge.no/vocabulary/skosno#{sub_string}")
+
+
+def skosxl_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/2008/05/skos-xl#{sub_string}")
