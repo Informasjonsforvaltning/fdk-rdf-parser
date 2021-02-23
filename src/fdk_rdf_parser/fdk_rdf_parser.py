@@ -232,6 +232,7 @@ def parse_events(
 ) -> Dict[str, Optional[Event]]:
     events: Dict[str, Optional[Event]] = {}
 
+    fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format=rdf_format)
     graph = Graph().parse(data=event_rdf, format=rdf_format)
 
     for catalog_record_uri in graph.subjects(
@@ -251,9 +252,26 @@ def parse_events(
                 primary_topic_uri,
             )
         ):
-            events[primary_topic_uri.toPython()] = parse_event(
-                graph, catalog_record_uri, primary_topic_uri
-            )
+            event = parse_event(graph, catalog_record_uri, primary_topic_uri)
+
+            if (
+                event
+                and event.hasCompetentAuthority is not None
+                and len(event.hasCompetentAuthority) > 0
+            ):
+                event.hasCompetentAuthority = list(
+                    filter(
+                        None,
+                        map(
+                            lambda authority: publisher_from_fdk_org_catalog(
+                                authority, fdk_orgs
+                            ),
+                            event.hasCompetentAuthority,
+                        ),
+                    )
+                )
+
+            events[primary_topic_uri.toPython()] = event
 
     return events
 

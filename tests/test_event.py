@@ -154,12 +154,16 @@ def test_parse_events(
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
-                    id=None,
-                    name=None,
-                    orgPath=None,
-                    prefLabel=None,
-                    organisasjonsform=None,
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                    id="123456789",
+                    name="Digitaliseringsdirektoratet",
+                    orgPath="/STAT/987654321/123456789",
+                    prefLabel={
+                        "en": "Norwegian Digitalisation Agency",
+                        "nn": "Digitaliseringsdirektoratet",
+                        "nb": "Digitaliseringsdirektoratet",
+                    },
+                    organisasjonsform="ORGL",
                 )
             ],
             relation=[
