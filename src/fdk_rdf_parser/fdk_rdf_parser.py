@@ -2,10 +2,11 @@ from functools import reduce
 from typing import Dict, List, Optional
 
 from rdflib import Graph
-from rdflib.namespace import FOAF, RDF
+from rdflib.namespace import FOAF, RDF, SKOS
 
 from .classes import (
     Catalog,
+    Concept,
     DataService,
     Dataset,
     Event,
@@ -16,6 +17,7 @@ from .classes import (
 from .organizations import get_rdf_org_data, publisher_from_fdk_org_catalog
 from .parse_functions import (
     extend_with_associated_broader_types,
+    parse_concept,
     parse_data_service,
     parse_dataset,
     parse_event,
@@ -254,6 +256,37 @@ def parse_events(
             )
 
     return events
+
+
+def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, Concept]:
+    concepts: Dict[str, Concept] = {}
+    fdk_orgs = Graph().parse(data=get_rdf_org_data(orgnr=None), format="turtle")
+
+    concepts_graph = Graph().parse(data=concepts_rdf, format=rdf_format)
+
+    for record_uri in concepts_graph.subjects(
+        predicate=RDF.type, object=dcat_uri("CatalogRecord")
+    ):
+        primary_topic_uri = concepts_graph.value(record_uri, FOAF.primaryTopic)
+
+        if primary_topic_uri and is_type(
+            SKOS.Concept,
+            concepts_graph,
+            primary_topic_uri,
+        ):
+            concept = parse_concept(concepts_graph, record_uri, primary_topic_uri)
+
+            concept.publisher = publisher_from_fdk_org_catalog(
+                concept.publisher, fdk_orgs
+            )
+            if concept.collection:
+                concept.collection.publisher = publisher_from_fdk_org_catalog(
+                    concept.collection.publisher, fdk_orgs
+                )
+
+            concepts[primary_topic_uri.toPython()] = concept
+
+    return concepts
 
 
 def extend_catalog_with_orgs_data(
