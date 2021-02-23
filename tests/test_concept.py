@@ -371,3 +371,75 @@ def test_parse_concept_handles_wrong_collection_type(
     result = parse_concept(graph, record_uri, concept_uri)
 
     assert result == expected
+
+
+def test_parse_concept_with_old_skosno(
+    mock_organizations_and_reference_data: Mock,
+) -> None:
+    src = """@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix skosno: <http://difi.no/skosno#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+<https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "35367473-a4c0-3f55-bbdb-fcdbffb6f67a" ;
+        dct:isPartOf       <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662> ;
+        dct:issued         "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+        dct:modified       "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3> .
+
+<https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3>
+        a                  skos:Concept ;
+        dct:identifier     "523ff894-638b-44a2-a4fd-3e96a5a8a5a3" ;
+        dct:modified       "2020-02-14"^^xsd:date ;
+        dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+        skosxl:prefLabel   [ a                   skosxl:Label ;
+                             skosxl:literalForm  "Testbegrep"@nb
+                           ] ;
+        skosno:bruksområde "arbeid" ;
+        skosno:betydningsbeskrivelse  [ a           skosno:Definisjon ;
+                             rdfs:label  "Et begrep som en bruke til å teste med"@nb ;
+                             dct:audience skosno:allmennheten ;
+                             skosno:forholdTilKilde  skosno:sitatFraKilde;
+                             skosno:omfang [ rdfs:label    "test"@nb ;
+                                             rdfs:seeAlso  <http://example.com/> ]
+                           ] ."""
+
+    expected = Concept(
+        id="35367473-a4c0-3f55-bbdb-fcdbffb6f67a",
+        uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3",
+        harvest=HarvestMetaData(
+            firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+        ),
+        publisher=Publisher(
+            uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
+        ),
+        prefLabel={"nb": "Testbegrep"},
+        application=[{"nb": "arbeid"}],
+        definition=[
+            Definition(
+                text={"nb": "Et begrep som en bruke til å teste med"},
+                targetGroup="allmennheten",
+                sourceRelationship="sitatFraKilde",
+                range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
+            )
+        ],
+        type="concept",
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    concept_uri = URIRef(
+        u"https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3"
+    )
+    record_uri = URIRef(
+        u"https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a"
+    )
+
+    result = parse_concept(graph, record_uri, concept_uri)
+
+    assert result == expected
