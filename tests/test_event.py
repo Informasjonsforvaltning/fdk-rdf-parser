@@ -142,6 +142,7 @@ def test_parse_events(
                 "https://data.norge.no/concepts/312",
                 "https://data.norge.no/concepts/313",
             ],
+            specialized_type="business_event",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
             id="fdk-2",
@@ -169,6 +170,7 @@ def test_parse_events(
             relation=[
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
             ],
+            specialized_type="life_event",
         ),
     }
 

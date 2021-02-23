@@ -5,4 +5,4 @@ from .event import Event
 
 @dataclass
 class BusinessEvent(Event):
-    pass
+    specialized_type: str = "business_event"
