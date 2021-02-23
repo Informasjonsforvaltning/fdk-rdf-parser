@@ -5,4 +5,4 @@ from .event import Event
 
 @dataclass
 class LifeEvent(Event):
-    pass
+    specialized_type: str = "life_event"
