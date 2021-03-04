@@ -32,6 +32,10 @@
         "name": "Turtle"
     },
     {
+        "code": "application/vnd.geo+json",
+        "name": "geoJSON"
+    },
+    {
         "name": "UNKNOWN"
     }
 ]

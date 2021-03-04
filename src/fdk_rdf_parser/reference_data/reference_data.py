@@ -22,6 +22,7 @@ class DatasetReferenceData:
     location: Optional[Dict[str, SkosCode]] = None
     eu_themes: Optional[Dict[str, ThemeEU]] = None
     los_themes: Optional[Dict[str, ThemeLOS]] = None
+    media_types: Optional[Dict[str, SkosCode]] = None
 
 
 @dataclass
@@ -53,6 +54,7 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         location=get_and_map_reference_codes("location"),
         eu_themes=get_and_map_themes_eu(),
         los_themes=get_and_map_themes_los(),
+        media_types=get_and_map_media_types(),
     )
 
 
@@ -123,6 +125,7 @@ def get_and_map_media_types() -> Optional[Dict[str, SkosCode]]:
                     if code.get("name")
                     else None,
                 )
+
     return media_types if len(media_types) > 0 else None
 
 

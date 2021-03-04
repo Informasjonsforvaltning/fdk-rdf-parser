@@ -167,6 +167,36 @@ def test_extend_spatial() -> None:
     )
 
 
+def test_handles_open_licenses_with_missing_reference_data() -> None:
+    parsed_dataset = Dataset(
+        distribution=[
+            Distribution(
+                license=[
+                    SkosConcept(uri="http://data.norge.no/nlod/"),
+                    SkosConcept(
+                        uri="http://creativecommons.org/licenses/by/4.0/",
+                        prefLabel={"en": "Is not overwritten"},
+                    ),
+                ]
+            ),
+            Distribution(
+                license=[
+                    SkosConcept(
+                        uri="http://creativesnobs.org/licenses/",
+                        prefLabel={"en": "Is not open"},
+                    )
+                ]
+            ),
+            Distribution(),
+        ]
+    )
+
+    assert (
+        extend_dataset_with_reference_data(parsed_dataset, DatasetReferenceData())
+        == parsed_dataset
+    )
+
+
 def test_extend_open_licenses() -> None:
     parsed_dataset = Dataset(
         distribution=[
@@ -215,6 +245,86 @@ def test_extend_open_licenses() -> None:
                 ],
                 openLicense=False,
             ),
+            Distribution(),
+        ]
+    )
+
+    assert (
+        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
+        == expected
+    )
+
+
+def test_handles_media_types_with_missing_reference_data() -> None:
+    parsed_dataset = Dataset(
+        distribution=[
+            Distribution(format={"application/xml"}),
+            Distribution(format={"CSV"}),
+            Distribution(format={"json"}),
+            Distribution(format={"geo+json"}),
+            Distribution(format={"text/turtle"}),
+            Distribution(),
+        ]
+    )
+
+    assert (
+        extend_dataset_with_reference_data(parsed_dataset, DatasetReferenceData())
+        == parsed_dataset
+    )
+
+
+def test_extend_media_types() -> None:
+    parsed_dataset = Dataset(
+        distribution=[
+            Distribution(format={"application/xml"}),
+            Distribution(format={"CSV"}),
+            Distribution(format={"json"}),
+            Distribution(format={"geo+json"}),
+            Distribution(format={"text/turtle"}),
+            Distribution(format={"Rubbish"}),
+            Distribution(),
+        ]
+    )
+
+    expected = Dataset(
+        distribution=[
+            Distribution(
+                format={"application/xml"},
+                mediaType=[
+                    SkosCode(uri=None, code="application/xml", prefLabel={"nb": "XML"}),
+                ],
+            ),
+            Distribution(
+                format={"CSV"},
+                mediaType=[
+                    SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
+                ],
+            ),
+            Distribution(
+                format={"json"},
+                mediaType=[
+                    SkosCode(
+                        uri=None, code="application/json", prefLabel={"nb": "JSON"}
+                    ),
+                ],
+            ),
+            Distribution(
+                format={"geo+json"},
+                mediaType=[
+                    SkosCode(
+                        uri=None,
+                        code="application/vnd.geo+json",
+                        prefLabel={"nb": "geoJSON"},
+                    ),
+                ],
+            ),
+            Distribution(
+                format={"text/turtle"},
+                mediaType=[
+                    SkosCode(uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}),
+                ],
+            ),
+            Distribution(format={"Rubbish"}, mediaType=[]),
             Distribution(),
         ]
     )

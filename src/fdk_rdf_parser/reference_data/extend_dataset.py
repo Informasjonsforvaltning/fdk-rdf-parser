@@ -30,7 +30,7 @@ def extend_dataset_with_reference_data(
     )
     dataset.spatial = extend_skos_code_list(dataset.spatial, ref_data.location)
     dataset.distribution = extend_distributions(
-        dataset.distribution, ref_data.openlicenses
+        dataset.distribution, ref_data.openlicenses, ref_data.media_types
     )
     dataset.references = extend_reference_types(
         dataset.references, ref_data.referencetypes
@@ -46,25 +46,43 @@ def extend_dataset_with_reference_data(
 def extend_distributions(
     distributions: Optional[List[Distribution]],
     open_licenses: Optional[Dict[str, SkosCode]],
+    media_types: Optional[Dict[str, SkosCode]],
 ) -> Optional[List[Distribution]]:
-    if distributions is None or open_licenses is None:
+    if distributions is None:
         return distributions
     else:
         extended_distributions = []
         for dist in distributions:
-            if dist.license is not None:
-                extended_licenses = []
-                for lic in dist.license:
-                    ref_code = (
-                        open_licenses.get(remove_trailing_slash(lic.uri))
-                        if lic.uri is not None
-                        else None
-                    )
-                    if ref_code is not None:
-                        dist.openLicense = True
-                        if lic.prefLabel is None:
-                            lic.prefLabel = ref_code.prefLabel
-                    extended_licenses.append(lic)
-                dist.license = extended_licenses
+            if open_licenses is not None:
+                if dist.license is not None:
+                    extended_licenses = []
+                    for lic in dist.license:
+                        ref_code = (
+                            open_licenses.get(remove_trailing_slash(lic.uri))
+                            if lic.uri is not None
+                            else None
+                        )
+                        if ref_code is not None:
+                            dist.openLicense = True
+                            if lic.prefLabel is None:
+                                lic.prefLabel = ref_code.prefLabel
+                        extended_licenses.append(lic)
+                    dist.license = extended_licenses
+
+            if media_types is not None:
+                if dist.format is not None:
+                    extended_mediatypes = []
+                    for fmt in dist.format:
+                        ref_code = media_types.get(fmt.lower())
+                        if ref_code is None:
+                            ref_code = media_types.get("text/" + fmt.lower())
+                        if ref_code is None:
+                            ref_code = media_types.get("application/" + fmt.lower())
+                        if ref_code is None:
+                            ref_code = media_types.get("application/vnd." + fmt.lower())
+                        if ref_code is not None:
+                            extended_mediatypes.append(ref_code)
+                    dist.mediaType = extended_mediatypes
+
             extended_distributions.append(dist)
         return extended_distributions

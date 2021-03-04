@@ -221,6 +221,13 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
+            mediaType=[
+                SkosCode(
+                    uri=None,
+                    code="application/vnd.geo+json",
+                    prefLabel={"nb": "geoJSON"},
+                ),
+            ],
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",

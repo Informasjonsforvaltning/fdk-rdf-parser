@@ -37,7 +37,7 @@ To run linters, safety, checkers and tests:
 
 Code formatting:
 ```
-% nox black
+% nox -rs black
 ```
 
 ### Other helpful commands
