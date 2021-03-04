@@ -7,7 +7,7 @@ from fdk_rdf_parser.reference_data import (
 
 
 org_response_0 = """
-@prefix br:    <https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
 @prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix org:   <http://www.w3.org/ns/org#> .
@@ -51,7 +51,7 @@ org_response_0 = """
 """
 
 org_response_1 = """
-@prefix br:    <https://github.com/Informasjonsforvaltning/organization-catalogue/blob/develop/src/main/resources/ontology/organization-catalogue.owl#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
 @prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix org:   <http://www.w3.org/ns/org#> .
