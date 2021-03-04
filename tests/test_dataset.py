@@ -673,6 +673,9 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                     ],
                     openLicense=True,
                     format={"HTML"},
+                    mediaType=[
+                        SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"})
+                    ],
                 )
             ],
         ),
