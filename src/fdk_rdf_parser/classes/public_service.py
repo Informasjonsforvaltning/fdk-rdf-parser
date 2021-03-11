@@ -43,5 +43,6 @@ class PublicService:
     processingTime: Optional[str] = None
     hasCost: Optional[List[Cost]] = None
     relation: Optional[List["PublicService"]] = None
+    spatial: Optional[List[str]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"

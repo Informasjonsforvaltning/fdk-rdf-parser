@@ -108,5 +108,6 @@ def parse_public_service(
         relation=extract_public_services(
             public_services_graph, public_service_uri, DCTERMS.relation
         ),
+        spatial=value_list(public_services_graph, public_service_uri, DCTERMS.spatial),
     )
     return public_service
