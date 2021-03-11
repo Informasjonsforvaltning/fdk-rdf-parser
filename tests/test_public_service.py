@@ -59,6 +59,7 @@ def test_complete_public_services(
                     dct:language <http://publications.europa.eu/resource/authority/language/NOB>;
                     dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
                     dct:requires <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
+                    dct:spatial <https://data.geonorge.no/administrativeEnheter/kommune/id/172833>;
                     dct:title "Ei offentleg teneste"@nb ;
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
@@ -491,6 +492,9 @@ def test_complete_public_services(
                         "nb": "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"
                     },
                 )
+            ],
+            spatial=[
+                "https://data.geonorge.no/administrativeEnheter/kommune/id/172833"
             ],
             associatedBroaderTypesByEvents=[
                 "https://data.norge.no/concepts/306",
