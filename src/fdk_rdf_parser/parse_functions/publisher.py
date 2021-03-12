@@ -5,7 +5,6 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import (
-    cv_uri,
     object_value,
     value_list,
     value_translations,
@@ -30,17 +29,15 @@ def extract_publisher(
         return None
 
 
-def extract_authorities_as_publishers(
-    public_services_graph: Graph, public_service_uri: URIRef
+def extract_list_of_publishers(
+    public_services_graph: Graph, public_service_uri: URIRef, predicate: URIRef
 ) -> Optional[List[Publisher]]:
-    authorities = value_list(
-        public_services_graph, public_service_uri, cv_uri("hasCompetentAuthority")
-    )
-    if authorities is not None and len(authorities) > 0:
+    publishers_list = value_list(public_services_graph, public_service_uri, predicate)
+    if publishers_list is not None and len(publishers_list) > 0:
         return list(
             map(
-                lambda hasCompetentAuthority: Publisher(uri=hasCompetentAuthority),
-                authorities,
+                lambda publisher_uri: Publisher(uri=publisher_uri),
+                publishers_list,
             )
         )
     else:
