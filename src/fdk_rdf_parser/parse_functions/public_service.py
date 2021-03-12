@@ -20,7 +20,7 @@ from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .participation import extract_participations
-from .publisher import extract_authorities_as_publishers
+from .publisher import extract_list_of_publishers
 from .rule import extract_rules
 from .schema_contact_point import extract_schema_contact_points
 from .skos_concept import extract_skos_concept
@@ -63,8 +63,8 @@ def parse_public_service(
         isGroupedBy=value_list(
             public_services_graph, public_service_uri, cv_uri("isGroupedBy")
         ),
-        hasCompetentAuthority=extract_authorities_as_publishers(
-            public_services_graph, public_service_uri
+        hasCompetentAuthority=extract_list_of_publishers(
+            public_services_graph, public_service_uri, cv_uri("hasCompetentAuthority")
         ),
         harvest=extract_meta_data(public_services_graph, catalog_record_uri),
         keyword=extract_key_words(public_services_graph, public_service_uri),

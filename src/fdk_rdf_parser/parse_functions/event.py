@@ -14,7 +14,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from .harvest_meta_data import extract_meta_data
-from .publisher import extract_authorities_as_publishers
+from .publisher import extract_list_of_publishers
 from .skos_concept import extract_skos_concept
 
 
@@ -83,7 +83,9 @@ def parse_event(
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
-            hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
+            hasCompetentAuthority=extract_list_of_publishers(
+                graph, subject, cv_uri("hasCompetentAuthority")
+            ),
             relation=value_list(graph, subject, DCTERMS.relation),
             associatedBroaderTypes=extract_broader_types(graph, subject),
         )
@@ -97,7 +99,9 @@ def parse_event(
             title=value_translations(graph, subject, DCTERMS.title),
             description=value_translations(graph, subject, DCTERMS.description),
             dctType=extract_skos_concept(graph, subject, DCTERMS.type),
-            hasCompetentAuthority=extract_authorities_as_publishers(graph, subject),
+            hasCompetentAuthority=extract_list_of_publishers(
+                graph, subject, cv_uri("hasCompetentAuthority")
+            ),
             relation=value_list(graph, subject, DCTERMS.relation),
             associatedBroaderTypes=extract_broader_types(graph, subject),
         )
