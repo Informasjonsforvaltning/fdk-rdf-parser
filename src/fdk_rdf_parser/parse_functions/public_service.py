@@ -98,7 +98,9 @@ def parse_public_service(
         hasLegalResource=extract_legal_resources(
             public_services_graph, public_service_uri
         ),
-        hasChannel=extract_channels(public_services_graph, public_service_uri),
+        hasChannel=extract_channels(
+            public_services_graph, public_service_uri, cv_uri("hasChannel")
+        ),
         processingTime=object_value(
             public_services_graph, public_service_uri, cv_uri("processingTime")
         ),

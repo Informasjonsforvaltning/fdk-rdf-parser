@@ -17,7 +17,7 @@ def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
     values = []
     for resource in resource_list(graph, subject, cv_uri("hasCost")):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
-        channels = extract_channels(graph, cv_uri("ifAccessedThrough"))
+        channels = extract_channels(graph, resource, cv_uri("ifAccessedThrough"))
         values.append(
             Cost(
                 uri=resource_uri,
