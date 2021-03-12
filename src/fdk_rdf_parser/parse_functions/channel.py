@@ -5,16 +5,17 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Channel
 from fdk_rdf_parser.rdf_utils import (
-    cv_uri,
     object_value,
     resource_list,
 )
 from .skos_concept import extract_skos_concept
 
 
-def extract_channels(graph: Graph, subject: URIRef) -> Optional[List[Channel]]:
+def extract_channels(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> Optional[List[Channel]]:
     values = []
-    for resource in resource_list(graph, subject, cv_uri("hasChannel")):
+    for resource in resource_list(graph, subject, predicate):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         skos_concepts = extract_skos_concept(graph, resource, DCTERMS.type)
         values.append(
