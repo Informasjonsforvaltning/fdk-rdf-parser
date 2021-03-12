@@ -199,6 +199,24 @@ def parse_public_services(
                     )
                 )
 
+            if public_service.hasCost is not None and len(public_service.hasCost) > 0:
+                costs = []
+                for cost in public_service.hasCost:
+                    if cost.isDefinedBy is not None and len(cost.isDefinedBy) > 0:
+                        cost.isDefinedBy = list(
+                            filter(
+                                None,
+                                map(
+                                    lambda isDefinedBy: publisher_from_fdk_org_catalog(
+                                        isDefinedBy, fdk_orgs
+                                    ),
+                                    cost.isDefinedBy,
+                                ),
+                            )
+                        )
+                    costs.append(cost)
+                public_service.hasCost = costs
+
             if (
                 public_service.isGroupedBy is not None
                 and len(public_service.isGroupedBy) > 0
