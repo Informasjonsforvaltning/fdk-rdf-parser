@@ -45,7 +45,7 @@ def test_complete_public_services(
                     cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
                     cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
-                    cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15> ;
+                    cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>, <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
                     cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
@@ -114,6 +114,12 @@ def test_complete_public_services(
                     cv:value              4.27 ;
                     dct:description       "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3" ;
                     dct:identifier        "15" .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16>
+                    a  cv:Cost ;
+                    cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
+                    cv:value              5.0 ;
+                    dct:identifier        "16" .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
                     a cv:Channel ;
@@ -471,7 +477,7 @@ def test_complete_public_services(
                     description={
                         "nb": "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3"
                     },
-                    currency=None,
+                    currency="http://publications.europa.eu/resource/authority/currency/NOK",
                     ifAccessedThrough=Channel(
                         uri="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10",
                         identifier="10",
@@ -480,8 +486,30 @@ def test_complete_public_services(
                             prefLabel={"nb": "Post", "en": "Mail"},
                         ),
                     ),
-                    value=None,
-                )
+                    isDefinedBy=[
+                        Publisher(
+                            uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                            id="123456789",
+                            name="Digitaliseringsdirektoratet",
+                            orgPath="/STAT/987654321/123456789",
+                            prefLabel={
+                                "en": "Norwegian Digitalisation Agency",
+                                "nn": "Digitaliseringsdirektoratet",
+                                "nb": "Digitaliseringsdirektoratet",
+                            },
+                            organisasjonsform="ORGL",
+                        )
+                    ],
+                    value="4.27",
+                ),
+                Cost(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16",
+                    identifier="16",
+                    description=None,
+                    currency="http://publications.europa.eu/resource/authority/currency/NOK",
+                    ifAccessedThrough=None,
+                    value="5.0",
+                ),
             ],
             relation=[
                 PublicService(
