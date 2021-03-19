@@ -30,7 +30,7 @@ def dct_uri(sub_string: str) -> URIRef:
 
 
 def dqv_uri(sub_string: str) -> URIRef:
-    return URIRef(f"http://www.w3.org/ns/dqvNS#{sub_string}")
+    return URIRef(f"http://www.w3.org/ns/dqv#{sub_string}")
 
 
 def dqv_iso_uri(sub_string: str) -> URIRef:
