@@ -305,7 +305,7 @@ def test_dataset_has_quality_annotations() -> None:
 
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-        @prefix dqv:   <http://www.w3.org/ns/dqvNS#> .
+        @prefix dqv:   <http://www.w3.org/ns/dqv#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix prov:  <http://www.w3.org/ns/prov#> .
 
