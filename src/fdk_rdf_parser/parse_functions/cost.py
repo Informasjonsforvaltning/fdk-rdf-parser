@@ -6,6 +6,7 @@ from rdflib.namespace import DCTERMS
 from fdk_rdf_parser.classes import Cost
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
+    object_number_value,
     object_value,
     resource_list,
     value_translations,
@@ -31,7 +32,7 @@ def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
                 isDefinedBy=extract_list_of_publishers(
                     graph, resource, cv_uri("isDefinedBy")
                 ),
-                value=str(object_value(graph, resource, cv_uri("value"))),
+                value=str(object_number_value(graph, resource, cv_uri("value"))),
             )
         )
 

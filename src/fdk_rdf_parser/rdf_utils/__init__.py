@@ -26,6 +26,7 @@ from .utils import (
     date_value,
     is_type,
     is_uri_in_list,
+    object_number_value,
     object_value,
     resource_list,
     uri_or_identifier,
