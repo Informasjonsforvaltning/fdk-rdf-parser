@@ -118,7 +118,7 @@ def test_complete_public_services(
             <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16>
                     a  cv:Cost ;
                     cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
-                    cv:value              5.0 ;
+                    cv:value              0 ;
                     dct:identifier        "16" .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
@@ -508,7 +508,7 @@ def test_complete_public_services(
                     description=None,
                     currency="http://publications.europa.eu/resource/authority/currency/NOK",
                     ifAccessedThrough=None,
-                    value="5.0",
+                    value="0",
                 ),
             ],
             relation=[

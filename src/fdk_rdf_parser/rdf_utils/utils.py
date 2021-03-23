@@ -1,4 +1,5 @@
 from datetime import date, datetime
+import numbers
 from typing import Any, Dict, List, Optional, Set
 
 from isodate import date_isoformat, datetime_isoformat
@@ -25,6 +26,17 @@ def is_uri_in_list(
 def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return value.toPython() if value and not isinstance(value, BNode) else None
+
+
+def object_number_value(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> Optional[Any]:
+    value = graph.value(subject, predicate)
+    return (
+        value.toPython()
+        if isinstance(float(value), numbers.Number) and not isinstance(value, BNode)
+        else None
+    )
 
 
 def value_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
