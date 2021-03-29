@@ -16,10 +16,18 @@ def mock_organizations_client(mocker: MockFixture) -> Mock:
     return mock
 
 
+def org_path_from_arg(*args: Any, **kwargs: Any) -> str:
+    rsp = Mock(spec=requests.Response)
+    rsp.status_code = 200
+    rsp.raise_for_status.return_value = None
+    rsp.text = f"/ANNET/{str(args[0]).split('/').pop()}"
+    return rsp
+
+
 @pytest.fixture
 def mock_orgpath_client(mocker: MockFixture) -> Mock:
     mock = mocker.patch("requests.get")
-    mock.return_value.text = "/ANNET/orgpath"
+    mock.side_effect = org_path_from_arg
     return mock
 
 

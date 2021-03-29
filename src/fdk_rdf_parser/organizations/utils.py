@@ -10,7 +10,7 @@ base_org_url = os.getenv(
 
 def organization_url(orgnr: Optional[str]) -> str:
     return (
-        f"{base_org_url}/organizations/{orgnr}"
+        f"{base_org_url}/organizations/{orgnr.strip().replace(' ', '')}"
         if orgnr is not None
         else f"{base_org_url}/organizations"
     )

@@ -65,7 +65,7 @@ def parse_publisher(graph: Graph, org_ref: URIRef, publisher: Publisher) -> Publ
 def add_org_path(publisher: Publisher) -> Publisher:
     org_path = None
     if publisher.id:
-        org_path = get_org_path(publisher.id)
+        org_path = get_org_path(publisher.id.strip().replace(" ", ""))
     elif publisher.prefLabel:
         if publisher.prefLabel.get("nb"):
             org_path = get_org_path(publisher.prefLabel["nb"])
