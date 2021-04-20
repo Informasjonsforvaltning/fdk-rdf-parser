@@ -64,8 +64,8 @@ def test_uriref_distribution_access_service() -> None:
 
         <https://testdirektoratet.no/model/distribution/0>
             a                         dcat:Distribution ;
-            dcatapi:accessService     <https://testdistribusjon.no/accessservice/0> ,
-                                      <https://testdistribusjon.no/accessservice/1> .
+            dcatapi:accessService     <https://testdistribusjon.no/accessservice/0> ;
+            dcat:accessService        <https://testdistribusjon.no/accessservice/1> .
 
         <https://testdistribusjon.no/accessservice/0>
                 a                               dcatapi:DataDistributionService ;
@@ -77,8 +77,8 @@ def test_uriref_distribution_access_service() -> None:
                 dct:title                       "Tittel 0"@nb .
 
         <https://testdistribusjon.no/accessservice/1>
-                a                               dcatapi:DataDistributionService ;
-                dcatapi:endpointDescription
+                a                               dcat:DataService ;
+                dcat:endpointDescription
                     [ a           foaf:Document , skos:Concept ;
                       dct:source  "https://testdirektoratet.no/model/2"
                     ] ;
