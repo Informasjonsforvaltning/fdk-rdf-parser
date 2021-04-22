@@ -1,15 +1,19 @@
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from typing import Dict, List
 
-from fdk_rdf_parser.classes import PartialDataset
+from rdflib import Graph, URIRef
+from rdflib.namespace import DCTERMS, FOAF, XSD
+
+from fdk_rdf_parser.classes import PartialDataset, SkosConcept
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     catalog_ref,
+    cpsv_uri,
     dcat_ap_no_uri,
     dcat_uri,
     dqv_iso_uri,
     object_value,
     prov_uri,
+    resource_list,
     value_list,
     value_set,
     value_translations,
@@ -31,6 +35,7 @@ def parse_dataset(
     datasets_graph: Graph, record_uri: URIRef, dataset_uri: URIRef
 ) -> PartialDataset:
     quality_annotations = extract_quality_annotation(datasets_graph, dataset_uri)
+    cpsv_follows = extract_legal_basis_from_cpsv_follows(datasets_graph, dataset_uri)
 
     dataset = PartialDataset(
         id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
@@ -70,13 +75,19 @@ def parse_dataset(
         hasRelevanceAnnotation=quality_annotations.get(
             dqv_iso_uri("Relevance").toPython()
         ),
-        legalBasisForRestriction=extract_skos_concept(
+        legalBasisForRestriction=cpsv_follows["restriction"]
+        if len(cpsv_follows["restriction"]) > 0
+        else extract_skos_concept(
             datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForRestriction")
         ),
-        legalBasisForProcessing=extract_skos_concept(
+        legalBasisForProcessing=cpsv_follows["processing"]
+        if len(cpsv_follows["processing"]) > 0
+        else extract_skos_concept(
             datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForProcessing")
         ),
-        legalBasisForAccess=extract_skos_concept(
+        legalBasisForAccess=cpsv_follows["access"]
+        if len(cpsv_follows["access"]) > 0
+        else extract_skos_concept(
             datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForAccess")
         ),
         conformsTo=extract_skos_concept(
@@ -101,3 +112,34 @@ def parse_dataset(
     )
 
     return dataset
+
+
+def extract_legal_basis_from_cpsv_follows(
+    datasets_graph: Graph, dataset_uri: URIRef
+) -> Dict[str, List[SkosConcept]]:
+    legal_basis_for: Dict[str, List[SkosConcept]] = {
+        "restriction": [],
+        "processing": [],
+        "access": [],
+    }
+
+    for legal_resource in resource_list(
+        datasets_graph, dataset_uri, cpsv_uri("follows")
+    ):
+        legal_type = object_value(datasets_graph, legal_resource, DCTERMS.type)
+        implements = datasets_graph.value(legal_resource, cpsv_uri("implements"))
+        if legal_type and implements:
+            skos_concept = SkosConcept(
+                uri=object_value(datasets_graph, implements, XSD.seeAlso),
+                extraType=cpsv_uri("Rule").toPython(),
+                prefLabel=value_translations(datasets_graph, implements, DCTERMS.title),
+            )
+
+            if "ruleForNonDisclosure" in legal_type:
+                legal_basis_for["restriction"].append(skos_concept)
+            elif "ruleForDataProcessing" in legal_type:
+                legal_basis_for["processing"].append(skos_concept)
+            elif "ruleForDisclosure" in legal_type:
+                legal_basis_for["access"].append(skos_concept)
+
+    return legal_basis_for

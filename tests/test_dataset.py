@@ -682,3 +682,84 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
     }
 
     assert parse_datasets(src) == expected
+
+
+def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None:
+    src = """
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix cpsv: <http://purl.org/vocab/cpsv#> .
+        @prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+        @prefix eli: <http://data.europa.eu/eli/ontology#> .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "123" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+            a                  dcat:Dataset ;
+            cpsv:follows [ a cpsv:Rule ;
+                    dct:type cpsvno:ruleForNonDisclosure ;
+                    cpsv:implements [ a eli:LegalResouce ;
+                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-1" ;
+                        dct:title "Skatteforvaltningsloven §3-1"@nb ;
+                  ] ;
+                ] ,
+                [ a cpsv:Rule ;
+                    dct:type cpsvno:ruleForDisclosure ;
+                    cpsv:implements [ a eli:LegalResouce ;
+                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
+                        dct:title "Skatteforvaltningsloven §§ 3-3 til 3-9"@nb ;
+                    ] ;
+                ] ,
+                [ a cpsv:Rule ;
+                    dct:type cpsvno:ruleForDataProcessing ;
+                    cpsv:implements [ a eli:LegalResouce ;
+                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
+                        dct:title "Skatteforvaltningsloven §§ 3-3 til 3-9"@nb ;
+                    ] ;
+                ] ,
+                [ a cpsv:Rule ;
+                    dct:type cpsvno:ruleForSomethingElse ;
+                    cpsv:implements [ a eli:LegalResouce ; ] ;
+                ] ,
+                [ a cpsv:Rule ; ] ."""
+    expected = {
+        "https://testdirektoratet.no/model/dataset/0": Dataset(
+            uri="https://testdirektoratet.no/model/dataset/0",
+            id="123",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+            ),
+            legalBasisForRestriction=[
+                SkosConcept(
+                    uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-1",
+                    prefLabel={"nb": "Skatteforvaltningsloven §3-1"},
+                    extraType="http://purl.org/vocab/cpsv#Rule",
+                )
+            ],
+            legalBasisForProcessing=[
+                SkosConcept(
+                    uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-3",
+                    prefLabel={"nb": "Skatteforvaltningsloven §§ 3-3 til 3-9"},
+                    extraType="http://purl.org/vocab/cpsv#Rule",
+                )
+            ],
+            legalBasisForAccess=[
+                SkosConcept(
+                    uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-3",
+                    prefLabel={"nb": "Skatteforvaltningsloven §§ 3-3 til 3-9"},
+                    extraType="http://purl.org/vocab/cpsv#Rule",
+                )
+            ],
+        ),
+    }
+
+    assert parse_datasets(src) == expected
