@@ -123,3 +123,11 @@ def date_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List
 def catalog_ref(graph: Graph, subject: URIRef) -> URIRef:
     catalog_meta_data_ref = graph.value(subject, DCTERMS.isPartOf)
     return graph.value(catalog_meta_data_ref, FOAF.primaryTopic)
+
+
+linguistic_system_keywords: Dict[str, str] = {
+    "http://publications.europa.eu/resource/authority/language/NOR": "no",
+    "http://publications.europa.eu/resource/authority/language/NOB": "nb",
+    "http://publications.europa.eu/resource/authority/language/NNO": "nn",
+    "http://publications.europa.eu/resource/authority/language/ENG": "en",
+}

@@ -81,3 +81,7 @@ def skosno_old_uri(sub_string: str) -> URIRef:
 
 def skosxl_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://www.w3.org/2008/05/skos-xl#{sub_string}")
+
+
+def oa_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/oa#{sub_string}")

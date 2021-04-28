@@ -11,7 +11,8 @@ def test_quality_annotations() -> None:
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-        @prefix prov:  <http://www.w3.org/ns/prov#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix oa:    <http://www.w3.org/ns/oa#> .
 
         <https://testdirektoratet.no/model/dataset/quality>
                 a                   dcat:Dataset ;
@@ -19,22 +20,31 @@ def test_quality_annotations() -> None:
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Currentness> ;
-                    prov:hasBody     [] ] ;
+                    oa:hasBody     [] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Availability> ;
-                    prov:hasBody     [ rdf:value  "availability"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "availability" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Accuracy> ;
-                    prov:hasBody     [ rdf:value  "Accuracy"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "Accuracy" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Relevance> ;
-                    prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "relevans" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/NNO> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
@@ -56,7 +66,7 @@ def test_quality_annotations() -> None:
         ),
         "http://iso.org/25012/2008/dataquality/Relevance": QualityAnnotation(
             inDimension="http://iso.org/25012/2008/dataquality/Relevance",
-            hasBody={"nb": "relevans"},
+            hasBody={"nn": "relevans"},
         ),
         "http://iso.org/25012/2008/dataquality/Completeness": QualityAnnotation(
             inDimension="http://iso.org/25012/2008/dataquality/Completeness"
@@ -75,7 +85,8 @@ def test_quality_annotations_with_prefix() -> None:
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-        @prefix prov:  <http://www.w3.org/ns/prov#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix oa:    <http://www.w3.org/ns/oa#> .
         @prefix iso:   <http://iso.org/25012/2008/dataquality/> .
 
         <https://testdirektoratet.no/model/dataset/quality>
@@ -83,19 +94,28 @@ def test_quality_annotations_with_prefix() -> None:
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Currentness ;
-                    prov:hasBody     [] ] ;
+                    oa:hasBody     [] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Availability ;
-                    prov:hasBody     [ rdf:value  "availability"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "availability" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Accuracy ;
-                    prov:hasBody     [ rdf:value  "Accuracy"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "Accuracy" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Relevance ;
-                    prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "relevans" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Completeness ] ;
@@ -135,7 +155,8 @@ def test_has_annotation() -> None:
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-        @prefix prov:  <http://www.w3.org/ns/prov#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix oa:    <http://www.w3.org/ns/oa#> .
         @prefix iso:   <http://iso.org/25012/2008/dataquality/> .
 
         <https://testdirektoratet.no/model/dataset/quality>
@@ -143,19 +164,28 @@ def test_has_annotation() -> None:
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Currentness ;
-                    prov:hasBody     [] ] ;
+                    oa:hasBody     [] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Availability ;
-                    prov:hasBody     [ rdf:value  "availability"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "availability" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Accuracy ;
-                    prov:hasBody     [ rdf:value  "Accuracy"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "Accuracy" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Relevance ;
-                    prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "relevans" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension iso:Completeness ] ;
