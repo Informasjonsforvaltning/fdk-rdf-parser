@@ -307,7 +307,8 @@ def test_dataset_has_quality_annotations() -> None:
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-        @prefix prov:  <http://www.w3.org/ns/prov#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix oa:    <http://www.w3.org/ns/oa#> .
 
         <https://testdirektoratet.no/model/dataset/quality>
                 a                   dcat:Dataset ;
@@ -315,22 +316,31 @@ def test_dataset_has_quality_annotations() -> None:
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Currentness> ;
-                    prov:hasBody     [] ] ;
+                    oa:hasBody     [] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Availability> ;
-                    prov:hasBody     [ rdf:value  "availability"@en ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "availability" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Relevance> ;
-                    prov:hasBody     [ rdf:value  "relevans"@nb ] ] ;
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "relevans" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ;
                 dqv:hasQualityAnnotation  [
                     a                dqv:QualityAnnotation ;
                     dqv:inDimension
                         <http://iso.org/25012/2008/dataquality/Completeness> ;
-                    prov:hasBody     [ rdf:value  "Completeness"@en ] ] ."""
+                    oa:hasBody     [ a    oa:TextualBody ;
+                        rdf:value  "Completeness" ;
+                        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                        dct:format       <http://publications.europa.eu/resource/authority/file-type/TXT> ] ] ."""
 
     expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/quality",

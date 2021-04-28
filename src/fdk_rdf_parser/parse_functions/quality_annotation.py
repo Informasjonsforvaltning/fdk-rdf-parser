@@ -1,15 +1,15 @@
 from typing import Dict, Optional
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import RDF
+from rdflib.namespace import DCTERMS, RDF
 
 from fdk_rdf_parser.classes import QualityAnnotation
 from fdk_rdf_parser.rdf_utils import (
     dqv_uri,
+    linguistic_system_keywords,
+    oa_uri,
     object_value,
-    prov_uri,
     resource_list,
-    value_translations,
 )
 
 
@@ -30,8 +30,12 @@ def extract_quality_annotation(
 
 
 def extract_has_body(graph: Graph, subject: URIRef) -> Optional[Dict[str, str]]:
-    has_body_uri = graph.value(subject, prov_uri("hasBody"))
-    if has_body_uri is not None:
-        return value_translations(graph, has_body_uri, RDF.value)
-    else:
-        return None
+    has_body: Dict[str, str] = {}
+    for has_body_ref in resource_list(graph, subject, oa_uri("hasBody")):
+        lang_uri = object_value(graph, has_body_ref, DCTERMS.language)
+        lang = linguistic_system_keywords.get(lang_uri if lang_uri else "")
+
+        value = object_value(graph, has_body_ref, RDF.value)
+        if value:
+            has_body[lang if lang else "no"] = value
+    return has_body if len(has_body) > 0 else None
