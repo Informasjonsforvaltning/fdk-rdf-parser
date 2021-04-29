@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, XSD
+from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
 
 from fdk_rdf_parser.classes import PartialDataset, SkosConcept
 from fdk_rdf_parser.rdf_utils import (
@@ -126,20 +126,25 @@ def extract_legal_basis_from_cpsv_follows(
     for legal_resource in resource_list(
         datasets_graph, dataset_uri, cpsv_uri("follows")
     ):
-        legal_type = object_value(datasets_graph, legal_resource, DCTERMS.type)
-        implements = datasets_graph.value(legal_resource, cpsv_uri("implements"))
-        if legal_type and implements:
+        rule_type = object_value(datasets_graph, legal_resource, DCTERMS.type)
+        implements_ref = datasets_graph.value(legal_resource, cpsv_uri("implements"))
+        if rule_type and implements_ref:
+            legal_type_ref = datasets_graph.value(implements_ref, DCTERMS.type)
             skos_concept = SkosConcept(
-                uri=object_value(datasets_graph, implements, XSD.seeAlso),
-                extraType=cpsv_uri("Rule").toPython(),
-                prefLabel=value_translations(datasets_graph, implements, DCTERMS.title),
+                uri=object_value(datasets_graph, implements_ref, RDFS.seeAlso),
+                extraType=rule_type,
+                prefLabel=value_translations(
+                    datasets_graph, legal_type_ref, SKOS.prefLabel
+                )
+                if legal_type_ref
+                else None,
             )
 
-            if "ruleForNonDisclosure" in legal_type:
+            if "ruleForNonDisclosure" in rule_type:
                 legal_basis_for["restriction"].append(skos_concept)
-            elif "ruleForDataProcessing" in legal_type:
+            elif "ruleForDataProcessing" in rule_type:
                 legal_basis_for["processing"].append(skos_concept)
-            elif "ruleForDisclosure" in legal_type:
+            elif "ruleForDisclosure" in rule_type:
                 legal_basis_for["access"].append(skos_concept)
 
     return legal_basis_for
