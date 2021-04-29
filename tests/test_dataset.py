@@ -690,6 +690,8 @@ def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
         @prefix cpsv: <http://purl.org/vocab/cpsv#> .
         @prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
         @prefix eli: <http://data.europa.eu/eli/ontology#> .
@@ -707,22 +709,25 @@ def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None
             cpsv:follows [ a cpsv:Rule ;
                     dct:type cpsvno:ruleForNonDisclosure ;
                     cpsv:implements [ a eli:LegalResouce ;
-                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-1" ;
-                        dct:title "Skatteforvaltningsloven §3-1"@nb ;
-                  ] ;
+                        rdfs:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-1" ;
+                        dct:type    [ a skos:Concept ;
+                            skos:prefLabel  "Skatteforvaltningsloven §3-1"@nb ;
+                        ]
+                    ] ;
                 ] ,
                 [ a cpsv:Rule ;
                     dct:type cpsvno:ruleForDisclosure ;
                     cpsv:implements [ a eli:LegalResouce ;
-                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
-                        dct:title "Skatteforvaltningsloven §§ 3-3 til 3-9"@nb ;
+                        rdfs:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
+                        dct:type    [ a skos:Concept ;
+                            skos:prefLabel  "Skatteforvaltningsloven §§ 3-3 til 3-9"@nb ;
+                        ]
                     ] ;
                 ] ,
                 [ a cpsv:Rule ;
                     dct:type cpsvno:ruleForDataProcessing ;
                     cpsv:implements [ a eli:LegalResouce ;
-                        xsd:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
-                        dct:title "Skatteforvaltningsloven §§ 3-3 til 3-9"@nb ;
+                        rdfs:seeAlso "https://lovdata.no/NL/lov/2016-05-27-14/§3-3" ;
                     ] ;
                 ] ,
                 [ a cpsv:Rule ;
@@ -742,21 +747,20 @@ def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None
                 SkosConcept(
                     uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-1",
                     prefLabel={"nb": "Skatteforvaltningsloven §3-1"},
-                    extraType="http://purl.org/vocab/cpsv#Rule",
+                    extraType="https://data.norge.no/vocabulary/cpsvno#ruleForNonDisclosure",
                 )
             ],
             legalBasisForProcessing=[
                 SkosConcept(
                     uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-3",
-                    prefLabel={"nb": "Skatteforvaltningsloven §§ 3-3 til 3-9"},
-                    extraType="http://purl.org/vocab/cpsv#Rule",
+                    extraType="https://data.norge.no/vocabulary/cpsvno#ruleForDataProcessing",
                 )
             ],
             legalBasisForAccess=[
                 SkosConcept(
                     uri="https://lovdata.no/NL/lov/2016-05-27-14/§3-3",
                     prefLabel={"nb": "Skatteforvaltningsloven §§ 3-3 til 3-9"},
-                    extraType="http://purl.org/vocab/cpsv#Rule",
+                    extraType="https://data.norge.no/vocabulary/cpsvno#ruleForDisclosure",
                 )
             ],
         ),
