@@ -16,6 +16,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
+from .format import extract_formats
 from .harvest_meta_data import extract_meta_data
 from .model_element import parse_model_element
 from .model_property import parse_model_property
@@ -46,7 +47,7 @@ def parse_information_model(
         hasPart=object_value(graph, info_model_uri, DCTERMS.hasPart),
         isReplacedBy=object_value(graph, info_model_uri, DCTERMS.isReplacedBy),
         replaces=object_value(graph, info_model_uri, DCTERMS.replaces),
-        hasFormat=value_set(graph, info_model_uri, DCTERMS.hasFormat),
+        hasFormat=extract_formats(graph, info_model_uri),
         homepage=object_value(graph, info_model_uri, FOAF.homepage),
         status=object_value(graph, info_model_uri, adms_uri("status")),
         versionInfo=object_value(graph, info_model_uri, OWL.versionInfo),
