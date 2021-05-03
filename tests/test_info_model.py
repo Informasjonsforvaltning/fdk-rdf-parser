@@ -6,6 +6,7 @@ from fdk_rdf_parser import parse_information_models
 from fdk_rdf_parser.classes import (
     Catalog,
     ContactPoint,
+    Format,
     HarvestMetaData,
     InformationModel,
     Publisher,
@@ -56,7 +57,7 @@ digdir:Utgiver  a       foaf:Agent , owl:NamedIndividual ;
 
 digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:description    "Modell med diverse i. Inneholder modellelementer som AltMuligModell skal peke til."@nb ;
-        dct:hasFormat      digdir:AlternativModellformat ;
+        dct:hasFormat      <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> ;
         dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell" ;
         dct:isPartOf       digdir:AltMuligModell ;
         dct:isReplacedBy   digdir:AdresseModell ;
@@ -78,6 +79,12 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         foaf:homepage      <https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell> ;
         modelldcatno:informationModelIdentifier
                 "https://www.digdir.no/diversemodell" .
+
+<https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png>
+        a           foaf:Document ;
+        dct:format  <http://publications.europa.eu/resource/authority/file-type/PNG> ;
+        dct:language <http://pubs.europa.eu/resource/authority/language/NOR> ;
+        dct:title   "Image of the logical data model (LDM)"@en .
 
 <https://informationmodels.staging.fellesdatakatalog.digdir.no/informationmodels/77e07f69-5fb4-30c7-afca-bffe179dc3b3>
         a                  dcat:CatalogRecord ;
@@ -162,9 +169,16 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                     startDate="2016-02-11T00:00:00+01:00",
                 )
             ],
-            hasFormat={
-                "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#AlternativModellformat"
-            },
+            hasFormat=[
+                Format(
+                    uri="https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png",
+                    title={"en": "Image of the logical data model (LDM)"},
+                    format="http://publications.europa.eu/resource/authority/file-type/PNG",
+                    language=SkosCode(
+                        uri="http://pubs.europa.eu/resource/authority/language/NOR",
+                    ),
+                )
+            ],
             homepage="https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell",
             status="http://purl.org/adms/status/Completed",
             versionInfo="1.0",

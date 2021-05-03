@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional, Set
 
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
+from .format import Format
 from .harvest_meta_data import HarvestMetaData
 from .model_element import ModelElement
 from .model_property import ModelProperty
@@ -25,7 +26,7 @@ class InformationModel(PartialDcatResource):
     isReplacedBy: Optional[str] = None
     replaces: Optional[str] = None
     temporal: Optional[List[Temporal]] = None
-    hasFormat: Optional[Set[str]] = None
+    hasFormat: Optional[List[Format]] = None
     homepage: Optional[str] = None
     status: Optional[str] = None
     versionInfo: Optional[str] = None

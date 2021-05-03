@@ -13,6 +13,7 @@ from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .event import Event
 from .evidence import Evidence
+from .format import Format
 from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
 from .legal_resource import LegalResource
