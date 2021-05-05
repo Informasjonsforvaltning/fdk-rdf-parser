@@ -8,6 +8,7 @@ from .criterion_requirement import extract_criterion_requirements
 from .dataservice import parse_data_service
 from .dataset import parse_dataset
 from .dcat_resource import parse_dcat_resource
+from .dct_standard import extract_dct_standard_list
 from .distribution import extract_distributions
 from .event import extend_with_associated_broader_types, parse_event
 from .evidence import extract_evidences
