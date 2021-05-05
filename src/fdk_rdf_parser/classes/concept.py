@@ -45,8 +45,8 @@ class Concept:
     prefLabel: Optional[Dict[str, str]] = None
     hiddenLabel: Optional[List[Dict[str, str]]] = None
     altLabel: Optional[List[Dict[str, str]]] = None
-    contactPoint: Optional[List[ContactPoint]] = None
-    definition: Optional[List[Definition]] = None
+    contactPoint: Optional[ContactPoint] = None
+    definition: Optional[Definition] = None
     seeAlso: Optional[Set[str]] = None
     validFromIncluding: Optional[str] = None
     validToIncluding: Optional[str] = None

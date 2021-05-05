@@ -180,11 +180,7 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
             ),
             prefLabel={"nb": "to"},
             altLabel=[{"nb": "w"}],
-            definition=[
-                Definition(
-                    text={"nb": "dfgfg"},
-                )
-            ],
+            definition=Definition(text={"nb": "dfgfg"}),
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190": Concept(
@@ -206,14 +202,12 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
             ),
             prefLabel={"nb": "midtbaneanker"},
             altLabel=[{"nb": "stabilisator"}],
-            definition=[
-                Definition(
-                    text={"nb": "en stabil stabilisator på midten"},
-                    sourceRelationship="egendefinert",
-                    targetGroup="fagspesialist",
-                    sources=[TextAndURI(uri=None, text=None)],
-                )
-            ],
+            definition=Definition(
+                text={"nb": "en stabil stabilisator på midten"},
+                sourceRelationship="egendefinert",
+                targetGroup="fagspesialist",
+                sources=[TextAndURI(uri=None, text=None)],
+            ),
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/9f25b5ad-8aa7-4233-853b-7434e20aeaef": Concept(
@@ -235,19 +229,17 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
             ),
             application=[{"nb": "arbeid"}],
             prefLabel={"nn": "dokument"},
-            definition=[
-                Definition(
-                    text={
-                        "nn": "eit skriftstykke, eit skriftleg utgreiing og inneheld informasjon. Eit dokument er meint for kommunikasjon eller lagring av data. "
-                    },
-                    sourceRelationship="basertPåKilde",
-                    sources=[
-                        TextAndURI(
-                            uri="http://example.com/", text={"nb": "Noe sted et sted"}
-                        )
-                    ],
-                )
-            ],
+            definition=Definition(
+                text={
+                    "nn": "eit skriftstykke, eit skriftleg utgreiing og inneheld informasjon. Eit dokument er meint for kommunikasjon eller lagring av data. "
+                },
+                sourceRelationship="basertPåKilde",
+                sources=[
+                    TextAndURI(
+                        uri="http://example.com/", text={"nb": "Noe sted et sted"}
+                    )
+                ],
+            ),
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3": Concept(
@@ -268,14 +260,12 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
             ),
             prefLabel={"nb": "Testbegrep"},
-            definition=[
-                Definition(
-                    text={"nb": "Et begrep som en bruke til å teste med"},
-                    targetGroup="allmennheten",
-                    sourceRelationship="sitatFraKilde",
-                    range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
-                )
-            ],
+            definition=Definition(
+                text={"nb": "Et begrep som en bruke til å teste med"},
+                targetGroup="allmennheten",
+                sourceRelationship="sitatFraKilde",
+                range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
+            ),
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/c4ae179e-6a3a-42bc-85a2-1e32d75fc013": Concept(
@@ -289,17 +279,13 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
             ),
             application=[{"nb": "hjem"}],
             prefLabel={"nn": "lua og sokka"},
-            contactPoint=[
-                ContactPoint(
-                    email="informasjonsforvaltning@brreg.no",
-                    hasTelephone="+4775007500",
-                )
-            ],
-            definition=[
-                Definition(
-                    text={"nb": "klesplagg for hode og hender"},
-                )
-            ],
+            contactPoint=ContactPoint(
+                email="informasjonsforvaltning@brreg.no",
+                hasTelephone="+4775007500",
+            ),
+            definition=Definition(
+                text={"nb": "klesplagg for hode og hender"},
+            ),
             seeAlso={
                 "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0",
                 "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940",
@@ -421,14 +407,12 @@ def test_parse_concept_with_old_skosno(
         ),
         prefLabel={"nb": "Testbegrep"},
         application=[{"nb": "arbeid"}],
-        definition=[
-            Definition(
-                text={"nb": "Et begrep som en bruke til å teste med"},
-                targetGroup="allmennheten",
-                sourceRelationship="sitatFraKilde",
-                range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
-            )
-        ],
+        definition=Definition(
+            text={"nb": "Et begrep som en bruke til å teste med"},
+            targetGroup="allmennheten",
+            sourceRelationship="sitatFraKilde",
+            range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
+        ),
         type="concept",
     )
 
