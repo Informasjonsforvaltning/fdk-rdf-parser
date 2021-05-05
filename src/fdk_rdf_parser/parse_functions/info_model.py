@@ -9,6 +9,7 @@ from fdk_rdf_parser.rdf_utils import (
     catalog_ref,
     model_dcat_ap_no_uri,
     object_value,
+    prof_uri,
     resource_list,
     uri_or_identifier,
     uri_or_identifier_list,
@@ -16,6 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
+from .dct_standard import extract_dct_standard_list
 from .format import extract_formats
 from .harvest_meta_data import extract_meta_data
 from .model_element import parse_model_element
@@ -46,6 +48,9 @@ def parse_information_model(
         isPartOf=object_value(graph, info_model_uri, DCTERMS.isPartOf),
         hasPart=object_value(graph, info_model_uri, DCTERMS.hasPart),
         isReplacedBy=object_value(graph, info_model_uri, DCTERMS.isReplacedBy),
+        isProfileOf=extract_dct_standard_list(
+            graph, info_model_uri, prof_uri("isProfileOf")
+        ),
         replaces=object_value(graph, info_model_uri, DCTERMS.replaces),
         hasFormat=extract_formats(graph, info_model_uri),
         homepage=object_value(graph, info_model_uri, FOAF.homepage),

@@ -6,6 +6,7 @@ from fdk_rdf_parser import parse_information_models
 from fdk_rdf_parser.classes import (
     Catalog,
     ContactPoint,
+    DctStandard,
     Format,
     HarvestMetaData,
     InformationModel,
@@ -41,6 +42,8 @@ def test_parse_info_model_no_elements(
 @prefix digdir: <https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix prof:  <https://www.w3.org/ns/dx/prof/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
 digdir:Tidsintervall  a  dct:PeriodOfTime , owl:NamedIndividual ;
         dcat:startDate  "2016-02-11T00:00:00+01:00"^^xsd:dateTime .
@@ -77,6 +80,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dcat:keyword       "Adresse"@nb ;
         dcat:theme         <https://psi.norge.no/los/tema/skole-og-utdanning> ;
         foaf:homepage      <https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell> ;
+        prof:isProfileOf   <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model> ;
         modelldcatno:informationModelIdentifier
                 "https://www.digdir.no/diversemodell" .
 
@@ -85,6 +89,12 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:format  <http://publications.europa.eu/resource/authority/file-type/PNG> ;
         dct:language <http://pubs.europa.eu/resource/authority/language/NOR> ;
         dct:title   "Image of the logical data model (LDM)"@en .
+
+<https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model>
+        a                dct:Standard ;
+        rdfs:seeAlso     <https://statswiki.unece.org/display/gsim/GSIM+resources+repository> ;
+        dct:title        "Generic Statistical Information Model"@en ;
+        owl:versionInfo  "??" .
 
 <https://informationmodels.staging.fellesdatakatalog.digdir.no/informationmodels/77e07f69-5fb4-30c7-afca-bffe179dc3b3>
         a                  dcat:CatalogRecord ;
@@ -162,6 +172,16 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 )
             ],
             isPartOf="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#AltMuligModell",
+            isProfileOf=[
+                DctStandard(
+                    uri="https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model",
+                    title={"en": "Generic Statistical Information Model"},
+                    seeAlso=[
+                        "https://statswiki.unece.org/display/gsim/GSIM+resources+repository"
+                    ],
+                    versionInfo="??",
+                )
+            ],
             isReplacedBy="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#AdresseModell",
             temporal=[
                 Temporal(
