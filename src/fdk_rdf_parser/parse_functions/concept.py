@@ -88,9 +88,7 @@ def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
     )
 
 
-def extract_definitions(
-    graph: Graph, concept_uri: URIRef
-) -> Optional[List[Definition]]:
+def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition]:
     definitions = []
     for definition_ref in graph.objects(concept_uri, skosno_uri("definisjon")):
         definitions.append(parse_definition(graph, definition_ref))
@@ -98,7 +96,7 @@ def extract_definitions(
         concept_uri, skosno_old_uri("betydningsbeskrivelse")
     ):
         definitions.append(parse_definition(graph, definition_ref))
-    return definitions if len(definitions) > 0 else None
+    return definitions[0] if len(definitions) > 0 else None
 
 
 def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
@@ -157,6 +155,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
 
     concept_temporal_list = extract_temporal(graph, concept_uri)
     concept_temporal = concept_temporal_list[0] if concept_temporal_list else Temporal()
+    contact_points = extract_contact_points(graph, concept_uri)
 
     pref_label_list = parse_label_set(graph, concept_uri, skosxl_uri("prefLabel"))
 
@@ -176,8 +175,8 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         else None,
         hiddenLabel=parse_label_set(graph, concept_uri, skosxl_uri("hiddenLabel")),
         altLabel=parse_label_set(graph, concept_uri, skosxl_uri("altLabel")),
-        contactPoint=extract_contact_points(graph, concept_uri),
-        definition=extract_definitions(graph, concept_uri),
+        contactPoint=contact_points[0] if contact_points else None,
+        definition=extract_definition(graph, concept_uri),
         seeAlso=value_set(graph, concept_uri, RDFS.seeAlso),
         validFromIncluding=concept_temporal.startDate,
         validToIncluding=concept_temporal.endDate,
