@@ -150,7 +150,6 @@ def parse_label_set(
         literal_form = value_translations(graph, label, skosxl_uri("literalForm"))
         if literal_form:
             values.append(literal_form)
-    values.sort()
     return values if len(values) > 0 else None
 
 
