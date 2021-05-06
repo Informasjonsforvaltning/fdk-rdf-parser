@@ -39,6 +39,7 @@ def parse_information_model(
         id=object_value(graph, fdk_record_uri, DCTERMS.identifier),
         harvest=extract_meta_data(graph, fdk_record_uri),
         catalog=parse_catalog(graph, fdk_record_uri),
+        conformsTo=extract_dct_standard_list(graph, info_model_uri, DCTERMS.conformsTo),
         license=extract_skos_code_list(graph, info_model_uri, DCTERMS.license),
         informationModelIdentifier=object_value(
             graph, info_model_uri, model_dcat_ap_no_uri("informationModelIdentifier")

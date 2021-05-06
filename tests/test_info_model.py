@@ -59,6 +59,7 @@ digdir:Utgiver  a       foaf:Agent , owl:NamedIndividual ;
         foaf:name       "Digitaliseringsdirektoratet"@nb .
 
 digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
+        dct:conformsTo          <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model> ;
         dct:description    "Modell med diverse i. Inneholder modellelementer som AltMuligModell skal peke til."@nb ;
         dct:hasFormat      <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> ;
         dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell" ;
@@ -156,6 +157,16 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             harvest=HarvestMetaData(
                 firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
             ),
+            conformsTo=[
+                DctStandard(
+                    uri="https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model",
+                    title={"en": "Generic Statistical Information Model"},
+                    seeAlso=[
+                        "https://statswiki.unece.org/display/gsim/GSIM+resources+repository"
+                    ],
+                    versionInfo="??",
+                )
+            ],
             license=[
                 SkosCode(
                     uri="http://creativecommons.org/licenses/by/4.0/deed.no",
