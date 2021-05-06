@@ -35,7 +35,7 @@ class Definition:
 @dataclass
 class Concept:
     id: Optional[str] = None
-    uri: Optional[str] = None
+    identifier: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     collection: Optional[Collection] = None
     publisher: Optional[Publisher] = None

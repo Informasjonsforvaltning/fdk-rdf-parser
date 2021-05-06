@@ -161,7 +161,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
 
     return Concept(
         id=object_value(graph, fdk_record_uri, DCTERMS.identifier),
-        uri=concept_uri.toPython(),
+        identifier=concept_uri.toPython(),
         harvest=extract_meta_data(graph, fdk_record_uri),
         collection=parse_collection(graph, fdk_record_uri),
         publisher=extract_publisher(
