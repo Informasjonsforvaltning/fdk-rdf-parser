@@ -19,6 +19,7 @@ class InformationModel(PartialDcatResource):
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     catalog: Optional[Catalog] = None
+    conformsTo: Optional[List[DctStandard]] = None
     license: Optional[List[SkosCode]] = None
     informationModelIdentifier: Optional[str] = None
     spatial: Optional[List[SkosCode]] = None
