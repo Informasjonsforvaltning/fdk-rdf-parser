@@ -459,22 +459,20 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
 [[package]]
 name = "rdflib"
-version = "5.0.0"
+version = "6.0.0"
 description = "RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information."
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 
 [package.dependencies]
 isodate = "*"
 pyparsing = "*"
-six = "*"
 
 [package.extras]
-docs = ["sphinx (<3)", "sphinxcontrib-apidoc"]
+docs = ["sphinx (<5)", "sphinxcontrib-apidoc"]
 html = ["html5lib"]
-sparql = ["requests"]
-tests = ["html5lib", "networkx", "nose", "doctest-ignore-unicode"]
+tests = ["html5lib", "networkx", "nose (==1.3.7)", "nose-timer", "coverage", "black (==21.7b0)", "flake8", "doctest-ignore-unicode (==0.1.2)"]
 
 [[package]]
 name = "regex"
@@ -583,7 +581,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "35b7a22a7c0be64fa2b66e376b37a3444eadee539c110e30c2ea505bee3537ab"
+content-hash = "e056e5b25892f6550234a7bd0e649c1082cd1cb76d5a3c2d490d97a15b6f9620"
 
 [metadata.files]
 appdirs = [
@@ -834,8 +832,8 @@ pyyaml = [
     {file = "PyYAML-5.4.1.tar.gz", hash = "sha256:607774cbba28732bfa802b54baa7484215f530991055bb562efbed5b2f20a45e"},
 ]
 rdflib = [
-    {file = "rdflib-5.0.0-py3-none-any.whl", hash = "sha256:88208ea971a87886d60ae2b1a4b2cdc263527af0454c422118d43fe64b357877"},
-    {file = "rdflib-5.0.0.tar.gz", hash = "sha256:78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155"},
+    {file = "rdflib-6.0.0-py3-none-any.whl", hash = "sha256:bb24f0058070d5843503e15b37c597bc3858d328d11acd9476efad3aa62f555d"},
+    {file = "rdflib-6.0.0.tar.gz", hash = "sha256:7ce4d757eb26f4dd43205ec340d8c097f29e5adfe45d6ea20238c731dc679879"},
 ]
 regex = [
     {file = "regex-2021.8.3-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:8764a78c5464ac6bde91a8c87dd718c27c1cabb7ed2b4beaf36d3e8e390567f9"},
