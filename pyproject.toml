@@ -13,19 +13,19 @@ requests = "^2.23.0"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.3"
 coverage = {extras = ["toml"], version = "^5.5"}
-pytest-cov = "^2.8.1"
-black = "^21.5b1"
+pytest-cov = "^2.12.1"
+black = "^21.7b0"
 flake8 = "^3.9.2"
 flake8-bandit = "^2.1.2"
-flake8-black = "^0.2.1"
+flake8-black = "^0.2.3"
 flake8-bugbear = "^21.4.3"
 flake8-import-order = "^0.18.1"
-pep8-naming = "^0.11.1"
+pep8-naming = "^0.12.1"
 safety = "^1.8.7"
 pytest-mock = "^3.6.1"
-codecov = "^2.0.22"
+codecov = "^2.1.12"
 flake8-annotations = "^2.6.2"
-mypy = "^0.812"
+mypy = "^0.910"
 
 [tool.coverage.paths]
 source = ["src"]
