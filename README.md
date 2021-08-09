@@ -13,9 +13,9 @@ This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser
 ```
 % pyenv install 3.9.0
 % pyenv local 3.9.0
-% pip install poetry==1.1.4
-% pip install nox==2020.12.31
-% pip install nox-poetry==0.8.1
+% pip install poetry==1.1.7
+% pip install nox==2021.6.12
+% pip install nox-poetry==0.8.6
 % poetry install
 ```
 
