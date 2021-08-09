@@ -213,6 +213,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             homepage="https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell",
             status="http://purl.org/adms/status/Completed",
             versionInfo="1.0",
+            versionNotes={"nb": "Lagt til objekttypen Timeline"},
             losTheme=[
                 ThemeLOS(
                     children=["https://psi.norge.no/los/tema/grunnskole"],
