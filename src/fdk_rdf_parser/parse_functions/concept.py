@@ -170,7 +170,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         ),
         subject=value_translations(graph, concept_uri, DCTERMS.subject),
         application=parse_applications(graph, concept_uri),
-        example=value_translations(graph, concept_uri, DCTERMS.example),
+        example=value_translations(graph, concept_uri, SKOS.example),
         prefLabel=pref_label_list[0]
         if pref_label_list and len(pref_label_list) > 0
         else None,
