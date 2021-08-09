@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "fdk-rdf-parser"
-version = "0.3.12"
+version = "1.0.0"
 description = ""
 authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-rdflib = "^5.0.0"
+rdflib = "^6.0.0"
 isodate = "^0.6.0"
 requests = "^2.23.0"
 
