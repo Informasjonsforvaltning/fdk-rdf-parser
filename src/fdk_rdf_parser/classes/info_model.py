@@ -33,7 +33,7 @@ class InformationModel(PartialDcatResource):
     homepage: Optional[str] = None
     status: Optional[str] = None
     versionInfo: Optional[str] = None
-    versionNotes: Optional[str] = None
+    versionNotes: Optional[Dict[str, str]] = None
     subjects: Optional[Set[str]] = None
     containsSubjects: Optional[Set[str]] = None
     containsModelElements: Optional[List[str]] = None

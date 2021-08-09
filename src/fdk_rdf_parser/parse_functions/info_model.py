@@ -14,6 +14,7 @@ from fdk_rdf_parser.rdf_utils import (
     uri_or_identifier,
     uri_or_identifier_list,
     value_set,
+    value_translations,
 )
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
@@ -57,7 +58,9 @@ def parse_information_model(
         homepage=object_value(graph, info_model_uri, FOAF.homepage),
         status=object_value(graph, info_model_uri, adms_uri("status")),
         versionInfo=object_value(graph, info_model_uri, OWL.versionInfo),
-        versionNotes=object_value(graph, info_model_uri, OWL.versionNotes),
+        versionNotes=value_translations(
+            graph, info_model_uri, adms_uri("versionNotes")
+        ),
         subjects=subjects,
         containsSubjects=subjects.copy() if subjects else None,
         containsModelElements=uri_or_identifier_list(graph, model_element_refs),
