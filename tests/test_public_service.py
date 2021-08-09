@@ -449,7 +449,7 @@ def test_complete_public_services(
                             prefLabel=None,
                         )
                     ],
-                    name=None,
+                    name={"nb": "Lov om behandlingsmåten i forvaltningssaker"},
                 )
             ],
             hasLegalResource=[

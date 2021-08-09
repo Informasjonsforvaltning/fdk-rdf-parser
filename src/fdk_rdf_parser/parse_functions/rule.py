@@ -23,7 +23,7 @@ def extract_rules(graph: Graph, subject: URIRef) -> Optional[List[Rule]]:
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 description=value_translations(graph, resource, DCTERMS.description),
                 language=extract_skos_code_list(graph, resource, DCTERMS.language),
-                name=value_translations(graph, resource, DCTERMS.name),
+                name=value_translations(graph, resource, DCTERMS.title),
             )
         )
 
