@@ -12,6 +12,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_set,
     value_translations,
 )
+from .conforms_to import extract_conforms_to
 from .data_distribution_service import extract_data_distribution_services
 from .skos_concept import extract_skos_concept
 
@@ -33,7 +34,7 @@ def extract_distributions(
                 downloadURL=value_set(graph, resource, dcat_uri("downloadURL")),
                 accessURL=value_set(graph, resource, dcat_uri("accessURL")),
                 license=extract_skos_concept(graph, resource, DCTERMS.license),
-                conformsTo=extract_skos_concept(graph, resource, DCTERMS.conformsTo),
+                conformsTo=extract_conforms_to(graph, resource),
                 page=extract_skos_concept(graph, resource, FOAF.page),
                 format=value_set(graph, resource, dct_uri("format")),
                 type=object_value(graph, resource, DCTERMS.type),

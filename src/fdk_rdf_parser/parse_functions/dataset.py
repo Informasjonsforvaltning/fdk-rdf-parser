@@ -19,6 +19,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from .catalog import parse_catalog
+from .conforms_to import extract_conforms_to
 from .dcat_resource import parse_dcat_resource
 from .distribution import extract_distributions
 from .harvest_meta_data import extract_meta_data
@@ -90,9 +91,7 @@ def parse_dataset(
         else extract_skos_concept(
             datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForAccess")
         ),
-        conformsTo=extract_skos_concept(
-            datasets_graph, dataset_uri, DCTERMS.conformsTo
-        ),
+        conformsTo=extract_conforms_to(datasets_graph, dataset_uri),
         informationModel=extract_skos_concept(
             datasets_graph, dataset_uri, dcat_ap_no_uri("informationModel")
         ),

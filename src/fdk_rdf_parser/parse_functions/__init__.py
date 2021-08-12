@@ -2,6 +2,7 @@ from .agent import extract_agents_for_participation
 from .catalog import parse_catalog
 from .channel import extract_channels
 from .concept import parse_concept
+from .conforms_to import extract_conforms_to
 from .contactpoint import extract_contact_points
 from .cost import extract_costs
 from .criterion_requirement import extract_criterion_requirements

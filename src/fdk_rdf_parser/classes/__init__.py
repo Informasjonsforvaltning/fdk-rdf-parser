@@ -3,6 +3,7 @@ from .businessEvent import BusinessEvent
 from .catalog import Catalog
 from .channel import Channel
 from .concept import Concept
+from .conforms_to import ConformsTo
 from .contactpoint import ContactPoint
 from .cost import Cost
 from .criterion_requirement import CriterionRequirement

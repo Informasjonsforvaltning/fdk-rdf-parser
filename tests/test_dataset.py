@@ -6,6 +6,7 @@ from rdflib import Graph, URIRef
 from fdk_rdf_parser import parse_datasets
 from fdk_rdf_parser.classes import (
     Catalog,
+    ConformsTo,
     Dataset,
     Distribution,
     HarvestMetaData,
@@ -437,9 +438,9 @@ def test_informationmodel_and_conformsto() -> None:
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
                 dct:conformsTo
-                [ a               skos:Concept , dct:Standard ;
+                [ a               skos:Concept ;
                   dct:source      "https://conformsto.no" ;
-                  skos:prefLabel  "conforms to"@en
+                  dct:title  "conforms to"@en
                 ] ;
                 dcatno:informationModel
                 [ a               skos:Concept , dct:Standard ;
@@ -451,10 +452,9 @@ def test_informationmodel_and_conformsto() -> None:
         uri="https://testdirektoratet.no/model/dataset/0",
         harvest=HarvestMetaData(),
         conformsTo=[
-            SkosConcept(
+            ConformsTo(
                 uri="https://conformsto.no",
                 prefLabel={"en": "conforms to"},
-                extraType="http://purl.org/dc/terms/Standard",
             )
         ],
         informationModel=[
@@ -493,9 +493,9 @@ def test_distribution_and_sample() -> None:
                 dcat:distribution
                     [ a                dcat:Distribution ;
                       dct:conformsTo
-                        [ a               dct:Standard , skos:Concept ;
+                        [ a               dct:Standard ;
                           dct:source      "https://hopp.no" ;
-                          skos:prefLabel  "standard1"@nb
+                          dct:title  "standard1"@nb
                         ] ;
                       dct:description  "asdadrtyrtydfghdgh  dgh dfgh dh"@nb ;
                       dct:format       "application/ATF" ;
@@ -524,10 +524,9 @@ def test_distribution_and_sample() -> None:
         distribution=[
             Distribution(
                 conformsTo=[
-                    SkosConcept(
+                    ConformsTo(
                         uri="https://hopp.no",
                         prefLabel={"nb": "standard1"},
-                        extraType="http://purl.org/dc/terms/Standard",
                     )
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
