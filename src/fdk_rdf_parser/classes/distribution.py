@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set
 
+from .conforms_to import ConformsTo
 from .data_distribution_service import DataDistributionService
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
@@ -15,7 +16,7 @@ class Distribution:
     accessURL: Optional[Set[str]] = None
     license: Optional[List[SkosConcept]] = None
     openLicense: bool = False
-    conformsTo: Optional[List[SkosConcept]] = None
+    conformsTo: Optional[List[ConformsTo]] = None
     page: Optional[List[SkosConcept]] = None
     mediaType: Optional[List[SkosCode]] = None
     format: Optional[Set[str]] = None

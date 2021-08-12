@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Set
 
 from .catalog import Catalog
+from .conforms_to import ConformsTo
 from .dcat_resource import PartialDcatResource
 from .distribution import Distribution
 from .harvest_meta_data import HarvestMetaData
@@ -40,7 +41,7 @@ class PartialDataset(PartialDcatResource):
     legalBasisForRestriction: Optional[List[SkosConcept]] = None
     legalBasisForProcessing: Optional[List[SkosConcept]] = None
     legalBasisForAccess: Optional[List[SkosConcept]] = None
-    conformsTo: Optional[List[SkosConcept]] = None
+    conformsTo: Optional[List[ConformsTo]] = None
     informationModel: Optional[List[SkosConcept]] = None
     references: Optional[List[Reference]] = None
     qualifiedAttributions: Optional[List[QualifiedAttribution]] = None
