@@ -10,6 +10,7 @@ from fdk_rdf_parser.classes import (
     Dataset,
     Distribution,
     HarvestMetaData,
+    MediaType,
     PartialDataset,
     Publisher,
     QualifiedAttribution,
@@ -499,6 +500,7 @@ def test_distribution_and_sample() -> None:
                         ] ;
                       dct:description  "asdadrtyrtydfghdgh  dgh dfgh dh"@nb ;
                       dct:format       "application/ATF" ;
+                      dcat:compressFormat   "ZIP" ;
                       dct:license
                         [ a           dct:LicenseDocument , skos:Concept ;
                           dct:source
@@ -518,6 +520,7 @@ def test_distribution_and_sample() -> None:
             Distribution(
                 description={"nb": "adsgjkv  cghj     dghdh"},
                 format={"application/ATF"},
+                dctFormat=[MediaType(code="application/ATF", name="UNKNOWN")],
                 accessURL={"https://application/ATF.com"},
             )
         ],
@@ -531,6 +534,8 @@ def test_distribution_and_sample() -> None:
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
                 format={"application/ATF"},
+                dctFormat=[MediaType(code="application/ATF", name="UNKNOWN")],
+                compressFormat=MediaType(code="ZIP"),
                 license=[
                     SkosConcept(
                         uri="http://creativecommons.org/publicdomain/zero/1.0/",
@@ -651,7 +656,7 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
 
         <https://example.com/open-distribution>
             a               dcat:Distribution ;
-            dct:format      "HTML" ;
+            dct:format      "HTML" , [ dct:title    "CSV" ] ;
             dct:license     <https://data.norge.no/nlod/> ;
             dcat:accessURL  <http://example.com/access-url> .
     """
@@ -681,15 +686,19 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                         )
                     ],
                     openLicense=True,
-                    format={"HTML"},
-                    mediaType=[
-                        SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"})
+                    format={
+                        "HTML",
+                    },
+                    dctFormat=[
+                        MediaType(code="HTML", name="UNKNOWN"),
+                    ],
+                    fdkFormat=[
+                        MediaType(code="HTML", name="UNKNOWN"),
                     ],
                 )
             ],
         ),
     }
-
     assert parse_datasets(src) == expected
 
 
@@ -775,4 +784,117 @@ def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None
         ),
     }
 
+    assert parse_datasets(src) == expected
+
+
+def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
+    src = """
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "123" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/321>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "321" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/1> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+            a                  dcat:Dataset ;
+            dcat:distribution  <https://example.com/extra-media-types> .
+
+        <https://testdirektoratet.no/model/dataset/1>
+            a                  dcat:Dataset ;
+            dcat:distribution  <https://example.com/unknown-media-types> .
+
+        <https://example.com/extra-media-types>
+            a               dcat:Distribution ;
+            dcat:mediaType      <https://www.iana.org/assignments/media-types/text/html> ;
+            dcat:compressFormat      <https://www.iana.org/assignments/media-types/text/plain> ;
+            dcat:packageFormat      <https://www.iana.org/assignments/media-types/application/xml> .
+
+        <https://example.com/unknown-media-types>
+            a               dcat:Distribution ;
+            dcat:mediaType      <https://www.iana.org/assignments/media-types/text/unknown> ;
+            dcat:compressFormat      <https://www.iana.org/assignments/media-types/text/unknown> .
+    """
+    expected = {
+        "https://testdirektoratet.no/model/dataset/0": Dataset(
+            uri="https://testdirektoratet.no/model/dataset/0",
+            id="123",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+            ),
+            distribution=[
+                Distribution(
+                    uri="https://example.com/extra-media-types",
+                    dcatMediaType=[
+                        MediaType(
+                            uri="https://www.iana.org/assignments/media-types/text/html",
+                            code="text/html",
+                            name="HTML",
+                        ),
+                    ],
+                    fdkFormat=[
+                        MediaType(
+                            uri="https://www.iana.org/assignments/media-types/text/html",
+                            code="text/html",
+                            name="HTML",
+                        ),
+                    ],
+                    compressFormat=MediaType(
+                        uri="https://www.iana.org/assignments/media-types/text/plain",
+                        code="text/plain",
+                        name="TXT",
+                    ),
+                    packageFormat=MediaType(
+                        uri="https://www.iana.org/assignments/media-types/application/xml",
+                        code="application/xml",
+                        name="XML",
+                    ),
+                )
+            ],
+        ),
+        "https://testdirektoratet.no/model/dataset/1": Dataset(
+            uri="https://testdirektoratet.no/model/dataset/1",
+            id="321",
+            harvest=HarvestMetaData(
+                firstHarvested="2020-03-12T11:52:16Z",
+                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+            ),
+            distribution=[
+                Distribution(
+                    uri="https://example.com/unknown-media-types",
+                    dcatMediaType=[
+                        MediaType(
+                            uri="https://www.iana.org/assignments/media-types/text/unknown",
+                            name="UNKNOWN",
+                        ),
+                    ],
+                    fdkFormat=[
+                        MediaType(
+                            uri="https://www.iana.org/assignments/media-types/text/unknown",
+                            name="UNKNOWN",
+                        ),
+                    ],
+                    compressFormat=MediaType(
+                        uri="https://www.iana.org/assignments/media-types/text/unknown",
+                        name="UNKNOWN",
+                    ),
+                )
+            ],
+        ),
+    }
     assert parse_datasets(src) == expected

@@ -4,6 +4,7 @@ from typing import Any, List, Optional, Set
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
+from .media_type import MediaType
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 
@@ -16,6 +17,7 @@ class DataService(PartialDcatResource):
     endpointDescription: Optional[Set[str]] = None
     endpointURL: Optional[Set[str]] = None
     mediaType: Optional[List[SkosCode]] = None
+    dcatMediaType: Optional[List[MediaType]] = None
     servesDataset: Optional[Set[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
     catalog: Optional[Catalog] = None

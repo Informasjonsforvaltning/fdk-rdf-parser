@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-from fdk_rdf_parser.classes import SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import MediaType, SkosCode, ThemeEU, ThemeLOS
 from .reference_data_client import get_reference_data
 from .utils import remove_trailing_slash
 
 
 @dataclass
 class DataServiceReferenceData:
-    media_types: Optional[Dict[str, SkosCode]] = None
+    media_types: Optional[Dict[str, MediaType]] = None
 
 
 @dataclass
@@ -22,7 +22,7 @@ class DatasetReferenceData:
     location: Optional[Dict[str, SkosCode]] = None
     eu_themes: Optional[Dict[str, ThemeEU]] = None
     los_themes: Optional[Dict[str, ThemeLOS]] = None
-    media_types: Optional[Dict[str, SkosCode]] = None
+    media_types: Optional[Dict[str, MediaType]] = None
 
 
 @dataclass
@@ -113,18 +113,18 @@ def get_and_map_themes_los() -> Optional[Dict[str, ThemeLOS]]:
     return mapped if len(mapped) > 0 else None
 
 
-def get_and_map_media_types() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
     media_types = {}
     codes = get_reference_data("/codes/mediatypes")
     if codes is not None:
         for code in codes:
-            if code.get("code"):
-                media_types[str(code.get("code"))] = SkosCode(
-                    code=str(code.get("code")),
-                    prefLabel={"nb": str(code.get("name"))}
-                    if code.get("name")
-                    else None,
-                )
+            media_type = MediaType(
+                uri=str(code["uri"]) if code.get("uri") else None,
+                code=str(code["code"]) if code.get("code") else None,
+                name=str(code["name"]) if code.get("name") else None,
+            )
+            if media_type.uri:
+                media_types[media_type.uri] = media_type
 
     return media_types if len(media_types) > 0 else None
 

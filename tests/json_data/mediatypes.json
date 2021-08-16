@@ -1,41 +1,53 @@
 [
     {
+        "uri": "https://www.iana.org/assignments/media-types/text/csv",
         "code": "text/csv",
         "name": "CSV"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/text/html",
         "code": "text/html",
         "name": "HTML"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/application/json",
         "code": "application/json",
         "name": "JSON"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/application/rdf+xml",
         "code": "application/rdf+xml",
         "name": "RDF/XML"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/text/plain",
         "code": "text/plain",
         "name": "TXT"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/application/xml",
         "code": "application/xml",
         "name": "XML"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/application/ld+json",
         "code": "application/ld+json",
         "name": "JSON-LD"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/text/turtle",
         "code": "text/turtle",
         "name": "Turtle"
     },
     {
+        "uri": "https://www.iana.org/assignments/media-types/application/vnd.geo+json",
         "code": "application/vnd.geo+json",
         "name": "geoJSON"
     },
     {
         "name": "UNKNOWN"
+    },
+    {
+        "code": "text/unknown+code"
     }
 ]

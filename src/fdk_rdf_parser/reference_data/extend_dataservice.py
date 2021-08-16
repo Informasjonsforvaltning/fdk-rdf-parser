@@ -1,36 +1,56 @@
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import DataService, SkosCode
+from fdk_rdf_parser.classes import DataService, MediaType, SkosCode
 from .reference_data import DataServiceReferenceData
+from .utils import map_media_type_to_skos_code
 
 
 def extend_data_service_with_reference_data(
     data_service: DataService, ref_data: DataServiceReferenceData
 ) -> DataService:
-    data_service.mediaType = extend_media_types(
+    data_service.mediaType = extend_media_type_skos_codes(
         data_service.mediaType, ref_data.media_types
+    )
+    data_service.dcatMediaType = extend_media_types(
+        data_service.dcatMediaType, ref_data.media_types
     )
 
     return data_service
 
 
-def extend_media_types(
-    media_types: Optional[List[SkosCode]], references: Optional[Dict[str, SkosCode]]
+def extend_media_type_skos_codes(
+    media_types: Optional[List[SkosCode]], references: Optional[Dict[str, MediaType]]
 ) -> Optional[List[SkosCode]]:
     extended = []
     if media_types and references:
         for media_type in media_types:
-            reference = find_corresponding_reference(media_type.uri, references)
+            reference = find_corresponding_media_type_reference(
+                media_type.uri, references
+            )
             if reference:
-                extended.append(reference)
+                extended.append(map_media_type_to_skos_code(reference))
     return extended if len(extended) > 0 else None
 
 
-def find_corresponding_reference(
-    media_type: Optional[str], references: Optional[Dict[str, SkosCode]]
-) -> Optional[SkosCode]:
+def extend_media_types(
+    media_types: Optional[List[MediaType]], references: Optional[Dict[str, MediaType]]
+) -> Optional[List[MediaType]]:
+    extended = []
+    if media_types and references:
+        for media_type in media_types:
+            reference = find_corresponding_media_type_reference(
+                media_type.uri, references
+            )
+            if reference:
+                extended.append(reference)
+            else:
+                extended.append(media_type)
+    return extended if len(extended) > 0 else None
+
+
+def find_corresponding_media_type_reference(
+    media_type: Optional[str], references: Optional[Dict[str, MediaType]]
+) -> Optional[MediaType]:
     if media_type and references:
-        for key in references:
-            if key in media_type:
-                return references[key]
+        return references.get(media_type)
     return None

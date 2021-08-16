@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import Reference, SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import MediaType, Reference, SkosCode, ThemeEU, ThemeLOS
 
 base_url = os.getenv(
     "REFERENCE_DATA_BASE_URI",
@@ -106,6 +106,14 @@ def extend_skos_code_list(
             else:
                 extended_codes.append(code)
         return extended_codes
+
+
+def map_media_type_to_skos_code(media_type: MediaType) -> SkosCode:
+    return SkosCode(
+        uri=media_type.uri,
+        code=media_type.code,
+        prefLabel={"nb": media_type.name if media_type.name else "UNKNOWN"},
+    )
 
 
 def remove_trailing_slash(uri: str) -> str:

@@ -6,6 +6,7 @@ from fdk_rdf_parser.classes import (
     ContactPoint,
     DataService,
     HarvestMetaData,
+    MediaType,
     Publisher,
     SkosCode,
     SkosConcept,
@@ -58,7 +59,7 @@ def test_parse_multiple_data_services(
                                   ] ;
         dcat:endpointDescription  <http://example.com/dette%20skal%20v%C3%A6re%20en%20lenke> , <http://example.com/Dette%20er%20en%20test> ;
         dcat:endpointURL          <http://kaffe.no> , <https://kaffemaskin.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/text/turtle> , <https://www.iana.org/assignments/media-types/application/rdf+xml> , <https://www.iana.org/assignments/media-types/application/json> ;
+        dcat:mediaType            <https://www.iana.org/assignments/media-types/text/turtle> ;
         dcat:servesDataset        <http://testutgiver.no/datasets/abc> .
 
 <https://testdirektoratet.no/dataservices/111>
@@ -95,7 +96,7 @@ def test_parse_multiple_data_services(
                                   ] ;
         dcat:endpointDescription  <http://example.com/> ;
         dcat:endpointURL          <https://vg.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/vnd.geo+json> , <https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet> .
+        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet> .
 
 <https://testdirektoratet.no/dataservices/000>
         a                  dcat:CatalogRecord ;
@@ -153,11 +154,18 @@ def test_parse_multiple_data_services(
             },
             endpointURL={"http://kaffe.no", "https://kaffemaskin.no"},
             mediaType=[
-                SkosCode(uri=None, code="application/json", prefLabel={"nb": "JSON"}),
                 SkosCode(
-                    uri=None, code="application/rdf+xml", prefLabel={"nb": "RDF/XML"}
+                    uri="https://www.iana.org/assignments/media-types/text/turtle",
+                    code="text/turtle",
+                    prefLabel={"nb": "Turtle"},
                 ),
-                SkosCode(uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}),
+            ],
+            dcatMediaType=[
+                MediaType(
+                    uri="https://www.iana.org/assignments/media-types/text/turtle",
+                    code="text/turtle",
+                    name="Turtle",
+                ),
             ],
             servesDataset={"http://testutgiver.no/datasets/abc"},
             conformsTo=[
@@ -221,11 +229,10 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
-            mediaType=[
-                SkosCode(
-                    uri=None,
-                    code="application/vnd.geo+json",
-                    prefLabel={"nb": "geoJSON"},
+            dcatMediaType=[
+                MediaType(
+                    uri="https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet",
+                    name="UNKNOWN",
                 ),
             ],
             catalog=Catalog(

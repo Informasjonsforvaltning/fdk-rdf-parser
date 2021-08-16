@@ -1,4 +1,4 @@
-from fdk_rdf_parser.classes import ConceptSchema, SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import ConceptSchema, MediaType, SkosCode, ThemeEU, ThemeLOS
 from fdk_rdf_parser.reference_data import (
     DataServiceReferenceData,
     DatasetReferenceData,
@@ -77,26 +77,50 @@ org_response_1 = """
 
 data_service_reference_data = DataServiceReferenceData(
     media_types={
-        "text/csv": SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
-        "text/html": SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"}),
-        "application/json": SkosCode(
-            uri=None, code="application/json", prefLabel={"nb": "JSON"}
+        "https://www.iana.org/assignments/media-types/text/csv": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/csv",
+            code="text/csv",
+            name="CSV",
         ),
-        "application/rdf+xml": SkosCode(
-            uri=None, code="application/rdf+xml", prefLabel={"nb": "RDF/XML"}
+        "https://www.iana.org/assignments/media-types/text/html": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/html",
+            code="text/html",
+            name="HTML",
         ),
-        "text/plain": SkosCode(uri=None, code="text/plain", prefLabel={"nb": "TXT"}),
-        "application/xml": SkosCode(
-            uri=None, code="application/xml", prefLabel={"nb": "XML"}
+        "https://www.iana.org/assignments/media-types/application/json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/json",
+            code="application/json",
+            name="JSON",
         ),
-        "application/ld+json": SkosCode(
-            uri=None, code="application/ld+json", prefLabel={"nb": "JSON-LD"}
+        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
+            code="application/rdf+xml",
+            name="RDF/XML",
         ),
-        "text/turtle": SkosCode(
-            uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}
+        "https://www.iana.org/assignments/media-types/text/plain": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/plain",
+            code="text/plain",
+            name="TXT",
         ),
-        "application/vnd.geo+json": SkosCode(
-            uri=None, code="application/vnd.geo+json", prefLabel={"nb": "geoJSON"}
+        "https://www.iana.org/assignments/media-types/application/xml": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/xml",
+            code="application/xml",
+            name="XML",
+        ),
+        "https://www.iana.org/assignments/media-types/application/ld+json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/ld+json",
+            code="application/ld+json",
+            name="JSON-LD",
+        ),
+        "https://www.iana.org/assignments/media-types/text/turtle": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/turtle",
+            code="text/turtle",
+            name="Turtle",
+        ),
+        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
+            code="application/vnd.geo+json",
+            name="geoJSON",
         ),
     }
 )
@@ -625,26 +649,50 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     media_types={
-        "text/csv": SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
-        "text/html": SkosCode(uri=None, code="text/html", prefLabel={"nb": "HTML"}),
-        "application/json": SkosCode(
-            uri=None, code="application/json", prefLabel={"nb": "JSON"}
+        "https://www.iana.org/assignments/media-types/text/csv": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/csv",
+            code="text/csv",
+            name="CSV",
         ),
-        "application/rdf+xml": SkosCode(
-            uri=None, code="application/rdf+xml", prefLabel={"nb": "RDF/XML"}
+        "https://www.iana.org/assignments/media-types/text/html": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/html",
+            code="text/html",
+            name="HTML",
         ),
-        "text/plain": SkosCode(uri=None, code="text/plain", prefLabel={"nb": "TXT"}),
-        "application/xml": SkosCode(
-            uri=None, code="application/xml", prefLabel={"nb": "XML"}
+        "https://www.iana.org/assignments/media-types/application/json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/json",
+            code="application/json",
+            name="JSON",
         ),
-        "application/ld+json": SkosCode(
-            uri=None, code="application/ld+json", prefLabel={"nb": "JSON-LD"}
+        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
+            code="application/rdf+xml",
+            name="RDF/XML",
         ),
-        "text/turtle": SkosCode(
-            uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}
+        "https://www.iana.org/assignments/media-types/text/plain": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/plain",
+            code="text/plain",
+            name="TXT",
         ),
-        "application/vnd.geo+json": SkosCode(
-            uri=None, code="application/vnd.geo+json", prefLabel={"nb": "geoJSON"}
+        "https://www.iana.org/assignments/media-types/application/xml": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/xml",
+            code="application/xml",
+            name="XML",
+        ),
+        "https://www.iana.org/assignments/media-types/application/ld+json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/ld+json",
+            code="application/ld+json",
+            name="JSON-LD",
+        ),
+        "https://www.iana.org/assignments/media-types/text/turtle": MediaType(
+            uri="https://www.iana.org/assignments/media-types/text/turtle",
+            code="text/turtle",
+            name="Turtle",
+        ),
+        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaType(
+            uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
+            code="application/vnd.geo+json",
+            name="geoJSON",
         ),
     },
 )

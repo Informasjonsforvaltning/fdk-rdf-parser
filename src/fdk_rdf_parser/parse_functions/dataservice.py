@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
 from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
 from .harvest_meta_data import extract_meta_data
+from .media_type import extract_media_type_list
 from .skos_code import extract_skos_code_list
 from .skos_concept import extract_skos_concept
 
@@ -29,6 +30,9 @@ def parse_data_service(
             data_services_graph, data_service_uri, dcat_uri("endpointDescription")
         ),
         mediaType=extract_skos_code_list(
+            data_services_graph, data_service_uri, dcat_uri("mediaType")
+        ),
+        dcatMediaType=extract_media_type_list(
             data_services_graph, data_service_uri, dcat_uri("mediaType")
         ),
         conformsTo=extract_skos_concept(
