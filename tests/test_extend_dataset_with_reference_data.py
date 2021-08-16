@@ -2,6 +2,7 @@ from fdk_rdf_parser.classes import (
     ConceptSchema,
     Dataset,
     Distribution,
+    MediaType,
     Reference,
     SkosCode,
     SkosConcept,
@@ -276,11 +277,15 @@ def test_handles_media_types_with_missing_reference_data() -> None:
 def test_extend_media_types() -> None:
     parsed_dataset = Dataset(
         distribution=[
-            Distribution(format={"application/xml"}),
+            Distribution(
+                format={"https://www.iana.org/assignments/media-types/application/xml"}
+            ),
             Distribution(format={"CSV"}),
             Distribution(format={"json"}),
             Distribution(format={"geo+json"}),
-            Distribution(format={"text/turtle"}),
+            Distribution(
+                format={"https://www.iana.org/assignments/media-types/text/turtle"}
+            ),
             Distribution(format={"Rubbish"}),
             Distribution(),
         ]
@@ -289,42 +294,55 @@ def test_extend_media_types() -> None:
     expected = Dataset(
         distribution=[
             Distribution(
-                format={"application/xml"},
+                format={"https://www.iana.org/assignments/media-types/application/xml"},
                 mediaType=[
-                    SkosCode(uri=None, code="application/xml", prefLabel={"nb": "XML"}),
+                    SkosCode(
+                        uri="https://www.iana.org/assignments/media-types/application/xml",
+                        code="application/xml",
+                        prefLabel={"nb": "XML"},
+                    ),
+                ],
+                fdkFormat=[
+                    MediaType(
+                        uri="https://www.iana.org/assignments/media-types/application/xml",
+                        code="application/xml",
+                        name="XML",
+                    )
                 ],
             ),
             Distribution(
                 format={"CSV"},
-                mediaType=[
-                    SkosCode(uri=None, code="text/csv", prefLabel={"nb": "CSV"}),
-                ],
+                fdkFormat=[MediaType(code="CSV", name="UNKNOWN")],
             ),
             Distribution(
                 format={"json"},
-                mediaType=[
-                    SkosCode(
-                        uri=None, code="application/json", prefLabel={"nb": "JSON"}
-                    ),
-                ],
+                fdkFormat=[MediaType(code="json", name="UNKNOWN")],
             ),
             Distribution(
                 format={"geo+json"},
+                fdkFormat=[MediaType(code="geo+json", name="UNKNOWN")],
+            ),
+            Distribution(
+                format={"https://www.iana.org/assignments/media-types/text/turtle"},
                 mediaType=[
                     SkosCode(
-                        uri=None,
-                        code="application/vnd.geo+json",
-                        prefLabel={"nb": "geoJSON"},
+                        uri="https://www.iana.org/assignments/media-types/text/turtle",
+                        code="text/turtle",
+                        prefLabel={"nb": "Turtle"},
+                    ),
+                ],
+                fdkFormat=[
+                    MediaType(
+                        uri="https://www.iana.org/assignments/media-types/text/turtle",
+                        code="text/turtle",
+                        name="Turtle",
                     ),
                 ],
             ),
             Distribution(
-                format={"text/turtle"},
-                mediaType=[
-                    SkosCode(uri=None, code="text/turtle", prefLabel={"nb": "Turtle"}),
-                ],
+                format={"Rubbish"},
+                fdkFormat=[MediaType(code="Rubbish", name="UNKNOWN")],
             ),
-            Distribution(format={"Rubbish"}, mediaType=[]),
             Distribution(),
         ]
     )

@@ -1,6 +1,6 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
-from fdk_rdf_parser.classes import Dataset, Distribution, SkosCode
+from fdk_rdf_parser.classes import Dataset, Distribution, MediaType, SkosCode
 from .reference_data import DatasetReferenceData
 from .utils import (
     extend_eu_themes,
@@ -8,6 +8,7 @@ from .utils import (
     extend_reference_types,
     extend_skos_code,
     extend_skos_code_list,
+    map_media_type_to_skos_code,
     remove_trailing_slash,
     split_los_from_eu_themes,
 )
@@ -46,7 +47,7 @@ def extend_dataset_with_reference_data(
 def extend_distributions(
     distributions: Optional[List[Distribution]],
     open_licenses: Optional[Dict[str, SkosCode]],
-    media_types: Optional[Dict[str, SkosCode]],
+    ref_media_types: Optional[Dict[str, MediaType]],
 ) -> Optional[List[Distribution]]:
     if distributions is None:
         return distributions
@@ -69,20 +70,56 @@ def extend_distributions(
                         extended_licenses.append(lic)
                     dist.license = extended_licenses
 
-            if media_types is not None:
-                if dist.format is not None:
-                    extended_mediatypes = []
+            if ref_media_types:
+                fdk_formats: Set[MediaType] = set()
+
+                if dist.format:
+                    extended_formats = []
                     for fmt in dist.format:
-                        ref_code = media_types.get(fmt.lower())
-                        if ref_code is None:
-                            ref_code = media_types.get("text/" + fmt.lower())
-                        if ref_code is None:
-                            ref_code = media_types.get("application/" + fmt.lower())
-                        if ref_code is None:
-                            ref_code = media_types.get("application/vnd." + fmt.lower())
-                        if ref_code is not None:
-                            extended_mediatypes.append(ref_code)
-                    dist.mediaType = extended_mediatypes
+                        ref_media_type = ref_media_types.get(fmt)
+                        if ref_media_type:
+                            extended_formats.append(
+                                map_media_type_to_skos_code(ref_media_type)
+                            )
+                            fdk_formats.add(ref_media_type)
+                        else:
+                            fdk_formats.add(MediaType(code=fmt))
+                    dist.mediaType = (
+                        extended_formats if len(extended_formats) > 0 else None
+                    )
+
+                if dist.dcatMediaType:
+                    extended_dcat_types = []
+                    for media_type in dist.dcatMediaType:
+                        extended = (
+                            ref_media_types.get(media_type.uri)
+                            if media_type.uri
+                            else None
+                        )
+                        if extended:
+                            extended_dcat_types.append(extended)
+                            fdk_formats.add(extended)
+                        else:
+                            extended_dcat_types.append(media_type)
+                            fdk_formats.add(media_type)
+                    dist.dcatMediaType = extended_dcat_types
+
+                if len(fdk_formats) > 0:
+                    dist.fdkFormat = list(fdk_formats)
+
+                if (
+                    dist.compressFormat
+                    and dist.compressFormat.uri
+                    and ref_media_types.get(dist.compressFormat.uri)
+                ):
+                    dist.compressFormat = ref_media_types[dist.compressFormat.uri]
+
+                if (
+                    dist.packageFormat
+                    and dist.packageFormat.uri
+                    and ref_media_types.get(dist.packageFormat.uri)
+                ):
+                    dist.packageFormat = ref_media_types[dist.packageFormat.uri]
 
             extended_distributions.append(dist)
         return extended_distributions

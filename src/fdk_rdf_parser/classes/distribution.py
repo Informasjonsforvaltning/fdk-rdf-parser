@@ -3,6 +3,7 @@ from typing import Dict, List, Optional, Set
 
 from .conforms_to import ConformsTo
 from .data_distribution_service import DataDistributionService
+from .media_type import MediaType
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 
@@ -20,5 +21,10 @@ class Distribution:
     page: Optional[List[SkosConcept]] = None
     mediaType: Optional[List[SkosCode]] = None
     format: Optional[Set[str]] = None
+    dctFormat: Optional[List[MediaType]] = None
+    dcatMediaType: Optional[List[MediaType]] = None
+    fdkFormat: Optional[List[MediaType]] = None
+    compressFormat: Optional[MediaType] = None
+    packageFormat: Optional[MediaType] = None
     type: Optional[str] = None
     accessService: Optional[List[DataDistributionService]] = None

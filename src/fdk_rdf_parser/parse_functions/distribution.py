@@ -14,6 +14,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .conforms_to import extract_conforms_to
 from .data_distribution_service import extract_data_distribution_services
+from .media_type import extract_media_type, extract_media_type_list
 from .skos_concept import extract_skos_concept
 
 
@@ -37,6 +38,16 @@ def extract_distributions(
                 conformsTo=extract_conforms_to(graph, resource),
                 page=extract_skos_concept(graph, resource, FOAF.page),
                 format=value_set(graph, resource, dct_uri("format")),
+                dctFormat=extract_media_type_list(graph, resource, dct_uri("format")),
+                dcatMediaType=extract_media_type_list(
+                    graph, resource, dcat_uri("mediaType")
+                ),
+                compressFormat=extract_media_type(
+                    graph, resource, dcat_uri("compressFormat")
+                ),
+                packageFormat=extract_media_type(
+                    graph, resource, dcat_uri("packageFormat")
+                ),
                 type=object_value(graph, resource, DCTERMS.type),
                 accessService=extract_data_distribution_services(graph, resource),
             )
