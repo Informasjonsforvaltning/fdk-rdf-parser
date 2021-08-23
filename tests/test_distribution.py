@@ -42,7 +42,7 @@ def test_single_distribution() -> None:
             title={"nb": "Testdistribusjon"},
             description={"en": "Description"},
             format={"json"},
-            dctFormat=[MediaType(uri=None, code="json", name="UNKNOWN")],
+            dctFormat=[MediaType(name="json", type="unknown")],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
@@ -94,7 +94,7 @@ def test_multiple_distributions() -> None:
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon json"},
             format={"json"},
-            dctFormat=[MediaType(code="json", name="UNKNOWN")],
+            dctFormat=[MediaType(name="json", type="unknown")],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
@@ -105,7 +105,7 @@ def test_multiple_distributions() -> None:
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon xml"},
             format={"xml"},
-            dctFormat=[MediaType(code="xml", name="UNKNOWN")],
+            dctFormat=[MediaType(name="xml", type="unknown")],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],

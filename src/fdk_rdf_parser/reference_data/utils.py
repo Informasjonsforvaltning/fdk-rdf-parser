@@ -8,6 +8,15 @@ base_url = os.getenv(
     "http://staging.fellesdatakatalog.digdir.no/reference-data",
 )
 
+new_base_url = os.getenv(
+    "NEW_REFERENCE_DATA_BASE_URI",
+    "https://www.staging.fellesdatakatalog.digdir.no/new-reference-data",
+)
+
+
+def new_reference_data_url(endpoint: str) -> str:
+    return f"{base_url}{endpoint}"
+
 
 def reference_data_url(endpoint: str) -> str:
     return f"{base_url}{endpoint}"
@@ -111,8 +120,8 @@ def extend_skos_code_list(
 def map_media_type_to_skos_code(media_type: MediaType) -> SkosCode:
     return SkosCode(
         uri=media_type.uri,
-        code=media_type.code,
-        prefLabel={"nb": media_type.name if media_type.name else "UNKNOWN"},
+        code=f"{media_type.type}/{media_type.subType}",
+        prefLabel={"nb": media_type.name} if media_type.name else None,
     )
 
 
