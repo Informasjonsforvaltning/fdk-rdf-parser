@@ -157,14 +157,15 @@ def test_parse_multiple_data_services(
                 SkosCode(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",
-                    prefLabel={"nb": "Turtle"},
+                    prefLabel={"nb": "turtle"},
                 ),
             ],
             dcatMediaType=[
                 MediaType(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
-                    code="text/turtle",
-                    name="Turtle",
+                    type="text",
+                    subType="turtle",
+                    name="turtle",
                 ),
             ],
             servesDataset={"http://testutgiver.no/datasets/abc"},
@@ -232,7 +233,7 @@ def test_parse_multiple_data_services(
             dcatMediaType=[
                 MediaType(
                     uri="https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet",
-                    name="UNKNOWN",
+                    type="unknown",
                 ),
             ],
             catalog=Catalog(

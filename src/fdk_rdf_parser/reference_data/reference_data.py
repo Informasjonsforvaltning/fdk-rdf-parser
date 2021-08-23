@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, Optional
 
 from fdk_rdf_parser.classes import MediaType, SkosCode, ThemeEU, ThemeLOS
-from .reference_data_client import get_reference_data
+from .reference_data_client import get_new_reference_data, get_reference_data
 from .utils import remove_trailing_slash
 
 
@@ -115,12 +115,13 @@ def get_and_map_themes_los() -> Optional[Dict[str, ThemeLOS]]:
 
 def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
     media_types = {}
-    codes = get_reference_data("/codes/mediatypes")
+    codes = get_new_reference_data("/iana/media-types").get("mediaTypes")
     if codes is not None:
         for code in codes:
             media_type = MediaType(
                 uri=str(code["uri"]) if code.get("uri") else None,
-                code=str(code["code"]) if code.get("code") else None,
+                type=str(code["type"]) if code.get("type") else None,
+                subType=str(code["subType"]) if code.get("subType") else None,
                 name=str(code["name"]) if code.get("name") else None,
             )
             if media_type.uri:

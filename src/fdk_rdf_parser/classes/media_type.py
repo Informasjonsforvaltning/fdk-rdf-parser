@@ -5,8 +5,9 @@ from typing import Any, Optional
 @dataclass
 class MediaType:
     uri: Optional[str] = None
-    code: Optional[str] = None
-    name: Optional[str] = "UNKNOWN"
+    name: Optional[str] = None
+    type: Optional[str] = "unknown"
+    subType: Optional[str] = None
 
     def __hash__(self: Any) -> int:
-        return hash((self.uri, self.code, self.name))
+        return hash((self.uri, self.name, self.type, self.subType))

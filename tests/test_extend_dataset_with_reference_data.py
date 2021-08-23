@@ -299,28 +299,29 @@ def test_extend_media_types() -> None:
                     SkosCode(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
                         code="application/xml",
-                        prefLabel={"nb": "XML"},
+                        prefLabel={"nb": "xml"},
                     ),
                 ],
                 fdkFormat=[
                     MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
-                        code="application/xml",
-                        name="XML",
+                        type="application",
+                        subType="xml",
+                        name="xml",
                     )
                 ],
             ),
             Distribution(
                 format={"CSV"},
-                fdkFormat=[MediaType(code="CSV", name="UNKNOWN")],
+                fdkFormat=[MediaType(name="CSV", type="unknown")],
             ),
             Distribution(
                 format={"json"},
-                fdkFormat=[MediaType(code="json", name="UNKNOWN")],
+                fdkFormat=[MediaType(name="json", type="unknown")],
             ),
             Distribution(
                 format={"geo+json"},
-                fdkFormat=[MediaType(code="geo+json", name="UNKNOWN")],
+                fdkFormat=[MediaType(name="geo+json", type="unknown")],
             ),
             Distribution(
                 format={"https://www.iana.org/assignments/media-types/text/turtle"},
@@ -328,20 +329,21 @@ def test_extend_media_types() -> None:
                     SkosCode(
                         uri="https://www.iana.org/assignments/media-types/text/turtle",
                         code="text/turtle",
-                        prefLabel={"nb": "Turtle"},
+                        prefLabel={"nb": "turtle"},
                     ),
                 ],
                 fdkFormat=[
                     MediaType(
                         uri="https://www.iana.org/assignments/media-types/text/turtle",
-                        code="text/turtle",
-                        name="Turtle",
+                        type="text",
+                        subType="turtle",
+                        name="turtle",
                     ),
                 ],
             ),
             Distribution(
                 format={"Rubbish"},
-                fdkFormat=[MediaType(code="Rubbish", name="UNKNOWN")],
+                fdkFormat=[MediaType(name="Rubbish", type="unknown")],
             ),
             Distribution(),
         ]

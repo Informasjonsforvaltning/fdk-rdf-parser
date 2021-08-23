@@ -83,7 +83,7 @@ def extend_distributions(
                             )
                             fdk_formats.add(ref_media_type)
                         else:
-                            fdk_formats.add(MediaType(code=fmt))
+                            fdk_formats.add(MediaType(name=fmt))
                     dist.mediaType = (
                         extended_formats if len(extended_formats) > 0 else None
                     )

@@ -520,7 +520,7 @@ def test_distribution_and_sample() -> None:
             Distribution(
                 description={"nb": "adsgjkv  cghj     dghdh"},
                 format={"application/ATF"},
-                dctFormat=[MediaType(code="application/ATF", name="UNKNOWN")],
+                dctFormat=[MediaType(name="application/ATF", type="unknown")],
                 accessURL={"https://application/ATF.com"},
             )
         ],
@@ -534,8 +534,8 @@ def test_distribution_and_sample() -> None:
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
                 format={"application/ATF"},
-                dctFormat=[MediaType(code="application/ATF", name="UNKNOWN")],
-                compressFormat=MediaType(code="ZIP"),
+                dctFormat=[MediaType(name="application/ATF", type="unknown")],
+                compressFormat=MediaType(name="ZIP"),
                 license=[
                     SkosConcept(
                         uri="http://creativecommons.org/publicdomain/zero/1.0/",
@@ -690,10 +690,10 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                         "HTML",
                     },
                     dctFormat=[
-                        MediaType(code="HTML", name="UNKNOWN"),
+                        MediaType(name="HTML", type="unknown"),
                     ],
                     fdkFormat=[
-                        MediaType(code="HTML", name="UNKNOWN"),
+                        MediaType(name="HTML", type="unknown"),
                     ],
                 )
             ],
@@ -821,7 +821,7 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
         <https://example.com/extra-media-types>
             a               dcat:Distribution ;
             dcat:mediaType      <https://www.iana.org/assignments/media-types/text/html> ;
-            dcat:compressFormat      <https://www.iana.org/assignments/media-types/text/plain> ;
+            dcat:compressFormat      <https://www.iana.org/assignments/media-types/application/json> ;
             dcat:packageFormat      <https://www.iana.org/assignments/media-types/application/xml> .
 
         <https://example.com/unknown-media-types>
@@ -843,26 +843,30 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                     dcatMediaType=[
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/html",
-                            code="text/html",
-                            name="HTML",
+                            type="text",
+                            subType="html",
+                            name="html",
                         ),
                     ],
                     fdkFormat=[
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/html",
-                            code="text/html",
-                            name="HTML",
+                            type="text",
+                            subType="html",
+                            name="html",
                         ),
                     ],
                     compressFormat=MediaType(
-                        uri="https://www.iana.org/assignments/media-types/text/plain",
-                        code="text/plain",
-                        name="TXT",
+                        uri="https://www.iana.org/assignments/media-types/application/json",
+                        type="application",
+                        subType="json",
+                        name="json",
                     ),
                     packageFormat=MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
-                        code="application/xml",
-                        name="XML",
+                        type="application",
+                        subType="xml",
+                        name="xml",
                     ),
                 )
             ],
@@ -880,18 +884,18 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                     dcatMediaType=[
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/unknown",
-                            name="UNKNOWN",
+                            type="unknown",
                         ),
                     ],
                     fdkFormat=[
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/unknown",
-                            name="UNKNOWN",
+                            type="unknown",
                         ),
                     ],
                     compressFormat=MediaType(
                         uri="https://www.iana.org/assignments/media-types/text/unknown",
-                        name="UNKNOWN",
+                        type="unknown",
                     ),
                 )
             ],

@@ -18,7 +18,7 @@ def extract_media_type(
     elif isinstance(value, URIRef):
         return MediaType(uri=value.toPython())
     else:
-        return MediaType(code=value.toPython())
+        return MediaType(name=value.toPython())
 
 
 def extract_media_type_list(
@@ -33,5 +33,5 @@ def extract_media_type_list(
         elif isinstance(obj, URIRef):
             media_types.append(MediaType(uri=obj.toPython()))
         else:
-            media_types.append(MediaType(code=obj.toPython()))
+            media_types.append(MediaType(name=obj.toPython()))
     return media_types if len(media_types) > 0 else None

@@ -51,16 +51,17 @@ def test_extend_media_types() -> None:
             SkosCode(
                 uri="https://www.iana.org/assignments/media-types/text/csv",
                 code="text/csv",
-                prefLabel={"nb": "CSV"},
+                prefLabel={"nb": "csv"},
             ),
         ],
         dcatMediaType=[
             MediaType(
                 uri="https://www.iana.org/assignments/media-types/text/csv",
-                code="text/csv",
-                name="CSV",
+                type="text",
+                subType="csv",
+                name="csv",
             ),
-            MediaType(uri="http://example.com/media-type/not/found", name="UNKNOWN"),
+            MediaType(uri="http://example.com/media-type/not/found", type="unknown"),
         ],
     )
 
