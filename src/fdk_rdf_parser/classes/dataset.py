@@ -14,7 +14,7 @@ from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
-from .theme import ThemeLOS
+from .theme import LosNode
 
 
 @dataclass
@@ -68,7 +68,7 @@ class PartialDataset(PartialDcatResource):
 @dataclass
 class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
-    losTheme: Optional[List[ThemeLOS]] = None
+    losTheme: Optional[List[LosNode]] = None
     type: str = "datasets"
 
     def add_values_from_partial(self: Any, values: PartialDataset) -> None:

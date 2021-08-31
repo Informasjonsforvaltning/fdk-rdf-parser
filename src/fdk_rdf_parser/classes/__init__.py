@@ -34,4 +34,4 @@ from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
-from .theme import ConceptSchema, ThemeEU, ThemeLOS
+from .theme import ConceptSchema, EuDataTheme, LosNode

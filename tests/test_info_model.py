@@ -10,10 +10,10 @@ from fdk_rdf_parser.classes import (
     Format,
     HarvestMetaData,
     InformationModel,
+    LosNode,
     Publisher,
     SkosCode,
     Temporal,
-    ThemeLOS,
 )
 from fdk_rdf_parser.classes.model_element import (
     ModelCodeElement,
@@ -215,7 +215,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             versionInfo="1.0",
             versionNotes={"nb": "Lagt til objekttypen Timeline"},
             losTheme=[
-                ThemeLOS(
+                LosNode(
                     children=["https://psi.norge.no/los/tema/grunnskole"],
                     isTema=True,
                     losPaths=["skole-og-utdanning"],

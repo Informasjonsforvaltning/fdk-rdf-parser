@@ -3,14 +3,14 @@ from typing import Dict, List, Optional, Set
 from fdk_rdf_parser.classes import Dataset, Distribution, MediaType, SkosCode
 from .reference_data import DatasetReferenceData
 from .utils import (
-    extend_eu_themes,
+    extend_eu_data_themes,
     extend_los_themes,
     extend_reference_types,
     extend_skos_code,
     extend_skos_code_list,
     map_media_type_to_skos_code,
     remove_trailing_slash,
-    split_los_from_eu_themes,
+    split_themes,
 )
 
 
@@ -37,9 +37,11 @@ def extend_dataset_with_reference_data(
         dataset.references, ref_data.referencetypes
     )
 
-    split_themes = split_los_from_eu_themes(dataset.theme, ref_data.los_themes)
-    dataset.losTheme = extend_los_themes(split_themes["los"], ref_data.los_themes)
-    dataset.theme = extend_eu_themes(split_themes["eu"], ref_data.eu_themes)
+    splitted_themes = split_themes(dataset.theme, ref_data.los_themes)
+    dataset.losTheme = extend_los_themes(splitted_themes["los"], ref_data.los_themes)
+    dataset.theme = extend_eu_data_themes(
+        splitted_themes["eu_data_themes"], ref_data.eu_data_themes
+    )
 
     return dataset
 

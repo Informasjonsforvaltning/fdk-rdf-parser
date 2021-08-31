@@ -1,191 +1,186 @@
-[
-    {
-        "internalId": null,
-        "children": [
-            "https://psi.norge.no/los/ord/film-og-kino",
-            "https://psi.norge.no/los/ord/kulturtilbud"
-        ],
-        "parents": [
-            "https://psi.norge.no/los/tema/kultur-idrett-og-fritid"
-        ],
-        "isTema": true,
-        "losPaths": [
-            "kultur-idrett-og-fritid/kultur"
-        ],
-        "name": {
-            "nn": "Kultur",
-            "nb": "Kultur",
-            "en": "Culture"
+{
+    "losNodes": [
+        {
+            "internalId": null,
+            "children": [
+                "https://psi.norge.no/los/ord/film-og-kino",
+                "https://psi.norge.no/los/ord/kulturtilbud"
+            ],
+            "parents": [
+                "https://psi.norge.no/los/tema/kultur-idrett-og-fritid"
+            ],
+            "isTheme": true,
+            "losPaths": [
+                "kultur-idrett-og-fritid/kultur"
+            ],
+            "name": {
+                "nn": "Kultur",
+                "nb": "Kultur",
+                "en": "Culture"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/tema/kultur",
+            "synonyms": [],
+            "relatedTerms": null
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/tema/kultur",
-        "synonyms": [],
-        "relatedTerms": null,
-        "tema": true
-    },
-    {
-        "internalId": null,
-        "children": null,
-        "parents": [
-            "https://psi.norge.no/los/tema/kultur"
-        ],
-        "isTema": false,
-        "losPaths": [
-            "kultur-idrett-og-fritid/kultur/film-og-kino"
-        ],
-        "name": {
-            "nn": "Film og kino",
-            "nb": "Film og kino",
-            "en": "Film and cinema"
+        {
+            "internalId": null,
+            "children": null,
+            "parents": [
+                "https://psi.norge.no/los/tema/kultur"
+            ],
+            "isTheme": false,
+            "losPaths": [
+                "kultur-idrett-og-fritid/kultur/film-og-kino"
+            ],
+            "name": {
+                "nn": "Film og kino",
+                "nb": "Film og kino",
+                "en": "Film and cinema"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/ord/film-og-kino",
+            "synonyms": [
+                "Billettbestilling",
+                "Kinobillett",
+                "Filmklubb"
+            ],
+            "relatedTerms": [
+                "https://psi.norge.no/los/ord/kulturtilbud"
+            ]
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/ord/film-og-kino",
-        "synonyms": [
-            "Billettbestilling",
-            "Kinobillett",
-            "Filmklubb"
-        ],
-        "relatedTerms": [
-            "https://psi.norge.no/los/ord/kulturtilbud"
-        ],
-        "tema": false
-    },
-    {
-        "internalId": null,
-        "children": null,
-        "parents": [
-            "https://psi.norge.no/los/tema/bibliotek"
-        ],
-        "isTema": false,
-        "losPaths": [
-            "kultur-idrett-og-fritid/bibliotek/utlan-og-reservasjon"
-        ],
-        "name": {
-            "nn": "Utlån og reservasjon",
-            "nb": "Utlån og reservasjon",
-            "en": "Loans and reservations"
+        {
+            "internalId": null,
+            "children": null,
+            "parents": [
+                "https://psi.norge.no/los/tema/bibliotek"
+            ],
+            "isTheme": false,
+            "losPaths": [
+                "kultur-idrett-og-fritid/bibliotek/utlan-og-reservasjon"
+            ],
+            "name": {
+                "nn": "Utlån og reservasjon",
+                "nb": "Utlån og reservasjon",
+                "en": "Loans and reservations"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/ord/utlan-og-reservasjon",
+            "synonyms": [],
+            "relatedTerms": null,
+            "tema": false
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/ord/utlan-og-reservasjon",
-        "synonyms": [],
-        "relatedTerms": null,
-        "tema": false
-    },
-    {
-        "internalId": null,
-        "children": [
-            "https://psi.norge.no/los/tema/kultur",
-            "https://psi.norge.no/los/tema/bibliotek"
-        ],
-        "parents": null,
-        "isTema": true,
-        "losPaths": [
-            "kultur-idrett-og-fritid"
-        ],
-        "name": {
-            "nn": "Kultur, idrett og fritid",
-            "nb": "Kultur, idrett og fritid",
-            "en": "Culture, sport and recreation"
+        {
+            "internalId": null,
+            "children": [
+                "https://psi.norge.no/los/tema/kultur",
+                "https://psi.norge.no/los/tema/bibliotek"
+            ],
+            "parents": null,
+            "isTheme": true,
+            "losPaths": [
+                "kultur-idrett-og-fritid"
+            ],
+            "name": {
+                "nn": "Kultur, idrett og fritid",
+                "nb": "Kultur, idrett og fritid",
+                "en": "Culture, sport and recreation"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/tema/kultur-idrett-og-fritid",
+            "synonyms": [],
+            "relatedTerms": null
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/tema/kultur-idrett-og-fritid",
-        "synonyms": [],
-        "relatedTerms": null,
-        "tema": true
-    },
-    {
-        "internalId": null,
-        "children": null,
-        "parents": [
-            "https://psi.norge.no/los/tema/kultur"
-        ],
-        "isTema": false,
-        "losPaths": [
-            "kultur-idrett-og-fritid/kultur/kulturtilbud"
-        ],
-        "name": {
-            "nn": "Kulturtilbod",
-            "nb": "Kulturtilbud",
-            "en": "Cultural activities"
+        {
+            "internalId": null,
+            "children": null,
+            "parents": [
+                "https://psi.norge.no/los/tema/kultur"
+            ],
+            "isTheme": false,
+            "losPaths": [
+                "kultur-idrett-og-fritid/kultur/kulturtilbud"
+            ],
+            "name": {
+                "nn": "Kulturtilbod",
+                "nb": "Kulturtilbud",
+                "en": "Cultural activities"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/ord/kulturtilbud",
+            "synonyms": [
+                "Dans",
+                "Teater",
+                "Musikk"
+            ],
+            "relatedTerms": [
+                "https://psi.norge.no/los/ord/film-og-kino"
+            ]
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/ord/kulturtilbud",
-        "synonyms": [
-            "Dans",
-            "Teater",
-            "Musikk"
-        ],
-        "relatedTerms": [
-            "https://psi.norge.no/los/ord/film-og-kino"
-        ],
-        "tema": false
-    },
-    {
-        "internalId": null,
-        "children": null,
-        "parents": [
-            "https://psi.norge.no/los/tema/grunnskole"
-        ],
-        "isTema": false,
-        "losPaths": [
-            "skole-og-utdanning/grunnskole/tilpasset-opplaring"
-        ],
-        "name": {
-            "nn": "Tilpassa opplæring",
-            "nb": "Tilpasset opplæring",
-            "en": "Adapted education"
+        {
+            "internalId": null,
+            "children": null,
+            "parents": [
+                "https://psi.norge.no/los/tema/grunnskole"
+            ],
+            "isTheme": false,
+            "losPaths": [
+                "skole-og-utdanning/grunnskole/tilpasset-opplaring"
+            ],
+            "name": {
+                "nn": "Tilpassa opplæring",
+                "nb": "Tilpasset opplæring",
+                "en": "Adapted education"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/ord/tilpasset-opplaring",
+            "synonyms": [
+                "Friskule",
+                "Friskole"
+            ],
+            "relatedTerms": null
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/ord/tilpasset-opplaring",
-        "synonyms": [
-            "Friskule",
-            "Friskole"
-        ],
-        "relatedTerms": null,
-        "tema": false
-    },
-    {
-        "internalId": null,
-        "children": [
-            "https://psi.norge.no/los/ord/tilpasset-opplaring"
-        ],
-        "parents": [
-            "https://psi.norge.no/los/tema/skole-og-utdanning"
-        ],
-        "isTema": true,
-        "losPaths": [
-            "skole-og-utdanning/grunnskole"
-        ],
-        "name": {
-            "nn": "Grunnskule",
-            "nb": "Grunnskole",
-            "en": "Compulsory education"
+        {
+            "internalId": null,
+            "children": [
+                "https://psi.norge.no/los/ord/tilpasset-opplaring"
+            ],
+            "parents": [
+                "https://psi.norge.no/los/tema/skole-og-utdanning"
+            ],
+            "isTheme": true,
+            "losPaths": [
+                "skole-og-utdanning/grunnskole"
+            ],
+            "name": {
+                "nn": "Grunnskule",
+                "nb": "Grunnskole",
+                "en": "Compulsory education"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/tema/grunnskole",
+            "synonyms": [],
+            "relatedTerms": null
         },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/tema/grunnskole",
-        "synonyms": [],
-        "relatedTerms": null,
-        "tema": true
-    },
-    {
-        "internalId": null,
-        "children": [
-            "https://psi.norge.no/los/tema/grunnskole"
-        ],
-        "parents": null,
-        "isTema": true,
-        "losPaths": [
-            "skole-og-utdanning"
-        ],
-        "name": {
-            "nn": "Skule og utdanning",
-            "nb": "Skole og utdanning",
-            "en": "Schools and education"
-        },
-        "definition": null,
-        "uri": "https://psi.norge.no/los/tema/skole-og-utdanning",
-        "synonyms": [],
-        "relatedTerms": null,
-        "tema": true
-    }
-]
+        {
+            "internalId": null,
+            "children": [
+                "https://psi.norge.no/los/tema/grunnskole"
+            ],
+            "parents": null,
+            "isTheme": true,
+            "losPaths": [
+                "skole-og-utdanning"
+            ],
+            "name": {
+                "nn": "Skule og utdanning",
+                "nb": "Skole og utdanning",
+                "en": "Schools and education"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/tema/skole-og-utdanning",
+            "synonyms": [],
+            "relatedTerms": null
+        }
+    ]
+}

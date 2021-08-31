@@ -10,7 +10,7 @@ from .model_element import ModelElement
 from .model_property import ModelProperty
 from .skos_code import SkosCode
 from .temporal import Temporal
-from .theme import ThemeLOS
+from .theme import LosNode
 
 
 @dataclass
@@ -39,7 +39,7 @@ class InformationModel(PartialDcatResource):
     containsModelElements: Optional[List[str]] = None
     modelElements: Optional[Dict[str, ModelElement]] = None
     modelProperties: Optional[Dict[str, ModelProperty]] = None
-    losTheme: Optional[List[ThemeLOS]] = None
+    losTheme: Optional[List[LosNode]] = None
     type: str = "informationmodels"
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> Any:

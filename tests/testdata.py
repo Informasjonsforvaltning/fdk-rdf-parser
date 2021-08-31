@@ -1,4 +1,10 @@
-from fdk_rdf_parser.classes import ConceptSchema, MediaType, SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import (
+    ConceptSchema,
+    EuDataTheme,
+    LosNode,
+    MediaType,
+    SkosCode,
+)
 from fdk_rdf_parser.reference_data import (
     DataServiceReferenceData,
     DatasetReferenceData,
@@ -485,8 +491,8 @@ dataset_reference_data = DatasetReferenceData(
             prefLabel={"no": "Oslo"},
         ),
     },
-    eu_themes={
-        "http://publications.europa.eu/resource/authority/data-theme/AGRI": ThemeEU(
+    eu_data_themes={
+        "http://publications.europa.eu/resource/authority/data-theme/AGRI": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/AGRI",
             code="AGRI",
             startUse="2015-10-01",
@@ -498,7 +504,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/ECON": ThemeEU(
+        "http://publications.europa.eu/resource/authority/data-theme/ECON": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/ECON",
             code="ECON",
             startUse="2015-10-01",
@@ -510,7 +516,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/HEAL": ThemeEU(
+        "http://publications.europa.eu/resource/authority/data-theme/HEAL": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/HEAL",
             code="HEAL",
             startUse="2015-10-01",
@@ -522,7 +528,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/TRAN": ThemeEU(
+        "http://publications.europa.eu/resource/authority/data-theme/TRAN": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/TRAN",
             code="TRAN",
             startUse="2015-10-01",
@@ -536,7 +542,7 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     los_themes={
-        "https://psi.norge.no/los/tema/kultur": ThemeLOS(
+        "https://psi.norge.no/los/tema/kultur": LosNode(
             children=[
                 "https://psi.norge.no/los/ord/film-og-kino",
                 "https://psi.norge.no/los/ord/kulturtilbud",
@@ -550,7 +556,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/ord/film-og-kino": ThemeLOS(
+        "https://psi.norge.no/los/ord/film-og-kino": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/kultur"],
             isTema=False,
@@ -561,7 +567,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Billettbestilling", "Kinobillett", "Filmklubb"],
             relatedTerms=["https://psi.norge.no/los/ord/kulturtilbud"],
         ),
-        "https://psi.norge.no/los/ord/utlan-og-reservasjon": ThemeLOS(
+        "https://psi.norge.no/los/ord/utlan-og-reservasjon": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/bibliotek"],
             isTema=False,
@@ -576,7 +582,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/kultur-idrett-og-fritid": ThemeLOS(
+        "https://psi.norge.no/los/tema/kultur-idrett-og-fritid": LosNode(
             children=[
                 "https://psi.norge.no/los/tema/kultur",
                 "https://psi.norge.no/los/tema/bibliotek",
@@ -594,7 +600,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/ord/kulturtilbud": ThemeLOS(
+        "https://psi.norge.no/los/ord/kulturtilbud": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/kultur"],
             isTema=False,
@@ -609,7 +615,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Dans", "Teater", "Musikk"],
             relatedTerms=["https://psi.norge.no/los/ord/film-og-kino"],
         ),
-        "https://psi.norge.no/los/ord/tilpasset-opplaring": ThemeLOS(
+        "https://psi.norge.no/los/ord/tilpasset-opplaring": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/grunnskole"],
             isTema=False,
@@ -624,7 +630,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Friskule", "Friskole"],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/grunnskole": ThemeLOS(
+        "https://psi.norge.no/los/tema/grunnskole": LosNode(
             children=["https://psi.norge.no/los/ord/tilpasset-opplaring"],
             parents=["https://psi.norge.no/los/tema/skole-og-utdanning"],
             isTema=True,
@@ -635,7 +641,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/skole-og-utdanning": ThemeLOS(
+        "https://psi.norge.no/los/tema/skole-og-utdanning": LosNode(
             children=["https://psi.norge.no/los/tema/grunnskole"],
             parents=None,
             isTema=True,
