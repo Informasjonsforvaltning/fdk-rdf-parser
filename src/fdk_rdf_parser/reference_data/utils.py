@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import MediaType, Reference, SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import EuDataTheme, LosNode, MediaType, Reference, SkosCode
 
 base_url = os.getenv(
     "REFERENCE_DATA_BASE_URI",
@@ -36,28 +36,28 @@ def extend_reference_types(
         return extended_references
 
 
-def split_los_from_eu_themes(
-    themes: Optional[List[ThemeEU]],
-    los: Optional[Dict[str, ThemeLOS]],
-) -> Dict[str, List[ThemeEU]]:
-    split_themes: Dict[str, List[ThemeEU]] = {"los": [], "eu": []}
+def split_themes(
+    themes: Optional[List[EuDataTheme]],
+    los: Optional[Dict[str, LosNode]],
+) -> Dict[str, List[EuDataTheme]]:
+    splitted_themes: Dict[str, List[EuDataTheme]] = {"los": [], "eu_data_themes": []}
     if themes is None:
-        return split_themes
+        return splitted_themes
     elif los is None:
-        split_themes["eu"] = themes
-        return split_themes
+        splitted_themes["eu_data_themes"] = themes
+        return splitted_themes
     else:
         for theme in themes:
             if theme.id in los:
-                split_themes["los"].append(theme)
+                splitted_themes["los"].append(theme)
             else:
-                split_themes["eu"].append(theme)
-        return split_themes
+                splitted_themes["eu_data_themes"].append(theme)
+        return splitted_themes
 
 
 def extend_los_themes(
-    themes: List[ThemeEU], los: Optional[Dict[str, ThemeLOS]]
-) -> Optional[List[ThemeLOS]]:
+    themes: List[EuDataTheme], los: Optional[Dict[str, LosNode]]
+) -> Optional[List[LosNode]]:
     extended = []
     if los is not None:
         for theme in themes:
@@ -65,13 +65,13 @@ def extend_los_themes(
     return extended if len(extended) > 0 else None
 
 
-def extend_eu_themes(
-    themes: List[ThemeEU], eu_themes: Optional[Dict[str, ThemeEU]]
-) -> Optional[List[ThemeEU]]:
+def extend_eu_data_themes(
+    themes: List[EuDataTheme], eu_data_themes: Optional[Dict[str, EuDataTheme]]
+) -> Optional[List[EuDataTheme]]:
     extended = []
-    if eu_themes is not None:
+    if eu_data_themes is not None:
         for theme in themes:
-            eu_theme = eu_themes.get(theme.id) if theme.id is not None else None
+            eu_theme = eu_data_themes.get(theme.id) if theme.id is not None else None
             if eu_theme is None:
                 extended.append(theme)
             else:

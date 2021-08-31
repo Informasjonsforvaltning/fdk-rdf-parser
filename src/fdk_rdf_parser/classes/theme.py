@@ -11,7 +11,7 @@ class ConceptSchema:
 
 
 @dataclass
-class ThemeEU:
+class EuDataTheme:
     id: Optional[str] = None
     code: Optional[str] = None
     startUse: Optional[str] = None
@@ -19,23 +19,23 @@ class ThemeEU:
     conceptSchema: Optional[ConceptSchema] = None
 
     def add_values_from_dict(self: Any, dict: Dict) -> None:
-        self.id = str(dict.get("id")) if dict.get("id") is not None else None
+        self.id = str(dict.get("uri")) if dict.get("uri") is not None else None
         self.code = str(dict.get("code")) if dict.get("code") is not None else None
         self.startUse = (
             str(dict.get("startUse")) if dict.get("startUse") is not None else None
         )
-        self.title = dict.get("title")
+        self.title = dict.get("label")
         self.conceptSchema = (
             ConceptSchema(
-                id=str(dict["conceptSchema"].get("id"))
-                if dict["conceptSchema"].get("id") is not None
+                id=str(dict["conceptSchema"].get("uri"))
+                if dict["conceptSchema"].get("uri") is not None
                 else None,
-                title=dict["conceptSchema"].get("title"),
-                versioninfo=str(dict["conceptSchema"].get("versioninfo"))
-                if dict["conceptSchema"].get("versioninfo") is not None
+                title=dict["conceptSchema"].get("label"),
+                versioninfo=str(dict["conceptSchema"].get("versionNumber"))
+                if dict["conceptSchema"].get("versionNumber") is not None
                 else None,
-                versionnumber=str(dict["conceptSchema"].get("versionnumber"))
-                if dict["conceptSchema"].get("versionnumber") is not None
+                versionnumber=str(dict["conceptSchema"].get("versionNumber"))
+                if dict["conceptSchema"].get("versionNumber") is not None
                 else None,
             )
             if dict.get("conceptSchema") is not None
@@ -44,7 +44,7 @@ class ThemeEU:
 
 
 @dataclass
-class ThemeLOS:
+class LosNode:
     children: Optional[List[str]] = None
     parents: Optional[List[str]] = None
     isTema: Optional[bool] = None
@@ -58,7 +58,7 @@ class ThemeLOS:
     def add_values_from_dict(self: Any, dict: Dict) -> None:
         self.children = dict.get("children")
         self.parents = dict.get("parents")
-        self.isTema = dict.get("isTema")
+        self.isTema = dict.get("isTheme")
         self.losPaths = dict.get("losPaths")
         self.name = dict.get("name")
         self.definition = dict.get("definition")

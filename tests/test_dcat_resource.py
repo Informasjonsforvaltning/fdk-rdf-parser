@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import PartialDcatResource, Publisher, SkosCode, ThemeEU
+from fdk_rdf_parser.classes import EuDataTheme, PartialDcatResource, Publisher, SkosCode
 from fdk_rdf_parser.parse_functions import parse_dcat_resource
 
 
@@ -63,8 +63,8 @@ def test_dcat_resource_parser() -> None:
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
         theme=[
-            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/GOVE"),
-            ThemeEU("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
+            EuDataTheme("http://pubs.europa.eu/resource/authority/data-theme/GOVE"),
+            EuDataTheme("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
         ],
         keyword=[{"nb": "test"}],
         issued="2019-03-22T13:11:16",

@@ -2,12 +2,12 @@ from fdk_rdf_parser.classes import (
     ConceptSchema,
     Dataset,
     Distribution,
+    EuDataTheme,
+    LosNode,
     MediaType,
     Reference,
     SkosCode,
     SkosConcept,
-    ThemeEU,
-    ThemeLOS,
 )
 from fdk_rdf_parser.reference_data import (
     DatasetReferenceData,
@@ -21,7 +21,7 @@ def test_handles_missing_reference_data() -> None:
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         ),
-        theme=[ThemeEU(id="https://psi.norge.no/los/tema/grunnskole")],
+        theme=[EuDataTheme(id="https://psi.norge.no/los/tema/grunnskole")],
     )
 
     assert (
@@ -391,17 +391,17 @@ def test_extend_references() -> None:
 def test_extend_themes() -> None:
     parsed_dataset = Dataset(
         theme=[
-            ThemeEU(
+            EuDataTheme(
                 id="http://publications.europa.eu/resource/authority/data-theme/ECON"
             ),
-            ThemeEU(id="https://psi.norge.no/los/tema/kultur"),
-            ThemeEU(id="https://psi.norge.no/not/in/los/or/eu"),
+            EuDataTheme(id="https://psi.norge.no/los/tema/kultur"),
+            EuDataTheme(id="https://psi.norge.no/not/in/los/or/eu"),
         ]
     )
 
     expected = Dataset(
         theme=[
-            ThemeEU(
+            EuDataTheme(
                 id="http://publications.europa.eu/resource/authority/data-theme/ECON",
                 code="ECON",
                 startUse="2015-10-01",
@@ -413,10 +413,10 @@ def test_extend_themes() -> None:
                     versionnumber="20160921-0",
                 ),
             ),
-            ThemeEU(id="https://psi.norge.no/not/in/los/or/eu"),
+            EuDataTheme(id="https://psi.norge.no/not/in/los/or/eu"),
         ],
         losTheme=[
-            ThemeLOS(
+            LosNode(
                 children=[
                     "https://psi.norge.no/los/ord/film-og-kino",
                     "https://psi.norge.no/los/ord/kulturtilbud",

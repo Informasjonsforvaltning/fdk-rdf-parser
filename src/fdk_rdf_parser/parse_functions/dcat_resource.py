@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import PartialDcatResource, ThemeEU
+from fdk_rdf_parser.classes import EuDataTheme, PartialDcatResource
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
@@ -43,10 +43,10 @@ def parse_dcat_resource(
     )
 
 
-def extract_themes(graph: Graph, subject: URIRef) -> Optional[List[ThemeEU]]:
+def extract_themes(graph: Graph, subject: URIRef) -> Optional[List[EuDataTheme]]:
     themes = value_list(graph, subject, dcat_uri("theme"))
     if themes is not None and len(themes) > 0:
-        return list(map(lambda theme_uri: ThemeEU(id=theme_uri), themes))
+        return list(map(lambda theme_uri: EuDataTheme(id=theme_uri), themes))
     else:
         return None
 

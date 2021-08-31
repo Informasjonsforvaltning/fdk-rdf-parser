@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Set
 from .contactpoint import ContactPoint
 from .publisher import Publisher
 from .skos_code import SkosCode
-from .theme import ThemeEU
+from .theme import EuDataTheme
 
 
 @dataclass
@@ -16,7 +16,7 @@ class PartialDcatResource:
     descriptionFormatted: Optional[Dict[str, str]] = None
     uri: Optional[str] = None
     accessRights: Optional[SkosCode] = None
-    theme: Optional[List[ThemeEU]] = None
+    theme: Optional[List[EuDataTheme]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[ContactPoint]] = None
     dctType: Optional[str] = None

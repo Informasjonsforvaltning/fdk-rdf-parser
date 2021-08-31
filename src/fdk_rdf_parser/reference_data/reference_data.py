@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-from fdk_rdf_parser.classes import MediaType, SkosCode, ThemeEU, ThemeLOS
+from fdk_rdf_parser.classes import EuDataTheme, LosNode, MediaType, SkosCode
 from .reference_data_client import get_new_reference_data, get_reference_data
 from .utils import remove_trailing_slash
 
@@ -20,8 +20,8 @@ class DatasetReferenceData:
     referencetypes: Optional[Dict[str, SkosCode]] = None
     openlicenses: Optional[Dict[str, SkosCode]] = None
     location: Optional[Dict[str, SkosCode]] = None
-    eu_themes: Optional[Dict[str, ThemeEU]] = None
-    los_themes: Optional[Dict[str, ThemeLOS]] = None
+    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
+    los_themes: Optional[Dict[str, LosNode]] = None
     media_types: Optional[Dict[str, MediaType]] = None
 
 
@@ -30,8 +30,8 @@ class InformationModelReferenceData:
     linguisticsystem: Optional[Dict[str, SkosCode]] = None
     openlicenses: Optional[Dict[str, SkosCode]] = None
     location: Optional[Dict[str, SkosCode]] = None
-    eu_themes: Optional[Dict[str, ThemeEU]] = None
-    los_themes: Optional[Dict[str, ThemeLOS]] = None
+    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
+    los_themes: Optional[Dict[str, LosNode]] = None
 
 
 @dataclass
@@ -52,8 +52,8 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         referencetypes=get_and_map_reference_codes("referencetypes"),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_reference_codes("location"),
-        eu_themes=get_and_map_themes_eu(),
-        los_themes=get_and_map_themes_los(),
+        eu_data_themes=get_and_map_eu_data_themes(),
+        los_themes=get_and_map_los_themes(),
         media_types=get_and_map_media_types(),
     )
 
@@ -63,8 +63,8 @@ def get_info_model_reference_data() -> InformationModelReferenceData:
         linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_reference_codes("location"),
-        eu_themes=get_and_map_themes_eu(),
-        los_themes=get_and_map_themes_los(),
+        eu_data_themes=get_and_map_eu_data_themes(),
+        los_themes=get_and_map_los_themes(),
     )
 
 
@@ -91,25 +91,25 @@ def get_and_map_reference_codes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
         return None
 
 
-def get_and_map_themes_eu() -> Optional[Dict[str, ThemeEU]]:
+def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
     mapped = {}
-    themes = get_reference_data("/themes")
+    themes = get_new_reference_data("/eu/data-themes").get("dataThemes")
     if themes is not None:
         for theme in themes:
-            eu_theme = ThemeEU()
+            eu_theme = EuDataTheme()
             eu_theme.add_values_from_dict(theme)
-            mapped[str(theme.get("id"))] = eu_theme
+            mapped[str(theme.get("uri"))] = eu_theme
     return mapped if len(mapped) > 0 else None
 
 
-def get_and_map_themes_los() -> Optional[Dict[str, ThemeLOS]]:
+def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
     mapped = {}
-    themes = get_reference_data("/los")
-    if themes is not None:
-        for theme in themes:
-            los_theme = ThemeLOS()
-            los_theme.add_values_from_dict(theme)
-            mapped[str(theme.get("uri"))] = los_theme
+    los_nodes = get_new_reference_data("/los/themes-and-words").get("losNodes")
+    if los_nodes is not None:
+        for los_node in los_nodes:
+            los_theme = LosNode()
+            los_theme.add_values_from_dict(los_node)
+            mapped[str(los_node.get("uri"))] = los_theme
     return mapped if len(mapped) > 0 else None
 
 
