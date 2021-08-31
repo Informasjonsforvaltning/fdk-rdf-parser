@@ -8,7 +8,6 @@ from .utils import (
     extend_reference_types,
     extend_skos_code,
     extend_skos_code_list,
-    map_media_type_to_skos_code,
     remove_trailing_slash,
     split_themes,
 )
@@ -75,53 +74,43 @@ def extend_distributions(
             if ref_media_types:
                 fdk_formats: Set[MediaType] = set()
 
-                if dist.format:
-                    extended_formats = []
-                    for fmt in dist.format:
-                        ref_media_type = ref_media_types.get(fmt)
+                if dist.fdkFormat:
+                    skos_code_formats = []
+                    for fmt in dist.fdkFormat:
+                        ref_media_type = (
+                            ref_media_types.get(fmt.code) if fmt.code else None
+                        )
                         if ref_media_type:
-                            extended_formats.append(
-                                map_media_type_to_skos_code(ref_media_type)
+                            skos_code_formats.append(
+                                SkosCode(
+                                    uri=fmt.code,
+                                    code=ref_media_type.code,
+                                    prefLabel={"nb": ref_media_type.code}
+                                    if ref_media_type.code
+                                    else None,
+                                )
                             )
                             fdk_formats.add(ref_media_type)
                         else:
-                            fdk_formats.add(MediaType(name=fmt))
+                            fdk_formats.add(fmt)
+                    dist.fdkFormat = list(fdk_formats) if len(fdk_formats) > 0 else None
                     dist.mediaType = (
-                        extended_formats if len(extended_formats) > 0 else None
+                        skos_code_formats if len(skos_code_formats) > 0 else None
                     )
-
-                if dist.dcatMediaType:
-                    extended_dcat_types = []
-                    for media_type in dist.dcatMediaType:
-                        extended = (
-                            ref_media_types.get(media_type.uri)
-                            if media_type.uri
-                            else None
-                        )
-                        if extended:
-                            extended_dcat_types.append(extended)
-                            fdk_formats.add(extended)
-                        else:
-                            extended_dcat_types.append(media_type)
-                            fdk_formats.add(media_type)
-                    dist.dcatMediaType = extended_dcat_types
-
-                if len(fdk_formats) > 0:
-                    dist.fdkFormat = list(fdk_formats)
 
                 if (
                     dist.compressFormat
-                    and dist.compressFormat.uri
-                    and ref_media_types.get(dist.compressFormat.uri)
+                    and dist.compressFormat.code
+                    and ref_media_types.get(dist.compressFormat.code)
                 ):
-                    dist.compressFormat = ref_media_types[dist.compressFormat.uri]
+                    dist.compressFormat = ref_media_types[dist.compressFormat.code]
 
                 if (
                     dist.packageFormat
-                    and dist.packageFormat.uri
-                    and ref_media_types.get(dist.packageFormat.uri)
+                    and dist.packageFormat.code
+                    and ref_media_types.get(dist.packageFormat.code)
                 ):
-                    dist.packageFormat = ref_media_types[dist.packageFormat.uri]
+                    dist.packageFormat = ref_media_types[dist.packageFormat.code]
 
             extended_distributions.append(dist)
         return extended_distributions

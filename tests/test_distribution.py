@@ -1,6 +1,12 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import ConformsTo, Distribution, MediaType, SkosConcept
+from fdk_rdf_parser.classes import (
+    ConformsTo,
+    Distribution,
+    FDKFormatType,
+    MediaType,
+    SkosConcept,
+)
 from fdk_rdf_parser.parse_functions import extract_distributions
 from fdk_rdf_parser.rdf_utils import dcat_uri
 
@@ -42,7 +48,7 @@ def test_single_distribution() -> None:
             title={"nb": "Testdistribusjon"},
             description={"en": "Description"},
             format={"json"},
-            dctFormat=[MediaType(name="json", type="unknown")],
+            fdkFormat=[MediaType(code="json", fdkType=FDKFormatType.UNKNOWN)],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
@@ -94,7 +100,7 @@ def test_multiple_distributions() -> None:
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon json"},
             format={"json"},
-            dctFormat=[MediaType(name="json", type="unknown")],
+            fdkFormat=[MediaType(code="json", fdkType=FDKFormatType.UNKNOWN)],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],
@@ -105,7 +111,7 @@ def test_multiple_distributions() -> None:
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon xml"},
             format={"xml"},
-            dctFormat=[MediaType(name="xml", type="unknown")],
+            fdkFormat=[MediaType(code="xml", fdkType=FDKFormatType.UNKNOWN)],
             license=[
                 SkosConcept(uri="https://creativecommons.org/licenses/by/4.0/deed.no")
             ],

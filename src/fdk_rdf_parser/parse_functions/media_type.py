@@ -15,10 +15,8 @@ def extract_media_type(
             f"Unable to parse {predicate.toPython()} for {subject.toPython()}"
         )
         return None
-    elif isinstance(value, URIRef):
-        return MediaType(uri=value.toPython())
     else:
-        return MediaType(name=value.toPython())
+        return MediaType(code=value.toPython())
 
 
 def extract_media_type_list(
@@ -30,8 +28,6 @@ def extract_media_type_list(
             logging.error(
                 f"Unable to parse {predicate.toPython()} for {subject.toPython()}"
             )
-        elif isinstance(obj, URIRef):
-            media_types.append(MediaType(uri=obj.toPython()))
         else:
-            media_types.append(MediaType(name=obj.toPython()))
+            media_types.append(MediaType(code=obj.toPython()))
     return media_types if len(media_types) > 0 else None

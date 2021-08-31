@@ -1,7 +1,13 @@
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-from fdk_rdf_parser.classes import EuDataTheme, LosNode, MediaType, SkosCode
+from fdk_rdf_parser.classes import (
+    EuDataTheme,
+    FDKFormatType,
+    LosNode,
+    MediaType,
+    SkosCode,
+)
 from .reference_data_client import get_new_reference_data, get_reference_data
 from .utils import remove_trailing_slash
 
@@ -115,17 +121,23 @@ def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
 
 def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
     media_types = {}
-    codes = get_new_reference_data("/iana/media-types").get("mediaTypes")
-    if codes is not None:
-        for code in codes:
-            media_type = MediaType(
-                uri=str(code["uri"]) if code.get("uri") else None,
-                type=str(code["type"]) if code.get("type") else None,
-                subType=str(code["subType"]) if code.get("subType") else None,
-                name=str(code["name"]) if code.get("name") else None,
-            )
-            if media_type.uri:
-                media_types[media_type.uri] = media_type
+    iana_codes = get_new_reference_data("/iana/media-types").get("mediaTypes")
+    if iana_codes is not None:
+        for code in iana_codes:
+            media_type_uri = str(code["uri"]) if code.get("uri") else None
+            if media_type_uri:
+                media_types[media_type_uri] = MediaType(
+                    fdkType=FDKFormatType.IANA, code=f"{code['type']}/{code['subType']}"
+                )
+
+    file_types = get_new_reference_data("/eu/file-types").get("fileTypes")
+    if file_types is not None:
+        for file_type in file_types:
+            file_type_uri = str(file_type["uri"]) if file_type.get("uri") else None
+            if file_type_uri:
+                media_types[file_type_uri] = MediaType(
+                    fdkType=FDKFormatType.FILE, code=f"{file_type['code']}"
+                )
 
     return media_types if len(media_types) > 0 else None
 
