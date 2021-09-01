@@ -165,7 +165,7 @@ def test_parse_multiple_data_services(
                 MediaType(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",
-                    fdkType=FDKFormatType.IANA,
+                    fdkType=FDKFormatType.MEDIA_TYPE,
                 ),
             ],
             servesDataset={"http://testutgiver.no/datasets/abc"},

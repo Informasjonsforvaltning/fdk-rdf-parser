@@ -846,7 +846,7 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/html",
                             code="text/html",
-                            fdkType=FDKFormatType.IANA,
+                            fdkType=FDKFormatType.MEDIA_TYPE,
                         ),
                     ],
                     mediaType=[
@@ -859,12 +859,12 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                     compressFormat=MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/json",
                         code="application/json",
-                        fdkType=FDKFormatType.IANA,
+                        fdkType=FDKFormatType.MEDIA_TYPE,
                     ),
                     packageFormat=MediaType(
                         uri="http://publications.europa.eu/resource/authority/file-type/7Z",
                         code="7Z",
-                        fdkType=FDKFormatType.FILE,
+                        fdkType=FDKFormatType.FILE_TYPE,
                     ),
                 )
             ],

@@ -313,7 +313,7 @@ def test_extend_media_types() -> None:
                 fdkFormat=[
                     MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
-                        fdkType=FDKFormatType.IANA,
+                        fdkType=FDKFormatType.MEDIA_TYPE,
                         code="application/xml",
                     )
                 ],
@@ -339,7 +339,7 @@ def test_extend_media_types() -> None:
                     MediaType(
                         uri="https://www.iana.org/assignments/media-types/text/turtle",
                         code="text/turtle",
-                        fdkType=FDKFormatType.IANA,
+                        fdkType=FDKFormatType.MEDIA_TYPE,
                     ),
                 ],
             ),

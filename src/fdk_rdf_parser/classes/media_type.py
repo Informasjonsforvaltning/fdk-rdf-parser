@@ -5,8 +5,8 @@ from typing import Any, Optional
 
 class FDKFormatType(str, Enum):
     UNKNOWN = "UNKNOWN"
-    IANA = "IANA"
-    FILE = "FILE"
+    MEDIA_TYPE = "MEDIA_TYPE"
+    FILE_TYPE = "FILE_TYPE"
 
 
 @dataclass

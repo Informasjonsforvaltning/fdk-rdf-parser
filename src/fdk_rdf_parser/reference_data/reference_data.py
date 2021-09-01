@@ -128,7 +128,7 @@ def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
             if media_type_uri:
                 media_types[media_type_uri] = MediaType(
                     uri=code.get("uri"),
-                    fdkType=FDKFormatType.IANA,
+                    fdkType=FDKFormatType.MEDIA_TYPE,
                     code=f"{code.get('type')}/{code.get('subType')}",
                 )
 
@@ -139,7 +139,7 @@ def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
             if file_type_uri:
                 media_types[file_type_uri] = MediaType(
                     uri=file_type.get("uri"),
-                    fdkType=FDKFormatType.FILE,
+                    fdkType=FDKFormatType.FILE_TYPE,
                     code=f"{file_type.get('code')}",
                 )
 

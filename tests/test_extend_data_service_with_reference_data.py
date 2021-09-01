@@ -57,7 +57,7 @@ def test_extend_media_types() -> None:
         dcatMediaType=[
             MediaType(
                 uri="https://www.iana.org/assignments/media-types/text/csv",
-                fdkType=FDKFormatType.IANA,
+                fdkType=FDKFormatType.MEDIA_TYPE,
                 code="text/csv",
             ),
         ],
