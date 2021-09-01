@@ -78,12 +78,12 @@ def extend_distributions(
                     skos_code_formats = []
                     for fmt in dist.fdkFormat:
                         ref_media_type = (
-                            ref_media_types.get(fmt.code) if fmt.code else None
+                            ref_media_types.get(fmt.uri) if fmt.uri else None
                         )
                         if ref_media_type:
                             skos_code_formats.append(
                                 SkosCode(
-                                    uri=fmt.code,
+                                    uri=ref_media_type.uri,
                                     code=ref_media_type.code,
                                     prefLabel={"nb": ref_media_type.code}
                                     if ref_media_type.code
@@ -91,7 +91,7 @@ def extend_distributions(
                                 )
                             )
                             fdk_formats.add(ref_media_type)
-                        else:
+                        elif fmt.code:
                             fdk_formats.add(fmt)
                     dist.fdkFormat = list(fdk_formats) if len(fdk_formats) > 0 else None
                     dist.mediaType = (
@@ -100,17 +100,17 @@ def extend_distributions(
 
                 if (
                     dist.compressFormat
-                    and dist.compressFormat.code
-                    and ref_media_types.get(dist.compressFormat.code)
+                    and dist.compressFormat.uri
+                    and ref_media_types.get(dist.compressFormat.uri)
                 ):
-                    dist.compressFormat = ref_media_types[dist.compressFormat.code]
+                    dist.compressFormat = ref_media_types[dist.compressFormat.uri]
 
                 if (
                     dist.packageFormat
-                    and dist.packageFormat.code
-                    and ref_media_types.get(dist.packageFormat.code)
+                    and dist.packageFormat.uri
+                    and ref_media_types.get(dist.packageFormat.uri)
                 ):
-                    dist.packageFormat = ref_media_types[dist.packageFormat.code]
+                    dist.packageFormat = ref_media_types[dist.packageFormat.uri]
 
             extended_distributions.append(dist)
         return extended_distributions

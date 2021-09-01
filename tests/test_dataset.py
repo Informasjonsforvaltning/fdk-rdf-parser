@@ -828,8 +828,8 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
 
         <https://example.com/unknown-media-types>
             a               dcat:Distribution ;
-            dcat:mediaType      <https://www.iana.org/assignments/media-types/text/unknown> ;
-            dcat:compressFormat      <https://www.iana.org/assignments/media-types/text/unknown> .
+            dcat:mediaType       <https://www.iana.org/assignments/media-types/text/unknown> ;
+            dcat:compressFormat  "text/unknown" .
     """
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -844,6 +844,7 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                     uri="https://example.com/extra-media-types",
                     fdkFormat=[
                         MediaType(
+                            uri="https://www.iana.org/assignments/media-types/text/html",
                             code="text/html",
                             fdkType=FDKFormatType.IANA,
                         ),
@@ -856,10 +857,12 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                         ),
                     ],
                     compressFormat=MediaType(
+                        uri="https://www.iana.org/assignments/media-types/application/json",
                         code="application/json",
                         fdkType=FDKFormatType.IANA,
                     ),
                     packageFormat=MediaType(
+                        uri="http://publications.europa.eu/resource/authority/file-type/7Z",
                         code="7Z",
                         fdkType=FDKFormatType.FILE,
                     ),
@@ -876,14 +879,8 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
             distribution=[
                 Distribution(
                     uri="https://example.com/unknown-media-types",
-                    fdkFormat=[
-                        MediaType(
-                            code="https://www.iana.org/assignments/media-types/text/unknown",
-                            fdkType=FDKFormatType.UNKNOWN,
-                        ),
-                    ],
                     compressFormat=MediaType(
-                        code="https://www.iana.org/assignments/media-types/text/unknown",
+                        code="text/unknown",
                         fdkType=FDKFormatType.UNKNOWN,
                     ),
                 )

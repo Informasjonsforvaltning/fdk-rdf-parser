@@ -41,8 +41,8 @@ def test_extend_media_types() -> None:
             SkosCode(uri="http://example.com/media-type/not/found"),
         ],
         dcatMediaType=[
-            MediaType(code="https://www.iana.org/assignments/media-types/text/csv"),
-            MediaType(code="http://example.com/media-type/not/found"),
+            MediaType(uri="https://www.iana.org/assignments/media-types/text/csv"),
+            MediaType(uri="http://example.com/media-type/not/found"),
         ],
     )
 
@@ -56,12 +56,9 @@ def test_extend_media_types() -> None:
         ],
         dcatMediaType=[
             MediaType(
+                uri="https://www.iana.org/assignments/media-types/text/csv",
                 fdkType=FDKFormatType.IANA,
                 code="text/csv",
-            ),
-            MediaType(
-                code="http://example.com/media-type/not/found",
-                fdkType=FDKFormatType.UNKNOWN,
             ),
         ],
     )

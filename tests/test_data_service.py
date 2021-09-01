@@ -163,6 +163,7 @@ def test_parse_multiple_data_services(
             ],
             dcatMediaType=[
                 MediaType(
+                    uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",
                     fdkType=FDKFormatType.IANA,
                 ),
@@ -229,12 +230,6 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
-            dcatMediaType=[
-                MediaType(
-                    code="https://www.iana.org/assignments/media-types/application/not.found",
-                    fdkType=FDKFormatType.UNKNOWN,
-                ),
-            ],
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",

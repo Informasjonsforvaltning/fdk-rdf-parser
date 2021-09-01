@@ -11,8 +11,9 @@ class FDKFormatType(str, Enum):
 
 @dataclass
 class MediaType:
+    uri: Optional[str] = None
     fdkType: FDKFormatType = FDKFormatType.UNKNOWN
     code: Optional[str] = None
 
     def __hash__(self: Any) -> int:
-        return hash((self.fdkType, self.code))
+        return hash((self.uri, self.fdkType, self.code))

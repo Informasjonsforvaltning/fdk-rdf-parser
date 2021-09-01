@@ -44,12 +44,10 @@ def extend_media_types(
     if media_types and references:
         for media_type in media_types:
             reference = find_corresponding_media_type_reference(
-                media_type.code, references
+                media_type.uri, references
             )
             if reference:
                 extended.append(reference)
-            else:
-                extended.append(media_type)
     return extended if len(extended) > 0 else None
 
 

@@ -281,7 +281,7 @@ def test_extend_media_types() -> None:
             Distribution(
                 fdkFormat=[
                     MediaType(
-                        code="https://www.iana.org/assignments/media-types/application/xml"
+                        uri="https://www.iana.org/assignments/media-types/application/xml"
                     )
                 ]
             ),
@@ -291,7 +291,7 @@ def test_extend_media_types() -> None:
             Distribution(
                 fdkFormat=[
                     MediaType(
-                        code="https://www.iana.org/assignments/media-types/text/turtle"
+                        uri="https://www.iana.org/assignments/media-types/text/turtle"
                     )
                 ]
             ),
@@ -312,6 +312,7 @@ def test_extend_media_types() -> None:
                 ],
                 fdkFormat=[
                     MediaType(
+                        uri="https://www.iana.org/assignments/media-types/application/xml",
                         fdkType=FDKFormatType.IANA,
                         code="application/xml",
                     )
@@ -336,6 +337,7 @@ def test_extend_media_types() -> None:
                 ],
                 fdkFormat=[
                     MediaType(
+                        uri="https://www.iana.org/assignments/media-types/text/turtle",
                         code="text/turtle",
                         fdkType=FDKFormatType.IANA,
                     ),
