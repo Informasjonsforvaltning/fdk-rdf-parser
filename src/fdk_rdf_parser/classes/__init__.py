@@ -20,7 +20,7 @@ from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
 from .legal_resource import LegalResource
 from .lifeEvent import LifeEvent
-from .media_type import MediaType
+from .media_type import FDKFormatType, MediaType
 from .output import Output
 from .participation import Participation
 from .public_service import PublicService

@@ -5,6 +5,7 @@ from fdk_rdf_parser.classes import (
     Catalog,
     ContactPoint,
     DataService,
+    FDKFormatType,
     HarvestMetaData,
     MediaType,
     Publisher,
@@ -96,7 +97,7 @@ def test_parse_multiple_data_services(
                                   ] ;
         dcat:endpointDescription  <http://example.com/> ;
         dcat:endpointURL          <https://vg.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet> .
+        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/not.found> .
 
 <https://testdirektoratet.no/dataservices/000>
         a                  dcat:CatalogRecord ;
@@ -157,15 +158,14 @@ def test_parse_multiple_data_services(
                 SkosCode(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",
-                    prefLabel={"nb": "turtle"},
+                    prefLabel={"nb": "text/turtle"},
                 ),
             ],
             dcatMediaType=[
                 MediaType(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
-                    type="text",
-                    subType="turtle",
-                    name="turtle",
+                    code="text/turtle",
+                    fdkType=FDKFormatType.MEDIA_TYPE,
                 ),
             ],
             servesDataset={"http://testutgiver.no/datasets/abc"},
@@ -230,12 +230,6 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
-            dcatMediaType=[
-                MediaType(
-                    uri="https://www.iana.org/assignments/media-types/application/vnd.oasis.opendocument.spreadsheet",
-                    type="unknown",
-                ),
-            ],
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",

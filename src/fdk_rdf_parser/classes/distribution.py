@@ -21,8 +21,6 @@ class Distribution:
     page: Optional[List[SkosConcept]] = None
     mediaType: Optional[List[SkosCode]] = None
     format: Optional[Set[str]] = None
-    dctFormat: Optional[List[MediaType]] = None
-    dcatMediaType: Optional[List[MediaType]] = None
     fdkFormat: Optional[List[MediaType]] = None
     compressFormat: Optional[MediaType] = None
     packageFormat: Optional[MediaType] = None

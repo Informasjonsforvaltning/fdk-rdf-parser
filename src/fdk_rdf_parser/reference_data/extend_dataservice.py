@@ -2,7 +2,6 @@ from typing import Dict, List, Optional
 
 from fdk_rdf_parser.classes import DataService, MediaType, SkosCode
 from .reference_data import DataServiceReferenceData
-from .utils import map_media_type_to_skos_code
 
 
 def extend_data_service_with_reference_data(
@@ -28,7 +27,13 @@ def extend_media_type_skos_codes(
                 media_type.uri, references
             )
             if reference:
-                extended.append(map_media_type_to_skos_code(reference))
+                extended.append(
+                    SkosCode(
+                        uri=media_type.uri,
+                        code=reference.code,
+                        prefLabel={"nb": reference.code} if reference.code else None,
+                    )
+                )
     return extended if len(extended) > 0 else None
 
 
@@ -43,8 +48,6 @@ def extend_media_types(
             )
             if reference:
                 extended.append(reference)
-            else:
-                extended.append(media_type)
     return extended if len(extended) > 0 else None
 
 

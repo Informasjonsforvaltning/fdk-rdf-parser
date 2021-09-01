@@ -9,6 +9,7 @@ from fdk_rdf_parser.classes import (
     ConformsTo,
     Dataset,
     Distribution,
+    FDKFormatType,
     HarvestMetaData,
     MediaType,
     PartialDataset,
@@ -520,7 +521,9 @@ def test_distribution_and_sample() -> None:
             Distribution(
                 description={"nb": "adsgjkv  cghj     dghdh"},
                 format={"application/ATF"},
-                dctFormat=[MediaType(name="application/ATF", type="unknown")],
+                fdkFormat=[
+                    MediaType(code="application/ATF", fdkType=FDKFormatType.UNKNOWN)
+                ],
                 accessURL={"https://application/ATF.com"},
             )
         ],
@@ -534,8 +537,10 @@ def test_distribution_and_sample() -> None:
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
                 format={"application/ATF"},
-                dctFormat=[MediaType(name="application/ATF", type="unknown")],
-                compressFormat=MediaType(name="ZIP"),
+                fdkFormat=[
+                    MediaType(code="application/ATF", fdkType=FDKFormatType.UNKNOWN)
+                ],
+                compressFormat=MediaType(code="ZIP"),
                 license=[
                     SkosConcept(
                         uri="http://creativecommons.org/publicdomain/zero/1.0/",
@@ -689,11 +694,8 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                     format={
                         "HTML",
                     },
-                    dctFormat=[
-                        MediaType(name="HTML", type="unknown"),
-                    ],
                     fdkFormat=[
-                        MediaType(name="HTML", type="unknown"),
+                        MediaType(code="HTML", fdkType=FDKFormatType.UNKNOWN),
                     ],
                 )
             ],
@@ -822,12 +824,12 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
             a               dcat:Distribution ;
             dcat:mediaType      <https://www.iana.org/assignments/media-types/text/html> ;
             dcat:compressFormat      <https://www.iana.org/assignments/media-types/application/json> ;
-            dcat:packageFormat      <https://www.iana.org/assignments/media-types/application/xml> .
+            dcat:packageFormat      <http://publications.europa.eu/resource/authority/file-type/7Z> .
 
         <https://example.com/unknown-media-types>
             a               dcat:Distribution ;
-            dcat:mediaType      <https://www.iana.org/assignments/media-types/text/unknown> ;
-            dcat:compressFormat      <https://www.iana.org/assignments/media-types/text/unknown> .
+            dcat:mediaType       <https://www.iana.org/assignments/media-types/text/unknown> ;
+            dcat:compressFormat  "text/unknown" .
     """
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -840,33 +842,29 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
             distribution=[
                 Distribution(
                     uri="https://example.com/extra-media-types",
-                    dcatMediaType=[
-                        MediaType(
-                            uri="https://www.iana.org/assignments/media-types/text/html",
-                            type="text",
-                            subType="html",
-                            name="html",
-                        ),
-                    ],
                     fdkFormat=[
                         MediaType(
                             uri="https://www.iana.org/assignments/media-types/text/html",
-                            type="text",
-                            subType="html",
-                            name="html",
+                            code="text/html",
+                            fdkType=FDKFormatType.MEDIA_TYPE,
+                        ),
+                    ],
+                    mediaType=[
+                        SkosCode(
+                            uri="https://www.iana.org/assignments/media-types/text/html",
+                            code="text/html",
+                            prefLabel={"nb": "text/html"},
                         ),
                     ],
                     compressFormat=MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/json",
-                        type="application",
-                        subType="json",
-                        name="json",
+                        code="application/json",
+                        fdkType=FDKFormatType.MEDIA_TYPE,
                     ),
                     packageFormat=MediaType(
-                        uri="https://www.iana.org/assignments/media-types/application/xml",
-                        type="application",
-                        subType="xml",
-                        name="xml",
+                        uri="http://publications.europa.eu/resource/authority/file-type/7Z",
+                        code="7Z",
+                        fdkType=FDKFormatType.FILE_TYPE,
                     ),
                 )
             ],
@@ -881,21 +879,9 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
             distribution=[
                 Distribution(
                     uri="https://example.com/unknown-media-types",
-                    dcatMediaType=[
-                        MediaType(
-                            uri="https://www.iana.org/assignments/media-types/text/unknown",
-                            type="unknown",
-                        ),
-                    ],
-                    fdkFormat=[
-                        MediaType(
-                            uri="https://www.iana.org/assignments/media-types/text/unknown",
-                            type="unknown",
-                        ),
-                    ],
                     compressFormat=MediaType(
-                        uri="https://www.iana.org/assignments/media-types/text/unknown",
-                        type="unknown",
+                        code="text/unknown",
+                        fdkType=FDKFormatType.UNKNOWN,
                     ),
                 )
             ],
