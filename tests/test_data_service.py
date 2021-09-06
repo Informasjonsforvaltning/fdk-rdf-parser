@@ -161,7 +161,7 @@ def test_parse_multiple_data_services(
                     prefLabel={"nb": "text/turtle"},
                 ),
             ],
-            dcatMediaType=[
+            fdkFormat=[
                 MediaType(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",

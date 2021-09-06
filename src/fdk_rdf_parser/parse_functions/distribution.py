@@ -3,7 +3,7 @@ from typing import List, Optional
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF
 
-from fdk_rdf_parser.classes import Distribution, MediaType
+from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     dct_uri,
@@ -14,18 +14,8 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .conforms_to import extract_conforms_to
 from .data_distribution_service import extract_data_distribution_services
-from .media_type import extract_media_type, extract_media_type_list
+from .media_type import extract_fdk_format, extract_media_type
 from .skos_concept import extract_skos_concept
-
-
-def extract_fdk_format(graph: Graph, subject: URIRef) -> Optional[List[MediaType]]:
-    fdk_format: List[MediaType] = list()
-    dct_format = extract_media_type_list(graph, subject, dct_uri("format"))
-    fdk_format.extend(dct_format if dct_format else [])
-    dcat_media_type = extract_media_type_list(graph, subject, dcat_uri("mediaType"))
-    fdk_format.extend(dcat_media_type if dcat_media_type else [])
-
-    return fdk_format if len(fdk_format) > 0 else None
 
 
 def extract_distributions(

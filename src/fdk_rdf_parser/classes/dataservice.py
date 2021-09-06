@@ -17,7 +17,7 @@ class DataService(PartialDcatResource):
     endpointDescription: Optional[Set[str]] = None
     endpointURL: Optional[Set[str]] = None
     mediaType: Optional[List[SkosCode]] = None
-    dcatMediaType: Optional[List[MediaType]] = None
+    fdkFormat: Optional[List[MediaType]] = None
     servesDataset: Optional[Set[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
     catalog: Optional[Catalog] = None
