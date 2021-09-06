@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fdk-rdf-parser"
-version = "1.1.0"
+version = "1.1.1"
 description = ""
 authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 
