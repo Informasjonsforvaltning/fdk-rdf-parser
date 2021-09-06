@@ -15,7 +15,7 @@ new_base_url = os.getenv(
 
 
 def new_reference_data_url(endpoint: str) -> str:
-    return f"{base_url}{endpoint}"
+    return f"{new_base_url}{endpoint}"
 
 
 def reference_data_url(endpoint: str) -> str:
