@@ -16,6 +16,11 @@
             "mediaType": "application/zip"
         },
         {
+            "uri": "http://publications.europa.eu/resource/authority/file-type/XML",
+            "code": "XML",
+            "mediaType": "application/xml"
+        },
+        {
             "code": "UNKNOWN"
         }
     ]

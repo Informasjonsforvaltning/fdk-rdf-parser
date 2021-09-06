@@ -4,6 +4,17 @@ from typing import List, Optional
 from rdflib import BNode, Graph, URIRef
 
 from fdk_rdf_parser.classes import MediaType
+from fdk_rdf_parser.rdf_utils import dcat_uri, dct_uri
+
+
+def extract_fdk_format(graph: Graph, subject: URIRef) -> Optional[List[MediaType]]:
+    fdk_format: List[MediaType] = list()
+    dct_format = extract_media_type_list(graph, subject, dct_uri("format"))
+    fdk_format.extend(dct_format if dct_format else [])
+    dcat_media_type = extract_media_type_list(graph, subject, dcat_uri("mediaType"))
+    fdk_format.extend(dcat_media_type if dcat_media_type else [])
+
+    return fdk_format if len(fdk_format) > 0 else None
 
 
 def extract_media_type(

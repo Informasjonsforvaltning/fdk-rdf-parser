@@ -139,6 +139,11 @@ data_service_reference_data = DataServiceReferenceData(
             fdkType=FDKFormatType.FILE_TYPE,
             code="AKN4EU_ZIP",
         ),
+        "http://publications.europa.eu/resource/authority/file-type/XML": MediaType(
+            uri="http://publications.europa.eu/resource/authority/file-type/XML",
+            fdkType=FDKFormatType.FILE_TYPE,
+            code="XML",
+        ),
     }
 )
 
@@ -720,6 +725,11 @@ dataset_reference_data = DatasetReferenceData(
             uri="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP",
             fdkType=FDKFormatType.FILE_TYPE,
             code="AKN4EU_ZIP",
+        ),
+        "http://publications.europa.eu/resource/authority/file-type/XML": MediaType(
+            uri="http://publications.europa.eu/resource/authority/file-type/XML",
+            fdkType=FDKFormatType.FILE_TYPE,
+            code="XML",
         ),
     },
 )

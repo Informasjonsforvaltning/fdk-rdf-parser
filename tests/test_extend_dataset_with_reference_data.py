@@ -282,7 +282,14 @@ def test_extend_media_types() -> None:
                 fdkFormat=[
                     MediaType(
                         uri="https://www.iana.org/assignments/media-types/application/xml"
-                    )
+                    ),
+                ]
+            ),
+            Distribution(
+                fdkFormat=[
+                    MediaType(
+                        uri="http://publications.europa.eu/resource/authority/file-type/XML"
+                    ),
                 ]
             ),
             Distribution(fdkFormat=[MediaType(code="CSV")]),
@@ -315,7 +322,23 @@ def test_extend_media_types() -> None:
                         uri="https://www.iana.org/assignments/media-types/application/xml",
                         fdkType=FDKFormatType.MEDIA_TYPE,
                         code="application/xml",
-                    )
+                    ),
+                ],
+            ),
+            Distribution(
+                mediaType=[
+                    SkosCode(
+                        uri="http://publications.europa.eu/resource/authority/file-type/XML",
+                        code="XML",
+                        prefLabel={"nb": "XML"},
+                    ),
+                ],
+                fdkFormat=[
+                    MediaType(
+                        uri="http://publications.europa.eu/resource/authority/file-type/XML",
+                        fdkType=FDKFormatType.FILE_TYPE,
+                        code="XML",
+                    ),
                 ],
             ),
             Distribution(
