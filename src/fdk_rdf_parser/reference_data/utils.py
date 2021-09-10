@@ -48,7 +48,7 @@ def split_themes(
         return splitted_themes
     else:
         for theme in themes:
-            if theme.id in los:
+            if remove_scheme_and_trailing_slash(theme.id) in los:
                 splitted_themes["los"].append(theme)
             else:
                 splitted_themes["eu_data_themes"].append(theme)
@@ -61,7 +61,7 @@ def extend_los_themes(
     extended = []
     if los is not None:
         for theme in themes:
-            extended.append(los[str(theme.id)])
+            extended.append(los[remove_scheme_and_trailing_slash(str(theme.id))])
     return extended if len(extended) > 0 else None
 
 
@@ -71,7 +71,11 @@ def extend_eu_data_themes(
     extended = []
     if eu_data_themes is not None:
         for theme in themes:
-            eu_theme = eu_data_themes.get(theme.id) if theme.id is not None else None
+            eu_theme = (
+                eu_data_themes.get(remove_scheme_and_trailing_slash(theme.id))
+                if theme.id is not None
+                else None
+            )
             if eu_theme is None:
                 extended.append(theme)
             else:
@@ -87,7 +91,7 @@ def extend_skos_code(
         uri = skos_code.uri if skos_code is not None else None
         if uri is not None:
             ref_code = (
-                references.get(remove_trailing_slash(uri))
+                references.get(remove_scheme_and_trailing_slash(uri))
                 if references is not None
                 else None
             )
@@ -106,7 +110,7 @@ def extend_skos_code_list(
         extended_codes = []
         for code in skos_codes:
             ref_code = (
-                references.get(remove_trailing_slash(code.uri))
+                references.get(remove_scheme_and_trailing_slash(code.uri))
                 if code.uri is not None
                 else None
             )
@@ -117,7 +121,12 @@ def extend_skos_code_list(
         return extended_codes
 
 
-def remove_trailing_slash(uri: str) -> str:
+def remove_scheme_and_trailing_slash(uri: Optional[str]) -> str:
+    if uri is None:
+        return ""
+
+    uri = uri.replace("http://", "").replace("https://", "")
+
     if uri.endswith("/"):
         return uri[:-1]
     else:

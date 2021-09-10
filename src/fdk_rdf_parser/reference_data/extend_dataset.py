@@ -8,7 +8,7 @@ from .utils import (
     extend_reference_types,
     extend_skos_code,
     extend_skos_code_list,
-    remove_trailing_slash,
+    remove_scheme_and_trailing_slash,
     split_themes,
 )
 
@@ -60,7 +60,7 @@ def extend_distributions(
                     extended_licenses = []
                     for lic in dist.license:
                         ref_code = (
-                            open_licenses.get(remove_trailing_slash(lic.uri))
+                            open_licenses.get(remove_scheme_and_trailing_slash(lic.uri))
                             if lic.uri is not None
                             else None
                         )
@@ -78,7 +78,11 @@ def extend_distributions(
                     skos_code_formats = []
                     for fmt in dist.fdkFormat:
                         ref_media_type = (
-                            ref_media_types.get(fmt.uri) if fmt.uri else None
+                            ref_media_types.get(
+                                remove_scheme_and_trailing_slash(fmt.uri)
+                            )
+                            if fmt.uri
+                            else None
                         )
                         if ref_media_type:
                             skos_code_formats.append(
@@ -101,16 +105,24 @@ def extend_distributions(
                 if (
                     dist.compressFormat
                     and dist.compressFormat.uri
-                    and ref_media_types.get(dist.compressFormat.uri)
+                    and ref_media_types.get(
+                        remove_scheme_and_trailing_slash(dist.compressFormat.uri)
+                    )
                 ):
-                    dist.compressFormat = ref_media_types[dist.compressFormat.uri]
+                    dist.compressFormat = ref_media_types[
+                        remove_scheme_and_trailing_slash(dist.compressFormat.uri)
+                    ]
 
                 if (
                     dist.packageFormat
                     and dist.packageFormat.uri
-                    and ref_media_types.get(dist.packageFormat.uri)
+                    and ref_media_types.get(
+                        remove_scheme_and_trailing_slash(dist.packageFormat.uri)
+                    )
                 ):
-                    dist.packageFormat = ref_media_types[dist.packageFormat.uri]
+                    dist.packageFormat = ref_media_types[
+                        remove_scheme_and_trailing_slash(dist.packageFormat.uri)
+                    ]
 
             extended_distributions.append(dist)
         return extended_distributions
