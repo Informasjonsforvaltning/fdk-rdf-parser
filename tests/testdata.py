@@ -84,73 +84,73 @@ org_response_1 = """
 
 data_service_reference_data = DataServiceReferenceData(
     media_types={
-        "https://www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/csv",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="csv",
             code="text/csv",
         ),
-        "https://www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/html",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="html",
             code="text/html",
         ),
-        "https://www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="json",
             code="application/json",
         ),
-        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="rdf+xml",
             code="application/rdf+xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/xml",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="xml",
             code="application/xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/ld+json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="ld+json",
             code="application/ld+json",
         ),
-        "https://www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/turtle",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="turtle",
             code="text/turtle",
         ),
-        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="vnd.geo+json",
             code="application/vnd.geo+json",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/7Z",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="7Z",
             code="7Z",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AAC",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="AAC",
             code="AAC",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="AKN4EU_ZIP",
             code="AKN4EU_ZIP",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/XML",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="XML",
@@ -161,12 +161,12 @@ data_service_reference_data = DataServiceReferenceData(
 
 public_service_reference_data = PublicServiceReferenceData(
     linguisticsystem={
-        "http://publications.europa.eu/resource/authority/language": SkosCode(
+        "publications.europa.eu/resource/authority/language": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language",
             code=None,
             prefLabel={"en": "Languages Named Authority List"},
         ),
-        "http://publications.europa.eu/resource/authority/language/ENG": SkosCode(
+        "publications.europa.eu/resource/authority/language/ENG": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/ENG",
             code="ENG",
             prefLabel={
@@ -176,7 +176,7 @@ public_service_reference_data = PublicServiceReferenceData(
                 "no": "Engelsk",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NOB": SkosCode(
+        "publications.europa.eu/resource/authority/language/NOB": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NOB",
             code="NOB",
             prefLabel={
@@ -186,7 +186,7 @@ public_service_reference_data = PublicServiceReferenceData(
                 "no": "Norsk Bokmål",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NNO": SkosCode(
+        "publications.europa.eu/resource/authority/language/NNO": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NNO",
             code="NNO",
             prefLabel={
@@ -196,12 +196,12 @@ public_service_reference_data = PublicServiceReferenceData(
                 "no": "Norsk Nynorsk",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NOR": SkosCode(
+        "publications.europa.eu/resource/authority/language/NOR": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NOR",
             code="NOR",
             prefLabel={"nb": "Norsk", "nn": "Norsk", "no": "Norsk", "en": "Norwegian"},
         ),
-        "http://publications.europa.eu/resource/authority/language/SMI": SkosCode(
+        "publications.europa.eu/resource/authority/language/SMI": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/SMI",
             code="SMI",
             prefLabel={"en": "Sami languages"},
@@ -211,12 +211,12 @@ public_service_reference_data = PublicServiceReferenceData(
 
 dataset_reference_data = DatasetReferenceData(
     provenancestatement={
-        "http://data.brreg.no/datakatalog/provinens": SkosCode(
+        "data.brreg.no/datakatalog/provinens": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens",
             code=None,
             prefLabel={"no": "Opphav", "en": "Provinens"},
         ),
-        "http://data.brreg.no/datakatalog/provinens/bruker": SkosCode(
+        "data.brreg.no/datakatalog/provinens/bruker": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens/bruker",
             code="BRUKER",
             prefLabel={
@@ -225,7 +225,7 @@ dataset_reference_data = DatasetReferenceData(
                 "en": "User collection",
             },
         ),
-        "http://data.brreg.no/datakatalog/provinens/nasjonal": SkosCode(
+        "data.brreg.no/datakatalog/provinens/nasjonal": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens/nasjonal",
             code="NASJONAL",
             prefLabel={
@@ -234,78 +234,78 @@ dataset_reference_data = DatasetReferenceData(
                 "nn": "Autoritativ kilde",
             },
         ),
-        "http://data.brreg.no/datakatalog/provinens/tredjepart": SkosCode(
+        "data.brreg.no/datakatalog/provinens/tredjepart": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens/tredjepart",
             code="TREDJEPART",
             prefLabel={"en": "Third party", "nb": "Tredjepart", "nn": "Tredjepart"},
         ),
-        "http://data.brreg.no/datakatalog/provinens/vedtak": SkosCode(
+        "data.brreg.no/datakatalog/provinens/vedtak": SkosCode(
             uri="http://data.brreg.no/datakatalog/provinens/vedtak",
             code="VEDTAK",
             prefLabel={"nb": "Vedtak", "nn": "Vedtak", "en": "Governmental decisions"},
         ),
     },
     rightsstatement={
-        "http://publications.europa.eu/resource/authority/access-right": SkosCode(
+        "publications.europa.eu/resource/authority/access-right": SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right",
             code=None,
             prefLabel={"en": "Access right Named Authority List"},
         ),
-        "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC": SkosCode(
+        "publications.europa.eu/resource/authority/access-right/NON_PUBLIC": SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
             code="NON_PUBLIC",
             prefLabel={"en": "Non-public"},
         ),
-        "http://publications.europa.eu/resource/authority/access-right/PUBLIC": SkosCode(
+        "publications.europa.eu/resource/authority/access-right/PUBLIC": SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
             code="PUBLIC",
             prefLabel={"en": "Public"},
         ),
-        "http://publications.europa.eu/resource/authority/access-right/RESTRICTED": SkosCode(
+        "publications.europa.eu/resource/authority/access-right/RESTRICTED": SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
             code="RESTRICTED",
             prefLabel={"en": "Restricted"},
         ),
     },
     frequency={
-        "http://publications.europa.eu/resource/authority/frequency": SkosCode(
+        "publications.europa.eu/resource/authority/frequency": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency",
             code=None,
             prefLabel={"en": "Frequency"},
         ),
-        "http://publications.europa.eu/resource/authority/frequency/ANNUAL": SkosCode(
+        "publications.europa.eu/resource/authority/frequency/ANNUAL": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
             code="ANNUAL",
             prefLabel={"en": "annual"},
         ),
-        "http://publications.europa.eu/resource/authority/frequency/DAILY": SkosCode(
+        "publications.europa.eu/resource/authority/frequency/DAILY": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/DAILY",
             code="DAILY",
             prefLabel={"en": "daily"},
         ),
-        "http://publications.europa.eu/resource/authority/frequency/MONTHLY": SkosCode(
+        "publications.europa.eu/resource/authority/frequency/MONTHLY": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/MONTHLY",
             code="MONTHLY",
             prefLabel={"en": "monthly"},
         ),
-        "http://publications.europa.eu/resource/authority/frequency/NEVER": SkosCode(
+        "publications.europa.eu/resource/authority/frequency/NEVER": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/NEVER",
             code="NEVER",
             prefLabel={"en": "never"},
         ),
-        "http://publications.europa.eu/resource/authority/frequency/WEEKLY": SkosCode(
+        "publications.europa.eu/resource/authority/frequency/WEEKLY": SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/WEEKLY",
             code="WEEKLY",
             prefLabel={"en": "weekly"},
         ),
     },
     linguisticsystem={
-        "http://publications.europa.eu/resource/authority/language": SkosCode(
+        "publications.europa.eu/resource/authority/language": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language",
             code=None,
             prefLabel={"en": "Languages Named Authority List"},
         ),
-        "http://publications.europa.eu/resource/authority/language/ENG": SkosCode(
+        "publications.europa.eu/resource/authority/language/ENG": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/ENG",
             code="ENG",
             prefLabel={
@@ -315,7 +315,7 @@ dataset_reference_data = DatasetReferenceData(
                 "no": "Engelsk",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NOB": SkosCode(
+        "publications.europa.eu/resource/authority/language/NOB": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NOB",
             code="NOB",
             prefLabel={
@@ -325,7 +325,7 @@ dataset_reference_data = DatasetReferenceData(
                 "no": "Norsk Bokmål",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NNO": SkosCode(
+        "publications.europa.eu/resource/authority/language/NNO": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NNO",
             code="NNO",
             prefLabel={
@@ -335,29 +335,29 @@ dataset_reference_data = DatasetReferenceData(
                 "no": "Norsk Nynorsk",
             },
         ),
-        "http://publications.europa.eu/resource/authority/language/NOR": SkosCode(
+        "publications.europa.eu/resource/authority/language/NOR": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/NOR",
             code="NOR",
             prefLabel={"nb": "Norsk", "nn": "Norsk", "no": "Norsk", "en": "Norwegian"},
         ),
-        "http://publications.europa.eu/resource/authority/language/SMI": SkosCode(
+        "publications.europa.eu/resource/authority/language/SMI": SkosCode(
             uri="http://publications.europa.eu/resource/authority/language/SMI",
             code="SMI",
             prefLabel={"en": "Sami languages"},
         ),
     },
     referencetypes={
-        "http://purl.org/dc/terms/hasVersion": SkosCode(
+        "purl.org/dc/terms/hasVersion": SkosCode(
             uri="http://purl.org/dc/terms/hasVersion",
             code="hasVersion",
             prefLabel={"en": "Has version"},
         ),
-        "http://purl.org/dc/terms/isPartOf": SkosCode(
+        "purl.org/dc/terms/isPartOf": SkosCode(
             uri="http://purl.org/dc/terms/isPartOf",
             code="isPartOf",
             prefLabel={"en": "Is Part Of"},
         ),
-        "http://purl.org/dc/terms/isReferencedBy": SkosCode(
+        "purl.org/dc/terms/isReferencedBy": SkosCode(
             uri="http://purl.org/dc/terms/isReferencedBy",
             code="isReferencedBy",
             prefLabel={
@@ -366,109 +366,79 @@ dataset_reference_data = DatasetReferenceData(
                 "nb": "Er referert av",
             },
         ),
-        "http://purl.org/dc/terms/isReplacedBy": SkosCode(
+        "purl.org/dc/terms/isReplacedBy": SkosCode(
             uri="http://purl.org/dc/terms/isReplacedBy",
             code="isReplacedBy",
             prefLabel={"en": "Is replaced by"},
         ),
-        "http://purl.org/dc/terms/isRequiredBy": SkosCode(
+        "purl.org/dc/terms/isRequiredBy": SkosCode(
             uri="http://purl.org/dc/terms/isRequiredBy",
             code="requires",
             prefLabel={"en": "Is required by"},
         ),
-        "http://purl.org/dc/terms/isVersionOf": SkosCode(
+        "purl.org/dc/terms/isVersionOf": SkosCode(
             uri="http://purl.org/dc/terms/isVersionOf",
             code="isVersionOf",
             prefLabel={"en": "Is version of"},
         ),
-        "http://purl.org/dc/terms/reference-types": SkosCode(
+        "purl.org/dc/terms/reference-types": SkosCode(
             uri="http://purl.org/dc/terms/reference-types",
             code=None,
             prefLabel={"nb": "Referanse typer"},
         ),
-        "http://purl.org/dc/terms/references": SkosCode(
+        "purl.org/dc/terms/references": SkosCode(
             uri="http://purl.org/dc/terms/references",
             code="references",
             prefLabel={"en": "References"},
         ),
-        "http://purl.org/dc/terms/relation": SkosCode(
+        "purl.org/dc/terms/relation": SkosCode(
             uri="http://purl.org/dc/terms/relation",
             code="relation",
             prefLabel={"en": "Has relation to"},
         ),
-        "http://purl.org/dc/terms/replaces": SkosCode(
+        "purl.org/dc/terms/replaces": SkosCode(
             uri="http://purl.org/dc/terms/replaces",
             code="replaces",
             prefLabel={"en": "Replaces"},
         ),
-        "http://purl.org/dc/terms/requires": SkosCode(
+        "purl.org/dc/terms/requires": SkosCode(
             uri="http://purl.org/dc/terms/requires",
             code="requires",
             prefLabel={"en": "Requires"},
         ),
-        "http://purl.org/dc/terms/source": SkosCode(
+        "purl.org/dc/terms/source": SkosCode(
             uri="http://purl.org/dc/terms/source",
             code="source",
             prefLabel={"en": "Source"},
         ),
     },
     openlicenses={
-        "http://creativecommons.org/licenses/by/4.0": SkosCode(
+        "creativecommons.org/licenses/by/4.0": SkosCode(
             uri="http://creativecommons.org/licenses/by/4.0/",
             code="CC BY 4.0",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
         ),
-        "http://creativecommons.org/licenses/by/4.0/deed.no": SkosCode(
+        "creativecommons.org/licenses/by/4.0/deed.no": SkosCode(
             uri="http://creativecommons.org/licenses/by/4.0/deed.no",
             code="CC BY 4.0 DEED",
             prefLabel={"en": "Creative Commons Attribution 4.0 International"},
         ),
-        "http://creativecommons.org/publicdomain/zero/1.0": SkosCode(
+        "creativecommons.org/publicdomain/zero/1.0": SkosCode(
             uri="https://creativecommons.org/publicdomain/zero/1.0/",
             code="CC0 1.0",
             prefLabel={"en": "Creative Commons Universal Public Domain Dedication"},
         ),
-        "http://data.norge.no/nlod": SkosCode(
+        "data.norge.no/nlod": SkosCode(
             uri="http://data.norge.no/nlod/",
             code="NLOD",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
         ),
-        "http://data.norge.no/nlod/no/1.0": SkosCode(
+        "data.norge.no/nlod/no/1.0": SkosCode(
             uri="https://data.norge.no/nlod/no/1.0",
             code="NLOD10",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
         ),
-        "http://data.norge.no/nlod/no/2.0": SkosCode(
-            uri="http://data.norge.no/nlod/no/2.0",
-            code="NLOD20",
-            prefLabel={"en": "Norwegian Licence for Open Government Data"},
-        ),
-        "https://creativecommons.org/licenses/by/4.0": SkosCode(
-            uri="http://creativecommons.org/licenses/by/4.0/",
-            code="CC BY 4.0",
-            prefLabel={"en": "Creative Commons Attribution 4.0 International"},
-        ),
-        "https://creativecommons.org/licenses/by/4.0/deed.no": SkosCode(
-            uri="http://creativecommons.org/licenses/by/4.0/deed.no",
-            code="CC BY 4.0 DEED",
-            prefLabel={"en": "Creative Commons Attribution 4.0 International"},
-        ),
-        "https://creativecommons.org/publicdomain/zero/1.0": SkosCode(
-            uri="https://creativecommons.org/publicdomain/zero/1.0/",
-            code="CC0 1.0",
-            prefLabel={"en": "Creative Commons Universal Public Domain Dedication"},
-        ),
-        "https://data.norge.no/nlod": SkosCode(
-            uri="http://data.norge.no/nlod/",
-            code="NLOD",
-            prefLabel={"en": "Norwegian Licence for Open Government Data"},
-        ),
-        "https://data.norge.no/nlod/no/1.0": SkosCode(
-            uri="https://data.norge.no/nlod/no/1.0",
-            code="NLOD10",
-            prefLabel={"en": "Norwegian Licence for Open Government Data"},
-        ),
-        "https://data.norge.no/nlod/no/2.0": SkosCode(
+        "data.norge.no/nlod/no/2.0": SkosCode(
             uri="http://data.norge.no/nlod/no/2.0",
             code="NLOD20",
             prefLabel={"en": "Norwegian Licence for Open Government Data"},
@@ -480,44 +450,44 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     location={
-        "http://sws.geonames.org/3144096": SkosCode(
+        "sws.geonames.org/3144096": SkosCode(
             uri="http://sws.geonames.org/3144096/",
             code="http://sws.geonames.org/3144096/",
             prefLabel={"no": "Norge"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/fylke/id/173159": SkosCode(
+        "data.geonorge.no/administrativeEnheter/fylke/id/173159": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173159",
             code="https://data.geonorge.no/administrativeEnheter/fylke/id/173159",
             prefLabel={"no": "Oslo"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/kommune/id/173068": SkosCode(
+        "data.geonorge.no/administrativeEnheter/kommune/id/173068": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/kommune/id/173068",
             code="https://data.geonorge.no/administrativeEnheter/kommune/id/173068",
             prefLabel={"no": "Trondheim"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/fylke/id/173152": SkosCode(
+        "data.geonorge.no/administrativeEnheter/fylke/id/173152": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173152",
             code="https://data.geonorge.no/administrativeEnheter/fylke/id/173152",
             prefLabel={"no": "Rogaland"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/fylke/id/173142": SkosCode(
+        "data.geonorge.no/administrativeEnheter/fylke/id/173142": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142",
             code="https://data.geonorge.no/administrativeEnheter/fylke/id/173142",
             prefLabel={"no": "Finnmárku"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/nasjon/id/173163": SkosCode(
+        "data.geonorge.no/administrativeEnheter/nasjon/id/173163": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/nasjon/id/173163",
             code="https://data.geonorge.no/administrativeEnheter/nasjon/id/173163",
             prefLabel={"no": "Norge"},
         ),
-        "https://data.geonorge.no/administrativeEnheter/kommune/id/173018": SkosCode(
+        "data.geonorge.no/administrativeEnheter/kommune/id/173018": SkosCode(
             uri="https://data.geonorge.no/administrativeEnheter/kommune/id/173018",
             code="https://data.geonorge.no/administrativeEnheter/kommune/id/173018",
             prefLabel={"no": "Oslo"},
         ),
     },
     eu_data_themes={
-        "http://publications.europa.eu/resource/authority/data-theme/AGRI": EuDataTheme(
+        "publications.europa.eu/resource/authority/data-theme/AGRI": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/AGRI",
             code="AGRI",
             startUse="2015-10-01",
@@ -529,7 +499,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/ECON": EuDataTheme(
+        "publications.europa.eu/resource/authority/data-theme/ECON": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/ECON",
             code="ECON",
             startUse="2015-10-01",
@@ -541,7 +511,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/HEAL": EuDataTheme(
+        "publications.europa.eu/resource/authority/data-theme/HEAL": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/HEAL",
             code="HEAL",
             startUse="2015-10-01",
@@ -553,7 +523,7 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
-        "http://publications.europa.eu/resource/authority/data-theme/TRAN": EuDataTheme(
+        "publications.europa.eu/resource/authority/data-theme/TRAN": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/TRAN",
             code="TRAN",
             startUse="2015-10-01",
@@ -567,7 +537,7 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     los_themes={
-        "https://psi.norge.no/los/tema/kultur": LosNode(
+        "psi.norge.no/los/tema/kultur": LosNode(
             children=[
                 "https://psi.norge.no/los/ord/film-og-kino",
                 "https://psi.norge.no/los/ord/kulturtilbud",
@@ -581,7 +551,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/ord/film-og-kino": LosNode(
+        "psi.norge.no/los/ord/film-og-kino": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/kultur"],
             isTema=False,
@@ -592,7 +562,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Billettbestilling", "Kinobillett", "Filmklubb"],
             relatedTerms=["https://psi.norge.no/los/ord/kulturtilbud"],
         ),
-        "https://psi.norge.no/los/ord/utlan-og-reservasjon": LosNode(
+        "psi.norge.no/los/ord/utlan-og-reservasjon": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/bibliotek"],
             isTema=False,
@@ -607,7 +577,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/kultur-idrett-og-fritid": LosNode(
+        "psi.norge.no/los/tema/kultur-idrett-og-fritid": LosNode(
             children=[
                 "https://psi.norge.no/los/tema/kultur",
                 "https://psi.norge.no/los/tema/bibliotek",
@@ -625,7 +595,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/ord/kulturtilbud": LosNode(
+        "psi.norge.no/los/ord/kulturtilbud": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/kultur"],
             isTema=False,
@@ -640,7 +610,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Dans", "Teater", "Musikk"],
             relatedTerms=["https://psi.norge.no/los/ord/film-og-kino"],
         ),
-        "https://psi.norge.no/los/ord/tilpasset-opplaring": LosNode(
+        "psi.norge.no/los/ord/tilpasset-opplaring": LosNode(
             children=None,
             parents=["https://psi.norge.no/los/tema/grunnskole"],
             isTema=False,
@@ -655,7 +625,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=["Friskule", "Friskole"],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/grunnskole": LosNode(
+        "psi.norge.no/los/tema/grunnskole": LosNode(
             children=["https://psi.norge.no/los/ord/tilpasset-opplaring"],
             parents=["https://psi.norge.no/los/tema/skole-og-utdanning"],
             isTema=True,
@@ -666,7 +636,7 @@ dataset_reference_data = DatasetReferenceData(
             synonyms=[],
             relatedTerms=None,
         ),
-        "https://psi.norge.no/los/tema/skole-og-utdanning": LosNode(
+        "psi.norge.no/los/tema/skole-og-utdanning": LosNode(
             children=["https://psi.norge.no/los/tema/grunnskole"],
             parents=None,
             isTema=True,
@@ -683,73 +653,73 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     media_types={
-        "https://www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/csv",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="csv",
             code="text/csv",
         ),
-        "https://www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/html",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="html",
             code="text/html",
         ),
-        "https://www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="json",
             code="application/json",
         ),
-        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="rdf+xml",
             code="application/rdf+xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/xml",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="xml",
             code="application/xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/ld+json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="ld+json",
             code="application/ld+json",
         ),
-        "https://www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/turtle",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="turtle",
             code="text/turtle",
         ),
-        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
+        "www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
             type=MediaTypeOrExtentType.MEDIA_TYPE,
             name="vnd.geo+json",
             code="application/vnd.geo+json",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/7Z",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="7Z",
             code="7Z",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AAC",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="AAC",
             code="AAC",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="AKN4EU_ZIP",
             code="AKN4EU_ZIP",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
+        "publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/XML",
             type=MediaTypeOrExtentType.FILE_TYPE,
             name="XML",

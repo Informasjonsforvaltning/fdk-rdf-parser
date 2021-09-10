@@ -2,6 +2,7 @@ from typing import Dict, List, Optional
 
 from fdk_rdf_parser.classes import DataService, MediaTypeOrExtent, SkosCode
 from .reference_data import DataServiceReferenceData
+from .utils import remove_scheme_and_trailing_slash
 
 
 def extend_data_service_with_reference_data(
@@ -57,5 +58,5 @@ def find_corresponding_media_type_reference(
     media_type: Optional[str], references: Optional[Dict[str, MediaTypeOrExtent]]
 ) -> Optional[MediaTypeOrExtent]:
     if media_type and references:
-        return references.get(media_type)
+        return references.get(remove_scheme_and_trailing_slash(media_type))
     return None
