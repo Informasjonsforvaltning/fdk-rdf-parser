@@ -9,9 +9,9 @@ from fdk_rdf_parser.classes import (
     ConformsTo,
     Dataset,
     Distribution,
-    FDKFormatType,
     HarvestMetaData,
-    MediaType,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
     PartialDataset,
     Publisher,
     QualifiedAttribution,
@@ -522,7 +522,9 @@ def test_distribution_and_sample() -> None:
                 description={"nb": "adsgjkv  cghj     dghdh"},
                 format={"application/ATF"},
                 fdkFormat=[
-                    MediaType(code="application/ATF", fdkType=FDKFormatType.UNKNOWN)
+                    MediaTypeOrExtent(
+                        code="application/ATF", type=MediaTypeOrExtentType.UNKNOWN
+                    )
                 ],
                 accessURL={"https://application/ATF.com"},
             )
@@ -538,9 +540,11 @@ def test_distribution_and_sample() -> None:
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
                 format={"application/ATF"},
                 fdkFormat=[
-                    MediaType(code="application/ATF", fdkType=FDKFormatType.UNKNOWN)
+                    MediaTypeOrExtent(
+                        code="application/ATF", type=MediaTypeOrExtentType.UNKNOWN
+                    )
                 ],
-                compressFormat=MediaType(code="ZIP"),
+                compressFormat=MediaTypeOrExtent(code="ZIP"),
                 license=[
                     SkosConcept(
                         uri="http://creativecommons.org/publicdomain/zero/1.0/",
@@ -695,7 +699,9 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
                         "HTML",
                     },
                     fdkFormat=[
-                        MediaType(code="HTML", fdkType=FDKFormatType.UNKNOWN),
+                        MediaTypeOrExtent(
+                            code="HTML", type=MediaTypeOrExtentType.UNKNOWN
+                        ),
                     ],
                 )
             ],
@@ -843,10 +849,11 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                 Distribution(
                     uri="https://example.com/extra-media-types",
                     fdkFormat=[
-                        MediaType(
+                        MediaTypeOrExtent(
                             uri="https://www.iana.org/assignments/media-types/text/html",
+                            name="html",
                             code="text/html",
-                            fdkType=FDKFormatType.MEDIA_TYPE,
+                            type=MediaTypeOrExtentType.MEDIA_TYPE,
                         ),
                     ],
                     mediaType=[
@@ -856,15 +863,17 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
                             prefLabel={"nb": "text/html"},
                         ),
                     ],
-                    compressFormat=MediaType(
+                    compressFormat=MediaTypeOrExtent(
                         uri="https://www.iana.org/assignments/media-types/application/json",
+                        name="json",
                         code="application/json",
-                        fdkType=FDKFormatType.MEDIA_TYPE,
+                        type=MediaTypeOrExtentType.MEDIA_TYPE,
                     ),
-                    packageFormat=MediaType(
+                    packageFormat=MediaTypeOrExtent(
                         uri="http://publications.europa.eu/resource/authority/file-type/7Z",
+                        name="7Z",
                         code="7Z",
-                        fdkType=FDKFormatType.FILE_TYPE,
+                        type=MediaTypeOrExtentType.FILE_TYPE,
                     ),
                 )
             ],
@@ -879,9 +888,9 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
             distribution=[
                 Distribution(
                     uri="https://example.com/unknown-media-types",
-                    compressFormat=MediaType(
+                    compressFormat=MediaTypeOrExtent(
                         code="text/unknown",
-                        fdkType=FDKFormatType.UNKNOWN,
+                        type=MediaTypeOrExtentType.UNKNOWN,
                     ),
                 )
             ],

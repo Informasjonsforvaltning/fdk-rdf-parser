@@ -1,4 +1,9 @@
-from fdk_rdf_parser.classes import DataService, FDKFormatType, MediaType, SkosCode
+from fdk_rdf_parser.classes import (
+    DataService,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
+    SkosCode,
+)
 from fdk_rdf_parser.reference_data import (
     DataServiceReferenceData,
     extend_data_service_with_reference_data,
@@ -9,7 +14,7 @@ from .testdata import data_service_reference_data
 def test_handles_missing_references() -> None:
     parsed_data_service = DataService(
         mediaType=[SkosCode(uri="http://example.com/media-type/text/csv")],
-        fdkFormat=[MediaType(code="http://example.com/media-type/text/csv")],
+        fdkFormat=[MediaTypeOrExtent(code="http://example.com/media-type/text/csv")],
     )
 
     assert (
@@ -23,7 +28,7 @@ def test_handles_missing_references() -> None:
 def test_handles_empty_media_type() -> None:
     parsed_data_service = DataService(
         mediaType=[SkosCode()],
-        fdkFormat=[MediaType()],
+        fdkFormat=[MediaTypeOrExtent()],
     )
 
     assert (
@@ -44,12 +49,14 @@ def test_extend_media_types() -> None:
             SkosCode(uri="http://example.com/media-type/not/found"),
         ],
         fdkFormat=[
-            MediaType(uri="https://www.iana.org/assignments/media-types/text/csv"),
-            MediaType(
+            MediaTypeOrExtent(
+                uri="https://www.iana.org/assignments/media-types/text/csv"
+            ),
+            MediaTypeOrExtent(
                 uri="http://publications.europa.eu/resource/authority/file-type/XML"
             ),
-            MediaType(uri="http://example.com/media-type/not/found"),
-            MediaType(code="some-type"),
+            MediaTypeOrExtent(uri="http://example.com/media-type/not/found"),
+            MediaTypeOrExtent(code="some-type"),
         ],
     )
 
@@ -67,19 +74,21 @@ def test_extend_media_types() -> None:
             ),
         ],
         fdkFormat=[
-            MediaType(
+            MediaTypeOrExtent(
                 uri="https://www.iana.org/assignments/media-types/text/csv",
-                fdkType=FDKFormatType.MEDIA_TYPE,
+                type=MediaTypeOrExtentType.MEDIA_TYPE,
+                name="csv",
                 code="text/csv",
             ),
-            MediaType(
+            MediaTypeOrExtent(
                 uri="http://publications.europa.eu/resource/authority/file-type/XML",
-                fdkType=FDKFormatType.FILE_TYPE,
+                type=MediaTypeOrExtentType.FILE_TYPE,
+                name="XML",
                 code="XML",
             ),
-            MediaType(
+            MediaTypeOrExtent(
                 code="some-type",
-                fdkType=FDKFormatType.UNKNOWN,
+                type=MediaTypeOrExtentType.UNKNOWN,
             ),
         ],
     )

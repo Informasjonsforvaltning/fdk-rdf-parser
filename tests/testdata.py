@@ -1,9 +1,9 @@
 from fdk_rdf_parser.classes import (
     ConceptSchema,
     EuDataTheme,
-    FDKFormatType,
     LosNode,
-    MediaType,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
     SkosCode,
 )
 from fdk_rdf_parser.reference_data import (
@@ -84,64 +84,76 @@ org_response_1 = """
 
 data_service_reference_data = DataServiceReferenceData(
     media_types={
-        "https://www.iana.org/assignments/media-types/text/csv": MediaType(
+        "https://www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/csv",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="csv",
             code="text/csv",
         ),
-        "https://www.iana.org/assignments/media-types/text/html": MediaType(
+        "https://www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/html",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="html",
             code="text/html",
         ),
-        "https://www.iana.org/assignments/media-types/application/json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="json",
             code="application/json",
         ),
-        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaType(
+        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="rdf+xml",
             code="application/rdf+xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/xml": MediaType(
+        "https://www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/xml",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="xml",
             code="application/xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/ld+json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/ld+json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="ld+json",
             code="application/ld+json",
         ),
-        "https://www.iana.org/assignments/media-types/text/turtle": MediaType(
+        "https://www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/turtle",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="turtle",
             code="text/turtle",
         ),
-        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="vnd.geo+json",
             code="application/vnd.geo+json",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/7Z",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="7Z",
             code="7Z",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AAC",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="AAC",
             code="AAC",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="AKN4EU_ZIP",
             code="AKN4EU_ZIP",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/XML": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/XML",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="XML",
             code="XML",
         ),
     }
@@ -671,64 +683,76 @@ dataset_reference_data = DatasetReferenceData(
         ),
     },
     media_types={
-        "https://www.iana.org/assignments/media-types/text/csv": MediaType(
+        "https://www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/csv",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="csv",
             code="text/csv",
         ),
-        "https://www.iana.org/assignments/media-types/text/html": MediaType(
+        "https://www.iana.org/assignments/media-types/text/html": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/html",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="html",
             code="text/html",
         ),
-        "https://www.iana.org/assignments/media-types/application/json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="json",
             code="application/json",
         ),
-        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaType(
+        "https://www.iana.org/assignments/media-types/application/rdf+xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/rdf+xml",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="rdf+xml",
             code="application/rdf+xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/xml": MediaType(
+        "https://www.iana.org/assignments/media-types/application/xml": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/xml",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="xml",
             code="application/xml",
         ),
-        "https://www.iana.org/assignments/media-types/application/ld+json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/ld+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/ld+json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="ld+json",
             code="application/ld+json",
         ),
-        "https://www.iana.org/assignments/media-types/text/turtle": MediaType(
+        "https://www.iana.org/assignments/media-types/text/turtle": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/text/turtle",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="turtle",
             code="text/turtle",
         ),
-        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaType(
+        "https://www.iana.org/assignments/media-types/application/vnd.geo+json": MediaTypeOrExtent(
             uri="https://www.iana.org/assignments/media-types/application/vnd.geo+json",
-            fdkType=FDKFormatType.MEDIA_TYPE,
+            type=MediaTypeOrExtentType.MEDIA_TYPE,
+            name="vnd.geo+json",
             code="application/vnd.geo+json",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/7Z": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/7Z",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="7Z",
             code="7Z",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/AAC": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AAC",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="AAC",
             code="AAC",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="AKN4EU_ZIP",
             code="AKN4EU_ZIP",
         ),
-        "http://publications.europa.eu/resource/authority/file-type/XML": MediaType(
+        "http://publications.europa.eu/resource/authority/file-type/XML": MediaTypeOrExtent(
             uri="http://publications.europa.eu/resource/authority/file-type/XML",
-            fdkType=FDKFormatType.FILE_TYPE,
+            type=MediaTypeOrExtentType.FILE_TYPE,
+            name="XML",
             code="XML",
         ),
     },

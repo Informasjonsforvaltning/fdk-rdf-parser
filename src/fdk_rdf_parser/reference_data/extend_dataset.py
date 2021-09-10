@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Set
 
-from fdk_rdf_parser.classes import Dataset, Distribution, MediaType, SkosCode
+from fdk_rdf_parser.classes import Dataset, Distribution, MediaTypeOrExtent, SkosCode
 from .reference_data import DatasetReferenceData
 from .utils import (
     extend_eu_data_themes,
@@ -48,7 +48,7 @@ def extend_dataset_with_reference_data(
 def extend_distributions(
     distributions: Optional[List[Distribution]],
     open_licenses: Optional[Dict[str, SkosCode]],
-    ref_media_types: Optional[Dict[str, MediaType]],
+    ref_media_types: Optional[Dict[str, MediaTypeOrExtent]],
 ) -> Optional[List[Distribution]]:
     if distributions is None:
         return distributions
@@ -72,7 +72,7 @@ def extend_distributions(
                     dist.license = extended_licenses
 
             if ref_media_types:
-                fdk_formats: Set[MediaType] = set()
+                fdk_formats: Set[MediaTypeOrExtent] = set()
 
                 if dist.fdkFormat:
                     skos_code_formats = []
