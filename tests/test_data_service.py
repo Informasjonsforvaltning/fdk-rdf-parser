@@ -5,9 +5,9 @@ from fdk_rdf_parser.classes import (
     Catalog,
     ContactPoint,
     DataService,
-    FDKFormatType,
     HarvestMetaData,
-    MediaType,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
     Publisher,
     SkosCode,
     SkosConcept,
@@ -162,10 +162,11 @@ def test_parse_multiple_data_services(
                 ),
             ],
             fdkFormat=[
-                MediaType(
+                MediaTypeOrExtent(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
+                    name="turtle",
                     code="text/turtle",
-                    fdkType=FDKFormatType.MEDIA_TYPE,
+                    type=MediaTypeOrExtentType.MEDIA_TYPE,
                 ),
             ],
             servesDataset={"http://testutgiver.no/datasets/abc"},

@@ -3,9 +3,9 @@ from typing import Dict, Optional
 
 from fdk_rdf_parser.classes import (
     EuDataTheme,
-    FDKFormatType,
     LosNode,
-    MediaType,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
     SkosCode,
 )
 from .reference_data_client import get_new_reference_data, get_reference_data
@@ -14,7 +14,7 @@ from .utils import remove_trailing_slash
 
 @dataclass
 class DataServiceReferenceData:
-    media_types: Optional[Dict[str, MediaType]] = None
+    media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
 
 
 @dataclass
@@ -28,7 +28,7 @@ class DatasetReferenceData:
     location: Optional[Dict[str, SkosCode]] = None
     eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
     los_themes: Optional[Dict[str, LosNode]] = None
-    media_types: Optional[Dict[str, MediaType]] = None
+    media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
 
 
 @dataclass
@@ -119,17 +119,18 @@ def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
     return mapped if len(mapped) > 0 else None
 
 
-def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
+def get_and_map_media_types() -> Optional[Dict[str, MediaTypeOrExtent]]:
     media_types = {}
     iana_codes = get_new_reference_data("/iana/media-types").get("mediaTypes")
     if iana_codes is not None:
         for code in iana_codes:
             media_type_uri = str(code["uri"]) if code.get("uri") else None
             if media_type_uri:
-                media_types[media_type_uri] = MediaType(
+                media_types[media_type_uri] = MediaTypeOrExtent(
                     uri=code.get("uri"),
-                    fdkType=FDKFormatType.MEDIA_TYPE,
+                    name=f"{code.get('name')}",
                     code=f"{code.get('type')}/{code.get('subType')}",
+                    type=MediaTypeOrExtentType.MEDIA_TYPE,
                 )
 
     file_types = get_new_reference_data("/eu/file-types").get("fileTypes")
@@ -137,10 +138,11 @@ def get_and_map_media_types() -> Optional[Dict[str, MediaType]]:
         for file_type in file_types:
             file_type_uri = str(file_type["uri"]) if file_type.get("uri") else None
             if file_type_uri:
-                media_types[file_type_uri] = MediaType(
+                media_types[file_type_uri] = MediaTypeOrExtent(
                     uri=file_type.get("uri"),
-                    fdkType=FDKFormatType.FILE_TYPE,
+                    name=f"{file_type.get('code')}",
                     code=f"{file_type.get('code')}",
+                    type=MediaTypeOrExtentType.FILE_TYPE,
                 )
 
     return media_types if len(media_types) > 0 else None

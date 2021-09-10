@@ -3,9 +3,9 @@ from fdk_rdf_parser.classes import (
     Dataset,
     Distribution,
     EuDataTheme,
-    FDKFormatType,
     LosNode,
-    MediaType,
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
     Reference,
     SkosCode,
     SkosConcept,
@@ -280,29 +280,29 @@ def test_extend_media_types() -> None:
         distribution=[
             Distribution(
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="https://www.iana.org/assignments/media-types/application/xml"
                     ),
                 ]
             ),
             Distribution(
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="http://publications.europa.eu/resource/authority/file-type/XML"
                     ),
                 ]
             ),
-            Distribution(fdkFormat=[MediaType(code="CSV")]),
-            Distribution(fdkFormat=[MediaType(code="json")]),
-            Distribution(fdkFormat=[MediaType(code="geo+json")]),
+            Distribution(fdkFormat=[MediaTypeOrExtent(code="CSV")]),
+            Distribution(fdkFormat=[MediaTypeOrExtent(code="json")]),
+            Distribution(fdkFormat=[MediaTypeOrExtent(code="geo+json")]),
             Distribution(
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="https://www.iana.org/assignments/media-types/text/turtle"
                     )
                 ]
             ),
-            Distribution(fdkFormat=[MediaType(code="Rubbish")]),
+            Distribution(fdkFormat=[MediaTypeOrExtent(code="Rubbish")]),
             Distribution(),
         ]
     )
@@ -318,9 +318,10 @@ def test_extend_media_types() -> None:
                     ),
                 ],
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
-                        fdkType=FDKFormatType.MEDIA_TYPE,
+                        type=MediaTypeOrExtentType.MEDIA_TYPE,
+                        name="xml",
                         code="application/xml",
                     ),
                 ],
@@ -334,21 +335,30 @@ def test_extend_media_types() -> None:
                     ),
                 ],
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="http://publications.europa.eu/resource/authority/file-type/XML",
-                        fdkType=FDKFormatType.FILE_TYPE,
+                        type=MediaTypeOrExtentType.FILE_TYPE,
+                        name="XML",
                         code="XML",
                     ),
                 ],
             ),
             Distribution(
-                fdkFormat=[MediaType(code="CSV", fdkType=FDKFormatType.UNKNOWN)],
+                fdkFormat=[
+                    MediaTypeOrExtent(code="CSV", type=MediaTypeOrExtentType.UNKNOWN)
+                ],
             ),
             Distribution(
-                fdkFormat=[MediaType(code="json", fdkType=FDKFormatType.UNKNOWN)],
+                fdkFormat=[
+                    MediaTypeOrExtent(code="json", type=MediaTypeOrExtentType.UNKNOWN)
+                ],
             ),
             Distribution(
-                fdkFormat=[MediaType(code="geo+json", fdkType=FDKFormatType.UNKNOWN)],
+                fdkFormat=[
+                    MediaTypeOrExtent(
+                        code="geo+json", type=MediaTypeOrExtentType.UNKNOWN
+                    )
+                ],
             ),
             Distribution(
                 mediaType=[
@@ -359,15 +369,20 @@ def test_extend_media_types() -> None:
                     ),
                 ],
                 fdkFormat=[
-                    MediaType(
+                    MediaTypeOrExtent(
                         uri="https://www.iana.org/assignments/media-types/text/turtle",
+                        name="turtle",
                         code="text/turtle",
-                        fdkType=FDKFormatType.MEDIA_TYPE,
+                        type=MediaTypeOrExtentType.MEDIA_TYPE,
                     ),
                 ],
             ),
             Distribution(
-                fdkFormat=[MediaType(code="Rubbish", fdkType=FDKFormatType.UNKNOWN)],
+                fdkFormat=[
+                    MediaTypeOrExtent(
+                        code="Rubbish", type=MediaTypeOrExtentType.UNKNOWN
+                    )
+                ],
             ),
             Distribution(),
         ]

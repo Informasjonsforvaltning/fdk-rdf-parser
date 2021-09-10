@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import DataService, MediaType, SkosCode
+from fdk_rdf_parser.classes import DataService, MediaTypeOrExtent, SkosCode
 from .reference_data import DataServiceReferenceData
 
 
@@ -18,7 +18,8 @@ def extend_data_service_with_reference_data(
 
 
 def extend_media_type_skos_codes(
-    media_types: Optional[List[SkosCode]], references: Optional[Dict[str, MediaType]]
+    media_types: Optional[List[SkosCode]],
+    references: Optional[Dict[str, MediaTypeOrExtent]],
 ) -> Optional[List[SkosCode]]:
     extended = []
     if media_types and references:
@@ -38,8 +39,9 @@ def extend_media_type_skos_codes(
 
 
 def extend_fdk_format(
-    formats: Optional[List[MediaType]], references: Optional[Dict[str, MediaType]]
-) -> Optional[List[MediaType]]:
+    formats: Optional[List[MediaTypeOrExtent]],
+    references: Optional[Dict[str, MediaTypeOrExtent]],
+) -> Optional[List[MediaTypeOrExtent]]:
     extended = []
     if formats and references:
         for fmt in formats:
@@ -52,8 +54,8 @@ def extend_fdk_format(
 
 
 def find_corresponding_media_type_reference(
-    media_type: Optional[str], references: Optional[Dict[str, MediaType]]
-) -> Optional[MediaType]:
+    media_type: Optional[str], references: Optional[Dict[str, MediaTypeOrExtent]]
+) -> Optional[MediaTypeOrExtent]:
     if media_type and references:
         return references.get(media_type)
     return None
