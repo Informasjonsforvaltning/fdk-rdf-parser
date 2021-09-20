@@ -63,6 +63,12 @@ class InformationModel(PartialDcatResource):
 
         self.add_subject_from_element_or_property(element.subject)
 
+        if element.codes:
+            [
+                self.add_subject_from_element_or_property(code.subject)
+                for code in element.codes
+            ]
+
         element_key = element.uri if element.uri else element.identifier
         self.modelElements[element_key] = element
 

@@ -819,3 +819,56 @@ def test_subjects_from_elements_and_properties_added_to_contains_subjects() -> N
     result = parse_information_model(graph, URIRef("record"), subject)
 
     assert result == expected
+
+
+def test_code_element_subjects_are_added_to_containssubjects() -> None:
+    src = """@prefix digdir: <https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#> .
+        @prefix adms:  <http://www.w3.org/ns/adms#> .
+        @prefix dct:   <http://purl.org/dc/terms/> .
+        @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix locn: <http://www.w3.org/ns/locn#> .
+        @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+        @prefix xkos: <https://rdf-vocabulary.ddialliance.org/xkos/> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+        @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
+
+        digdir:PersonOgEnhet  a         modelldcatno:InformationModel ;
+                modelldcatno:containsModelElement digdir:Person;
+                dct:identifier          "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#PersonOgEnhet"^^xsd:string .
+
+        digdir:Person  a                     modelldcatno:ObjectType ;
+                modelldcatno:hasProperty       digdir:sivilstand .
+
+
+        digdir:Sivilstand  a                 modelldcatno:CodeList ;
+                dct:subject        <http://begrepskatalogen/begrep/88804c58-ff43-11e6-9d97-005056825ca0> ;
+                dct:title              "Sivilstand"@nb .
+
+        digdir:sivilstand  a             modelldcatno:Attribute ;
+                dct:subject <http://begrepskatalogen/begrep/88804c58-ff43-11e6-9d97-005056825ca0> ;
+                dct:title          "sivilstand"@nb ;
+                modelldcatno:hasValueFrom         digdir:Sivilstand ;
+                modelldcatno:sequenceNumber "11"^^xsd:positiveInteger ;
+                xsd:maxOccurs            "1"^^xsd:nonNegativeInteger .
+
+        digdir:Ugift  a             modelldcatno:CodeElement ;
+                dct:identifier    "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Ugift"^^xsd:string ;
+                skos:inScheme     digdir:Sivilstand ;
+                dct:subject       <http://begrepskatalogen/begrep/92f82e89-fb04-11e9-92b0-005056828ed3> ;
+                xkos:next         digdir:Gift ;
+                skos:topConceptOf digdir:Sivilstand ;
+                skos:prefLabel    "sivilstand ugift"@nb ;
+                skos:notation     "ugift"^^xsd:string .
+
+    """
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#PersonOgEnhet"
+    )
+    result = parse_information_model(graph, URIRef("record"), subject)
+    assert result.containsSubjects is not None and len(result.containsSubjects) == 2
