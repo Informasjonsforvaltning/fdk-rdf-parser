@@ -159,3 +159,38 @@ def test_several_of_same_reference_type() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference-list")
 
     assert extract_references(graph, subject) == expected
+
+
+def test_references_label() -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+
+        <https://testdirektoratet.no/model/dataset/reference>
+                a                   dcat:Dataset ;
+                dct:relation
+                    <https://testdirektoratet.no/model/dataset/relation> .
+
+        <https://testdirektoratet.no/model/dataset/relation>
+                a                   rdf:Resource;
+                rdfs:label
+                    "Relasjon"@nb .
+            """
+
+    expected = [
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation",
+                prefLabel={"nb": "Relasjon"},
+            ),
+        )
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
+
+    assert extract_references(graph, subject) == expected
