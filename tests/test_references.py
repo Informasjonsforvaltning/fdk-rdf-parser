@@ -194,3 +194,31 @@ def test_references_label() -> None:
     subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
 
     assert extract_references(graph, subject) == expected
+
+
+def test_literal_reference() -> None:
+
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+        <https://testdirektoratet.no/model/dataset/reference>
+                a                   dcat:Dataset ;
+                dct:relation
+                    "https://testdirektoratet.no/model/dataset/relation" .
+
+            """
+
+    expected = [
+        Reference(
+            referenceType=SkosCode(uri="http://purl.org/dc/terms/relation"),
+            source=SkosConcept(
+                uri="https://testdirektoratet.no/model/dataset/relation",
+            ),
+        )
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
+
+    assert extract_references(graph, subject) == expected
