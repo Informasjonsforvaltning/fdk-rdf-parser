@@ -11,6 +11,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_ap_no_uri,
     dcat_uri,
     dqv_iso_uri,
+    fdk_uri,
     object_value,
     prov_uri,
     resource_list,
@@ -100,6 +101,13 @@ def parse_dataset(
             datasets_graph, dataset_uri, prov_uri("qualifiedAttribution")
         ),
         catalog=parse_catalog(datasets_graph, record_uri),
+        isOpenData=extract_boolean(datasets_graph, dataset_uri, fdk_uri("isOpenData")),
+        isAuthoritative=extract_boolean(
+            datasets_graph, dataset_uri, fdk_uri("isAuthoritative")
+        ),
+        isRelatedToTransportportal=extract_boolean(
+            datasets_graph, dataset_uri, fdk_uri("isRelatedToTransportportal")
+        ),
     )
 
     dataset.add_values_from_dcat_resource(
@@ -111,6 +119,13 @@ def parse_dataset(
     )
 
     return dataset
+
+
+def extract_boolean(
+    datasets_graph: Graph, dataset_uri: URIRef, predicate: URIRef
+) -> bool:
+    value = object_value(datasets_graph, dataset_uri, predicate)
+    return value if value and isinstance(value, bool) else False
 
 
 def extract_legal_basis_from_cpsv_follows(

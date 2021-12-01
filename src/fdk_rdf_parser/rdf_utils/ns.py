@@ -55,6 +55,12 @@ def br_uri(sub_string: str) -> URIRef:
     )
 
 
+def fdk_uri(sub_string: str) -> URIRef:
+    return URIRef(
+        f"https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/master/src/main/resources/ontology/fdk.owl#{sub_string}"  # noqa: B950
+    )
+
+
 def model_dcat_ap_no_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://data.norge.no/vocabulary/modelldcatno#{sub_string}")
 
