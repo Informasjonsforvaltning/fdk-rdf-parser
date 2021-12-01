@@ -46,6 +46,9 @@ class PartialDataset(PartialDcatResource):
     references: Optional[List[Reference]] = None
     qualifiedAttributions: Optional[List[QualifiedAttribution]] = None
     catalog: Optional[Catalog] = None
+    isOpenData: bool = False
+    isAuthoritative: bool = False
+    isRelatedToTransportportal: bool = False
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
@@ -113,3 +116,6 @@ class Dataset(PartialDataset):
         self.references = values.references
         self.qualifiedAttributions = values.qualifiedAttributions
         self.catalog = values.catalog
+        self.isOpenData = values.isOpenData
+        self.isAuthoritative = values.isAuthoritative
+        self.isRelatedToTransportportal = values.isRelatedToTransportportal

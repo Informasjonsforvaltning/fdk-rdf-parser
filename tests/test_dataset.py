@@ -32,11 +32,14 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix fdk:   <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/master/src/main/resources/ontology/fdk.owl#> .
 
         <https://testdirektoratet.no/model/dataset/0>
-                a               dcat:Dataset ;
-                dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
-                                  dct:identifier    "123456789" ] .
+                a                   dcat:Dataset ;
+                fdk:isOpenData      true ;
+                fdk:isAuthoritative false ;
+                dct:publisher       [ a                 vcard:Kind , foaf:Agent ;
+                                      dct:identifier    "123456789" ] .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a>
                 a                  dcat:CatalogRecord ;
@@ -47,10 +50,12 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/1> .
 
         <https://testdirektoratet.no/model/dataset/1>
-                a                  dcat:Dataset ;
-                dct:spatial        [ <http://www.w3.org/ns/locn#geometry> "gmlLiteral"^^<http://www.opengis.net/ont/geosparql#gmlLiteral> ] ;
-                dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
-                dct:relation       <https://testdirektoratet.no/model/dataset/0> .
+                a                   dcat:Dataset ;
+                fdk:isAuthoritative true ;
+                fdk:isRelatedToTransportportal  true ;
+                dct:spatial         [ <http://www.w3.org/ns/locn#geometry> "gmlLiteral"^^<http://www.opengis.net/ont/geosparql#gmlLiteral> ] ;
+                dct:accessRights    <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+                dct:relation        <https://testdirektoratet.no/model/dataset/0> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
                 a                  dcat:CatalogRecord ;
@@ -87,6 +92,9 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 organisasjonsform="ORGL",
             ),
             uri="https://testdirektoratet.no/model/dataset/0",
+            isOpenData=True,
+            isAuthoritative=False,
+            isRelatedToTransportportal=False,
         ),
         "https://testdirektoratet.no/model/dataset/1": Dataset(
             id="4667277a",
@@ -100,6 +108,9 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 prefLabel={"en": "Public"},
             ),
             uri="https://testdirektoratet.no/model/dataset/1",
+            isOpenData=False,
+            isAuthoritative=True,
+            isRelatedToTransportportal=True,
             references=[
                 Reference(
                     referenceType=SkosCode(
