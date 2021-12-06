@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, XSD
+from rdflib.namespace import DCTERMS, RDFS
 
 from fdk_rdf_parser.classes import LegalResource
 from fdk_rdf_parser.rdf_utils import (
@@ -22,7 +22,7 @@ def extract_legal_resources(
             LegalResource(
                 uri=resource_uri,
                 description=value_translations(graph, resource, DCTERMS.description),
-                url=object_value(graph, resource, XSD.seeAlso),
+                url=object_value(graph, resource, RDFS.seeAlso),
             )
         )
 
