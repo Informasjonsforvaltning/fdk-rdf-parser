@@ -33,6 +33,7 @@ def test_complete_public_services(
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
             @prefix schema:  <http://schema.org/> .
             @prefix eli: <http://data.europa.eu/eli/ontology#> .
+            @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
                     cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
@@ -178,7 +179,7 @@ def test_complete_public_services(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
                     dct:description     "Lov om Enhetsregisteret"@nb ;
-                    xsd:seeAlso         <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ; .
+                    rdfs:seeAlso         <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ; .
 
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
                     dct:identifier "971526920" ;
