@@ -20,7 +20,7 @@ def parse_catalog(graph: Graph, child_record_uri: URIRef) -> Optional[Catalog]:
 
             return Catalog(
                 id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
-                publisher=extract_publisher(graph, catalog_uri, catalog_uri),
+                publisher=extract_publisher(graph, catalog_uri),
                 title=value_translations(graph, catalog_uri, DCTERMS.title),
                 uri=catalog_uri.toPython(),
                 description=value_translations(graph, catalog_uri, DCTERMS.description),

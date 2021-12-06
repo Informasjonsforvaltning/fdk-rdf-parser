@@ -8,8 +8,12 @@ from fdk_rdf_parser.classes.concept import Collection, Definition, TextAndURI
 from fdk_rdf_parser.parse_functions import parse_concept
 
 
-def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
-    src = """@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+def test_parse_concepts(mock_reference_data_client: Mock) -> None:
+    src = """
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+@prefix rov:   <http://www.w3.org/ns/regorg#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
@@ -108,7 +112,7 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
         a                  skos:Concept ;
         dct:identifier     "523ff894-638b-44a2-a4fd-3e96a5a8a5a3" ;
         dct:modified       "2020-02-14"^^xsd:date ;
-        dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+        dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/987654321> ;
         skosxl:prefLabel   [ a                   skosxl:Label ;
                              skosxl:literalForm  "Testbegrep"@nb
                            ] ;
@@ -153,6 +157,14 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                                         vcard:hasTelephone  <tel:+4775007500>
                                       ] .
 
+<https://data.brreg.no/enhetsregisteret/api/enheter/987654321>
+        a                      rov:RegisteredOrganization ;
+        dct:identifier         "987654321" ;
+        rov:legalName          "Testdirektoratet" ;
+        foaf:name              "Testdirektoratet"@nb ;
+        rov:orgType            orgtype:STAT ;
+        br:orgPath             "/STAT/987654321" .
+
 <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662>
         a                  dcat:CatalogRecord ;
         dct:identifier     "5e08611a-4e94-3d8f-9d9f-d3a292ec1662" ;
@@ -173,11 +185,11 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028",
                 label={"nb": "Concept collection belonging to 910258028"},
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
                 ),
             ),
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             prefLabel={"nb": "to"},
             altLabel=[{"nb": "w"}],
@@ -196,11 +208,11 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028",
                 label={"nb": "Concept collection belonging to 910258028"},
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
                 ),
             ),
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             prefLabel={"nb": "midtbaneanker"},
             altLabel=[{"nb": "stabilisator"}],
@@ -224,11 +236,11 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028",
                 label={"nb": "Concept collection belonging to 910258028"},
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
                 ),
             ),
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             application=[{"nb": "arbeid"}],
             prefLabel={"nn": "dokument"},
@@ -257,11 +269,18 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028",
                 label={"nb": "Concept collection belonging to 910258028"},
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
                 ),
             ),
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/987654321",
+                id="987654321",
+                name="Testdirektoratet",
+                orgPath="/STAT/987654321",
+                prefLabel={
+                    "nb": "Testdirektoratet",
+                },
+                organisasjonsform="STAT",
             ),
             prefLabel={"nb": "Testbegrep"},
             definition=Definition(
@@ -280,7 +299,7 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
                 firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
             ),
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/910258028",
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             application=[{"nb": "hjem"}],
             prefLabel={"nn": "lua og sokka"},
@@ -307,7 +326,7 @@ def test_parse_concepts(mock_organizations_and_reference_data: Mock) -> None:
 
 
 def test_parse_concept_handles_wrong_collection_type(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
@@ -366,7 +385,7 @@ def test_parse_concept_handles_wrong_collection_type(
 
 
 def test_parse_concept_with_old_skosno(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 @prefix skosno: <http://difi.no/skosno#> .

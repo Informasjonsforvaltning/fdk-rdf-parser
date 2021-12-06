@@ -24,9 +24,12 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.parse_functions import parse_dataset
 
 
-def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) -> None:
+def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
 
     src = """
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -38,8 +41,7 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 a                   dcat:Dataset ;
                 fdk:isOpenData      true ;
                 fdk:isAuthoritative false ;
-                dct:publisher       [ a                 vcard:Kind , foaf:Agent ;
-                                      dct:identifier    "123456789" ] .
+                dct:publisher       <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/4667277a>
                 a                  dcat:CatalogRecord ;
@@ -70,7 +72,15 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ."""
+                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime .
+
+        <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
+            a                      rov:RegisteredOrganization ;
+            dct:identifier         "123456789" ;
+            rov:legalName          "Digitaliseringsdirektoratet" ;
+            foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+            rov:orgType            orgtype:ORGL ;
+            br:orgPath             "/STAT/987654321/123456789" ."""
 
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -130,10 +140,13 @@ def test_parse_multiple_datasets(mock_organizations_and_reference_data: Mock) ->
 
 
 def test_adds_catalog_to_dataset(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
 
     src = """
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -145,8 +158,7 @@ def test_adds_catalog_to_dataset(
                 dcat:dataset     <https://testdirektoratet.no/model/dataset/0> ;
                 dct:title        "Katalog"@nb ;
                 dct:description  "Beskrivelse av katalog"@nb ;
-                dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
-                                  dct:identifier    "123456789" ] .
+                dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> .
 
         <https://datasets.fellesdatakatalog.digdir.no/catalog/abc123>
                 a                  dcat:CatalogRecord ;
@@ -166,7 +178,16 @@ def test_adds_catalog_to_dataset(
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://testdirektoratet.no/model/dataset/0>
-                a                         dcat:Dataset ."""
+                dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                a                         dcat:Dataset .
+
+        <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
+            a                      rov:RegisteredOrganization ;
+            dct:identifier         "123456789" ;
+            rov:legalName          "Digitaliseringsdirektoratet" ;
+            foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+            rov:orgType            orgtype:ORGL ;
+            br:orgPath             "/STAT/987654321/123456789" ."""
 
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -213,7 +234,7 @@ def test_adds_catalog_to_dataset(
 
 
 def test_does_not_parse_catalog_as_a_dataset(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
 
     src = """
@@ -580,8 +601,11 @@ def test_distribution_and_sample() -> None:
     assert parse_dataset(graph, URIRef("record"), subject) == expected
 
 
-def test_qualified_attributions(mock_organizations_client: Mock) -> None:
+def test_qualified_attributions() -> None:
     src = """
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
@@ -606,14 +630,29 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
             dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
             dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
             foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
-    """
+
+        <https://data.brreg.no/enhetsregisteret/api/enheter/123456789>
+                a                      rov:RegisteredOrganization ;
+                dct:identifier         "123456789" ;
+                rov:legalName          "Digitaliseringsdirektoratet" ;
+                foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+                rov:orgType            orgtype:ORGL ;
+                br:orgPath             "/STAT/987654321/123456789" .
+
+        <https://data.brreg.no/enhetsregisteret/api/enheter/111111111>
+                a                      rov:RegisteredOrganization ;
+                dct:identifier         "111111111" ;
+                rov:legalName          "Pythondirektoratet" ;
+                foaf:name              "Pythondirektoratet"@nn , "Pythondirektoratet"@nb , "Norwegian Python Agency"@en ;
+                rov:orgType            orgtype:ORGL ;
+                br:orgPath             "/STAT/987654321/111111111" ."""
 
     expected = PartialDataset(
         uri="https://testdirektoratet.no/model/dataset/0",
         qualifiedAttributions=[
             QualifiedAttribution(
                 agent=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
@@ -628,7 +667,7 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
             ),
             QualifiedAttribution(
                 agent=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/111111111",
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/111111111",
                     id="111111111",
                     name="Pythondirektoratet",
                     orgPath="/STAT/987654321/111111111",
@@ -654,7 +693,7 @@ def test_qualified_attributions(mock_organizations_client: Mock) -> None:
         )
 
 
-def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> None:
+def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -721,7 +760,7 @@ def test_https_uri_open_license(mock_organizations_and_reference_data: Mock) -> 
     assert parse_datasets(src) == expected
 
 
-def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None:
+def test_dcat_ap_no_2_rules(mock_reference_data_client: Mock) -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -806,7 +845,7 @@ def test_dcat_ap_no_2_rules(mock_organizations_and_reference_data: Mock) -> None
     assert parse_datasets(src) == expected
 
 
-def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
+def test_extra_media_types(mock_reference_data_client: Mock) -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .

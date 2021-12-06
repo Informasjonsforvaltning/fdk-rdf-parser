@@ -110,7 +110,7 @@ def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Colle
         if collection_uri and is_type(SKOS.Collection, graph, collection_uri):
             return Collection(
                 id=object_value(graph, collection_record_uri, DCTERMS.identifier),
-                publisher=extract_publisher(graph, collection_uri, collection_uri),
+                publisher=extract_publisher(graph, collection_uri),
                 label=value_translations(graph, collection_uri, RDFS.label),
                 uri=collection_uri.toPython(),
                 description=value_translations(
@@ -165,9 +165,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         identifier=concept_uri.toPython() if concept_uri else None,
         harvest=extract_meta_data(graph, fdk_record_uri),
         collection=parse_collection(graph, fdk_record_uri),
-        publisher=extract_publisher(
-            graph, concept_uri, graph.value(fdk_record_uri, DCTERMS.isPartOf)
-        ),
+        publisher=extract_publisher(graph, concept_uri),
         subject=value_translations(graph, concept_uri, DCTERMS.subject),
         application=parse_applications(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),

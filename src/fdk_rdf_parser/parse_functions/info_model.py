@@ -6,7 +6,6 @@ from rdflib.namespace import DCTERMS, FOAF, OWL
 from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
-    catalog_ref,
     model_dcat_ap_no_uri,
     object_value,
     prof_uri,
@@ -70,7 +69,6 @@ def parse_information_model(
         parse_dcat_resource(
             graph,
             info_model_uri,
-            catalog_subject=catalog_ref(graph, fdk_record_uri),
         )
     )
 

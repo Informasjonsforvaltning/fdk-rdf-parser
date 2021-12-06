@@ -78,6 +78,7 @@ class Dataset(PartialDataset):
         self.id = values.id
         self.identifier = values.identifier
         self.title = values.title
+        self.publisher = values.publisher
         self.description = values.description
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri

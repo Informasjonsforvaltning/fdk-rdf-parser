@@ -3,7 +3,6 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (
-    catalog_ref,
     dcat_uri,
     object_value,
     value_set,
@@ -46,7 +45,6 @@ def parse_data_service(
         parse_dcat_resource(
             data_services_graph,
             data_service_uri,
-            catalog_subject=catalog_ref(data_services_graph, record_uri),
         )
     )
     return data_service

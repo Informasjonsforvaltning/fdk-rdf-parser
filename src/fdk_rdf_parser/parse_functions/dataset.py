@@ -6,7 +6,6 @@ from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
 from fdk_rdf_parser.classes import PartialDataset, SkosConcept
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
-    catalog_ref,
     cpsv_uri,
     dcat_ap_no_uri,
     dcat_uri,
@@ -114,7 +113,6 @@ def parse_dataset(
         parse_dcat_resource(
             graph=datasets_graph,
             subject=dataset_uri,
-            catalog_subject=catalog_ref(datasets_graph, record_uri),
         )
     )
 

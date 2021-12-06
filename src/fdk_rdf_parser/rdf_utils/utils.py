@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Set
 
 from isodate import date_isoformat, datetime_isoformat
 from rdflib import BNode, Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, RDF
+from rdflib.namespace import DCTERMS, RDF
 
 
 def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
@@ -118,11 +118,6 @@ def date_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List
             values.append(date_isoformat(date_object))
     values.sort()
     return values if len(values) > 0 else None
-
-
-def catalog_ref(graph: Graph, subject: URIRef) -> URIRef:
-    catalog_meta_data_ref = graph.value(subject, DCTERMS.isPartOf)
-    return graph.value(catalog_meta_data_ref, FOAF.primaryTopic)
 
 
 linguistic_system_keywords: Dict[str, str] = {

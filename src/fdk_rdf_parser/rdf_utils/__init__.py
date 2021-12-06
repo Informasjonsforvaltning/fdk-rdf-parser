@@ -24,7 +24,6 @@ from .ns import (
     xkos_uri,
 )
 from .utils import (
-    catalog_ref,
     date_list,
     date_value,
     is_type,

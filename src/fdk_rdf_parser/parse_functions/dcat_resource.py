@@ -18,13 +18,11 @@ from .publisher import extract_publisher
 from .skos_code import extract_skos_code, extract_skos_code_list
 
 
-def parse_dcat_resource(
-    graph: Graph, subject: URIRef, catalog_subject: URIRef
-) -> PartialDcatResource:
+def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
     formatted_description = value_translations(graph, subject, DCTERMS.description)
     return PartialDcatResource(
         identifier=value_set(graph, subject, DCTERMS.identifier),
-        publisher=extract_publisher(graph, subject, catalog_subject),
+        publisher=extract_publisher(graph, subject),
         title=value_translations(graph, subject, DCTERMS.title),
         description=description_html_cleaner(formatted_description)
         if formatted_description
