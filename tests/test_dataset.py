@@ -846,7 +846,8 @@ def test_extra_media_types(mock_organizations_and_reference_data: Mock) -> None:
         <https://example.com/unknown-media-types>
             a               dcat:Distribution ;
             dcat:mediaType       <https://www.iana.org/assignments/media-types/text/unknown> ;
-            dcat:compressFormat  "text/unknown" .
+            dcat:compressFormat  "text/unknown" ;
+            dcat:packageFormat   [ ] .
     """
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(

@@ -23,7 +23,9 @@ def extract_media_type(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[MediaTypeOrExtent]:
     value = graph.value(subject, predicate)
-    if not value or isinstance(value, BNode):
+    if not value:
+        return None
+    elif isinstance(value, BNode):
         logging.error(
             f"Unable to parse {predicate.toPython()} for {subject.toPython()}"
         )
