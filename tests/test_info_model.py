@@ -28,7 +28,7 @@ from fdk_rdf_parser.parse_functions.info_model import (
 
 
 def test_parse_info_model_no_elements(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """@prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
@@ -118,7 +118,8 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
             },
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
+                uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
+                id="991825827",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             title={"nb": "Diversemodell"},
@@ -236,7 +237,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
 
 
 def test_parse_info_model_with_elements(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """@prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
@@ -257,6 +258,7 @@ digdir:Utgiver  a       foaf:Agent , owl:NamedIndividual ;
         foaf:name       "Digitaliseringsdirektoratet"@nb .
 
 digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
+        dct:publisher       digdir:Utgiver ;
         modelldcatno:containsModelElement
                 ex-abstrakt:EBU_EditorialObject , digdir:Kjønn ;
         modelldcatno:informationModelIdentifier
@@ -329,7 +331,8 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
     expected = {
         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
+                uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
+                id="991825827",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
@@ -340,7 +343,8 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
             catalog=Catalog(
                 id="03953a9d-5b6b-34ec-b41c-dcdcb21874d9",
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/991825827",
+                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
+                    id="991825827",
                     prefLabel={"nb": "Digitaliseringsdirektoratet"},
                 ),
                 title={"nb": "Digitaliseringsdirektoratets modellkatalog"},
@@ -596,7 +600,7 @@ def test_elements_are_not_added_twice() -> None:
 
 
 def test_parse_handles_escaped_double_quote(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """
 <rdf:RDF
@@ -641,7 +645,7 @@ def test_parse_handles_escaped_double_quote(
 
 
 def test_parse_handles_newline(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """
 <rdf:RDF

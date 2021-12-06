@@ -7,6 +7,11 @@ from fdk_rdf_parser.rdf_utils import prov_uri
 
 def test_single_qualified_attribution() -> None:
     src = """
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix dct:   <http://purl.org/dc/terms/> .
+        @prefix rov:   <http://www.w3.org/ns/regorg#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix prov:  <http://www.w3.org/ns/prov#> .
@@ -17,6 +22,14 @@ def test_single_qualified_attribution() -> None:
                                          dcat:hadRole  <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor> ;
                                          prov:agent    <https://data.brreg.no/enhetsregisteret/api/enheter/123456789>
                                        ] .
+
+        <https://data.brreg.no/enhetsregisteret/api/enheter/123456789>
+            a                      rov:RegisteredOrganization ;
+            dct:identifier         "123456789" ;
+            rov:legalName          "Digitaliseringsdirektoratet" ;
+            foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+            rov:orgType            orgtype:ORGL ;
+            br:orgPath             "/STAT/987654321/123456789" .
       """
 
     expected = [
@@ -24,6 +37,14 @@ def test_single_qualified_attribution() -> None:
             agent=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
                 id="123456789",
+                name="Digitaliseringsdirektoratet",
+                orgPath="/STAT/987654321/123456789",
+                prefLabel={
+                    "nn": "Digitaliseringsdirektoratet",
+                    "nb": "Digitaliseringsdirektoratet",
+                    "en": "Norwegian Digitalisation Agency",
+                },
+                organisasjonsform="ORGL",
             ),
             role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
         )
@@ -64,14 +85,12 @@ def test_multiple_qualified_attributions() -> None:
         QualifiedAttribution(
             agent=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
-                id="123456789",
             ),
             role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
         ),
         QualifiedAttribution(
             agent=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/987654321",
-                id="987654321",
             ),
             role="http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor",
         ),

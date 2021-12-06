@@ -5,40 +5,37 @@ from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import (
+    br_uri,
     object_value,
-    value_list,
+    rov_uri,
     value_translations,
 )
 
 
-def extract_publisher(
-    graph: Graph, subject: URIRef, catalog_subject: URIRef
-) -> Optional[Publisher]:
+def extract_publisher(graph: Graph, subject: URIRef) -> Optional[Publisher]:
     publisher = graph.value(subject, DCTERMS.publisher)
-    publisher = (
-        publisher if publisher else graph.value(catalog_subject, DCTERMS.publisher)
-    )
+    return parse_publisher(graph, publisher) if publisher else None
 
-    if publisher:
-        return Publisher(
-            uri=publisher.toPython() if isinstance(publisher, URIRef) else None,
-            id=object_value(graph, publisher, DCTERMS.identifier),
-            prefLabel=value_translations(graph, publisher, FOAF.name),
-        )
-    else:
-        return None
+
+def parse_publisher(graph: Graph, publisher: URIRef) -> Publisher:
+    org_form = object_value(graph, publisher, rov_uri("orgType"))
+    return Publisher(
+        uri=publisher.toPython() if isinstance(publisher, URIRef) else None,
+        id=object_value(graph, publisher, DCTERMS.identifier),
+        name=object_value(graph, publisher, rov_uri("legalName")),
+        orgPath=object_value(graph, publisher, br_uri("orgPath")),
+        prefLabel=value_translations(graph, publisher, FOAF.name),
+        organisasjonsform=org_form.split("#")[-1] if org_form else None,
+    )
 
 
 def extract_list_of_publishers(
     public_services_graph: Graph, public_service_uri: URIRef, predicate: URIRef
 ) -> Optional[List[Publisher]]:
-    publishers_list = value_list(public_services_graph, public_service_uri, predicate)
-    if publishers_list is not None and len(publishers_list) > 0:
-        return list(
-            map(
-                lambda publisher_uri: Publisher(uri=publisher_uri),
-                publishers_list,
-            )
+    publisher_list = list(
+        map(
+            lambda publisher_uri: parse_publisher(public_services_graph, publisher_uri),
+            public_services_graph.objects(public_service_uri, predicate),
         )
-    else:
-        return None
+    )
+    return publisher_list if len(publisher_list) > 0 else None

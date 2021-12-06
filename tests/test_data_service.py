@@ -15,15 +15,18 @@ from fdk_rdf_parser.classes import (
 
 
 def test_parse_multiple_data_services(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
 
     src = """
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rov:   <http://www.w3.org/ns/regorg#> .
 
 <https://testdirektoratet.no/catalogs/321>
         a                  dcat:CatalogRecord ;
@@ -41,15 +44,14 @@ def test_parse_multiple_data_services(
 
 <https://testutgiver.no/catalogs/123456789>
         a               dcat:Catalog ;
-        dct:publisher   [ a                 vcard:Kind , foaf:Agent ;
-                          dct:identifier    "123456789"
-                        ] ;
+        dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
         dct:title      "Data service catalog"@en ;
         dcat:service   <https://testutgiver.no/data-services/2> .
 
 <https://testutgiver.no/data-services/2>
         a                         dcat:DataService ;
         dct:conformsTo            <https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS> ;
+        dct:publisher             <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
         dct:description           "Beskrivelse for å benytte seg av en kaffemaskin"@nb , "Beskrivelse for å benytte seg av en kaffemaskin NYNORSK"@nn , "Beskrivelse for å benytte seg av en kaffemaskin ENGELSK"@en ;
         dct:title                 "Kaffe API Nynorsk ENGELSK"@en , "Kaffe API Nynorsk"@nn , "Kaffe API"@nb ;
         dcat:contactPoint         [ a                          vcard:Organization ;
@@ -73,6 +75,7 @@ def test_parse_multiple_data_services(
 
 <https://testutgiver.no/dataservices/0>
         a                         dcat:DataService ;
+        dct:publisher             <https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321> ;
         dcat:endpointDescription  <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml> .
 
 <https://testutgiver.no/catalogs/987654321>
@@ -92,6 +95,7 @@ def test_parse_multiple_data_services(
 <https://testutgiver.no/dataservices/1>
         a                         dcat:DataService ;
         dct:title                 "Testing Testing"@nb ;
+        dct:publisher             <https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321> ;
         dcat:contactPoint         [ a         vcard:Organization ;
                                     vcard:fn  "Contact information"
                                   ] ;
@@ -105,7 +109,15 @@ def test_parse_multiple_data_services(
         dct:isPartOf       <https://testdirektoratet.no/catalogs/321> ;
         dct:issued         "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
         dct:modified       "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
-        foaf:primaryTopic  <https://testutgiver.no/dataservices/0> ."""
+        foaf:primaryTopic  <https://testutgiver.no/dataservices/0> .
+
+<https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
+        a                      rov:RegisteredOrganization ;
+        dct:identifier         "123456789" ;
+        rov:legalName          "Digitaliseringsdirektoratet" ;
+        foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+        rov:orgType            orgtype:ORGL ;
+        br:orgPath             "/STAT/987654321/123456789" ."""
 
     expected = {
         "https://testutgiver.no/data-services/2": DataService(

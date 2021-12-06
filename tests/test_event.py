@@ -11,9 +11,12 @@ from fdk_rdf_parser.classes import (
 
 
 def test_parse_events(
-    mock_organizations_and_reference_data: Mock,
+    mock_reference_data_client: Mock,
 ) -> None:
     src = """
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
             @prefix cv: <http://data.europa.eu/m8g/> .
@@ -100,12 +103,19 @@ def test_parse_events(
             .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
-                    cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
                     cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
                     dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
                     dct:identifier              "4" ;
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
-            ."""
+            .
+
+            <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789>
+                    a                      rov:RegisteredOrganization ;
+                    dct:identifier         "123456789" ;
+                    rov:legalName          "Digitaliseringsdirektoratet" ;
+                    foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+                    rov:orgType            orgtype:ORGL ;
+                    br:orgPath             "/STAT/987654321/123456789" ."""
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1": BusinessEvent(
@@ -155,7 +165,7 @@ def test_parse_events(
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
