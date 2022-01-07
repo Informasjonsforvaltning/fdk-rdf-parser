@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from fdk_rdf_parser.classes import (
     EuDataTheme,
@@ -52,7 +52,7 @@ def get_data_service_reference_data() -> DataServiceReferenceData:
 def get_dataset_reference_data() -> DatasetReferenceData:
     return DatasetReferenceData(
         provenancestatement=get_and_map_reference_codes("provenancestatement"),
-        rightsstatement=get_and_map_reference_codes("rightsstatement"),
+        rightsstatement=get_and_map_access_rights(),
         frequency=get_and_map_reference_codes("frequency"),
         linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
         referencetypes=get_and_map_reference_codes("referencetypes"),
@@ -80,8 +80,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
     )
 
 
-def get_and_map_reference_codes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
-    codes = get_reference_data(f"/codes/{endpoint}")
+def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, SkosCode]]:
     if codes is not None:
         return {
             remove_scheme_and_trailing_slash(str(code.get("uri"))): SkosCode(
@@ -95,6 +94,16 @@ def get_and_map_reference_codes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
         }
     else:
         return None
+
+
+def get_and_map_reference_codes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
+    codes = get_reference_data(f"/codes/{endpoint}")
+    return parse_reference_codes(codes)
+
+
+def get_and_map_access_rights() -> Optional[Dict[str, SkosCode]]:
+    access_rights = get_new_reference_data("/eu/access-rights").get("accessRights")
+    return parse_reference_codes(access_rights)
 
 
 def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
