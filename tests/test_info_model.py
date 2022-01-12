@@ -120,6 +120,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             publisher=Publisher(
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
                 id="991825827",
+                name="Digitaliseringsdirektoratet",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             title={"nb": "Diversemodell"},
@@ -333,6 +334,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
             publisher=Publisher(
                 uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
                 id="991825827",
+                name="Digitaliseringsdirektoratet",
                 prefLabel={"nb": "Digitaliseringsdirektoratet"},
             ),
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
@@ -345,6 +347,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
                 publisher=Publisher(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Utgiver",
                     id="991825827",
+                    name="Digitaliseringsdirektoratet",
                     prefLabel={"nb": "Digitaliseringsdirektoratet"},
                 ),
                 title={"nb": "Digitaliseringsdirektoratets modellkatalog"},
