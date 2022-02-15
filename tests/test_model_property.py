@@ -24,7 +24,7 @@ def test_handles_missing_type() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#noType")
+    subject = URIRef("https://testdirektoratet.no/model#noType")
 
     assert parse_model_property(graph, subject) == expected
 
@@ -66,7 +66,7 @@ def test_parse_property_type_note() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#farge")
+    subject = URIRef("https://testdirektoratet.no/model#farge")
 
     assert parse_model_property(graph, subject) == expected
 
@@ -95,7 +95,7 @@ def test_parse_property_type_abstraction() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#lapp")
+    subject = URIRef("https://testdirektoratet.no/model#lapp")
 
     assert parse_model_property(graph, subject) == expected
 
@@ -122,7 +122,7 @@ def test_parse_has_data_type() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#gyldighetsperiode")
+    subject = URIRef("https://testdirektoratet.no/model#gyldighetsperiode")
 
     assert parse_model_property(graph, subject) == expected
 
@@ -149,7 +149,7 @@ def test_parse_has_value_from_bnode() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#sivilstand")
+    subject = URIRef("https://testdirektoratet.no/model#sivilstand")
 
     assert parse_model_property(graph, subject) == expected
 
@@ -175,7 +175,7 @@ def test_has_value_from_not_added_when_bnode_and_missing_identifier() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#sivilstand")
+    subject = URIRef("https://testdirektoratet.no/model#sivilstand")
 
     assert parse_model_property(graph, subject) == expected
 

@@ -40,7 +40,7 @@ def test_uriref_publisher() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/publisher")
 
     assert extract_publisher(graph, subject) == expected
 
@@ -61,7 +61,7 @@ def test_bnode_publisher() -> None:
     expected = Publisher(id="123456789")
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/publisher")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/publisher")
 
     assert extract_publisher(graph, subject) == expected
 

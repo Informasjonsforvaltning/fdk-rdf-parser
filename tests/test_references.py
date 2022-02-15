@@ -110,7 +110,7 @@ def test_references() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/reference")
 
     assert extract_references(graph, subject) == expected
 
@@ -156,7 +156,7 @@ def test_several_of_same_reference_type() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference-list")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/reference-list")
 
     assert extract_references(graph, subject) == expected
 
@@ -191,7 +191,7 @@ def test_references_label() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/reference")
 
     assert extract_references(graph, subject) == expected
 
@@ -219,6 +219,6 @@ def test_literal_reference() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/reference")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/reference")
 
     assert extract_references(graph, subject) == expected

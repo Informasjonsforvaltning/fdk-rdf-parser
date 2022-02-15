@@ -62,7 +62,7 @@ def test_single_distribution() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/distribution")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/distribution")
 
     assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected
 
@@ -127,6 +127,6 @@ def test_multiple_distributions() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/distribution")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/distribution")
 
     assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected

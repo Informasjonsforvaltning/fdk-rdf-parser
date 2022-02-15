@@ -52,7 +52,7 @@ def test_single_qualified_attribution() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(
-        u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
+        "https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
     )
 
     actual = extract_qualified_attributions(
@@ -98,7 +98,7 @@ def test_multiple_qualified_attributions() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(
-        u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attributions"
+        "https://testdirektoratet.no/model/dataset/dataset-with-qualified-attributions"
     )
 
     actual = extract_qualified_attributions(
@@ -130,7 +130,7 @@ def test_handles_missing_agent() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(
-        u"https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
+        "https://testdirektoratet.no/model/dataset/dataset-with-qualified-attribution"
     )
 
     actual = extract_qualified_attributions(

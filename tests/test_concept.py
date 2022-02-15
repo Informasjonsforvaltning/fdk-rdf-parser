@@ -373,10 +373,10 @@ def test_parse_concept_handles_wrong_collection_type(
 
     graph = Graph().parse(data=src, format="turtle")
     concept_uri = URIRef(
-        u"https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0"
+        "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0"
     )
     record_uri = URIRef(
-        u"https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f"
+        "https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f"
     )
 
     result = parse_concept(graph, record_uri, concept_uri)
@@ -444,10 +444,10 @@ def test_parse_concept_with_old_skosno(
 
     graph = Graph().parse(data=src, format="turtle")
     concept_uri = URIRef(
-        u"https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3"
+        "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3"
     )
     record_uri = URIRef(
-        u"https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a"
+        "https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a"
     )
 
     result = parse_concept(graph, record_uri, concept_uri)

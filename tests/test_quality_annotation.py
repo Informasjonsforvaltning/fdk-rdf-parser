@@ -74,7 +74,7 @@ def test_quality_annotations() -> None:
     }
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/quality")
 
     assert extract_quality_annotation(graph, subject) == expected
 
@@ -144,7 +144,7 @@ def test_quality_annotations_with_prefix() -> None:
     }
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/quality")
 
     annotations = extract_quality_annotation(graph, subject)
     assert annotations == expected
@@ -193,7 +193,7 @@ def test_has_annotation() -> None:
                     a                dqv:QualityAnnotation ] ."""
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/quality")
 
     annotations = extract_quality_annotation(graph, subject)
 

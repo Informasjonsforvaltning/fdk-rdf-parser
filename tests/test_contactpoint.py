@@ -28,7 +28,7 @@ def test_single_contact_point() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/contact")
 
     assert extract_contact_points(graph, subject) == expected
 
@@ -79,7 +79,7 @@ def test_several_contact_points() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/contact")
 
     assert extract_contact_points(graph, subject) == expected
 
@@ -111,6 +111,6 @@ def test_telephone_and_email_is_nodes() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/contact")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/contact")
 
     assert extract_contact_points(graph, subject) == expected

@@ -45,7 +45,7 @@ def test_bnode_distribution_access_service() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/distributionservice")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/distributionservice")
 
     assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected
 
@@ -116,6 +116,6 @@ def test_uriref_distribution_access_service() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/distributionservice")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/distributionservice")
 
     assert extract_distributions(graph, subject, dcat_uri("distribution")) == expected

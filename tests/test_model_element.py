@@ -24,7 +24,7 @@ def test_handles_missing_type() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#NoType")
+    subject = URIRef("https://testdirektoratet.no/model#NoType")
 
     assert parse_model_element(graph, subject) == expected
 
@@ -64,7 +64,7 @@ def test_parse_text_simple_type() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model#SomeTextType")
+    subject = URIRef("https://testdirektoratet.no/model#SomeTextType")
 
     assert parse_model_element(graph, subject) == expected
 
