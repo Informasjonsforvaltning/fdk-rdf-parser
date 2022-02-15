@@ -328,9 +328,9 @@ def test_parse_dataset() -> None:
     )
 
     datasets_graph = Graph().parse(data=src, format="turtle")
-    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    dataset_uri = URIRef("https://testdirektoratet.no/model/dataset/0")
     record_uri = URIRef(
-        u"https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca"
+        "https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca"
     )
 
     assert parse_dataset(datasets_graph, record_uri, dataset_uri) == expected
@@ -398,7 +398,7 @@ def test_dataset_has_quality_annotations() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/quality")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/quality")
 
     assert parse_dataset(graph, URIRef("record"), subject) == expected
 
@@ -456,7 +456,7 @@ def test_legal_basis_fields() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
     assert parse_dataset(graph, URIRef("record"), subject) == expected
 
@@ -501,7 +501,7 @@ def test_informationmodel_and_conformsto() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
     assert parse_dataset(graph, URIRef("record"), subject) == expected
 
@@ -596,7 +596,7 @@ def test_distribution_and_sample() -> None:
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/0")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
     assert parse_dataset(graph, URIRef("record"), subject) == expected
 

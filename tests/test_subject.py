@@ -47,7 +47,7 @@ def test_uriref_subject() -> None:
     ]
 
     datasets_graph = Graph().parse(data=src, format="turtle")
-    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
+    dataset_uri = URIRef("https://testdirektoratet.no/model/dataset/subject")
 
     assert extract_subjects(datasets_graph, dataset_uri) == expected
 
@@ -76,6 +76,6 @@ def test_blank_node_subject() -> None:
     ]
 
     datasets_graph = Graph().parse(data=src, format="turtle")
-    dataset_uri = URIRef(u"https://testdirektoratet.no/model/dataset/subject")
+    dataset_uri = URIRef("https://testdirektoratet.no/model/dataset/subject")
 
     assert extract_subjects(datasets_graph, dataset_uri) == expected

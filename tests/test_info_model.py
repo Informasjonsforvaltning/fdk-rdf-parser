@@ -510,7 +510,7 @@ def test_handles_missing_elements() -> None:
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(
-        u"https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
     )
 
     assert parse_information_model(graph, URIRef("record"), subject) == expected
@@ -820,7 +820,7 @@ def test_subjects_from_elements_and_properties_added_to_contains_subjects() -> N
 
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef(
-        u"https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell"
     )
 
     result = parse_information_model(graph, URIRef("record"), subject)

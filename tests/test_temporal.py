@@ -28,7 +28,7 @@ def test_temporal_dcat() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
 
@@ -57,7 +57,7 @@ def test_temporal_uri() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
 
@@ -93,7 +93,7 @@ def test_temporal_owl_time() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
 
@@ -121,7 +121,7 @@ def test_temporal_schema() -> None:
     ]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
 
@@ -141,6 +141,6 @@ def test_handles_missing_node() -> None:
     expected = [Temporal()]
 
     graph = Graph().parse(data=src, format="turtle")
-    subject = URIRef(u"https://testdirektoratet.no/model/dataset/temporal")
+    subject = URIRef("https://testdirektoratet.no/model/dataset/temporal")
 
     assert extract_temporal(graph, subject) == expected
