@@ -89,6 +89,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         a           foaf:Document ;
         dct:format  <http://publications.europa.eu/resource/authority/file-type/PNG> ;
         dct:language <http://pubs.europa.eu/resource/authority/language/NOR> ;
+        rdfs:seeAlso <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> ;
         dct:title   "Image of the logical data model (LDM)"@en .
 
 <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model>
@@ -207,6 +208,9 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                     uri="https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png",
                     title={"en": "Image of the logical data model (LDM)"},
                     format="http://publications.europa.eu/resource/authority/file-type/PNG",
+                    seeAlso=[
+                        "https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png"
+                    ],
                     language=SkosCode(
                         uri="http://pubs.europa.eu/resource/authority/language/NOR",
                     ),
