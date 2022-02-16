@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 
 from .skos_code import SkosCode
 
@@ -10,4 +10,4 @@ class Format:
     title: Optional[Dict[str, str]] = None
     format: Optional[str] = None
     language: Optional[SkosCode] = None
-    seeAlso: Optional[List[str]] = None
+    seeAlso: Optional[str] = None
