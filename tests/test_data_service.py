@@ -153,7 +153,7 @@ def test_parse_multiple_data_services(
                 ContactPoint(
                     fullname="Contact information",
                     email="kaffe@epost.no",
-                    organizationName="Kaffehuset",
+                    organizationName={"nb": "Kaffehuset"},
                     hasURL="http://www.kaffehuset.no",
                 )
             ],

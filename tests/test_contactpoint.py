@@ -15,13 +15,13 @@ def test_single_contact_point() -> None:
                 dcat:contactPoint
                     [ a                          vcard:Organization ;
                       vcard:hasTelephone         "23453345" ;
-                      vcard:hasOrganizationName  "Testdirektoratet" ;
+                      vcard:hasOrganizationName  "Testdirektoratet"@nb ;
                       vcard:hasURL               <https://testdirektoratet.no>
                     ] ."""
 
     expected = [
         ContactPoint(
-            organizationName="Testdirektoratet",
+            organizationName={"nb": "Testdirektoratet"},
             hasURL="https://testdirektoratet.no",
             hasTelephone="23453345",
         )
@@ -47,8 +47,8 @@ def test_several_contact_points() -> None:
                 dcat:contactPoint
                     [ a                          vcard:Organization ;
                       vcard:hasEmail             "post@mail.com" ;
-                      vcard:hasOrganizationName  "Testdirektoratet" ;
-                      vcard:organization-unit    "Testenhet" ;
+                      vcard:hasOrganizationName  "Testdirektoratet"@nb , "Testdirektoratet"@nn , "Directorate of test"@en ;
+                      vcard:organization-unit    "Testenhet"@nb , "Testenhet"@nn , "Test unit"@en ;
                       vcard:hasURL               <https://testdirektoratet.no>
                     ] ;
                 dcat:contactPoint
@@ -65,8 +65,12 @@ def test_several_contact_points() -> None:
     expected = [
         ContactPoint(
             email="post@mail.com",
-            organizationName="Testdirektoratet",
-            organizationUnit="Testenhet",
+            organizationName={
+                "nb": "Testdirektoratet",
+                "nn": "Testdirektoratet",
+                "en": "Directorate of test",
+            },
+            organizationUnit={"nb": "Testenhet", "nn": "Testenhet", "en": "Test unit"},
             hasURL="https://testdirektoratet.no",
         ),
         ContactPoint(
