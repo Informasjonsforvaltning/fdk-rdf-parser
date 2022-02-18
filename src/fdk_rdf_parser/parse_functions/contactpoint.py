@@ -3,7 +3,13 @@ from typing import Any, List, Optional
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser.classes import ContactPoint
-from fdk_rdf_parser.rdf_utils import dcat_uri, object_value, resource_list, vcard_uri
+from fdk_rdf_parser.rdf_utils import (
+    dcat_uri,
+    object_value,
+    resource_list,
+    value_translations,
+    vcard_uri,
+)
 
 
 def extract_contact_points(
@@ -20,10 +26,10 @@ def extract_contact_points(
                 uri=resource_uri,
                 fullname=object_value(graph, resource, vcard_uri("fn")),
                 email=extract_has_email(graph, resource),
-                organizationName=object_value(
+                organizationName=value_translations(
                     graph, resource, vcard_uri("hasOrganizationName")
                 ),
-                organizationUnit=object_value(
+                organizationUnit=value_translations(
                     graph, resource, vcard_uri("organization-unit")
                 ),
                 hasURL=object_value(graph, resource, vcard_uri("hasURL")),
