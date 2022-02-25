@@ -12,7 +12,7 @@ locations = "src", "tests", "noxfile.py"
 def tests(session: Session) -> None:
     args = session.posargs or ["--cov", "-m", "not e2e"]
     env = {
-        "ORGANIZATION_CATALOGUE_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
+        "ORGANIZATION_CATALOG_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
     }
     session.install(".", "coverage[toml]", "pytest", "pytest-cov", "pytest-mock")
     session.run("pytest", env=env, *args)

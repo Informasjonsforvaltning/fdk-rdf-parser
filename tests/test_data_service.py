@@ -19,8 +19,8 @@ def test_parse_multiple_data_services(
 ) -> None:
 
     src = """
-@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
@@ -75,12 +75,12 @@ def test_parse_multiple_data_services(
 
 <https://testutgiver.no/dataservices/0>
         a                         dcat:DataService ;
-        dct:publisher             <https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321> ;
+        dct:publisher             <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
         dcat:endpointDescription  <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml> .
 
 <https://testutgiver.no/catalogs/987654321>
         a              dcat:Catalog ;
-        dct:publisher  <https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321> ;
+        dct:publisher  <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
         dct:title      "Dataservicekatalog2 for Digitaliseringsdirektoratet"@nb ;
         dcat:service   <https://testutgiver.no/dataservices/0> , <https://testutgiver.no/dataservices/1> .
 
@@ -95,7 +95,7 @@ def test_parse_multiple_data_services(
 <https://testutgiver.no/dataservices/1>
         a                         dcat:DataService ;
         dct:title                 "Testing Testing"@nb ;
-        dct:publisher             <https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321> ;
+        dct:publisher             <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
         dcat:contactPoint         [ a         vcard:Organization ;
                                     vcard:fn  "Contact information"
                                   ] ;
@@ -207,7 +207,7 @@ def test_parse_multiple_data_services(
         ),
         "https://testutgiver.no/dataservices/0": DataService(
             publisher=Publisher(
-                uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
             ),
             uri="https://testutgiver.no/dataservices/0",
             id="d1d698ef-267a-3d57-949f-b2bc44657f3e",
@@ -222,13 +222,13 @@ def test_parse_multiple_data_services(
                 uri="https://testutgiver.no/catalogs/987654321",
                 title={"nb": "Dataservicekatalog2 for Digitaliseringsdirektoratet"},
                 publisher=Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                    uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
                 ),
             ),
         ),
         "https://testutgiver.no/dataservices/1": DataService(
             publisher=Publisher(
-                uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
             ),
             title={"nb": "Testing Testing"},
             uri="https://testutgiver.no/dataservices/1",
@@ -248,7 +248,7 @@ def test_parse_multiple_data_services(
                 uri="https://testutgiver.no/catalogs/987654321",
                 title={"nb": "Dataservicekatalog2 for Digitaliseringsdirektoratet"},
                 publisher=Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.brreg.no/organizations/987654321",
+                    uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
                 ),
             ),
         ),

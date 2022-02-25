@@ -7,8 +7,8 @@ from fdk_rdf_parser.rdf_utils import prov_uri
 
 def test_single_qualified_attribution() -> None:
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
         @prefix dct:   <http://purl.org/dc/terms/> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
