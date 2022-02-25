@@ -24,8 +24,8 @@ def test_complete_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
-            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -47,7 +47,7 @@ def test_complete_public_services(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
                     cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
-                    cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                    cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
                     cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>, <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16> ;
                     cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
@@ -114,7 +114,7 @@ def test_complete_public_services(
                     a  cv:Cost ;
                     cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
                     cv:ifAccessedThrough  <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10> ;
-                    cv:isDefinedBy        <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                    cv:isDefinedBy        <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:value              4.27 ;
                     dct:description       "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3" ;
                     dct:identifier        "15" .
@@ -133,7 +133,7 @@ def test_complete_public_services(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10>
                     a cv:Channel ;
-                    cv:ownedBy      <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                    cv:ownedBy      <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     dct:identifier  "10" ;
                     dct:type        <https://data.norge.no/concepts/257> .
 
@@ -204,7 +204,7 @@ def test_complete_public_services(
                     dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
 
-            <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789>
+            <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
                     a                      rov:RegisteredOrganization ;
                     dct:identifier         "123456789" ;
                     rov:legalName          "Digitaliseringsdirektoratet" ;
@@ -213,8 +213,8 @@ def test_complete_public_services(
                     br:orgPath             "/STAT/987654321/123456789" ."""
 
     event_src = """
-            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -241,7 +241,7 @@ def test_complete_public_services(
                 dct:description "Elektronisk prosess for oppgjør etter dødsfall."@nb ;
                 dct:type <https://data.norge.no/concepts/308> ;
                 dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ;
-                cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
             .
 
             <https://data.norge.no/concepts/300> a skos:Concept ;
@@ -300,7 +300,7 @@ def test_complete_public_services(
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
             .
 
-            <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789>
+            <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
                     a                      rov:RegisteredOrganization ;
                     dct:identifier         "123456789" ;
                     rov:legalName          "Digitaliseringsdirektoratet" ;
@@ -322,7 +322,7 @@ def test_complete_public_services(
             ],
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
+                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
@@ -511,7 +511,7 @@ def test_complete_public_services(
                     ),
                     isDefinedBy=[
                         Publisher(
-                            uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
+                            uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
                             id="123456789",
                             name="Digitaliseringsdirektoratet",
                             orgPath="/STAT/987654321/123456789",
@@ -563,8 +563,8 @@ def test_parse_multiple_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix cpsv: <http://purl.org/vocab/cpsv#> .
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -577,7 +577,7 @@ def test_parse_multiple_public_services(
                 dct:identifier "1" ;
                 dct:title "Ei offentleg teneste"@nb ;
                 dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
-                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                 cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                 cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
 
@@ -592,7 +592,7 @@ def test_parse_multiple_public_services(
                 dct:identifier "2" ;
                 dct:title "Ei anna offentleg teneste"@nn ;
                 dct:description "Ei anna offentleg teneste som tener som døme til bruk i utvikling"@nb ;
-                cv:hasCompetentAuthority <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/991825827> .
+                cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/991825827> .
 
         <http://localhost:5000/services/fdk-2>
                 a                  dcat:CatalogRecord ;
@@ -638,7 +638,7 @@ def test_parse_multiple_public_services(
                             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
         .
 
-        <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789>
+        <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
                 a                      rov:RegisteredOrganization ;
                 dct:identifier         "123456789" ;
                 rov:legalName          "Digitaliseringsdirektoratet" ;
@@ -666,7 +666,7 @@ def test_parse_multiple_public_services(
             ],
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
+                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
@@ -745,7 +745,7 @@ def test_parse_multiple_public_services(
             },
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/991825827",
+                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/991825827",
                 )
             ],
             harvest=HarvestMetaData(

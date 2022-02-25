@@ -21,7 +21,7 @@ This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser
 
 ### Environment variables
 ```
-ORGANIZATION_CATALOGUE_BASE_URI=https://organization-catalogue.staging.fellesdatakatalog.digdir.no
+ORGANIZATION_CATALOG_BASE_URI=https://organization-catalog.staging.fellesdatakatalog.digdir.no
 REFERENCE_DATA_BASE_URI=http://staging.fellesdatakatalog.digdir.no/reference-data
 NEW_REFERENCE_DATA_BASE_URI=https://www.staging.fellesdatakatalog.digdir.no/new-reference-data
 ```

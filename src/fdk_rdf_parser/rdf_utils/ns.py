@@ -51,7 +51,7 @@ def rov_uri(sub_string: str) -> URIRef:
 
 def br_uri(sub_string: str) -> URIRef:
     return URIRef(
-        f"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#{sub_string}"  # noqa: B950
+        f"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#{sub_string}"  # noqa: B950
     )
 
 

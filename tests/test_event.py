@@ -14,8 +14,8 @@ def test_parse_events(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
-            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/organization-catalogue.owl#> .
-            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -41,7 +41,7 @@ def test_parse_events(
                 dct:title "Oppgjør etter dødsfall"@nb ;
                 dct:description "Elektronisk prosess for oppgjør etter dødsfall."@nb ;
                 dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> ;
-                cv:hasCompetentAuthority    <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
             .
 
             <https://data.norge.no/concepts/300> a skos:Concept ;
@@ -109,7 +109,7 @@ def test_parse_events(
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb
             .
 
-            <https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789>
+            <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
                     a                      rov:RegisteredOrganization ;
                     dct:identifier         "123456789" ;
                     rov:legalName          "Digitaliseringsdirektoratet" ;
@@ -165,7 +165,7 @@ def test_parse_events(
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
             hasCompetentAuthority=[
                 Publisher(
-                    uri="https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/123456789",
+                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",
