@@ -4,7 +4,12 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
 
 from fdk_rdf_parser.classes import Concept, Temporal
-from fdk_rdf_parser.classes.concept import Collection, Definition, TextAndURI
+from fdk_rdf_parser.classes.concept import (
+    AssociativeRelation,
+    Collection,
+    Definition,
+    TextAndURI,
+)
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
@@ -99,6 +104,30 @@ def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition
     return definitions[0] if len(definitions) > 0 else None
 
 
+def parse_associative_relation(
+    graph: Graph, associative_relation_ref: URIRef
+) -> AssociativeRelation:
+    return AssociativeRelation(
+        description=value_translations(
+            graph, associative_relation_ref, DCTERMS.description
+        ),
+        related=object_value(graph, associative_relation_ref, SKOS.related),
+    )
+
+
+def extract_associative_relations(
+    graph: Graph, concept_uri: URIRef
+) -> Optional[List[AssociativeRelation]]:
+    associative_relations = []
+    for associative_relation_ref in graph.objects(
+        concept_uri, skosno_uri("assosiativRelasjon")
+    ):
+        associative_relations.append(
+            parse_associative_relation(graph, associative_relation_ref)
+        )
+    return associative_relations if len(associative_relations) > 0 else None
+
+
 def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
     collection_record_uri = graph.value(concept_record_uri, DCTERMS.isPartOf)
 
@@ -179,4 +208,5 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         seeAlso=value_set(graph, concept_uri, RDFS.seeAlso),
         validFromIncluding=concept_temporal.startDate,
         validToIncluding=concept_temporal.endDate,
+        associativeRelation=extract_associative_relations(graph, concept_uri),
     )
