@@ -33,6 +33,12 @@ class Definition:
 
 
 @dataclass
+class AssociativeRelation:
+    description: Optional[Dict[str, str]] = None
+    related: Optional[str] = None
+
+
+@dataclass
 class Concept:
     id: Optional[str] = None
     uri: Optional[str] = None
@@ -51,4 +57,5 @@ class Concept:
     seeAlso: Optional[Set[str]] = None
     validFromIncluding: Optional[str] = None
     validToIncluding: Optional[str] = None
+    associativeRelation: Optional[List[AssociativeRelation]] = None
     type: str = "concept"

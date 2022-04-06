@@ -4,7 +4,12 @@ from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parse_concepts
 from fdk_rdf_parser.classes import Concept, ContactPoint, HarvestMetaData, Publisher
-from fdk_rdf_parser.classes.concept import Collection, Definition, TextAndURI
+from fdk_rdf_parser.classes.concept import (
+    AssociativeRelation,
+    Collection,
+    Definition,
+    TextAndURI,
+)
 from fdk_rdf_parser.parse_functions import parse_concept
 
 
@@ -23,6 +28,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
         a               skos:Collection ;
@@ -51,6 +57,14 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosxl:prefLabel    [ a                   skosxl:Label ;
                               skosxl:literalForm  "to"@nb
                             ] ;
+        skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
+                                  dct:description         "Beskrivelse"@nb ;
+                                  skos:related  <http://begrepskatalogen/begrep/organisasjon>
+                                ] ;
+        skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
+                                  dct:description         "Beskrivelse"@nb ;
+                                  skos:related  <http://begrepskatalogen/begrep/virksomhet>
+                                ] ;
         skosno:definisjon   [ a           skosno:Definisjon ;
                               rdfs:label  "dfgfg"@nb ;
                               dct:audience skosno:blabla ;
@@ -194,6 +208,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             prefLabel={"nb": "to"},
             altLabel=[{"nb": "w"}],
             definition=Definition(text={"nb": "dfgfg"}),
+            associativeRelation=[
+                AssociativeRelation(
+                    description={"nb": "Beskrivelse"},
+                    related="http://begrepskatalogen/begrep/organisasjon",
+                ),
+                AssociativeRelation(
+                    description={"nb": "Beskrivelse"},
+                    related="http://begrepskatalogen/begrep/virksomhet",
+                ),
+            ],
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190": Concept(
