@@ -8,6 +8,7 @@ from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,
     Definition,
+    PartitiveRelation,
     TextAndURI,
 )
 from fdk_rdf_parser.parse_functions import parse_concept
@@ -64,6 +65,14 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
                                   dct:description         "Beskrivelse"@nb ;
                                   skos:related  <http://begrepskatalogen/begrep/virksomhet>
+                                ] ;
+        skosno:partitivRelasjon [ rdf:type                    skosno:PartitivRelasjon ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  dct:hasPart     <http://begrepskatalogen/begrep/blad>
+                                ] ;
+        skosno:partitivRelasjon [ rdf:type                    skosno:PartitivRelasjon ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  dct:isPartOf     <http://begrepskatalogen/begrep/tre>
                                 ] ;
         skosno:definisjon   [ a           skosno:Definisjon ;
                               rdfs:label  "dfgfg"@nb ;
@@ -216,6 +225,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 AssociativeRelation(
                     description={"nb": "Beskrivelse"},
                     related="http://begrepskatalogen/begrep/virksomhet",
+                ),
+            ],
+            partitiveRelation=[
+                PartitiveRelation(
+                    description={"nb": "Inndelingskriterium"},
+                    hasPart="http://begrepskatalogen/begrep/blad",
+                ),
+                PartitiveRelation(
+                    description={"nb": "Inndelingskriterium"},
+                    isPartOf="http://begrepskatalogen/begrep/tre",
                 ),
             ],
             type="concept",
