@@ -69,6 +69,10 @@ def xkos_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://rdf-vocabulary.ddialliance.org/xkos/{sub_string}")
 
 
+def xkos_uri_v_2(sub_string: str) -> URIRef:
+    return URIRef(f"http://rdf-vocabulary.ddialliance.org/xkos#{sub_string}")
+
+
 def cv_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://data.europa.eu/m8g/{sub_string}")
 

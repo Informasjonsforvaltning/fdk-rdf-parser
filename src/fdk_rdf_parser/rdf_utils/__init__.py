@@ -22,6 +22,7 @@ from .ns import (
     skosxl_uri,
     vcard_uri,
     xkos_uri,
+    xkos_uri_v_2,
 )
 from .utils import (
     date_list,
