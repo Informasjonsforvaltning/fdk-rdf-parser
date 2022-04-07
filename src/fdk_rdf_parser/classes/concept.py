@@ -39,6 +39,13 @@ class AssociativeRelation:
 
 
 @dataclass
+class PartitiveRelation:
+    description: Optional[Dict[str, str]] = None
+    hasPart: Optional[str] = None
+    isPartOf: Optional[str] = None
+
+
+@dataclass
 class Concept:
     id: Optional[str] = None
     uri: Optional[str] = None
@@ -58,4 +65,5 @@ class Concept:
     validFromIncluding: Optional[str] = None
     validToIncluding: Optional[str] = None
     associativeRelation: Optional[List[AssociativeRelation]] = None
+    partitiveRelation: Optional[List[PartitiveRelation]] = None
     type: str = "concept"

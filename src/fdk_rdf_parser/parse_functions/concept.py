@@ -9,6 +9,7 @@ from fdk_rdf_parser.classes.concept import (
     Collection,
     Definition,
     TextAndURI,
+    PartitiveRelation,
 )
 from fdk_rdf_parser.rdf_utils import (
     date_value,
@@ -128,6 +129,31 @@ def extract_associative_relations(
     return associative_relations if len(associative_relations) > 0 else None
 
 
+def parse_partitive_relation(
+    graph: Graph, partitive_relation_ref: URIRef
+) -> PartitiveRelation:
+    return PartitiveRelation(
+        description=value_translations(
+            graph, partitive_relation_ref, DCTERMS.description
+        ),
+        hasPart=object_value(graph, partitive_relation_ref, DCTERMS.hasPart),
+        isPartOf=object_value(graph, partitive_relation_ref, DCTERMS.isPartOf),
+    )
+
+
+def extract_partitive_relations(
+    graph: Graph, concept_uri: URIRef
+) -> Optional[List[PartitiveRelation]]:
+    partitive_relations = []
+    for partitive_relation_ref in graph.objects(
+        concept_uri, skosno_uri("partitivRelasjon")
+    ):
+        partitive_relations.append(
+            parse_partitive_relation(graph, partitive_relation_ref)
+        )
+    return partitive_relations if len(partitive_relations) > 0 else None
+
+
 def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
     collection_record_uri = graph.value(concept_record_uri, DCTERMS.isPartOf)
 
@@ -209,4 +235,5 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         validFromIncluding=concept_temporal.startDate,
         validToIncluding=concept_temporal.endDate,
         associativeRelation=extract_associative_relations(graph, concept_uri),
+        partitiveRelation=extract_partitive_relations(graph, concept_uri),
     )
