@@ -8,6 +8,7 @@ from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,
     Definition,
+    GenericRelation,
     PartitiveRelation,
     TextAndURI,
 )
@@ -73,6 +74,14 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosno:partitivRelasjon [ rdf:type                    skosno:PartitivRelasjon ;
                                   dct:description  "Inndelingskriterium"@nb ;
                                   dct:isPartOf     <http://begrepskatalogen/begrep/tre>
+                                ] ;
+        skosno:generiskRelasjon [ rdf:type                    skosno:GeneriskRelasjon ;
+                                  skosno:inndelingskriterium  "Inndelingskriterium"@nb ;
+                                  xkos:generalizes    <http://begrepskatalogen/begrep/biffbestikk>
+                                ] ;
+        skosno:generiskRelasjon [ rdf:type                    skosno:GeneriskRelasjon ;
+                                  skosno:inndelingskriterium  "Inndelingskriterium"@nb ;
+                                  xkos:specializes    <http://begrepskatalogen/begrep/bestikk>
                                 ] ;
         skosno:definisjon   [ a           skosno:Definisjon ;
                               rdfs:label  "dfgfg"@nb ;
@@ -235,6 +244,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 PartitiveRelation(
                     description={"nb": "Inndelingskriterium"},
                     isPartOf="http://begrepskatalogen/begrep/tre",
+                ),
+            ],
+            genericRelation=[
+                GenericRelation(
+                    divisioncriterion={"nb": "Inndelingskriterium"},
+                    generalizes="http://begrepskatalogen/begrep/biffbestikk",
+                ),
+                GenericRelation(
+                    divisioncriterion={"nb": "Inndelingskriterium"},
+                    specializes="http://begrepskatalogen/begrep/bestikk",
                 ),
             ],
             type="concept",

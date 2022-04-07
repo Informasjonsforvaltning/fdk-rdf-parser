@@ -46,6 +46,13 @@ class PartitiveRelation:
 
 
 @dataclass
+class GenericRelation:
+    divisioncriterion: Optional[Dict[str, str]] = None
+    generalizes: Optional[str] = None
+    specializes: Optional[str] = None
+
+
+@dataclass
 class Concept:
     id: Optional[str] = None
     uri: Optional[str] = None
@@ -66,4 +73,5 @@ class Concept:
     validToIncluding: Optional[str] = None
     associativeRelation: Optional[List[AssociativeRelation]] = None
     partitiveRelation: Optional[List[PartitiveRelation]] = None
+    genericRelation: Optional[List[GenericRelation]] = None
     type: str = "concept"

@@ -8,8 +8,9 @@ from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,
     Definition,
-    TextAndURI,
+    GenericRelation,
     PartitiveRelation,
+    TextAndURI,
 )
 from fdk_rdf_parser.rdf_utils import (
     date_value,
@@ -21,6 +22,7 @@ from fdk_rdf_parser.rdf_utils import (
     skosxl_uri,
     value_set,
     value_translations,
+    xkos_uri_v_2,
 )
 from .contactpoint import extract_contact_points
 from .harvest_meta_data import extract_meta_data
@@ -154,6 +156,33 @@ def extract_partitive_relations(
     return partitive_relations if len(partitive_relations) > 0 else None
 
 
+def parse_generic_relation(
+    graph: Graph, generic_relation_ref: URIRef
+) -> GenericRelation:
+    return GenericRelation(
+        divisioncriterion=value_translations(
+            graph, generic_relation_ref, skosno_uri("inndelingskriterium")
+        ),
+        generalizes=object_value(
+            graph, generic_relation_ref, xkos_uri_v_2("generalizes")
+        ),
+        specializes=object_value(
+            graph, generic_relation_ref, xkos_uri_v_2("specializes")
+        ),
+    )
+
+
+def extract_generic_relations(
+    graph: Graph, concept_uri: URIRef
+) -> Optional[List[GenericRelation]]:
+    generic_relations = []
+    for generic_relation_ref in graph.objects(
+        concept_uri, skosno_uri("generiskRelasjon")
+    ):
+        generic_relations.append(parse_generic_relation(graph, generic_relation_ref))
+    return generic_relations if len(generic_relations) > 0 else None
+
+
 def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
     collection_record_uri = graph.value(concept_record_uri, DCTERMS.isPartOf)
 
@@ -236,4 +265,5 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         validToIncluding=concept_temporal.endDate,
         associativeRelation=extract_associative_relations(graph, concept_uri),
         partitiveRelation=extract_partitive_relations(graph, concept_uri),
+        genericRelation=extract_generic_relations(graph, concept_uri),
     )
