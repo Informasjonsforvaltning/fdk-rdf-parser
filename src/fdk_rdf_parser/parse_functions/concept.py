@@ -261,6 +261,8 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         contactPoint=contact_points[0] if contact_points else None,
         definition=extract_definition(graph, concept_uri),
         seeAlso=value_set(graph, concept_uri, RDFS.seeAlso),
+        isReplacedBy=value_set(graph, concept_uri, DCTERMS.isReplacedBy),
+        replaces=value_set(graph, concept_uri, DCTERMS.replaces),
         validFromIncluding=concept_temporal.startDate,
         validToIncluding=concept_temporal.endDate,
         associativeRelation=extract_associative_relations(graph, concept_uri),
