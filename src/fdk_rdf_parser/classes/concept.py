@@ -69,6 +69,8 @@ class Concept:
     contactPoint: Optional[ContactPoint] = None
     definition: Optional[Definition] = None
     seeAlso: Optional[Set[str]] = None
+    isReplacedBy: Optional[Set[str]] = None
+    replaces: Optional[Set[str]] = None
     validFromIncluding: Optional[str] = None
     validToIncluding: Optional[str] = None
     associativeRelation: Optional[List[AssociativeRelation]] = None

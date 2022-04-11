@@ -174,6 +174,8 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/c4ae179e-6a3a-42bc-85a2-1e32d75fc013>
         a                  skos:Concept ;
         rdfs:seeAlso       "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940" , "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940" , "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0" , "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190" ;
+        dct:isReplacedBy   "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0" ;
+        dct:replaces       "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940" ;
         dct:identifier     "c4ae179e-6a3a-42bc-85a2-1e32d75fc013" ;
         dct:modified       "2020-11-04"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
@@ -377,6 +379,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940",
                 "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190",
                 "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940",
+            },
+            isReplacedBy={
+                "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0"
+            },
+            replaces={
+                "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940"
             },
             type="concept",
         ),
