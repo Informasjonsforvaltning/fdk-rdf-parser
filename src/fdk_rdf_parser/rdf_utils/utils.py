@@ -34,7 +34,8 @@ def object_number_value(
     value = graph.value(subject, predicate)
     return (
         value.toPython()
-        if isinstance(float(value), numbers.Number) and not isinstance(value, BNode)
+        if not isinstance(value, BNode)
+        and isinstance(string_to_float(str(value)), numbers.Number)
         else None
     )
 
@@ -118,6 +119,22 @@ def date_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List
             values.append(date_isoformat(date_object))
     values.sort()
     return values if len(values) > 0 else None
+
+
+def string_to_float(str_value: str) -> Optional[float]:
+    dot_split = str_value.split(".")
+    comma_split = str_value.split(",")
+    if len(dot_split) == 2 and "," not in dot_split[1]:
+        to_convert = str_value.replace(",", "")
+    elif len(comma_split) == 2 and "." not in comma_split[1]:
+        to_convert = str_value.replace(".", "").replace(",", ".")
+    else:
+        to_convert = str_value
+
+    try:
+        return float(to_convert)
+    except ValueError:
+        return None
 
 
 linguistic_system_keywords: Dict[str, str] = {
