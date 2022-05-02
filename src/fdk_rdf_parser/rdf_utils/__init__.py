@@ -27,6 +27,7 @@ from .ns import (
 from .utils import (
     date_list,
     date_value,
+    duration_string_value,
     is_type,
     is_uri_in_list,
     linguistic_system_keywords,

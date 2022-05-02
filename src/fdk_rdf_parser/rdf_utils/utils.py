@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import numbers
 from typing import Any, Dict, List, Optional, Set
 
@@ -26,6 +26,19 @@ def is_uri_in_list(
 def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return value.toPython() if value and not isinstance(value, BNode) else None
+
+
+def duration_string_value(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> Optional[str]:
+    value = graph.value(subject, predicate)
+    return (
+        str(value)
+        if value
+        and not isinstance(value, BNode)
+        and isinstance(value.toPython(), timedelta)
+        else None
+    )
 
 
 def object_number_value(
