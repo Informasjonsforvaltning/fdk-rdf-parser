@@ -56,7 +56,7 @@ def test_complete_public_services(
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
                     cv:isDescribedAt <https://data.norge.no/node/1127> ;
                     cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
-                    cv:processingTime "P1D" ;
+                    cv:processingTime "P1D"^^xsd:duration ;
                     cv:sector <https://data.norge.no/concepts/2> ;
                     dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
                     dct:identifier "1" ;
@@ -577,6 +577,7 @@ def test_parse_multiple_public_services(
                 dct:identifier "1" ;
                 dct:title "Ei offentleg teneste"@nb ;
                 dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
+                cv:processingTime "not valid duration type"^^xsd:duration ;
                 cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                 cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                 cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .

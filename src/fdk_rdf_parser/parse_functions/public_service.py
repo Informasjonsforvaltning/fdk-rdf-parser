@@ -6,6 +6,7 @@ from rdflib.namespace import DCTERMS
 from fdk_rdf_parser.classes import PublicService
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
+    duration_string_value,
     object_value,
     resource_list,
     value_list,
@@ -101,7 +102,7 @@ def parse_public_service(
         hasChannel=extract_channels(
             public_services_graph, public_service_uri, cv_uri("hasChannel")
         ),
-        processingTime=object_value(
+        processingTime=duration_string_value(
             public_services_graph, public_service_uri, cv_uri("processingTime")
         ),
         hasCost=extract_costs(public_services_graph, public_service_uri),
