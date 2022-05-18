@@ -1,48 +1,39 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Any, List, Optional
 
-from .channel import Channel
-from .cost import Cost
-from .criterion_requirement import CriterionRequirement
-from .evidence import Evidence
-from .harvest_meta_data import HarvestMetaData
-from .legal_resource import LegalResource
-from .output import Output
-from .participation import Participation
+from .cpsvno_service import Service
 from .publisher import Publisher
-from .rule import Rule
 from .schema_contact_point import SchemaContactPoint
-from .skos_code import SkosCode
-from .skos_concept import SkosConcept
 
 
 @dataclass
-class PublicService:
-    id: Optional[str] = None
-    uri: Optional[str] = None
-    identifier: Optional[str] = None
-    title: Optional[Dict[str, str]] = None
-    description: Optional[Dict[str, str]] = None
-    isDescribedAt: Optional[List[SkosConcept]] = None
-    isGroupedBy: Optional[List[str]] = None
+class PublicService(Service):
     hasCompetentAuthority: Optional[List[Publisher]] = None
-    harvest: Optional[HarvestMetaData] = None
-    keyword: Optional[List[Dict[str, str]]] = None
-    sector: Optional[List[SkosConcept]] = None
-    isClassifiedBy: Optional[List[SkosConcept]] = None
-    language: Optional[List[SkosCode]] = None
-    hasCriterion: Optional[List[CriterionRequirement]] = None
-    hasParticipation: Optional[List[Participation]] = None
-    hasInput: Optional[List[Evidence]] = None
-    produces: Optional[List[Output]] = None
-    requires: Optional[List["PublicService"]] = None
     hasContactPoint: Optional[List[SchemaContactPoint]] = None
-    follows: Optional[List[Rule]] = None
-    hasLegalResource: Optional[List[LegalResource]] = None
-    hasChannel: Optional[List[Channel]] = None
-    processingTime: Optional[str] = None
-    hasCost: Optional[List[Cost]] = None
-    relation: Optional[List["PublicService"]] = None
-    spatial: Optional[List[str]] = None
-    associatedBroaderTypesByEvents: Optional[List[str]] = None
-    type: str = "publicservices"
+
+    def add_cpsvno_service_values(self: Any, values: Service) -> None:
+        self.id = values.id
+        self.uri = values.uri
+        self.identifier = values.identifier
+        self.title = values.title
+        self.description = values.description
+        self.isDescribedAt = values.isDescribedAt
+        self.isGroupedBy = values.isGroupedBy
+        self.harvest = values.harvest
+        self.keyword = values.keyword
+        self.sector = values.sector
+        self.isClassifiedBy = values.isClassifiedBy
+        self.language = values.language
+        self.hasCriterion = values.hasCriterion
+        self.hasParticipation = values.hasParticipation
+        self.hasInput = values.hasInput
+        self.produces = values.produces
+        self.requires = values.requires
+        self.follows = values.follows
+        self.hasLegalResource = values.hasLegalResource
+        self.hasChannel = values.hasChannel
+        self.processingTime = values.processingTime
+        self.hasCost = values.hasCost
+        self.relation = values.relation
+        self.spatial = values.spatial
+        self.type = values.type

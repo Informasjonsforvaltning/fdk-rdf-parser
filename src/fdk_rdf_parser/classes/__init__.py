@@ -6,6 +6,7 @@ from .concept import Concept
 from .conforms_to import ConformsTo
 from .contactpoint import ContactPoint
 from .cost import Cost
+from .cpsvno_service import Service
 from .criterion_requirement import CriterionRequirement
 from .data_distribution_service import DataDistributionService
 from .dataservice import DataService

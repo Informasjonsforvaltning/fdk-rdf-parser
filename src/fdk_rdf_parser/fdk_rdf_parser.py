@@ -10,23 +10,30 @@ from .classes import (
     Dataset,
     Event,
     InformationModel,
-    PublicService,
+    Service,
 )
 from .parse_functions import (
     extend_with_associated_broader_types,
     parse_concept,
+    parse_cpsvno_service,
     parse_data_service,
     parse_dataset,
     parse_event,
     parse_information_model,
-    parse_public_service,
 )
-from .rdf_utils import cpsv_uri, cv_uri, dcat_uri, is_type, model_dcat_ap_no_uri
+from .rdf_utils import (
+    cpsv_uri,
+    cpsvno_uri,
+    cv_uri,
+    dcat_uri,
+    is_type,
+    model_dcat_ap_no_uri,
+)
 from .reference_data import (
+    extend_cpsvno_service_with_reference_data,
     extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
     extend_info_model_with_reference_data,
-    extend_public_service_with_reference_data,
     get_data_service_reference_data,
     get_dataset_reference_data,
     get_info_model_reference_data,
@@ -122,58 +129,65 @@ def parse_information_models(
 
 def parse_public_services(
     public_service_rdf: str, event_rdf: str = None, rdf_format: str = "turtle"
-) -> Dict[str, PublicService]:
-    public_services: Dict[str, PublicService] = {}
+) -> Dict[str, Service]:
+    cpsvno_services: Dict[str, Service] = {}
     reference_data = get_public_service_reference_data()
 
     events: Dict[str, Optional[Event]] = (
         parse_events(event_rdf) if event_rdf is not None else {}
     )
 
-    public_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
+    cpsvno_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
-    for catalog_record_uri in public_services_graph.subjects(
+    for catalog_record_uri in cpsvno_services_graph.subjects(
         predicate=RDF.type, object=dcat_uri("CatalogRecord")
     ):
-        primary_topic_uri = public_services_graph.value(
+        primary_topic_uri = cpsvno_services_graph.value(
             catalog_record_uri, FOAF.primaryTopic
         )
 
-        if primary_topic_uri and is_type(
-            cpsv_uri("PublicService"),
-            public_services_graph,
-            primary_topic_uri,
+        if primary_topic_uri and (
+            is_type(
+                cpsvno_uri("Service"),
+                cpsvno_services_graph,
+                primary_topic_uri,
+            )
+            or is_type(
+                cpsv_uri("PublicService"),
+                cpsvno_services_graph,
+                primary_topic_uri,
+            )
         ):
-            public_service = parse_public_service(
-                public_services_graph, catalog_record_uri, primary_topic_uri
+            cpsvno_service = parse_cpsvno_service(
+                cpsvno_services_graph, catalog_record_uri, primary_topic_uri
             )
 
             if (
-                public_service.isGroupedBy is not None
-                and len(public_service.isGroupedBy) > 0
+                cpsvno_service.isGroupedBy is not None
+                and len(cpsvno_service.isGroupedBy) > 0
             ):
                 associated_skos_concepts_uris: List[str] = []
                 reduce(
                     lambda output, current_event_uri: extend_with_associated_broader_types(
                         events, current_event_uri, output
                     ),
-                    public_service.isGroupedBy,
+                    cpsvno_service.isGroupedBy,
                     associated_skos_concepts_uris,
                 )
-                public_service.associatedBroaderTypesByEvents = (
+                cpsvno_service.associatedBroaderTypesByEvents = (
                     associated_skos_concepts_uris
                     if associated_skos_concepts_uris
                     and len(associated_skos_concepts_uris) > 0
                     else None
                 )
 
-            public_service = extend_public_service_with_reference_data(
-                public_service, reference_data
+            cpsvno_service = extend_cpsvno_service_with_reference_data(
+                cpsvno_service, reference_data
             )
 
-            public_services[primary_topic_uri.toPython()] = public_service
+            cpsvno_services[primary_topic_uri.toPython()] = cpsvno_service
 
-    return public_services
+    return cpsvno_services
 
 
 def parse_events(

@@ -4,6 +4,7 @@ from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Agent,
     Channel,
+    ContactPoint,
     Cost,
     CriterionRequirement,
     Evidence,
@@ -15,6 +16,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     Rule,
     SchemaContactPoint,
+    Service,
     SkosCode,
     SkosConcept,
 )
@@ -439,7 +441,7 @@ def test_complete_public_services(
                 ),
             ],
             requires=[
-                PublicService(
+                Service(
                     id="4",
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
                     identifier="4",
@@ -535,7 +537,7 @@ def test_complete_public_services(
                 ),
             ],
             relation=[
-                PublicService(
+                Service(
                     id="4",
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/2",
                     identifier="4",
@@ -768,6 +770,146 @@ def test_parse_multiple_public_services(
             ),
             type="publicservices",
         ),
+    }
+
+    assert parse_public_services(src) == expected
+
+
+def test_parse_cpsvno_services(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix adms:   <http://www.w3.org/ns/adms#> .
+        @prefix cccev:  <http://data.europa.eu/m8g/cccev/> .
+        @prefix cpsv:   <http://purl.org/vocab/cpsv#> .
+        @prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+        @prefix cv:     <http://data.europa.eu/m8g/> .
+        @prefix dcat:   <http://www.w3.org/ns/dcat#> .
+        @prefix dcatno: <https://data.norge.no/vocabulary/dcatno#> .
+        @prefix dct:    <http://purl.org/dc/terms/> .
+        @prefix eli:    <http://data.europa.eu/eli/ontology#> .
+        @prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+        @prefix locn:   <http://www.w3.org/ns/locn#> .
+        @prefix odrl:   <http://www.w3.org/ns/odrl/2/> .
+        @prefix org:    <http://www.w3.org/ns/org#> .
+        @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+        @prefix schema: <http://schema.org/> .
+        @prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+        @prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+        @prefix xkos:   <http://rdf-vocabulary.ddialliance.org/xkos#> .
+        @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl>
+                rdf:type        foaf:Agent ;
+                dct:identifier  "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl"^^xsd:anyURI ;
+                locn:address    [ rdf:type          locn:Address ;
+                                  locn:fullAddress  "Dummygata 1, Dummyby, Dummyland"@nb
+                                ] ;
+                foaf:name       "Dummy aktør"@nb , "Dummy aktør"@nn , "Dummy agent"@en .
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl>
+                rdf:type         cv:Output ;
+                dct:description  "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat."@nb ;
+                dct:identifier   "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl"^^xsd:anyURI ;
+                dct:language     <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> , <http://publications.europa.eu/resource/authority/language/NNO> ;
+                dct:title        "Dummy tjenesteresultat"@nb , "Dummy tjenesteresultat"@nn , "Dummy service result"@en .
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl>
+                rdf:type                  vcard:Organization ;
+                vcard:hasLanguage         <http://publications.europa.eu/resource/authority/language/NOB> , <http://publications.europa.eu/resource/authority/language/NNO> , <http://publications.europa.eu/resource/authority/language/ENG> ;
+                vcard:hasOganizationName  "Dummy Kontaktpunkt"@nb , "Dummy Kontaktpunkt"@nn , "Dummy Contact Point"@en ;
+                vcard:hasURL              <https://example.org/exHjemmeside> .
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl>
+                rdf:type           cpsvno:Service ;
+                cv:ownedBy         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl> ;
+                dct:description    "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå."@nb ;
+                dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl"^^xsd:anyURI ;
+                dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
+                dct:title          "Dummy service"@en , "Dummytjeneste"@nn , "Dummytjeneste"@nb ;
+                cpsv:produces      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl> ;
+                dcat:contactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> .
+
+        <https://www.staging.fellesdatakatalog.digdir.no/public-services/1fc38c3c-1c86-3161-a9a7-e443fd94d413>
+                rdf:type           dcat:CatalogRecord ;
+                dct:identifier     "1fc38c3c-1c86-3161-a9a7-e443fd94d413" ;
+                dct:issued         "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+                dct:modified       "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl> ."""
+
+    expected = {
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl": Service(
+            id="1fc38c3c-1c86-3161-a9a7-e443fd94d413",
+            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+            identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+            title={"en": "Dummy service", "nn": "Dummytjeneste", "nb": "Dummytjeneste"},
+            description={
+                "en": "The text is displayed in English.",
+                "nn": "Teksten blir vist på nynorsk.",
+                "nb": "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå.",
+            },
+            harvest=HarvestMetaData(
+                firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+            ),
+            ownedBy=[
+                Publisher(
+                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl",
+                    id="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl",
+                    name="Dummy aktør",
+                    prefLabel={
+                        "nb": "Dummy aktør",
+                        "nn": "Dummy aktør",
+                        "en": "Dummy agent",
+                    },
+                )
+            ],
+            contactPoint=[
+                ContactPoint(
+                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl",
+                    hasURL="https://example.org/exHjemmeside",
+                )
+            ],
+            language=[
+                SkosCode(
+                    uri="http://publications.europa.eu/resource/authority/language/ENG",
+                    code="ENG",
+                    prefLabel={
+                        "en": "English",
+                        "nb": "Engelsk",
+                        "nn": "Engelsk",
+                        "no": "Engelsk",
+                    },
+                ),
+                SkosCode(
+                    uri="http://publications.europa.eu/resource/authority/language/NOB",
+                    code="NOB",
+                    prefLabel={
+                        "en": "Norwegian Bokmål",
+                        "nb": "Norsk Bokmål",
+                        "nn": "Norsk Bokmål",
+                        "no": "Norsk Bokmål",
+                    },
+                ),
+            ],
+            produces=[
+                Output(
+                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl",
+                    identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl",
+                    name={
+                        "nb": "Dummy tjenesteresultat",
+                        "nn": "Dummy tjenesteresultat",
+                        "en": "Dummy service result",
+                    },
+                    description={
+                        "en": "The text is displayed in English.",
+                        "nn": "Teksten blir vist på nynorsk.",
+                        "nb": "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat.",
+                    },
+                )
+            ],
+            type="publicservices",
+        )
     }
 
     assert parse_public_services(src) == expected
