@@ -1,5 +1,5 @@
 from .agent import Agent
-from .businessEvent import BusinessEvent
+from .business_event import BusinessEvent
 from .catalog import Catalog
 from .channel import Channel
 from .concept import Concept
@@ -19,7 +19,7 @@ from .format import Format
 from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
 from .legal_resource import LegalResource
-from .lifeEvent import LifeEvent
+from .life_event import LifeEvent
 from .media_type import MediaTypeOrExtent, MediaTypeOrExtentType
 from .output import Output
 from .participation import Participation
