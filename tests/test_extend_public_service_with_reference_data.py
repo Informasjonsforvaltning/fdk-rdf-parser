@@ -1,5 +1,5 @@
 from fdk_rdf_parser.classes import PublicService, SkosCode
-from fdk_rdf_parser.reference_data import extend_public_service_with_reference_data
+from fdk_rdf_parser.reference_data import extend_cpsvno_service_with_reference_data
 from .testdata import public_service_reference_data
 
 
@@ -28,7 +28,7 @@ def test_extend_media_types() -> None:
     )
 
     assert (
-        extend_public_service_with_reference_data(
+        extend_cpsvno_service_with_reference_data(
             parsed_public_service, public_service_reference_data
         )
         == expected
