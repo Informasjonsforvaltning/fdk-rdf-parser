@@ -2,6 +2,7 @@ from .ns import (
     adms_uri,
     br_uri,
     cpsv_uri,
+    cpsvno_uri,
     cv_uri,
     dcat_ap_no_uri,
     dcat_api_uri,

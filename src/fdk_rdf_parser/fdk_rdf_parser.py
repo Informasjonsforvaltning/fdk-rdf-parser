@@ -189,6 +189,11 @@ def parse_events(
 
         if primary_topic_uri and (
             is_type(
+                cv_uri("Event"),
+                graph,
+                primary_topic_uri,
+            )
+            or is_type(
                 cv_uri("BusinessEvent"),
                 graph,
                 primary_topic_uri,

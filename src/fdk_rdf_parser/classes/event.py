@@ -18,3 +18,6 @@ class Event:
     hasCompetentAuthority: Optional[List[Publisher]] = None
     relation: Optional[List[str]] = None
     associatedBroaderTypes: Optional[List[str]] = None
+    mayInitiate: Optional[List[str]] = None
+    subject: Optional[List[str]] = None
+    distribution: Optional[List[str]] = None
