@@ -63,6 +63,7 @@ def test_parse_multiple_data_services(
         dcat:endpointDescription  <http://example.com/dette%20skal%20v%C3%A6re%20en%20lenke> , <http://example.com/Dette%20er%20en%20test> ;
         dcat:endpointURL          <http://kaffe.no> , <https://kaffemaskin.no> ;
         dcat:mediaType            <https://www.iana.org/assignments/media-types/text/turtle> ;
+        foaf:page                 <https://data4.norge.no>;
         dcat:servesDataset        <http://testutgiver.no/datasets/abc> .
 
 <https://testdirektoratet.no/dataservices/111>
@@ -187,6 +188,7 @@ def test_parse_multiple_data_services(
                     uri="https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS"
                 )
             ],
+            page=["https://data4.norge.no"],
             catalog=Catalog(
                 id="d07885d9-0925-339f-bb22-58c28dc30409",
                 uri="https://testutgiver.no/catalogs/123456789",

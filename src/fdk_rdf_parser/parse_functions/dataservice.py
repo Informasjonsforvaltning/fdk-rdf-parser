@@ -1,10 +1,11 @@
 from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     object_value,
+    value_list,
     value_set,
 )
 from .catalog import parse_catalog
@@ -38,6 +39,7 @@ def parse_data_service(
         servesDataset=value_set(
             data_services_graph, data_service_uri, dcat_uri("servesDataset")
         ),
+        page=value_list(data_services_graph, data_service_uri, FOAF.page),
         catalog=parse_catalog(data_services_graph, record_uri),
     )
 
