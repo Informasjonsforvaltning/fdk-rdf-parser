@@ -20,6 +20,7 @@ class DataService(PartialDcatResource):
     fdkFormat: Optional[List[MediaTypeOrExtent]] = None
     servesDataset: Optional[Set[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None
+    page: Optional[List[str]] = None
     catalog: Optional[Catalog] = None
     type: str = "dataservices"
 
