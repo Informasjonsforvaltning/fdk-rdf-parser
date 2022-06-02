@@ -8,7 +8,7 @@ from .cost import extract_costs
 from .cpsvno_service import parse_cpsvno_service
 from .criterion_requirement import extract_criterion_requirements
 from .dataservice import parse_data_service
-from .dataset import parse_dataset
+from .dataset import parse_dataset, parse_dataset_series_values
 from .dcat_resource import parse_dcat_resource
 from .dct_standard import extract_dct_standard_list
 from .distribution import extract_distributions

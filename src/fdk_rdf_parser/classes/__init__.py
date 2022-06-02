@@ -10,7 +10,7 @@ from .cpsvno_service import Service
 from .criterion_requirement import CriterionRequirement
 from .data_distribution_service import DataDistributionService
 from .dataservice import DataService
-from .dataset import Dataset, PartialDataset
+from .dataset import Dataset, DatasetSeries, PartialDataset
 from .dcat_resource import PartialDcatResource
 from .dct_standard import DctStandard
 from .distribution import Distribution
