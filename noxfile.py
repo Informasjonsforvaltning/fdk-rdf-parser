@@ -4,7 +4,7 @@ import nox
 from nox.sessions import Session
 import nox_poetry
 
-nox.options.sessions = "lint", "mypy", "safety", "tests"
+nox.options.sessions = "lint", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
 
