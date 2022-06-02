@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fdk-rdf-parser"
-version = "2.1.6"
+version = "2.1.7"
 description = ""
 authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 
@@ -12,7 +12,7 @@ requests = "^2.23.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
-coverage = {extras = ["toml"], version = "^6.3.3"}
+coverage = {extras = ["toml"], version = "^6.4"}
 pytest-cov = "^3.0.0"
 black = "^22.3.0"
 flake8 = "^4.0.1"
@@ -25,7 +25,7 @@ safety = "^1.8.7"
 pytest-mock = "^3.7.0"
 codecov = "^2.1.12"
 flake8-annotations = "^2.9.0"
-mypy = "^0.950"
+mypy = "^0.960"
 
 [tool.coverage.paths]
 source = ["src"]
