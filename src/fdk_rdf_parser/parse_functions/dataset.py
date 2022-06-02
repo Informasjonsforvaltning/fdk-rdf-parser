@@ -3,7 +3,7 @@ from typing import Dict, List
 from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
 
-from fdk_rdf_parser.classes import PartialDataset, SkosConcept
+from fdk_rdf_parser.classes import DatasetSeries, PartialDataset, SkosConcept
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     cpsv_uri,
@@ -107,6 +107,7 @@ def parse_dataset(
         isRelatedToTransportportal=extract_boolean(
             datasets_graph, dataset_uri, fdk_uri("isRelatedToTransportportal")
         ),
+        inSeries=object_value(datasets_graph, dataset_uri, dcat_uri("inSeries")),
     )
 
     dataset.add_values_from_dcat_resource(
@@ -117,6 +118,15 @@ def parse_dataset(
     )
 
     return dataset
+
+
+def parse_dataset_series_values(
+    datasets_graph: Graph, dataset_uri: URIRef
+) -> DatasetSeries:
+    return DatasetSeries(
+        last=object_value(datasets_graph, dataset_uri, dcat_uri("last")),
+        first=object_value(datasets_graph, dataset_uri, dcat_uri("first")),
+    )
 
 
 def extract_boolean(

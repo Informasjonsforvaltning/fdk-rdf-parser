@@ -49,6 +49,7 @@ class PartialDataset(PartialDcatResource):
     isOpenData: bool = False
     isAuthoritative: bool = False
     isRelatedToTransportportal: bool = False
+    inSeries: Optional[str] = None
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
@@ -120,3 +121,62 @@ class Dataset(PartialDataset):
         self.isOpenData = values.isOpenData
         self.isAuthoritative = values.isAuthoritative
         self.isRelatedToTransportportal = values.isRelatedToTransportportal
+        self.inSeries = values.inSeries
+
+
+@dataclass
+class DatasetSeries(Dataset):
+    first: Optional[str] = None
+    last: Optional[str] = None
+    specialized_type: str = "dataset_series"
+
+    def add_values_from_dataset(self: Any, values: Dataset) -> None:
+        self.id = values.id
+        self.identifier = values.identifier
+        self.title = values.title
+        self.publisher = values.publisher
+        self.description = values.description
+        self.descriptionFormatted = values.descriptionFormatted
+        self.uri = values.uri
+        self.accessRights = values.accessRights
+        self.theme = values.theme
+        self.keyword = values.keyword
+        self.contactPoint = values.contactPoint
+        self.dctType = values.dctType
+        self.issued = values.issued
+        self.modified = values.modified
+        self.landingPage = values.landingPage
+        self.language = values.language
+        self.harvest = values.harvest
+        self.accessRightsComment = values.accessRightsComment
+        self.distribution = values.distribution
+        self.sample = values.sample
+        self.source = values.source
+        self.objective = values.objective
+        self.page = values.page
+        self.admsIdentifier = values.admsIdentifier
+        self.temporal = values.temporal
+        self.subject = values.subject
+        self.spatial = values.spatial
+        self.provenance = values.provenance
+        self.accrualPeriodicity = values.accrualPeriodicity
+        self.hasAccuracyAnnotation = values.hasAccuracyAnnotation
+        self.hasCompletenessAnnotation = values.hasCompletenessAnnotation
+        self.hasCurrentnessAnnotation = values.hasCurrentnessAnnotation
+        self.hasAvailabilityAnnotation = values.hasAvailabilityAnnotation
+        self.hasRelevanceAnnotation = values.hasRelevanceAnnotation
+        self.legalBasisForRestriction = values.legalBasisForRestriction
+        self.legalBasisForProcessing = values.legalBasisForProcessing
+        self.legalBasisForAccess = values.legalBasisForAccess
+        self.conformsTo = values.conformsTo
+        self.informationModel = values.informationModel
+        self.references = values.references
+        self.qualifiedAttributions = values.qualifiedAttributions
+        self.catalog = values.catalog
+        self.isOpenData = values.isOpenData
+        self.isAuthoritative = values.isAuthoritative
+        self.isRelatedToTransportportal = values.isRelatedToTransportportal
+        self.inSeries = values.inSeries
+        self.publisher = values.publisher
+        self.losTheme = values.losTheme
+        self.type = values.type

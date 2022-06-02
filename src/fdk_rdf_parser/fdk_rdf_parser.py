@@ -18,6 +18,7 @@ from .parse_functions import (
     parse_cpsvno_service,
     parse_data_service,
     parse_dataset,
+    parse_dataset_series_values,
     parse_event,
     parse_information_model,
 )
@@ -80,8 +81,9 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
         predicate=RDF.type, object=dcat_uri("CatalogRecord")
     ):
         primary_topic_uri = datasets_graph.value(record_uri, FOAF.primaryTopic)
-        if primary_topic_uri is not None and is_type(
-            dcat_uri("Dataset"), datasets_graph, primary_topic_uri
+        if primary_topic_uri is not None and (
+            is_type(dcat_uri("Dataset"), datasets_graph, primary_topic_uri)
+            or is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri)
         ):
             partial_dataset = parse_dataset(
                 datasets_graph, record_uri, primary_topic_uri
@@ -91,7 +93,12 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
             dataset.add_values_from_partial(values=partial_dataset)
             dataset = extend_dataset_with_reference_data(dataset, reference_data)
 
-            datasets[primary_topic_uri.toPython()] = dataset
+            if is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri):
+                series = parse_dataset_series_values(datasets_graph, primary_topic_uri)
+                series.add_values_from_dataset(values=dataset)
+                datasets[primary_topic_uri.toPython()] = series
+            else:
+                datasets[primary_topic_uri.toPython()] = dataset
 
     return datasets
 
