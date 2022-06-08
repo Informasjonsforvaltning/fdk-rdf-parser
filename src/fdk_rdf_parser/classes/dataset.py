@@ -50,6 +50,7 @@ class PartialDataset(PartialDcatResource):
     isAuthoritative: bool = False
     isRelatedToTransportportal: bool = False
     inSeries: Optional[str] = None
+    prev: Optional[str] = None
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> None:
         self.identifier = values.identifier
@@ -122,6 +123,7 @@ class Dataset(PartialDataset):
         self.isAuthoritative = values.isAuthoritative
         self.isRelatedToTransportportal = values.isRelatedToTransportportal
         self.inSeries = values.inSeries
+        self.prev = values.prev
 
 
 @dataclass
@@ -177,6 +179,7 @@ class DatasetSeries(Dataset):
         self.isAuthoritative = values.isAuthoritative
         self.isRelatedToTransportportal = values.isRelatedToTransportportal
         self.inSeries = values.inSeries
+        self.prev = values.prev
         self.publisher = values.publisher
         self.losTheme = values.losTheme
         self.type = values.type

@@ -108,6 +108,7 @@ def parse_dataset(
             datasets_graph, dataset_uri, fdk_uri("isRelatedToTransportportal")
         ),
         inSeries=object_value(datasets_graph, dataset_uri, dcat_uri("inSeries")),
+        prev=object_value(datasets_graph, dataset_uri, dcat_uri("prev")),
     )
 
     dataset.add_values_from_dcat_resource(

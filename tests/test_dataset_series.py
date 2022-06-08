@@ -226,6 +226,7 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isAuthoritative=False,
             isRelatedToTransportportal=False,
             inSeries="http://example.org/budget",
+            prev="http://example.org/budget-2018",
             type="datasets",
         ),
         "http://example.org/budget-2020": Dataset(
@@ -261,6 +262,7 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isAuthoritative=False,
             isRelatedToTransportportal=False,
             inSeries="http://example.org/budget",
+            prev="http://example.org/budget-2019",
             type="datasets",
         ),
     }
