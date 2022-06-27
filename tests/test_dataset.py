@@ -27,15 +27,15 @@ from fdk_rdf_parser.parse_functions import parse_dataset
 def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
 
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-        @prefix fdk:   <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/master/src/main/resources/ontology/fdk.owl#> .
+        @prefix fdk:   <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/main/src/main/resources/ontology/fdk.owl#> .
 
         <https://testdirektoratet.no/model/dataset/0>
                 a                   dcat:Dataset ;
@@ -144,8 +144,8 @@ def test_adds_catalog_to_dataset(
 ) -> None:
 
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -603,8 +603,8 @@ def test_distribution_and_sample() -> None:
 
 def test_qualified_attributions() -> None:
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

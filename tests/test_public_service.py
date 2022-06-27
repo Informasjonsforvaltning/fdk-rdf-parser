@@ -26,8 +26,8 @@ def test_complete_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
-            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -215,8 +215,8 @@ def test_complete_public_services(
                     br:orgPath             "/STAT/987654321/123456789" ."""
 
     event_src = """
-            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+            @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+            @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
             @prefix cpsv: <http://purl.org/vocab/cpsv#> .
             @prefix dct: <http://purl.org/dc/terms/> .
@@ -565,8 +565,8 @@ def test_parse_multiple_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
-        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
         @prefix cpsv: <http://purl.org/vocab/cpsv#> .
         @prefix dct: <http://purl.org/dc/terms/> .

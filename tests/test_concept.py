@@ -17,8 +17,8 @@ from fdk_rdf_parser.parse_functions import parse_concept
 
 def test_parse_concepts(mock_reference_data_client: Mock) -> None:
     src = """
-@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#> .
-@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/org-type.ttl#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
 @prefix rov:   <http://www.w3.org/ns/regorg#> .
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
