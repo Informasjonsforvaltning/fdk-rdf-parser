@@ -51,13 +51,13 @@ def rov_uri(sub_string: str) -> URIRef:
 
 def br_uri(sub_string: str) -> URIRef:
     return URIRef(
-        f"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/master/src/main/resources/ontology/organization-catalog.owl#{sub_string}"  # noqa: B950
+        f"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#{sub_string}"  # noqa: B950
     )
 
 
 def fdk_uri(sub_string: str) -> URIRef:
     return URIRef(
-        f"https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/master/src/main/resources/ontology/fdk.owl#{sub_string}"  # noqa: B950
+        f"https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/main/src/main/resources/ontology/fdk.owl#{sub_string}"  # noqa: B950
     )
 
 
