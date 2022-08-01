@@ -1,0 +1,2140 @@
+{
+    "kommuner": [
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/0301",
+            "kommunenavn": "Oslo",
+            "kommunenavnNorsk": "Oslo",
+            "kommunenummer": "0301"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1101",
+            "kommunenavn": "Eigersund",
+            "kommunenavnNorsk": "Eigersund",
+            "kommunenummer": "1101"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1103",
+            "kommunenavn": "Stavanger",
+            "kommunenavnNorsk": "Stavanger",
+            "kommunenummer": "1103"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1106",
+            "kommunenavn": "Haugesund",
+            "kommunenavnNorsk": "Haugesund",
+            "kommunenummer": "1106"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1108",
+            "kommunenavn": "Sandnes",
+            "kommunenavnNorsk": "Sandnes",
+            "kommunenummer": "1108"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1111",
+            "kommunenavn": "Sokndal",
+            "kommunenavnNorsk": "Sokndal",
+            "kommunenummer": "1111"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1112",
+            "kommunenavn": "Lund",
+            "kommunenavnNorsk": "Lund",
+            "kommunenummer": "1112"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1114",
+            "kommunenavn": "Bjerkreim",
+            "kommunenavnNorsk": "Bjerkreim",
+            "kommunenummer": "1114"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1119",
+            "kommunenavn": "Hå",
+            "kommunenavnNorsk": "Hå",
+            "kommunenummer": "1119"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1120",
+            "kommunenavn": "Klepp",
+            "kommunenavnNorsk": "Klepp",
+            "kommunenummer": "1120"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1121",
+            "kommunenavn": "Time",
+            "kommunenavnNorsk": "Time",
+            "kommunenummer": "1121"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1122",
+            "kommunenavn": "Gjesdal",
+            "kommunenavnNorsk": "Gjesdal",
+            "kommunenummer": "1122"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1124",
+            "kommunenavn": "Sola",
+            "kommunenavnNorsk": "Sola",
+            "kommunenummer": "1124"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1127",
+            "kommunenavn": "Randaberg",
+            "kommunenavnNorsk": "Randaberg",
+            "kommunenummer": "1127"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1130",
+            "kommunenavn": "Strand",
+            "kommunenavnNorsk": "Strand",
+            "kommunenummer": "1130"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1133",
+            "kommunenavn": "Hjelmeland",
+            "kommunenavnNorsk": "Hjelmeland",
+            "kommunenummer": "1133"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1134",
+            "kommunenavn": "Suldal",
+            "kommunenavnNorsk": "Suldal",
+            "kommunenummer": "1134"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1135",
+            "kommunenavn": "Sauda",
+            "kommunenavnNorsk": "Sauda",
+            "kommunenummer": "1135"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1144",
+            "kommunenavn": "Kvitsøy",
+            "kommunenavnNorsk": "Kvitsøy",
+            "kommunenummer": "1144"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1145",
+            "kommunenavn": "Bokn",
+            "kommunenavnNorsk": "Bokn",
+            "kommunenummer": "1145"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1146",
+            "kommunenavn": "Tysvær",
+            "kommunenavnNorsk": "Tysvær",
+            "kommunenummer": "1146"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1149",
+            "kommunenavn": "Karmøy",
+            "kommunenavnNorsk": "Karmøy",
+            "kommunenummer": "1149"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1151",
+            "kommunenavn": "Utsira",
+            "kommunenavnNorsk": "Utsira",
+            "kommunenummer": "1151"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1160",
+            "kommunenavn": "Vindafjord",
+            "kommunenavnNorsk": "Vindafjord",
+            "kommunenummer": "1160"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1505",
+            "kommunenavn": "Kristiansund",
+            "kommunenavnNorsk": "Kristiansund",
+            "kommunenummer": "1505"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1506",
+            "kommunenavn": "Molde",
+            "kommunenavnNorsk": "Molde",
+            "kommunenummer": "1506"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1507",
+            "kommunenavn": "Ålesund",
+            "kommunenavnNorsk": "Ålesund",
+            "kommunenummer": "1507"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1511",
+            "kommunenavn": "Vanylven",
+            "kommunenavnNorsk": "Vanylven",
+            "kommunenummer": "1511"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1514",
+            "kommunenavn": "Sande",
+            "kommunenavnNorsk": "Sande",
+            "kommunenummer": "1514"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1515",
+            "kommunenavn": "Herøy",
+            "kommunenavnNorsk": "Herøy",
+            "kommunenummer": "1515"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1516",
+            "kommunenavn": "Ulstein",
+            "kommunenavnNorsk": "Ulstein",
+            "kommunenummer": "1516"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1517",
+            "kommunenavn": "Hareid",
+            "kommunenavnNorsk": "Hareid",
+            "kommunenummer": "1517"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1520",
+            "kommunenavn": "Ørsta",
+            "kommunenavnNorsk": "Ørsta",
+            "kommunenummer": "1520"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1525",
+            "kommunenavn": "Stranda",
+            "kommunenavnNorsk": "Stranda",
+            "kommunenummer": "1525"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1528",
+            "kommunenavn": "Sykkylven",
+            "kommunenavnNorsk": "Sykkylven",
+            "kommunenummer": "1528"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1531",
+            "kommunenavn": "Sula",
+            "kommunenavnNorsk": "Sula",
+            "kommunenummer": "1531"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1532",
+            "kommunenavn": "Giske",
+            "kommunenavnNorsk": "Giske",
+            "kommunenummer": "1532"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1535",
+            "kommunenavn": "Vestnes",
+            "kommunenavnNorsk": "Vestnes",
+            "kommunenummer": "1535"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1539",
+            "kommunenavn": "Rauma",
+            "kommunenavnNorsk": "Rauma",
+            "kommunenummer": "1539"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1547",
+            "kommunenavn": "Aukra",
+            "kommunenavnNorsk": "Aukra",
+            "kommunenummer": "1547"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1554",
+            "kommunenavn": "Averøy",
+            "kommunenavnNorsk": "Averøy",
+            "kommunenummer": "1554"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1557",
+            "kommunenavn": "Gjemnes",
+            "kommunenavnNorsk": "Gjemnes",
+            "kommunenummer": "1557"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1560",
+            "kommunenavn": "Tingvoll",
+            "kommunenavnNorsk": "Tingvoll",
+            "kommunenummer": "1560"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1563",
+            "kommunenavn": "Sunndal",
+            "kommunenavnNorsk": "Sunndal",
+            "kommunenummer": "1563"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1566",
+            "kommunenavn": "Surnadal",
+            "kommunenavnNorsk": "Surnadal",
+            "kommunenummer": "1566"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1573",
+            "kommunenavn": "Smøla",
+            "kommunenavnNorsk": "Smøla",
+            "kommunenummer": "1573"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1576",
+            "kommunenavn": "Aure",
+            "kommunenavnNorsk": "Aure",
+            "kommunenummer": "1576"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1577",
+            "kommunenavn": "Volda",
+            "kommunenavnNorsk": "Volda",
+            "kommunenummer": "1577"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1578",
+            "kommunenavn": "Fjord",
+            "kommunenavnNorsk": "Fjord",
+            "kommunenummer": "1578"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1579",
+            "kommunenavn": "Hustadvika",
+            "kommunenavnNorsk": "Hustadvika",
+            "kommunenummer": "1579"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1804",
+            "kommunenavn": "Bodø",
+            "kommunenavnNorsk": "Bodø",
+            "kommunenummer": "1804"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1806",
+            "kommunenavn": "Narvik",
+            "kommunenavnNorsk": "Narvik",
+            "kommunenummer": "1806"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1811",
+            "kommunenavn": "Bindal",
+            "kommunenavnNorsk": "Bindal",
+            "kommunenummer": "1811"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1812",
+            "kommunenavn": "Sømna",
+            "kommunenavnNorsk": "Sømna",
+            "kommunenummer": "1812"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1813",
+            "kommunenavn": "Brønnøy",
+            "kommunenavnNorsk": "Brønnøy",
+            "kommunenummer": "1813"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1815",
+            "kommunenavn": "Vega",
+            "kommunenavnNorsk": "Vega",
+            "kommunenummer": "1815"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1816",
+            "kommunenavn": "Vevelstad",
+            "kommunenavnNorsk": "Vevelstad",
+            "kommunenummer": "1816"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1818",
+            "kommunenavn": "Herøy",
+            "kommunenavnNorsk": "Herøy",
+            "kommunenummer": "1818"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1820",
+            "kommunenavn": "Alstahaug",
+            "kommunenavnNorsk": "Alstahaug",
+            "kommunenummer": "1820"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1822",
+            "kommunenavn": "Leirfjord",
+            "kommunenavnNorsk": "Leirfjord",
+            "kommunenummer": "1822"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1824",
+            "kommunenavn": "Vefsn",
+            "kommunenavnNorsk": "Vefsn",
+            "kommunenummer": "1824"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1825",
+            "kommunenavn": "Grane",
+            "kommunenavnNorsk": "Grane",
+            "kommunenummer": "1825"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1826",
+            "kommunenavn": "Aarborte",
+            "kommunenavnNorsk": "Hattfjelldal",
+            "kommunenummer": "1826"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1827",
+            "kommunenavn": "Dønna",
+            "kommunenavnNorsk": "Dønna",
+            "kommunenummer": "1827"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1828",
+            "kommunenavn": "Nesna",
+            "kommunenavnNorsk": "Nesna",
+            "kommunenummer": "1828"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1832",
+            "kommunenavn": "Hemnes",
+            "kommunenavnNorsk": "Hemnes",
+            "kommunenummer": "1832"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1833",
+            "kommunenavn": "Rana",
+            "kommunenavnNorsk": "Rana",
+            "kommunenummer": "1833"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1834",
+            "kommunenavn": "Lurøy",
+            "kommunenavnNorsk": "Lurøy",
+            "kommunenummer": "1834"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1835",
+            "kommunenavn": "Træna",
+            "kommunenavnNorsk": "Træna",
+            "kommunenummer": "1835"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1836",
+            "kommunenavn": "Rødøy",
+            "kommunenavnNorsk": "Rødøy",
+            "kommunenummer": "1836"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1837",
+            "kommunenavn": "Meløy",
+            "kommunenavnNorsk": "Meløy",
+            "kommunenummer": "1837"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1838",
+            "kommunenavn": "Gildeskål",
+            "kommunenavnNorsk": "Gildeskål",
+            "kommunenummer": "1838"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1839",
+            "kommunenavn": "Beiarn",
+            "kommunenavnNorsk": "Beiarn",
+            "kommunenummer": "1839"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1840",
+            "kommunenavn": "Saltdal",
+            "kommunenavnNorsk": "Saltdal",
+            "kommunenummer": "1840"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1841",
+            "kommunenavn": "Fauske",
+            "kommunenavnNorsk": "Fauske",
+            "kommunenummer": "1841"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1845",
+            "kommunenavn": "Sørfold",
+            "kommunenavnNorsk": "Sørfold",
+            "kommunenummer": "1845"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1848",
+            "kommunenavn": "Steigen",
+            "kommunenavnNorsk": "Steigen",
+            "kommunenummer": "1848"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1851",
+            "kommunenavn": "Lødingen",
+            "kommunenavnNorsk": "Lødingen",
+            "kommunenummer": "1851"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1853",
+            "kommunenavn": "Evenes",
+            "kommunenavnNorsk": "Evenes",
+            "kommunenummer": "1853"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1856",
+            "kommunenavn": "Røst",
+            "kommunenavnNorsk": "Røst",
+            "kommunenummer": "1856"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1857",
+            "kommunenavn": "Værøy",
+            "kommunenavnNorsk": "Værøy",
+            "kommunenummer": "1857"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1859",
+            "kommunenavn": "Flakstad",
+            "kommunenavnNorsk": "Flakstad",
+            "kommunenummer": "1859"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1860",
+            "kommunenavn": "Vestvågøy",
+            "kommunenavnNorsk": "Vestvågøy",
+            "kommunenummer": "1860"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1865",
+            "kommunenavn": "Vågan",
+            "kommunenavnNorsk": "Vågan",
+            "kommunenummer": "1865"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1866",
+            "kommunenavn": "Hadsel",
+            "kommunenavnNorsk": "Hadsel",
+            "kommunenummer": "1866"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1867",
+            "kommunenavn": "Bø",
+            "kommunenavnNorsk": "Bø",
+            "kommunenummer": "1867"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1868",
+            "kommunenavn": "Øksnes",
+            "kommunenavnNorsk": "Øksnes",
+            "kommunenummer": "1868"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1870",
+            "kommunenavn": "Sortland",
+            "kommunenavnNorsk": "Sortland",
+            "kommunenummer": "1870"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1871",
+            "kommunenavn": "Andøy",
+            "kommunenavnNorsk": "Andøy",
+            "kommunenummer": "1871"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1874",
+            "kommunenavn": "Moskenes",
+            "kommunenavnNorsk": "Moskenes",
+            "kommunenummer": "1874"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/1875",
+            "kommunenavn": "Hábmer",
+            "kommunenavnNorsk": "Hamarøy",
+            "kommunenummer": "1875"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3001",
+            "kommunenavn": "Halden",
+            "kommunenavnNorsk": "Halden",
+            "kommunenummer": "3001"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3002",
+            "kommunenavn": "Moss",
+            "kommunenavnNorsk": "Moss",
+            "kommunenummer": "3002"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3003",
+            "kommunenavn": "Sarpsborg",
+            "kommunenavnNorsk": "Sarpsborg",
+            "kommunenummer": "3003"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3004",
+            "kommunenavn": "Fredrikstad",
+            "kommunenavnNorsk": "Fredrikstad",
+            "kommunenummer": "3004"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3005",
+            "kommunenavn": "Drammen",
+            "kommunenavnNorsk": "Drammen",
+            "kommunenummer": "3005"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3006",
+            "kommunenavn": "Kongsberg",
+            "kommunenavnNorsk": "Kongsberg",
+            "kommunenummer": "3006"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3007",
+            "kommunenavn": "Ringerike",
+            "kommunenavnNorsk": "Ringerike",
+            "kommunenummer": "3007"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3011",
+            "kommunenavn": "Hvaler",
+            "kommunenavnNorsk": "Hvaler",
+            "kommunenummer": "3011"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3012",
+            "kommunenavn": "Aremark",
+            "kommunenavnNorsk": "Aremark",
+            "kommunenummer": "3012"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3013",
+            "kommunenavn": "Marker",
+            "kommunenavnNorsk": "Marker",
+            "kommunenummer": "3013"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3014",
+            "kommunenavn": "Indre Østfold",
+            "kommunenavnNorsk": "Indre Østfold",
+            "kommunenummer": "3014"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3015",
+            "kommunenavn": "Skiptvet",
+            "kommunenavnNorsk": "Skiptvet",
+            "kommunenummer": "3015"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3016",
+            "kommunenavn": "Rakkestad",
+            "kommunenavnNorsk": "Rakkestad",
+            "kommunenummer": "3016"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3017",
+            "kommunenavn": "Råde",
+            "kommunenavnNorsk": "Råde",
+            "kommunenummer": "3017"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3018",
+            "kommunenavn": "Våler",
+            "kommunenavnNorsk": "Våler",
+            "kommunenummer": "3018"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3019",
+            "kommunenavn": "Vestby",
+            "kommunenavnNorsk": "Vestby",
+            "kommunenummer": "3019"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3020",
+            "kommunenavn": "Nordre Follo",
+            "kommunenavnNorsk": "Nordre Follo",
+            "kommunenummer": "3020"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3021",
+            "kommunenavn": "Ås",
+            "kommunenavnNorsk": "Ås",
+            "kommunenummer": "3021"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3022",
+            "kommunenavn": "Frogn",
+            "kommunenavnNorsk": "Frogn",
+            "kommunenummer": "3022"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3023",
+            "kommunenavn": "Nesodden",
+            "kommunenavnNorsk": "Nesodden",
+            "kommunenummer": "3023"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3024",
+            "kommunenavn": "Bærum",
+            "kommunenavnNorsk": "Bærum",
+            "kommunenummer": "3024"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3025",
+            "kommunenavn": "Asker",
+            "kommunenavnNorsk": "Asker",
+            "kommunenummer": "3025"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3026",
+            "kommunenavn": "Aurskog-Høland",
+            "kommunenavnNorsk": "Aurskog-Høland",
+            "kommunenummer": "3026"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3027",
+            "kommunenavn": "Rælingen",
+            "kommunenavnNorsk": "Rælingen",
+            "kommunenummer": "3027"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3028",
+            "kommunenavn": "Enebakk",
+            "kommunenavnNorsk": "Enebakk",
+            "kommunenummer": "3028"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3029",
+            "kommunenavn": "Lørenskog",
+            "kommunenavnNorsk": "Lørenskog",
+            "kommunenummer": "3029"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3030",
+            "kommunenavn": "Lillestrøm",
+            "kommunenavnNorsk": "Lillestrøm",
+            "kommunenummer": "3030"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3031",
+            "kommunenavn": "Nittedal",
+            "kommunenavnNorsk": "Nittedal",
+            "kommunenummer": "3031"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3032",
+            "kommunenavn": "Gjerdrum",
+            "kommunenavnNorsk": "Gjerdrum",
+            "kommunenummer": "3032"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3033",
+            "kommunenavn": "Ullensaker",
+            "kommunenavnNorsk": "Ullensaker",
+            "kommunenummer": "3033"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3034",
+            "kommunenavn": "Nes",
+            "kommunenavnNorsk": "Nes",
+            "kommunenummer": "3034"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3035",
+            "kommunenavn": "Eidsvoll",
+            "kommunenavnNorsk": "Eidsvoll",
+            "kommunenummer": "3035"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3036",
+            "kommunenavn": "Nannestad",
+            "kommunenavnNorsk": "Nannestad",
+            "kommunenummer": "3036"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3037",
+            "kommunenavn": "Hurdal",
+            "kommunenavnNorsk": "Hurdal",
+            "kommunenummer": "3037"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3038",
+            "kommunenavn": "Hole",
+            "kommunenavnNorsk": "Hole",
+            "kommunenummer": "3038"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3039",
+            "kommunenavn": "Flå",
+            "kommunenavnNorsk": "Flå",
+            "kommunenummer": "3039"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3040",
+            "kommunenavn": "Nesbyen",
+            "kommunenavnNorsk": "Nesbyen",
+            "kommunenummer": "3040"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3041",
+            "kommunenavn": "Gol",
+            "kommunenavnNorsk": "Gol",
+            "kommunenummer": "3041"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3042",
+            "kommunenavn": "Hemsedal",
+            "kommunenavnNorsk": "Hemsedal",
+            "kommunenummer": "3042"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3043",
+            "kommunenavn": "Ål",
+            "kommunenavnNorsk": "Ål",
+            "kommunenummer": "3043"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3044",
+            "kommunenavn": "Hol",
+            "kommunenavnNorsk": "Hol",
+            "kommunenummer": "3044"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3045",
+            "kommunenavn": "Sigdal",
+            "kommunenavnNorsk": "Sigdal",
+            "kommunenummer": "3045"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3046",
+            "kommunenavn": "Krødsherad",
+            "kommunenavnNorsk": "Krødsherad",
+            "kommunenummer": "3046"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3047",
+            "kommunenavn": "Modum",
+            "kommunenavnNorsk": "Modum",
+            "kommunenummer": "3047"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3048",
+            "kommunenavn": "Øvre Eiker",
+            "kommunenavnNorsk": "Øvre Eiker",
+            "kommunenummer": "3048"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3049",
+            "kommunenavn": "Lier",
+            "kommunenavnNorsk": "Lier",
+            "kommunenummer": "3049"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3050",
+            "kommunenavn": "Flesberg",
+            "kommunenavnNorsk": "Flesberg",
+            "kommunenummer": "3050"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3051",
+            "kommunenavn": "Rollag",
+            "kommunenavnNorsk": "Rollag",
+            "kommunenummer": "3051"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3052",
+            "kommunenavn": "Nore og Uvdal",
+            "kommunenavnNorsk": "Nore og Uvdal",
+            "kommunenummer": "3052"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3053",
+            "kommunenavn": "Jevnaker",
+            "kommunenavnNorsk": "Jevnaker",
+            "kommunenummer": "3053"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3054",
+            "kommunenavn": "Lunner",
+            "kommunenavnNorsk": "Lunner",
+            "kommunenummer": "3054"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3401",
+            "kommunenavn": "Kongsvinger",
+            "kommunenavnNorsk": "Kongsvinger",
+            "kommunenummer": "3401"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3403",
+            "kommunenavn": "Hamar",
+            "kommunenavnNorsk": "Hamar",
+            "kommunenummer": "3403"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3405",
+            "kommunenavn": "Lillehammer",
+            "kommunenavnNorsk": "Lillehammer",
+            "kommunenummer": "3405"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3407",
+            "kommunenavn": "Gjøvik",
+            "kommunenavnNorsk": "Gjøvik",
+            "kommunenummer": "3407"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3411",
+            "kommunenavn": "Ringsaker",
+            "kommunenavnNorsk": "Ringsaker",
+            "kommunenummer": "3411"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3412",
+            "kommunenavn": "Løten",
+            "kommunenavnNorsk": "Løten",
+            "kommunenummer": "3412"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3413",
+            "kommunenavn": "Stange",
+            "kommunenavnNorsk": "Stange",
+            "kommunenummer": "3413"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3414",
+            "kommunenavn": "Nord-Odal",
+            "kommunenavnNorsk": "Nord-Odal",
+            "kommunenummer": "3414"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3415",
+            "kommunenavn": "Sør-Odal",
+            "kommunenavnNorsk": "Sør-Odal",
+            "kommunenummer": "3415"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3416",
+            "kommunenavn": "Eidskog",
+            "kommunenavnNorsk": "Eidskog",
+            "kommunenummer": "3416"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3417",
+            "kommunenavn": "Grue",
+            "kommunenavnNorsk": "Grue",
+            "kommunenummer": "3417"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3418",
+            "kommunenavn": "Åsnes",
+            "kommunenavnNorsk": "Åsnes",
+            "kommunenummer": "3418"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3419",
+            "kommunenavn": "Våler",
+            "kommunenavnNorsk": "Våler",
+            "kommunenummer": "3419"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3420",
+            "kommunenavn": "Elverum",
+            "kommunenavnNorsk": "Elverum",
+            "kommunenummer": "3420"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3421",
+            "kommunenavn": "Trysil",
+            "kommunenavnNorsk": "Trysil",
+            "kommunenummer": "3421"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3422",
+            "kommunenavn": "Åmot",
+            "kommunenavnNorsk": "Åmot",
+            "kommunenummer": "3422"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3423",
+            "kommunenavn": "Stor-Elvdal",
+            "kommunenavnNorsk": "Stor-Elvdal",
+            "kommunenummer": "3423"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3424",
+            "kommunenavn": "Rendalen",
+            "kommunenavnNorsk": "Rendalen",
+            "kommunenummer": "3424"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3425",
+            "kommunenavn": "Engerdal",
+            "kommunenavnNorsk": "Engerdal",
+            "kommunenummer": "3425"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3426",
+            "kommunenavn": "Tolga",
+            "kommunenavnNorsk": "Tolga",
+            "kommunenummer": "3426"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3427",
+            "kommunenavn": "Tynset",
+            "kommunenavnNorsk": "Tynset",
+            "kommunenummer": "3427"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3428",
+            "kommunenavn": "Alvdal",
+            "kommunenavnNorsk": "Alvdal",
+            "kommunenummer": "3428"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3429",
+            "kommunenavn": "Folldal",
+            "kommunenavnNorsk": "Folldal",
+            "kommunenummer": "3429"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3430",
+            "kommunenavn": "Os",
+            "kommunenavnNorsk": "Os",
+            "kommunenummer": "3430"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3431",
+            "kommunenavn": "Dovre",
+            "kommunenavnNorsk": "Dovre",
+            "kommunenummer": "3431"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3432",
+            "kommunenavn": "Lesja",
+            "kommunenavnNorsk": "Lesja",
+            "kommunenummer": "3432"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3433",
+            "kommunenavn": "Skjåk",
+            "kommunenavnNorsk": "Skjåk",
+            "kommunenummer": "3433"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3434",
+            "kommunenavn": "Lom",
+            "kommunenavnNorsk": "Lom",
+            "kommunenummer": "3434"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3435",
+            "kommunenavn": "Vågå",
+            "kommunenavnNorsk": "Vågå",
+            "kommunenummer": "3435"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3436",
+            "kommunenavn": "Nord-Fron",
+            "kommunenavnNorsk": "Nord-Fron",
+            "kommunenummer": "3436"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3437",
+            "kommunenavn": "Sel",
+            "kommunenavnNorsk": "Sel",
+            "kommunenummer": "3437"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3438",
+            "kommunenavn": "Sør-Fron",
+            "kommunenavnNorsk": "Sør-Fron",
+            "kommunenummer": "3438"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3439",
+            "kommunenavn": "Ringebu",
+            "kommunenavnNorsk": "Ringebu",
+            "kommunenummer": "3439"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3440",
+            "kommunenavn": "Øyer",
+            "kommunenavnNorsk": "Øyer",
+            "kommunenummer": "3440"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3441",
+            "kommunenavn": "Gausdal",
+            "kommunenavnNorsk": "Gausdal",
+            "kommunenummer": "3441"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3442",
+            "kommunenavn": "Østre Toten",
+            "kommunenavnNorsk": "Østre Toten",
+            "kommunenummer": "3442"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3443",
+            "kommunenavn": "Vestre Toten",
+            "kommunenavnNorsk": "Vestre Toten",
+            "kommunenummer": "3443"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3446",
+            "kommunenavn": "Gran",
+            "kommunenavnNorsk": "Gran",
+            "kommunenummer": "3446"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3447",
+            "kommunenavn": "Søndre Land",
+            "kommunenavnNorsk": "Søndre Land",
+            "kommunenummer": "3447"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3448",
+            "kommunenavn": "Nordre Land",
+            "kommunenavnNorsk": "Nordre Land",
+            "kommunenummer": "3448"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3449",
+            "kommunenavn": "Sør-Aurdal",
+            "kommunenavnNorsk": "Sør-Aurdal",
+            "kommunenummer": "3449"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3450",
+            "kommunenavn": "Etnedal",
+            "kommunenavnNorsk": "Etnedal",
+            "kommunenummer": "3450"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3451",
+            "kommunenavn": "Nord-Aurdal",
+            "kommunenavnNorsk": "Nord-Aurdal",
+            "kommunenummer": "3451"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3452",
+            "kommunenavn": "Vestre Slidre",
+            "kommunenavnNorsk": "Vestre Slidre",
+            "kommunenummer": "3452"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3453",
+            "kommunenavn": "Øystre Slidre",
+            "kommunenavnNorsk": "Øystre Slidre",
+            "kommunenummer": "3453"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3454",
+            "kommunenavn": "Vang",
+            "kommunenavnNorsk": "Vang",
+            "kommunenummer": "3454"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3801",
+            "kommunenavn": "Horten",
+            "kommunenavnNorsk": "Horten",
+            "kommunenummer": "3801"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3802",
+            "kommunenavn": "Holmestrand",
+            "kommunenavnNorsk": "Holmestrand",
+            "kommunenummer": "3802"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3803",
+            "kommunenavn": "Tønsberg",
+            "kommunenavnNorsk": "Tønsberg",
+            "kommunenummer": "3803"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3804",
+            "kommunenavn": "Sandefjord",
+            "kommunenavnNorsk": "Sandefjord",
+            "kommunenummer": "3804"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3805",
+            "kommunenavn": "Larvik",
+            "kommunenavnNorsk": "Larvik",
+            "kommunenummer": "3805"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3806",
+            "kommunenavn": "Porsgrunn",
+            "kommunenavnNorsk": "Porsgrunn",
+            "kommunenummer": "3806"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3807",
+            "kommunenavn": "Skien",
+            "kommunenavnNorsk": "Skien",
+            "kommunenummer": "3807"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3808",
+            "kommunenavn": "Notodden",
+            "kommunenavnNorsk": "Notodden",
+            "kommunenummer": "3808"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3811",
+            "kommunenavn": "Færder",
+            "kommunenavnNorsk": "Færder",
+            "kommunenummer": "3811"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3812",
+            "kommunenavn": "Siljan",
+            "kommunenavnNorsk": "Siljan",
+            "kommunenummer": "3812"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3813",
+            "kommunenavn": "Bamble",
+            "kommunenavnNorsk": "Bamble",
+            "kommunenummer": "3813"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3814",
+            "kommunenavn": "Kragerø",
+            "kommunenavnNorsk": "Kragerø",
+            "kommunenummer": "3814"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3815",
+            "kommunenavn": "Drangedal",
+            "kommunenavnNorsk": "Drangedal",
+            "kommunenummer": "3815"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3816",
+            "kommunenavn": "Nome",
+            "kommunenavnNorsk": "Nome",
+            "kommunenummer": "3816"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3817",
+            "kommunenavn": "Midt-Telemark",
+            "kommunenavnNorsk": "Midt-Telemark",
+            "kommunenummer": "3817"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3818",
+            "kommunenavn": "Tinn",
+            "kommunenavnNorsk": "Tinn",
+            "kommunenummer": "3818"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3819",
+            "kommunenavn": "Hjartdal",
+            "kommunenavnNorsk": "Hjartdal",
+            "kommunenummer": "3819"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3820",
+            "kommunenavn": "Seljord",
+            "kommunenavnNorsk": "Seljord",
+            "kommunenummer": "3820"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3821",
+            "kommunenavn": "Kviteseid",
+            "kommunenavnNorsk": "Kviteseid",
+            "kommunenummer": "3821"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3822",
+            "kommunenavn": "Nissedal",
+            "kommunenavnNorsk": "Nissedal",
+            "kommunenummer": "3822"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3823",
+            "kommunenavn": "Fyresdal",
+            "kommunenavnNorsk": "Fyresdal",
+            "kommunenummer": "3823"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3824",
+            "kommunenavn": "Tokke",
+            "kommunenavnNorsk": "Tokke",
+            "kommunenummer": "3824"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/3825",
+            "kommunenavn": "Vinje",
+            "kommunenavnNorsk": "Vinje",
+            "kommunenummer": "3825"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4201",
+            "kommunenavn": "Risør",
+            "kommunenavnNorsk": "Risør",
+            "kommunenummer": "4201"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4202",
+            "kommunenavn": "Grimstad",
+            "kommunenavnNorsk": "Grimstad",
+            "kommunenummer": "4202"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4203",
+            "kommunenavn": "Arendal",
+            "kommunenavnNorsk": "Arendal",
+            "kommunenummer": "4203"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4204",
+            "kommunenavn": "Kristiansand",
+            "kommunenavnNorsk": "Kristiansand",
+            "kommunenummer": "4204"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4205",
+            "kommunenavn": "Lindesnes",
+            "kommunenavnNorsk": "Lindesnes",
+            "kommunenummer": "4205"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4206",
+            "kommunenavn": "Farsund",
+            "kommunenavnNorsk": "Farsund",
+            "kommunenummer": "4206"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4207",
+            "kommunenavn": "Flekkefjord",
+            "kommunenavnNorsk": "Flekkefjord",
+            "kommunenummer": "4207"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4211",
+            "kommunenavn": "Gjerstad",
+            "kommunenavnNorsk": "Gjerstad",
+            "kommunenummer": "4211"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4212",
+            "kommunenavn": "Vegårshei",
+            "kommunenavnNorsk": "Vegårshei",
+            "kommunenummer": "4212"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4213",
+            "kommunenavn": "Tvedestrand",
+            "kommunenavnNorsk": "Tvedestrand",
+            "kommunenummer": "4213"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4214",
+            "kommunenavn": "Froland",
+            "kommunenavnNorsk": "Froland",
+            "kommunenummer": "4214"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4215",
+            "kommunenavn": "Lillesand",
+            "kommunenavnNorsk": "Lillesand",
+            "kommunenummer": "4215"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4216",
+            "kommunenavn": "Birkenes",
+            "kommunenavnNorsk": "Birkenes",
+            "kommunenummer": "4216"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4217",
+            "kommunenavn": "Åmli",
+            "kommunenavnNorsk": "Åmli",
+            "kommunenummer": "4217"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4218",
+            "kommunenavn": "Iveland",
+            "kommunenavnNorsk": "Iveland",
+            "kommunenummer": "4218"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4219",
+            "kommunenavn": "Evje og Hornnes",
+            "kommunenavnNorsk": "Evje og Hornnes",
+            "kommunenummer": "4219"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4220",
+            "kommunenavn": "Bygland",
+            "kommunenavnNorsk": "Bygland",
+            "kommunenummer": "4220"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4221",
+            "kommunenavn": "Valle",
+            "kommunenavnNorsk": "Valle",
+            "kommunenummer": "4221"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4222",
+            "kommunenavn": "Bykle",
+            "kommunenavnNorsk": "Bykle",
+            "kommunenummer": "4222"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4223",
+            "kommunenavn": "Vennesla",
+            "kommunenavnNorsk": "Vennesla",
+            "kommunenummer": "4223"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4224",
+            "kommunenavn": "Åseral",
+            "kommunenavnNorsk": "Åseral",
+            "kommunenummer": "4224"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4225",
+            "kommunenavn": "Lyngdal",
+            "kommunenavnNorsk": "Lyngdal",
+            "kommunenummer": "4225"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4226",
+            "kommunenavn": "Hægebostad",
+            "kommunenavnNorsk": "Hægebostad",
+            "kommunenummer": "4226"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4227",
+            "kommunenavn": "Kvinesdal",
+            "kommunenavnNorsk": "Kvinesdal",
+            "kommunenummer": "4227"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4228",
+            "kommunenavn": "Sirdal",
+            "kommunenavnNorsk": "Sirdal",
+            "kommunenummer": "4228"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4601",
+            "kommunenavn": "Bergen",
+            "kommunenavnNorsk": "Bergen",
+            "kommunenummer": "4601"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4602",
+            "kommunenavn": "Kinn",
+            "kommunenavnNorsk": "Kinn",
+            "kommunenummer": "4602"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4611",
+            "kommunenavn": "Etne",
+            "kommunenavnNorsk": "Etne",
+            "kommunenummer": "4611"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4612",
+            "kommunenavn": "Sveio",
+            "kommunenavnNorsk": "Sveio",
+            "kommunenummer": "4612"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4613",
+            "kommunenavn": "Bømlo",
+            "kommunenavnNorsk": "Bømlo",
+            "kommunenummer": "4613"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4614",
+            "kommunenavn": "Stord",
+            "kommunenavnNorsk": "Stord",
+            "kommunenummer": "4614"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4615",
+            "kommunenavn": "Fitjar",
+            "kommunenavnNorsk": "Fitjar",
+            "kommunenummer": "4615"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4616",
+            "kommunenavn": "Tysnes",
+            "kommunenavnNorsk": "Tysnes",
+            "kommunenummer": "4616"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4617",
+            "kommunenavn": "Kvinnherad",
+            "kommunenavnNorsk": "Kvinnherad",
+            "kommunenummer": "4617"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4618",
+            "kommunenavn": "Ullensvang",
+            "kommunenavnNorsk": "Ullensvang",
+            "kommunenummer": "4618"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4619",
+            "kommunenavn": "Eidfjord",
+            "kommunenavnNorsk": "Eidfjord",
+            "kommunenummer": "4619"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4620",
+            "kommunenavn": "Ulvik",
+            "kommunenavnNorsk": "Ulvik",
+            "kommunenummer": "4620"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4621",
+            "kommunenavn": "Voss",
+            "kommunenavnNorsk": "Voss",
+            "kommunenummer": "4621"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4622",
+            "kommunenavn": "Kvam",
+            "kommunenavnNorsk": "Kvam",
+            "kommunenummer": "4622"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4623",
+            "kommunenavn": "Samnanger",
+            "kommunenavnNorsk": "Samnanger",
+            "kommunenummer": "4623"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4624",
+            "kommunenavn": "Bjørnafjorden",
+            "kommunenavnNorsk": "Bjørnafjorden",
+            "kommunenummer": "4624"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4625",
+            "kommunenavn": "Austevoll",
+            "kommunenavnNorsk": "Austevoll",
+            "kommunenummer": "4625"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4626",
+            "kommunenavn": "Øygarden",
+            "kommunenavnNorsk": "Øygarden",
+            "kommunenummer": "4626"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4627",
+            "kommunenavn": "Askøy",
+            "kommunenavnNorsk": "Askøy",
+            "kommunenummer": "4627"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4628",
+            "kommunenavn": "Vaksdal",
+            "kommunenavnNorsk": "Vaksdal",
+            "kommunenummer": "4628"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4629",
+            "kommunenavn": "Modalen",
+            "kommunenavnNorsk": "Modalen",
+            "kommunenummer": "4629"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4630",
+            "kommunenavn": "Osterøy",
+            "kommunenavnNorsk": "Osterøy",
+            "kommunenummer": "4630"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4631",
+            "kommunenavn": "Alver",
+            "kommunenavnNorsk": "Alver",
+            "kommunenummer": "4631"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4632",
+            "kommunenavn": "Austrheim",
+            "kommunenavnNorsk": "Austrheim",
+            "kommunenummer": "4632"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4633",
+            "kommunenavn": "Fedje",
+            "kommunenavnNorsk": "Fedje",
+            "kommunenummer": "4633"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4634",
+            "kommunenavn": "Masfjorden",
+            "kommunenavnNorsk": "Masfjorden",
+            "kommunenummer": "4634"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4635",
+            "kommunenavn": "Gulen",
+            "kommunenavnNorsk": "Gulen",
+            "kommunenummer": "4635"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4636",
+            "kommunenavn": "Solund",
+            "kommunenavnNorsk": "Solund",
+            "kommunenummer": "4636"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4637",
+            "kommunenavn": "Hyllestad",
+            "kommunenavnNorsk": "Hyllestad",
+            "kommunenummer": "4637"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4638",
+            "kommunenavn": "Høyanger",
+            "kommunenavnNorsk": "Høyanger",
+            "kommunenummer": "4638"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4639",
+            "kommunenavn": "Vik",
+            "kommunenavnNorsk": "Vik",
+            "kommunenummer": "4639"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4640",
+            "kommunenavn": "Sogndal",
+            "kommunenavnNorsk": "Sogndal",
+            "kommunenummer": "4640"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4641",
+            "kommunenavn": "Aurland",
+            "kommunenavnNorsk": "Aurland",
+            "kommunenummer": "4641"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4642",
+            "kommunenavn": "Lærdal",
+            "kommunenavnNorsk": "Lærdal",
+            "kommunenummer": "4642"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4643",
+            "kommunenavn": "Årdal",
+            "kommunenavnNorsk": "Årdal",
+            "kommunenummer": "4643"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4644",
+            "kommunenavn": "Luster",
+            "kommunenavnNorsk": "Luster",
+            "kommunenummer": "4644"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4645",
+            "kommunenavn": "Askvoll",
+            "kommunenavnNorsk": "Askvoll",
+            "kommunenummer": "4645"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4646",
+            "kommunenavn": "Fjaler",
+            "kommunenavnNorsk": "Fjaler",
+            "kommunenummer": "4646"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4647",
+            "kommunenavn": "Sunnfjord",
+            "kommunenavnNorsk": "Sunnfjord",
+            "kommunenummer": "4647"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4648",
+            "kommunenavn": "Bremanger",
+            "kommunenavnNorsk": "Bremanger",
+            "kommunenummer": "4648"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4649",
+            "kommunenavn": "Stad",
+            "kommunenavnNorsk": "Stad",
+            "kommunenummer": "4649"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4650",
+            "kommunenavn": "Gloppen",
+            "kommunenavnNorsk": "Gloppen",
+            "kommunenummer": "4650"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/4651",
+            "kommunenavn": "Stryn",
+            "kommunenavnNorsk": "Stryn",
+            "kommunenummer": "4651"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5001",
+            "kommunenavn": "Trondheim",
+            "kommunenavnNorsk": "Trondheim",
+            "kommunenummer": "5001"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5006",
+            "kommunenavn": "Steinkjer",
+            "kommunenavnNorsk": "Steinkjer",
+            "kommunenummer": "5006"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5007",
+            "kommunenavn": "Namsos",
+            "kommunenavnNorsk": "Namsos",
+            "kommunenummer": "5007"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5014",
+            "kommunenavn": "Frøya",
+            "kommunenavnNorsk": "Frøya",
+            "kommunenummer": "5014"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5020",
+            "kommunenavn": "Osen",
+            "kommunenavnNorsk": "Osen",
+            "kommunenummer": "5020"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5021",
+            "kommunenavn": "Oppdal",
+            "kommunenavnNorsk": "Oppdal",
+            "kommunenummer": "5021"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5022",
+            "kommunenavn": "Rennebu",
+            "kommunenavnNorsk": "Rennebu",
+            "kommunenummer": "5022"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5025",
+            "kommunenavn": "Røros",
+            "kommunenavnNorsk": "Røros",
+            "kommunenummer": "5025"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5026",
+            "kommunenavn": "Holtålen",
+            "kommunenavnNorsk": "Holtålen",
+            "kommunenummer": "5026"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5027",
+            "kommunenavn": "Midtre Gauldal",
+            "kommunenavnNorsk": "Midtre Gauldal",
+            "kommunenummer": "5027"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5028",
+            "kommunenavn": "Melhus",
+            "kommunenavnNorsk": "Melhus",
+            "kommunenummer": "5028"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5029",
+            "kommunenavn": "Skaun",
+            "kommunenavnNorsk": "Skaun",
+            "kommunenummer": "5029"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5031",
+            "kommunenavn": "Malvik",
+            "kommunenavnNorsk": "Malvik",
+            "kommunenummer": "5031"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5032",
+            "kommunenavn": "Selbu",
+            "kommunenavnNorsk": "Selbu",
+            "kommunenummer": "5032"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5033",
+            "kommunenavn": "Tydal",
+            "kommunenavnNorsk": "Tydal",
+            "kommunenummer": "5033"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5034",
+            "kommunenavn": "Meråker",
+            "kommunenavnNorsk": "Meråker",
+            "kommunenummer": "5034"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5035",
+            "kommunenavn": "Stjørdal",
+            "kommunenavnNorsk": "Stjørdal",
+            "kommunenummer": "5035"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5036",
+            "kommunenavn": "Frosta",
+            "kommunenavnNorsk": "Frosta",
+            "kommunenummer": "5036"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5037",
+            "kommunenavn": "Levanger",
+            "kommunenavnNorsk": "Levanger",
+            "kommunenummer": "5037"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5038",
+            "kommunenavn": "Verdal",
+            "kommunenavnNorsk": "Verdal",
+            "kommunenummer": "5038"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5041",
+            "kommunenavn": "Snåase",
+            "kommunenavnNorsk": "Snåsa",
+            "kommunenummer": "5041"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5042",
+            "kommunenavn": "Lierne",
+            "kommunenavnNorsk": "Lierne",
+            "kommunenummer": "5042"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5043",
+            "kommunenavn": "Raarvihke",
+            "kommunenavnNorsk": "Røyrvik",
+            "kommunenummer": "5043"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5044",
+            "kommunenavn": "Namsskogan",
+            "kommunenavnNorsk": "Namsskogan",
+            "kommunenummer": "5044"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5045",
+            "kommunenavn": "Grong",
+            "kommunenavnNorsk": "Grong",
+            "kommunenummer": "5045"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5046",
+            "kommunenavn": "Høylandet",
+            "kommunenavnNorsk": "Høylandet",
+            "kommunenummer": "5046"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5047",
+            "kommunenavn": "Overhalla",
+            "kommunenavnNorsk": "Overhalla",
+            "kommunenummer": "5047"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5049",
+            "kommunenavn": "Flatanger",
+            "kommunenavnNorsk": "Flatanger",
+            "kommunenummer": "5049"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5052",
+            "kommunenavn": "Leka",
+            "kommunenavnNorsk": "Leka",
+            "kommunenummer": "5052"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5053",
+            "kommunenavn": "Inderøy",
+            "kommunenavnNorsk": "Inderøy",
+            "kommunenummer": "5053"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5054",
+            "kommunenavn": "Indre Fosen",
+            "kommunenavnNorsk": "Indre Fosen",
+            "kommunenummer": "5054"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5055",
+            "kommunenavn": "Heim",
+            "kommunenavnNorsk": "Heim",
+            "kommunenummer": "5055"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5056",
+            "kommunenavn": "Hitra",
+            "kommunenavnNorsk": "Hitra",
+            "kommunenummer": "5056"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5057",
+            "kommunenavn": "Ørland",
+            "kommunenavnNorsk": "Ørland",
+            "kommunenummer": "5057"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5058",
+            "kommunenavn": "Åfjord",
+            "kommunenavnNorsk": "Åfjord",
+            "kommunenummer": "5058"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5059",
+            "kommunenavn": "Orkland",
+            "kommunenavnNorsk": "Orkland",
+            "kommunenummer": "5059"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5060",
+            "kommunenavn": "Nærøysund",
+            "kommunenavnNorsk": "Nærøysund",
+            "kommunenummer": "5060"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5061",
+            "kommunenavn": "Rindal",
+            "kommunenavnNorsk": "Rindal",
+            "kommunenummer": "5061"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5401",
+            "kommunenavn": "Tromsø",
+            "kommunenavnNorsk": "Tromsø",
+            "kommunenummer": "5401"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5402",
+            "kommunenavn": "Harstad",
+            "kommunenavnNorsk": "Harstad",
+            "kommunenummer": "5402"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5403",
+            "kommunenavn": "Alta",
+            "kommunenavnNorsk": "Alta",
+            "kommunenummer": "5403"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5404",
+            "kommunenavn": "Vardø",
+            "kommunenavnNorsk": "Vardø",
+            "kommunenummer": "5404"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5405",
+            "kommunenavn": "Vadsø",
+            "kommunenavnNorsk": "Vadsø",
+            "kommunenummer": "5405"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5406",
+            "kommunenavn": "Hammerfest",
+            "kommunenavnNorsk": "Hammerfest",
+            "kommunenummer": "5406"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5411",
+            "kommunenavn": "Kvæfjord",
+            "kommunenavnNorsk": "Kvæfjord",
+            "kommunenummer": "5411"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5412",
+            "kommunenavn": "Dielddanuorri",
+            "kommunenavnNorsk": "Tjeldsund",
+            "kommunenummer": "5412"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5413",
+            "kommunenavn": "Ibestad",
+            "kommunenavnNorsk": "Ibestad",
+            "kommunenummer": "5413"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5414",
+            "kommunenavn": "Gratangen",
+            "kommunenavnNorsk": "Gratangen",
+            "kommunenummer": "5414"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5415",
+            "kommunenavn": "Loabák",
+            "kommunenavnNorsk": "Lavangen",
+            "kommunenummer": "5415"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5416",
+            "kommunenavn": "Bardu",
+            "kommunenavnNorsk": "Bardu",
+            "kommunenummer": "5416"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5417",
+            "kommunenavn": "Salangen",
+            "kommunenavnNorsk": "Salangen",
+            "kommunenummer": "5417"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5418",
+            "kommunenavn": "Målselv",
+            "kommunenavnNorsk": "Målselv",
+            "kommunenummer": "5418"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5419",
+            "kommunenavn": "Sørreisa",
+            "kommunenavnNorsk": "Sørreisa",
+            "kommunenummer": "5419"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5420",
+            "kommunenavn": "Dyrøy",
+            "kommunenavnNorsk": "Dyrøy",
+            "kommunenummer": "5420"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5421",
+            "kommunenavn": "Senja",
+            "kommunenavnNorsk": "Senja",
+            "kommunenummer": "5421"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5422",
+            "kommunenavn": "Balsfjord",
+            "kommunenavnNorsk": "Balsfjord",
+            "kommunenummer": "5422"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5423",
+            "kommunenavn": "Karlsøy",
+            "kommunenavnNorsk": "Karlsøy",
+            "kommunenummer": "5423"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5424",
+            "kommunenavn": "Lyngen",
+            "kommunenavnNorsk": "Lyngen",
+            "kommunenummer": "5424"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5425",
+            "kommunenavn": "Storfjord",
+            "kommunenavnNorsk": "Storfjord",
+            "kommunenummer": "5425"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5426",
+            "kommunenavn": "Gáivuotna",
+            "kommunenavnNorsk": "Kåfjord",
+            "kommunenummer": "5426"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5427",
+            "kommunenavn": "Skjervøy",
+            "kommunenavnNorsk": "Skjervøy",
+            "kommunenummer": "5427"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5428",
+            "kommunenavn": "Nordreisa",
+            "kommunenavnNorsk": "Nordreisa",
+            "kommunenummer": "5428"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5429",
+            "kommunenavn": "Kvænangen",
+            "kommunenavnNorsk": "Kvænangen",
+            "kommunenummer": "5429"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5430",
+            "kommunenavn": "Guovdageaidnu",
+            "kommunenavnNorsk": "Kautokeino",
+            "kommunenummer": "5430"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5432",
+            "kommunenavn": "Loppa",
+            "kommunenavnNorsk": "Loppa",
+            "kommunenummer": "5432"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5433",
+            "kommunenavn": "Hasvik",
+            "kommunenavnNorsk": "Hasvik",
+            "kommunenummer": "5433"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5434",
+            "kommunenavn": "Måsøy",
+            "kommunenavnNorsk": "Måsøy",
+            "kommunenummer": "5434"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5435",
+            "kommunenavn": "Nordkapp",
+            "kommunenavnNorsk": "Nordkapp",
+            "kommunenummer": "5435"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5436",
+            "kommunenavn": "Porsanger",
+            "kommunenavnNorsk": "Porsanger",
+            "kommunenummer": "5436"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5437",
+            "kommunenavn": "Kárášjohka",
+            "kommunenavnNorsk": "Karasjok",
+            "kommunenummer": "5437"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5438",
+            "kommunenavn": "Lebesby",
+            "kommunenavnNorsk": "Lebesby",
+            "kommunenummer": "5438"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5439",
+            "kommunenavn": "Gamvik",
+            "kommunenavnNorsk": "Gamvik",
+            "kommunenummer": "5439"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5440",
+            "kommunenavn": "Berlevåg",
+            "kommunenavnNorsk": "Berlevåg",
+            "kommunenummer": "5440"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5441",
+            "kommunenavn": "Deatnu",
+            "kommunenavnNorsk": "Tana",
+            "kommunenummer": "5441"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5442",
+            "kommunenavn": "Unjárga",
+            "kommunenavnNorsk": "Nesseby",
+            "kommunenummer": "5442"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5443",
+            "kommunenavn": "Båtsfjord",
+            "kommunenavnNorsk": "Båtsfjord",
+            "kommunenummer": "5443"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/kommune/id/5444",
+            "kommunenavn": "Sør-Varanger",
+            "kommunenavnNorsk": "Sør-Varanger",
+            "kommunenummer": "5444"
+        }
+    ]
+}

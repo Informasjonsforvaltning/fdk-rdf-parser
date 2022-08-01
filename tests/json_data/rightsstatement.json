@@ -1,30 +1,52 @@
 {
     "accessRights": [
         {
-            "uri": "http://publications.europa.eu/resource/authority/access-right",
-            "prefLabel": {
-                "en": "Access right Named Authority List"
+            "uri": "http://publications.europa.eu/resource/authority/access-right/CONFIDENTIAL",
+            "code": "CONFIDENTIAL",
+            "label": {
+                "en": "confidential"
             }
         },
         {
             "uri": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
             "code": "NON_PUBLIC",
-            "prefLabel": {
-                "en": "Non-public"
+            "label": {
+                "en": "non-public"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/access-right/NORMAL",
+            "code": "NORMAL",
+            "label": {
+                "en": "normal"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/access-right/OP_DATPRO",
+            "code": "OP_DATPRO",
+            "label": {
+                "en": "Provisional data"
             }
         },
         {
             "uri": "http://publications.europa.eu/resource/authority/access-right/PUBLIC",
             "code": "PUBLIC",
-            "prefLabel": {
-                "en": "Public"
+            "label": {
+                "en": "public"
             }
         },
         {
             "uri": "http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
             "code": "RESTRICTED",
-            "prefLabel": {
-                "en": "Restricted"
+            "label": {
+                "en": "restricted"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/access-right/SENSITIVE",
+            "code": "SENSITIVE",
+            "label": {
+                "en": "sensitive"
             }
         }
     ]

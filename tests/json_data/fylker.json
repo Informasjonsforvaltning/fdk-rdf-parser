@@ -1,0 +1,59 @@
+{
+    "fylker": [
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/03",
+            "fylkesnavn": "Oslo",
+            "fylkesnummer": "03"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/11",
+            "fylkesnavn": "Rogaland",
+            "fylkesnummer": "11"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/15",
+            "fylkesnavn": "Møre og Romsdal",
+            "fylkesnummer": "15"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/18",
+            "fylkesnavn": "Nordland",
+            "fylkesnummer": "18"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/30",
+            "fylkesnavn": "Viken",
+            "fylkesnummer": "30"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/34",
+            "fylkesnavn": "Innlandet",
+            "fylkesnummer": "34"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/38",
+            "fylkesnavn": "Vestfold og Telemark",
+            "fylkesnummer": "38"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/42",
+            "fylkesnavn": "Agder",
+            "fylkesnummer": "42"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/46",
+            "fylkesnavn": "Vestland",
+            "fylkesnummer": "46"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/50",
+            "fylkesnavn": "Trøndelag",
+            "fylkesnummer": "50"
+        },
+        {
+            "uri": "https://data.geonorge.no/administrativeEnheter/fylke/id/54",
+            "fylkesnavn": "Troms og Finnmark",
+            "fylkesnummer": "54"
+        }
+    ]
+}

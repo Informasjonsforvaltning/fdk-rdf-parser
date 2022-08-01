@@ -1,55 +1,51 @@
-[
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language",
-        "prefLabel": {
-            "en": "Languages Named Authority List"
+{
+    "linguisticSystems": [
+        {
+            "uri": "http://publications.europa.eu/resource/authority/language/ENG",
+            "code": "ENG",
+            "label": {
+                "nn": "Engelsk",
+                "no": "Engelsk",
+                "nb": "Engelsk",
+                "en": "English"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/language/NNO",
+            "code": "NNO",
+            "label": {
+                "nn": "Norsk Nynorsk",
+                "no": "Norsk Nynorsk",
+                "nb": "Norsk Nynorsk",
+                "en": "Norwegian Nynorsk"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/language/NOB",
+            "code": "NOB",
+            "label": {
+                "nn": "Norsk Bokmål",
+                "no": "Norsk Bokmål",
+                "nb": "Norsk Bokmål",
+                "en": "Norwegian Bokmål"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/language/NOR",
+            "code": "NOR",
+            "label": {
+                "nn": "Norsk",
+                "no": "Norsk",
+                "nb": "Norsk",
+                "en": "Norwegian"
+            }
+        },
+        {
+            "uri": "http://publications.europa.eu/resource/authority/language/SMI",
+            "code": "SMI",
+            "label": {
+                "en": "Sami languages"
+            }
         }
-    },
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language/ENG",
-        "code": "ENG",
-        "prefLabel": {
-            "en": "English",
-            "nb": "Engelsk",
-            "nn": "Engelsk",
-            "no": "Engelsk"
-        }
-    },
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language/NOB",
-        "code": "NOB",
-        "prefLabel": {
-            "en": "Norwegian Bokmål",
-            "nb": "Norsk Bokmål",
-            "nn": "Norsk Bokmål",
-            "no": "Norsk Bokmål"
-        }
-    },
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language/NNO",
-        "code": "NNO",
-        "prefLabel": {
-            "en": "Norwegian Nynorsk",
-            "nb": "Norsk Nynorsk",
-            "nn": "Norsk Nynorsk",
-            "no": "Norsk Nynorsk"
-        }
-    },
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language/NOR",
-        "code": "NOR",
-        "prefLabel": {
-            "nb": "Norsk",
-            "nn": "Norsk",
-            "no": "Norsk",
-            "en": "Norwegian"
-        }
-    },
-    {
-        "uri": "http://publications.europa.eu/resource/authority/language/SMI",
-        "code": "SMI",
-        "prefLabel": {
-            "en": "Sami languages"
-        }
-    }
-]
+    ]
+}

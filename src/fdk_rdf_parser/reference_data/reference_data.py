@@ -8,7 +8,7 @@ from fdk_rdf_parser.classes import (
     MediaTypeOrExtentType,
     SkosCode,
 )
-from .reference_data_client import get_new_reference_data, get_reference_data
+from .reference_data_client import get_reference_data
 from .utils import remove_scheme_and_trailing_slash
 
 
@@ -51,13 +51,13 @@ def get_data_service_reference_data() -> DataServiceReferenceData:
 
 def get_dataset_reference_data() -> DatasetReferenceData:
     return DatasetReferenceData(
-        provenancestatement=get_and_map_reference_codes("provenancestatement"),
+        provenancestatement=get_and_map_provenance_statements(),
         rightsstatement=get_and_map_access_rights(),
-        frequency=get_and_map_reference_codes("frequency"),
-        linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
-        referencetypes=get_and_map_reference_codes("referencetypes"),
-        openlicenses=get_and_map_reference_codes("openlicenses"),
-        location=get_and_map_reference_codes("location"),
+        frequency=get_and_map_frequencies(),
+        linguisticsystem=get_and_map_linguistic_system(),
+        referencetypes=get_and_map_reference_types(),
+        openlicenses=get_and_map_open_licenses(),
+        location=get_and_map_locations(),
         eu_data_themes=get_and_map_eu_data_themes(),
         los_themes=get_and_map_los_themes(),
         media_types=get_and_map_media_types(),
@@ -66,18 +66,16 @@ def get_dataset_reference_data() -> DatasetReferenceData:
 
 def get_info_model_reference_data() -> InformationModelReferenceData:
     return InformationModelReferenceData(
-        linguisticsystem=get_and_map_reference_codes("linguisticsystem"),
-        openlicenses=get_and_map_reference_codes("openlicenses"),
-        location=get_and_map_reference_codes("location"),
+        linguisticsystem=get_and_map_linguistic_system(),
+        openlicenses=get_and_map_open_licenses(),
+        location=get_and_map_locations(),
         eu_data_themes=get_and_map_eu_data_themes(),
         los_themes=get_and_map_los_themes(),
     )
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
-    return PublicServiceReferenceData(
-        linguisticsystem=get_and_map_reference_codes("linguisticsystem")
-    )
+    return PublicServiceReferenceData(linguisticsystem=get_and_map_linguistic_system())
 
 
 def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, SkosCode]]:
@@ -86,9 +84,7 @@ def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, Sko
             remove_scheme_and_trailing_slash(str(code.get("uri"))): SkosCode(
                 uri=str(code.get("uri")) if code.get("uri") is not None else None,
                 code=str(code.get("code")) if code.get("code") is not None else None,
-                prefLabel=code.get("prefLabel")
-                if code.get("prefLabel") is not None
-                else None,
+                prefLabel=code.get("label") if code.get("label") is not None else None,
             )
             for code in codes
         }
@@ -96,19 +92,103 @@ def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, Sko
         return None
 
 
-def get_and_map_reference_codes(endpoint: str) -> Optional[Dict[str, SkosCode]]:
-    codes = get_reference_data(f"/codes/{endpoint}")
-    return parse_reference_codes(codes)
+def parse_locations(
+    nasjoner: Optional[List[Dict]],
+    fylker: Optional[List[Dict]],
+    kommuner: Optional[List[Dict]],
+) -> Optional[Dict[str, SkosCode]]:
+    locations = dict()
+    if nasjoner is not None:
+        for nasjon in nasjoner:
+            locations[
+                remove_scheme_and_trailing_slash(str(nasjon.get("uri")))
+            ] = SkosCode(
+                uri=str(nasjon.get("uri")) if nasjon.get("uri") is not None else None,
+                code=str(nasjon.get("nasjonsnummer"))
+                if nasjon.get("nasjonsnummer") is not None
+                else None,
+                prefLabel={"no": str(nasjon["nasjonsnavn"])}
+                if nasjon.get("nasjonsnavn") is not None
+                else None,
+            )
+    if fylker is not None:
+        for fylke in fylker:
+            locations[
+                remove_scheme_and_trailing_slash(str(fylke.get("uri")))
+            ] = SkosCode(
+                uri=str(fylke.get("uri")) if fylke.get("uri") is not None else None,
+                code=str(fylke.get("fylkesnummer"))
+                if fylke.get("fylkesnummer") is not None
+                else None,
+                prefLabel={"no": str(fylke["fylkesnavn"])}
+                if fylke.get("fylkesnavn") is not None
+                else None,
+            )
+    if kommuner is not None:
+        for kommune in kommuner:
+            locations[
+                remove_scheme_and_trailing_slash(str(kommune.get("uri")))
+            ] = SkosCode(
+                uri=str(kommune.get("uri")) if kommune.get("uri") is not None else None,
+                code=str(kommune.get("kommunenummer"))
+                if kommune.get("kommunenummer") is not None
+                else None,
+                prefLabel={"no": str(kommune["kommunenavnNorsk"])}
+                if kommune.get("kommunenavnNorsk") is not None
+                else None,
+            )
+
+    return locations if len(locations) > 0 else None
+
+
+def get_and_map_locations() -> Optional[Dict[str, SkosCode]]:
+    nasjoner = get_reference_data("/geonorge/administrative-enheter/nasjoner").get(
+        "nasjoner"
+    )
+    fylker = get_reference_data("/geonorge/administrative-enheter/fylker").get("fylker")
+    kommuner = get_reference_data("/geonorge/administrative-enheter/kommuner").get(
+        "kommuner"
+    )
+    return parse_locations(nasjoner, fylker, kommuner)
+
+
+def get_and_map_frequencies() -> Optional[Dict[str, SkosCode]]:
+    frequencies = get_reference_data("/eu/frequencies").get("frequencies")
+    return parse_reference_codes(frequencies)
+
+
+def get_and_map_provenance_statements() -> Optional[Dict[str, SkosCode]]:
+    provenance_statements = get_reference_data("/provenance-statements").get(
+        "provenanceStatements"
+    )
+    return parse_reference_codes(provenance_statements)
+
+
+def get_and_map_reference_types() -> Optional[Dict[str, SkosCode]]:
+    reference_types = get_reference_data("/reference-types").get("referenceTypes")
+    return parse_reference_codes(reference_types)
+
+
+def get_and_map_open_licenses() -> Optional[Dict[str, SkosCode]]:
+    open_licenses = get_reference_data("/open-licenses").get("openLicenses")
+    return parse_reference_codes(open_licenses)
+
+
+def get_and_map_linguistic_system() -> Optional[Dict[str, SkosCode]]:
+    linguistic_systems = get_reference_data("/linguistic-systems").get(
+        "linguisticSystems"
+    )
+    return parse_reference_codes(linguistic_systems)
 
 
 def get_and_map_access_rights() -> Optional[Dict[str, SkosCode]]:
-    access_rights = get_new_reference_data("/eu/access-rights").get("accessRights")
+    access_rights = get_reference_data("/eu/access-rights").get("accessRights")
     return parse_reference_codes(access_rights)
 
 
 def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
     mapped = {}
-    themes = get_new_reference_data("/eu/data-themes").get("dataThemes")
+    themes = get_reference_data("/eu/data-themes").get("dataThemes")
     if themes is not None:
         for theme in themes:
             eu_theme = EuDataTheme()
@@ -119,7 +199,7 @@ def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
 
 def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
     mapped = {}
-    los_nodes = get_new_reference_data("/los/themes-and-words").get("losNodes")
+    los_nodes = get_reference_data("/los/themes-and-words").get("losNodes")
     if los_nodes is not None:
         for los_node in los_nodes:
             los_theme = LosNode()
@@ -132,7 +212,7 @@ def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
 
 def get_and_map_media_types() -> Optional[Dict[str, MediaTypeOrExtent]]:
     media_types = {}
-    iana_codes = get_new_reference_data("/iana/media-types").get("mediaTypes")
+    iana_codes = get_reference_data("/iana/media-types").get("mediaTypes")
     if iana_codes is not None:
         for code in iana_codes:
             media_type_uri = str(code["uri"]) if code.get("uri") else None
@@ -146,7 +226,7 @@ def get_and_map_media_types() -> Optional[Dict[str, MediaTypeOrExtent]]:
                     type=MediaTypeOrExtentType.MEDIA_TYPE,
                 )
 
-    file_types = get_new_reference_data("/eu/file-types").get("fileTypes")
+    file_types = get_reference_data("/eu/file-types").get("fileTypes")
     if file_types is not None:
         for file_type in file_types:
             file_type_uri = str(file_type["uri"]) if file_type.get("uri") else None
