@@ -1,87 +1,103 @@
-[
-    {
-        "uri": "http://purl.org/dc/terms/hasVersion",
-        "code": "hasVersion",
-        "prefLabel": {
-            "en": "Has version"
+{
+    "referenceTypes": [
+        {
+            "uri": "http://purl.org/dc/terms/hasVersion",
+            "code": "hasVersion",
+            "label": {
+                "nn": "Har versjon",
+                "nb": "Har versjon",
+                "en": "Has version"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/isPartOf",
+            "code": "isPartOf",
+            "label": {
+                "nn": "Er del av",
+                "nb": "Er en del av",
+                "en": "Is Part Of"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/isReferencedBy",
+            "code": "isReferencedBy",
+            "label": {
+                "nn": "Er referert av",
+                "nb": "Er referert av",
+                "en": "Is Referenced By"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/isReplacedBy",
+            "code": "isReplacedBy",
+            "label": {
+                "nn": "Er erstatta av",
+                "nb": "Er erstattet av",
+                "en": "Is replaced by"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/isRequiredBy",
+            "code": "isRequiredBy",
+            "label": {
+                "nn": "Er påkravd av",
+                "nb": "Er påkrevd av",
+                "en": "Is required by"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/isVersionOf",
+            "code": "isVersionOf",
+            "label": {
+                "nn": "Er versjon av",
+                "nb": "Er versjon av",
+                "en": "Is version of"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/references",
+            "code": "references",
+            "label": {
+                "nn": "Refererar",
+                "nb": "Refererer",
+                "en": "References"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/relation",
+            "code": "relation",
+            "label": {
+                "nn": "Er relatert til",
+                "nb": "Er relatert til",
+                "en": "Has relation to"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/replaces",
+            "code": "replaces",
+            "label": {
+                "nn": "Erstatter",
+                "nb": "Erstatter",
+                "en": "Replaces"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/requires",
+            "code": "requires",
+            "label": {
+                "nn": "Krevjar",
+                "nb": "Krever",
+                "en": "Requires"
+            }
+        },
+        {
+            "uri": "http://purl.org/dc/terms/source",
+            "code": "source",
+            "label": {
+                "nn": "Er avleda frå (kjelde)",
+                "nb": "Er avledet fra (kilde)",
+                "en": "Source"
+            }
         }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/isPartOf",
-        "code": "isPartOf",
-        "prefLabel": {
-            "en": "Is Part Of"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/isReferencedBy",
-        "code": "isReferencedBy",
-        "prefLabel": {
-            "en": "Is Referenced By",
-            "nn": "Er referert av",
-            "nb": "Er referert av"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/isReplacedBy",
-        "code": "isReplacedBy",
-        "prefLabel": {
-            "en": "Is replaced by"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/isRequiredBy",
-        "code": "requires",
-        "prefLabel": {
-            "en": "Is required by"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/isVersionOf",
-        "code": "isVersionOf",
-        "prefLabel": {
-            "en": "Is version of"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/reference-types",
-        "prefLabel": {
-            "nb": "Referanse typer"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/references",
-        "code": "references",
-        "prefLabel": {
-            "en": "References"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/relation",
-        "code": "relation",
-        "prefLabel": {
-            "en": "Has relation to"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/replaces",
-        "code": "replaces",
-        "prefLabel": {
-            "en": "Replaces"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/requires",
-        "code": "requires",
-        "prefLabel": {
-            "en": "Requires"
-        }
-    },
-    {
-        "uri": "http://purl.org/dc/terms/source",
-        "code": "source",
-        "prefLabel": {
-            "en": "Source"
-        }
-    }
-]
+    ]
+}

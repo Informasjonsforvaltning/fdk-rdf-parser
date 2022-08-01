@@ -115,7 +115,7 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
             accessRights=SkosCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
                 code="PUBLIC",
-                prefLabel={"en": "Public"},
+                prefLabel={"en": "public"},
             ),
             uri="https://testdirektoratet.no/model/dataset/1",
             isOpenData=False,
@@ -126,7 +126,11 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                     referenceType=SkosCode(
                         uri="http://purl.org/dc/terms/relation",
                         code="relation",
-                        prefLabel={"en": "Has relation to"},
+                        prefLabel={
+                            "nn": "Er relatert til",
+                            "nb": "Er relatert til",
+                            "en": "Has relation to",
+                        },
                     ),
                     source=SkosConcept(
                         uri="https://testdirektoratet.no/model/dataset/0"
@@ -725,7 +729,7 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
             accessRights=SkosCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
                 code="PUBLIC",
-                prefLabel={"en": "Public"},
+                prefLabel={"en": "public"},
             ),
             id="123",
             harvest=HarvestMetaData(
@@ -740,7 +744,8 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
                         SkosConcept(
                             uri="https://data.norge.no/nlod/",
                             prefLabel={
-                                "en": "Norwegian Licence for Open Government Data"
+                                "no": "Norsk lisens for offentlige data",
+                                "en": "Norwegian Licence for Open Government Data",
                             },
                         )
                     ],

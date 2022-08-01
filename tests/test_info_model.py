@@ -70,7 +70,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:license        <http://creativecommons.org/licenses/by/4.0/deed.no> ;
         dct:modified       "2017-09-28T00:00:00+01:00"^^xsd:dateTime ;
         dct:publisher      digdir:Utgiver ;
-        dct:spatial        <http://sws.geonames.org/3144096/> ;
+        dct:spatial        <https://data.geonorge.no/administrativeEnheter/nasjon/id/173163> ;
         dct:temporal       digdir:Tidsintervall ;
         dct:title          "Diversemodell"@nb ;
         dct:type           "Fellesmodell"@nb ;
@@ -174,14 +174,17 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 SkosCode(
                     uri="http://creativecommons.org/licenses/by/4.0/deed.no",
                     code="CC BY 4.0 DEED",
-                    prefLabel={"en": "Creative Commons Attribution 4.0 International"},
+                    prefLabel={
+                        "no": "Creative Commons Navngivelse 4.0 Internasjonal",
+                        "en": "Creative Commons Attribution 4.0 International",
+                    },
                 )
             ],
             informationModelIdentifier="https://www.digdir.no/diversemodell",
             spatial=[
                 SkosCode(
-                    uri="http://sws.geonames.org/3144096/",
-                    code="http://sws.geonames.org/3144096/",
+                    uri="https://data.geonorge.no/administrativeEnheter/nasjon/id/173163",
+                    code="173163",
                     prefLabel={"no": "Norge"},
                 )
             ],

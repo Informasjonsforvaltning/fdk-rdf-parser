@@ -60,7 +60,7 @@ def test_extend_access_rights() -> None:
         accessRights=SkosCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
             code="RESTRICTED",
-            prefLabel={"en": "Restricted"},
+            prefLabel={"en": "restricted"},
         )
     )
 
@@ -104,7 +104,7 @@ def test_extend_accrual_periodicity() -> None:
         accrualPeriodicity=SkosCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
             code="ANNUAL",
-            prefLabel={"en": "annual"},
+            prefLabel={"nn": "årleg", "no": "årlig", "nb": "årlig", "en": "annual"},
         )
     )
 
@@ -147,18 +147,16 @@ def test_extend_language() -> None:
 def test_extend_spatial() -> None:
     parsed_dataset = Dataset(
         spatial=[
-            SkosCode(
-                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142"
-            )
+            SkosCode(uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54")
         ]
     )
 
     expected = Dataset(
         spatial=[
             SkosCode(
-                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142",
-                code="https://data.geonorge.no/administrativeEnheter/fylke/id/173142",
-                prefLabel={"no": "Finnmárku"},
+                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54",
+                code="54",
+                prefLabel={"no": "Troms og Finnmark"},
             )
         ]
     )
@@ -229,7 +227,10 @@ def test_extend_open_licenses() -> None:
                 license=[
                     SkosConcept(
                         uri="http://data.norge.no/nlod/",
-                        prefLabel={"en": "Norwegian Licence for Open Government Data"},
+                        prefLabel={
+                            "no": "Norsk lisens for offentlige data",
+                            "en": "Norwegian Licence for Open Government Data",
+                        },
                     ),
                     SkosConcept(
                         uri="http://creativecommons.org/licenses/by/4.0/",
@@ -412,7 +413,11 @@ def test_extend_references() -> None:
                 referenceType=SkosCode(
                     uri="http://purl.org/dc/terms/hasVersion",
                     code="hasVersion",
-                    prefLabel={"en": "Has version"},
+                    prefLabel={
+                        "nn": "Har versjon",
+                        "nb": "Har versjon",
+                        "en": "Has version",
+                    },
                 ),
                 source=SkosConcept(
                     uri="https://testdirektoratet.no/model/dataset/hasVersion"

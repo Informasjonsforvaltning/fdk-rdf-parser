@@ -16,7 +16,7 @@ def reference_effect(*args: Any, **kwargs: Any) -> Mock:
 
 
 def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
-    if "provenancestatement" in url:
+    if "provenance-statements" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/provenancestatement.json")
         )
@@ -24,20 +24,24 @@ def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
         mock.json.return_value = json.load(
             open("./tests/json_data/rightsstatement.json")
         )
-    elif "frequency" in url:
+    elif "eu/frequencies" in url:
         mock.json.return_value = json.load(open("./tests/json_data/frequency.json"))
-    elif "linguisticsystem" in url:
+    elif "linguistic-systems" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/linguisticsystem.json")
         )
-    elif "referencetypes" in url:
+    elif "reference-types" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/referencetypes.json")
         )
-    elif "openlicenses" in url:
+    elif "open-licenses" in url:
         mock.json.return_value = json.load(open("./tests/json_data/openlicenses.json"))
-    elif "location" in url:
-        mock.json.return_value = json.load(open("./tests/json_data/location.json"))
+    elif "nasjoner" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/nasjoner.json"))
+    elif "fylker" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/fylker.json"))
+    elif "kommuner" in url:
+        mock.json.return_value = json.load(open("./tests/json_data/kommuner.json"))
     elif "los/themes-and-words" in url:
         mock.json.return_value = json.load(open("./tests/json_data/los.json"))
     elif "eu/data-themes" in url:
