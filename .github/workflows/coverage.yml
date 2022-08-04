@@ -7,6 +7,6 @@ jobs:
     with:
       python_version: '3.9'
       python_architecture: x64
-      sessions: tests-3.9
+      sessions: tests
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
