@@ -4,13 +4,13 @@ from typing import Dict, List, Optional
 from fdk_rdf_parser.classes import EuDataTheme, LosNode, Reference, SkosCode
 
 base_url = os.getenv(
-    "NEW_REFERENCE_DATA_BASE_URI",
-    "https://www.staging.fellesdatakatalog.digdir.no/new-reference-data",
+    "FDK_REFERENCE_DATA_BASE_URI",
+    "https://www.staging.fellesdatakatalog.digdir.no",
 )
 
 
 def reference_data_url(endpoint: str) -> str:
-    return f"{base_url}{endpoint}"
+    return f"{base_url}/reference-data{endpoint}"
 
 
 def extend_reference_types(
