@@ -135,7 +135,7 @@ def parse_information_models(
 
 
 def parse_public_services(
-    public_service_rdf: str, event_rdf: str = None, rdf_format: str = "turtle"
+    public_service_rdf: str, event_rdf: Optional[str] = None, rdf_format: str = "turtle"
 ) -> Dict[str, Service]:
     cpsvno_services: Dict[str, Service] = {}
     reference_data = get_public_service_reference_data()
