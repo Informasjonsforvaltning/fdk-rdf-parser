@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from .channel import Channel
-from .contactpoint import ContactPoint
+from .contactpoint import CVContactPoint
 from .cost import Cost
 from .criterion_requirement import CriterionRequirement
 from .evidence import Evidence
@@ -25,7 +25,7 @@ class Service:
     description: Optional[Dict[str, str]] = None
     harvest: Optional[HarvestMetaData] = None
     ownedBy: Optional[List[Publisher]] = None
-    contactPoint: Optional[List[ContactPoint]] = None
+    contactPoint: Optional[List[CVContactPoint]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     sector: Optional[List[SkosConcept]] = None
     produces: Optional[List[Output]] = None

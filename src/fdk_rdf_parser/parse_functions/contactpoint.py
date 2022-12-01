@@ -2,11 +2,18 @@ from typing import Any, List, Optional
 
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import ContactPoint
+from fdk_rdf_parser.classes import ContactPoint, CVContactPoint
+from fdk_rdf_parser.parse_functions.opening_hours_specification import (
+    extract_opening_hours_specification,
+)
+from fdk_rdf_parser.parse_functions.skos_code import extract_skos_code_list
 from fdk_rdf_parser.rdf_utils import (
+    cv_uri,
     dcat_uri,
     object_value,
     resource_list,
+    schema_uri,
+    value_list,
     value_translations,
     vcard_uri,
 )
@@ -68,3 +75,32 @@ def extract_has_email(graph: Graph, subject: Any) -> Optional[Any]:
             return email
     else:
         return None
+
+
+def extract_cv_has_contact_point(
+    graph: Graph, subject: URIRef
+) -> Optional[List[CVContactPoint]]:
+    values = []
+    for resource in resource_list(graph, subject, cv_uri("hasContactPoint")):
+        values.append(
+            CVContactPoint(
+                uri=resource.toPython() if isinstance(resource, URIRef) else None,
+                email=value_list(graph, resource, cv_uri("email")),
+                telephone=value_list(graph, resource, cv_uri("telephone")),
+                contactPage=value_list(graph, resource, cv_uri("contactPage")),
+                language=extract_skos_code_list(
+                    graph, resource, vcard_uri("hasLanguage")
+                ),
+                openingHours=value_translations(
+                    graph, resource, cv_uri("openingHours")
+                ),
+                specialOpeningHours=extract_opening_hours_specification(
+                    graph, resource, cv_uri("specialOpeningHoursSpecification")
+                ),
+                hoursAvailable=extract_opening_hours_specification(
+                    graph, resource, schema_uri("hoursAvailable")
+                ),
+            )
+        )
+
+    return values if len(values) > 0 else None
