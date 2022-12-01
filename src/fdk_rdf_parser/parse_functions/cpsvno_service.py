@@ -15,7 +15,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from .channel import extract_channels
-from .contactpoint import extract_contact_points
+from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
 from .criterion_requirement import extract_criterion_requirements
 from .dcat_resource import extract_key_words, extract_skos_code_list
@@ -26,7 +26,6 @@ from .output import extract_outputs
 from .participation import extract_participations
 from .publisher import extract_list_of_publishers
 from .rule import extract_rules
-from .schema_contact_point import extract_schema_contact_points
 from .skos_concept import extract_skos_concept
 
 
@@ -63,7 +62,7 @@ def parse_cpsvno_service(
         ownedBy=extract_list_of_publishers(
             services_graph, cpsvno_service_uri, cv_uri("ownedBy")
         ),
-        contactPoint=extract_contact_points(services_graph, cpsvno_service_uri),
+        contactPoint=extract_cv_has_contact_point(services_graph, cpsvno_service_uri),
         isGroupedBy=value_list(
             services_graph, cpsvno_service_uri, cv_uri("isGroupedBy")
         ),
@@ -107,9 +106,6 @@ def parse_cpsvno_service(
         public_service = PublicService(
             hasCompetentAuthority=extract_list_of_publishers(
                 services_graph, cpsvno_service_uri, cv_uri("hasCompetentAuthority")
-            ),
-            hasContactPoint=extract_schema_contact_points(
-                services_graph, cpsvno_service_uri
             ),
         )
         public_service.add_cpsvno_service_values(service)

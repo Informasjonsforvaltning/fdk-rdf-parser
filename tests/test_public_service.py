@@ -4,18 +4,18 @@ from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Agent,
     Channel,
-    ContactPoint,
     Cost,
     CriterionRequirement,
+    CVContactPoint,
     Evidence,
     HarvestMetaData,
     LegalResource,
+    OpeningHoursSpecification,
     Output,
     Participation,
     PublicService,
     Publisher,
     Rule,
-    SchemaContactPoint,
     Service,
     SkosCode,
     SkosConcept,
@@ -39,6 +39,8 @@ def test_complete_public_services(
             @prefix schema:  <http://schema.org/> .
             @prefix eli: <http://data.europa.eu/eli/ontology#> .
             @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+            @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+            @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
                     cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
@@ -170,10 +172,33 @@ def test_complete_public_services(
                     dct:title        "Serveringsbevilling"@nb ;
                     dct:type         <https://data.norge.no/concepts/205> .
 
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> a schema:ContactPoint ;
-                    schema:contactType  "Kontakt brukerveiledning ved Brønnøysundregistrene"@nb ;
-                    schema:telephone    "75 00 75 00" ;
-                    schema:url          <https://www.altinn.no/skjemaoversikt/bronnoysundregistrene/registrere-nye-og-endre-eksisterende-foretak-og-enheter---samordnet-registermelding/> ; .
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1>
+                    rdf:type cv:ContactPoint;
+                    schema:hoursAvailable <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl>;
+                    cv:ContactPage <https://www.bronnoy.kommune.no/>;
+                    cv:email "mailto:postmottak@bronnoy.kommune.no"^^xsd:anyURI;
+                    vcard:hasLanguage <http://publications.europa.eu/resource/authority/language/NOB>,
+                       <http://publications.europa.eu/resource/authority/language/NNO>,
+                       <http://publications.europa.eu/resource/authority/language/ENG>;
+                    cv:telephone "tel:+4775012000";
+                    cv:openingHours "Resepsjonen er åpent for henvendelser mandag - fredag: kl  10:00 - 14:00."@no,
+                       "Teksten blir vist på nynorsk."@nn,
+                       "The reception is open for inquiries Monday - Friday: 10:00 - 14:00."@en;
+                    cv:specialOpeningHoursSpecification <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl> .
+
+            <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl>
+                    rdf:type cv:OpeningHoursSpecification;
+                    schema:dayOfWeek <https://schema.org/Monday>,
+                        <https://schema.org/Tuesday>,
+                        <https://schema.org/Wednesday>,
+                        <https://schema.org/Thursday>,
+                        <https://schema.org/Friday>;
+                    schema:closes "14:00:00"^^xsd:time;
+                    schema:opens "10:00:00"^^xsd:time .
+
+            <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl>
+                    rdf:type cv:OpeningHoursSpecification;
+                    schema:dayOfWeek <https://schema.org/PublicHolidays> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> a cpsv:Rule ;
                     dct:description     "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"@nb ;
@@ -450,14 +475,66 @@ def test_complete_public_services(
                     },
                 )
             ],
-            hasContactPoint=[
-                SchemaContactPoint(
+            contactPoint=[
+                CVContactPoint(
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1",
-                    contactType={
-                        "nb": "Kontakt brukerveiledning ved Brønnøysundregistrene"
+                    email=["mailto:postmottak@bronnoy.kommune.no"],
+                    telephone=["tel:+4775012000"],
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/ENG",
+                            code="ENG",
+                            prefLabel={
+                                "en": "English",
+                                "nb": "Engelsk",
+                                "nn": "Engelsk",
+                                "no": "Engelsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NNO",
+                            code="NNO",
+                            prefLabel={
+                                "en": "Norwegian Nynorsk",
+                                "nb": "Norsk Nynorsk",
+                                "nn": "Norsk Nynorsk",
+                                "no": "Norsk Nynorsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code="NOB",
+                            prefLabel={
+                                "en": "Norwegian Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                            },
+                        ),
+                    ],
+                    openingHours={
+                        "no": "Resepsjonen er åpent for henvendelser mandag - fredag: kl  10:00 - 14:00.",
+                        "nn": "Teksten blir vist på nynorsk.",
+                        "en": "The reception is open for inquiries Monday - Friday: 10:00 - 14:00.",
                     },
-                    telephone="75 00 75 00",
-                    url="https://www.altinn.no/skjemaoversikt/bronnoysundregistrene/registrere-nye-og-endre-eksisterende-foretak-og-enheter---samordnet-registermelding/",
+                    specialOpeningHours=[
+                        OpeningHoursSpecification(
+                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl",
+                            dayOfWeek=["https://schema.org/PublicHolidays"],
+                        )
+                    ],
+                    hoursAvailable=[
+                        OpeningHoursSpecification(
+                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl",
+                            dayOfWeek=[
+                                "https://schema.org/Friday",
+                                "https://schema.org/Monday",
+                                "https://schema.org/Thursday",
+                                "https://schema.org/Tuesday",
+                                "https://schema.org/Wednesday",
+                            ],
+                        )
+                    ],
                 )
             ],
             follows=[
@@ -816,10 +893,13 @@ def test_parse_cpsvno_services(
                 dct:title        "Dummy tjenesteresultat"@nb , "Dummy tjenesteresultat"@nn , "Dummy service result"@en .
 
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl>
-                rdf:type                  vcard:Organization ;
-                vcard:hasLanguage         <http://publications.europa.eu/resource/authority/language/NOB> , <http://publications.europa.eu/resource/authority/language/NNO> , <http://publications.europa.eu/resource/authority/language/ENG> ;
-                vcard:hasOganizationName  "Dummy Kontaktpunkt"@nb , "Dummy Kontaktpunkt"@nn , "Dummy Contact Point"@en ;
-                vcard:hasURL              <https://example.org/exHjemmeside> .
+                rdf:type cv:ContactPoint;
+                cv:contactPage <https://example.org/exKontaktside>;
+                cv:email "mailto:postmottak@example.org"^^xsd:anyURI;
+                cv:telephone "tel:+4712345678";
+                vcard:hasLanguage <http://publications.europa.eu/resource/authority/language/NOB>,
+                    <http://publications.europa.eu/resource/authority/language/NNO>,
+                    <http://publications.europa.eu/resource/authority/language/ENG> .
 
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl>
                 rdf:type           cpsvno:Service ;
@@ -829,7 +909,7 @@ def test_parse_cpsvno_services(
                 dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
                 dct:title          "Dummy service"@en , "Dummytjeneste"@nn , "Dummytjeneste"@nb ;
                 cpsv:produces      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl> ;
-                dcat:contactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> .
+                cv:hasContactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> .
 
         <https://www.staging.fellesdatakatalog.digdir.no/public-services/1fc38c3c-1c86-3161-a9a7-e443fd94d413>
                 rdf:type           dcat:CatalogRecord ;
@@ -865,9 +945,43 @@ def test_parse_cpsvno_services(
                 )
             ],
             contactPoint=[
-                ContactPoint(
+                CVContactPoint(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl",
-                    hasURL="https://example.org/exHjemmeside",
+                    email=["mailto:postmottak@example.org"],
+                    telephone=["tel:+4712345678"],
+                    contactPage=["https://example.org/exKontaktside"],
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/ENG",
+                            code="ENG",
+                            prefLabel={
+                                "en": "English",
+                                "nb": "Engelsk",
+                                "nn": "Engelsk",
+                                "no": "Engelsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NNO",
+                            code="NNO",
+                            prefLabel={
+                                "en": "Norwegian Nynorsk",
+                                "nb": "Norsk Nynorsk",
+                                "nn": "Norsk Nynorsk",
+                                "no": "Norsk Nynorsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code="NOB",
+                            prefLabel={
+                                "en": "Norwegian Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                            },
+                        ),
+                    ],
                 )
             ],
             language=[

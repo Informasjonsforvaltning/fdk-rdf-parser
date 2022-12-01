@@ -4,7 +4,7 @@ from .catalog import Catalog
 from .channel import Channel
 from .concept import Concept
 from .conforms_to import ConformsTo
-from .contactpoint import ContactPoint
+from .contactpoint import ContactPoint, CVContactPoint
 from .cost import Cost
 from .cpsvno_service import Service
 from .criterion_requirement import CriterionRequirement
@@ -22,6 +22,7 @@ from .info_model import InformationModel
 from .legal_resource import LegalResource
 from .life_event import LifeEvent
 from .media_type import MediaTypeOrExtent, MediaTypeOrExtentType
+from .opening_hours_specification import OpeningHoursSpecification
 from .output import Output
 from .participation import Participation
 from .public_service import PublicService
@@ -30,7 +31,6 @@ from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
 from .rule import Rule
-from .schema_contact_point import SchemaContactPoint
 from .skos_code import SkosCode
 from .skos_concept import SkosConcept
 from .subject import Subject

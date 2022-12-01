@@ -3,13 +3,11 @@ from typing import Any, List, Optional
 
 from .cpsvno_service import Service
 from .publisher import Publisher
-from .schema_contact_point import SchemaContactPoint
 
 
 @dataclass
 class PublicService(Service):
     hasCompetentAuthority: Optional[List[Publisher]] = None
-    hasContactPoint: Optional[List[SchemaContactPoint]] = None
 
     def add_cpsvno_service_values(self: Any, values: Service) -> None:
         self.id = values.id
@@ -25,6 +23,7 @@ class PublicService(Service):
         self.isClassifiedBy = values.isClassifiedBy
         self.language = values.language
         self.hasCriterion = values.hasCriterion
+        self.contactPoint = values.contactPoint
         self.hasParticipation = values.hasParticipation
         self.hasInput = values.hasInput
         self.produces = values.produces
