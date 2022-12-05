@@ -520,18 +520,68 @@ def test_complete_public_services(
                     specialOpeningHours=[
                         OpeningHoursSpecification(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl",
-                            dayOfWeek=["https://schema.org/PublicHolidays"],
+                            dayOfWeek=[
+                                SkosCode(
+                                    uri="https://schema.org/PublicHolidays",
+                                    code="PublicHolidays",
+                                    prefLabel={
+                                        "nn": "Offentlege fridagar",
+                                        "nb": "Offentlige fridager",
+                                        "en": "Public holidays",
+                                    },
+                                )
+                            ],
                         )
                     ],
                     hoursAvailable=[
                         OpeningHoursSpecification(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl",
                             dayOfWeek=[
-                                "https://schema.org/Friday",
-                                "https://schema.org/Monday",
-                                "https://schema.org/Thursday",
-                                "https://schema.org/Tuesday",
-                                "https://schema.org/Wednesday",
+                                SkosCode(
+                                    uri="https://schema.org/Friday",
+                                    code="Friday",
+                                    prefLabel={
+                                        "nn": "Fredag",
+                                        "nb": "Fredag",
+                                        "en": "Friday",
+                                    },
+                                ),
+                                SkosCode(
+                                    uri="https://schema.org/Monday",
+                                    code="Monday",
+                                    prefLabel={
+                                        "nn": "Måndag",
+                                        "nb": "Mandag",
+                                        "en": "Monday",
+                                    },
+                                ),
+                                SkosCode(
+                                    uri="https://schema.org/Thursday",
+                                    code="Thursday",
+                                    prefLabel={
+                                        "nn": "Torsdag",
+                                        "nb": "Torsdag",
+                                        "en": "Thursday",
+                                    },
+                                ),
+                                SkosCode(
+                                    uri="https://schema.org/Tuesday",
+                                    code="Tuesday",
+                                    prefLabel={
+                                        "nn": "Tysdag",
+                                        "nb": "Tirsdag",
+                                        "en": "Tuesday",
+                                    },
+                                ),
+                                SkosCode(
+                                    uri="https://schema.org/Wednesday",
+                                    code="Wednesday",
+                                    prefLabel={
+                                        "nn": "Onsdag",
+                                        "nb": "Onsdag",
+                                        "en": "Wednesday",
+                                    },
+                                ),
                             ],
                         )
                     ],
