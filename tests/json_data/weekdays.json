@@ -1,0 +1,76 @@
+{
+    "weekDays": [
+        {
+            "uri": "https://schema.org/Friday",
+            "code": "Friday",
+            "label": {
+                "nn": "Fredag",
+                "nb": "Fredag",
+                "en": "Friday"
+            }
+        },
+        {
+            "uri": "https://schema.org/Monday",
+            "code": "Monday",
+            "label": {
+                "nn": "Måndag",
+                "nb": "Mandag",
+                "en": "Monday"
+            }
+        },
+        {
+            "uri": "https://schema.org/PublicHolidays",
+            "code": "PublicHolidays",
+            "label": {
+                "nn": "Offentlege fridagar",
+                "nb": "Offentlige fridager",
+                "en": "Public holidays"
+            }
+        },
+        {
+            "uri": "https://schema.org/Saturday",
+            "code": "Saturday",
+            "label": {
+                "nn": "Laurdag",
+                "nb": "Lørdag",
+                "en": "Saturday"
+            }
+        },
+        {
+            "uri": "https://schema.org/Sunday",
+            "code": "Sunday",
+            "label": {
+                "nn": "Sundag",
+                "nb": "Søndag",
+                "en": "Sunday"
+            }
+        },
+        {
+            "uri": "https://schema.org/Thursday",
+            "code": "Thursday",
+            "label": {
+                "nn": "Torsdag",
+                "nb": "Torsdag",
+                "en": "Thursday"
+            }
+        },
+        {
+            "uri": "https://schema.org/Tuesday",
+            "code": "Tuesday",
+            "label": {
+                "nn": "Tysdag",
+                "nb": "Tirsdag",
+                "en": "Tuesday"
+            }
+        },
+        {
+            "uri": "https://schema.org/Wednesday",
+            "code": "Wednesday",
+            "label": {
+                "nn": "Onsdag",
+                "nb": "Onsdag",
+                "en": "Wednesday"
+            }
+        }
+    ]
+}

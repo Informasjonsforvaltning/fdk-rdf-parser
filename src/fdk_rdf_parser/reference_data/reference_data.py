@@ -43,6 +43,7 @@ class InformationModelReferenceData:
 @dataclass
 class PublicServiceReferenceData:
     linguisticsystem: Optional[Dict[str, SkosCode]] = None
+    week_days: Optional[Dict[str, SkosCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -75,7 +76,10 @@ def get_info_model_reference_data() -> InformationModelReferenceData:
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
-    return PublicServiceReferenceData(linguisticsystem=get_and_map_linguistic_system())
+    return PublicServiceReferenceData(
+        linguisticsystem=get_and_map_linguistic_system(),
+        week_days=get_and_map_week_days(),
+    )
 
 
 def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, SkosCode]]:
@@ -184,6 +188,11 @@ def get_and_map_linguistic_system() -> Optional[Dict[str, SkosCode]]:
 def get_and_map_access_rights() -> Optional[Dict[str, SkosCode]]:
     access_rights = get_reference_data("/eu/access-rights").get("accessRights")
     return parse_reference_codes(access_rights)
+
+
+def get_and_map_week_days() -> Optional[Dict[str, SkosCode]]:
+    week_days = get_reference_data("/schema/week-days").get("weekDays")
+    return parse_reference_codes(week_days)
 
 
 def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
