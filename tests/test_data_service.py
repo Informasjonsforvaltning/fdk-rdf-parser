@@ -3,8 +3,8 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_data_services
 from fdk_rdf_parser.classes import (
     Catalog,
-    ContactPoint,
     DataService,
+    DCATContactPoint,
     HarvestMetaData,
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
@@ -151,7 +151,7 @@ def test_parse_multiple_data_services(
             },
             uri="https://testutgiver.no/data-services/2",
             contactPoint=[
-                ContactPoint(
+                DCATContactPoint(
                     fullname="Contact information",
                     email="kaffe@epost.no",
                     organizationName={"nb": "Kaffehuset"},
@@ -235,7 +235,7 @@ def test_parse_multiple_data_services(
             title={"nb": "Testing Testing"},
             uri="https://testutgiver.no/dataservices/1",
             contactPoint=[
-                ContactPoint(
+                DCATContactPoint(
                     fullname="Contact information",
                 )
             ],

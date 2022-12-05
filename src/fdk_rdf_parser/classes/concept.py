@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set
 
-from .contactpoint import ContactPoint
+from .contactpoint import DCATContactPoint
 from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher
 
@@ -66,7 +66,7 @@ class Concept:
     prefLabel: Optional[Dict[str, str]] = None
     hiddenLabel: Optional[List[Dict[str, str]]] = None
     altLabel: Optional[List[Dict[str, str]]] = None
-    contactPoint: Optional[ContactPoint] = None
+    contactPoint: Optional[DCATContactPoint] = None
     definition: Optional[Definition] = None
     seeAlso: Optional[Set[str]] = None
     isReplacedBy: Optional[Set[str]] = None

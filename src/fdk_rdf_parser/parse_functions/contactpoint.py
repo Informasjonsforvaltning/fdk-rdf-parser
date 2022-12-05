@@ -2,7 +2,7 @@ from typing import Any, List, Optional
 
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import ContactPoint, CVContactPoint
+from fdk_rdf_parser.classes import CVContactPoint, DCATContactPoint
 from fdk_rdf_parser.parse_functions.opening_hours_specification import (
     extract_opening_hours_specification,
 )
@@ -21,7 +21,7 @@ from fdk_rdf_parser.rdf_utils import (
 
 def extract_contact_points(
     graph: Graph, subject: URIRef
-) -> Optional[List[ContactPoint]]:
+) -> Optional[List[DCATContactPoint]]:
     values = []
     for resource in resource_list(graph, subject, dcat_uri("contactPoint")):
         resource_uri = None
@@ -29,7 +29,7 @@ def extract_contact_points(
             resource_uri = resource.toPython()
 
         values.append(
-            ContactPoint(
+            DCATContactPoint(
                 uri=resource_uri,
                 fullname=object_value(graph, resource, vcard_uri("fn")),
                 email=extract_has_email(graph, resource),

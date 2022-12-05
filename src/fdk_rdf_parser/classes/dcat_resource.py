@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set
 
-from .contactpoint import ContactPoint
+from .contactpoint import DCATContactPoint
 from .publisher import Publisher
 from .skos_code import SkosCode
 from .theme import EuDataTheme
@@ -18,7 +18,7 @@ class PartialDcatResource:
     accessRights: Optional[SkosCode] = None
     theme: Optional[List[EuDataTheme]] = None
     keyword: Optional[List[Dict[str, str]]] = None
-    contactPoint: Optional[List[ContactPoint]] = None
+    contactPoint: Optional[List[DCATContactPoint]] = None
     dctType: Optional[str] = None
     issued: Optional[str] = None
     modified: Optional[str] = None

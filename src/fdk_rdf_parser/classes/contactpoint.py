@@ -6,7 +6,7 @@ from .skos_code import SkosCode
 
 
 @dataclass
-class ContactPoint:
+class DCATContactPoint:
     uri: Optional[str] = None
     fullname: Optional[str] = None
     email: Optional[str] = None

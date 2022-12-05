@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import ContactPoint
+from fdk_rdf_parser.classes import DCATContactPoint
 from fdk_rdf_parser.parse_functions import extract_contact_points
 
 
@@ -20,7 +20,7 @@ def test_single_contact_point() -> None:
                     ] ."""
 
     expected = [
-        ContactPoint(
+        DCATContactPoint(
             organizationName={"nb": "Testdirektoratet"},
             hasURL="https://testdirektoratet.no",
             hasTelephone="23453345",
@@ -63,7 +63,7 @@ def test_several_contact_points() -> None:
                 vcard:hasEmail             <mailto:testmann@mail.com> ."""
 
     expected = [
-        ContactPoint(
+        DCATContactPoint(
             email="post@mail.com",
             organizationName={
                 "nb": "Testdirektoratet",
@@ -73,13 +73,13 @@ def test_several_contact_points() -> None:
             organizationUnit={"nb": "Testenhet", "nn": "Testenhet", "en": "Test unit"},
             hasURL="https://testdirektoratet.no",
         ),
-        ContactPoint(
+        DCATContactPoint(
             uri="https://testdirektoratet.no/kontakt/testmann",
             fullname="Test Mann",
             email="testmann@mail.com",
             hasTelephone="12345678",
         ),
-        ContactPoint(uri="https://testdirektoratet.no/kontakt/testmann2"),
+        DCATContactPoint(uri="https://testdirektoratet.no/kontakt/testmann2"),
     ]
 
     graph = Graph().parse(data=src, format="turtle")
@@ -108,7 +108,7 @@ def test_telephone_and_email_is_nodes() -> None:
             vcard:hasValue  <tel:99999999> ."""
 
     expected = [
-        ContactPoint(
+        DCATContactPoint(
             email="post@mail.com",
             hasTelephone="99999999",
         )

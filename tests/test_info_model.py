@@ -5,7 +5,7 @@ from rdflib import Graph, URIRef
 from fdk_rdf_parser import parse_information_models
 from fdk_rdf_parser.classes import (
     Catalog,
-    ContactPoint,
+    DCATContactPoint,
     DctStandard,
     Format,
     HarvestMetaData,
@@ -134,7 +134,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
             keyword=[{"nb": "Adresse"}],
             contactPoint=[
-                ContactPoint(
+                DCATContactPoint(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#KontaktOss",
                     fullname="Avdeling for digitalisering",
                     email="informasjonsforvaltning@digdir.no",
