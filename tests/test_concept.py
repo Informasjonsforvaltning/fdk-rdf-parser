@@ -3,7 +3,7 @@ from unittest.mock import Mock
 from rdflib import Graph, URIRef
 
 from fdk_rdf_parser import parse_concepts
-from fdk_rdf_parser.classes import Concept, ContactPoint, HarvestMetaData, Publisher
+from fdk_rdf_parser.classes import Concept, DCATContactPoint, HarvestMetaData, Publisher
 from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,
@@ -367,7 +367,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             ),
             application=[{"nb": "hjem"}],
             prefLabel={"nn": "lua og sokka"},
-            contactPoint=ContactPoint(
+            contactPoint=DCATContactPoint(
                 email="informasjonsforvaltning@brreg.no",
                 hasTelephone="+4775007500",
             ),
