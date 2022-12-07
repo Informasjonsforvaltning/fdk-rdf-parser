@@ -344,8 +344,11 @@ def test_complete_public_services(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
-            admsStatus=SkosCode(uri='http://purl.org/adms/status/Completed', code='Completed',
-                                prefLabel={'nn': 'Ferdigstilt', 'nb': 'Ferdigstilt', 'en': 'Completed'}),
+            admsStatus=SkosCode(
+                uri="http://purl.org/adms/status/Completed",
+                code="Completed",
+                prefLabel={"nn": "Ferdigstilt", "nb": "Ferdigstilt", "en": "Completed"},
+            ),
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
