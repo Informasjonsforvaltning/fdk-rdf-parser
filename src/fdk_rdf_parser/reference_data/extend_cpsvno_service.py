@@ -1,6 +1,11 @@
 from typing import List, Optional
 
-from fdk_rdf_parser.classes import CVContactPoint, OpeningHoursSpecification, Service
+from fdk_rdf_parser.classes import (
+    CVContactPoint,
+    OpeningHoursSpecification,
+    Output,
+    Service,
+)
 from .reference_data import PublicServiceReferenceData
 from .utils import extend_skos_code, extend_skos_code_list
 
@@ -14,6 +19,7 @@ def extend_cpsvno_service_with_reference_data(
     cpsvno_service.contactPoint = extend_cv_contact_points(
         cpsvno_service.contactPoint, ref_data
     )
+    cpsvno_service.produces = extend_cv_output(cpsvno_service.produces, ref_data)
     cpsvno_service.admsStatus = extend_skos_code(
         cpsvno_service.admsStatus, ref_data.statuses
     )
@@ -53,4 +59,19 @@ def extend_opening_hours_spec(
         for item in opening_hours:
             item.dayOfWeek = extend_skos_code_list(item.dayOfWeek, ref_data.week_days)
             extended.append(item)
+        return extended
+
+
+def extend_cv_output(
+    outputs: Optional[List[Output]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Output]]:
+    if outputs is None:
+        return outputs
+    else:
+        extended: List[Output] = list()
+        for output in outputs:
+            output.language = extend_skos_code_list(
+                output.language, ref_data.linguisticsystem
+            )
+            extended.append(output)
         return extended
