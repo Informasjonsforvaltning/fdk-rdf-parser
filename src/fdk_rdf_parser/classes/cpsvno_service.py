@@ -46,3 +46,4 @@ class Service:
     hasCriterion: Optional[List[CriterionRequirement]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
+    admsStatus: Optional[SkosCode] = None

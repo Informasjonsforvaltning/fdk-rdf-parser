@@ -26,6 +26,7 @@ def test_complete_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
+            @prefix adms: <http://www.w3.org/ns/adms#> .
             @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
             @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
             @prefix rov:   <http://www.w3.org/ns/regorg#> .
@@ -48,6 +49,7 @@ def test_complete_public_services(
                     dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
                     dct:identifier              "4" ;
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb .
+
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
                     cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
@@ -72,6 +74,7 @@ def test_complete_public_services(
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
+                    adms:status   <http://purl.org/adms/status/Completed>;
                     dcat:keyword "Serveringsbevilling"@nb .
 
             <https://data.norge.no/concepts/1>
@@ -341,6 +344,8 @@ def test_complete_public_services(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
+            admsStatus=SkosCode(uri='http://purl.org/adms/status/Completed', code='Completed',
+                                prefLabel={'nn': 'Ferdigstilt', 'nb': 'Ferdigstilt', 'en': 'Completed'}),
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },

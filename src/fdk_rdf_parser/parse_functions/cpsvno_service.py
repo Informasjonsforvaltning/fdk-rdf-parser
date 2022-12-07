@@ -13,12 +13,13 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_list,
     value_translations,
+    adms_uri
 )
 from .channel import extract_channels
 from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
 from .criterion_requirement import extract_criterion_requirements
-from .dcat_resource import extract_key_words, extract_skos_code_list
+from .dcat_resource import extract_key_words, extract_skos_code_list, extract_skos_code
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
@@ -100,6 +101,7 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.relation
         ),
         spatial=value_list(services_graph, cpsvno_service_uri, DCTERMS.spatial),
+        admsStatus=extract_skos_code(services_graph, cpsvno_service_uri, adms_uri("status")),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):
