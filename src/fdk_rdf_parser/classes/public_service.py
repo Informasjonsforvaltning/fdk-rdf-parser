@@ -36,3 +36,4 @@ class PublicService(Service):
         self.relation = values.relation
         self.spatial = values.spatial
         self.type = values.type
+        self.admsStatus = values.admsStatus
