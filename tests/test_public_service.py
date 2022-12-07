@@ -1077,6 +1077,38 @@ def test_parse_cpsvno_services(
                         "nn": "Teksten blir vist på nynorsk.",
                         "nb": "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat.",
                     },
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/ENG",
+                            code="ENG",
+                            prefLabel={
+                                "nn": "Engelsk",
+                                "no": "Engelsk",
+                                "nb": "Engelsk",
+                                "en": "English",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NNO",
+                            code="NNO",
+                            prefLabel={
+                                "nn": "Norsk Nynorsk",
+                                "no": "Norsk Nynorsk",
+                                "nb": "Norsk Nynorsk",
+                                "en": "Norwegian Nynorsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code="NOB",
+                            prefLabel={
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "en": "Norwegian Bokmål",
+                            },
+                        ),
+                    ],
                 )
             ],
             type="publicservices",
