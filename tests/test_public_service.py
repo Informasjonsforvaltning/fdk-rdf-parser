@@ -50,7 +50,6 @@ def test_complete_public_services(
                     dct:identifier              "4" ;
                     dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb .
 
-
             <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
                     cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
                     cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
