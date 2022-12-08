@@ -104,6 +104,7 @@ def parse_cpsvno_service(
         admsStatus=extract_skos_code(
             services_graph, cpsvno_service_uri, adms_uri("status")
         ),
+        subject=value_list(services_graph, cpsvno_service_uri, DCTERMS.subject),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):
