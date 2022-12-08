@@ -48,3 +48,4 @@ class Service:
     type: str = "publicservices"
     admsStatus: Optional[SkosCode] = None
     subject: Optional[List[str]] = None
+    homepage: Optional[List[str]] = None

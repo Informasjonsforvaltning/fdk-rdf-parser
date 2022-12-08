@@ -75,6 +75,7 @@ def test_complete_public_services(
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     adms:status   <http://purl.org/adms/status/Completed> ;
                     dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
+                    foaf:homepage <http://testhomepage0.no>, <http://testhomepage1.no> ;
                     dcat:keyword "Serveringsbevilling"@nb .
 
             <https://data.norge.no/concepts/1>
@@ -350,6 +351,7 @@ def test_complete_public_services(
                 prefLabel={"nn": "Ferdigstilt", "nb": "Ferdigstilt", "en": "Completed"},
             ),
             subject=["http://testbegrep0.no", "http://testbegrep1.no"],
+            homepage=["http://testhomepage0.no", "http://testhomepage1.no"],
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },

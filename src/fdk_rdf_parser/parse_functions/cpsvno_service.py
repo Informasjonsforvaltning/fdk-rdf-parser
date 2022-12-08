@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, FOAF
 
 from fdk_rdf_parser.classes import PublicService, Service
 from fdk_rdf_parser.rdf_utils import (
@@ -105,6 +105,7 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, adms_uri("status")
         ),
         subject=value_list(services_graph, cpsvno_service_uri, DCTERMS.subject),
+        homepage=value_list(services_graph, cpsvno_service_uri, FOAF.homepage),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):
