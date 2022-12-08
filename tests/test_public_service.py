@@ -701,6 +701,7 @@ def test_parse_multiple_public_services(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """
+        @prefix adms: <http://www.w3.org/ns/adms#> .
         @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
         @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
@@ -716,6 +717,7 @@ def test_parse_multiple_public_services(
                 dct:title "Ei offentleg teneste"@nb ;
                 dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
                 cv:processingTime "not valid duration type"^^xsd:duration ;
+                adms:status <http://is-not-in-ref-data.test> ;
                 cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                 cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                 cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
@@ -797,6 +799,7 @@ def test_parse_multiple_public_services(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
+            admsStatus=SkosCode(uri="http://is-not-in-ref-data.test"),
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
