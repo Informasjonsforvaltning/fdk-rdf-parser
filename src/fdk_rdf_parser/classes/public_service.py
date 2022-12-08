@@ -37,3 +37,5 @@ class PublicService(Service):
         self.spatial = values.spatial
         self.type = values.type
         self.admsStatus = values.admsStatus
+        self.subject = values.subject
+        # her og hege

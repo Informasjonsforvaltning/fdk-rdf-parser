@@ -47,3 +47,6 @@ class Service:
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
     admsStatus: Optional[SkosCode] = None
+    subject: Optional[List[str]] = None
+
+    # her skal subject hege

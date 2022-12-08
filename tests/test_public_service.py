@@ -73,7 +73,8 @@ def test_complete_public_services(
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
-                    adms:status   <http://purl.org/adms/status/Completed>;
+                    adms:status   <http://purl.org/adms/status/Completed> ;
+                    dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
                     dcat:keyword "Serveringsbevilling"@nb .
 
             <https://data.norge.no/concepts/1>
@@ -348,6 +349,7 @@ def test_complete_public_services(
                 code="Completed",
                 prefLabel={"nn": "Ferdigstilt", "nb": "Ferdigstilt", "en": "Completed"},
             ),
+            subject=["http://testbegrep0.no", "http://testbegrep1.no"],
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
@@ -1114,5 +1116,7 @@ def test_parse_cpsvno_services(
             type="publicservices",
         )
     }
+
+    # legg til test -> bruk forrige commit som mal ish (obs dette er en liste) hege
 
     assert parse_public_services(src) == expected
