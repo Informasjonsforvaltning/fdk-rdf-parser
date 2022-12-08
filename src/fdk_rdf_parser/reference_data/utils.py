@@ -86,10 +86,8 @@ def extend_skos_code(
                 if references is not None
                 else None
             )
-            if ref_code is not None:
-                return ref_code
 
-    return ref_code
+    return ref_code if ref_code is not None else skos_code
 
 
 def extend_skos_code_list(
