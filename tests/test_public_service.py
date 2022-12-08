@@ -1117,6 +1117,4 @@ def test_parse_cpsvno_services(
         )
     }
 
-    # legg til test -> bruk forrige commit som mal ish (obs dette er en liste) hege
-
     assert parse_public_services(src) == expected

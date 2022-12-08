@@ -67,7 +67,6 @@ def parse_cpsvno_service(
         isGroupedBy=value_list(
             services_graph, cpsvno_service_uri, cv_uri("isGroupedBy")
         ),
-        # helt lik som isgrouped by, men ikke cv_uri, men dct:subject, DCTERMS.subjects muligens? hege
         harvest=extract_meta_data(services_graph, catalog_record_uri),
         keyword=extract_key_words(services_graph, cpsvno_service_uri),
         sector=extract_skos_concept(
@@ -106,7 +105,6 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, adms_uri("status")
         ),
         subject=value_list(services_graph, cpsvno_service_uri, DCTERMS.subject),
-        # helt lik som isgrouped by, men ikke cv_uri, men dct:subject, DCTERMS.subjects muligens? hege
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):

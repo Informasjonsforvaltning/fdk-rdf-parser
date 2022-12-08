@@ -38,4 +38,3 @@ class PublicService(Service):
         self.type = values.type
         self.admsStatus = values.admsStatus
         self.subject = values.subject
-        # her og hege

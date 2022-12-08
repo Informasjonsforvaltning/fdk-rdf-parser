@@ -48,5 +48,3 @@ class Service:
     type: str = "publicservices"
     admsStatus: Optional[SkosCode] = None
     subject: Optional[List[str]] = None
-
-    # her skal subject hege
