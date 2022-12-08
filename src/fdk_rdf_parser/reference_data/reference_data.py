@@ -45,6 +45,7 @@ class PublicServiceReferenceData:
     linguisticsystem: Optional[Dict[str, SkosCode]] = None
     week_days: Optional[Dict[str, SkosCode]] = None
     statuses: Optional[Dict[str, SkosCode]] = None
+    evidence_type: Optional[Dict[str, SkosCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -81,6 +82,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         linguisticsystem=get_and_map_linguistic_system(),
         week_days=get_and_map_week_days(),
         statuses=get_and_map_statuses(),
+        evidence_type=get_and_map_evidence_types(),
     )
 
 
@@ -200,6 +202,11 @@ def get_and_map_week_days() -> Optional[Dict[str, SkosCode]]:
 def get_and_map_statuses() -> Optional[Dict[str, SkosCode]]:
     statuses = get_reference_data("adms/statuses").get("statuses")
     return parse_reference_codes(statuses)
+
+
+def get_and_map_evidence_types() -> Optional[Dict[str, SkosCode]]:
+    evidence_types = get_reference_data("digdir/evidence-types").get("evidenceTypes")
+    return parse_reference_codes(evidence_types)
 
 
 def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:

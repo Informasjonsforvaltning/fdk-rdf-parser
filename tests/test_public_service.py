@@ -20,6 +20,7 @@ from fdk_rdf_parser.classes import (
     SkosCode,
     SkosConcept,
 )
+from fdk_rdf_parser.classes.evidence import EvidenceRdfType
 
 
 def test_complete_public_services(
@@ -71,7 +72,8 @@ def test_complete_public_services(
                     dct:spatial <https://data.geonorge.no/administrativeEnheter/kommune/id/172833>;
                     dct:title "Ei offentleg teneste"@nb ;
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
-                    cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ;
+                    cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ,
+                                  <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     adms:status   <http://purl.org/adms/status/Completed> ;
                     dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
@@ -167,7 +169,20 @@ def test_complete_public_services(
                     a                cv:Evidence ;
                     dct:description  "Vandelsattest"@nb ;
                     dct:identifier   "1" ;
-                    dct:title        "Vandelsattest"@nb .
+                    dct:title        "Vandelsattest"@nb ;
+                    dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ,
+                                     <http://publications.europa.eu/resource/authority/language/NNO> ,
+                                     <http://publications.europa.eu/resource/authority/language/ENG> ;
+                    dct:type         <https://data.norge.no/vocabulary/evidence-type#attestation> ;
+                    foaf:page        <https://example.org/exDokumentasjonsSide> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2>
+                    a                dcat:Dataset ;
+                    dct:description  "Annen dokumentasjon"@nb ;
+                    dct:identifier   "2" ;
+                    dct:title        "Nødvendig dokumentasjon"@nb ;
+                    dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
+                    foaf:page        <https://example.org/exDokumentasjonsSide2> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4>
                     a                cv:Output ;
@@ -454,12 +469,72 @@ def test_complete_public_services(
             ],
             hasInput=[
                 Evidence(
+                    rdfType=EvidenceRdfType.EVIDENCE_TYPE,
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1",
                     identifier="1",
                     name={"nb": "Vandelsattest"},
                     description={"nb": "Vandelsattest"},
-                    type=None,
-                    language=None,
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/ENG",
+                            code="ENG",
+                            prefLabel={
+                                "nn": "Engelsk",
+                                "no": "Engelsk",
+                                "nb": "Engelsk",
+                                "en": "English",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NNO",
+                            code="NNO",
+                            prefLabel={
+                                "nn": "Norsk Nynorsk",
+                                "no": "Norsk Nynorsk",
+                                "nb": "Norsk Nynorsk",
+                                "en": "Norwegian Nynorsk",
+                            },
+                        ),
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code="NOB",
+                            prefLabel={
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "en": "Norwegian Bokmål",
+                            },
+                        ),
+                    ],
+                    dctType=[
+                        SkosCode(
+                            uri="https://data.norge.no/vocabulary/evidence-type#attestation",
+                            code="attestation",
+                            prefLabel={"nb": "attest", "en": "attestation"},
+                        ),
+                    ],
+                    page=["https://example.org/exDokumentasjonsSide"],
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.DATASET_TYPE,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2",
+                    identifier="2",
+                    name={"nb": "Nødvendig dokumentasjon"},
+                    description={"nb": "Annen dokumentasjon"},
+                    dctType=None,
+                    language=[
+                        SkosCode(
+                            uri="http://publications.europa.eu/resource/authority/language/NOB",
+                            code="NOB",
+                            prefLabel={
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "en": "Norwegian Bokmål",
+                            },
+                        ),
+                    ],
+                    page=["https://example.org/exDokumentasjonsSide2"],
                 ),
             ],
             produces=[

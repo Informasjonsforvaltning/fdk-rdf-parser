@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from fdk_rdf_parser.classes import (
     CVContactPoint,
+    Evidence,
     OpeningHoursSpecification,
     Output,
     Service,
@@ -23,6 +24,7 @@ def extend_cpsvno_service_with_reference_data(
     cpsvno_service.admsStatus = extend_skos_code(
         cpsvno_service.admsStatus, ref_data.statuses
     )
+    cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
 
     return cpsvno_service
 
@@ -74,4 +76,22 @@ def extend_cv_output(
                 output.language, ref_data.linguisticsystem
             )
             extended.append(output)
+        return extended
+
+
+def extend_cv_evidence(
+    evidences: Optional[List[Evidence]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Evidence]]:
+    if evidences is None:
+        return None
+    else:
+        extended: List[Evidence] = list()
+        for evidence in evidences:
+            evidence.dctType = extend_skos_code_list(
+                evidence.dctType, ref_data.evidence_type
+            )
+            evidence.language = extend_skos_code_list(
+                evidence.language, ref_data.linguisticsystem
+            )
+            extended.append(evidence)
         return extended
