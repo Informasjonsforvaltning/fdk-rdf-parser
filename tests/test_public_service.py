@@ -17,7 +17,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     Rule,
     Service,
-    SkosCode,
+    ReferenceDataCode,
     SkosConcept,
 )
 from fdk_rdf_parser.classes.evidence import EvidenceRdfType
@@ -360,7 +360,7 @@ def test_complete_public_services(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
-            admsStatus=SkosCode(
+            admsStatus=ReferenceDataCode(
                 uri="http://purl.org/adms/status/Completed",
                 code="Completed",
                 prefLabel={"nn": "Ferdigstilt", "nb": "Ferdigstilt", "en": "Completed"},
@@ -416,7 +416,7 @@ def test_complete_public_services(
                 )
             ],
             language=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="http://publications.europa.eu/resource/authority/language/NOB",
                     code="NOB",
                     prefLabel={
@@ -475,7 +475,7 @@ def test_complete_public_services(
                     name={"nb": "Vandelsattest"},
                     description={"nb": "Vandelsattest"},
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/ENG",
                             code="ENG",
                             prefLabel={
@@ -485,7 +485,7 @@ def test_complete_public_services(
                                 "en": "English",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NNO",
                             code="NNO",
                             prefLabel={
@@ -495,7 +495,7 @@ def test_complete_public_services(
                                 "en": "Norwegian Nynorsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code="NOB",
                             prefLabel={
@@ -507,7 +507,7 @@ def test_complete_public_services(
                         ),
                     ],
                     dctType=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="https://data.norge.no/vocabulary/evidence-type#attestation",
                             code="attestation",
                             prefLabel={"nb": "attest", "en": "attestation"},
@@ -523,7 +523,7 @@ def test_complete_public_services(
                     description={"nb": "Annen dokumentasjon"},
                     dctType=None,
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code="NOB",
                             prefLabel={
@@ -567,7 +567,7 @@ def test_complete_public_services(
                     email=["mailto:postmottak@bronnoy.kommune.no"],
                     telephone=["tel:+4775012000"],
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/ENG",
                             code="ENG",
                             prefLabel={
@@ -577,7 +577,7 @@ def test_complete_public_services(
                                 "no": "Engelsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NNO",
                             code="NNO",
                             prefLabel={
@@ -587,7 +587,7 @@ def test_complete_public_services(
                                 "no": "Norsk Nynorsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code="NOB",
                             prefLabel={
@@ -607,7 +607,7 @@ def test_complete_public_services(
                         OpeningHoursSpecification(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl",
                             dayOfWeek=[
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/PublicHolidays",
                                     code="PublicHolidays",
                                     prefLabel={
@@ -623,7 +623,7 @@ def test_complete_public_services(
                         OpeningHoursSpecification(
                             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl",
                             dayOfWeek=[
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/Friday",
                                     code="Friday",
                                     prefLabel={
@@ -632,7 +632,7 @@ def test_complete_public_services(
                                         "en": "Friday",
                                     },
                                 ),
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/Monday",
                                     code="Monday",
                                     prefLabel={
@@ -641,7 +641,7 @@ def test_complete_public_services(
                                         "en": "Monday",
                                     },
                                 ),
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/Thursday",
                                     code="Thursday",
                                     prefLabel={
@@ -650,7 +650,7 @@ def test_complete_public_services(
                                         "en": "Thursday",
                                     },
                                 ),
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/Tuesday",
                                     code="Tuesday",
                                     prefLabel={
@@ -659,7 +659,7 @@ def test_complete_public_services(
                                         "en": "Tuesday",
                                     },
                                 ),
-                                SkosCode(
+                                ReferenceDataCode(
                                     uri="https://schema.org/Wednesday",
                                     code="Wednesday",
                                     prefLabel={
@@ -681,7 +681,7 @@ def test_complete_public_services(
                         "nb": "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"
                     },
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code=None,
                             prefLabel=None,
@@ -876,7 +876,7 @@ def test_parse_multiple_public_services(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/services/1",
             identifier="1",
             title={"nb": "Ei offentleg teneste"},
-            admsStatus=SkosCode(uri="http://is-not-in-ref-data.test"),
+            admsStatus=ReferenceDataCode(uri="http://is-not-in-ref-data.test"),
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
             },
@@ -1090,7 +1090,7 @@ def test_parse_cpsvno_services(
                     telephone=["tel:+4712345678"],
                     contactPage=["https://example.org/exKontaktside"],
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/ENG",
                             code="ENG",
                             prefLabel={
@@ -1100,7 +1100,7 @@ def test_parse_cpsvno_services(
                                 "no": "Engelsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NNO",
                             code="NNO",
                             prefLabel={
@@ -1110,7 +1110,7 @@ def test_parse_cpsvno_services(
                                 "no": "Norsk Nynorsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code="NOB",
                             prefLabel={
@@ -1124,7 +1124,7 @@ def test_parse_cpsvno_services(
                 )
             ],
             language=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="http://publications.europa.eu/resource/authority/language/ENG",
                     code="ENG",
                     prefLabel={
@@ -1134,7 +1134,7 @@ def test_parse_cpsvno_services(
                         "no": "Engelsk",
                     },
                 ),
-                SkosCode(
+                ReferenceDataCode(
                     uri="http://publications.europa.eu/resource/authority/language/NOB",
                     code="NOB",
                     prefLabel={
@@ -1160,7 +1160,7 @@ def test_parse_cpsvno_services(
                         "nb": "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat.",
                     },
                     language=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/ENG",
                             code="ENG",
                             prefLabel={
@@ -1170,7 +1170,7 @@ def test_parse_cpsvno_services(
                                 "en": "English",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NNO",
                             code="NNO",
                             prefLabel={
@@ -1180,7 +1180,7 @@ def test_parse_cpsvno_services(
                                 "en": "Norwegian Nynorsk",
                             },
                         ),
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
                             code="NOB",
                             prefLabel={

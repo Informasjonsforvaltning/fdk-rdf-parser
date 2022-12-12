@@ -5,7 +5,7 @@ from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
 from .media_type import MediaTypeOrExtent
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 
@@ -16,7 +16,7 @@ class DataService(PartialDcatResource):
     harvest: Optional[HarvestMetaData] = None
     endpointDescription: Optional[Set[str]] = None
     endpointURL: Optional[Set[str]] = None
-    mediaType: Optional[List[SkosCode]] = None
+    mediaType: Optional[List[ReferenceDataCode]] = None
     fdkFormat: Optional[List[MediaTypeOrExtent]] = None
     servesDataset: Optional[Set[str]] = None
     conformsTo: Optional[List[SkosConcept]] = None

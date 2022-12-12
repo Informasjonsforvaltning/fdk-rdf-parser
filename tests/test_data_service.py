@@ -9,7 +9,7 @@ from fdk_rdf_parser.classes import (
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
     Publisher,
-    SkosCode,
+    ReferenceDataCode,
     SkosConcept,
 )
 
@@ -168,7 +168,7 @@ def test_parse_multiple_data_services(
             },
             endpointURL={"http://kaffe.no", "https://kaffemaskin.no"},
             mediaType=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
                     code="text/turtle",
                     prefLabel={"nb": "text/turtle"},

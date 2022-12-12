@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Optional
 
-from fdk_rdf_parser.classes import EuDataTheme, LosNode, Reference, SkosCode
+from fdk_rdf_parser.classes import EuDataTheme, LosNode, Reference, ReferenceDataCode
 
 base_url = os.getenv(
     "FDK_REFERENCE_DATA_BASE_URI",
@@ -15,7 +15,7 @@ def reference_data_url(endpoint: str) -> str:
 
 def extend_reference_types(
     references: Optional[List[Reference]],
-    reference_types: Optional[Dict[str, SkosCode]],
+    reference_types: Optional[Dict[str, ReferenceDataCode]],
 ) -> Optional[List[Reference]]:
     if references is None or reference_types is None:
         return references
@@ -75,8 +75,9 @@ def extend_eu_data_themes(
 
 
 def extend_skos_code(
-    skos_code: Optional[SkosCode], references: Optional[Dict[str, SkosCode]]
-) -> Optional[SkosCode]:
+    skos_code: Optional[ReferenceDataCode],
+    references: Optional[Dict[str, ReferenceDataCode]],
+) -> Optional[ReferenceDataCode]:
     ref_code = None
     if references is not None:
         uri = skos_code.uri if skos_code is not None else None
@@ -91,8 +92,9 @@ def extend_skos_code(
 
 
 def extend_skos_code_list(
-    skos_codes: Optional[List[SkosCode]], references: Optional[Dict[str, SkosCode]]
-) -> Optional[List[SkosCode]]:
+    skos_codes: Optional[List[ReferenceDataCode]],
+    references: Optional[Dict[str, ReferenceDataCode]],
+) -> Optional[List[ReferenceDataCode]]:
     if skos_codes is None or references is None:
         return skos_codes
     else:

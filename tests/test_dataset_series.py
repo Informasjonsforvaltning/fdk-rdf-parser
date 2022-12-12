@@ -7,7 +7,7 @@ from fdk_rdf_parser.classes import (
     DatasetSeries,
     HarvestMetaData,
     Publisher,
-    SkosCode,
+    ReferenceDataCode,
 )
 
 
@@ -140,7 +140,7 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
                 title={"en": "European Data Catalog"},
                 uri="http://example.org/EUCatalog",
             ),
-            provenance=SkosCode(
+            provenance=ReferenceDataCode(
                 uri="http://data.brreg.no/datakatalog/provinens/nasjonal",
                 code="NASJONAL",
                 prefLabel={

@@ -6,7 +6,7 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     dcat_uri,
 )
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 
 
 class EvidenceRdfType(str, Enum):
@@ -22,6 +22,6 @@ class Evidence:
     identifier: Optional[str] = None
     name: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
-    dctType: Optional[List[SkosCode]] = None
-    language: Optional[List[SkosCode]] = None
+    dctType: Optional[List[ReferenceDataCode]] = None
+    language: Optional[List[ReferenceDataCode]] = None
     page: Optional[List[str]] = None

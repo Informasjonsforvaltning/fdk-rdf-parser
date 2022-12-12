@@ -1,6 +1,11 @@
 from rdflib import Graph, URIRef
 
-from fdk_rdf_parser.classes import EuDataTheme, PartialDcatResource, Publisher, SkosCode
+from fdk_rdf_parser.classes import (
+    EuDataTheme,
+    PartialDcatResource,
+    Publisher,
+    ReferenceDataCode,
+)
 from fdk_rdf_parser.parse_functions import parse_dcat_resource
 
 
@@ -56,7 +61,7 @@ def test_dcat_resource_parser() -> None:
             "en": "Description of dataset 0",
         },
         uri="https://testdirektoratet.no/model/dataset/dcatresource",
-        accessRights=SkosCode(
+        accessRights=ReferenceDataCode(
             uri="http://pubs.europa.eu/resource/authority/access-right/PUBLIC"
         ),
         publisher=Publisher(
@@ -70,7 +75,9 @@ def test_dcat_resource_parser() -> None:
         issued="2019-03-22T13:11:16",
         modified="2019-03-23T13:11:16",
         language=[
-            SkosCode(uri="http://pubs.europa.eu/resource/authority/language/NOR")
+            ReferenceDataCode(
+                uri="http://pubs.europa.eu/resource/authority/language/NOR"
+            )
         ],
         landingPage={"https://testdirektoratet.no"},
         dctType="Kodelister",

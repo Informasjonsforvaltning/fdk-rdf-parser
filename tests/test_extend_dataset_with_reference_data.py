@@ -7,7 +7,7 @@ from fdk_rdf_parser.classes import (
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
     Reference,
-    SkosCode,
+    ReferenceDataCode,
     SkosConcept,
 )
 from fdk_rdf_parser.reference_data import (
@@ -19,7 +19,7 @@ from .testdata import dataset_reference_data
 
 def test_handles_missing_reference_data() -> None:
     parsed_dataset = Dataset(
-        accessRights=SkosCode(
+        accessRights=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         ),
         theme=[EuDataTheme(id="https://psi.norge.no/los/tema/grunnskole")],
@@ -33,11 +33,11 @@ def test_handles_missing_reference_data() -> None:
 
 def test_uri_not_present_in_reference_data() -> None:
     parsed_dataset = Dataset(
-        accessRights=SkosCode(
+        accessRights=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/access-right/MISSING"
         ),
         language=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/language/JAP"
             )
         ],
@@ -51,13 +51,13 @@ def test_uri_not_present_in_reference_data() -> None:
 
 def test_extend_access_rights() -> None:
     parsed_dataset = Dataset(
-        accessRights=SkosCode(
+        accessRights=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         )
     )
 
     expected = Dataset(
-        accessRights=SkosCode(
+        accessRights=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
             code="RESTRICTED",
             prefLabel={"en": "restricted"},
@@ -72,11 +72,13 @@ def test_extend_access_rights() -> None:
 
 def test_extend_provenance() -> None:
     parsed_dataset = Dataset(
-        provenance=SkosCode(uri="http://data.brreg.no/datakatalog/provinens/bruker")
+        provenance=ReferenceDataCode(
+            uri="http://data.brreg.no/datakatalog/provinens/bruker"
+        )
     )
 
     expected = Dataset(
-        provenance=SkosCode(
+        provenance=ReferenceDataCode(
             uri="http://data.brreg.no/datakatalog/provinens/bruker",
             code="BRUKER",
             prefLabel={
@@ -95,13 +97,13 @@ def test_extend_provenance() -> None:
 
 def test_extend_accrual_periodicity() -> None:
     parsed_dataset = Dataset(
-        accrualPeriodicity=SkosCode(
+        accrualPeriodicity=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL"
         )
     )
 
     expected = Dataset(
-        accrualPeriodicity=SkosCode(
+        accrualPeriodicity=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
             code="ANNUAL",
             prefLabel={"nn": "årleg", "no": "årlig", "nb": "årlig", "en": "annual"},
@@ -117,7 +119,7 @@ def test_extend_accrual_periodicity() -> None:
 def test_extend_language() -> None:
     parsed_dataset = Dataset(
         language=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/language/ENG"
             )
         ]
@@ -125,7 +127,7 @@ def test_extend_language() -> None:
 
     expected = Dataset(
         language=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/language/ENG",
                 code="ENG",
                 prefLabel={
@@ -147,13 +149,15 @@ def test_extend_language() -> None:
 def test_extend_spatial() -> None:
     parsed_dataset = Dataset(
         spatial=[
-            SkosCode(uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54")
+            ReferenceDataCode(
+                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54"
+            )
         ]
     )
 
     expected = Dataset(
         spatial=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54",
                 code="54",
                 prefLabel={"no": "Troms og Finnmark"},
@@ -312,7 +316,7 @@ def test_extend_media_types() -> None:
         distribution=[
             Distribution(
                 mediaType=[
-                    SkosCode(
+                    ReferenceDataCode(
                         uri="https://www.iana.org/assignments/media-types/application/xml",
                         code="application/xml",
                         prefLabel={"nb": "application/xml"},
@@ -329,7 +333,7 @@ def test_extend_media_types() -> None:
             ),
             Distribution(
                 mediaType=[
-                    SkosCode(
+                    ReferenceDataCode(
                         uri="http://publications.europa.eu/resource/authority/file-type/XML",
                         code="XML",
                         prefLabel={"nb": "XML"},
@@ -363,7 +367,7 @@ def test_extend_media_types() -> None:
             ),
             Distribution(
                 mediaType=[
-                    SkosCode(
+                    ReferenceDataCode(
                         uri="https://www.iana.org/assignments/media-types/text/turtle",
                         code="text/turtle",
                         prefLabel={"nb": "text/turtle"},
@@ -399,7 +403,9 @@ def test_extend_references() -> None:
     parsed_dataset = Dataset(
         references=[
             Reference(
-                referenceType=SkosCode(uri="http://purl.org/dc/terms/hasVersion"),
+                referenceType=ReferenceDataCode(
+                    uri="http://purl.org/dc/terms/hasVersion"
+                ),
                 source=SkosConcept(
                     uri="https://testdirektoratet.no/model/dataset/hasVersion"
                 ),
@@ -410,7 +416,7 @@ def test_extend_references() -> None:
     expected = Dataset(
         references=[
             Reference(
-                referenceType=SkosCode(
+                referenceType=ReferenceDataCode(
                     uri="http://purl.org/dc/terms/hasVersion",
                     code="hasVersion",
                     prefLabel={
