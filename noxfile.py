@@ -41,6 +41,18 @@ def black(session: Session) -> None:
 
 
 @nox_poetry.session(python=["3.9"])
+def isort(session: Session) -> None:
+    session.install("isort")
+    session.run("isort", ".")
+
+
+@nox_poetry.session(python=["3.9"])
+def fixlint(session: Session) -> None:
+    session.notify("isort")
+    session.notify("black")
+
+
+@nox_poetry.session(python=["3.9"])
 def safety(session: Session) -> None:
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
