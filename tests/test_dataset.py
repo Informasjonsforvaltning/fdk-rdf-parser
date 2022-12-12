@@ -17,7 +17,7 @@ from fdk_rdf_parser.classes import (
     QualifiedAttribution,
     QualityAnnotation,
     Reference,
-    SkosCode,
+    ReferenceDataCode,
     SkosConcept,
     Subject,
 )
@@ -112,7 +112,7 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 firstHarvested="2020-03-12T11:52:16Z",
                 changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
             ),
-            accessRights=SkosCode(
+            accessRights=ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
                 code="PUBLIC",
                 prefLabel={"en": "public"},
@@ -123,7 +123,7 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
             isRelatedToTransportportal=True,
             references=[
                 Reference(
-                    referenceType=SkosCode(
+                    referenceType=ReferenceDataCode(
                         uri="http://purl.org/dc/terms/relation",
                         code="relation",
                         prefLabel={
@@ -318,14 +318,14 @@ def test_parse_dataset() -> None:
             Subject(uri="https://testdirektoratet.no/model/concept/0"),
             Subject(uri="https://testdirektoratet.no/model/concept/1"),
         ],
-        accrualPeriodicity=SkosCode(
+        accrualPeriodicity=ReferenceDataCode(
             "http://publications.europa.eu/resource/authority/freq"
         ),
-        provenance=SkosCode(
+        provenance=ReferenceDataCode(
             uri="http://data.brreg.no/datakatalog/provinens/tredjepart"
         ),
         spatial=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142"
             )
         ],
@@ -726,7 +726,7 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
             uri="https://testdirektoratet.no/model/dataset/0",
-            accessRights=SkosCode(
+            accessRights=ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
                 code="PUBLIC",
                 prefLabel={"en": "public"},
@@ -913,7 +913,7 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
                         ),
                     ],
                     mediaType=[
-                        SkosCode(
+                        ReferenceDataCode(
                             uri="https://www.iana.org/assignments/media-types/text/html",
                             code="text/html",
                             prefLabel={"nb": "text/html"},

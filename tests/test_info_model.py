@@ -12,7 +12,7 @@ from fdk_rdf_parser.classes import (
     InformationModel,
     LosNode,
     Publisher,
-    SkosCode,
+    ReferenceDataCode,
     Temporal,
 )
 from fdk_rdf_parser.classes.model_element import (
@@ -145,7 +145,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             issued="2016-09-28T00:00:00+01:00",
             modified="2017-09-28T00:00:00+01:00",
             language=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="http://publications.europa.eu/resource/authority/language/NOB",
                     code="NOB",
                     prefLabel={
@@ -171,7 +171,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 )
             ],
             license=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="http://creativecommons.org/licenses/by/4.0/deed.no",
                     code="CC BY 4.0 DEED",
                     prefLabel={
@@ -182,7 +182,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             ],
             informationModelIdentifier="https://www.digdir.no/diversemodell",
             spatial=[
-                SkosCode(
+                ReferenceDataCode(
                     uri="https://data.geonorge.no/administrativeEnheter/nasjon/id/173163",
                     code="173163",
                     prefLabel={"no": "Norge"},
@@ -212,7 +212,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                     title={"en": "Image of the logical data model (LDM)"},
                     format="http://publications.europa.eu/resource/authority/file-type/PNG",
                     seeAlso="https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png",
-                    language=SkosCode(
+                    language=ReferenceDataCode(
                         uri="http://pubs.europa.eu/resource/authority/language/NOR",
                     ),
                 )

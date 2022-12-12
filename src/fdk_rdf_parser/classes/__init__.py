@@ -31,7 +31,7 @@ from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
 from .rule import Rule
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal

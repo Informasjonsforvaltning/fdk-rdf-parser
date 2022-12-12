@@ -12,7 +12,7 @@ from .output import Output
 from .participation import Participation
 from .publisher import Publisher
 from .rule import Rule
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 
@@ -42,10 +42,10 @@ class Service:
     requires: Optional[List["Service"]] = None
     relation: Optional[List["Service"]] = None
     hasLegalResource: Optional[List[LegalResource]] = None
-    language: Optional[List[SkosCode]] = None
+    language: Optional[List[ReferenceDataCode]] = None
     hasCriterion: Optional[List[CriterionRequirement]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
-    admsStatus: Optional[SkosCode] = None
+    admsStatus: Optional[ReferenceDataCode] = None
     subject: Optional[List[str]] = None
     homepage: Optional[List[str]] = None

@@ -8,7 +8,7 @@ from .format import Format
 from .harvest_meta_data import HarvestMetaData
 from .model_element import ModelElement
 from .model_property import ModelProperty
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 from .temporal import Temporal
 from .theme import LosNode
 
@@ -20,9 +20,9 @@ class InformationModel(PartialDcatResource):
     harvest: Optional[HarvestMetaData] = None
     catalog: Optional[Catalog] = None
     conformsTo: Optional[List[DctStandard]] = None
-    license: Optional[List[SkosCode]] = None
+    license: Optional[List[ReferenceDataCode]] = None
     informationModelIdentifier: Optional[str] = None
-    spatial: Optional[List[SkosCode]] = None
+    spatial: Optional[List[ReferenceDataCode]] = None
     isPartOf: Optional[str] = None
     hasPart: Optional[str] = None
     isReplacedBy: Optional[str] = None

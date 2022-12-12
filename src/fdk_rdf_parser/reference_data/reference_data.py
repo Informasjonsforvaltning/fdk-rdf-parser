@@ -6,7 +6,7 @@ from fdk_rdf_parser.classes import (
     LosNode,
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
-    SkosCode,
+    ReferenceDataCode,
 )
 from .reference_data_client import get_reference_data
 from .utils import remove_scheme_and_trailing_slash
@@ -19,13 +19,13 @@ class DataServiceReferenceData:
 
 @dataclass
 class DatasetReferenceData:
-    provenancestatement: Optional[Dict[str, SkosCode]] = None
-    rightsstatement: Optional[Dict[str, SkosCode]] = None
-    frequency: Optional[Dict[str, SkosCode]] = None
-    linguisticsystem: Optional[Dict[str, SkosCode]] = None
-    referencetypes: Optional[Dict[str, SkosCode]] = None
-    openlicenses: Optional[Dict[str, SkosCode]] = None
-    location: Optional[Dict[str, SkosCode]] = None
+    provenancestatement: Optional[Dict[str, ReferenceDataCode]] = None
+    rightsstatement: Optional[Dict[str, ReferenceDataCode]] = None
+    frequency: Optional[Dict[str, ReferenceDataCode]] = None
+    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
+    referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
+    openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
+    location: Optional[Dict[str, ReferenceDataCode]] = None
     eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
     los_themes: Optional[Dict[str, LosNode]] = None
     media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
@@ -33,19 +33,19 @@ class DatasetReferenceData:
 
 @dataclass
 class InformationModelReferenceData:
-    linguisticsystem: Optional[Dict[str, SkosCode]] = None
-    openlicenses: Optional[Dict[str, SkosCode]] = None
-    location: Optional[Dict[str, SkosCode]] = None
+    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
+    openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
+    location: Optional[Dict[str, ReferenceDataCode]] = None
     eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
     los_themes: Optional[Dict[str, LosNode]] = None
 
 
 @dataclass
 class PublicServiceReferenceData:
-    linguisticsystem: Optional[Dict[str, SkosCode]] = None
-    week_days: Optional[Dict[str, SkosCode]] = None
-    statuses: Optional[Dict[str, SkosCode]] = None
-    evidence_type: Optional[Dict[str, SkosCode]] = None
+    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
+    week_days: Optional[Dict[str, ReferenceDataCode]] = None
+    statuses: Optional[Dict[str, ReferenceDataCode]] = None
+    evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -86,10 +86,12 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
     )
 
 
-def parse_reference_codes(codes: Optional[List[Dict]]) -> Optional[Dict[str, SkosCode]]:
+def parse_reference_codes(
+    codes: Optional[List[Dict]],
+) -> Optional[Dict[str, ReferenceDataCode]]:
     if codes is not None:
         return {
-            remove_scheme_and_trailing_slash(str(code.get("uri"))): SkosCode(
+            remove_scheme_and_trailing_slash(str(code.get("uri"))): ReferenceDataCode(
                 uri=str(code.get("uri")) if code.get("uri") is not None else None,
                 code=str(code.get("code")) if code.get("code") is not None else None,
                 prefLabel=code.get("label") if code.get("label") is not None else None,
@@ -104,13 +106,13 @@ def parse_locations(
     nasjoner: Optional[List[Dict]],
     fylker: Optional[List[Dict]],
     kommuner: Optional[List[Dict]],
-) -> Optional[Dict[str, SkosCode]]:
+) -> Optional[Dict[str, ReferenceDataCode]]:
     locations = dict()
     if nasjoner is not None:
         for nasjon in nasjoner:
             locations[
                 remove_scheme_and_trailing_slash(str(nasjon.get("uri")))
-            ] = SkosCode(
+            ] = ReferenceDataCode(
                 uri=str(nasjon.get("uri")) if nasjon.get("uri") is not None else None,
                 code=str(nasjon.get("nasjonsnummer"))
                 if nasjon.get("nasjonsnummer") is not None
@@ -123,7 +125,7 @@ def parse_locations(
         for fylke in fylker:
             locations[
                 remove_scheme_and_trailing_slash(str(fylke.get("uri")))
-            ] = SkosCode(
+            ] = ReferenceDataCode(
                 uri=str(fylke.get("uri")) if fylke.get("uri") is not None else None,
                 code=str(fylke.get("fylkesnummer"))
                 if fylke.get("fylkesnummer") is not None
@@ -136,7 +138,7 @@ def parse_locations(
         for kommune in kommuner:
             locations[
                 remove_scheme_and_trailing_slash(str(kommune.get("uri")))
-            ] = SkosCode(
+            ] = ReferenceDataCode(
                 uri=str(kommune.get("uri")) if kommune.get("uri") is not None else None,
                 code=str(kommune.get("kommunenummer"))
                 if kommune.get("kommunenummer") is not None
@@ -149,7 +151,7 @@ def parse_locations(
     return locations if len(locations) > 0 else None
 
 
-def get_and_map_locations() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_locations() -> Optional[Dict[str, ReferenceDataCode]]:
     nasjoner = get_reference_data("/geonorge/administrative-enheter/nasjoner").get(
         "nasjoner"
     )
@@ -160,51 +162,51 @@ def get_and_map_locations() -> Optional[Dict[str, SkosCode]]:
     return parse_locations(nasjoner, fylker, kommuner)
 
 
-def get_and_map_frequencies() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_frequencies() -> Optional[Dict[str, ReferenceDataCode]]:
     frequencies = get_reference_data("/eu/frequencies").get("frequencies")
     return parse_reference_codes(frequencies)
 
 
-def get_and_map_provenance_statements() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_provenance_statements() -> Optional[Dict[str, ReferenceDataCode]]:
     provenance_statements = get_reference_data("/provenance-statements").get(
         "provenanceStatements"
     )
     return parse_reference_codes(provenance_statements)
 
 
-def get_and_map_reference_types() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:
     reference_types = get_reference_data("/reference-types").get("referenceTypes")
     return parse_reference_codes(reference_types)
 
 
-def get_and_map_open_licenses() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_open_licenses() -> Optional[Dict[str, ReferenceDataCode]]:
     open_licenses = get_reference_data("/open-licenses").get("openLicenses")
     return parse_reference_codes(open_licenses)
 
 
-def get_and_map_linguistic_system() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_linguistic_system() -> Optional[Dict[str, ReferenceDataCode]]:
     linguistic_systems = get_reference_data("/linguistic-systems").get(
         "linguisticSystems"
     )
     return parse_reference_codes(linguistic_systems)
 
 
-def get_and_map_access_rights() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_access_rights() -> Optional[Dict[str, ReferenceDataCode]]:
     access_rights = get_reference_data("/eu/access-rights").get("accessRights")
     return parse_reference_codes(access_rights)
 
 
-def get_and_map_week_days() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_week_days() -> Optional[Dict[str, ReferenceDataCode]]:
     week_days = get_reference_data("/schema/week-days").get("weekDays")
     return parse_reference_codes(week_days)
 
 
-def get_and_map_statuses() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_statuses() -> Optional[Dict[str, ReferenceDataCode]]:
     statuses = get_reference_data("adms/statuses").get("statuses")
     return parse_reference_codes(statuses)
 
 
-def get_and_map_evidence_types() -> Optional[Dict[str, SkosCode]]:
+def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
     evidence_types = get_reference_data("digdir/evidence-types").get("evidenceTypes")
     return parse_reference_codes(evidence_types)
 

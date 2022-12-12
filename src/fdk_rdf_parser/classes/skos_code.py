@@ -3,7 +3,7 @@ from typing import Dict, Optional
 
 
 @dataclass
-class SkosCode:
+class ReferenceDataCode:
     uri: Optional[str] = None
     code: Optional[str] = None
     prefLabel: Optional[Dict[str, str]] = None

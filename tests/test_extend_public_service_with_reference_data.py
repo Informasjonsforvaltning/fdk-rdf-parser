@@ -1,4 +1,4 @@
-from fdk_rdf_parser.classes import PublicService, SkosCode
+from fdk_rdf_parser.classes import PublicService, ReferenceDataCode
 from fdk_rdf_parser.reference_data import extend_cpsvno_service_with_reference_data
 from .testdata import public_service_reference_data
 
@@ -6,7 +6,7 @@ from .testdata import public_service_reference_data
 def test_extend_media_types() -> None:
     parsed_public_service = PublicService(
         language=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/language/NOB"
             ),
         ],
@@ -14,7 +14,7 @@ def test_extend_media_types() -> None:
 
     expected = PublicService(
         language=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/language/NOB",
                 code="NOB",
                 prefLabel={

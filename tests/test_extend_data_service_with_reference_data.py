@@ -2,7 +2,7 @@ from fdk_rdf_parser.classes import (
     DataService,
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
-    SkosCode,
+    ReferenceDataCode,
 )
 from fdk_rdf_parser.reference_data import (
     DataServiceReferenceData,
@@ -13,7 +13,7 @@ from .testdata import data_service_reference_data
 
 def test_handles_missing_references() -> None:
     parsed_data_service = DataService(
-        mediaType=[SkosCode(uri="http://example.com/media-type/text/csv")],
+        mediaType=[ReferenceDataCode(uri="http://example.com/media-type/text/csv")],
         fdkFormat=[MediaTypeOrExtent(code="http://example.com/media-type/text/csv")],
     )
 
@@ -27,7 +27,7 @@ def test_handles_missing_references() -> None:
 
 def test_handles_empty_media_type() -> None:
     parsed_data_service = DataService(
-        mediaType=[SkosCode()],
+        mediaType=[ReferenceDataCode()],
         fdkFormat=[MediaTypeOrExtent()],
     )
 
@@ -42,11 +42,13 @@ def test_handles_empty_media_type() -> None:
 def test_extend_media_types() -> None:
     parsed_data_service = DataService(
         mediaType=[
-            SkosCode(uri="https://www.iana.org/assignments/media-types/text/csv"),
-            SkosCode(
+            ReferenceDataCode(
+                uri="https://www.iana.org/assignments/media-types/text/csv"
+            ),
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/file-type/XML"
             ),
-            SkosCode(uri="http://example.com/media-type/not/found"),
+            ReferenceDataCode(uri="http://example.com/media-type/not/found"),
         ],
         fdkFormat=[
             MediaTypeOrExtent(
@@ -62,12 +64,12 @@ def test_extend_media_types() -> None:
 
     expected = DataService(
         mediaType=[
-            SkosCode(
+            ReferenceDataCode(
                 uri="https://www.iana.org/assignments/media-types/text/csv",
                 code="text/csv",
                 prefLabel={"nb": "text/csv"},
             ),
-            SkosCode(
+            ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/file-type/XML",
                 code="XML",
                 prefLabel={"nb": "XML"},

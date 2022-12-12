@@ -10,7 +10,7 @@ from .publisher import Publisher
 from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
-from .skos_code import SkosCode
+from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
@@ -30,9 +30,9 @@ class PartialDataset(PartialDcatResource):
     admsIdentifier: Optional[Set[str]] = None
     temporal: Optional[List[Temporal]] = None
     subject: Optional[List[Subject]] = None
-    spatial: Optional[List[SkosCode]] = None
-    provenance: Optional[SkosCode] = None
-    accrualPeriodicity: Optional[SkosCode] = None
+    spatial: Optional[List[ReferenceDataCode]] = None
+    provenance: Optional[ReferenceDataCode] = None
+    accrualPeriodicity: Optional[ReferenceDataCode] = None
     hasAccuracyAnnotation: Optional[QualityAnnotation] = None
     hasCompletenessAnnotation: Optional[QualityAnnotation] = None
     hasCurrentnessAnnotation: Optional[QualityAnnotation] = None

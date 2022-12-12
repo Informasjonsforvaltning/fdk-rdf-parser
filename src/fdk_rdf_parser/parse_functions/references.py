@@ -4,7 +4,7 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import DCTERMS, RDFS
 from rdflib.term import BNode
 
-from fdk_rdf_parser.classes import Reference, SkosCode, SkosConcept
+from fdk_rdf_parser.classes import Reference, ReferenceDataCode, SkosConcept
 from fdk_rdf_parser.rdf_utils import resource_list, value_translations
 
 
@@ -32,7 +32,7 @@ def extract_references(graph: Graph, subject: URIRef) -> Optional[List[Reference
             for resource in resources:
                 values.append(
                     Reference(
-                        referenceType=SkosCode(uri=predicate.toPython()),
+                        referenceType=ReferenceDataCode(uri=predicate.toPython()),
                         source=SkosConcept(
                             uri=resource.toPython()
                             if not isinstance(resource, BNode)
