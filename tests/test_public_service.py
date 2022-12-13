@@ -73,7 +73,8 @@ def test_complete_public_services(
                     dct:title "Ei offentleg teneste"@nb ;
                     cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ,
-                                  <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2> ;
+                                  <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2> ,
+                                  <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     adms:status   <http://purl.org/adms/status/Completed> ;
                     dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
@@ -183,6 +184,11 @@ def test_complete_public_services(
                     dct:title        "Nødvendig dokumentasjon"@nb ;
                     dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
                     foaf:page        <https://example.org/exDokumentasjonsSide2> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3>
+                    a                "invalid type" ;
+                    dct:identifier   "3" ;
+                    dct:title        "Ugyldig dokumentasjonstype"@nb .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4>
                     a                cv:Output ;
@@ -535,6 +541,12 @@ def test_complete_public_services(
                         ),
                     ],
                     page=["https://example.org/exDokumentasjonsSide2"],
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.UNKNOWN,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3",
+                    identifier="3",
+                    name={"nb": "Ugyldig dokumentasjonstype"},
                 ),
             ],
             produces=[
