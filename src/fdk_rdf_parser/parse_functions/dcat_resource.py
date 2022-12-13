@@ -1,10 +1,20 @@
 import re
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import EuDataTheme, PartialDcatResource
+from fdk_rdf_parser.classes import (
+    EuDataTheme,
+    PartialDcatResource,
+)
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
@@ -15,7 +25,10 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .contactpoint import extract_contact_points
 from .publisher import extract_publisher
-from .skos_code import extract_skos_code, extract_skos_code_list
+from .skos_code import (
+    extract_skos_code,
+    extract_skos_code_list,
+)
 
 
 def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:

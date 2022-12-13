@@ -1,7 +1,16 @@
-from typing import Dict, Optional
+from typing import (
+    Dict,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, RDF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    RDF,
+)
 
 from fdk_rdf_parser.classes import QualityAnnotation
 from fdk_rdf_parser.rdf_utils import (

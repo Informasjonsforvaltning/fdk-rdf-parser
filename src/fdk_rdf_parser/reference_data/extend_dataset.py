@@ -1,4 +1,9 @@
-from typing import Dict, List, Optional, Set
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Set,
+)
 
 from fdk_rdf_parser.classes import (
     Dataset,

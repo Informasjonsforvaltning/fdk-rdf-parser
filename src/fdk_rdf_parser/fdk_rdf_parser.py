@@ -1,8 +1,16 @@
 from functools import reduce
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from rdflib import Graph
-from rdflib.namespace import FOAF, RDF, SKOS
+from rdflib.namespace import (
+    FOAF,
+    RDF,
+    SKOS,
+)
 
 from .classes import (
     Concept,

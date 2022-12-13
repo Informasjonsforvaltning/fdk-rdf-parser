@@ -1,8 +1,14 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import HarvestMetaData
-from fdk_rdf_parser.rdf_utils import date_list, date_value
+from fdk_rdf_parser.rdf_utils import (
+    date_list,
+    date_value,
+)
 
 
 def extract_meta_data(graph: Graph, subject: URIRef) -> HarvestMetaData:

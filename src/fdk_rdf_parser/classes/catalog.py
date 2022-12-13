@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from typing import Dict, Optional
+from typing import (
+    Dict,
+    Optional,
+)
 
 from .publisher import Publisher
 

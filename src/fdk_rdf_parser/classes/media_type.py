@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Optional
+from typing import (
+    Any,
+    Optional,
+)
 
 
 class MediaTypeOrExtentType(str, Enum):

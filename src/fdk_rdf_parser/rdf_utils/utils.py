@@ -1,10 +1,30 @@
-from datetime import date, datetime, timedelta
+from datetime import (
+    date,
+    datetime,
+    timedelta,
+)
 import numbers
-from typing import Any, Dict, List, Optional, Set
+from typing import (
+    Any,
+    Dict,
+    List,
+    Optional,
+    Set,
+)
 
-from isodate import date_isoformat, datetime_isoformat
-from rdflib import BNode, Graph, URIRef
-from rdflib.namespace import DCTERMS, RDF
+from isodate import (
+    date_isoformat,
+    datetime_isoformat,
+)
+from rdflib import (
+    BNode,
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    RDF,
+)
 
 
 def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:

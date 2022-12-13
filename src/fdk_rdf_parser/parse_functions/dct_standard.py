@@ -1,7 +1,17 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, OWL, RDFS
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    OWL,
+    RDFS,
+)
 
 from fdk_rdf_parser.classes import DctStandard
 from fdk_rdf_parser.rdf_utils import (

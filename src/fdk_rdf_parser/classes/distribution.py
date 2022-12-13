@@ -1,5 +1,10 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Set
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Set,
+)
 
 from .conforms_to import ConformsTo
 from .data_distribution_service import DataDistributionService

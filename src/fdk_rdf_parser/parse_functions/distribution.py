@@ -1,7 +1,16 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+)
 
 from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import (
@@ -14,7 +23,10 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .conforms_to import extract_conforms_to
 from .data_distribution_service import extract_data_distribution_services
-from .media_type import extract_fdk_format, extract_media_type
+from .media_type import (
+    extract_fdk_format,
+    extract_media_type,
+)
 from .skos_concept import extract_skos_concept
 
 

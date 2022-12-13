@@ -1,10 +1,21 @@
 from typing import Optional
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+)
 
 from fdk_rdf_parser.classes import Catalog
-from fdk_rdf_parser.rdf_utils import dcat_uri, is_type, object_value, value_translations
+from fdk_rdf_parser.rdf_utils import (
+    dcat_uri,
+    is_type,
+    object_value,
+    value_translations,
+)
 from .publisher import extract_publisher
 
 

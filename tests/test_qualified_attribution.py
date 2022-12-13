@@ -1,6 +1,12 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
-from fdk_rdf_parser.classes import Publisher, QualifiedAttribution
+from fdk_rdf_parser.classes import (
+    Publisher,
+    QualifiedAttribution,
+)
 from fdk_rdf_parser.parse_functions import extract_qualified_attributions
 from fdk_rdf_parser.rdf_utils import prov_uri
 

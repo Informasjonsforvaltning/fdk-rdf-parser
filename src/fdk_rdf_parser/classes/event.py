@@ -1,5 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher

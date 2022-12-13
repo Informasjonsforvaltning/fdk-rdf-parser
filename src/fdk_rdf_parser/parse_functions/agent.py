@@ -1,7 +1,17 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, RDF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+    RDF,
+)
 
 from fdk_rdf_parser.classes import Agent
 from fdk_rdf_parser.rdf_utils import (

@@ -1,5 +1,11 @@
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+)
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (

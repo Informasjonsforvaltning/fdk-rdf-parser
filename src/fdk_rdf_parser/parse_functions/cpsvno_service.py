@@ -1,9 +1,21 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+)
 
-from fdk_rdf_parser.classes import PublicService, Service
+from fdk_rdf_parser.classes import (
+    PublicService,
+    Service,
+)
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     cpsv_uri,
@@ -19,7 +31,11 @@ from .channel import extract_channels
 from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
 from .criterion_requirement import extract_criterion_requirements
-from .dcat_resource import extract_key_words, extract_skos_code, extract_skos_code_list
+from .dcat_resource import (
+    extract_key_words,
+    extract_skos_code,
+    extract_skos_code_list,
+)
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources

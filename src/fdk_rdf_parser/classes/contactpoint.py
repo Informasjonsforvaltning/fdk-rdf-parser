@@ -1,5 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from .opening_hours_specification import OpeningHoursSpecification
 from .skos_code import ReferenceDataCode

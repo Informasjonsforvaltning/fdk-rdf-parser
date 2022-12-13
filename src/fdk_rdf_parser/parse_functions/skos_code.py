@@ -1,9 +1,18 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import ReferenceDataCode
-from fdk_rdf_parser.rdf_utils import object_value, value_list
+from fdk_rdf_parser.rdf_utils import (
+    object_value,
+    value_list,
+)
 
 
 def extract_skos_code(

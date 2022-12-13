@@ -1,10 +1,25 @@
 from functools import reduce
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCAT, DCTERMS, SKOS
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCAT,
+    DCTERMS,
+    SKOS,
+)
 
-from fdk_rdf_parser.classes import BusinessEvent, Event, LifeEvent
+from fdk_rdf_parser.classes import (
+    BusinessEvent,
+    Event,
+    LifeEvent,
+)
 from fdk_rdf_parser.rdf_utils import (
     cpsvno_uri,
     cv_uri,

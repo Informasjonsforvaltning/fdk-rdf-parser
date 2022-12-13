@@ -1,6 +1,13 @@
-from typing import Any, List, Optional
+from typing import (
+    Any,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import Temporal

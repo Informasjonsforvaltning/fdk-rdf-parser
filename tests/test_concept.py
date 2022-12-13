@@ -1,9 +1,17 @@
 from unittest.mock import Mock
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser import parse_concepts
-from fdk_rdf_parser.classes import Concept, DCATContactPoint, HarvestMetaData, Publisher
+from fdk_rdf_parser.classes import (
+    Concept,
+    DCATContactPoint,
+    HarvestMetaData,
+    Publisher,
+)
 from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,

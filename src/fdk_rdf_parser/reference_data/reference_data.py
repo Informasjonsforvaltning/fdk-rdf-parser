@@ -1,5 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from fdk_rdf_parser.classes import (
     EuDataTheme,

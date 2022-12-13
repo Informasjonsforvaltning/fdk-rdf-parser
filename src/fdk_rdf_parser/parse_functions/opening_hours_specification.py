@@ -1,6 +1,12 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import OpeningHoursSpecification
 from fdk_rdf_parser.parse_functions.skos_code import extract_skos_code_list

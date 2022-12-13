@@ -1,5 +1,11 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set
+from typing import (
+    Any,
+    Dict,
+    List,
+    Optional,
+    Set,
+)
 
 from .catalog import Catalog
 from .conforms_to import ConformsTo
