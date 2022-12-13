@@ -1,5 +1,10 @@
 from dataclasses import dataclass
-from typing import Any, List, Optional, Set
+from typing import (
+    Any,
+    List,
+    Optional,
+    Set,
+)
 
 from .catalog import Catalog
 from .dcat_resource import PartialDcatResource

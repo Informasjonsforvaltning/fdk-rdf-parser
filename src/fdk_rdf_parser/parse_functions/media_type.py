@@ -1,10 +1,20 @@
 import logging
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import BNode, Graph, URIRef
+from rdflib import (
+    BNode,
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import MediaTypeOrExtent
-from fdk_rdf_parser.rdf_utils import dcat_uri, dct_uri
+from fdk_rdf_parser.rdf_utils import (
+    dcat_uri,
+    dct_uri,
+)
 
 
 def extract_fdk_format(

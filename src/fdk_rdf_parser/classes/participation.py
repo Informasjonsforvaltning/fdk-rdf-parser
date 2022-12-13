@@ -1,5 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from .agent import Agent
 from .skos_concept import SkosConcept

@@ -1,5 +1,12 @@
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, RDF, XSD
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    RDF,
+    XSD,
+)
 
 from fdk_rdf_parser.classes.model_property import ModelProperty
 from fdk_rdf_parser.rdf_utils import (

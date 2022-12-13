@@ -1,6 +1,13 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
-from rdflib import Graph, Literal, URIRef
+from rdflib import (
+    Graph,
+    Literal,
+    URIRef,
+)
 from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import ConformsTo

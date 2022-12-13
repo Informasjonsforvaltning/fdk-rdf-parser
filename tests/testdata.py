@@ -12,7 +12,6 @@ from fdk_rdf_parser.reference_data import (
     PublicServiceReferenceData,
 )
 
-
 data_service_reference_data = DataServiceReferenceData(
     media_types={
         "www.iana.org/assignments/media-types/text/csv": MediaTypeOrExtent(

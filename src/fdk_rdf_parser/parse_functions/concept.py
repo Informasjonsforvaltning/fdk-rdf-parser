@@ -1,9 +1,24 @@
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+    RDFS,
+    SKOS,
+)
 
-from fdk_rdf_parser.classes import Concept, Temporal
+from fdk_rdf_parser.classes import (
+    Concept,
+    Temporal,
+)
 from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,

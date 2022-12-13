@@ -4,13 +4,20 @@ from .catalog import Catalog
 from .channel import Channel
 from .concept import Concept
 from .conforms_to import ConformsTo
-from .contactpoint import CVContactPoint, DCATContactPoint
+from .contactpoint import (
+    CVContactPoint,
+    DCATContactPoint,
+)
 from .cost import Cost
 from .cpsvno_service import Service
 from .criterion_requirement import CriterionRequirement
 from .data_distribution_service import DataDistributionService
 from .dataservice import DataService
-from .dataset import Dataset, DatasetSeries, PartialDataset
+from .dataset import (
+    Dataset,
+    DatasetSeries,
+    PartialDataset,
+)
 from .dcat_resource import PartialDcatResource
 from .dct_standard import DctStandard
 from .distribution import Distribution
@@ -21,7 +28,10 @@ from .harvest_meta_data import HarvestMetaData
 from .info_model import InformationModel
 from .legal_resource import LegalResource
 from .life_event import LifeEvent
-from .media_type import MediaTypeOrExtent, MediaTypeOrExtentType
+from .media_type import (
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
+)
 from .opening_hours_specification import OpeningHoursSpecification
 from .output import Output
 from .participation import Participation
@@ -35,4 +45,8 @@ from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
-from .theme import ConceptSchema, EuDataTheme, LosNode
+from .theme import (
+    ConceptSchema,
+    EuDataTheme,
+    LosNode,
+)

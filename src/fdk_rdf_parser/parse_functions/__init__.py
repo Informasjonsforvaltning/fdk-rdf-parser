@@ -8,11 +8,17 @@ from .cost import extract_costs
 from .cpsvno_service import parse_cpsvno_service
 from .criterion_requirement import extract_criterion_requirements
 from .dataservice import parse_data_service
-from .dataset import parse_dataset, parse_dataset_series_values
+from .dataset import (
+    parse_dataset,
+    parse_dataset_series_values,
+)
 from .dcat_resource import parse_dcat_resource
 from .dct_standard import extract_dct_standard_list
 from .distribution import extract_distributions
-from .event import extend_with_associated_broader_types, parse_event
+from .event import (
+    extend_with_associated_broader_types,
+    parse_event,
+)
 from .evidence import extract_evidences
 from .format import extract_formats
 from .harvest_meta_data import extract_meta_data

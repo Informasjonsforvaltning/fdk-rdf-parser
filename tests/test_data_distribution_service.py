@@ -1,6 +1,13 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
-from fdk_rdf_parser.classes import DataDistributionService, Distribution, SkosConcept
+from fdk_rdf_parser.classes import (
+    DataDistributionService,
+    Distribution,
+    SkosConcept,
+)
 from fdk_rdf_parser.parse_functions import extract_distributions
 from fdk_rdf_parser.rdf_utils import dcat_uri
 

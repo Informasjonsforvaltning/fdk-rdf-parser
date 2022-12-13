@@ -1,9 +1,24 @@
-from typing import Dict, List
+from typing import (
+    Dict,
+    List,
+)
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, RDFS, SKOS
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+    RDFS,
+    SKOS,
+)
 
-from fdk_rdf_parser.classes import DatasetSeries, PartialDataset, SkosConcept
+from fdk_rdf_parser.classes import (
+    DatasetSeries,
+    PartialDataset,
+    SkosConcept,
+)
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     cpsv_uri,
@@ -26,7 +41,10 @@ from .harvest_meta_data import extract_meta_data
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
 from .references import extract_references
-from .skos_code import extract_skos_code, extract_skos_code_list
+from .skos_code import (
+    extract_skos_code,
+    extract_skos_code_list,
+)
 from .skos_concept import extract_skos_concept
 from .subject import extract_subjects
 from .temporal import extract_temporal

@@ -1,4 +1,7 @@
-from fdk_rdf_parser.classes import PublicService, ReferenceDataCode
+from fdk_rdf_parser.classes import (
+    PublicService,
+    ReferenceDataCode,
+)
 from fdk_rdf_parser.reference_data import extend_cpsvno_service_with_reference_data
 from .testdata import public_service_reference_data
 

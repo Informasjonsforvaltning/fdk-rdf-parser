@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
 from .skos_code import ReferenceDataCode
 

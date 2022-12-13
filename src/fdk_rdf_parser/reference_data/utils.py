@@ -1,7 +1,16 @@
 import os
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
-from fdk_rdf_parser.classes import EuDataTheme, LosNode, Reference, ReferenceDataCode
+from fdk_rdf_parser.classes import (
+    EuDataTheme,
+    LosNode,
+    Reference,
+    ReferenceDataCode,
+)
 
 base_url = os.getenv(
     "FDK_REFERENCE_DATA_BASE_URI",

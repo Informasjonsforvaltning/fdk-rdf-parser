@@ -1,5 +1,13 @@
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, RDF, SKOS, XSD
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    RDF,
+    SKOS,
+    XSD,
+)
 
 from fdk_rdf_parser.classes.model_element import (
     ModelCodeElement,
@@ -14,7 +22,6 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
     xkos_uri,
 )
-
 
 CODE_LIST = model_dcat_ap_no_uri("CodeList").toPython()
 SIMPLE_TYPE = model_dcat_ap_no_uri("SimpleType").toPython()

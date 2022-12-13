@@ -1,8 +1,18 @@
-from typing import Any, List, Optional
+from typing import (
+    Any,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
-from fdk_rdf_parser.classes import CVContactPoint, DCATContactPoint
+from fdk_rdf_parser.classes import (
+    CVContactPoint,
+    DCATContactPoint,
+)
 from fdk_rdf_parser.parse_functions.opening_hours_specification import (
     extract_opening_hours_specification,
 )

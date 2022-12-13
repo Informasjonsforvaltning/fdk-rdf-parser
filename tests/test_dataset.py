@@ -1,7 +1,10 @@
 from typing import Dict
 from unittest.mock import Mock
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser import parse_datasets
 from fdk_rdf_parser.classes import (

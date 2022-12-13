@@ -7,7 +7,10 @@ from fdk_rdf_parser.reference_data import (
     get_dataset_reference_data,
 )
 from fdk_rdf_parser.reference_data.utils import remove_scheme_and_trailing_slash
-from .testdata import data_service_reference_data, dataset_reference_data
+from .testdata import (
+    data_service_reference_data,
+    dataset_reference_data,
+)
 
 
 def test_get_data_service_reference_data(mock_reference_data_client: Mock) -> None:

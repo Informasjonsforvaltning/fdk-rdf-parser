@@ -1,6 +1,9 @@
 from unittest.mock import Mock
 
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser import parse_information_models
 from fdk_rdf_parser.classes import (

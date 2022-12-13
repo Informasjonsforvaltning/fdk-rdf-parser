@@ -1,7 +1,19 @@
-from typing import Any, List, Optional
+from typing import (
+    Any,
+    List,
+    Optional,
+)
 
-from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, RDF, SKOS
+from rdflib import (
+    Graph,
+    Literal,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    RDF,
+    SKOS,
+)
 
 from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.rdf_utils import (

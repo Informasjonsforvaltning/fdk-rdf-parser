@@ -15,9 +15,9 @@ from fdk_rdf_parser.classes import (
     Participation,
     PublicService,
     Publisher,
+    ReferenceDataCode,
     Rule,
     Service,
-    ReferenceDataCode,
     SkosConcept,
 )
 from fdk_rdf_parser.classes.evidence import EvidenceRdfType

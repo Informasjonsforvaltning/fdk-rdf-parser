@@ -1,4 +1,7 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.classes.model_property import ModelProperty

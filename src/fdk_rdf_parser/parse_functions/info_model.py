@@ -1,7 +1,14 @@
 from typing import List
 
-from rdflib import Graph, URIRef
-from rdflib.namespace import DCTERMS, FOAF, OWL
+from rdflib import (
+    Graph,
+    URIRef,
+)
+from rdflib.namespace import (
+    DCTERMS,
+    FOAF,
+    OWL,
+)
 
 from fdk_rdf_parser.classes import InformationModel
 from fdk_rdf_parser.rdf_utils import (

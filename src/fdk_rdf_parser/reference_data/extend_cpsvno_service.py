@@ -1,4 +1,7 @@
-from typing import List, Optional
+from typing import (
+    List,
+    Optional,
+)
 
 from fdk_rdf_parser.classes import (
     CVContactPoint,
@@ -8,7 +11,10 @@ from fdk_rdf_parser.classes import (
     Service,
 )
 from .reference_data import PublicServiceReferenceData
-from .utils import extend_skos_code, extend_skos_code_list
+from .utils import (
+    extend_skos_code,
+    extend_skos_code_list,
+)
 
 
 def extend_cpsvno_service_with_reference_data(

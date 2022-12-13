@@ -1,4 +1,7 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.parse_functions import extract_publisher

@@ -1,4 +1,7 @@
-from rdflib import Graph, URIRef
+from rdflib import (
+    Graph,
+    URIRef,
+)
 
 from fdk_rdf_parser.classes import DCATContactPoint
 from fdk_rdf_parser.parse_functions import extract_contact_points

@@ -1,6 +1,14 @@
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
-from fdk_rdf_parser.classes import DataService, MediaTypeOrExtent, ReferenceDataCode
+from fdk_rdf_parser.classes import (
+    DataService,
+    MediaTypeOrExtent,
+    ReferenceDataCode,
+)
 from .reference_data import DataServiceReferenceData
 from .utils import remove_scheme_and_trailing_slash
 
