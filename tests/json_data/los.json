@@ -181,6 +181,31 @@
             "uri": "https://psi.norge.no/los/tema/skole-og-utdanning",
             "synonyms": [],
             "relatedTerms": null
-        }
+        },
+        {
+            "internalId": null,
+            "children": [
+              "https://psi.norge.no/los/tema/tilskuddsordninger-for-naring",
+              "https://psi.norge.no/los/tema/naringsliv",
+              "https://psi.norge.no/los/tema/naringsutvikling",
+              "https://psi.norge.no/los/tema/landbruk",
+              "https://psi.norge.no/los/tema/handel-og-service"
+            ],
+            "parents": null,
+            "isTheme": true,
+            "losPaths": [
+              "naring"
+            ],
+            "name": {
+              "nn": "Næring",
+              "nb": "Næring",
+              "en": "Business"
+            },
+            "definition": null,
+            "uri": "https://psi.norge.no/los/tema/naring",
+            "synonyms": [],
+            "relatedTerms": null,
+            "theme": true
+          }
     ]
 }

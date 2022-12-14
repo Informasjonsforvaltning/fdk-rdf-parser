@@ -51,6 +51,8 @@ class PublicServiceReferenceData:
     statuses: Optional[Dict[str, ReferenceDataCode]] = None
     types: Optional[Dict[str, ReferenceDataCode]] = None
     evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
+    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
+    los_themes: Optional[Dict[str, LosNode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -89,6 +91,8 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         statuses=get_and_map_statuses(),
         evidence_type=get_and_map_evidence_types(),
         types=get_and_map_dct_types(),
+        eu_data_themes=get_and_map_eu_data_themes(),
+        los_themes=get_and_map_los_themes(),
     )
 
 

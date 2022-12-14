@@ -21,6 +21,11 @@ from fdk_rdf_parser.classes import (
     SkosConcept,
 )
 from fdk_rdf_parser.classes.evidence import EvidenceRdfType
+from fdk_rdf_parser.classes.theme import (
+    ConceptSchema,
+    EuDataTheme,
+    LosNode,
+)
 
 
 def test_complete_public_services(
@@ -1068,7 +1073,10 @@ def test_parse_cpsvno_services(
                 dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
                 dct:title          "Dummy service"@en , "Dummytjeneste"@nn , "Dummytjeneste"@nb ;
                 cpsv:produces      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl> ;
-                cv:hasContactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> .
+                cv:hasContactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> ;
+                cv:thematicArea    <https://psi.norge.no/not/in/los/or/eu> ,
+                                   <http://publications.europa.eu/resource/authority/data-theme/GOVE> ,
+                                   <https://psi.norge.no/los/tema/naring> .
 
         <https://www.staging.fellesdatakatalog.digdir.no/public-services/1fc38c3c-1c86-3161-a9a7-e443fd94d413>
                 rdf:type           dcat:CatalogRecord ;
@@ -1214,6 +1222,49 @@ def test_parse_cpsvno_services(
                 )
             ],
             type="publicservices",
+            thematicAreaUris=[
+                "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+                "https://psi.norge.no/los/tema/naring",
+                "https://psi.norge.no/not/in/los/or/eu",
+            ],
+            losThemes=[
+                LosNode(
+                    children=[
+                        "https://psi.norge.no/los/tema/tilskuddsordninger-for-naring",
+                        "https://psi.norge.no/los/tema/naringsliv",
+                        "https://psi.norge.no/los/tema/naringsutvikling",
+                        "https://psi.norge.no/los/tema/landbruk",
+                        "https://psi.norge.no/los/tema/handel-og-service",
+                    ],
+                    parents=None,
+                    isTema=True,
+                    losPaths=["naring"],
+                    name={"nn": "Næring", "nb": "Næring", "en": "Business"},
+                    definition=None,
+                    uri="https://psi.norge.no/los/tema/naring",
+                    synonyms=[],
+                    relatedTerms=None,
+                ),
+            ],
+            euDataThemes=[
+                EuDataTheme(
+                    id="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+                    code="GOVE",
+                    startUse="2015-10-01",
+                    title={
+                        "nn": "Forvaltning og offentleg sektor",
+                        "no": "Forvaltning og offentlig sektor",
+                        "nb": "Forvaltning og offentlig sektor",
+                        "en": "Government and public sector",
+                    },
+                    conceptSchema=ConceptSchema(
+                        id="http://publications.europa.eu/resource/authority/data-theme",
+                        title={"en": "Data theme"},
+                        versioninfo="20200923-0",
+                        versionnumber="20200923-0",
+                    ),
+                ),
+            ],
         )
     }
 

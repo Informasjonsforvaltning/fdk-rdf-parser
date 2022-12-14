@@ -36,6 +36,38 @@ def extend_reference_types(
         return extended_references
 
 
+def collect_los_themes(
+    theme_uris: Optional[List[str]],
+    los: Optional[Dict[str, LosNode]],
+) -> Optional[List[LosNode]]:
+    if los is None or theme_uris is None:
+        return None
+
+    collected_los_themes: List[LosNode] = list()
+    for uri in theme_uris:
+        uri = remove_scheme_and_trailing_slash(uri)
+        if uri in los:
+            collected_los_themes.append(los[uri])
+
+    return collected_los_themes if len(collected_los_themes) > 0 else None
+
+
+def collect_eu_data_themes(
+    theme_uris: Optional[List[str]],
+    eu_data_themes: Optional[Dict[str, EuDataTheme]],
+) -> Optional[List[EuDataTheme]]:
+    if eu_data_themes is None or theme_uris is None:
+        return None
+
+    collected_eu_data_themes: List[EuDataTheme] = list()
+    for uri in theme_uris:
+        uri = remove_scheme_and_trailing_slash(uri)
+        if uri in eu_data_themes:
+            collected_eu_data_themes.append(eu_data_themes[uri])
+
+    return collected_eu_data_themes if len(collected_eu_data_themes) > 0 else None
+
+
 def split_themes(
     themes: Optional[List[EuDataTheme]],
     los: Optional[Dict[str, LosNode]],
