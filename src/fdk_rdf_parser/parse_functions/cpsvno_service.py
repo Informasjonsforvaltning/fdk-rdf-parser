@@ -122,6 +122,9 @@ def parse_cpsvno_service(
         ),
         subject=value_list(services_graph, cpsvno_service_uri, DCTERMS.subject),
         homepage=value_list(services_graph, cpsvno_service_uri, FOAF.homepage),
+        dctType=extract_skos_code_list(
+            services_graph, cpsvno_service_uri, DCTERMS.type
+        ),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):
