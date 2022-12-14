@@ -208,17 +208,17 @@ def get_and_map_week_days() -> Optional[Dict[str, ReferenceDataCode]]:
 
 
 def get_and_map_statuses() -> Optional[Dict[str, ReferenceDataCode]]:
-    statuses = get_reference_data("adms/statuses").get("statuses")
+    statuses = get_reference_data("/adms/statuses").get("statuses")
     return parse_reference_codes(statuses)
 
 
 def get_and_map_dct_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    dct_types = get_reference_data("eu/main-activities").get("mainActivities")
+    dct_types = get_reference_data("/eu/main-activities").get("mainActivities")
     return parse_reference_codes(dct_types)
 
 
 def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    evidence_types = get_reference_data("digdir/evidence-types").get("evidenceTypes")
+    evidence_types = get_reference_data("/digdir/evidence-types").get("evidenceTypes")
     return parse_reference_codes(evidence_types)
 
 
