@@ -53,3 +53,4 @@ class Service:
     admsStatus: Optional[ReferenceDataCode] = None
     subject: Optional[List[str]] = None
     homepage: Optional[List[str]] = None
+    dctType: Optional[List[ReferenceDataCode]] = None

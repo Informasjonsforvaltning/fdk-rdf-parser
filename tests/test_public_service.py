@@ -77,6 +77,7 @@ def test_complete_public_services(
                                   <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3> ;
                     cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
                     adms:status   <http://purl.org/adms/status/Completed> ;
+                    dct:type      <http://publications.europa.eu/resource/authority/main-activity/airport> ;
                     dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
                     foaf:homepage <http://testhomepage0.no>, <http://testhomepage1.no> ;
                     dcat:keyword "Serveringsbevilling"@nb .
@@ -371,6 +372,13 @@ def test_complete_public_services(
                 code="Completed",
                 prefLabel={"nn": "Ferdigstilt", "nb": "Ferdigstilt", "en": "Completed"},
             ),
+            dctType=[
+                ReferenceDataCode(
+                    uri="http://publications.europa.eu/resource/authority/main-activity/airport",
+                    code="airport",
+                    prefLabel={"en": "Airport-related activities"},
+                )
+            ],
             subject=["http://testbegrep0.no", "http://testbegrep1.no"],
             homepage=["http://testhomepage0.no", "http://testhomepage1.no"],
             description={

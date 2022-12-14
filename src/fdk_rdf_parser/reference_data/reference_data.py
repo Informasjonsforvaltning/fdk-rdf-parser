@@ -49,6 +49,7 @@ class PublicServiceReferenceData:
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     week_days: Optional[Dict[str, ReferenceDataCode]] = None
     statuses: Optional[Dict[str, ReferenceDataCode]] = None
+    types: Optional[Dict[str, ReferenceDataCode]] = None
     evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
 
 
@@ -87,6 +88,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         week_days=get_and_map_week_days(),
         statuses=get_and_map_statuses(),
         evidence_type=get_and_map_evidence_types(),
+        types=get_and_map_dct_types(),
     )
 
 
@@ -208,6 +210,11 @@ def get_and_map_week_days() -> Optional[Dict[str, ReferenceDataCode]]:
 def get_and_map_statuses() -> Optional[Dict[str, ReferenceDataCode]]:
     statuses = get_reference_data("adms/statuses").get("statuses")
     return parse_reference_codes(statuses)
+
+
+def get_and_map_dct_types() -> Optional[Dict[str, ReferenceDataCode]]:
+    dct_types = get_reference_data("eu/main-activities").get("mainActivities")
+    return parse_reference_codes(dct_types)
 
 
 def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:

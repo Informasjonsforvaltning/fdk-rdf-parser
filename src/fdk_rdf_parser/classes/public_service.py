@@ -43,3 +43,4 @@ class PublicService(Service):
         self.admsStatus = values.admsStatus
         self.subject = values.subject
         self.homepage = values.homepage
+        self.dctType = values.dctType
