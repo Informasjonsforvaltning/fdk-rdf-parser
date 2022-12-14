@@ -32,6 +32,24 @@
             }
         },
         {
+            "uri": "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "code": "GOVE",
+            "label": {
+              "nn": "Forvaltning og offentleg sektor",
+              "no": "Forvaltning og offentlig sektor",
+              "nb": "Forvaltning og offentlig sektor",
+              "en": "Government and public sector"
+            },
+            "startUse": "2015-10-01",
+            "conceptSchema": {
+              "uri": "http://publications.europa.eu/resource/authority/data-theme",
+              "label": {
+                "en": "Data theme"
+              },
+              "versionNumber": "20200923-0"
+            }
+        },
+        {
             "uri": "http://publications.europa.eu/resource/authority/data-theme/HEAL",
             "code": "HEAL",
             "startUse": "2015-10-01",

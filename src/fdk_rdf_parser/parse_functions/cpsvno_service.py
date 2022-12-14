@@ -125,6 +125,9 @@ def parse_cpsvno_service(
         dctType=extract_skos_code_list(
             services_graph, cpsvno_service_uri, DCTERMS.type
         ),
+        thematicAreaUris=value_list(
+            services_graph, cpsvno_service_uri, cv_uri("thematicArea")
+        ),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):

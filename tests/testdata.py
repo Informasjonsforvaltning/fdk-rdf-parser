@@ -137,6 +137,44 @@ public_service_reference_data = PublicServiceReferenceData(
             prefLabel={"en": "Sami languages"},
         ),
     },
+    eu_data_themes={
+        "publications.europa.eu/resource/authority/data-theme/GOVE": EuDataTheme(
+            id="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            code="GOVE",
+            title={
+                "nn": "Forvaltning og offentleg sektor",
+                "no": "Forvaltning og offentlig sektor",
+                "nb": "Forvaltning og offentlig sektor",
+                "en": "Government and public sector",
+            },
+            startUse="2015-10-01",
+            conceptSchema=ConceptSchema(
+                id="http://publications.europa.eu/resource/authority/data-theme",
+                title={"en": "Data theme"},
+                versioninfo="20200923-0",
+                versionnumber="20200923-0",
+            ),
+        )
+    },
+    los_themes={
+        "psi.norge.no/los/tema/naring": LosNode(
+            children=[
+                "https://psi.norge.no/los/tema/tilskuddsordninger-for-naring",
+                "https://psi.norge.no/los/tema/naringsliv",
+                "https://psi.norge.no/los/tema/naringsutvikling",
+                "https://psi.norge.no/los/tema/landbruk",
+                "https://psi.norge.no/los/tema/handel-og-service",
+            ],
+            parents=None,
+            isTema=True,
+            losPaths=["naring"],
+            name={"nn": "Næring", "nb": "Næring", "en": "Business"},
+            definition=None,
+            uri="https://psi.norge.no/los/tema/naring",
+            synonyms=[],
+            relatedTerms=None,
+        ),
+    },
 )
 
 dataset_reference_data = DatasetReferenceData(
@@ -2537,6 +2575,23 @@ dataset_reference_data = DatasetReferenceData(
                 versionnumber="20160921-0",
             ),
         ),
+        "publications.europa.eu/resource/authority/data-theme/GOVE": EuDataTheme(
+            id="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            code="GOVE",
+            title={
+                "nn": "Forvaltning og offentleg sektor",
+                "no": "Forvaltning og offentlig sektor",
+                "nb": "Forvaltning og offentlig sektor",
+                "en": "Government and public sector",
+            },
+            startUse="2015-10-01",
+            conceptSchema=ConceptSchema(
+                id="http://publications.europa.eu/resource/authority/data-theme",
+                title={"en": "Data theme"},
+                versioninfo="20200923-0",
+                versionnumber="20200923-0",
+            ),
+        ),
         "publications.europa.eu/resource/authority/data-theme/HEAL": EuDataTheme(
             id="http://publications.europa.eu/resource/authority/data-theme/HEAL",
             code="HEAL",
@@ -2674,6 +2729,23 @@ dataset_reference_data = DatasetReferenceData(
             },
             definition=None,
             uri="https://psi.norge.no/los/tema/skole-og-utdanning",
+            synonyms=[],
+            relatedTerms=None,
+        ),
+        "psi.norge.no/los/tema/naring": LosNode(
+            children=[
+                "https://psi.norge.no/los/tema/tilskuddsordninger-for-naring",
+                "https://psi.norge.no/los/tema/naringsliv",
+                "https://psi.norge.no/los/tema/naringsutvikling",
+                "https://psi.norge.no/los/tema/landbruk",
+                "https://psi.norge.no/los/tema/handel-og-service",
+            ],
+            parents=None,
+            isTema=True,
+            losPaths=["naring"],
+            name={"nn": "Næring", "nb": "Næring", "en": "Business"},
+            definition=None,
+            uri="https://psi.norge.no/los/tema/naring",
             synonyms=[],
             relatedTerms=None,
         ),

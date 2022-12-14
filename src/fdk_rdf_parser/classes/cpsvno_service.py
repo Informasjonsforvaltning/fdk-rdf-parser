@@ -5,6 +5,10 @@ from typing import (
     Optional,
 )
 
+from fdk_rdf_parser.classes.theme import (
+    EuDataTheme,
+    LosNode,
+)
 from .channel import Channel
 from .contactpoint import CVContactPoint
 from .cost import Cost
@@ -54,3 +58,6 @@ class Service:
     subject: Optional[List[str]] = None
     homepage: Optional[List[str]] = None
     dctType: Optional[List[ReferenceDataCode]] = None
+    thematicAreaUris: Optional[List[str]] = None
+    losThemes: Optional[List[LosNode]] = None
+    euDataThemes: Optional[List[EuDataTheme]] = None
