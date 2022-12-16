@@ -15,3 +15,4 @@ class Rule:
     description: Optional[Dict[str, str]] = None
     language: Optional[List[ReferenceDataCode]] = None
     name: Optional[Dict[str, str]] = None
+    implements: Optional[List[str]] = None

@@ -105,7 +105,9 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.requires
         ),
         follows=extract_rules(services_graph, cpsvno_service_uri),
-        hasLegalResource=extract_legal_resources(services_graph, cpsvno_service_uri),
+        hasLegalResource=extract_legal_resources(
+            services_graph, cpsvno_service_uri, cv_uri("hasLegalResource")
+        ),
         hasChannel=extract_channels(
             services_graph, cpsvno_service_uri, cv_uri("hasChannel")
         ),

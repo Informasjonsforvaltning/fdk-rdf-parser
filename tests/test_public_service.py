@@ -236,7 +236,7 @@ def test_complete_public_services(
                     dct:identifier      "1" ;
                     dct:language        <http://publications.europa.eu/resource/authority/language/NOB> ;
                     dct:title           "Lov om behandlingsmåten i forvaltningssaker"@nb ;
-                    cpsv:implements     <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> , <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
+                    cpsv:implements     <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
                     dct:description     "Lov om Enhetsregisteret"@nb ;
@@ -713,6 +713,9 @@ def test_complete_public_services(
                         )
                     ],
                     name={"nb": "Lov om behandlingsmåten i forvaltningssaker"},
+                    implements=[
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1"
+                    ],
                 )
             ],
             hasLegalResource=[

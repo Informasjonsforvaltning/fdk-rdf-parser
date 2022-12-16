@@ -1,4 +1,5 @@
 from typing import (
+    Any,
     List,
     Optional,
 )
@@ -14,7 +15,6 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import LegalResource
 from fdk_rdf_parser.rdf_utils import (
-    cv_uri,
     object_value,
     resource_list,
     value_translations,
@@ -22,10 +22,10 @@ from fdk_rdf_parser.rdf_utils import (
 
 
 def extract_legal_resources(
-    graph: Graph, subject: URIRef
+    graph: Graph, subject: URIRef, predicate: Any
 ) -> Optional[List[LegalResource]]:
     values = []
-    for resource in resource_list(graph, subject, cv_uri("hasLegalResource")):
+    for resource in resource_list(graph, subject, predicate):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             LegalResource(
