@@ -15,8 +15,8 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import LegalResource
 from fdk_rdf_parser.rdf_utils import (
-    object_value,
     resource_list,
+    value_list,
     value_translations,
 )
 
@@ -30,8 +30,10 @@ def extract_legal_resources(
         values.append(
             LegalResource(
                 uri=resource_uri,
+                dctTitle=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
-                url=object_value(graph, resource, RDFS.seeAlso),
+                seeAlso=value_list(graph, resource, RDFS.seeAlso),
+                relation=value_list(graph, resource, DCTERMS.relation),
             )
         )
 
