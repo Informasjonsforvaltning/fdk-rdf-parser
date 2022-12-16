@@ -239,8 +239,13 @@ def test_complete_public_services(
                     cpsv:implements     <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
+                    dct:title           "Lov om Enhetsregisteret"@nb ;
                     dct:description     "Lov om Enhetsregisteret"@nb ;
-                    rdfs:seeAlso         <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ; .
+                    rdfs:seeAlso        <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ;
+                    dct:relation        <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/2> .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/2> a eli:LegalResource ;
+                    dct:title           "Annen regulativ ressurs"@nb .
 
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
                     dct:identifier "971526920" ;
@@ -721,8 +726,12 @@ def test_complete_public_services(
             hasLegalResource=[
                 LegalResource(
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1",
+                    dctTitle={"nb": "Lov om Enhetsregisteret"},
                     description={"nb": "Lov om Enhetsregisteret"},
-                    url="https://lovdata.no/eli/lov/1994/06/03/15/nor/html",
+                    seeAlso=["https://lovdata.no/eli/lov/1994/06/03/15/nor/html"],
+                    relation=[
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/2"
+                    ],
                 )
             ],
             hasChannel=[
