@@ -12,7 +12,6 @@ from fdk_rdf_parser.classes.theme import (
 from .channel import Channel
 from .contactpoint import CVContactPoint
 from .cost import Cost
-from .criterion_requirement import CriterionRequirement
 from .evidence import Evidence
 from .harvest_meta_data import HarvestMetaData
 from .legal_resource import LegalResource
@@ -52,7 +51,6 @@ class Service:
     relation: Optional[List["Service"]] = None
     hasLegalResource: Optional[List[LegalResource]] = None
     language: Optional[List[ReferenceDataCode]] = None
-    hasCriterion: Optional[List[CriterionRequirement]] = None
     holdsRequirement: Optional[List[Requirement]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
