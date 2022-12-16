@@ -40,6 +40,7 @@ from .publisher import Publisher
 from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
 from .references import Reference
+from .requirement import Requirement
 from .rule import Rule
 from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept

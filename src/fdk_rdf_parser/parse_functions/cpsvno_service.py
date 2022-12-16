@@ -42,6 +42,7 @@ from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .participation import extract_participations
 from .publisher import extract_list_of_publishers
+from .requirement import extract_requirements
 from .rule import extract_rules
 from .skos_concept import extract_skos_concept
 
@@ -98,6 +99,7 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.language
         ),
         hasCriterion=extract_criterion_requirements(services_graph, cpsvno_service_uri),
+        holdsRequirement=extract_requirements(services_graph, cpsvno_service_uri),
         hasParticipation=extract_participations(services_graph, cpsvno_service_uri),
         hasInput=extract_evidences(services_graph, cpsvno_service_uri),
         produces=extract_outputs(services_graph, cpsvno_service_uri),

@@ -4,28 +4,26 @@ from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Agent,
     Channel,
+    ConceptSchema,
     Cost,
-    CriterionRequirement,
     CVContactPoint,
+    EuDataTheme,
     Evidence,
     HarvestMetaData,
     LegalResource,
+    LosNode,
     OpeningHoursSpecification,
     Output,
     Participation,
     PublicService,
     Publisher,
     ReferenceDataCode,
+    Requirement,
     Rule,
     Service,
     SkosConcept,
 )
 from fdk_rdf_parser.classes.evidence import EvidenceRdfType
-from fdk_rdf_parser.classes.theme import (
-    ConceptSchema,
-    EuDataTheme,
-    LosNode,
-)
 
 
 def test_complete_public_services(
@@ -61,7 +59,7 @@ def test_complete_public_services(
                     cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
                     cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>, <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16> ;
-                    cv:hasCriterion <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>  ;
+                    cv:holdsRequirement <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5> ;
                     cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
                     cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
@@ -154,10 +152,12 @@ def test_complete_public_services(
                     dct:identifier  "10" ;
                     dct:type        <https://data.norge.no/concepts/257> .
 
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5>
-                    a               cv:CriterionRequirement ;
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5>
+                    a               cv:Requirement ;
                     dct:identifier  "5" ;
-                    dct:title       "Krav om vandel"@nb ;
+                    dct:title       "Et attestkrav"@no ;
+                    dct:description "Et viktig krav som må tilfredsstilles."@no ;
+                    cv:fulfils     <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
                     dct:type        <https://data.norge.no/concepts/153> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
@@ -446,12 +446,16 @@ def test_complete_public_services(
                     },
                 ),
             ],
-            hasCriterion=[
-                CriterionRequirement(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/criterion-requirement/5",
+            holdsRequirement=[
+                Requirement(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5",
                     identifier="5",
-                    name={"nb": "Krav om vandel"},
-                    type=[
+                    dctTitle={"no": "Et attestkrav"},
+                    description={"no": "Et viktig krav som må tilfredsstilles."},
+                    fulfils=[
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1"
+                    ],
+                    dctType=[
                         SkosConcept(
                             uri="https://data.norge.no/concepts/153",
                             prefLabel={"nb": "Attest"},

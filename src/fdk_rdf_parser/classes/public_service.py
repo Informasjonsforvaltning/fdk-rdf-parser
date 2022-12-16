@@ -27,6 +27,7 @@ class PublicService(Service):
         self.isClassifiedBy = values.isClassifiedBy
         self.language = values.language
         self.hasCriterion = values.hasCriterion
+        self.holdsRequirement = values.holdsRequirement
         self.contactPoint = values.contactPoint
         self.hasParticipation = values.hasParticipation
         self.hasInput = values.hasInput
