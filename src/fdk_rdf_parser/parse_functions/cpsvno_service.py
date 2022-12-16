@@ -30,7 +30,6 @@ from fdk_rdf_parser.rdf_utils import (
 from .channel import extract_channels
 from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
-from .criterion_requirement import extract_criterion_requirements
 from .dcat_resource import (
     extract_key_words,
     extract_skos_code,
@@ -98,7 +97,6 @@ def parse_cpsvno_service(
         language=extract_skos_code_list(
             services_graph, cpsvno_service_uri, DCTERMS.language
         ),
-        hasCriterion=extract_criterion_requirements(services_graph, cpsvno_service_uri),
         holdsRequirement=extract_requirements(services_graph, cpsvno_service_uri),
         hasParticipation=extract_participations(services_graph, cpsvno_service_uri),
         hasInput=extract_evidences(services_graph, cpsvno_service_uri),
