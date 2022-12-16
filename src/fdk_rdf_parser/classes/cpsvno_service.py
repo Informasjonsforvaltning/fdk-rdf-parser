@@ -19,6 +19,7 @@ from .legal_resource import LegalResource
 from .output import Output
 from .participation import Participation
 from .publisher import Publisher
+from .requirement import Requirement
 from .rule import Rule
 from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
@@ -52,6 +53,7 @@ class Service:
     hasLegalResource: Optional[List[LegalResource]] = None
     language: Optional[List[ReferenceDataCode]] = None
     hasCriterion: Optional[List[CriterionRequirement]] = None
+    holdsRequirement: Optional[List[Requirement]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
     admsStatus: Optional[ReferenceDataCode] = None

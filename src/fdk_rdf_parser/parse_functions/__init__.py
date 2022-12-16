@@ -29,6 +29,7 @@ from .publisher import extract_publisher
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
 from .references import extract_references
+from .requirement import extract_requirements
 from .rule import extract_rules
 from .skos_concept import extract_skos_concept
 from .subject import extract_subjects
