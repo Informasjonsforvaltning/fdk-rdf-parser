@@ -95,6 +95,9 @@ def extract_cv_has_contact_point(
         values.append(
             CVContactPoint(
                 uri=resource.toPython() if isinstance(resource, URIRef) else None,
+                contactType=value_translations(
+                    graph, resource, schema_uri("contactType")
+                ),
                 email=value_list(graph, resource, cv_uri("email")),
                 telephone=value_list(graph, resource, cv_uri("telephone")),
                 contactPage=value_list(graph, resource, cv_uri("contactPage")),
