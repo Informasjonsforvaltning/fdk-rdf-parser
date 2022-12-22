@@ -1074,6 +1074,7 @@ def test_parse_cpsvno_services(
 
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl>
                 rdf:type cv:ContactPoint;
+                schema:contactType  "Kontakt test"@nb ;
                 cv:contactPage <https://example.org/exKontaktside>;
                 cv:email "mailto:postmottak@example.org"^^xsd:anyURI;
                 cv:telephone "tel:+4712345678";
@@ -1130,6 +1131,7 @@ def test_parse_cpsvno_services(
             contactPoint=[
                 CVContactPoint(
                     uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl",
+                    contactType={"nb": "Kontakt test"},
                     email=["mailto:postmottak@example.org"],
                     telephone=["tel:+4712345678"],
                     contactPage=["https://example.org/exKontaktside"],

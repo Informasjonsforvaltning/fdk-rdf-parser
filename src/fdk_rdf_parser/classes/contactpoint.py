@@ -23,6 +23,7 @@ class DCATContactPoint:
 @dataclass
 class CVContactPoint:
     uri: Optional[str] = None
+    contactType: Optional[Dict[str, str]] = None
     email: Optional[List[str]] = None
     telephone: Optional[List[str]] = None
     contactPage: Optional[List[str]] = None
