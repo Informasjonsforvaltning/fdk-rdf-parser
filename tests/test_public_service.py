@@ -389,7 +389,10 @@ def test_complete_public_services(
                     prefLabel={"en": "Airport-related activities"},
                 )
             ],
-            subject=["http://testbegrep0.no", "http://testbegrep1.no"],
+            subject=[
+                SkosConcept(uri="http://testbegrep0.no"),
+                SkosConcept(uri="http://testbegrep1.no"),
+            ],
             homepage=["http://testhomepage0.no", "http://testhomepage1.no"],
             description={
                 "nn": "Ei offentleg teneste som tener som døme til bruk i utvikling"
