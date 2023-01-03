@@ -103,3 +103,7 @@ def oa_uri(sub_string: str) -> URIRef:
 
 def prof_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://www.w3.org/ns/dx/prof/{sub_string}")
+
+
+def org_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://www.w3.org/ns/org#{sub_string}")

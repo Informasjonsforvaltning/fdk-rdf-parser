@@ -32,6 +32,7 @@ from .media_type import (
     MediaTypeOrExtentType,
 )
 from .opening_hours_specification import OpeningHoursSpecification
+from .organization import Organization
 from .output import Output
 from .participation import Participation
 from .public_service import PublicService

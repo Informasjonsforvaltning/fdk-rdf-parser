@@ -13,6 +13,7 @@ from .ns import (
     fdk_uri,
     model_dcat_ap_no_uri,
     oa_uri,
+    org_uri,
     owl_time_uri,
     prof_uri,
     prov_uri,
