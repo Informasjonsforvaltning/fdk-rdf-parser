@@ -55,7 +55,7 @@ class Service:
     associatedBroaderTypesByEvents: Optional[List[str]] = None
     type: str = "publicservices"
     admsStatus: Optional[ReferenceDataCode] = None
-    subject: Optional[List[str]] = None
+    subject: Optional[List[SkosConcept]] = None
     homepage: Optional[List[str]] = None
     dctType: Optional[List[ReferenceDataCode]] = None
     thematicAreaUris: Optional[List[str]] = None

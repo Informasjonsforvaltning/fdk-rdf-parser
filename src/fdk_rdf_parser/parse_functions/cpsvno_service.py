@@ -122,7 +122,9 @@ def parse_cpsvno_service(
         admsStatus=extract_skos_code(
             services_graph, cpsvno_service_uri, adms_uri("status")
         ),
-        subject=value_list(services_graph, cpsvno_service_uri, DCTERMS.subject),
+        subject=extract_skos_concept(
+            services_graph, cpsvno_service_uri, DCTERMS.subject
+        ),
         homepage=value_list(services_graph, cpsvno_service_uri, FOAF.homepage),
         dctType=extract_skos_code_list(
             services_graph, cpsvno_service_uri, DCTERMS.type
