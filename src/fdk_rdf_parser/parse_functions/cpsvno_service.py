@@ -38,9 +38,9 @@ from .dcat_resource import (
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
+from .organization import extract_organizations
 from .output import extract_outputs
 from .participation import extract_participations
-from .publisher import extract_list_of_publishers
 from .requirement import extract_requirements
 from .rule import extract_rules
 from .skos_concept import extract_skos_concept
@@ -76,7 +76,7 @@ def parse_cpsvno_service(
         description=value_translations(
             services_graph, cpsvno_service_uri, DCTERMS.description
         ),
-        ownedBy=extract_list_of_publishers(
+        ownedBy=extract_organizations(
             services_graph, cpsvno_service_uri, cv_uri("ownedBy")
         ),
         contactPoint=extract_cv_has_contact_point(services_graph, cpsvno_service_uri),
@@ -136,7 +136,7 @@ def parse_cpsvno_service(
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):
         public_service = PublicService(
-            hasCompetentAuthority=extract_list_of_publishers(
+            hasCompetentAuthority=extract_organizations(
                 services_graph, cpsvno_service_uri, cv_uri("hasCompetentAuthority")
             ),
         )

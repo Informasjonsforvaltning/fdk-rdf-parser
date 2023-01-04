@@ -13,10 +13,10 @@ from fdk_rdf_parser.classes import (
     LegalResource,
     LosNode,
     OpeningHoursSpecification,
+    Organization,
     Output,
     Participation,
     PublicService,
-    Publisher,
     ReferenceDataCode,
     Requirement,
     Rule,
@@ -395,17 +395,17 @@ def test_complete_public_services(
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             ],
             hasCompetentAuthority=[
-                Publisher(
+                Organization(
                     uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                    id="123456789",
-                    name="Digitaliseringsdirektoratet",
+                    identifier="123456789",
+                    name={"nb": "Digitaliseringsdirektoratet"},
                     orgPath="/STAT/987654321/123456789",
-                    prefLabel={
-                        "en": "Norwegian Digitalisation Agency",
+                    title={
                         "nn": "Digitaliseringsdirektoratet",
                         "nb": "Digitaliseringsdirektoratet",
+                        "en": "Norwegian Digitalisation Agency",
                     },
-                    organisasjonsform="ORGL",
+                    orgType="ORGL",
                 )
             ],
             harvest=HarvestMetaData(
@@ -756,17 +756,17 @@ def test_complete_public_services(
                     currency="http://publications.europa.eu/resource/authority/currency/NOK",
                     ifAccessedThrough="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2",
                     isDefinedBy=[
-                        Publisher(
+                        Organization(
                             uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                            id="123456789",
-                            name="Digitaliseringsdirektoratet",
+                            identifier="123456789",
+                            name={"nb": "Digitaliseringsdirektoratet"},
                             orgPath="/STAT/987654321/123456789",
-                            prefLabel={
+                            title={
                                 "en": "Norwegian Digitalisation Agency",
                                 "nn": "Digitaliseringsdirektoratet",
                                 "nb": "Digitaliseringsdirektoratet",
                             },
-                            organisasjonsform="ORGL",
+                            orgType="ORGL",
                         )
                     ],
                     value="4.27",
@@ -915,17 +915,17 @@ def test_parse_multiple_public_services(
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             ],
             hasCompetentAuthority=[
-                Publisher(
+                Organization(
                     uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                    id="123456789",
-                    name="Digitaliseringsdirektoratet",
+                    identifier="123456789",
+                    name={"nb": "Digitaliseringsdirektoratet"},
                     orgPath="/STAT/987654321/123456789",
-                    prefLabel={
+                    title={
                         "en": "Norwegian Digitalisation Agency",
                         "nn": "Digitaliseringsdirektoratet",
                         "nb": "Digitaliseringsdirektoratet",
                     },
-                    organisasjonsform="ORGL",
+                    orgType="ORGL",
                 )
             ],
             harvest=HarvestMetaData(
@@ -994,7 +994,7 @@ def test_parse_multiple_public_services(
                 "nb": "Ei anna offentleg teneste som tener som døme til bruk i utvikling"
             },
             hasCompetentAuthority=[
-                Publisher(
+                Organization(
                     uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/991825827",
                 )
             ],
@@ -1047,13 +1047,14 @@ def test_parse_cpsvno_services(
         @prefix xkos:   <http://rdf-vocabulary.ddialliance.org/xkos#> .
         @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 
-        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl>
-                rdf:type        foaf:Agent ;
-                dct:identifier  "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl"^^xsd:anyURI ;
-                locn:address    [ rdf:type          locn:Address ;
-                                  locn:fullAddress  "Dummygata 1, Dummyby, Dummyland"@nb
-                                ] ;
-                foaf:name       "Dummy aktør"@nb , "Dummy aktør"@nn , "Dummy agent"@en .
+        <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
+                a              org:Organization;
+                dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
+                dct:title      "Organisasjon i Brønnøysund"@nb ;
+                foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
+                dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
+                dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
+                               <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
 
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl>
                 rdf:type         cv:Output ;
@@ -1074,7 +1075,7 @@ def test_parse_cpsvno_services(
 
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl>
                 rdf:type           cpsvno:Service ;
-                cv:ownedBy         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl> ;
+                cv:ownedBy         <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced> ;
                 dct:description    "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå."@nb ;
                 dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl"^^xsd:anyURI ;
                 dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
@@ -1107,16 +1108,17 @@ def test_parse_cpsvno_services(
                 firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
             ),
             ownedBy=[
-                Publisher(
-                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl",
-                    id="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl",
-                    name="Dummy aktør",
-                    prefLabel={
-                        "nb": "Dummy aktør",
-                        "nn": "Dummy aktør",
-                        "en": "Dummy agent",
-                    },
-                )
+                Organization(
+                    uri="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
+                    identifier="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
+                    name={"nb": "Organisasjon i Brønnøysund"},
+                    orgType="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+                    spatial=[
+                        "http://publications.europa.eu/resource/authority/country/NOR",
+                        "https://data.geonorge.no/administrativeEnheter/kommune/id/172833",
+                    ],
+                    homepage=["https://www.bronnoy.organisasjon.no"],
+                ),
             ],
             contactPoint=[
                 CVContactPoint(

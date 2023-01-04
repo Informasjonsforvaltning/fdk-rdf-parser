@@ -15,9 +15,9 @@ from .cost import Cost
 from .evidence import Evidence
 from .harvest_meta_data import HarvestMetaData
 from .legal_resource import LegalResource
+from .organization import Organization
 from .output import Output
 from .participation import Participation
-from .publisher import Publisher
 from .requirement import Requirement
 from .rule import Rule
 from .skos_code import ReferenceDataCode
@@ -32,7 +32,7 @@ class Service:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     harvest: Optional[HarvestMetaData] = None
-    ownedBy: Optional[List[Publisher]] = None
+    ownedBy: Optional[List[Organization]] = None
     contactPoint: Optional[List[CVContactPoint]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     sector: Optional[List[SkosConcept]] = None
