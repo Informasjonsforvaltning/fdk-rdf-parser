@@ -5,7 +5,7 @@ from typing import (
     Optional,
 )
 
-from .publisher import Publisher
+from .organization import Organization
 
 
 @dataclass
@@ -15,5 +15,5 @@ class Cost:
     description: Optional[Dict[str, str]] = None
     currency: Optional[str] = None
     ifAccessedThrough: Optional[str] = None
-    isDefinedBy: Optional[List[Publisher]] = None
+    isDefinedBy: Optional[List[Organization]] = None
     value: Optional[str] = None

@@ -17,7 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
-from .publisher import extract_list_of_publishers
+from .organization import extract_organizations
 
 
 def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
@@ -33,7 +33,7 @@ def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
                 ifAccessedThrough=object_value(
                     graph, resource, cv_uri("ifAccessedThrough")
                 ),
-                isDefinedBy=extract_list_of_publishers(
+                isDefinedBy=extract_organizations(
                     graph, resource, cv_uri("isDefinedBy")
                 ),
                 value=str(object_number_value(graph, resource, cv_uri("value"))),
