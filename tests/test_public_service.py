@@ -1074,13 +1074,14 @@ def test_parse_cpsvno_services(
         @prefix xkos:   <http://rdf-vocabulary.ddialliance.org/xkos#> .
         @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 
-        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl>
-                rdf:type        foaf:Agent ;
-                dct:identifier  "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl"^^xsd:anyURI ;
-                locn:address    [ rdf:type          locn:Address ;
-                                  locn:fullAddress  "Dummygata 1, Dummyby, Dummyland"@nb
-                                ] ;
-                foaf:name       "Dummy aktør"@nb , "Dummy aktør"@nn , "Dummy agent"@en .
+        <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
+                a              org:Organization;
+                dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
+                dct:title      "Organisasjon i Brønnøysund"@nb ;
+                foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
+                dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
+                dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
+                               <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
 
         <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
         a              org:Organization;
