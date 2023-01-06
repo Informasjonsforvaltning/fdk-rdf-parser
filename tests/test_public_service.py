@@ -128,7 +128,7 @@ def test_complete_public_services(
             <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>
                     a  cv:Cost ;
                     cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
-                    cv:ifAccessedThrough  <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10> ;
+                    cv:ifAccessedThrough  <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
                     cv:isDefinedBy        <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
                     cv:value              4.27 ;
                     dct:description       "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3" ;
@@ -144,12 +144,6 @@ def test_complete_public_services(
                     a cv:Channel ;
                     cv:ownedBy      <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
                     dct:identifier  "2" ;
-                    dct:type        <https://data.norge.no/concepts/257> .
-
-            <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10>
-                    a cv:Channel ;
-                    cv:ownedBy      <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
-                    dct:identifier  "10" ;
                     dct:type        <https://data.norge.no/concepts/257> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5>
@@ -760,14 +754,7 @@ def test_complete_public_services(
                         "nb": "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3"
                     },
                     currency="http://publications.europa.eu/resource/authority/currency/NOK",
-                    ifAccessedThrough=Channel(
-                        uri="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/10",
-                        identifier="10",
-                        type=SkosConcept(
-                            uri="https://data.norge.no/concepts/257",
-                            prefLabel={"nb": "Post", "en": "Mail"},
-                        ),
-                    ),
+                    ifAccessedThrough="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2",
                     isDefinedBy=[
                         Publisher(
                             uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",

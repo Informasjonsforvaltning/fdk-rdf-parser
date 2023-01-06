@@ -5,7 +5,6 @@ from typing import (
     Optional,
 )
 
-from .channel import Channel
 from .publisher import Publisher
 
 
@@ -15,6 +14,6 @@ class Cost:
     identifier: Optional[str] = None
     description: Optional[Dict[str, str]] = None
     currency: Optional[str] = None
-    ifAccessedThrough: Optional[Channel] = None
+    ifAccessedThrough: Optional[str] = None
     isDefinedBy: Optional[List[Publisher]] = None
     value: Optional[str] = None
