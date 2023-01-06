@@ -17,7 +17,6 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
-from .channel import extract_channels
 from .publisher import extract_list_of_publishers
 
 
@@ -25,16 +24,15 @@ def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
     values = []
     for resource in resource_list(graph, subject, cv_uri("hasCost")):
         resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
-        channels = extract_channels(graph, resource, cv_uri("ifAccessedThrough"))
         values.append(
             Cost(
                 uri=resource_uri,
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 description=value_translations(graph, resource, DCTERMS.description),
                 currency=object_value(graph, resource, cv_uri("currency")),
-                ifAccessedThrough=channels[0]
-                if channels is not None and len(channels) == 1
-                else None,
+                ifAccessedThrough=object_value(
+                    graph, resource, cv_uri("ifAccessedThrough")
+                ),
                 isDefinedBy=extract_list_of_publishers(
                     graph, resource, cv_uri("isDefinedBy")
                 ),
