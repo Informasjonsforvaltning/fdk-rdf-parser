@@ -10,6 +10,5 @@ from typing import (
 class Agent:
     uri: Optional[str] = None
     identifier: Optional[str] = None
-    title: Optional[Dict[str, str]] = None
-    name: Optional[str] = None
+    name: Optional[Dict[str, str]] = None
     playsRole: Optional[List[str]] = None

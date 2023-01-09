@@ -5,13 +5,12 @@ from typing import (
     Optional,
 )
 
+from fdk_rdf_parser.classes import Agent
+
 
 @dataclass
-class Organization:
-    uri: Optional[str] = None
-    identifier: Optional[str] = None
+class Organization(Agent):
     title: Optional[Dict[str, str]] = None
-    name: Optional[Dict[str, str]] = None
     orgPath: Optional[str] = None
     orgType: Optional[str] = None
     spatial: Optional[List[str]] = None

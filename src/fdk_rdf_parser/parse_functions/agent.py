@@ -9,7 +9,6 @@ from rdflib import (
 )
 from rdflib.namespace import (
     DCTERMS,
-    FOAF,
     RDF,
 )
 
@@ -41,8 +40,7 @@ def extract_agents_for_participation(
             Agent(
                 uri=resource_uri,
                 identifier=object_value(graph, resource, DCTERMS.identifier),
-                title=value_translations(graph, resource, DCTERMS.title),
-                name=object_value(graph, resource, FOAF.name),
+                name=value_translations(graph, resource, DCTERMS.title),
                 playsRole=value_list(graph, resource, cv_uri("playsRole")),
             )
         )
