@@ -4,6 +4,7 @@ from typing import (
 )
 
 from fdk_rdf_parser.classes import (
+    Channel,
     CVContactPoint,
     Evidence,
     OpeningHoursSpecification,
@@ -36,13 +37,13 @@ def extend_cpsvno_service_with_reference_data(
     cpsvno_service.dctType = extend_skos_code_list(
         cpsvno_service.dctType, ref_data.types
     )
-
     cpsvno_service.losThemes = collect_los_themes(
         cpsvno_service.thematicAreaUris, ref_data.los_themes
     )
     cpsvno_service.euDataThemes = collect_eu_data_themes(
         cpsvno_service.thematicAreaUris, ref_data.eu_data_themes
     )
+    cpsvno_service.hasChannel = extend_channels(cpsvno_service.hasChannel, ref_data)
 
     return cpsvno_service
 
@@ -105,3 +106,16 @@ def extend_cv_evidence(
             evidence.language, ref_data.linguisticsystem
         )
     return evidences
+
+
+def extend_channels(
+    channels: Optional[List[Channel]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Channel]]:
+    if channels is None:
+        return None
+
+    for channel in channels:
+        channel.channelType = extend_skos_code(
+            channel.channelType, ref_data.channel_type
+        )
+    return channels

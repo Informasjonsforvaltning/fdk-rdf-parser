@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
+    Address,
     Agent,
     Channel,
     ConceptSchema,
@@ -142,9 +143,19 @@ def test_complete_public_services(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
                     a cv:Channel ;
-                    cv:ownedBy      <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
-                    dct:identifier  "2" ;
-                    dct:type        <https://data.norge.no/concepts/257> .
+                    cv:ownedBy          <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
+                    dct:identifier      "2" ;
+                    dct:type            <https://data.norge.no/vocabulary/service-channel-type#assistant> ;
+                    dct:description     "Lov om Enhetsregisteret"@nb ;
+                    cv:processingTime   "P1D"^^xsd:duration ;
+                    vcard:hasEmail      "mailto:postmottak@bronnoy.kommune.no" ;
+                    vcard:hasURL        "http://testurl.com" ;
+                    vcard:hasAddress   [ a vcard:Address ;
+                                        vcard:street-address "Sivert Nielsens gt. 24" ;
+                                        vcard:locality "Brønnøysund" ;
+                                        vcard:postal-code "8905" ;
+                                        vcard:country-name "Norge"@nb , "Norway"@en ; ] ;
+                    cpsv:hasInput      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5>
                     a               cv:Requirement ;
@@ -252,7 +263,6 @@ def test_complete_public_services(
                     dct:title "Tull"@nb ;
                     foaf:name "TULLEBYRÅ" ;
                     cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
-
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -739,10 +749,26 @@ def test_complete_public_services(
                 Channel(
                     uri="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2",
                     identifier="2",
-                    type=SkosConcept(
-                        uri="https://data.norge.no/concepts/257",
-                        prefLabel={"nb": "Post", "en": "Mail"},
+                    channelType=ReferenceDataCode(
+                        uri="https://data.norge.no/vocabulary/service-channel-type#assistant",
+                        prefLabel={"nb": "assistent", "en": "assistant"},
+                        code="assistant",
                     ),
+                    description={"nb": "Lov om Enhetsregisteret"},
+                    processingTime="P1D",
+                    email=["mailto:postmottak@bronnoy.kommune.no"],
+                    url=["http://testurl.com"],
+                    address=[
+                        Address(
+                            streetAddress="Sivert Nielsens gt. 24",
+                            locality="Brønnøysund",
+                            postalCode="8905",
+                            countryName={"nb": "Norge", "en": "Norway"},
+                        )
+                    ],
+                    hasInput=[
+                        "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl"
+                    ],
                 )
             ],
             processingTime="P1D",
@@ -1047,15 +1073,22 @@ def test_parse_cpsvno_services(
         @prefix xkos:   <http://rdf-vocabulary.ddialliance.org/xkos#> .
         @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 
-        <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
-                a              org:Organization;
-                dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
-                dct:title      "Organisasjon i Brønnøysund"@nb ;
-                foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
-                dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
-                dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
-                               <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl>
+                rdf:type        foaf:Agent ;
+                dct:identifier  "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exAktorDummy.ttl"^^xsd:anyURI ;
+                locn:address    [ rdf:type          locn:Address ;
+                                  locn:fullAddress  "Dummygata 1, Dummyby, Dummyland"@nb
+                                ] ;
+                foaf:name       "Dummy aktør"@nb , "Dummy aktør"@nn , "Dummy agent"@en .
 
+        <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
+        a              org:Organization;
+        dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
+        dct:title      "Organisasjon i Brønnøysund"@nb ;
+        foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
+        dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
+        dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
+                        <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl>
                 rdf:type         cv:Output ;
                 dct:description  "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat."@nb ;

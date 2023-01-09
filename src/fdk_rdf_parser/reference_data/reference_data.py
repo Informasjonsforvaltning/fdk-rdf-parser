@@ -53,6 +53,7 @@ class PublicServiceReferenceData:
     evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
     eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
     los_themes: Optional[Dict[str, LosNode]] = None
+    channel_type: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -93,6 +94,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         types=get_and_map_dct_types(),
         eu_data_themes=get_and_map_eu_data_themes(),
         los_themes=get_and_map_los_themes(),
+        channel_type=get_and_map_channel_types(),
     )
 
 
@@ -219,6 +221,13 @@ def get_and_map_statuses() -> Optional[Dict[str, ReferenceDataCode]]:
 def get_and_map_dct_types() -> Optional[Dict[str, ReferenceDataCode]]:
     dct_types = get_reference_data("/eu/main-activities").get("mainActivities")
     return parse_reference_codes(dct_types)
+
+
+def get_and_map_channel_types() -> Optional[Dict[str, ReferenceDataCode]]:
+    channels = get_reference_data("/digdir/service-channel-types").get(
+        "serviceChannelTypes"
+    )
+    return parse_reference_codes(channels)
 
 
 def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
