@@ -1,3 +1,4 @@
+from .address import Address
 from .agent import Agent
 from .business_event import BusinessEvent
 from .catalog import Catalog
