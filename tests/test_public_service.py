@@ -255,13 +255,11 @@ def test_complete_public_services(
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
                     dct:identifier "971526920" ;
                     dct:title "Statistisk sentralbyrå"@nb ;
-                    foaf:name "STATISTISK SENTRALBYRÅ" ;
                     cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ; .
 
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526921> a dct:Agent ;
                     dct:identifier "971526921" ;
                     dct:title "Tull"@nb ;
-                    foaf:name "TULLEBYRÅ" ;
                     cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
 
             <http://localhost:5000/services/fdk-1>
@@ -493,8 +491,7 @@ def test_complete_public_services(
                         Agent(
                             uri="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
                             identifier="971526920",
-                            title={"nb": "Statistisk sentralbyrå"},
-                            name="STATISTISK SENTRALBYRÅ",
+                            name={"nb": "Statistisk sentralbyrå"},
                             playsRole=[
                                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1"
                             ],
@@ -909,7 +906,6 @@ def test_parse_multiple_public_services(
         <https://data.brreg.no/enhetsregisteret/api/enheter/985399077> a dct:Agent ;
                 dct:identifier "985399077" ;
                 dct:title "Mattilsynet"@nb ;
-                foaf:name "MATTILSYNET" ;
                 cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>,
                             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
         .
@@ -976,8 +972,7 @@ def test_parse_multiple_public_services(
                         Agent(
                             uri="https://data.brreg.no/enhetsregisteret/api/enheter/985399077",
                             identifier="985399077",
-                            title={"nb": "Mattilsynet"},
-                            name="MATTILSYNET",
+                            name={"nb": "Mattilsynet"},
                             playsRole=[
                                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
                                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
@@ -1000,8 +995,7 @@ def test_parse_multiple_public_services(
                         Agent(
                             uri="https://data.brreg.no/enhetsregisteret/api/enheter/985399077",
                             identifier="985399077",
-                            title={"nb": "Mattilsynet"},
-                            name="MATTILSYNET",
+                            name={"nb": "Mattilsynet"},
                             playsRole=[
                                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
                                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
