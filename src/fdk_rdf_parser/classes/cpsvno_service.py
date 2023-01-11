@@ -17,7 +17,6 @@ from .harvest_meta_data import HarvestMetaData
 from .legal_resource import LegalResource
 from .organization import Organization
 from .output import Output
-from .participation import Participation
 from .requirement import Requirement
 from .rule import Rule
 from .skos_code import ReferenceDataCode
@@ -41,7 +40,7 @@ class Service:
     hasInput: Optional[List[Evidence]] = None
     processingTime: Optional[str] = None
     isDescribedAt: Optional[List[SkosConcept]] = None
-    hasParticipation: Optional[List[Participation]] = None
+    hasParticipation: Optional[List[str]] = None
     isGroupedBy: Optional[List[str]] = None
     isClassifiedBy: Optional[List[SkosConcept]] = None
     hasChannel: Optional[List[Channel]] = None

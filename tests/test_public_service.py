@@ -3,7 +3,6 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Address,
-    Agent,
     Channel,
     ConceptSchema,
     Cost,
@@ -16,7 +15,6 @@ from fdk_rdf_parser.classes import (
     OpeningHoursSpecification,
     Organization,
     Output,
-    Participation,
     PublicService,
     ReferenceDataCode,
     Requirement,
@@ -474,30 +472,7 @@ def test_complete_public_services(
                 ),
             ],
             hasParticipation=[
-                Participation(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
-                    identifier="1",
-                    description={
-                        "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
-                    },
-                    role=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concepts/101",
-                            prefLabel={"nb": "Datakonsument"},
-                            extraType=None,
-                        )
-                    ],
-                    agents=[
-                        Agent(
-                            uri="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
-                            identifier="971526920",
-                            name={"nb": "Statistisk sentralbyrå"},
-                            playsRole=[
-                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1"
-                            ],
-                        )
-                    ],
-                )
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
             ],
             hasInput=[
                 Evidence(
@@ -954,54 +929,8 @@ def test_parse_multiple_public_services(
                 firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
             ),
             hasParticipation=[
-                Participation(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
-                    identifier="1",
-                    description={
-                        "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
-                    },
-                    role=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concepts/101",
-                            prefLabel=None,
-                            extraType=None,
-                        )
-                    ],
-                    agents=[
-                        Agent(
-                            uri="https://data.brreg.no/enhetsregisteret/api/enheter/985399077",
-                            identifier="985399077",
-                            name={"nb": "Mattilsynet"},
-                            playsRole=[
-                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
-                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
-                            ],
-                        )
-                    ],
-                ),
-                Participation(
-                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
-                    identifier="6",
-                    description={"nb": "Mattilsynet"},
-                    role=[
-                        SkosConcept(
-                            uri="https://data.norge.no/concepts/15",
-                            prefLabel=None,
-                            extraType=None,
-                        )
-                    ],
-                    agents=[
-                        Agent(
-                            uri="https://data.brreg.no/enhetsregisteret/api/enheter/985399077",
-                            identifier="985399077",
-                            name={"nb": "Mattilsynet"},
-                            playsRole=[
-                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
-                                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
-                            ],
-                        )
-                    ],
-                ),
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
             ],
             type="publicservices",
         ),
