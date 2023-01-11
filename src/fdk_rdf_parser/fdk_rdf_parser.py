@@ -149,7 +149,7 @@ def parse_public_services(
     reference_data = get_public_service_reference_data()
 
     events: Dict[str, Optional[Event]] = (
-        parse_events(event_rdf) if event_rdf is not None else {}
+        parse_events(event_rdf, rdf_format) if event_rdf is not None else {}
     )
 
     cpsvno_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
