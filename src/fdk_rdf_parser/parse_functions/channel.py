@@ -47,6 +47,7 @@ def extract_channels(
                 hasInput=value_list(graph, resource, cpsv_uri("hasInput")),
                 email=value_list(graph, resource, vcard_uri("hasEmail")),
                 url=value_list(graph, resource, vcard_uri("hasURL")),
+                telephone=value_list(graph, resource, vcard_uri("hasTelephone")),
             )
         )
 

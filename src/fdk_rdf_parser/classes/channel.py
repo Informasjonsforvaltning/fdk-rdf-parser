@@ -21,3 +21,4 @@ class Channel:
     hasInput: Optional[List[str]] = None
     email: Optional[List[str]] = None
     url: Optional[List[str]] = None
+    telephone: Optional[List[str]] = None
