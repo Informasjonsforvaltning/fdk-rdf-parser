@@ -155,8 +155,8 @@ def test_complete_public_services(
                                         vcard:locality "Brønnøysund" ;
                                         vcard:postal-code "8905" ;
                                         vcard:country-name "Norge"@nb , "Norway"@en ; ] ;
-                    cpsv:hasInput      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl> .
-
+                    cpsv:hasInput      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl> ;
+                    vcard:hasTelephone "tel:+4712345678" .
             <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5>
                     a               cv:Requirement ;
                     dct:identifier  "5" ;
@@ -769,6 +769,7 @@ def test_complete_public_services(
                     hasInput=[
                         "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl"
                     ],
+                    telephone=["tel:+4712345678"],
                 )
             ],
             processingTime="P1D",
