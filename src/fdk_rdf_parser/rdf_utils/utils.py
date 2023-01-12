@@ -35,14 +35,6 @@ def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
     return False
 
 
-def is_uri_in_list(
-    reference_uri: str, graph: Graph, subject: URIRef, predicate: URIRef
-) -> bool:
-    return reference_uri in map(
-        lambda resource: resource.toPython(), resource_list(graph, subject, predicate)
-    )
-
-
 def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return value.toPython() if value and not isinstance(value, BNode) else None

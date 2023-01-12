@@ -27,6 +27,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_list,
     value_translations,
 )
+from .agent import extract_participating_agents
 from .channel import extract_channels
 from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
@@ -132,6 +133,9 @@ def parse_cpsvno_service(
         ),
         thematicAreaUris=value_list(
             services_graph, cpsvno_service_uri, cv_uri("thematicArea")
+        ),
+        participatingAgents=extract_participating_agents(
+            services_graph, cpsvno_service_uri
         ),
     )
 
