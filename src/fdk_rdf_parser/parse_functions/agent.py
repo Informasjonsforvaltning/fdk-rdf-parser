@@ -1,4 +1,5 @@
 from typing import (
+    Dict,
     List,
     Optional,
 )
@@ -9,40 +10,57 @@ from rdflib import (
 )
 from rdflib.namespace import (
     DCTERMS,
-    RDF,
+    FOAF,
 )
 
 from fdk_rdf_parser.classes import Agent
+from fdk_rdf_parser.parse_functions.organization import parse_organization
+from fdk_rdf_parser.parse_functions.participation import parse_participation
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
-    is_uri_in_list,
     object_value,
-    value_list,
+    org_uri,
+    resource_list,
+    rov_uri,
+    uri_or_identifier,
     value_translations,
 )
+from fdk_rdf_parser.rdf_utils.utils import is_type
 
 
-def extract_agents_for_participation(
-    graph: Graph, participation_ref: URIRef
-) -> Optional[List[Agent]]:
-    values = []
-    agents = graph.subjects(predicate=RDF.type, object=DCTERMS.Agent)
-    filtered_agents = filter(
-        lambda agent: is_uri_in_list(
-            participation_ref, graph, agent, cv_uri("playsRole")
-        ),
-        agents,
-    )
-    for resource in filtered_agents:
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
-
-        values.append(
-            Agent(
-                uri=resource_uri,
-                identifier=object_value(graph, resource, DCTERMS.identifier),
-                name=value_translations(graph, resource, DCTERMS.title),
-                playsRole=value_list(graph, resource, cv_uri("playsRole")),
-            )
+def parse_agent_or_organization(graph: Graph, subject: URIRef) -> Optional[Agent]:
+    if is_type(org_uri("Organization"), graph, subject) or is_type(
+        rov_uri("RegisteredOrganization"), graph, subject
+    ):
+        return parse_organization(graph, subject)
+    elif is_type(FOAF.Agent, graph, subject) or is_type(DCTERMS.Agent, graph, subject):
+        return Agent(
+            uri=uri_or_identifier(graph, subject),
+            identifier=object_value(graph, subject, DCTERMS.identifier),
+            name=value_translations(graph, subject, DCTERMS.title),
         )
+    else:
+        return None
 
+
+def extract_participating_agents(
+    graph: Graph, service_uri: URIRef
+) -> Optional[List[Agent]]:
+    agents: Dict[str, Agent] = {}
+    for participation in resource_list(graph, service_uri, cv_uri("hasParticipation")):
+        agent_uri = object_value(graph, participation, cv_uri("hasParticipant"))
+        if agent_uri and agent_uri not in agents:
+            agent = parse_agent_or_organization(graph, URIRef(agent_uri))
+            if agent:
+                agents[agent_uri] = agent
+
+        parsed_participation = parse_participation(graph, participation)
+        agent = agents.get(agent_uri) if agent_uri else None
+        if parsed_participation and agent:
+            if agent.playsRole:
+                agent.playsRole.append(parsed_participation)
+            else:
+                agent.playsRole = [parsed_participation]
+
+    values = list(agents.values())
     return values if len(values) > 0 else None

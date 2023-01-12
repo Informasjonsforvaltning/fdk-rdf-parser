@@ -253,12 +253,12 @@ def test_complete_public_services(
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
                     dct:identifier "971526920" ;
                     dct:title "Statistisk sentralbyrå"@nb ;
-                    cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ; .
+                    cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ; .
 
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526921> a dct:Agent ;
                     dct:identifier "971526921" ;
                     dct:title "Tull"@nb ;
-                    cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
+                    cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -825,7 +825,6 @@ def test_parse_multiple_public_services(
                 cv:processingTime "not valid duration type"^^xsd:duration ;
                 adms:status <http://is-not-in-ref-data.test> ;
                 cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
-                cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>, <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
                 cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
 
         <http://localhost:5000/services/fdk-1>
@@ -864,25 +863,6 @@ def test_parse_multiple_public_services(
                 dct:identifier "4" ;
                 dct:title "Ei anna offentleg teneste"@nn ;
                 dct:description "Ei anna offentleg teneste som tener som døme til bruk i utvikling"@nb ; .
-
-        <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> a cv:Participation ;
-                dct:identifier "1" ;
-                dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
-                cv:role <https://data.norge.no/concepts/101> ;
-        .
-
-        <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
-                a                cv:Participation ;
-                cv:role          <https://data.norge.no/concepts/15> ;
-                dct:description  "Mattilsynet"@nb ;
-                dct:identifier   "6" .
-
-        <https://data.brreg.no/enhetsregisteret/api/enheter/985399077> a dct:Agent ;
-                dct:identifier "985399077" ;
-                dct:title "Mattilsynet"@nb ;
-                cv:playsRole <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>,
-                            <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ;
-        .
 
         <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
                 a                      rov:RegisteredOrganization ;
@@ -928,10 +908,6 @@ def test_parse_multiple_public_services(
             harvest=HarvestMetaData(
                 firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
             ),
-            hasParticipation=[
-                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
-                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6",
-            ],
             type="publicservices",
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/2": PublicService(

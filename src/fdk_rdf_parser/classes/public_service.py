@@ -44,3 +44,4 @@ class PublicService(Service):
         self.subject = values.subject
         self.homepage = values.homepage
         self.dctType = values.dctType
+        self.participatingAgents = values.participatingAgents
