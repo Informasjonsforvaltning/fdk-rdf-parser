@@ -14,7 +14,7 @@ from .format import Format
 from .harvest_meta_data import HarvestMetaData
 from .model_element import ModelElement
 from .model_property import ModelProperty
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 from .temporal import Temporal
 from .theme import LosNode
 

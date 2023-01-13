@@ -29,7 +29,7 @@ from .format import extract_formats
 from .harvest_meta_data import extract_meta_data
 from .model_element import parse_model_element
 from .model_property import parse_model_property
-from .skos_code import extract_skos_code_list
+from .reference_data_code import extract_reference_data_code_list
 from .temporal import extract_temporal
 
 
@@ -47,11 +47,15 @@ def parse_information_model(
         harvest=extract_meta_data(graph, fdk_record_uri),
         catalog=parse_catalog(graph, fdk_record_uri),
         conformsTo=extract_dct_standard_list(graph, info_model_uri, DCTERMS.conformsTo),
-        license=extract_skos_code_list(graph, info_model_uri, DCTERMS.license),
+        license=extract_reference_data_code_list(
+            graph, info_model_uri, DCTERMS.license
+        ),
         informationModelIdentifier=object_value(
             graph, info_model_uri, model_dcat_ap_no_uri("informationModelIdentifier")
         ),
-        spatial=extract_skos_code_list(graph, info_model_uri, DCTERMS.spatial),
+        spatial=extract_reference_data_code_list(
+            graph, info_model_uri, DCTERMS.spatial
+        ),
         temporal=extract_temporal(graph, info_model_uri),
         isPartOf=object_value(graph, info_model_uri, DCTERMS.isPartOf),
         hasPart=object_value(graph, info_model_uri, DCTERMS.hasPart),

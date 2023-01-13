@@ -8,7 +8,7 @@ from typing import (
 
 from .contactpoint import DCATContactPoint
 from .publisher import Publisher
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 from .theme import EuDataTheme
 
 

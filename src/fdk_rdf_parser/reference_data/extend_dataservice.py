@@ -16,7 +16,7 @@ from .utils import remove_scheme_and_trailing_slash
 def extend_data_service_with_reference_data(
     data_service: DataService, ref_data: DataServiceReferenceData
 ) -> DataService:
-    data_service.mediaType = extend_media_type_skos_codes(
+    data_service.mediaType = extend_media_type_reference_data_codes(
         data_service.mediaType, ref_data.media_types
     )
     data_service.fdkFormat = extend_fdk_format(
@@ -26,7 +26,7 @@ def extend_data_service_with_reference_data(
     return data_service
 
 
-def extend_media_type_skos_codes(
+def extend_media_type_reference_data_codes(
     media_types: Optional[List[ReferenceDataCode]],
     references: Optional[Dict[str, MediaTypeOrExtent]],
 ) -> Optional[List[ReferenceDataCode]]:

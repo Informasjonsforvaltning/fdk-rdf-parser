@@ -26,7 +26,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from fdk_rdf_parser.rdf_utils.utils import value_list
-from .dcat_resource import extract_skos_code_list
+from .dcat_resource import extract_reference_data_code_list
 
 
 def extract_evidences(graph: Graph, subject: URIRef) -> Optional[List[Evidence]]:
@@ -48,8 +48,10 @@ def extract_evidences(graph: Graph, subject: URIRef) -> Optional[List[Evidence]]
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 name=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
-                dctType=extract_skos_code_list(graph, resource, DCTERMS.type),
-                language=extract_skos_code_list(graph, resource, DCTERMS.language),
+                dctType=extract_reference_data_code_list(graph, resource, DCTERMS.type),
+                language=extract_reference_data_code_list(
+                    graph, resource, DCTERMS.language
+                ),
                 page=value_list(graph, resource, FOAF.page),
             )
         )

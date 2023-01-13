@@ -25,9 +25,9 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .contactpoint import extract_contact_points
 from .publisher import extract_publisher
-from .skos_code import (
-    extract_skos_code,
-    extract_skos_code_list,
+from .reference_data_code import (
+    extract_reference_data_code,
+    extract_reference_data_code_list,
 )
 
 
@@ -42,7 +42,7 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         else None,
         descriptionFormatted=formatted_description,
         uri=subject.toPython(),
-        accessRights=extract_skos_code(graph, subject, DCTERMS.accessRights),
+        accessRights=extract_reference_data_code(graph, subject, DCTERMS.accessRights),
         theme=extract_themes(graph, subject),
         keyword=extract_key_words(graph, subject),
         contactPoint=extract_contact_points(graph, subject),
@@ -50,7 +50,7 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         issued=date_value(graph, subject, DCTERMS.issued),
         modified=date_value(graph, subject, DCTERMS.modified),
         landingPage=value_set(graph, subject, dcat_uri("landingPage")),
-        language=extract_skos_code_list(graph, subject, DCTERMS.language),
+        language=extract_reference_data_code_list(graph, subject, DCTERMS.language),
     )
 
 

@@ -16,7 +16,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
-from .skos_code import extract_skos_code_list
+from .reference_data_code import extract_reference_data_code_list
 from .skos_concept import extract_skos_concept
 
 
@@ -30,7 +30,9 @@ def extract_outputs(graph: Graph, subject: URIRef) -> Optional[List[Output]]:
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 name=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
-                language=extract_skos_code_list(graph, resource, DCTERMS.language),
+                language=extract_reference_data_code_list(
+                    graph, resource, DCTERMS.language
+                ),
                 type=extract_skos_concept(graph, resource, DCTERMS.type),
             )
         )
