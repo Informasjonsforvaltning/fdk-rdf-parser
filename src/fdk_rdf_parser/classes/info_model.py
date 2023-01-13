@@ -46,7 +46,7 @@ class InformationModel(PartialDcatResource):
     modelElements: Optional[Dict[str, ModelElement]] = None
     modelProperties: Optional[Dict[str, ModelProperty]] = None
     losTheme: Optional[List[LosNode]] = None
-    type: str = "informationmodels"
+    type: str = "informationmodels"  # used by elasticsearch for indexing
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> Any:
         self.identifier = values.identifier
