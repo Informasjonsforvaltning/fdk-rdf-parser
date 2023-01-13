@@ -6,7 +6,7 @@ from typing import (
 )
 
 from .opening_hours_specification import OpeningHoursSpecification
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 
 
 @dataclass

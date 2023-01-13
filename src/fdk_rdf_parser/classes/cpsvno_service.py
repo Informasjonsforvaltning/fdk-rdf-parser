@@ -18,9 +18,9 @@ from .harvest_meta_data import HarvestMetaData
 from .legal_resource import LegalResource
 from .organization import Organization
 from .output import Output
+from .reference_data_code import ReferenceDataCode
 from .requirement import Requirement
 from .rule import Rule
-from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 

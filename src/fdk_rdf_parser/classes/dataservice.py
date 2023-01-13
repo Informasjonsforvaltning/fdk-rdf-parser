@@ -10,7 +10,7 @@ from .catalog import Catalog
 from .dcat_resource import PartialDcatResource
 from .harvest_meta_data import HarvestMetaData
 from .media_type import MediaTypeOrExtent
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 

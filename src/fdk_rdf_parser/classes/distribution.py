@@ -9,7 +9,7 @@ from typing import (
 from .conforms_to import ConformsTo
 from .data_distribution_service import DataDistributionService
 from .media_type import MediaTypeOrExtent
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 

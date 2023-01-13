@@ -10,7 +10,7 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     dcat_uri,
 )
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 
 
 class EvidenceRdfType(str, Enum):

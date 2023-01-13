@@ -31,7 +31,9 @@ def extend_reference_types(
     else:
         extended_references = []
         for ref in references:
-            ref.referenceType = extend_skos_code(ref.referenceType, reference_types)
+            ref.referenceType = extend_reference_data_code(
+                ref.referenceType, reference_types
+            )
             extended_references.append(ref)
         return extended_references
 
@@ -115,13 +117,13 @@ def extend_eu_data_themes(
     return extended if len(extended) > 0 else None
 
 
-def extend_skos_code(
-    skos_code: Optional[ReferenceDataCode],
+def extend_reference_data_code(
+    ref_data_code: Optional[ReferenceDataCode],
     references: Optional[Dict[str, ReferenceDataCode]],
 ) -> Optional[ReferenceDataCode]:
     ref_code = None
     if references is not None:
-        uri = skos_code.uri if skos_code is not None else None
+        uri = ref_data_code.uri if ref_data_code is not None else None
         if uri is not None:
             ref_code = (
                 references.get(remove_scheme_and_trailing_slash(uri))
@@ -129,18 +131,18 @@ def extend_skos_code(
                 else None
             )
 
-    return ref_code if ref_code is not None else skos_code
+    return ref_code if ref_code is not None else ref_data_code
 
 
-def extend_skos_code_list(
-    skos_codes: Optional[List[ReferenceDataCode]],
+def extend_reference_data_code_list(
+    ref_data_codes: Optional[List[ReferenceDataCode]],
     references: Optional[Dict[str, ReferenceDataCode]],
 ) -> Optional[List[ReferenceDataCode]]:
-    if skos_codes is None or references is None:
-        return skos_codes
+    if ref_data_codes is None or references is None:
+        return ref_data_codes
     else:
         extended_codes = []
-        for code in skos_codes:
+        for code in ref_data_codes:
             ref_code = (
                 references.get(remove_scheme_and_trailing_slash(code.uri))
                 if code.uri is not None

@@ -5,7 +5,7 @@ from typing import (
     Optional,
 )
 
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 
 
 @dataclass

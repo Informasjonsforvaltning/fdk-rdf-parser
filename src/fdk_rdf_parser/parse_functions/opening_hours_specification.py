@@ -9,7 +9,9 @@ from rdflib import (
 )
 
 from fdk_rdf_parser.classes import OpeningHoursSpecification
-from fdk_rdf_parser.parse_functions.skos_code import extract_skos_code_list
+from fdk_rdf_parser.parse_functions.reference_data_code import (
+    extract_reference_data_code_list,
+)
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     resource_list,
@@ -26,7 +28,7 @@ def extract_opening_hours_specification(
         values.append(
             OpeningHoursSpecification(
                 uri=resource_uri,
-                dayOfWeek=extract_skos_code_list(
+                dayOfWeek=extract_reference_data_code_list(
                     graph, resource, schema_uri("dayOfWeek")
                 ),
                 opens=date_value(graph, resource, schema_uri("opens")),

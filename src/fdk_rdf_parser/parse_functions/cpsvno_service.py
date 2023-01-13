@@ -33,8 +33,8 @@ from .contactpoint import extract_cv_has_contact_point
 from .cost import extract_costs
 from .dcat_resource import (
     extract_key_words,
-    extract_skos_code,
-    extract_skos_code_list,
+    extract_reference_data_code,
+    extract_reference_data_code_list,
 )
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
@@ -94,7 +94,7 @@ def parse_cpsvno_service(
         isDescribedAt=extract_skos_concept(
             services_graph, cpsvno_service_uri, cv_uri("isDescribedAt")
         ),
-        language=extract_skos_code_list(
+        language=extract_reference_data_code_list(
             services_graph, cpsvno_service_uri, DCTERMS.language
         ),
         holdsRequirement=extract_requirements(services_graph, cpsvno_service_uri),
@@ -121,14 +121,14 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.relation
         ),
         spatial=value_list(services_graph, cpsvno_service_uri, DCTERMS.spatial),
-        admsStatus=extract_skos_code(
+        admsStatus=extract_reference_data_code(
             services_graph, cpsvno_service_uri, adms_uri("status")
         ),
         subject=extract_skos_concept(
             services_graph, cpsvno_service_uri, DCTERMS.subject
         ),
         homepage=value_list(services_graph, cpsvno_service_uri, FOAF.homepage),
-        dctType=extract_skos_code_list(
+        dctType=extract_reference_data_code_list(
             services_graph, cpsvno_service_uri, DCTERMS.type
         ),
         thematicAreaUris=value_list(

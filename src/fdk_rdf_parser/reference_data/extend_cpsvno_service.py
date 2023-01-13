@@ -15,26 +15,26 @@ from .reference_data import PublicServiceReferenceData
 from .utils import (
     collect_eu_data_themes,
     collect_los_themes,
-    extend_skos_code,
-    extend_skos_code_list,
+    extend_reference_data_code,
+    extend_reference_data_code_list,
 )
 
 
 def extend_cpsvno_service_with_reference_data(
     cpsvno_service: Service, ref_data: PublicServiceReferenceData
 ) -> Service:
-    cpsvno_service.language = extend_skos_code_list(
+    cpsvno_service.language = extend_reference_data_code_list(
         cpsvno_service.language, ref_data.linguisticsystem
     )
     cpsvno_service.contactPoint = extend_cv_contact_points(
         cpsvno_service.contactPoint, ref_data
     )
     cpsvno_service.produces = extend_cv_output(cpsvno_service.produces, ref_data)
-    cpsvno_service.admsStatus = extend_skos_code(
+    cpsvno_service.admsStatus = extend_reference_data_code(
         cpsvno_service.admsStatus, ref_data.statuses
     )
     cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
-    cpsvno_service.dctType = extend_skos_code_list(
+    cpsvno_service.dctType = extend_reference_data_code_list(
         cpsvno_service.dctType, ref_data.types
     )
     cpsvno_service.losThemes = collect_los_themes(
@@ -55,7 +55,7 @@ def extend_cv_contact_points(
         return contact_points
 
     for contact_point in contact_points:
-        contact_point.language = extend_skos_code_list(
+        contact_point.language = extend_reference_data_code_list(
             contact_point.language, ref_data.linguisticsystem
         )
         contact_point.hoursAvailable = extend_opening_hours_spec(
@@ -75,7 +75,9 @@ def extend_opening_hours_spec(
         return opening_hours
 
     for item in opening_hours:
-        item.dayOfWeek = extend_skos_code_list(item.dayOfWeek, ref_data.week_days)
+        item.dayOfWeek = extend_reference_data_code_list(
+            item.dayOfWeek, ref_data.week_days
+        )
     return opening_hours
 
 
@@ -86,7 +88,7 @@ def extend_cv_output(
         return outputs
 
     for output in outputs:
-        output.language = extend_skos_code_list(
+        output.language = extend_reference_data_code_list(
             output.language, ref_data.linguisticsystem
         )
     return outputs
@@ -99,10 +101,10 @@ def extend_cv_evidence(
         return None
 
     for evidence in evidences:
-        evidence.dctType = extend_skos_code_list(
+        evidence.dctType = extend_reference_data_code_list(
             evidence.dctType, ref_data.evidence_type
         )
-        evidence.language = extend_skos_code_list(
+        evidence.language = extend_reference_data_code_list(
             evidence.language, ref_data.linguisticsystem
         )
     return evidences
@@ -115,7 +117,7 @@ def extend_channels(
         return None
 
     for channel in channels:
-        channel.channelType = extend_skos_code(
+        channel.channelType = extend_reference_data_code(
             channel.channelType, ref_data.channel_type
         )
     return channels

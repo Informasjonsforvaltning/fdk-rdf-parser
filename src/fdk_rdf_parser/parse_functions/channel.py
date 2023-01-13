@@ -25,7 +25,7 @@ from fdk_rdf_parser.rdf_utils.utils import (
     value_list,
     value_translations,
 )
-from .dcat_resource import extract_skos_code
+from .dcat_resource import extract_reference_data_code
 
 
 def extract_channels(
@@ -38,7 +38,7 @@ def extract_channels(
             Channel(
                 uri=resource_uri,
                 identifier=object_value(graph, resource, DCTERMS.identifier),
-                channelType=extract_skos_code(graph, resource, DCTERMS.type),
+                channelType=extract_reference_data_code(graph, resource, DCTERMS.type),
                 description=value_translations(graph, resource, DCTERMS.description),
                 address=extract_address(graph, resource),
                 processingTime=duration_string_value(

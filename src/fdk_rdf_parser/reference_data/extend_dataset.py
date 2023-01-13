@@ -15,9 +15,9 @@ from .reference_data import DatasetReferenceData
 from .utils import (
     extend_eu_data_themes,
     extend_los_themes,
+    extend_reference_data_code,
+    extend_reference_data_code_list,
     extend_reference_types,
-    extend_skos_code,
-    extend_skos_code_list,
     remove_scheme_and_trailing_slash,
     split_themes,
 )
@@ -26,19 +26,21 @@ from .utils import (
 def extend_dataset_with_reference_data(
     dataset: Dataset, ref_data: DatasetReferenceData
 ) -> Dataset:
-    dataset.accessRights = extend_skos_code(
+    dataset.accessRights = extend_reference_data_code(
         dataset.accessRights, ref_data.rightsstatement
     )
-    dataset.provenance = extend_skos_code(
+    dataset.provenance = extend_reference_data_code(
         dataset.provenance, ref_data.provenancestatement
     )
-    dataset.accrualPeriodicity = extend_skos_code(
+    dataset.accrualPeriodicity = extend_reference_data_code(
         dataset.accrualPeriodicity, ref_data.frequency
     )
-    dataset.language = extend_skos_code_list(
+    dataset.language = extend_reference_data_code_list(
         dataset.language, ref_data.linguisticsystem
     )
-    dataset.spatial = extend_skos_code_list(dataset.spatial, ref_data.location)
+    dataset.spatial = extend_reference_data_code_list(
+        dataset.spatial, ref_data.location
+    )
     dataset.distribution = extend_distributions(
         dataset.distribution, ref_data.openlicenses, ref_data.media_types
     )
@@ -85,7 +87,7 @@ def extend_distributions(
                 fdk_formats: Set[MediaTypeOrExtent] = set()
 
                 if dist.fdkFormat:
-                    skos_code_formats = []
+                    ref_code_formats = []
                     for fmt in dist.fdkFormat:
                         ref_media_type = (
                             ref_media_types.get(
@@ -95,7 +97,7 @@ def extend_distributions(
                             else None
                         )
                         if ref_media_type:
-                            skos_code_formats.append(
+                            ref_code_formats.append(
                                 ReferenceDataCode(
                                     uri=ref_media_type.uri,
                                     code=ref_media_type.code,
@@ -109,7 +111,7 @@ def extend_distributions(
                             fdk_formats.add(fmt)
                     dist.fdkFormat = list(fdk_formats) if len(fdk_formats) > 0 else None
                     dist.mediaType = (
-                        skos_code_formats if len(skos_code_formats) > 0 else None
+                        ref_code_formats if len(ref_code_formats) > 0 else None
                     )
 
                 if (

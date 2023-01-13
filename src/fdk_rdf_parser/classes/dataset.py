@@ -15,8 +15,8 @@ from .harvest_meta_data import HarvestMetaData
 from .publisher import Publisher
 from .qualified_attribution import QualifiedAttribution
 from .quality_annotation import QualityAnnotation
+from .reference_data_code import ReferenceDataCode
 from .references import Reference
-from .skos_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal

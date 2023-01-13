@@ -16,7 +16,9 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.parse_functions.opening_hours_specification import (
     extract_opening_hours_specification,
 )
-from fdk_rdf_parser.parse_functions.skos_code import extract_skos_code_list
+from fdk_rdf_parser.parse_functions.reference_data_code import (
+    extract_reference_data_code_list,
+)
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     dcat_uri,
@@ -101,7 +103,7 @@ def extract_cv_has_contact_point(
                 email=value_list(graph, resource, cv_uri("email")),
                 telephone=value_list(graph, resource, cv_uri("telephone")),
                 contactPage=value_list(graph, resource, cv_uri("contactPage")),
-                language=extract_skos_code_list(
+                language=extract_reference_data_code_list(
                     graph, resource, vcard_uri("hasLanguage")
                 ),
                 openingHours=value_translations(

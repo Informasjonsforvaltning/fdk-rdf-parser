@@ -6,7 +6,7 @@ from typing import (
 )
 
 from .address import Address
-from .skos_code import ReferenceDataCode
+from .reference_data_code import ReferenceDataCode
 
 
 @dataclass
