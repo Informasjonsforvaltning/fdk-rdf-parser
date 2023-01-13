@@ -80,20 +80,20 @@ def split_themes(
     elif los is None:
         splitted_themes["eu_data_themes"] = themes
         return splitted_themes
-    else:
-        for theme in themes:
-            if remove_scheme_and_trailing_slash(theme.id) in los:
-                splitted_themes["los"].append(theme)
-            else:
-                splitted_themes["eu_data_themes"].append(theme)
-        return splitted_themes
+
+    for theme in themes:
+        if remove_scheme_and_trailing_slash(theme.id) in los:
+            splitted_themes["los"].append(theme)
+        else:
+            splitted_themes["eu_data_themes"].append(theme)
+    return splitted_themes
 
 
 def extend_los_themes(
     themes: List[EuDataTheme], los: Optional[Dict[str, LosNode]]
 ) -> Optional[List[LosNode]]:
     extended = []
-    if los is not None:
+    if los:
         for theme in themes:
             extended.append(los[remove_scheme_and_trailing_slash(str(theme.id))])
     return extended if len(extended) > 0 else None
@@ -103,11 +103,11 @@ def extend_eu_data_themes(
     themes: List[EuDataTheme], eu_data_themes: Optional[Dict[str, EuDataTheme]]
 ) -> Optional[List[EuDataTheme]]:
     extended = []
-    if eu_data_themes is not None:
+    if eu_data_themes:
         for theme in themes:
             eu_theme = (
                 eu_data_themes.get(remove_scheme_and_trailing_slash(theme.id))
-                if theme.id is not None
+                if theme.id
                 else None
             )
             if eu_theme is None:
@@ -122,16 +122,16 @@ def extend_reference_data_code(
     references: Optional[Dict[str, ReferenceDataCode]],
 ) -> Optional[ReferenceDataCode]:
     ref_code = None
-    if references is not None:
-        uri = ref_data_code.uri if ref_data_code is not None else None
-        if uri is not None:
+    if references:
+        uri = ref_data_code.uri if ref_data_code else None
+        if uri:
             ref_code = (
                 references.get(remove_scheme_and_trailing_slash(uri))
-                if references is not None
+                if references
                 else None
             )
 
-    return ref_code if ref_code is not None else ref_data_code
+    return ref_code if ref_code else ref_data_code
 
 
 def extend_reference_data_code_list(
@@ -140,19 +140,19 @@ def extend_reference_data_code_list(
 ) -> Optional[List[ReferenceDataCode]]:
     if ref_data_codes is None or references is None:
         return ref_data_codes
-    else:
-        extended_codes = []
-        for code in ref_data_codes:
-            ref_code = (
-                references.get(remove_scheme_and_trailing_slash(code.uri))
-                if code.uri is not None
-                else None
-            )
-            if ref_code is not None:
-                extended_codes.append(ref_code)
-            else:
-                extended_codes.append(code)
-        return extended_codes
+
+    extended_codes = []
+    for code in ref_data_codes:
+        ref_code = (
+            references.get(remove_scheme_and_trailing_slash(code.uri))
+            if code.uri
+            else None
+        )
+        if ref_code:
+            extended_codes.append(ref_code)
+        else:
+            extended_codes.append(code)
+    return extended_codes
 
 
 def remove_scheme_and_trailing_slash(uri: Optional[str]) -> str:
