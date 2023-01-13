@@ -53,7 +53,7 @@ class Service:
     language: Optional[List[ReferenceDataCode]] = None
     holdsRequirement: Optional[List[Requirement]] = None
     associatedBroaderTypesByEvents: Optional[List[str]] = None
-    type: str = "publicservices"
+    type: str = "publicservices"  # used by elasticsearch for indexing
     admsStatus: Optional[ReferenceDataCode] = None
     subject: Optional[List[SkosConcept]] = None
     homepage: Optional[List[str]] = None

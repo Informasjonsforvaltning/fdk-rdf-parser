@@ -27,7 +27,7 @@ class DataService(PartialDcatResource):
     conformsTo: Optional[List[SkosConcept]] = None
     page: Optional[List[str]] = None
     catalog: Optional[Catalog] = None
-    type: str = "dataservices"
+    type: str = "dataservices"  # used by elasticsearch for indexing
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> Any:
         self.identifier = values.identifier

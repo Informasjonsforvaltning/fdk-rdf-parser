@@ -80,7 +80,7 @@ class PartialDataset(PartialDcatResource):
 class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
     losTheme: Optional[List[LosNode]] = None
-    type: str = "datasets"
+    type: str = "datasets"  # used by elasticsearch for indexing
 
     def add_values_from_partial(self: Any, values: PartialDataset) -> None:
         self.id = values.id
