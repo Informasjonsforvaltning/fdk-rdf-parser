@@ -25,6 +25,7 @@ from fdk_rdf_parser.rdf_utils.utils import (
     value_list,
     value_translations,
 )
+from .dcat_resource import extract_reference_data_code
 
 
 def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
@@ -39,7 +40,9 @@ def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
         organization.title = value_translations(graph, organization_uri, SKOS.prefLabel)
         organization.homepage = value_list(graph, organization_uri, FOAF.homepage)
         organization.spatial = value_list(graph, organization_uri, DCTERMS.spatial)
-        organization.orgType = object_value(graph, organization_uri, DCTERMS.type)
+        organization.orgType = extract_reference_data_code(
+            graph, organization_uri, DCTERMS.type
+        )
     elif is_type(rov_uri("RegisteredOrganization"), graph, organization_uri):
         organization.name = value_translations(
             graph, organization_uri, rov_uri("legalName")
@@ -47,9 +50,6 @@ def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
         organization.orgPath = object_value(graph, organization_uri, br_uri("orgPath"))
         organization.title = value_translations(graph, organization_uri, FOAF.name)
         organization.homepage = value_list(graph, organization_uri, FOAF.homepage)
-        org_type = object_value(graph, organization_uri, rov_uri("orgType"))
-        organization.orgType = org_type.split("#")[-1] if org_type else None
-
     return set_organization_name_from_pref_label_if_missing(organization)
 
 

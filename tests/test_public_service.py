@@ -272,7 +272,6 @@ def test_complete_public_services(
                     dct:identifier         "123456789" ;
                     rov:legalName          "Digitaliseringsdirektoratet" ;
                     foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
-                    rov:orgType            orgtype:ORGL ;
                     br:orgPath             "/STAT/987654321/123456789" ."""
 
     event_src = """
@@ -368,7 +367,6 @@ def test_complete_public_services(
                     dct:identifier         "123456789" ;
                     rov:legalName          "Digitaliseringsdirektoratet" ;
                     foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
-                    rov:orgType            orgtype:ORGL ;
                     br:orgPath             "/STAT/987654321/123456789" ."""
 
     expected = {
@@ -411,7 +409,6 @@ def test_complete_public_services(
                         "nb": "Digitaliseringsdirektoratet",
                         "en": "Norwegian Digitalisation Agency",
                     },
-                    orgType="ORGL",
                 )
             ],
             harvest=HarvestMetaData(
@@ -765,7 +762,6 @@ def test_complete_public_services(
                                 "nn": "Digitaliseringsdirektoratet",
                                 "nb": "Digitaliseringsdirektoratet",
                             },
-                            orgType="ORGL",
                         )
                     ],
                     value="4.27",
@@ -870,7 +866,6 @@ def test_parse_multiple_public_services(
                 dct:identifier         "123456789" ;
                 rov:legalName          "Digitaliseringsdirektoratet" ;
                 foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
-                rov:orgType            orgtype:ORGL ;
                 br:orgPath             "/STAT/987654321/123456789" .
 
         <http://localhost:5000/services/fdk-4>
@@ -903,7 +898,6 @@ def test_parse_multiple_public_services(
                         "nn": "Digitaliseringsdirektoratet",
                         "nb": "Digitaliseringsdirektoratet",
                     },
-                    orgType="ORGL",
                 )
             ],
             harvest=HarvestMetaData(
@@ -990,6 +984,7 @@ def test_parse_cpsvno_services(
         dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
         dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
                         <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
+
         <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl>
                 rdf:type         cv:Output ;
                 dct:description  "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat."@nb ;
@@ -1046,7 +1041,15 @@ def test_parse_cpsvno_services(
                     uri="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
                     identifier="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
                     name={"nb": "Organisasjon i Brønnøysund"},
-                    orgType="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+                    orgType=ReferenceDataCode(
+                        uri="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+                        prefLabel={
+                            "nn": "Ikkje-statleg organisasjon",
+                            "nb": "Ikke-statlig organisasjon",
+                            "en": "Non-Governmental Organisation",
+                        },
+                        code="NonGovernmentalOrganisation",
+                    ),
                     spatial=[
                         "http://publications.europa.eu/resource/authority/country/NOR",
                         "https://data.geonorge.no/administrativeEnheter/kommune/id/172833",

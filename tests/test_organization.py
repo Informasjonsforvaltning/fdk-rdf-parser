@@ -3,7 +3,10 @@ from rdflib import (
     URIRef,
 )
 
-from fdk_rdf_parser.classes import Organization
+from fdk_rdf_parser.classes import (
+    Organization,
+    ReferenceDataCode,
+)
 from fdk_rdf_parser.parse_functions.organization import (
     extract_organizations,
     parse_organization,
@@ -38,7 +41,9 @@ def test_parse_organization() -> None:
             "nb": "Digitaliseringsdirektoratet",
             "en": "Norwegian Digitalisation Agency",
         },
-        orgType="http://purl.org/adms/publishertype/NationalAuthority",
+        orgType=ReferenceDataCode(
+            uri="http://purl.org/adms/publishertype/NationalAuthority",
+        ),
         homepage=["https://www.digdir.no"],
         spatial=["http://publications.europa.eu/resource/authority/country/NOR"],
     )
@@ -96,7 +101,9 @@ def test_extract_organizations() -> None:
                 "nb": "SO",
                 "en": "SO",
             },
-            orgType="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+            orgType=ReferenceDataCode(
+                uri="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+            ),
             homepage=["https://www.sivilorg.no"],
             spatial=["http://publications.europa.eu/resource/authority/country/NOR"],
         ),
@@ -110,7 +117,6 @@ def test_extract_organizations() -> None:
                 "nb": "SRO",
                 "en": "SRO",
             },
-            orgType="FLI",
             homepage=["https://www.storregorg.no"],
         ),
     ]
@@ -119,6 +125,7 @@ def test_extract_organizations() -> None:
     subject = URIRef(
         "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
     )
+
     assert extract_organizations(graph, subject, cv_uri("ownedBy")) == expected
 
 

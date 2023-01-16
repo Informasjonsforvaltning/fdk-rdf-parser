@@ -175,6 +175,26 @@ public_service_reference_data = PublicServiceReferenceData(
             relatedTerms=None,
         ),
     },
+    organization_types={
+        "purl.org/adms/publishertype/IndustryConsortium": ReferenceDataCode(
+            uri="http://purl.org/adms/publishertype/IndustryConsortium",
+            code="IndustryConsortium",
+            prefLabel={
+                "nn": "Industrikonsortium",
+                "nb": "Industrikonsortium",
+                "en": "Industry consortium",
+            },
+        ),
+        "purl.org/adms/publishertype/NationalAuthority": ReferenceDataCode(
+            uri="http://purl.org/adms/publishertype/NationalAuthority",
+            code="NationalAuthority",
+            prefLabel={
+                "nn": "Nasjonal myndigheit",
+                "nb": "Nasjonal myndighet",
+                "en": "National authority",
+            },
+        ),
+    },
 )
 
 dataset_reference_data = DatasetReferenceData(

@@ -62,6 +62,10 @@ def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
         mock.json.return_value = json.load(
             open("./tests/json_data/serviceChannelTypes.json")
         )
+    elif "adms/publisher-types" in url:
+        mock.json.return_value = json.load(
+            open("./tests/json_data/publishertypes.json")
+        )
 
     return mock
 
