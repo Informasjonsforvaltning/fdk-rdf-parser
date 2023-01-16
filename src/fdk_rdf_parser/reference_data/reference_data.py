@@ -54,6 +54,7 @@ class PublicServiceReferenceData:
     eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
     los_themes: Optional[Dict[str, LosNode]] = None
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
+    organization_types: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -95,6 +96,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         eu_data_themes=get_and_map_eu_data_themes(),
         los_themes=get_and_map_los_themes(),
         channel_type=get_and_map_channel_types(),
+        organization_types=get_and_map_organization_types(),
     )
 
 
@@ -228,6 +230,13 @@ def get_and_map_channel_types() -> Optional[Dict[str, ReferenceDataCode]]:
         "serviceChannelTypes"
     )
     return parse_reference_codes(channels)
+
+
+def get_and_map_organization_types() -> Optional[Dict[str, ReferenceDataCode]]:
+    organization_types = get_reference_data("/adms/publisher-types").get(
+        "publisherTypes"
+    )
+    return parse_reference_codes(organization_types)
 
 
 def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:

@@ -8,7 +8,9 @@ from fdk_rdf_parser.classes import (
     CVContactPoint,
     Evidence,
     OpeningHoursSpecification,
+    Organization,
     Output,
+    PublicService,
     Service,
 )
 from .reference_data import PublicServiceReferenceData
@@ -44,6 +46,12 @@ def extend_cpsvno_service_with_reference_data(
         cpsvno_service.thematicAreaUris, ref_data.eu_data_themes
     )
     cpsvno_service.hasChannel = extend_channels(cpsvno_service.hasChannel, ref_data)
+    cpsvno_service.ownedBy = extend_organizations(cpsvno_service.ownedBy, ref_data)
+
+    if isinstance(cpsvno_service, PublicService):
+        cpsvno_service.hasCompetentAuthority = extend_organizations(
+            cpsvno_service.hasCompetentAuthority, ref_data
+        )
 
     return cpsvno_service
 
@@ -121,3 +129,15 @@ def extend_channels(
             channel.channelType, ref_data.channel_type
         )
     return channels
+
+
+def extend_organizations(
+    organizations: Optional[List[Organization]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Organization]]:
+    if organizations is None:
+        return None
+    for organization in organizations:
+        organization.orgType = extend_reference_data_code(
+            organization.orgType, ref_data.organization_types
+        )
+    return organizations
