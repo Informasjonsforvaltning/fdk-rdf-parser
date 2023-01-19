@@ -23,37 +23,42 @@ from fdk_rdf_parser.rdf_utils import (
     is_type,
     object_value,
     resource_list,
+    uri_or_identifier,
     value_translations,
 )
 from fdk_rdf_parser.rdf_utils.utils import value_list
 from .dcat_resource import extract_reference_data_code_list
 
 
+def parse_evidence(graph: Graph, resource: URIRef) -> Evidence:
+    if is_type(cv_uri("Evidence"), graph, resource):
+        rdf_type = EvidenceRdfType.EVIDENCE_TYPE.value
+    elif is_type(dcat_uri("Dataset"), graph, resource):
+        rdf_type = EvidenceRdfType.DATASET_TYPE.value
+    else:
+        rdf_type = EvidenceRdfType.UNKNOWN.value
+
+    return Evidence(
+        rdfType=rdf_type,
+        uri=uri_or_identifier(graph, resource),
+        identifier=object_value(graph, resource, DCTERMS.identifier),
+        name=value_translations(graph, resource, DCTERMS.title),
+        description=value_translations(graph, resource, DCTERMS.description),
+        dctType=extract_reference_data_code_list(graph, resource, DCTERMS.type),
+        language=extract_reference_data_code_list(graph, resource, DCTERMS.language),
+        page=value_list(graph, resource, FOAF.page),
+    )
+
+
 def extract_evidences(graph: Graph, subject: URIRef) -> Optional[List[Evidence]]:
-    values = []
-    for resource in resource_list(graph, subject, cpsv_uri("hasInput")):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
+    all_resources = resource_list(graph, subject, cpsv_uri("hasInput"))
+    for channel in resource_list(graph, subject, cv_uri("hasChannel")):
+        all_resources += resource_list(graph, channel, cpsv_uri("hasInput"))
 
-        if is_type(cv_uri("Evidence"), graph, resource):
-            rdf_type = EvidenceRdfType.EVIDENCE_TYPE.value
-        elif is_type(dcat_uri("Dataset"), graph, resource):
-            rdf_type = EvidenceRdfType.DATASET_TYPE.value
-        else:
-            rdf_type = EvidenceRdfType.UNKNOWN.value
+    evidence_dict = dict()
+    for resource in all_resources:
+        evidence = parse_evidence(graph, resource)
+        evidence_dict[evidence.uri] = evidence
 
-        values.append(
-            Evidence(
-                rdfType=rdf_type,
-                uri=resource_uri,
-                identifier=object_value(graph, resource, DCTERMS.identifier),
-                name=value_translations(graph, resource, DCTERMS.title),
-                description=value_translations(graph, resource, DCTERMS.description),
-                dctType=extract_reference_data_code_list(graph, resource, DCTERMS.type),
-                language=extract_reference_data_code_list(
-                    graph, resource, DCTERMS.language
-                ),
-                page=value_list(graph, resource, FOAF.page),
-            )
-        )
-
-    return values if len(values) > 0 else None
+    evidence_list = list(evidence_dict.values())
+    return evidence_list if len(evidence_list) > 0 else None

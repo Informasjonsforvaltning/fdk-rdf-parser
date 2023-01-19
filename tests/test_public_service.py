@@ -546,6 +546,10 @@ def test_complete_public_services(
                     identifier="3",
                     name={"nb": "Ugyldig dokumentasjonstype"},
                 ),
+                Evidence(
+                    rdfType=EvidenceRdfType.UNKNOWN,
+                    uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl",
+                ),
             ],
             produces=[
                 Output(
@@ -1211,6 +1215,125 @@ def test_parse_cpsvno_services(
                         versionnumber="20200923-0",
                     ),
                 ),
+            ],
+        )
+    }
+
+    assert parse_public_services(src) == expected
+
+
+def test_service_evidence_collection_from_channel(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix cpsv:   <http://purl.org/vocab/cpsv#> .
+        @prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+        @prefix cv:     <http://data.europa.eu/m8g/> .
+        @prefix dcat:   <http://www.w3.org/ns/dcat#> .
+        @prefix dct:    <http://purl.org/dc/terms/> .
+        @prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+        @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl>
+                rdf:type            cpsvno:Service ;
+                dct:identifier      "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl"^^xsd:anyURI ;
+                cpsv:hasInput       <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ,
+                                    <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3> ,
+                                    [
+                                        rdf:type cv:Evidence ;
+                                        dct:identifier "999999999" ;
+                                    ] ;
+                cv:hasChannel       <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/1> .
+
+
+        <https://www.staging.fellesdatakatalog.digdir.no/public-services/1fc38c3c-1c86-3161-a9a7-e443fd94d413>
+                rdf:type            dcat:CatalogRecord ;
+                dct:identifier      "1fc38c3c-1c86-3161-a9a7-e443fd94d413" ;
+                dct:issued          "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+                dct:modified        "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+                foaf:primaryTopic   <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl> .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/1>
+                a               cv:Channel ;
+                dct:identifier  "1" ;
+                cpsv:hasInput   <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2> ,
+                                <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3> ,
+                                <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/4> ,
+                                [
+                                    rdf:type cv:Evidence ;
+                                    dct:identifier "999999999" ;
+                                ] .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1>
+                a                cv:Evidence ;
+                dct:description  "Vandelsattest"@nb ;
+                dct:identifier   "1" ;
+                dct:title        "Vandelsattest"@nb .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2>
+                a                dcat:Dataset ;
+                dct:description  "Annen dokumentasjon"@nb ;
+                dct:identifier   "2" ;
+                dct:title        "Nødvendig dokumentasjon"@nb .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3>
+                a                cv:Evidence ;
+                dct:description  "Duplisert dokumentasjon"@nb ;
+                dct:identifier   "3" .
+        """
+
+    expected = {
+        "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl": Service(
+            id="1fc38c3c-1c86-3161-a9a7-e443fd94d413",
+            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+            identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+            harvest=HarvestMetaData(
+                firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+            ),
+            type="publicservices",
+            hasInput=[
+                Evidence(
+                    rdfType=EvidenceRdfType.EVIDENCE_TYPE,
+                    uri="999999999",
+                    identifier="999999999",
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.EVIDENCE_TYPE,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1",
+                    identifier="1",
+                    name={"nb": "Vandelsattest"},
+                    description={"nb": "Vandelsattest"},
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.EVIDENCE_TYPE,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3",
+                    identifier="3",
+                    description={"nb": "Duplisert dokumentasjon"},
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.DATASET_TYPE,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2",
+                    identifier="2",
+                    description={"nb": "Annen dokumentasjon"},
+                    name={"nb": "Nødvendig dokumentasjon"},
+                ),
+                Evidence(
+                    rdfType=EvidenceRdfType.UNKNOWN,
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/4",
+                ),
+            ],
+            hasChannel=[
+                Channel(
+                    uri="http://public-service-publisher.fellesdatakatalog.digdir.no/channel/1",
+                    identifier="1",
+                    hasInput=[
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2",
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3",
+                        "http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/4",
+                    ],
+                )
             ],
         )
     }
