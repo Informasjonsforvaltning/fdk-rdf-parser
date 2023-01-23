@@ -15,6 +15,7 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import Organization
 from fdk_rdf_parser.rdf_utils import (
+    cv_uri,
     object_value,
     org_uri,
     rov_uri,
@@ -35,7 +36,9 @@ def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
         else None,
         identifier=object_value(graph, organization_uri, DCTERMS.identifier),
     )
-    if is_type(org_uri("Organization"), graph, organization_uri):
+    if is_type(org_uri("Organization"), graph, organization_uri) or is_type(
+        cv_uri("PublicOrganisation"), graph, organization_uri
+    ):
         organization.name = value_translations(graph, organization_uri, DCTERMS.title)
         organization.title = value_translations(graph, organization_uri, SKOS.prefLabel)
         organization.homepage = value_list(graph, organization_uri, FOAF.homepage)

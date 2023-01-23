@@ -60,6 +60,7 @@ def test_extract_organizations() -> None:
         @prefix br:      <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
         @prefix cv:      <http://data.europa.eu/m8g/> .
         @prefix cpsv:    <http://purl.org/vocab/cpsv#> .
+        @prefix cpsvno:   <https://data.norge.no/vocabulary/cpsvno#> .
         @prefix dct:     <http://purl.org/dc/terms/> .
         @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
         @prefix org:     <http://www.w3.org/ns/org#> .
@@ -68,7 +69,7 @@ def test_extract_organizations() -> None:
         @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
         <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1>
-            a cpsv:Service ;
+            a cpsvno:Service ;
             cv:ownedBy  <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123> ,
                         <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
             dct:identifier  "1" .
@@ -127,6 +128,57 @@ def test_extract_organizations() -> None:
     )
 
     assert extract_organizations(graph, subject, cv_uri("ownedBy")) == expected
+
+
+def test_extract_public_organisation() -> None:
+    src = """
+        @prefix cv:      <http://data.europa.eu/m8g/> .
+        @prefix cpsv:    <http://purl.org/vocab/cpsv#> .
+        @prefix dct:     <http://purl.org/dc/terms/> .
+        @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+        @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+        <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1>
+            a cpsv:PublicService ;
+            cv:hasCompetentAuthority  <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321> ;
+            dct:identifier  "1" .
+
+        <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321>
+            a                      cv:PublicOrganisation ;
+            dct:identifier         "987654321" ;
+            dct:title              "Offentlig organisasjon"@nb ;
+            skos:prefLabel         "OO"@nn , "OO"@nb , "OO"@en ;
+            dct:type               <http://purl.org/adms/publishertype/NationalAuthority> ;
+            foaf:homepage          "https://www.sivilorg.no" ;
+            dct:spatial            <http://publications.europa.eu/resource/authority/country/NOR> . """
+
+    expected = [
+        Organization(
+            uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321",
+            identifier="987654321",
+            name={"nb": "Offentlig organisasjon"},
+            title={
+                "nn": "OO",
+                "nb": "OO",
+                "en": "OO",
+            },
+            orgType=ReferenceDataCode(
+                uri="http://purl.org/adms/publishertype/NationalAuthority",
+            ),
+            homepage=["https://www.sivilorg.no"],
+            spatial=["http://publications.europa.eu/resource/authority/country/NOR"],
+        ),
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef(
+        "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
+    )
+
+    assert (
+        extract_organizations(graph, subject, cv_uri("hasCompetentAuthority"))
+        == expected
+    )
 
 
 def test_bnode_organization() -> None:

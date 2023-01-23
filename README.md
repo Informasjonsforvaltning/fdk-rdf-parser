@@ -1,6 +1,6 @@
 # fdk-rdf-parser
 
-This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser), that parses rdf-data to json-objects used by [Felles dataktatalog](https://data.norge.no)
+This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser), that parses rdf-data to json-objects used by [Felles datakatalog](https://data.norge.no)
 
 ## Develop and run locally
 ### Requirements
