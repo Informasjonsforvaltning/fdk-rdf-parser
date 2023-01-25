@@ -3,6 +3,7 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Address,
+    Agent,
     Channel,
     ConceptSchema,
     Cost,
@@ -15,6 +16,7 @@ from fdk_rdf_parser.classes import (
     OpeningHoursSpecification,
     Organization,
     Output,
+    Participation,
     PublicService,
     ReferenceDataCode,
     Requirement,
@@ -167,7 +169,8 @@ def test_complete_public_services(
                     a               cv:Participation ;
                     cv:role         <https://data.norge.no/concepts/101> ;
                     dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
-                    dct:identifier  "1" ; .
+                    dct:identifier  "1" ;
+                    cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
                     a                cv:Participation ;
@@ -797,7 +800,29 @@ def test_complete_public_services(
                 "https://data.norge.no/concepts/304",
                 "https://data.norge.no/concepts/310",
             ],
-            type="publicservices",
+            participatingAgents=[
+                Agent(
+                    uri="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
+                    identifier="971526920",
+                    name={"nb": "Statistisk sentralbyrå"},
+                    playsRole=[
+                        Participation(
+                            uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
+                            identifier="1",
+                            description={
+                                "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
+                            },
+                            agent="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
+                            role=[
+                                SkosConcept(
+                                    uri="https://data.norge.no/concepts/101",
+                                    prefLabel={"nb": "Datakonsument"},
+                                )
+                            ],
+                        )
+                    ],
+                )
+            ],
         ),
     }
 

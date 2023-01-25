@@ -138,7 +138,8 @@ def test_participation_with_agent_and_organization(
                     dct:identifier "1" ;
                     cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ,
                                         <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/2> ,
-                                        <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/3> .
+                                        <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/3> ,
+                                        <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4> .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
                     a               cv:Participation ;
@@ -161,6 +162,13 @@ def test_participation_with_agent_and_organization(
                     dct:identifier   "3" ;
                     cv:hasParticipant <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> .
 
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4>
+                    a                cv:Participation ;
+                    cv:role          <https://data.norge.no/concepts/101> ;
+                    dct:description  "Deltagelse med Offentlig Organisasjon"@nb ;
+                    dct:identifier   "4" ;
+                    cv:hasParticipant <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321> .
+
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920>
                     a foaf:Agent ;
                     dct:identifier "971526920" ;
@@ -179,6 +187,12 @@ def test_participation_with_agent_and_organization(
                     rov:legalName          "Digitaliseringsdirektoratet"@nb ;
                     br:orgPath             "/STAT/987654321/123456789" ;
                     cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/3> .
+
+            <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321>
+                    a              cv:PublicOrganisation;
+                    dct:identifier "https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321"^^xsd:anyURI ;
+                    dct:title      "En offentlig organisasjon"@nb ;
+                    cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4> .
 
             <https://data.norge.no/concepts/15>
                     a               skos:Concept ;
@@ -203,6 +217,7 @@ def test_participation_with_agent_and_organization(
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1",
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/2",
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/3",
+                "http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4",
             ],
             harvest=HarvestMetaData(),
             participatingAgents=[
@@ -265,6 +280,25 @@ def test_participation_with_agent_and_organization(
                                 )
                             ],
                             agent="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
+                        )
+                    ],
+                ),
+                Organization(
+                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321",
+                    identifier="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321",
+                    name={"nb": "En offentlig organisasjon"},
+                    playsRole=[
+                        Participation(
+                            uri="http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4",
+                            identifier="4",
+                            description={"nb": "Deltagelse med Offentlig Organisasjon"},
+                            role=[
+                                SkosConcept(
+                                    uri="https://data.norge.no/concepts/101",
+                                    prefLabel={"nb": "Datakonsument"},
+                                )
+                            ],
+                            agent="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321",
                         )
                     ],
                 ),

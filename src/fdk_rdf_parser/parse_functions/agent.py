@@ -29,8 +29,10 @@ from fdk_rdf_parser.rdf_utils.utils import is_type
 
 
 def parse_agent_or_organization(graph: Graph, subject: URIRef) -> Optional[Agent]:
-    if is_type(org_uri("Organization"), graph, subject) or is_type(
-        rov_uri("RegisteredOrganization"), graph, subject
+    if (
+        is_type(org_uri("Organization"), graph, subject)
+        or is_type(rov_uri("RegisteredOrganization"), graph, subject)
+        or is_type(cv_uri("PublicOrganisation"), graph, subject)
     ):
         return parse_organization(graph, subject)
     elif is_type(FOAF.Agent, graph, subject) or is_type(DCTERMS.Agent, graph, subject):
