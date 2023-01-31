@@ -1,0 +1,69 @@
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
+@prefix rov:   <http://www.w3.org/ns/regorg#> .
+@prefix cpsv: <http://purl.org/vocab/cpsv#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cv: <http://data.europa.eu/m8g/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
+        dct:identifier "1" ;
+        dct:title "Ei offentleg teneste"@nb ;
+        dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
+        cv:processingTime "not valid duration type"^^xsd:duration ;
+        adms:status <http://is-not-in-ref-data.test> ;
+        cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
+        cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> .
+
+<http://localhost:5000/services/fdk-1>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "fdk-1" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
+        dct:identifier "2" ;
+        dct:title "Ei anna offentleg teneste"@nn ;
+        dct:description "Ei anna offentleg teneste som tener som døme til bruk i utvikling"@nb ;
+        cv:hasCompetentAuthority <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/991825827> .
+
+<http://localhost:5000/services/fdk-2>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "fdk-2" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> a cpsv:PublicService ;
+        dct:identifier "3" ;
+        dct:title "Ei anna offentleg teneste"@nn ;
+        dct:description "Ei anna offentleg teneste som tener som døme til bruk i utvikling"@nb ; .
+
+<http://localhost:5000/services/fdk-3>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "fdk-3" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/3> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/4> a cpsv:PublicService ;
+        dct:identifier "4" ;
+        dct:title "Ei anna offentleg teneste"@nn ;
+        dct:description "Ei anna offentleg teneste som tener som døme til bruk i utvikling"@nb ; .
+
+<https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
+        a                      rov:RegisteredOrganization ;
+        dct:identifier         "123456789" ;
+        rov:legalName          "Digitaliseringsdirektoratet" ;
+        foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+        br:orgPath             "/STAT/987654321/123456789" .
+
+<http://localhost:5000/services/fdk-4>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "fdk-4" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime .

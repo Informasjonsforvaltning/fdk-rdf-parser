@@ -1,0 +1,245 @@
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
+@prefix rov:   <http://www.w3.org/ns/regorg#> .
+@prefix cpsv: <http://purl.org/vocab/cpsv#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cv: <http://data.europa.eu/m8g/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:  <http://schema.org/> .
+@prefix eli: <http://data.europa.eu/eli/ontology#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
+        cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
+        cv:isGroupedBy              <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
+        dct:description             "Dette skjemaet  brukes for å registrere en ny virksomhet, eller søke om godkjenning av en ny næringsmiddelvirksomhet. Skjemaet skal også brukes dersom du vil utvide aktiviteten i en allerede eksisterende virksomhet og starte med en ny aktivitet som ikke er registrert."@nb ;
+        dct:identifier              "4" ;
+        dct:title                   "Ny næringsmiddelvirksomhet inkl. matkontaktmaterialer"@nb .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
+        cv:hasChannel             <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
+        cv:hasCompetentAuthority    <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
+        cv:hasContactPoint <http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1> ;
+        cv:hasCost <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>, <http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16> ;
+        cv:holdsRequirement <http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5> ;
+        cv:hasLegalResource <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> ;
+        cv:hasParticipation <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ;
+        cv:isClassifiedBy <https://data.norge.no/concepts/17> , <https://data.norge.no/concepts/16> ;
+        cv:isDescribedAt <https://data.norge.no/node/1127> ;
+        cv:isGroupedBy <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ;
+        cv:processingTime "P1D"^^xsd:duration ;
+        cv:sector <https://data.norge.no/concepts/2> ;
+        dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
+        dct:identifier "1" ;
+        dct:language <http://publications.europa.eu/resource/authority/language/NOB>;
+        dct:relation <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
+        dct:requires <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> ;
+        dct:spatial <https://data.geonorge.no/administrativeEnheter/kommune/id/172833>;
+        dct:title "Ei offentleg teneste"@nb ;
+        cpsv:follows <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
+        cpsv:hasInput <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1> ,
+                      <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2> ,
+                      <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3> ;
+        cpsv:produces <http://public-service-publisher.fellesdatakatalog.digdir.no/output/4> ;
+        adms:status   <http://purl.org/adms/status/Completed> ;
+        dct:type      <http://publications.europa.eu/resource/authority/main-activity/airport> ;
+        dct:subject   <http://testbegrep0.no>, <http://testbegrep1.no> ;
+        foaf:homepage <http://testhomepage0.no>, <http://testhomepage1.no> ;
+        dcat:keyword "Serveringsbevilling"@nb .
+
+<https://data.norge.no/concepts/1>
+        a               skos:Concept ;
+        skos:prefLabel  "Starte og drive en bedrift"@nb , "Starting business"@en .
+
+<https://data.norge.no/concepts/15>
+        a               skos:Concept ;
+        skos:prefLabel  "Daglig leder"@nb .
+
+<https://data.norge.no/concepts/16>
+        a               skos:Concept ;
+        skos:prefLabel  "Kafé"@nb .
+
+<https://data.norge.no/concepts/17>
+        a               skos:Concept ;
+        skos:prefLabel  "Spiserestaurant"@nb .
+
+<https://data.norge.no/concepts/2>
+        a               skos:Concept ;
+        skos:prefLabel  "Nacekode: 56.1"@nb .
+
+<https://data.norge.no/concepts/101>
+        a               skos:Concept ;
+        skos:prefLabel  "Datakonsument"@nb ; .
+
+<https://data.norge.no/concepts/153>
+        a skos:Concept ;
+        skos:prefLabel "Attest"@nb .
+
+<https://data.norge.no/concepts/205>
+        a skos:Concept ;
+        skos:prefLabel "Tillatelse"@nb, "Permit"@en .
+
+<https://data.norge.no/concepts/257>
+        a skos:Concept ;
+        skos:prefLabel  "Post"@nb , "Mail"@en .
+
+<https://data.norge.no/concepts/308> a skos:Concept ;
+        skos:prefLabel "Dødsfall og arv"@nb ;
+.
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/cost/15>
+        a  cv:Cost ;
+        cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
+        cv:ifAccessedThrough  <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2> ;
+        cv:isDefinedBy        <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789> ;
+        cv:value              4.27 ;
+        dct:description       "4,27 kr pr. vareliter for alkoholholdig drikk i gruppe 3" ;
+        dct:identifier        "15" .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/cost/16>
+        a  cv:Cost ;
+        cv:currency           <http://publications.europa.eu/resource/authority/currency/NOK> ;
+        cv:value              0 ;
+        dct:identifier        "16" .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
+        a cv:Channel ;
+        cv:ownedBy          <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
+        dct:identifier      "2" ;
+        dct:type            <https://data.norge.no/vocabulary/service-channel-type#assistant> ;
+        dct:description     "Lov om Enhetsregisteret"@nb ;
+        cv:processingTime   "P1D"^^xsd:duration ;
+        vcard:hasEmail      "mailto:postmottak@bronnoy.kommune.no" ;
+        vcard:hasURL        "http://testurl.com" ;
+        vcard:hasAddress   [ a vcard:Address ;
+                            vcard:street-address "Sivert Nielsens gt. 24" ;
+                            vcard:locality "Brønnøysund" ;
+                            vcard:postal-code "8905" ;
+                            vcard:country-name "Norge"@nb , "Norway"@en ; ] ;
+        cpsv:hasInput      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exDokumentasjon.ttl> ;
+        vcard:hasTelephone "tel:+4712345678" .
+<http://public-service-publisher.fellesdatakatalog.digdir.no/requirement/5>
+        a               cv:Requirement ;
+        dct:identifier  "5" ;
+        dct:title       "Et attestkrav"@no ;
+        dct:description "Et viktig krav som må tilfredsstilles."@no ;
+        cv:fulfils     <http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> ;
+        dct:type        <https://data.norge.no/concepts/153> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
+        a               cv:Participation ;
+        cv:role         <https://data.norge.no/concepts/101> ;
+        dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
+        dct:identifier  "1" ;
+        cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
+        a                cv:Participation ;
+        cv:role          <https://data.norge.no/concepts/15> ;
+        dct:description  "Mattilsynet"@nb ;
+        dct:identifier   "6" .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/1>
+        a                cv:Evidence ;
+        dct:description  "Vandelsattest"@nb ;
+        dct:identifier   "1" ;
+        dct:title        "Vandelsattest"@nb ;
+        dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ,
+                          <http://publications.europa.eu/resource/authority/language/NNO> ,
+                          <http://publications.europa.eu/resource/authority/language/ENG> ;
+        dct:type         <https://data.norge.no/vocabulary/evidence-type#attestation> ;
+        foaf:page        <https://example.org/exDokumentasjonsSide> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2>
+        a                dcat:Dataset ;
+        dct:description  "Annen dokumentasjon"@nb ;
+        dct:identifier   "2" ;
+        dct:title        "Nødvendig dokumentasjon"@nb ;
+        dct:language     <http://publications.europa.eu/resource/authority/language/NOB> ;
+        foaf:page        <https://example.org/exDokumentasjonsSide2> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/3>
+        a                "invalid type" ;
+        dct:identifier   "3" ;
+        dct:title        "Ugyldig dokumentasjonstype"@nb .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/output/4>
+        a                cv:Output ;
+        dct:description  "Serveringsbevilling"@nb ;
+        dct:identifier   "4" ;
+        dct:title        "Serveringsbevilling"@nb ;
+        dct:type         <https://data.norge.no/concepts/205> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/contact/1>
+        rdf:type cv:ContactPoint;
+        schema:hoursAvailable <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl>;
+        cv:ContactPage <https://www.bronnoy.kommune.no/>;
+        cv:email "mailto:postmottak@bronnoy.kommune.no"^^xsd:anyURI;
+        vcard:hasLanguage <http://publications.europa.eu/resource/authority/language/NOB>,
+            <http://publications.europa.eu/resource/authority/language/NNO>,
+            <http://publications.europa.eu/resource/authority/language/ENG>;
+        cv:telephone "tel:+4775012000";
+        cv:openingHours "Resepsjonen er åpent for henvendelser mandag - fredag: kl  10:00 - 14:00."@no,
+            "Teksten blir vist på nynorsk."@nn,
+            "The reception is open for inquiries Monday - Friday: 10:00 - 14:00."@en;
+        cv:specialOpeningHoursSpecification <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl> .
+
+<https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl>
+        rdf:type cv:OpeningHoursSpecification;
+        schema:dayOfWeek <https://schema.org/Monday>,
+            <https://schema.org/Tuesday>,
+            <https://schema.org/Wednesday>,
+            <https://schema.org/Thursday>,
+            <https://schema.org/Friday>;
+        schema:closes "14:00:00"^^xsd:time;
+        schema:opens "10:00:00"^^xsd:time .
+
+<https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl>
+        rdf:type cv:OpeningHoursSpecification;
+        schema:dayOfWeek <https://schema.org/PublicHolidays> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/rule/1> a cpsv:Rule ;
+        dct:description     "Lov om behandlingsmåten i forvaltningssaker (https://lovdata.no/lov/1967-02-10)"@nb ;
+        dct:identifier      "1" ;
+        dct:language        <http://publications.europa.eu/resource/authority/language/NOB> ;
+        dct:title           "Lov om behandlingsmåten i forvaltningssaker"@nb ;
+        cpsv:implements     <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/1> a eli:LegalResource ;
+        dct:title           "Lov om Enhetsregisteret"@nb ;
+        dct:description     "Lov om Enhetsregisteret"@nb ;
+        rdfs:seeAlso        <https://lovdata.no/eli/lov/1994/06/03/15/nor/html> ;
+        dct:relation        <http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/2> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/legalresource/2> a eli:LegalResource ;
+        dct:title           "Annen regulativ ressurs"@nb .
+
+<https://data.brreg.no/enhetsregisteret/api/enheter/971526920> a dct:Agent ;
+        dct:identifier "971526920" ;
+        dct:title "Statistisk sentralbyrå"@nb ;
+        cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ; .
+
+<https://data.brreg.no/enhetsregisteret/api/enheter/971526921> a dct:Agent ;
+        dct:identifier "971526921" ;
+        dct:title "Tull"@nb ;
+        cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6> ; .
+
+<http://localhost:5000/services/fdk-1>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "fdk-1" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
+
+<https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
+        a                      rov:RegisteredOrganization ;
+        dct:identifier         "123456789" ;
+        rov:legalName          "Digitaliseringsdirektoratet" ;
+        foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
+        br:orgPath             "/STAT/987654321/123456789" .

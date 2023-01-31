@@ -1,0 +1,75 @@
+@prefix adms:   <http://www.w3.org/ns/adms#> .
+@prefix cccev:  <http://data.europa.eu/m8g/cccev/> .
+@prefix cpsv:   <http://purl.org/vocab/cpsv#> .
+@prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+@prefix cv:     <http://data.europa.eu/m8g/> .
+@prefix dcat:   <http://www.w3.org/ns/dcat#> .
+@prefix dcatno: <https://data.norge.no/vocabulary/dcatno#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix eli:    <http://data.europa.eu/eli/ontology#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix locn:   <http://www.w3.org/ns/locn#> .
+@prefix odrl:   <http://www.w3.org/ns/odrl/2/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+@prefix xkos:   <http://rdf-vocabulary.ddialliance.org/xkos#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
+        a              org:Organization;
+        dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
+        dct:title      "Organisasjon i Brønnøysund"@nb ;
+        foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
+        dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
+        dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
+                        <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
+
+<https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced>
+        a              org:Organization;
+        dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced"^^xsd:anyURI ;
+        dct:title      "Organisasjon i Brønnøysund"@nb ;
+        foaf:homepage  <https://www.bronnoy.organisasjon.no> ;
+        dct:type       <http://purl.org/adms/publishertype/NonGovernmentalOrganisation> ;
+        dct:spatial    <http://publications.europa.eu/resource/authority/country/NOR> ,
+                        <https://data.geonorge.no/administrativeEnheter/kommune/id/172833> .
+
+<https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl>
+        rdf:type         cv:Output ;
+        dct:description  "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat."@nb ;
+        dct:identifier   "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl"^^xsd:anyURI ;
+        dct:language     <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> , <http://publications.europa.eu/resource/authority/language/NNO> ;
+        dct:title        "Dummy tjenesteresultat"@nb , "Dummy tjenesteresultat"@nn , "Dummy service result"@en .
+
+<https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl>
+        rdf:type cv:ContactPoint;
+        schema:contactType  "Kontakt test"@nb ;
+        cv:contactPage <https://example.org/exKontaktside>;
+        cv:email "mailto:postmottak@example.org"^^xsd:anyURI;
+        cv:telephone "tel:+4712345678";
+        vcard:hasLanguage <http://publications.europa.eu/resource/authority/language/NOB>,
+            <http://publications.europa.eu/resource/authority/language/NNO>,
+            <http://publications.europa.eu/resource/authority/language/ENG> .
+
+<https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl>
+        rdf:type           cpsvno:Service ;
+        cv:ownedBy         <https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced> ;
+        dct:description    "The text is displayed in English."@en , "Teksten blir vist på nynorsk."@nn , "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå."@nb ;
+        dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl"^^xsd:anyURI ;
+        dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
+        dct:title          "Dummy service"@en , "Dummytjeneste"@nn , "Dummytjeneste"@nb ;
+        cpsv:produces      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl> ;
+        cv:hasContactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> ;
+        cv:thematicArea    <https://psi.norge.no/not/in/los/or/eu> ,
+                            <http://publications.europa.eu/resource/authority/data-theme/GOVE> ,
+                            <https://psi.norge.no/los/tema/naring> .
+
+<https://www.staging.fellesdatakatalog.digdir.no/public-services/1fc38c3c-1c86-3161-a9a7-e443fd94d413>
+        rdf:type           dcat:CatalogRecord ;
+        dct:identifier     "1fc38c3c-1c86-3161-a9a7-e443fd94d413" ;
+        dct:issued         "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+        dct:modified       "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl> .

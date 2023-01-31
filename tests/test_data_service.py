@@ -17,109 +17,6 @@ from fdk_rdf_parser.classes import (
 def test_parse_multiple_data_services(
     mock_reference_data_client: Mock,
 ) -> None:
-
-    src = """
-@prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
-@prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
-@prefix dct:   <http://purl.org/dc/terms/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix dcat:  <http://www.w3.org/ns/dcat#> .
-@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
-@prefix rov:   <http://www.w3.org/ns/regorg#> .
-
-<https://testdirektoratet.no/catalogs/321>
-        a                  dcat:CatalogRecord ;
-        dct:identifier     "d6199127-8835-33e1-9108-233cd81e92f9" ;
-        dct:issued         "2020-06-22T13:39:27.334Z"^^xsd:dateTime ;
-        dct:modified       "2020-06-22T13:39:27.334Z"^^xsd:dateTime ;
-        foaf:primaryTopic  <https://testutgiver.no/catalogs/987654321> .
-
-<https://testdirektoratet.no/catalogs/123>
-        a                  dcat:CatalogRecord ;
-        dct:identifier     "d07885d9-0925-339f-bb22-58c28dc30409" ;
-        dct:issued         "2020-08-07T09:56:01.329Z"^^xsd:dateTime ;
-        dct:modified       "2020-08-07T10:02:26.312Z"^^xsd:dateTime , "2020-08-07T09:56:01.329Z" ;
-        foaf:primaryTopic  <https://testutgiver.no/catalogs/123456789> .
-
-<https://testutgiver.no/catalogs/123456789>
-        a               dcat:Catalog ;
-        dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
-        dct:title      "Data service catalog"@en ;
-        dcat:service   <https://testutgiver.no/data-services/2> .
-
-<https://testutgiver.no/data-services/2>
-        a                         dcat:DataService ;
-        dct:conformsTo            <https://data.norge.no/def/serviceType#CUSTOMER_RELATIONS> ;
-        dct:publisher             <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
-        dct:description           "Beskrivelse for å benytte seg av en kaffemaskin"@nb , "Beskrivelse for å benytte seg av en kaffemaskin NYNORSK"@nn , "Beskrivelse for å benytte seg av en kaffemaskin ENGELSK"@en ;
-        dct:title                 "Kaffe API Nynorsk ENGELSK"@en , "Kaffe API Nynorsk"@nn , "Kaffe API"@nb ;
-        dcat:contactPoint         [ a                          vcard:Organization ;
-                                    vcard:fn                   "Contact information" ;
-                                    vcard:hasEmail             <mailto:kaffe@epost.no> ;
-                                    vcard:hasOrganizationName  "Kaffehuset"@nb ;
-                                    vcard:hasURL               <http://www.kaffehuset.no>
-                                  ] ;
-        dcat:endpointDescription  <http://example.com/dette%20skal%20v%C3%A6re%20en%20lenke> , <http://example.com/Dette%20er%20en%20test> ;
-        dcat:endpointURL          <http://kaffe.no> , <https://kaffemaskin.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/text/turtle> ;
-        foaf:page                 <https://data4.norge.no>;
-        dcat:servesDataset        <http://testutgiver.no/datasets/abc> .
-
-<https://testdirektoratet.no/dataservices/111>
-        a                  dcat:CatalogRecord ;
-        dct:identifier     "1" ;
-        dct:isPartOf       <https://testdirektoratet.no/catalogs/321> ;
-        dct:issued         "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
-        dct:modified       "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
-        foaf:primaryTopic  <https://testutgiver.no/dataservices/1> .
-
-<https://testutgiver.no/dataservices/0>
-        a                         dcat:DataService ;
-        dct:publisher             <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
-        dcat:endpointDescription  <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml> .
-
-<https://testutgiver.no/catalogs/987654321>
-        a              dcat:Catalog ;
-        dct:publisher  <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
-        dct:title      "Dataservicekatalog2 for Digitaliseringsdirektoratet"@nb ;
-        dcat:service   <https://testutgiver.no/dataservices/0> , <https://testutgiver.no/dataservices/1> .
-
-<https://testdirektoratet.no/dataservices/222>
-        a                  dcat:CatalogRecord ;
-        dct:identifier     "2" ;
-        dct:isPartOf       <https://testdirektoratet.no/catalogs/123> ;
-        dct:issued         "2020-08-07T09:56:01.329Z"^^xsd:dateTime ;
-        dct:modified       "2020-08-07T10:02:26.312Z"^^xsd:dateTime , "2020-08-07T09:56:01.329Z" ;
-        foaf:primaryTopic  <https://testutgiver.no/data-services/2> .
-
-<https://testutgiver.no/dataservices/1>
-        a                         dcat:DataService ;
-        dct:title                 "Testing Testing"@nb ;
-        dct:publisher             <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
-        dcat:contactPoint         [ a         vcard:Organization ;
-                                    vcard:fn  "Contact information"
-                                  ] ;
-        dcat:endpointDescription  <http://example.com/> ;
-        dcat:endpointURL          <https://vg.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/not.found> .
-
-<https://testdirektoratet.no/dataservices/000>
-        a                  dcat:CatalogRecord ;
-        dct:identifier     "d1d698ef-267a-3d57-949f-b2bc44657f3e" ;
-        dct:isPartOf       <https://testdirektoratet.no/catalogs/321> ;
-        dct:issued         "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
-        dct:modified       "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
-        foaf:primaryTopic  <https://testutgiver.no/dataservices/0> .
-
-<https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
-        a                      rov:RegisteredOrganization ;
-        dct:identifier         "123456789" ;
-        rov:legalName          "Digitaliseringsdirektoratet" ;
-        foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
-        rov:orgType            orgtype:ORGL ;
-        br:orgPath             "/STAT/987654321/123456789" ."""
-
     expected = {
         "https://testutgiver.no/data-services/2": DataService(
             publisher=Publisher(
@@ -256,4 +153,5 @@ def test_parse_multiple_data_services(
         ),
     }
 
-    assert parse_data_services(src) == expected
+    with open("tests/test_data/dataservice0.ttl", "r") as src:
+        assert parse_data_services(src.read()) == expected
