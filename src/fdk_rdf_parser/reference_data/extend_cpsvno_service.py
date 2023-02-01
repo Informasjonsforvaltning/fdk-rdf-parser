@@ -1,16 +1,20 @@
 from typing import (
+    cast,
     List,
     Optional,
 )
 
 from fdk_rdf_parser.classes import (
+    Agent,
     Channel,
     CVContactPoint,
     Evidence,
     OpeningHoursSpecification,
     Organization,
     Output,
+    Participation,
     PublicService,
+    ReferenceDataCode,
     Service,
 )
 from .reference_data import PublicServiceReferenceData
@@ -47,6 +51,10 @@ def extend_cpsvno_service_with_reference_data(
     )
     cpsvno_service.hasChannel = extend_channels(cpsvno_service.hasChannel, ref_data)
     cpsvno_service.ownedBy = extend_organizations(cpsvno_service.ownedBy, ref_data)
+
+    cpsvno_service.participatingAgents = extend_participations_of_agents(
+        cpsvno_service.participatingAgents, ref_data
+    )
 
     if isinstance(cpsvno_service, PublicService):
         cpsvno_service.hasCompetentAuthority = extend_organizations(
@@ -136,8 +144,39 @@ def extend_organizations(
 ) -> Optional[List[Organization]]:
     if organizations is None:
         return None
+
     for organization in organizations:
         organization.orgType = extend_reference_data_code(
             organization.orgType, ref_data.organization_types
         )
     return organizations
+
+
+def extend_participations_of_agents(
+    participating_agents: Optional[List[Agent]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Agent]]:
+    if participating_agents is None:
+        return None
+
+    for agent in participating_agents:
+        agent.playsRole = extend_participations(agent.playsRole, ref_data)
+
+    return participating_agents
+
+
+def extend_participations(
+    participations: Optional[List[Participation]], ref_data: PublicServiceReferenceData
+) -> Optional[List[Participation]]:
+    if participations is None:
+        return None
+
+    for participation in participations:
+        extended_roles = []
+        if participation.role:
+            for role in participation.role:
+                extended_role = extend_reference_data_code(role, ref_data.role_types)
+                extended_role = cast(ReferenceDataCode, extended_role)
+                extended_roles.append(extended_role)
+        participation.role = extended_roles if len(extended_roles) > 0 else None
+
+    return participations
