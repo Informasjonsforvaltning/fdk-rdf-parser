@@ -1,9 +1,10 @@
 import os
 from typing import (
-    Any,
     Dict,
     List,
     Optional,
+    Sequence,
+    TypeVar,
 )
 
 from fdk_rdf_parser.classes import (
@@ -32,8 +33,10 @@ def extend_reference_types(
     else:
         extended_references = []
         for ref in references:
-            ref.referenceType = extend_reference_data_code(
-                ref.referenceType, reference_types
+            ref.referenceType = (
+                extend_reference_data_code(ref.referenceType, reference_types)
+                if ref.referenceType
+                else None
             )
             extended_references.append(ref)
         return extended_references
@@ -119,18 +122,13 @@ def extend_eu_data_themes(
 
 
 def extend_reference_data_code(
-    ref_data_code: Optional[ReferenceDataCode],
+    ref_data_code: ReferenceDataCode,
     references: Optional[Dict[str, ReferenceDataCode]],
-) -> Optional[ReferenceDataCode]:
+) -> ReferenceDataCode:
     ref_code = None
     if references:
         uri = ref_data_code.uri if ref_data_code else None
-        if uri:
-            ref_code = (
-                references.get(remove_scheme_and_trailing_slash(uri))
-                if references
-                else None
-            )
+        ref_code = references.get(remove_scheme_and_trailing_slash(uri))
 
     return ref_code if ref_code else ref_data_code
 
@@ -168,5 +166,8 @@ def remove_scheme_and_trailing_slash(uri: Optional[str]) -> str:
         return uri
 
 
-def remove_none_values(lst: List[Optional[Any]]) -> List[Any]:
+T = TypeVar("T")
+
+
+def remove_none_values(lst: Sequence[Optional[T]]) -> List[T]:
     return [item for item in lst if item is not None]

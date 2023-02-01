@@ -35,8 +35,10 @@ def extend_cpsvno_service_with_reference_data(
         cpsvno_service.contactPoint, ref_data
     )
     cpsvno_service.produces = extend_cv_output(cpsvno_service.produces, ref_data)
-    cpsvno_service.admsStatus = extend_reference_data_code(
-        cpsvno_service.admsStatus, ref_data.statuses
+    cpsvno_service.admsStatus = (
+        extend_reference_data_code(cpsvno_service.admsStatus, ref_data.statuses)
+        if cpsvno_service.admsStatus
+        else None
     )
     cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
     cpsvno_service.dctType = extend_reference_data_code_list(
@@ -132,8 +134,10 @@ def extend_channels(
         return None
 
     for channel in channels:
-        channel.channelType = extend_reference_data_code(
-            channel.channelType, ref_data.channel_type
+        channel.channelType = (
+            extend_reference_data_code(channel.channelType, ref_data.channel_type)
+            if channel.channelType
+            else None
         )
     return channels
 
@@ -145,8 +149,12 @@ def extend_organizations(
         return None
 
     for organization in organizations:
-        organization.orgType = extend_reference_data_code(
-            organization.orgType, ref_data.organization_types
+        organization.orgType = (
+            extend_reference_data_code(
+                organization.orgType, ref_data.organization_types
+            )
+            if organization.orgType
+            else None
         )
     return organizations
 
