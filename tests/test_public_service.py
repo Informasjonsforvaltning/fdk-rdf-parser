@@ -472,10 +472,14 @@ def test_complete_public_services(
                             },
                             agent="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
                             role=[
-                                SkosConcept(
-                                    uri="https://data.norge.no/concepts/101",
-                                    prefLabel={"nb": "Datakonsument"},
-                                )
+                                ReferenceDataCode(
+                                    uri="https://data.norge.no/vocabulary/role-type#data-consumer",
+                                    code="data-consumer",
+                                    prefLabel={
+                                        "nb": "datakonsument",
+                                        "en": "data consumer",
+                                    },
+                                ),
                             ],
                         )
                     ],

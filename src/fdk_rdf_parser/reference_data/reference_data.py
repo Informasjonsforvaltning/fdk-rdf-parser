@@ -55,6 +55,7 @@ class PublicServiceReferenceData:
     los_themes: Optional[Dict[str, LosNode]] = None
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
     organization_types: Optional[Dict[str, ReferenceDataCode]] = None
+    role_types: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_data_service_reference_data() -> DataServiceReferenceData:
@@ -97,6 +98,7 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         los_themes=get_and_map_los_themes(),
         channel_type=get_and_map_channel_types(),
         organization_types=get_and_map_organization_types(),
+        role_types=get_and_map_role_types(),
     )
 
 
@@ -242,6 +244,11 @@ def get_and_map_organization_types() -> Optional[Dict[str, ReferenceDataCode]]:
 def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
     evidence_types = get_reference_data("/digdir/evidence-types").get("evidenceTypes")
     return parse_reference_codes(evidence_types)
+
+
+def get_and_map_role_types() -> Optional[Dict[str, ReferenceDataCode]]:
+    role_types = get_reference_data("/digdir/role-types").get("roleTypes")
+    return parse_reference_codes(role_types)
 
 
 def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:

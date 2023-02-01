@@ -195,6 +195,21 @@ public_service_reference_data = PublicServiceReferenceData(
             },
         ),
     },
+    role_types={
+        "data.norge.no/vocabulary/role-type#data-consumer": ReferenceDataCode(
+            uri="https://data.norge.no/vocabulary/role-type#data-consumer",
+            code="data-consumer",
+            prefLabel={
+                "nb": "datakonsument",
+                "en": "data consumer",
+            },
+        ),
+        "data.norge.no/vocabulary/role-type#data-provider": ReferenceDataCode(
+            uri="https://data.norge.no/vocabulary/role-type#data-provider",
+            code="data-provider",
+            prefLabel={"nb": "dataleverandør", "en": "data provider"},
+        ),
+    },
 )
 
 dataset_reference_data = DatasetReferenceData(

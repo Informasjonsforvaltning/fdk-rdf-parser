@@ -134,7 +134,7 @@
 
 <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
         a               cv:Participation ;
-        cv:role         <https://data.norge.no/concepts/101> ;
+        cv:role         <https://data.norge.no/vocabulary/role-type#data-consumer> ;
         dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
         dct:identifier  "1" ;
         cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .

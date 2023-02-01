@@ -7,7 +7,7 @@ from fdk_rdf_parser.classes import (
     Organization,
     Participation,
     PublicService,
-    SkosConcept,
+    ReferenceDataCode,
 )
 
 
@@ -31,7 +31,7 @@ def test_multiple_participations_one_agent(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
                     a               cv:Participation ;
-                    cv:role         <https://data.norge.no/concepts/101> ;
+                    cv:role         <https://data.norge.no/vocabulary/role-type#data-consumer> ;
                     dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
                     dct:identifier  "1" ;
                     cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
@@ -49,14 +49,6 @@ def test_multiple_participations_one_agent(
                     dct:title "Statistisk sentralbyrå"@nb ;
                     cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1> ,
                                     <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/2> .
-
-            <https://data.norge.no/concepts/15>
-                    a               skos:Concept ;
-                    skos:prefLabel  "Daglig leder"@nb .
-
-            <https://data.norge.no/concepts/101>
-                    a               skos:Concept ;
-                    skos:prefLabel  "Datakonsument"@nb ; .
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -87,10 +79,14 @@ def test_multiple_participations_one_agent(
                                 "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
                             },
                             role=[
-                                SkosConcept(
-                                    uri="https://data.norge.no/concepts/101",
-                                    prefLabel={"nb": "Datakonsument"},
-                                )
+                                ReferenceDataCode(
+                                    uri="https://data.norge.no/vocabulary/role-type#data-consumer",
+                                    code="data-consumer",
+                                    prefLabel={
+                                        "nb": "datakonsument",
+                                        "en": "data consumer",
+                                    },
+                                ),
                             ],
                             agent="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
                         ),
@@ -99,9 +95,8 @@ def test_multiple_participations_one_agent(
                             identifier="2",
                             description={"nb": "Mattilsynet"},
                             role=[
-                                SkosConcept(
+                                ReferenceDataCode(
                                     uri="https://data.norge.no/concepts/15",
-                                    prefLabel={"nb": "Daglig leder"},
                                 )
                             ],
                             agent="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
@@ -143,7 +138,7 @@ def test_participation_with_agent_and_organization(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/1>
                     a               cv:Participation ;
-                    cv:role         <https://data.norge.no/concepts/101> ;
+                    cv:role         <https://data.norge.no/vocabulary/role-type#data-consumer> ;
                     dct:description "Statistisk sentralbyrås Virksomhets- og foretaksregister"@nb ;
                     dct:identifier  "1" ;
                     cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
@@ -164,7 +159,7 @@ def test_participation_with_agent_and_organization(
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4>
                     a                cv:Participation ;
-                    cv:role          <https://data.norge.no/concepts/101> ;
+                    cv:role          <https://data.norge.no/vocabulary/role-type#data-consumer> ;
                     dct:description  "Deltagelse med Offentlig Organisasjon"@nb ;
                     dct:identifier   "4" ;
                     cv:hasParticipant <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321> .
@@ -193,14 +188,6 @@ def test_participation_with_agent_and_organization(
                     dct:identifier "https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321"^^xsd:anyURI ;
                     dct:title      "En offentlig organisasjon"@nb ;
                     cv:participates <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/4> .
-
-            <https://data.norge.no/concepts/15>
-                    a               skos:Concept ;
-                    skos:prefLabel  "Daglig leder"@nb .
-
-            <https://data.norge.no/concepts/101>
-                    a               skos:Concept ;
-                    skos:prefLabel  "Datakonsument"@nb ; .
 
             <http://localhost:5000/services/fdk-1>
                     a                  dcat:CatalogRecord ;
@@ -233,10 +220,14 @@ def test_participation_with_agent_and_organization(
                                 "nb": "Statistisk sentralbyrås Virksomhets- og foretaksregister"
                             },
                             role=[
-                                SkosConcept(
-                                    uri="https://data.norge.no/concepts/101",
-                                    prefLabel={"nb": "Datakonsument"},
-                                )
+                                ReferenceDataCode(
+                                    uri="https://data.norge.no/vocabulary/role-type#data-consumer",
+                                    code="data-consumer",
+                                    prefLabel={
+                                        "nb": "datakonsument",
+                                        "en": "data consumer",
+                                    },
+                                ),
                             ],
                             agent="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
                         ),
@@ -252,9 +243,8 @@ def test_participation_with_agent_and_organization(
                             identifier="2",
                             description={"nb": "Mattilsynet"},
                             role=[
-                                SkosConcept(
+                                ReferenceDataCode(
                                     uri="https://data.norge.no/concepts/15",
-                                    prefLabel={"nb": "Daglig leder"},
                                 )
                             ],
                             agent="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
@@ -274,9 +264,8 @@ def test_participation_with_agent_and_organization(
                                 "nb": "Deltagelse med Digitaliseringsdirektoratet"
                             },
                             role=[
-                                SkosConcept(
+                                ReferenceDataCode(
                                     uri="https://data.norge.no/concepts/15",
-                                    prefLabel={"nb": "Daglig leder"},
                                 )
                             ],
                             agent="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
@@ -293,10 +282,14 @@ def test_participation_with_agent_and_organization(
                             identifier="4",
                             description={"nb": "Deltagelse med Offentlig Organisasjon"},
                             role=[
-                                SkosConcept(
-                                    uri="https://data.norge.no/concepts/101",
-                                    prefLabel={"nb": "Datakonsument"},
-                                )
+                                ReferenceDataCode(
+                                    uri="https://data.norge.no/vocabulary/role-type#data-consumer",
+                                    code="data-consumer",
+                                    prefLabel={
+                                        "nb": "datakonsument",
+                                        "en": "data consumer",
+                                    },
+                                ),
                             ],
                             agent="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321",
                         )
