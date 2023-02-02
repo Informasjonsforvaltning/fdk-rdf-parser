@@ -1,5 +1,4 @@
 from typing import (
-    cast,
     List,
     Optional,
 )
@@ -14,7 +13,6 @@ from fdk_rdf_parser.classes import (
     Output,
     Participation,
     PublicService,
-    ReferenceDataCode,
     Service,
 )
 from .reference_data import PublicServiceReferenceData
@@ -23,6 +21,7 @@ from .utils import (
     collect_los_themes,
     extend_reference_data_code,
     extend_reference_data_code_list,
+    remove_none_values,
 )
 
 
@@ -174,9 +173,12 @@ def extend_participations(
         extended_roles = []
         if participation.role:
             for role in participation.role:
-                extended_role = extend_reference_data_code(role, ref_data.role_types)
-                extended_role = cast(ReferenceDataCode, extended_role)
-                extended_roles.append(extended_role)
-        participation.role = extended_roles if len(extended_roles) > 0 else None
+                extended_roles.append(
+                    extend_reference_data_code(role, ref_data.role_types)
+                )
+        filtered_extended_roles = remove_none_values(extended_roles)
+        participation.role = (
+            filtered_extended_roles if len(filtered_extended_roles) > 0 else None
+        )
 
     return participations
