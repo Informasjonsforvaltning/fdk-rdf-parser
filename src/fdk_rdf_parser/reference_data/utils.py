@@ -1,5 +1,6 @@
 import os
 from typing import (
+    Any,
     Dict,
     List,
     Optional,
@@ -165,3 +166,7 @@ def remove_scheme_and_trailing_slash(uri: Optional[str]) -> str:
         return uri[:-1]
     else:
         return uri
+
+
+def remove_none_values(lst: List[Optional[Any]]) -> List[Any]:
+    return [item for item in lst if item is not None]
