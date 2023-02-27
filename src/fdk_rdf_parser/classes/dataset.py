@@ -134,7 +134,6 @@ class Dataset(PartialDataset):
 
 @dataclass
 class DatasetSeries(Dataset):
-    first: Optional[str] = None
     last: Optional[str] = None
     specialized_type: str = "dataset_series"
 

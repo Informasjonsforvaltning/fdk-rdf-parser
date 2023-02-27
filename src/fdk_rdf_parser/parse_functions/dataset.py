@@ -148,7 +148,6 @@ def parse_dataset_series_values(
 ) -> DatasetSeries:
     return DatasetSeries(
         last=object_value(datasets_graph, dataset_uri, dcat_uri("last")),
-        first=object_value(datasets_graph, dataset_uri, dcat_uri("first")),
     )
 
 

@@ -55,7 +55,6 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isRelatedToTransportportal=False,
             inSeries=None,
             type="datasets",
-            first="http://example.org/budget-2018",
             last="http://example.org/budget-2020",
             specialized_type="dataset_series",
         ),
