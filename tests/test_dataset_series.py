@@ -56,7 +56,7 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             inSeries=None,
             type="datasets",
             last="http://example.org/budget-2020",
-            specialized_type="dataset_series",
+            specializedType="datasetSeries",
         ),
         "http://example.org/budget-2018": Dataset(
             publisher=Publisher(
