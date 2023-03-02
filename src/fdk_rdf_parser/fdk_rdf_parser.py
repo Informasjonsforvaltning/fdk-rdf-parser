@@ -26,7 +26,7 @@ from .parse_functions import (
     parse_cpsvno_service,
     parse_data_service,
     parse_dataset,
-    parse_dataset_series_values,
+    parse_dataset_series,
     parse_event,
     parse_information_model,
 )
@@ -102,7 +102,7 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
             dataset = extend_dataset_with_reference_data(dataset, reference_data)
 
             if is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri):
-                series = parse_dataset_series_values(datasets_graph, primary_topic_uri)
+                series = parse_dataset_series(datasets_graph, primary_topic_uri)
                 series.add_values_from_dataset(values=dataset)
                 datasets[primary_topic_uri.toPython()] = series
             else:

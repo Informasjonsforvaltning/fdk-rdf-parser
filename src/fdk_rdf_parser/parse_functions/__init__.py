@@ -9,7 +9,7 @@ from .cpsvno_service import parse_cpsvno_service
 from .dataservice import parse_data_service
 from .dataset import (
     parse_dataset,
-    parse_dataset_series_values,
+    parse_dataset_series,
 )
 from .dcat_resource import parse_dcat_resource
 from .dct_standard import extract_dct_standard_list

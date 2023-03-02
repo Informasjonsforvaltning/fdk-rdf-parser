@@ -1,6 +1,8 @@
+import logging
 from typing import (
     Dict,
     List,
+    Optional,
 )
 
 from rdflib import (
@@ -143,12 +145,50 @@ def parse_dataset(
     return dataset
 
 
-def parse_dataset_series_values(
-    datasets_graph: Graph, dataset_uri: URIRef
-) -> DatasetSeries:
+def parse_dataset_series(datasets_graph: Graph, dataset_uri: URIRef) -> DatasetSeries:
+    prev_dataset_uri = object_value(datasets_graph, dataset_uri, dcat_uri("last"))
     return DatasetSeries(
-        last=object_value(datasets_graph, dataset_uri, dcat_uri("last")),
+        last=prev_dataset_uri,
+        datasetsInSeries=extract_datasets_in_series(
+            datasets_graph, dataset_uri.toPython(), prev_dataset_uri
+        )
+        if prev_dataset_uri
+        else None,
     )
+
+
+def extract_datasets_in_series(
+    datasets_graph: Graph, dataset_series_uri: str, last_dataset_uri: str
+) -> List[str]:
+    datasets_in_series: List[str] = [last_dataset_uri]
+    cur_dataset_uri: Optional[str] = last_dataset_uri
+
+    while prev_dataset_uri := object_value(
+        datasets_graph, URIRef(str(cur_dataset_uri)), dcat_uri("prev")
+    ):
+        # Check for circular graphs
+        if prev_dataset_uri in datasets_in_series:
+            logging.warning(
+                f"Circular linking in dataset series {dataset_series_uri}, on dataset {cur_dataset_uri}. Aborting list traversal."
+            )
+            break
+        datasets_in_series.append(prev_dataset_uri)
+        cur_dataset_uri = prev_dataset_uri
+
+    # Verify that all datasets in series are included
+    number_of_datasets_in_series = len(
+        list(
+            datasets_graph.subjects(
+                dcat_uri("inSeries"), URIRef(dataset_series_uri), unique=True
+            )
+        )
+    )
+    if len(datasets_in_series) != number_of_datasets_in_series:
+        logging.warning(
+            f"List of datasets in series {dataset_series_uri} is incomplete, linked list might be broken."
+        )
+
+    return datasets_in_series
 
 
 def extract_boolean(
