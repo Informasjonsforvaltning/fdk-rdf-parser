@@ -135,6 +135,7 @@ class Dataset(PartialDataset):
 @dataclass
 class DatasetSeries(Dataset):
     last: Optional[str] = None
+    datasetsInSeries: Optional[List[str]] = None
     specializedType: str = "datasetSeries"
 
     def add_values_from_dataset(self: Any, values: Dataset) -> None:

@@ -1,5 +1,10 @@
 from unittest.mock import Mock
 
+from rdflib import (
+    Graph,
+    URIRef,
+)
+
 from fdk_rdf_parser import parse_datasets
 from fdk_rdf_parser.classes import (
     Catalog,
@@ -9,6 +14,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     ReferenceDataCode,
 )
+from fdk_rdf_parser.parse_functions.dataset import parse_dataset_series
 
 
 def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
@@ -50,6 +56,11 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
                     "nn": "Autoritativ kilde",
                 },
             ),
+            datasetsInSeries=[
+                "http://example.org/budget-2020",
+                "http://example.org/budget-2019",
+                "http://example.org/budget-2018",
+            ],
             isOpenData=False,
             isAuthoritative=True,
             isRelatedToTransportportal=False,
@@ -169,3 +180,97 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
 
     with open("tests/test_data/dataset_series0.ttl", "r") as src:
         assert parse_datasets(src.read()) == expected
+
+
+def test_parse_dataset_series_abort_on_circular_graph(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix ex: <http://example.org/> .
+        @prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+
+        ex:budget a dcat:Dataset , dcat:DatasetSeries ;
+            dcat:last ex:budget-2020 ;
+            .
+
+        ex:budget-2017 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            .
+
+        ex:budget-2018 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2020 ;
+            .
+
+        ex:budget-2019 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2018 ;
+            .
+
+        ex:budget-2020 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2019 ;
+            .
+    """
+    expected = DatasetSeries(
+        specializedType="datasetSeries",
+        datasetsInSeries=[
+            "http://example.org/budget-2020",
+            "http://example.org/budget-2019",
+            "http://example.org/budget-2018",
+        ],
+        last="http://example.org/budget-2020",
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    assert parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
+
+
+def test_parse_dataset_series_broken_linked_list(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix ex: <http://example.org/> .
+        @prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+
+        ex:budget a dcat:Dataset , dcat:DatasetSeries ;
+            dcat:last ex:budget-2020 ;
+            .
+
+        ex:budget-2016 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            .
+
+        ex:budget-2017 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            .
+
+        ex:budget-2018 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            .
+
+        ex:budget-2019 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2018 ;
+            .
+
+        ex:budget-2020 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2019 ;
+            .
+
+    """
+    expected = DatasetSeries(
+        specializedType="datasetSeries",
+        datasetsInSeries=[
+            "http://example.org/budget-2020",
+            "http://example.org/budget-2019",
+            "http://example.org/budget-2018",
+        ],
+        last="http://example.org/budget-2020",
+    )
+
+    graph = Graph().parse(data=src, format="turtle")
+    assert parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
