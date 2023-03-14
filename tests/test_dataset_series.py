@@ -11,6 +11,7 @@ from fdk_rdf_parser.classes import (
     Dataset,
     DatasetSeries,
     HarvestMetaData,
+    InSeries,
     Publisher,
     ReferenceDataCode,
 )
@@ -101,7 +102,11 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isOpenData=False,
             isAuthoritative=False,
             isRelatedToTransportportal=False,
-            inSeries="http://example.org/budget",
+            inSeries=InSeries(
+                uri="http://example.org/budget",
+                id="ad115f63-9edc-30dc-ab81-f6866e0631ea",
+                title={"en": "Budget data"},
+            ),
             type="datasets",
         ),
         "http://example.org/budget-2019": Dataset(
@@ -136,7 +141,11 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isOpenData=False,
             isAuthoritative=False,
             isRelatedToTransportportal=False,
-            inSeries="http://example.org/budget",
+            inSeries=InSeries(
+                uri="http://example.org/budget",
+                id="ad115f63-9edc-30dc-ab81-f6866e0631ea",
+                title={"en": "Budget data"},
+            ),
             prev="http://example.org/budget-2018",
             type="datasets",
         ),
@@ -172,7 +181,11 @@ def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
             isOpenData=False,
             isAuthoritative=False,
             isRelatedToTransportportal=False,
-            inSeries="http://example.org/budget",
+            inSeries=InSeries(
+                uri="http://example.org/budget",
+                id="ad115f63-9edc-30dc-ab81-f6866e0631ea",
+                title={"en": "Budget data"},
+            ),
             prev="http://example.org/budget-2019",
             type="datasets",
         ),

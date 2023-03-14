@@ -55,7 +55,7 @@ class PartialDataset(PartialDcatResource):
     isOpenData: bool = False
     isAuthoritative: bool = False
     isRelatedToTransportportal: bool = False
-    inSeries: Optional[str] = None
+    inSeries: Optional["InSeries"] = None
     prev: Optional[str] = None
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> None:
@@ -189,3 +189,10 @@ class DatasetSeries(Dataset):
         self.publisher = values.publisher
         self.losTheme = values.losTheme
         self.type = values.type
+
+
+@dataclass
+class InSeries:
+    uri: Optional[str] = None
+    id: Optional[str] = None
+    title: Optional[Dict[str, str]] = None
