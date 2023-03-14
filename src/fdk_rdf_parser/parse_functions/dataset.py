@@ -18,6 +18,7 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import (
     DatasetSeries,
+    InSeries,
     PartialDataset,
     SkosConcept,
 )
@@ -57,6 +58,7 @@ def parse_dataset(
 ) -> PartialDataset:
     quality_annotations = extract_quality_annotation(datasets_graph, dataset_uri)
     cpsv_follows = extract_legal_basis_from_cpsv_follows(datasets_graph, dataset_uri)
+    dataset_series_uri = object_value(datasets_graph, dataset_uri, dcat_uri("inSeries"))
 
     dataset = PartialDataset(
         id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
@@ -131,7 +133,9 @@ def parse_dataset(
         isRelatedToTransportportal=extract_boolean(
             datasets_graph, dataset_uri, fdk_uri("isRelatedToTransportportal")
         ),
-        inSeries=object_value(datasets_graph, dataset_uri, dcat_uri("inSeries")),
+        inSeries=extract_series_info(datasets_graph, URIRef(dataset_series_uri))
+        if dataset_series_uri
+        else None,
         prev=object_value(datasets_graph, dataset_uri, dcat_uri("prev")),
     )
 
@@ -189,6 +193,17 @@ def extract_datasets_in_series(
         )
 
     return datasets_in_series
+
+
+def extract_series_info(datasets_graph: Graph, dataset_series_uri: URIRef) -> InSeries:
+    series_title = value_translations(datasets_graph, dataset_series_uri, DCTERMS.title)
+    catalog_record_of_series_uri = next(
+        datasets_graph.subjects(FOAF.primaryTopic, dataset_series_uri), None
+    )
+    series_id = object_value(
+        datasets_graph, catalog_record_of_series_uri, DCTERMS.identifier
+    )
+    return InSeries(uri=dataset_series_uri.toPython(), title=series_title, id=series_id)
 
 
 def extract_boolean(

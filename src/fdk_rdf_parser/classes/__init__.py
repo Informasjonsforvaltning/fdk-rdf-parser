@@ -16,6 +16,7 @@ from .dataservice import DataService
 from .dataset import (
     Dataset,
     DatasetSeries,
+    InSeries,
     PartialDataset,
 )
 from .dcat_resource import PartialDcatResource
