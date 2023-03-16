@@ -42,6 +42,17 @@ def test_get_reference_data_http_error(
     assert get_data_service_reference_data() == expected_data_service
 
 
+def test_get_reference_data_timeout_error(
+    mock_reference_data_client_timeout_error: Mock,
+) -> None:
+
+    expected_dataset = DatasetReferenceData()
+    expected_data_service = DataServiceReferenceData()
+
+    assert get_dataset_reference_data() == expected_dataset
+    assert get_data_service_reference_data() == expected_data_service
+
+
 def test_get_reference_data_parse_error(
     mock_reference_data_client_parse_error: Mock,
 ) -> None:

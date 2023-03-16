@@ -13,7 +13,9 @@ def get_reference_data(endpoint: str) -> Dict[str, List[Dict]]:
 
     try:
         response = requests.get(
-            reference_data_url(endpoint), headers={"Accept": "application/json"}
+            reference_data_url(endpoint),
+            headers={"Accept": "application/json"},
+            timeout=30,
         )
 
         response.raise_for_status()
@@ -22,6 +24,8 @@ def get_reference_data(endpoint: str) -> Dict[str, List[Dict]]:
 
     except requests.HTTPError as err:
         logging.error(f"Http error response from reference-data ({err})")
+    except TimeoutError as err:
+        logging.error(f"Timeout error when getting reference data: {err}")
     except Exception as err:
         logging.error(f"Error occurred when getting data from reference-data: {err}")
 
