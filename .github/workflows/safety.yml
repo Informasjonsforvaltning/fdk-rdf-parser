@@ -1,7 +1,6 @@
 name: Safety
 on:
-  push:
-#  pull_request:
+  pull_request:
 #    branches:
 #      - main
 jobs:
