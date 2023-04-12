@@ -1,8 +1,8 @@
 name: Safety
 on:
   pull_request:
-#    branches:
-#      - main
+    branches:
+      - main
 jobs:
   safety:
     uses: Informasjonsforvaltning/workflows/.github/workflows/safety-nox.yaml@chore/hos/safety-formatting
