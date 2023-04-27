@@ -9,7 +9,11 @@ from typing import (
 from .contactpoint import DCATContactPoint
 from .publisher import Publisher
 from .reference_data_code import ReferenceDataCode
-from .theme import EuDataTheme
+from .theme import (
+    EuDataTheme,
+    Eurovoc,
+    LosNode,
+)
 
 
 @dataclass
@@ -21,7 +25,10 @@ class PartialDcatResource:
     descriptionFormatted: Optional[Dict[str, str]] = None
     uri: Optional[str] = None
     accessRights: Optional[ReferenceDataCode] = None
+    themeUris: Optional[List[str]] = None
     theme: Optional[List[EuDataTheme]] = None
+    losTheme: Optional[List[LosNode]] = None
+    eurovocThemes: Optional[List[Eurovoc]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[DCATContactPoint]] = None
     dctType: Optional[str] = None

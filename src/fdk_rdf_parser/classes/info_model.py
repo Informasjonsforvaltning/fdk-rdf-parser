@@ -16,7 +16,6 @@ from .model_element import ModelElement
 from .model_property import ModelProperty
 from .reference_data_code import ReferenceDataCode
 from .temporal import Temporal
-from .theme import LosNode
 
 
 @dataclass
@@ -45,7 +44,6 @@ class InformationModel(PartialDcatResource):
     containsModelElements: Optional[List[str]] = None
     modelElements: Optional[Dict[str, ModelElement]] = None
     modelProperties: Optional[Dict[str, ModelProperty]] = None
-    losTheme: Optional[List[LosNode]] = None
     type: str = "informationmodels"  # used by elasticsearch for indexing
 
     def add_values_from_dcat_resource(self: Any, values: PartialDcatResource) -> Any:
@@ -55,7 +53,10 @@ class InformationModel(PartialDcatResource):
         self.description = values.description
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
+        self.themeUris = values.themeUris
         self.theme = values.theme
+        self.losTheme = values.losTheme
+        self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
         self.dctType = values.dctType

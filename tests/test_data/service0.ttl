@@ -73,3 +73,15 @@
         dct:issued         "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
         dct:modified       "2022-05-18T11:26:51.589Z"^^xsd:dateTime ;
         foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl> .
+
+<http://publications.europa.eu/resource/authority/data-theme/GOVE>
+        skos:prefLabel	"Forvaltning og offentleg sektor"@nn ;
+        skos:prefLabel	"Government and public sector"@en ;
+        skos:prefLabel	"Forvaltning og offentlig sektor"@nb ;
+        skos:prefLabel	"Forvaltning og offentlig sektor"@no .
+
+<https://psi.norge.no/los/tema/naring>
+        rdf:type           skos:Concept ;
+        skos:prefLabel     "Business"@en , "Næring"@nb , "Næring"@nn ;
+        <https://fellesdatakatalog.digdir.no/ontology/internal/themePath>
+                "naring" .

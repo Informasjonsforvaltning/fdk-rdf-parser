@@ -17,8 +17,6 @@ from fdk_rdf_parser.classes import (
 )
 from .reference_data import PublicServiceReferenceData
 from .utils import (
-    collect_eu_data_themes,
-    collect_los_themes,
     extend_reference_data_code,
     extend_reference_data_code_list,
     remove_none_values,
@@ -43,12 +41,6 @@ def extend_cpsvno_service_with_reference_data(
     cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
     cpsvno_service.dctType = extend_reference_data_code_list(
         cpsvno_service.dctType, ref_data.types
-    )
-    cpsvno_service.losThemes = collect_los_themes(
-        cpsvno_service.thematicAreaUris, ref_data.los_themes
-    )
-    cpsvno_service.euDataThemes = collect_eu_data_themes(
-        cpsvno_service.thematicAreaUris, ref_data.eu_data_themes
     )
     cpsvno_service.hasChannel = extend_channels(cpsvno_service.hasChannel, ref_data)
     cpsvno_service.ownedBy = extend_organizations(cpsvno_service.ownedBy, ref_data)

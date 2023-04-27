@@ -1,9 +1,6 @@
 from fdk_rdf_parser.classes import (
-    ConceptSchema,
     Dataset,
     Distribution,
-    EuDataTheme,
-    LosNode,
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
     Reference,
@@ -22,7 +19,6 @@ def test_handles_missing_reference_data() -> None:
         accessRights=ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
         ),
-        theme=[EuDataTheme(id="https://psi.norge.no/los/tema/grunnskole")],
     )
 
     assert (
@@ -430,57 +426,6 @@ def test_extend_references() -> None:
                 ),
             )
         ]
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
-def test_extend_themes() -> None:
-    parsed_dataset = Dataset(
-        theme=[
-            EuDataTheme(
-                id="http://publications.europa.eu/resource/authority/data-theme/ECON"
-            ),
-            EuDataTheme(id="https://psi.norge.no/los/tema/kultur"),
-            EuDataTheme(id="https://psi.norge.no/not/in/los/or/eu"),
-        ]
-    )
-
-    expected = Dataset(
-        theme=[
-            EuDataTheme(
-                id="http://publications.europa.eu/resource/authority/data-theme/ECON",
-                code="ECON",
-                startUse="2015-10-01",
-                title={"nb": "Økonomi og finans", "en": "Economy and finance"},
-                conceptSchema=ConceptSchema(
-                    id="http://publications.europa.eu/resource/authority/data-theme",
-                    title={"en": "Dataset types Named Authority List"},
-                    versioninfo="20160921-0",
-                    versionnumber="20160921-0",
-                ),
-            ),
-            EuDataTheme(id="https://psi.norge.no/not/in/los/or/eu"),
-        ],
-        losTheme=[
-            LosNode(
-                children=[
-                    "https://psi.norge.no/los/ord/film-og-kino",
-                    "https://psi.norge.no/los/ord/kulturtilbud",
-                ],
-                parents=["https://psi.norge.no/los/tema/kultur-idrett-og-fritid"],
-                isTema=True,
-                losPaths=["kultur-idrett-og-fritid/kultur"],
-                name={"nn": "Kultur", "nb": "Kultur", "en": "Culture"},
-                definition=None,
-                uri="https://psi.norge.no/los/tema/kultur",
-                synonyms=[],
-                relatedTerms=None,
-            )
-        ],
     )
 
     assert (

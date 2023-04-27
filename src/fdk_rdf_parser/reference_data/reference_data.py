@@ -6,8 +6,6 @@ from typing import (
 )
 
 from fdk_rdf_parser.classes import (
-    EuDataTheme,
-    LosNode,
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
     ReferenceDataCode,
@@ -30,8 +28,6 @@ class DatasetReferenceData:
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
     openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
     location: Optional[Dict[str, ReferenceDataCode]] = None
-    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
-    los_themes: Optional[Dict[str, LosNode]] = None
     media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
 
 
@@ -40,8 +36,6 @@ class InformationModelReferenceData:
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
     location: Optional[Dict[str, ReferenceDataCode]] = None
-    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
-    los_themes: Optional[Dict[str, LosNode]] = None
 
 
 @dataclass
@@ -51,8 +45,6 @@ class PublicServiceReferenceData:
     statuses: Optional[Dict[str, ReferenceDataCode]] = None
     types: Optional[Dict[str, ReferenceDataCode]] = None
     evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
-    eu_data_themes: Optional[Dict[str, EuDataTheme]] = None
-    los_themes: Optional[Dict[str, LosNode]] = None
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
     organization_types: Optional[Dict[str, ReferenceDataCode]] = None
     role_types: Optional[Dict[str, ReferenceDataCode]] = None
@@ -71,8 +63,6 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         referencetypes=get_and_map_reference_types(),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_locations(),
-        eu_data_themes=get_and_map_eu_data_themes(),
-        los_themes=get_and_map_los_themes(),
         media_types=get_and_map_media_types(),
     )
 
@@ -82,8 +72,6 @@ def get_info_model_reference_data() -> InformationModelReferenceData:
         linguisticsystem=get_and_map_linguistic_system(),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_locations(),
-        eu_data_themes=get_and_map_eu_data_themes(),
-        los_themes=get_and_map_los_themes(),
     )
 
 
@@ -94,8 +82,6 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         statuses=get_and_map_statuses(),
         evidence_type=get_and_map_evidence_types(),
         types=get_and_map_dct_types(),
-        eu_data_themes=get_and_map_eu_data_themes(),
-        los_themes=get_and_map_los_themes(),
         channel_type=get_and_map_channel_types(),
         organization_types=get_and_map_organization_types(),
         role_types=get_and_map_role_types(),
@@ -249,30 +235,6 @@ def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
 def get_and_map_role_types() -> Optional[Dict[str, ReferenceDataCode]]:
     role_types = get_reference_data("/digdir/role-types").get("roleTypes")
     return parse_reference_codes(role_types)
-
-
-def get_and_map_eu_data_themes() -> Optional[Dict[str, EuDataTheme]]:
-    mapped = {}
-    themes = get_reference_data("/eu/data-themes").get("dataThemes")
-    if themes is not None:
-        for theme in themes:
-            eu_theme = EuDataTheme()
-            eu_theme.add_values_from_dict(theme)
-            mapped[remove_scheme_and_trailing_slash(str(theme.get("uri")))] = eu_theme
-    return mapped if len(mapped) > 0 else None
-
-
-def get_and_map_los_themes() -> Optional[Dict[str, LosNode]]:
-    mapped = {}
-    los_nodes = get_reference_data("/los/themes-and-words").get("losNodes")
-    if los_nodes is not None:
-        for los_node in los_nodes:
-            los_theme = LosNode()
-            los_theme.add_values_from_dict(los_node)
-            mapped[
-                remove_scheme_and_trailing_slash(str(los_node.get("uri")))
-            ] = los_theme
-    return mapped if len(mapped) > 0 else None
 
 
 def get_and_map_media_types() -> Optional[Dict[str, MediaTypeOrExtent]]:

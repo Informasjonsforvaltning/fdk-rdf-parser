@@ -7,6 +7,7 @@ from typing import (
 
 from fdk_rdf_parser.classes.theme import (
     EuDataTheme,
+    Eurovoc,
     LosNode,
 )
 from .agent import Agent
@@ -61,4 +62,5 @@ class Service:
     thematicAreaUris: Optional[List[str]] = None
     losThemes: Optional[List[LosNode]] = None
     euDataThemes: Optional[List[EuDataTheme]] = None
+    eurovocThemes: Optional[List[Eurovoc]] = None
     participatingAgents: Optional[List[Agent]] = None

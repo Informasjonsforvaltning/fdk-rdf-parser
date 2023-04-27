@@ -114,7 +114,13 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:identifier     "03953a9d-5b6b-34ec-b41c-dcdcb21874d9" ;
         dct:issued         "2020-10-06T10:29:22.705Z"^^xsd:dateTime ;
         dct:modified       "2020-10-13T11:35:47.394Z"^^xsd:dateTime ;
-        foaf:primaryTopic  digdir:Katalog ."""
+        foaf:primaryTopic  digdir:Katalog .
+
+<https://psi.norge.no/los/tema/skole-og-utdanning>
+        a                  skos:Concept ;
+        skos:prefLabel     "Skule og utdanning"@nn , "Skole og utdanning"@nb , "Schools and education"@en ;
+        <https://fellesdatakatalog.digdir.no/ontology/internal/themePath>
+                "skole-og-utdanning" ."""
 
     expected = {
         "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell": InformationModel(
@@ -224,18 +230,18 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             status="http://purl.org/adms/status/Completed",
             versionInfo="1.0",
             versionNotes={"nb": "Lagt til objekttypen Timeline"},
+            themeUris=["https://psi.norge.no/los/tema/skole-og-utdanning"],
             losTheme=[
                 LosNode(
-                    children=["https://psi.norge.no/los/tema/grunnskole"],
                     isTema=True,
                     losPaths=["skole-og-utdanning"],
+                    code="skole-og-utdanning",
                     name={
                         "nn": "Skule og utdanning",
                         "nb": "Skole og utdanning",
                         "en": "Schools and education",
                     },
                     uri="https://psi.norge.no/los/tema/skole-og-utdanning",
-                    synonyms=[],
                 )
             ],
             type="informationmodels",

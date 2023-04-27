@@ -13,13 +13,10 @@ from fdk_rdf_parser.classes import (
 )
 from .reference_data import DatasetReferenceData
 from .utils import (
-    extend_eu_data_themes,
-    extend_los_themes,
     extend_reference_data_code,
     extend_reference_data_code_list,
     extend_reference_types,
     remove_scheme_and_trailing_slash,
-    split_themes,
 )
 
 
@@ -52,12 +49,6 @@ def extend_dataset_with_reference_data(
     )
     dataset.references = extend_reference_types(
         dataset.references, ref_data.referencetypes
-    )
-
-    splitted_themes = split_themes(dataset.theme, ref_data.los_themes)
-    dataset.losTheme = extend_los_themes(splitted_themes["los"], ref_data.los_themes)
-    dataset.theme = extend_eu_data_themes(
-        splitted_themes["eu_data_themes"], ref_data.eu_data_themes
     )
 
     return dataset
