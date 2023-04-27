@@ -1,31 +1,31 @@
 [tool.poetry]
 name = "fdk-rdf-parser"
-version = "2.2.10"
+version = "2.2.11"
 description = ""
 authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<4.0"
-rdflib = "^6.2.0"
+rdflib = "^6.3.2"
 isodate = "^0.6.1"
-requests = "^2.28.1"
+requests = "^2.29.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.2.0"
-coverage = {extras = ["toml"], version = "^7.0.5"}
+pytest = "^7.3.1"
+coverage = {extras = ["toml"], version = "^7.2.3"}
 pytest-cov = "^4.0.0"
-black = "^22.12.0"
+black = "^23.3.0"
 flake8 = "^6.0.0"
 flake8-bandit = "^4.1.1"
 flake8-black = "^0.3.6"
-flake8-bugbear = "^22.12.6"
+flake8-bugbear = "^23.3.23"
 flake8-import-order = "^0.18.2"
 pep8-naming = "^0.13.3"
 safety = "^2.3.5"
 pytest-mock = "^3.10.0"
-codecov = "^2.1.12"
-flake8-annotations = "^2.9.1"
-mypy = "^0.991"
+codecov = "^2.1.13"
+flake8-annotations = "^3.0.0"
+mypy = "^1.2.0"
 
 [tool.coverage.paths]
 source = ["src"]

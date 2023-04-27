@@ -28,7 +28,6 @@ def parse_catalog(graph: Graph, child_record_uri: URIRef) -> Optional[Catalog]:
         catalog_uri = graph.value(catalog_record_uri, FOAF.primaryTopic)
 
         if catalog_uri and is_type(dcat_uri("Catalog"), graph, catalog_uri):
-
             return Catalog(
                 id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
                 publisher=extract_publisher(graph, catalog_uri),

@@ -8,7 +8,6 @@ from fdk_rdf_parser.parse_functions import extract_subjects
 
 
 def test_uriref_subject() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -56,7 +55,6 @@ def test_uriref_subject() -> None:
 
 
 def test_blank_node_subject() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

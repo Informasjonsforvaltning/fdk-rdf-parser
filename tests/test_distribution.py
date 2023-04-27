@@ -15,7 +15,6 @@ from fdk_rdf_parser.rdf_utils import dcat_uri
 
 
 def test_single_distribution() -> None:
-
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .

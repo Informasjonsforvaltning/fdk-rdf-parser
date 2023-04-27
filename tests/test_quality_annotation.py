@@ -9,7 +9,6 @@ from fdk_rdf_parser.rdf_utils import dqv_iso_uri
 
 
 def test_quality_annotations() -> None:
-
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
@@ -83,7 +82,6 @@ def test_quality_annotations() -> None:
 
 
 def test_quality_annotations_with_prefix() -> None:
-
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .

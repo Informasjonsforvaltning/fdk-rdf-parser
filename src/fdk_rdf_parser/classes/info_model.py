@@ -20,7 +20,6 @@ from .temporal import Temporal
 
 @dataclass
 class InformationModel(PartialDcatResource):
-
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     catalog: Optional[Catalog] = None

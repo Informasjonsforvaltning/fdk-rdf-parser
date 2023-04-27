@@ -36,7 +36,6 @@ from .temporal import extract_temporal
 def parse_information_model(
     graph: Graph, fdk_record_uri: URIRef, info_model_uri: URIRef
 ) -> InformationModel:
-
     subjects = value_set(graph, info_model_uri, DCTERMS.subject)
     model_element_refs = resource_list(
         graph, info_model_uri, model_dcat_ap_no_uri("containsModelElement")
@@ -90,7 +89,6 @@ def add_elements_to_model(
     info_model: InformationModel, graph: Graph, element_refs: List[URIRef]
 ) -> InformationModel:
     for element_ref in element_refs:
-
         element_id_optional = uri_or_identifier(graph, element_ref)
         if element_id_optional:
             element_id = str(element_id_optional)
@@ -114,7 +112,6 @@ def add_properties_to_model(
     info_model: InformationModel, graph: Graph, prop_refs: List[URIRef]
 ) -> InformationModel:
     for prop_ref in prop_refs:
-
         prop_id_optional = uri_or_identifier(graph, prop_ref)
         if prop_id_optional:
             prop_id = str(prop_id_optional)

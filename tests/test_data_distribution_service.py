@@ -13,7 +13,6 @@ from fdk_rdf_parser.rdf_utils import dcat_uri
 
 
 def test_bnode_distribution_access_service() -> None:
-
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .

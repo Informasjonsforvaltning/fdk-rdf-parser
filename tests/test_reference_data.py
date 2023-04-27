@@ -14,7 +14,6 @@ from .testdata import (
 
 
 def test_get_data_service_reference_data(mock_reference_data_client: Mock) -> None:
-
     expected = data_service_reference_data
 
     actual = get_data_service_reference_data()
@@ -23,7 +22,6 @@ def test_get_data_service_reference_data(mock_reference_data_client: Mock) -> No
 
 
 def test_get_dataset_reference_data(mock_reference_data_client: Mock) -> None:
-
     expected = dataset_reference_data
 
     actual = get_dataset_reference_data()
@@ -34,7 +32,6 @@ def test_get_dataset_reference_data(mock_reference_data_client: Mock) -> None:
 def test_get_reference_data_http_error(
     mock_reference_data_client_http_error: Mock,
 ) -> None:
-
     expected_dataset = DatasetReferenceData()
     expected_data_service = DataServiceReferenceData()
 
@@ -45,7 +42,6 @@ def test_get_reference_data_http_error(
 def test_get_reference_data_timeout_error(
     mock_reference_data_client_timeout_error: Mock,
 ) -> None:
-
     expected_dataset = DatasetReferenceData()
     expected_data_service = DataServiceReferenceData()
 
@@ -56,7 +52,6 @@ def test_get_reference_data_timeout_error(
 def test_get_reference_data_parse_error(
     mock_reference_data_client_parse_error: Mock,
 ) -> None:
-
     expected_dataset = DatasetReferenceData()
     expected_data_service = DataServiceReferenceData()
 
@@ -65,7 +60,6 @@ def test_get_reference_data_parse_error(
 
 
 def test_remove_scheme_and_trailing_slash() -> None:
-
     assert remove_scheme_and_trailing_slash("http://my.uri/") == "my.uri"
     assert remove_scheme_and_trailing_slash("https://my.uri") == "my.uri"
     assert remove_scheme_and_trailing_slash("ftp://my.uri/") == "ftp://my.uri"

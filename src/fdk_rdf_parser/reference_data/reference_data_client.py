@@ -10,7 +10,6 @@ from .utils import reference_data_url
 
 
 def get_reference_data(endpoint: str) -> Dict[str, List[Dict]]:
-
     try:
         response = requests.get(
             reference_data_url(endpoint),
