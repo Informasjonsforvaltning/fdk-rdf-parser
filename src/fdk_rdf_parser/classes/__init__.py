@@ -49,7 +49,7 @@ from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
 from .theme import (
-    ConceptSchema,
     EuDataTheme,
+    Eurovoc,
     LosNode,
 )

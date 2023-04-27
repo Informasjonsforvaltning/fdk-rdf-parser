@@ -5,6 +5,7 @@ from rdflib import (
 
 from fdk_rdf_parser.classes import (
     EuDataTheme,
+    Eurovoc,
     PartialDcatResource,
     Publisher,
     ReferenceDataCode,
@@ -19,6 +20,7 @@ def test_dcat_resource_parser() -> None:
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 
 <https://testdirektoratet.no/model/dataset/dcatresource>
         a                         dcat:Dataset ;
@@ -45,12 +47,31 @@ def test_dcat_resource_parser() -> None:
                                         "2019-04-02T00:00:00"^^xsd:dateTime ] ;
         dcat:keyword              "test"@nb ;
         dcat:theme
-            <http://pubs.europa.eu/resource/authority/data-theme/GOVE> ,
-            <http://pubs.europa.eu/resource/authority/data-theme/TECH> ;
+            <http://publications.europa.eu/resource/authority/data-theme/GOVE> ,
+            <http://publications.europa.eu/resource/authority/data-theme/TECH> ,
+            <http://eurovoc.europa.eu/1338> ;
         dct:subject               <https://testdirektoratet.no/model/concept/0> ,
                                   <https://testdirektoratet.no/model/concept/1> ;
         dct:type                  "Kodelister" ;
-        foaf:page                 <https://testdirektoratet.no> ."""
+        foaf:page                 <https://testdirektoratet.no> .
+
+<http://publications.europa.eu/resource/authority/data-theme/GOVE>
+        skos:prefLabel	"Forvaltning og offentleg sektor"@nn ;
+        skos:prefLabel	"Government and public sector"@en ;
+        skos:prefLabel	"Forvaltning og offentlig sektor"@nb ;
+        skos:prefLabel	"Forvaltning og offentlig sektor"@no .
+
+<http://publications.europa.eu/resource/authority/data-theme/TECH>
+        skos:prefLabel	"Vitskap og teknologi"@nn ;
+        skos:prefLabel	"Science and technology"@en ;
+        skos:prefLabel	"Vitenskap og teknologi"@nb ;
+        skos:prefLabel	"Vitenskap og teknologi"@no .
+
+<http://eurovoc.europa.eu/1338>
+        skos:prefLabel  "India"@en ;
+        <https://fellesdatakatalog.digdir.no/ontology/internal/themePath> "8367/1338" ;
+        <https://fellesdatakatalog.digdir.no/ontology/internal/themePath> "c_964c9649/1338" ;
+        <https://fellesdatakatalog.digdir.no/ontology/internal/themePath> "2848/1338" ."""
 
     expected = PartialDcatResource(
         identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
@@ -70,9 +91,40 @@ def test_dcat_resource_parser() -> None:
         publisher=Publisher(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
         ),
+        themeUris=[
+            "http://eurovoc.europa.eu/1338",
+            "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "http://publications.europa.eu/resource/authority/data-theme/TECH",
+        ],
         theme=[
-            EuDataTheme("http://pubs.europa.eu/resource/authority/data-theme/GOVE"),
-            EuDataTheme("http://pubs.europa.eu/resource/authority/data-theme/TECH"),
+            EuDataTheme(
+                uri="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+                code="GOVE",
+                title={
+                    "nn": "Forvaltning og offentleg sektor",
+                    "no": "Forvaltning og offentlig sektor",
+                    "nb": "Forvaltning og offentlig sektor",
+                    "en": "Government and public sector",
+                },
+            ),
+            EuDataTheme(
+                uri="http://publications.europa.eu/resource/authority/data-theme/TECH",
+                code="TECH",
+                title={
+                    "nn": "Vitskap og teknologi",
+                    "no": "Vitenskap og teknologi",
+                    "nb": "Vitenskap og teknologi",
+                    "en": "Science and technology",
+                },
+            ),
+        ],
+        eurovocThemes=[
+            Eurovoc(
+                uri="http://eurovoc.europa.eu/1338",
+                code="1338",
+                label={"en": "India"},
+                eurovocPaths=["2848/1338", "8367/1338", "c_964c9649/1338"],
+            )
         ],
         keyword=[{"nb": "test"}],
         issued="2019-03-22T13:11:16",

@@ -61,6 +61,10 @@ def fdk_uri(sub_string: str) -> URIRef:
     )
 
 
+def fdk_internal_uri(sub_string: str) -> URIRef:
+    return URIRef(f"https://fellesdatakatalog.digdir.no/ontology/internal/{sub_string}")
+
+
 def model_dcat_ap_no_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://data.norge.no/vocabulary/modelldcatno#{sub_string}")
 

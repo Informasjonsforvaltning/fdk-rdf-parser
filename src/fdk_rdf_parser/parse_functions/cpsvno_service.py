@@ -44,6 +44,12 @@ from .output import extract_outputs
 from .requirement import extract_requirements
 from .rule import extract_rules
 from .skos_concept import extract_skos_concept
+from .theme import (
+    map_data_themes,
+    map_eurovoc_themes,
+    map_los_themes,
+    split_theme_refs,
+)
 
 
 def extract_cpsvno_services(
@@ -67,6 +73,9 @@ def extract_cpsvno_services(
 def parse_cpsvno_service(
     services_graph: Graph, catalog_record_uri: URIRef, cpsvno_service_uri: URIRef
 ) -> Service:
+    theme_refs = split_theme_refs(
+        services_graph, cpsvno_service_uri, cv_uri("thematicArea")
+    )
 
     service = Service(
         id=object_value(services_graph, catalog_record_uri, DCTERMS.identifier),
@@ -134,6 +143,9 @@ def parse_cpsvno_service(
         thematicAreaUris=value_list(
             services_graph, cpsvno_service_uri, cv_uri("thematicArea")
         ),
+        euDataThemes=map_data_themes(services_graph, theme_refs["data-themes"]),
+        losThemes=map_los_themes(services_graph, theme_refs["los"]),
+        eurovocThemes=map_eurovoc_themes(services_graph, theme_refs["eurovocs"]),
         participatingAgents=extract_participating_agents(
             services_graph, cpsvno_service_uri
         ),

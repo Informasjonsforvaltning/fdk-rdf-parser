@@ -5,7 +5,6 @@ from fdk_rdf_parser.classes import (
     Address,
     Agent,
     Channel,
-    ConceptSchema,
     Cost,
     CVContactPoint,
     EuDataTheme,
@@ -723,40 +722,23 @@ def test_parse_cpsvno_services(
             ],
             losThemes=[
                 LosNode(
-                    children=[
-                        "https://psi.norge.no/los/tema/tilskuddsordninger-for-naring",
-                        "https://psi.norge.no/los/tema/naringsliv",
-                        "https://psi.norge.no/los/tema/naringsutvikling",
-                        "https://psi.norge.no/los/tema/landbruk",
-                        "https://psi.norge.no/los/tema/handel-og-service",
-                    ],
-                    parents=None,
                     isTema=True,
                     losPaths=["naring"],
                     name={"nn": "Næring", "nb": "Næring", "en": "Business"},
-                    definition=None,
                     uri="https://psi.norge.no/los/tema/naring",
-                    synonyms=[],
-                    relatedTerms=None,
+                    code="naring",
                 ),
             ],
             euDataThemes=[
                 EuDataTheme(
-                    id="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+                    uri="http://publications.europa.eu/resource/authority/data-theme/GOVE",
                     code="GOVE",
-                    startUse="2015-10-01",
                     title={
                         "nn": "Forvaltning og offentleg sektor",
                         "no": "Forvaltning og offentlig sektor",
                         "nb": "Forvaltning og offentlig sektor",
                         "en": "Government and public sector",
                     },
-                    conceptSchema=ConceptSchema(
-                        id="http://publications.europa.eu/resource/authority/data-theme",
-                        title={"en": "Data theme"},
-                        versioninfo="20200923-0",
-                        versionnumber="20200923-0",
-                    ),
                 ),
             ],
         )

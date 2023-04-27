@@ -37,7 +37,10 @@ class DataService(PartialDcatResource):
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
         self.accessRights = values.accessRights
+        self.themeUris = values.themeUris
         self.theme = values.theme
+        self.losTheme = values.losTheme
+        self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
         self.dctType = values.dctType

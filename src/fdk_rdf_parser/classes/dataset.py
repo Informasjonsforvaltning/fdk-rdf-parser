@@ -20,7 +20,6 @@ from .references import Reference
 from .skos_concept import SkosConcept
 from .subject import Subject
 from .temporal import Temporal
-from .theme import LosNode
 
 
 @dataclass
@@ -66,7 +65,10 @@ class PartialDataset(PartialDcatResource):
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
         self.accessRights = values.accessRights
+        self.themeUris = values.themeUris
         self.theme = values.theme
+        self.losTheme = values.losTheme
+        self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
         self.dctType = values.dctType
@@ -79,7 +81,6 @@ class PartialDataset(PartialDcatResource):
 @dataclass
 class Dataset(PartialDataset):
     publisher: Optional[Publisher] = None
-    losTheme: Optional[List[LosNode]] = None
     type: str = "datasets"  # used by elasticsearch for indexing
 
     def add_values_from_partial(self: Any, values: PartialDataset) -> None:
@@ -91,7 +92,10 @@ class Dataset(PartialDataset):
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
         self.accessRights = values.accessRights
+        self.themeUris = values.themeUris
         self.theme = values.theme
+        self.losTheme = values.losTheme
+        self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
         self.dctType = values.dctType
@@ -147,7 +151,10 @@ class DatasetSeries(Dataset):
         self.descriptionFormatted = values.descriptionFormatted
         self.uri = values.uri
         self.accessRights = values.accessRights
+        self.themeUris = values.themeUris
         self.theme = values.theme
+        self.losTheme = values.losTheme
+        self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
         self.dctType = values.dctType

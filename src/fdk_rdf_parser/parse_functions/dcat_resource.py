@@ -11,10 +11,7 @@ from rdflib import (
 )
 from rdflib.namespace import DCTERMS
 
-from fdk_rdf_parser.classes import (
-    EuDataTheme,
-    PartialDcatResource,
-)
+from fdk_rdf_parser.classes import PartialDcatResource
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
@@ -29,10 +26,17 @@ from .reference_data_code import (
     extract_reference_data_code,
     extract_reference_data_code_list,
 )
+from .theme import (
+    map_data_themes,
+    map_eurovoc_themes,
+    map_los_themes,
+    split_theme_refs,
+)
 
 
 def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
     formatted_description = value_translations(graph, subject, DCTERMS.description)
+    theme_refs = split_theme_refs(graph, subject, dcat_uri("theme"))
     return PartialDcatResource(
         identifier=value_set(graph, subject, DCTERMS.identifier),
         publisher=extract_publisher(graph, subject),
@@ -43,7 +47,10 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         descriptionFormatted=formatted_description,
         uri=subject.toPython(),
         accessRights=extract_reference_data_code(graph, subject, DCTERMS.accessRights),
-        theme=extract_themes(graph, subject),
+        themeUris=value_list(graph, subject, dcat_uri("theme")),
+        theme=map_data_themes(graph, theme_refs["data-themes"]),
+        losTheme=map_los_themes(graph, theme_refs["los"]),
+        eurovocThemes=map_eurovoc_themes(graph, theme_refs["eurovocs"]),
         keyword=extract_key_words(graph, subject),
         contactPoint=extract_contact_points(graph, subject),
         dctType=object_value(graph, subject, DCTERMS.type),
@@ -52,14 +59,6 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         landingPage=value_set(graph, subject, dcat_uri("landingPage")),
         language=extract_reference_data_code_list(graph, subject, DCTERMS.language),
     )
-
-
-def extract_themes(graph: Graph, subject: URIRef) -> Optional[List[EuDataTheme]]:
-    themes = value_list(graph, subject, dcat_uri("theme"))
-    if themes is not None and len(themes) > 0:
-        return list(map(lambda theme_uri: EuDataTheme(id=theme_uri), themes))
-    else:
-        return None
 
 
 def extract_key_words(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, str]]]:
