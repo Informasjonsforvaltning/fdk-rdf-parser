@@ -58,7 +58,6 @@ def extract_all_broader_skos_concepts(
 
 
 def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[str]]:
-
     broader_type_instances_from_event = resource_list(
         graph, event_subject, DCTERMS.type
     )
@@ -85,7 +84,6 @@ def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[
 def parse_event(
     graph: Graph, catalog_record_uri: URIRef, subject: URIRef
 ) -> Optional[Event]:
-
     event = Event(
         id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
         uri=subject.toPython(),

@@ -12,7 +12,6 @@ from fdk_rdf_parser.parse_functions import extract_references
 
 
 def test_references() -> None:
-
     src = """
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
         @prefix dct: <http://purl.org/dc/terms/> .
@@ -175,7 +174,6 @@ def test_several_of_same_reference_type() -> None:
 
 
 def test_references_label() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -210,7 +208,6 @@ def test_references_label() -> None:
 
 
 def test_literal_reference() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

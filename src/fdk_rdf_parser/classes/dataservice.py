@@ -16,7 +16,6 @@ from .skos_concept import SkosConcept
 
 @dataclass
 class DataService(PartialDcatResource):
-
     id: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     endpointDescription: Optional[Set[str]] = None

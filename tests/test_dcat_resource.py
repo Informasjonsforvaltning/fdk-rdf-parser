@@ -14,7 +14,6 @@ from fdk_rdf_parser.parse_functions import parse_dcat_resource
 
 
 def test_dcat_resource_parser() -> None:
-
     src = """
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -145,7 +144,6 @@ def test_dcat_resource_parser() -> None:
 
 
 def test_description_html_cleaner() -> None:
-
     src = """
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -175,7 +173,6 @@ def test_description_html_cleaner() -> None:
 
 
 def test_nb_is_default_language() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

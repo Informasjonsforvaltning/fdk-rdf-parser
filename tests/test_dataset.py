@@ -28,7 +28,6 @@ from fdk_rdf_parser.parse_functions import parse_dataset
 
 
 def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
-
     src = """
         @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
         @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
@@ -149,7 +148,6 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
 def test_adds_catalog_to_dataset(
     mock_reference_data_client: Mock,
 ) -> None:
-
     src = """
         @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
         @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
@@ -243,7 +241,6 @@ def test_adds_catalog_to_dataset(
 def test_does_not_parse_catalog_as_a_dataset(
     mock_reference_data_client: Mock,
 ) -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -270,7 +267,6 @@ def test_does_not_parse_catalog_as_a_dataset(
 
 
 def test_parse_dataset() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -344,7 +340,6 @@ def test_parse_dataset() -> None:
 
 
 def test_dataset_has_quality_annotations() -> None:
-
     src = """
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix dqv:   <http://www.w3.org/ns/dqv#> .
@@ -411,7 +406,6 @@ def test_dataset_has_quality_annotations() -> None:
 
 
 def test_legal_basis_fields() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -469,7 +463,6 @@ def test_legal_basis_fields() -> None:
 
 
 def test_informationmodel_and_conformsto() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -514,7 +507,6 @@ def test_informationmodel_and_conformsto() -> None:
 
 
 def test_distribution_and_sample() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

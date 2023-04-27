@@ -11,7 +11,6 @@ from .reference_data_code import ReferenceDataCode
 
 @dataclass
 class Channel:
-
     uri: Optional[str] = None
     identifier: Optional[str] = None
     channelType: Optional[ReferenceDataCode] = None

@@ -11,7 +11,6 @@ from fdk_rdf_parser.parse_functions.publisher import (
 
 
 def test_uriref_publisher() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
@@ -49,7 +48,6 @@ def test_uriref_publisher() -> None:
 
 
 def test_bnode_publisher() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .

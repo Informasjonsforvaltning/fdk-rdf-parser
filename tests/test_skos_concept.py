@@ -10,7 +10,6 @@ from fdk_rdf_parser.rdf_utils import dcat_ap_no_uri
 
 
 def test_legal_basis_for_restriction() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -41,7 +40,6 @@ def test_legal_basis_for_restriction() -> None:
 
 
 def test_ref_uri_used_when_missing_source() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -72,7 +70,6 @@ def test_ref_uri_used_when_missing_source() -> None:
 
 
 def test_source_is_prioritized_uri() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -102,7 +99,6 @@ def test_source_is_prioritized_uri() -> None:
 
 
 def test_handles_literal_uri() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .

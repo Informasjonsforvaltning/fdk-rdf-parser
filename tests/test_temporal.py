@@ -8,7 +8,6 @@ from fdk_rdf_parser.parse_functions import extract_temporal
 
 
 def test_temporal_dcat() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -37,7 +36,6 @@ def test_temporal_dcat() -> None:
 
 
 def test_temporal_uri() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -66,7 +64,6 @@ def test_temporal_uri() -> None:
 
 
 def test_temporal_owl_time() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -102,7 +99,6 @@ def test_temporal_owl_time() -> None:
 
 
 def test_temporal_schema() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -130,7 +126,6 @@ def test_temporal_schema() -> None:
 
 
 def test_handles_missing_node() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .

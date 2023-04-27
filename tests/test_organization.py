@@ -182,7 +182,6 @@ def test_extract_public_organisation() -> None:
 
 
 def test_bnode_organization() -> None:
-
     src = """
         @prefix cv:      <http://data.europa.eu/m8g/> .
         @prefix cpsv:    <http://purl.org/vocab/cpsv#> .

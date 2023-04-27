@@ -28,7 +28,6 @@ SIMPLE_TYPE = model_dcat_ap_no_uri("SimpleType").toPython()
 
 
 def parse_model_element(graph: Graph, element_ref: URIRef) -> ModelElement:
-
     element_uri = None
     if isinstance(element_ref, URIRef):
         element_uri = element_ref.toPython()
@@ -104,7 +103,6 @@ def parse_model_code_list(
 def parse_model_simple_type(
     graph: Graph, element_ref: URIRef, element: ModelElement
 ) -> ModelElement:
-
     element.typeDefinitionReference = object_value(
         graph, element_ref, model_dcat_ap_no_uri("typeDefinitionReference")
     )

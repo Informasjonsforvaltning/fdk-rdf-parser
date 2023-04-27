@@ -8,7 +8,6 @@ from fdk_rdf_parser.parse_functions import extract_contact_points
 
 
 def test_single_contact_point() -> None:
-
     src = """
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -37,7 +36,6 @@ def test_single_contact_point() -> None:
 
 
 def test_several_contact_points() -> None:
-
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -92,7 +90,6 @@ def test_several_contact_points() -> None:
 
 
 def test_telephone_and_email_is_nodes() -> None:
-
     src = """
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
