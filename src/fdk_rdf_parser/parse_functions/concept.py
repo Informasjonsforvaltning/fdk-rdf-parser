@@ -282,4 +282,5 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         associativeRelation=extract_associative_relations(graph, concept_uri),
         partitiveRelation=extract_partitive_relations(graph, concept_uri),
         genericRelation=extract_generic_relations(graph, concept_uri),
+        created=date_value(graph, concept_uri, DCTERMS.created),
     )
