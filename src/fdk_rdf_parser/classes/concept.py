@@ -81,4 +81,5 @@ class Concept:
     associativeRelation: Optional[List[AssociativeRelation]] = None
     partitiveRelation: Optional[List[PartitiveRelation]] = None
     genericRelation: Optional[List[GenericRelation]] = None
+    created: Optional[str] = None
     type: str = "concept"  # used by elasticsearch for indexing

@@ -13,9 +13,9 @@ This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser
 ```
 % pyenv install 3.9.0
 % pyenv local 3.9.0
-% pip install poetry==1.1.7
-% pip install nox==2021.6.12
-% pip install nox-poetry==0.8.6
+% pip install poetry==1.4.2
+% pip install nox==2023.4.22
+% pip install nox-poetry==1.0.2
 % poetry install
 ```
 
@@ -56,3 +56,11 @@ Run session with specified arguments:
 ```
 % nox -s tests -- -vv
 ```
+
+## Creating a new release of the library
+- Manually change the version in *pyproject.toml*.
+- Optional: update other dependencies as well.
+- Run `poetry update`
+- All commits to the main branch on GitHub triggers the "Release Drafter"-action, it creates a release draft or adds the commit to an existing draft.
+- Click the **Releases** link on GitHub when you are ready to publish the draft, and then click the "Edit"-button (looks like a **pencil**) on the **Draft** version.
+- Check that the release-tag equals the version in [pyproject](https://github.com/Informasjonsforvaltning/fdk-rdf-parser/blob/main/pyproject.toml) before clicking the **Publish release** button. This triggers the **Release**-action, that uses poetry to release the new version to [PyPI](https://pypi.org/).
