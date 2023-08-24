@@ -18,6 +18,7 @@ from fdk_rdf_parser.classes.concept import (
     Definition,
     GenericRelation,
     PartitiveRelation,
+    Subject,
     TextAndURI,
 )
 from fdk_rdf_parser.parse_functions import parse_concept
@@ -103,6 +104,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:identifier     "3609b02d-72c5-47e0-a6b8-df0a503cf190" ;
         dct:modified       "2020-09-08"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+        dct:subject        [ ] ;
         skosxl:altLabel    [ a                   skosxl:Label ;
                              skosxl:literalForm  "stabilisator"@nb
                            ] ;
@@ -130,6 +132,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:modified       "2020-02-14"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         skosno:bruksområde "arbeid" ;
+        dct:subject        "jobb" , "work"@en , <https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects#3> ;
+        dct:subject        [ a                   skos:Concept ;
+                             skos:prefLabel      "bnode subject"@en
+                           ] ;
         skosxl:prefLabel   [ a                   skosxl:Label ;
                              skosxl:literalForm  "dokument"@nn
                            ] ;
@@ -140,6 +146,13 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                                                      ] ;
                              skosno:forholdTilKilde  skosno:basertPåKilde
                            ] .
+
+<https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects#3>
+        a               skos:Concept;
+        dct:identifier  "https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects#3"^^xsd:anyURI;
+        skos:broader    <https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects#1>;
+        skos:inScheme   <https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects>;
+        skos:prefLabel  "nb 3"@nb , "nn 3"@nn .
 
 <https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a>
         a                  dcat:CatalogRecord ;
@@ -317,6 +330,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             application=[{"nb": "arbeid"}],
+            subject=[
+                Subject(label={"nb": "jobb"}),
+                Subject(label={"en": "work"}),
+                Subject(label={"nb": "nb 3", "nn": "nn 3"}),
+                Subject(label={"en": "bnode subject"}),
+            ],
             prefLabel={"nn": "dokument"},
             definition=Definition(
                 text={
