@@ -58,6 +58,11 @@ class GenericRelation:
 
 
 @dataclass
+class Subject:
+    label: Optional[Dict[str, str]] = None
+
+
+@dataclass
 class Concept:
     id: Optional[str] = None
     uri: Optional[str] = None
@@ -65,7 +70,7 @@ class Concept:
     harvest: Optional[HarvestMetaData] = None
     collection: Optional[Collection] = None
     publisher: Optional[Publisher] = None
-    subject: Optional[Dict[str, str]] = None
+    subject: Optional[List[Subject]] = None
     application: Optional[List[Dict[str, str]]] = None
     example: Optional[Dict[str, str]] = None
     prefLabel: Optional[Dict[str, str]] = None

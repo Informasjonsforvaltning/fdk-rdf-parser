@@ -5,6 +5,7 @@ from typing import (
 )
 
 from rdflib import (
+    BNode,
     Graph,
     URIRef,
 )
@@ -25,6 +26,7 @@ from fdk_rdf_parser.classes.concept import (
     Definition,
     GenericRelation,
     PartitiveRelation,
+    Subject,
     TextAndURI,
 )
 from fdk_rdf_parser.rdf_utils import (
@@ -66,6 +68,23 @@ def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextA
     for source_ref in graph.objects(definition_ref, DCTERMS.source):
         sources.append(parse_text_and_uri(graph, source_ref))
     return sources if len(sources) > 0 else None
+
+
+def extract_subjects(graph: Graph, concept_ref: URIRef) -> Optional[List[Subject]]:
+    subjects = []
+    for subject_node in graph.objects(concept_ref, DCTERMS.subject):
+        label: Optional[Dict[str, str]]
+        if isinstance(subject_node, BNode) or isinstance(subject_node, URIRef):
+            label = value_translations(graph, subject_node, SKOS.prefLabel)
+        else:
+            label = dict()
+            if subject_node.language:
+                label[subject_node.language] = subject_node.toPython()
+            else:
+                label["nb"] = subject_node.toPython()
+        if label and len(label) > 0:
+            subjects.append(Subject(label=label))
+    return subjects if len(subjects) > 0 else None
 
 
 def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
@@ -264,7 +283,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         harvest=extract_meta_data(graph, fdk_record_uri),
         collection=parse_collection(graph, fdk_record_uri),
         publisher=extract_publisher(graph, concept_uri),
-        subject=value_translations(graph, concept_uri, DCTERMS.subject),
+        subject=extract_subjects(graph, concept_uri),
         application=parse_applications(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),
         prefLabel=pref_label_list[0]
