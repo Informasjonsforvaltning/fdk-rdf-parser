@@ -10,6 +10,7 @@ from .ns import (
     dct_uri,
     dqv_iso_uri,
     dqv_uri,
+    euvoc_uri,
     fdk_internal_uri,
     fdk_uri,
     model_dcat_ap_no_uri,

@@ -71,6 +71,7 @@ class Concept:
     collection: Optional[Collection] = None
     publisher: Optional[Publisher] = None
     subject: Optional[List[Subject]] = None
+    status: Optional[Dict[str, str]] = None
     application: Optional[List[Dict[str, str]]] = None
     example: Optional[Dict[str, str]] = None
     prefLabel: Optional[Dict[str, str]] = None
