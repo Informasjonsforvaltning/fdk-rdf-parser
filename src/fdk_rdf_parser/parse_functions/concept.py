@@ -32,6 +32,7 @@ from fdk_rdf_parser.classes.concept import (
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
+    euvoc_uri,
     is_type,
     object_value,
     skosno_old_uri,
@@ -85,6 +86,19 @@ def extract_subjects(graph: Graph, concept_ref: URIRef) -> Optional[List[Subject
         if label and len(label) > 0:
             subjects.append(Subject(label=label))
     return subjects if len(subjects) > 0 else None
+
+
+def extract_status(graph: Graph, concept_ref: URIRef) -> Optional[Dict[str, str]]:
+    status: Dict[str, str] = dict()
+    for subject_node in graph.objects(concept_ref, euvoc_uri("status")):
+        if isinstance(subject_node, BNode) or isinstance(subject_node, URIRef):
+            return value_translations(graph, subject_node, SKOS.prefLabel)
+        else:
+            if subject_node.language:
+                status[subject_node.language] = subject_node.toPython()
+            else:
+                status["nb"] = subject_node.toPython()
+    return status if len(status) > 0 else None
 
 
 def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
@@ -284,6 +298,7 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         collection=parse_collection(graph, fdk_record_uri),
         publisher=extract_publisher(graph, concept_uri),
         subject=extract_subjects(graph, concept_uri),
+        status=extract_status(graph, concept_uri),
         application=parse_applications(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),
         prefLabel=pref_label_list[0]

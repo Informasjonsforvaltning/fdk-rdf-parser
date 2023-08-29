@@ -40,6 +40,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
+@prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
         a               skos:Collection ;
@@ -61,6 +62,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:created        "2023-02-17"^^xsd:date ;
         dct:identifier      "1843b048-f9af-4665-8e53-3c001d0166c0" ;
         dct:modified        "2019-12-16"^^xsd:date ;
+        euvoc:status        <http://publications.europa.eu/resource/authority/concept-status/CURRENT> ;
         dct:publisher       <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         skosxl:altLabel     [ a                   skosxl:Label ;
                               skosxl:literalForm  "w"@nb
@@ -105,6 +107,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:modified       "2020-09-08"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         dct:subject        [ ] ;
+        euvoc:status       "status nb" , "status en"@en ;
         skosxl:altLabel    [ a                   skosxl:Label ;
                              skosxl:literalForm  "stabilisator"@nb
                            ] ;
@@ -117,6 +120,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                              dct:audience skosno:fagspesialist ;
                              skosno:forholdTilKilde  skosno:egendefinert
                            ] .
+
+
+<http://publications.europa.eu/resource/authority/concept-status/CURRENT>
+        skos:prefLabel  "current"@en , "gjeldende"@no , "gjeldande"@nn , "gjeldende"@nb .
 
 <https://concepts.staging.fellesdatakatalog.digdir.no/concepts/fc8baf8d-6146-3b69-93c5-52bd41592c4e>
         a                  dcat:CatalogRecord ;
@@ -249,6 +256,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             prefLabel={"nb": "to"},
+            status={
+                "en": "current",
+                "no": "gjeldende",
+                "nn": "gjeldande",
+                "nb": "gjeldende",
+            },
             altLabel=[{"nb": "w"}],
             definition=Definition(text={"nb": "dfgfg"}),
             associativeRelation=[
@@ -302,6 +315,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
             prefLabel={"nb": "midtbaneanker"},
+            status={"nb": "status nb", "en": "status en"},
             altLabel=[{"nb": "stabilisator"}],
             definition=Definition(
                 text={"nb": "en stabil stabilisator på midten"},
