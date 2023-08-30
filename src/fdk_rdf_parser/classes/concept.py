@@ -90,4 +90,5 @@ class Concept:
     created: Optional[str] = None
     exactMatch: Optional[Set[str]] = None
     closeMatch: Optional[Set[str]] = None
+    memberOf: Optional[Set[str]] = None
     type: str = "concept"  # used by elasticsearch for indexing

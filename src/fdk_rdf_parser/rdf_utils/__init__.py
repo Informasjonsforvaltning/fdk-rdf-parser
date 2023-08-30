@@ -24,6 +24,7 @@ from .ns import (
     skosno_old_uri,
     skosno_uri,
     skosxl_uri,
+    uneskos_uri,
     vcard_uri,
     xkos_uri,
     xkos_uri_v_2,
