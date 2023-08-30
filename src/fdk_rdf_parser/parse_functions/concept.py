@@ -38,6 +38,7 @@ from fdk_rdf_parser.rdf_utils import (
     skosno_old_uri,
     skosno_uri,
     skosxl_uri,
+    uneskos_uri,
     value_set,
     value_translations,
     xkos_uri_v_2,
@@ -319,4 +320,5 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         created=date_value(graph, concept_uri, DCTERMS.created),
         exactMatch=value_set(graph, concept_uri, SKOS.exactMatch),
         closeMatch=value_set(graph, concept_uri, SKOS.closeMatch),
+        memberOf=value_set(graph, concept_uri, uneskos_uri("memberOf")),
     )

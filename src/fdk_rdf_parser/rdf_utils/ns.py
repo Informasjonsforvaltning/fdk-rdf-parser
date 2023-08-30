@@ -25,6 +25,10 @@ def vcard_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://www.w3.org/2006/vcard/ns#{sub_string}")
 
 
+def uneskos_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://purl.org/umu/uneskos#{sub_string}")
+
+
 def dct_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://purl.org/dc/terms/{sub_string}")
 

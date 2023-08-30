@@ -41,6 +41,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
+@prefix uneskos: <http://purl.org/umu/uneskos#> .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
         a               skos:Collection ;
@@ -66,6 +67,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:publisher       <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         skos:exactMatch     <http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940> ;
         skos:closeMatch     <http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940> ;
+        uneskos:memberOf    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ;
         skosxl:altLabel     [ a                   skosxl:Label ;
                               skosxl:literalForm  "w"@nb
                             ] ;
@@ -262,6 +264,9 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             },
             closeMatch={
                 "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940"
+            },
+            memberOf={
+                "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028"
             },
             prefLabel={"nb": "to"},
             status={
