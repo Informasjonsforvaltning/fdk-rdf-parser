@@ -41,6 +41,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
+@prefix uneskos: <http://purl.org/umu/uneskos#> .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
         a               skos:Collection ;
@@ -64,6 +65,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:modified        "2019-12-16"^^xsd:date ;
         euvoc:status        <http://publications.europa.eu/resource/authority/concept-status/CURRENT> ;
         dct:publisher       <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+        skos:exactMatch     <http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940> ;
+        skos:closeMatch     <http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940> ;
+        uneskos:memberOf    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ;
+        skosno:relationRole "muliggjør" ;
         skosxl:altLabel     [ a                   skosxl:Label ;
                               skosxl:literalForm  "w"@nb
                             ] ;
@@ -255,6 +260,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             publisher=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
+            exactMatch={
+                "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940"
+            },
+            closeMatch={
+                "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940"
+            },
+            memberOf={
+                "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028"
+            },
+            relationRole="muliggjør",
             prefLabel={"nb": "to"},
             status={
                 "en": "current",
