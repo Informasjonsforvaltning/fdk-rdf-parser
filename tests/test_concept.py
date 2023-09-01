@@ -61,6 +61,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0>
         a                   skos:Concept ;
         dct:created        "2023-02-17"^^xsd:date ;
+        dct:creator         <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         dct:identifier      "1843b048-f9af-4665-8e53-3c001d0166c0" ;
         dct:modified        "2019-12-16"^^xsd:date ;
         euvoc:status        <http://publications.europa.eu/resource/authority/concept-status/CURRENT> ;
@@ -244,6 +245,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0": Concept(
             id="55a38009-e114-301f-aa7c-8b5f09529f0f",
             uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f",
+            creator="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             created="2023-02-17",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
             harvest=HarvestMetaData(

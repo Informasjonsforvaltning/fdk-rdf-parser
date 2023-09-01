@@ -87,6 +87,7 @@ class Concept:
     associativeRelation: Optional[List[AssociativeRelation]] = None
     partitiveRelation: Optional[List[PartitiveRelation]] = None
     genericRelation: Optional[List[GenericRelation]] = None
+    creator: Optional[str] = None
     created: Optional[str] = None
     exactMatch: Optional[Set[str]] = None
     closeMatch: Optional[Set[str]] = None
