@@ -88,4 +88,6 @@ class Concept:
     partitiveRelation: Optional[List[PartitiveRelation]] = None
     genericRelation: Optional[List[GenericRelation]] = None
     created: Optional[str] = None
+    exactMatch: Optional[Set[str]] = None
+    closeMatch: Optional[Set[str]] = None
     type: str = "concept"  # used by elasticsearch for indexing
