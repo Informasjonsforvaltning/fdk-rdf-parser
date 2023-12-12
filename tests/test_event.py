@@ -6,7 +6,6 @@ from fdk_rdf_parser.classes import (
     Event,
     HarvestMetaData,
     LifeEvent,
-    Publisher,
     SkosConcept,
 )
 
@@ -164,20 +163,6 @@ def test_parse_events(
             ),
             title={"nb": "Oppgjør etter dødsfall"},
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
-            hasCompetentAuthority=[
-                Publisher(
-                    uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                    id="123456789",
-                    name="Digitaliseringsdirektoratet",
-                    orgPath="/STAT/987654321/123456789",
-                    prefLabel={
-                        "en": "Norwegian Digitalisation Agency",
-                        "nn": "Digitaliseringsdirektoratet",
-                        "nb": "Digitaliseringsdirektoratet",
-                    },
-                    organisasjonsform="ORGL",
-                )
-            ],
             relation=[
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
             ],
