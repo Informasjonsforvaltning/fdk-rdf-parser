@@ -16,7 +16,6 @@ class LifeEvent(Event):
         self.title = values.title
         self.description = values.description
         self.dctType = values.dctType
-        self.hasCompetentAuthority = values.hasCompetentAuthority
         self.relation = values.relation
         self.associatedBroaderTypes = values.associatedBroaderTypes
         self.mayInitiate = values.mayInitiate

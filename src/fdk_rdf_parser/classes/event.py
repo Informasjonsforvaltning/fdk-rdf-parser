@@ -6,7 +6,6 @@ from typing import (
 )
 
 from .harvest_meta_data import HarvestMetaData
-from .publisher import Publisher
 from .skos_concept import SkosConcept
 
 
@@ -19,7 +18,6 @@ class Event:
     title: Optional[Dict[str, str]] = None
     description: Optional[Dict[str, str]] = None
     dctType: Optional[List[SkosConcept]] = None
-    hasCompetentAuthority: Optional[List[Publisher]] = None
     relation: Optional[List[str]] = None
     associatedBroaderTypes: Optional[List[str]] = None
     mayInitiate: Optional[List[str]] = None
