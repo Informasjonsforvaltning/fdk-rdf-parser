@@ -29,7 +29,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .agent import extract_participating_agents
 from .channel import extract_channels
-from .contactpoint import extract_cv_has_contact_point
+from .contactpoint import extract_cv_contact_point
 from .cost import extract_costs
 from .dcat_resource import (
     extract_key_words,
@@ -88,7 +88,7 @@ def parse_cpsvno_service(
         ownedBy=extract_organizations(
             services_graph, cpsvno_service_uri, cv_uri("ownedBy")
         ),
-        contactPoint=extract_cv_has_contact_point(services_graph, cpsvno_service_uri),
+        contactPoint=extract_cv_contact_point(services_graph, cpsvno_service_uri),
         isGroupedBy=value_list(
             services_graph, cpsvno_service_uri, cv_uri("isGroupedBy")
         ),
