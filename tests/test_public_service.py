@@ -293,58 +293,6 @@ def test_complete_public_services(
                             ],
                         )
                     ],
-                    hoursAvailable=[
-                        OpeningHoursSpecification(
-                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exApningstidResepsjon.ttl",
-                            dayOfWeek=[
-                                ReferenceDataCode(
-                                    uri="https://schema.org/Friday",
-                                    code="Friday",
-                                    prefLabel={
-                                        "nn": "Fredag",
-                                        "nb": "Fredag",
-                                        "en": "Friday",
-                                    },
-                                ),
-                                ReferenceDataCode(
-                                    uri="https://schema.org/Monday",
-                                    code="Monday",
-                                    prefLabel={
-                                        "nn": "Måndag",
-                                        "nb": "Mandag",
-                                        "en": "Monday",
-                                    },
-                                ),
-                                ReferenceDataCode(
-                                    uri="https://schema.org/Thursday",
-                                    code="Thursday",
-                                    prefLabel={
-                                        "nn": "Torsdag",
-                                        "nb": "Torsdag",
-                                        "en": "Thursday",
-                                    },
-                                ),
-                                ReferenceDataCode(
-                                    uri="https://schema.org/Tuesday",
-                                    code="Tuesday",
-                                    prefLabel={
-                                        "nn": "Tysdag",
-                                        "nb": "Tirsdag",
-                                        "en": "Tuesday",
-                                    },
-                                ),
-                                ReferenceDataCode(
-                                    uri="https://schema.org/Wednesday",
-                                    code="Wednesday",
-                                    prefLabel={
-                                        "nn": "Onsdag",
-                                        "nb": "Onsdag",
-                                        "en": "Wednesday",
-                                    },
-                                ),
-                            ],
-                        )
-                    ],
                 )
             ],
             follows=[

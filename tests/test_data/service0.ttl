@@ -46,11 +46,11 @@
 
 <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl>
         rdf:type cv:ContactPoint;
-        schema:contactType  "Kontakt test"@nb ;
+        vcard:category  "Kontakt test"@nb ;
         cv:contactPage <https://example.org/exKontaktside>;
         cv:email "mailto:postmottak@example.org"^^xsd:anyURI;
         cv:telephone "tel:+4712345678";
-        vcard:hasLanguage <http://publications.europa.eu/resource/authority/language/NOB>,
+        vcard:language <http://publications.europa.eu/resource/authority/language/NOB>,
             <http://publications.europa.eu/resource/authority/language/NNO>,
             <http://publications.europa.eu/resource/authority/language/ENG> .
 
@@ -62,7 +62,7 @@
         dct:language       <http://publications.europa.eu/resource/authority/language/ENG> , <http://publications.europa.eu/resource/authority/language/NOB> ;
         dct:title          "Dummy service"@en , "Dummytjeneste"@nn , "Dummytjeneste"@nb ;
         cpsv:produces      <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl> ;
-        cv:hasContactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> ;
+        cv:contactPoint  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl> ;
         cv:thematicArea    <https://psi.norge.no/not/in/los/or/eu> ,
                             <http://publications.europa.eu/resource/authority/data-theme/GOVE> ,
                             <https://psi.norge.no/los/tema/naring> .
