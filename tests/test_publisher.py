@@ -6,8 +6,10 @@ from rdflib import (
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.parse_functions import extract_publisher
 from fdk_rdf_parser.parse_functions.publisher import (
+    extract_list_of_publishers,
     set_publisher_name_from_pref_label_if_missing,
 )
+from fdk_rdf_parser.rdf_utils.ns import cv_uri
 
 
 def test_uriref_publisher() -> None:
@@ -90,3 +92,39 @@ def test_set_name_from_label() -> None:
     assert set_publisher_name_from_pref_label_if_missing(input_4) == expected_4
     assert set_publisher_name_from_pref_label_if_missing(input_5) == expected_5
     assert set_publisher_name_from_pref_label_if_missing(input_6) == expected_6
+
+
+def test_list_of_publishers() -> None:
+    src = """@prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+        @prefix cv:     <http://data.europa.eu/m8g/> .
+        @prefix dct:    <http://purl.org/dc/terms/> .
+        @prefix org:    <http://www.w3.org/ns/org#> .
+        @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://testdirektoratet.no/model/service/publishers>
+                a               cpsvno:Service ;
+                cv:ownedBy      [
+                    a              org:Organization;
+                    dct:identifier "https://www.staging.fellesdatakatalog.digdir.no/organizations/123"^^xsd:anyURI ] ."""
+
+    expected = [
+        Publisher(
+            id="https://www.staging.fellesdatakatalog.digdir.no/organizations/123"
+        )
+    ]
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef("https://testdirektoratet.no/model/service/publishers")
+
+    assert extract_list_of_publishers(graph, subject, cv_uri("ownedBy")) == expected
+
+
+def test_empty_list_of_publishers_is_none() -> None:
+    src = """@prefix cpsvno: <https://data.norge.no/vocabulary/cpsvno#> .
+        <https://testdirektoratet.no/model/service/no-publishers>
+                a               cpsvno:Service ."""
+
+    graph = Graph().parse(data=src, format="turtle")
+    subject = URIRef("https://testdirektoratet.no/model/service/no-publishers")
+
+    assert extract_list_of_publishers(graph, subject, cv_uri("ownedBy")) is None
