@@ -12,7 +12,6 @@ from fdk_rdf_parser.classes import (
     HarvestMetaData,
     LegalResource,
     LosNode,
-    OpeningHoursSpecification,
     Organization,
     Output,
     Participation,
@@ -271,27 +270,6 @@ def test_complete_public_services(
                                 "no": "Norsk Bokmål",
                             },
                         ),
-                    ],
-                    openingHours={
-                        "no": "Resepsjonen er åpent for henvendelser mandag - fredag: kl  10:00 - 14:00.",
-                        "nn": "Teksten blir vist på nynorsk.",
-                        "en": "The reception is open for inquiries Monday - Friday: 10:00 - 14:00.",
-                    },
-                    specialOpeningHours=[
-                        OpeningHoursSpecification(
-                            uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHelligdagerStengt.ttl",
-                            dayOfWeek=[
-                                ReferenceDataCode(
-                                    uri="https://schema.org/PublicHolidays",
-                                    code="PublicHolidays",
-                                    prefLabel={
-                                        "nn": "Offentlege fridagar",
-                                        "nb": "Offentlige fridager",
-                                        "en": "Public holidays",
-                                    },
-                                )
-                            ],
-                        )
                     ],
                 )
             ],

@@ -8,7 +8,6 @@ from fdk_rdf_parser.classes import (
     Channel,
     CVContactPoint,
     Evidence,
-    OpeningHoursSpecification,
     Organization,
     Output,
     Participation,
@@ -67,27 +66,7 @@ def extend_cv_contact_points(
         contact_point.language = extend_reference_data_code_list(
             contact_point.language, ref_data.linguisticsystem
         )
-        contact_point.hoursAvailable = extend_opening_hours_spec(
-            contact_point.hoursAvailable, ref_data=ref_data
-        )
-        contact_point.specialOpeningHours = extend_opening_hours_spec(
-            contact_point.specialOpeningHours, ref_data=ref_data
-        )
     return contact_points
-
-
-def extend_opening_hours_spec(
-    opening_hours: Optional[List[OpeningHoursSpecification]],
-    ref_data: PublicServiceReferenceData,
-) -> Optional[List[OpeningHoursSpecification]]:
-    if opening_hours is None:
-        return opening_hours
-
-    for item in opening_hours:
-        item.dayOfWeek = extend_reference_data_code_list(
-            item.dayOfWeek, ref_data.week_days
-        )
-    return opening_hours
 
 
 def extend_cv_output(

@@ -13,9 +13,6 @@ from fdk_rdf_parser.classes import (
     CVContactPoint,
     DCATContactPoint,
 )
-from fdk_rdf_parser.parse_functions.opening_hours_specification import (
-    extract_opening_hours_specification,
-)
 from fdk_rdf_parser.parse_functions.reference_data_code import (
     extract_reference_data_code_list,
 )
@@ -102,12 +99,6 @@ def extract_cv_contact_point(
                 contactPage=value_list(graph, resource, cv_uri("contactPage")),
                 language=extract_reference_data_code_list(
                     graph, resource, vcard_uri("language")
-                ),
-                openingHours=value_translations(
-                    graph, resource, cv_uri("openingHours")
-                ),
-                specialOpeningHours=extract_opening_hours_specification(
-                    graph, resource, cv_uri("specialOpeningHoursSpecification")
                 ),
             )
         )
