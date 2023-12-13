@@ -40,7 +40,6 @@ class PublicService(Service):
         self.hasLegalResource = values.hasLegalResource
         self.language = values.language
         self.holdsRequirement = values.holdsRequirement
-        self.associatedBroaderTypesByEvents = values.associatedBroaderTypesByEvents
         self.type = values.type
         self.admsStatus = values.admsStatus
         self.subject = values.subject
