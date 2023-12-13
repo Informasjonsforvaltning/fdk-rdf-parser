@@ -5,7 +5,6 @@ from typing import (
     Optional,
 )
 
-from .opening_hours_specification import OpeningHoursSpecification
 from .reference_data_code import ReferenceDataCode
 
 
@@ -28,6 +27,3 @@ class CVContactPoint:
     telephone: Optional[List[str]] = None
     contactPage: Optional[List[str]] = None
     language: Optional[List[ReferenceDataCode]] = None
-    openingHours: Optional[Dict[str, str]] = None
-    specialOpeningHours: Optional[List[OpeningHoursSpecification]] = None
-    hoursAvailable: Optional[List[OpeningHoursSpecification]] = None

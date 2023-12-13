@@ -33,7 +33,6 @@ from .media_type import (
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
 )
-from .opening_hours_specification import OpeningHoursSpecification
 from .organization import Organization
 from .output import Output
 from .participation import Participation
