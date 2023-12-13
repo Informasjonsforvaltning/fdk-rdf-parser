@@ -1,7 +1,5 @@
-from functools import reduce
 from typing import (
     Dict,
-    List,
     Optional,
 )
 
@@ -21,7 +19,6 @@ from .classes import (
     Service,
 )
 from .parse_functions import (
-    extend_with_associated_broader_types,
     parse_concept,
     parse_cpsvno_service,
     parse_data_service,
@@ -143,14 +140,10 @@ def parse_information_models(
 
 
 def parse_public_services(
-    public_service_rdf: str, event_rdf: Optional[str] = None, rdf_format: str = "turtle"
+    public_service_rdf: str, rdf_format: str = "turtle"
 ) -> Dict[str, Service]:
     cpsvno_services: Dict[str, Service] = {}
     reference_data = get_public_service_reference_data()
-
-    events: Dict[str, Optional[Event]] = (
-        parse_events(event_rdf, rdf_format) if event_rdf is not None else {}
-    )
 
     cpsvno_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
@@ -176,25 +169,6 @@ def parse_public_services(
             cpsvno_service = parse_cpsvno_service(
                 cpsvno_services_graph, catalog_record_uri, primary_topic_uri
             )
-
-            if (
-                cpsvno_service.isGroupedBy is not None
-                and len(cpsvno_service.isGroupedBy) > 0
-            ):
-                associated_skos_concepts_uris: List[str] = []
-                reduce(
-                    lambda output, current_event_uri: extend_with_associated_broader_types(
-                        events, current_event_uri, output
-                    ),
-                    cpsvno_service.isGroupedBy,
-                    associated_skos_concepts_uris,
-                )
-                cpsvno_service.associatedBroaderTypesByEvents = (
-                    associated_skos_concepts_uris
-                    if associated_skos_concepts_uris
-                    and len(associated_skos_concepts_uris) > 0
-                    else None
-                )
 
             cpsvno_service = extend_cpsvno_service_with_reference_data(
                 cpsvno_service, reference_data

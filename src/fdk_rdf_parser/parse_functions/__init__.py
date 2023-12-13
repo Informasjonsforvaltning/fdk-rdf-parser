@@ -14,10 +14,7 @@ from .dataset import (
 from .dcat_resource import parse_dcat_resource
 from .dct_standard import extract_dct_standard_list
 from .distribution import extract_distributions
-from .event import (
-    extend_with_associated_broader_types,
-    parse_event,
-)
+from .event import parse_event
 from .evidence import extract_evidences
 from .format import extract_formats
 from .harvest_meta_data import extract_meta_data

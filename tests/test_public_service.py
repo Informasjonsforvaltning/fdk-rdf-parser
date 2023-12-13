@@ -378,11 +378,6 @@ def test_complete_public_services(
             spatial=[
                 "https://data.geonorge.no/administrativeEnheter/kommune/id/172833"
             ],
-            associatedBroaderTypesByEvents=[
-                "https://data.norge.no/concepts/306",
-                "https://data.norge.no/concepts/304",
-                "https://data.norge.no/concepts/310",
-            ],
             participatingAgents=[
                 Agent(
                     uri="https://data.brreg.no/enhetsregisteret/api/enheter/971526920",
@@ -413,10 +408,8 @@ def test_complete_public_services(
         ),
     }
 
-    with open("tests/test_data/public_service0.ttl", "r") as src, open(
-        "tests/test_data/event0.ttl", "r"
-    ) as event_src:
-        assert parse_public_services(src.read(), event_src.read()) == expected
+    with open("tests/test_data/public_service0.ttl", "r") as src:
+        assert parse_public_services(src.read()) == expected
 
 
 def test_parse_multiple_public_services(
