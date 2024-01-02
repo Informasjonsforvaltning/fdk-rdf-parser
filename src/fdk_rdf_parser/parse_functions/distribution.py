@@ -15,7 +15,6 @@ from rdflib.namespace import (
 from fdk_rdf_parser.classes import Distribution
 from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
-    dct_uri,
     object_value,
     resource_list,
     value_set,
@@ -49,7 +48,6 @@ def extract_distributions(
                 license=extract_skos_concept(graph, resource, DCTERMS.license),
                 conformsTo=extract_conforms_to(graph, resource),
                 page=extract_skos_concept(graph, resource, FOAF.page),
-                format=value_set(graph, resource, dct_uri("format")),
                 fdkFormat=extract_fdk_format(graph, resource),
                 compressFormat=extract_media_type(
                     graph, resource, dcat_uri("compressFormat")

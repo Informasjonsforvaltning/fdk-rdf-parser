@@ -49,7 +49,6 @@ def test_single_distribution() -> None:
             conformsTo=[ConformsTo(uri="https://testconformsto.org")],
             title={"nb": "Testdistribusjon"},
             description={"en": "Description"},
-            format={"json"},
             fdkFormat=[
                 MediaTypeOrExtent(code="json", type=MediaTypeOrExtentType.UNKNOWN)
             ],
@@ -103,7 +102,6 @@ def test_multiple_distributions() -> None:
         Distribution(
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon json"},
-            format={"json"},
             fdkFormat=[
                 MediaTypeOrExtent(code="json", type=MediaTypeOrExtentType.UNKNOWN)
             ],
@@ -116,7 +114,6 @@ def test_multiple_distributions() -> None:
             uri="https://testdirektoratet.no/model/distribution/0",
             title={"nb": "Testdistribusjon"},
             description={"nb": "Distribusjon xml"},
-            format={"xml"},
             fdkFormat=[
                 MediaTypeOrExtent(code="xml", type=MediaTypeOrExtentType.UNKNOWN)
             ],

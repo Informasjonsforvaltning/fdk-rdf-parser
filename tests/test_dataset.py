@@ -551,7 +551,6 @@ def test_distribution_and_sample() -> None:
         sample=[
             Distribution(
                 description={"nb": "adsgjkv  cghj     dghdh"},
-                format={"application/ATF"},
                 fdkFormat=[
                     MediaTypeOrExtent(
                         code="application/ATF", type=MediaTypeOrExtentType.UNKNOWN
@@ -569,7 +568,6 @@ def test_distribution_and_sample() -> None:
                     )
                 ],
                 description={"nb": "asdadrtyrtydfghdgh  dgh dfgh dh"},
-                format={"application/ATF"},
                 fdkFormat=[
                     MediaTypeOrExtent(
                         code="application/ATF", type=MediaTypeOrExtentType.UNKNOWN
@@ -745,12 +743,12 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
                         )
                     ],
                     openLicense=True,
-                    format={
-                        "HTML",
-                    },
                     fdkFormat=[
                         MediaTypeOrExtent(
                             code="HTML", type=MediaTypeOrExtentType.UNKNOWN
+                        ),
+                        MediaTypeOrExtent(
+                            name="CSV", type=MediaTypeOrExtentType.UNKNOWN
                         ),
                     ],
                 )
@@ -849,8 +847,10 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dc:      <http://purl.org/dc/elements/1.1/> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix euvoc:     <http://publications.europa.eu/ontology/euvoc#> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
                 a                  dcat:CatalogRecord ;
@@ -887,6 +887,23 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
             dcat:mediaType       <https://www.iana.org/assignments/media-types/text/unknown> ;
             dcat:compressFormat  "text/unknown" ;
             dcat:packageFormat   [ ] .
+
+<https://www.iana.org/assignments/media-types/application/json>
+        a               dct:MediaType;
+        dct:identifier  "application/json";
+        dct:title       "json" .
+
+<https://www.iana.org/assignments/media-types/text/html>
+        a               dct:MediaType;
+        dct:identifier  "text/html";
+        dct:title       "html" .
+
+<http://publications.europa.eu/resource/authority/file-type/7Z>
+        a                   euvoc:FileType;
+        euvoc:xlNotation    [
+            euvoc:xlCodification  "application/x-7z-compressed";
+            dct:type        <http://publications.europa.eu/resource/authority/notation-type/IANA_MT> ];
+        dc:identifier       "7Z" .
     """
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -905,13 +922,6 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
                             name="html",
                             code="text/html",
                             type=MediaTypeOrExtentType.MEDIA_TYPE,
-                        ),
-                    ],
-                    mediaType=[
-                        ReferenceDataCode(
-                            uri="https://www.iana.org/assignments/media-types/text/html",
-                            code="text/html",
-                            prefLabel={"nb": "text/html"},
                         ),
                     ],
                     compressFormat=MediaTypeOrExtent(
@@ -939,9 +949,14 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
             distribution=[
                 Distribution(
                     uri="https://example.com/unknown-media-types",
+                    fdkFormat=[
+                        MediaTypeOrExtent(
+                            uri="https://www.iana.org/assignments/media-types/text/unknown",
+                            type=MediaTypeOrExtentType.UNKNOWN,
+                        )
+                    ],
                     compressFormat=MediaTypeOrExtent(
-                        code="text/unknown",
-                        type=MediaTypeOrExtentType.UNKNOWN,
+                        code="text/unknown", type=MediaTypeOrExtentType.UNKNOWN
                     ),
                 )
             ],

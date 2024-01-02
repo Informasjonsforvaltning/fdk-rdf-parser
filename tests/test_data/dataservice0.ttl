@@ -81,7 +81,7 @@
                                   ] ;
         dcat:endpointDescription  <http://example.com/> ;
         dcat:endpointURL          <https://vg.no> ;
-        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/not.found> .
+        dcat:mediaType            <https://www.iana.org/assignments/media-types/application/not.found> , [] .
 
 <https://testdirektoratet.no/dataservices/000>
         a                  dcat:CatalogRecord ;
@@ -98,3 +98,8 @@
         foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
         rov:orgType            orgtype:ORGL ;
         br:orgPath             "/STAT/987654321/123456789" .
+
+<https://www.iana.org/assignments/media-types/text/turtle>
+        a               dct:MediaType;
+        dct:identifier  "text/turtle";
+        dct:title       "turtle" .
