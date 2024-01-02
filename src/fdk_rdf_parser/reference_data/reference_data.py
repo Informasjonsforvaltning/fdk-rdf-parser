@@ -5,18 +5,9 @@ from typing import (
     Optional,
 )
 
-from fdk_rdf_parser.classes import (
-    MediaTypeOrExtent,
-    MediaTypeOrExtentType,
-    ReferenceDataCode,
-)
+from fdk_rdf_parser.classes import ReferenceDataCode
 from .reference_data_client import get_reference_data
 from .utils import remove_scheme_and_trailing_slash
-
-
-@dataclass
-class DataServiceReferenceData:
-    media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
 
 
 @dataclass
@@ -28,7 +19,6 @@ class DatasetReferenceData:
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
     openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
     location: Optional[Dict[str, ReferenceDataCode]] = None
-    media_types: Optional[Dict[str, MediaTypeOrExtent]] = None
 
 
 @dataclass
@@ -50,10 +40,6 @@ class PublicServiceReferenceData:
     role_types: Optional[Dict[str, ReferenceDataCode]] = None
 
 
-def get_data_service_reference_data() -> DataServiceReferenceData:
-    return DataServiceReferenceData(media_types=get_and_map_media_types())
-
-
 def get_dataset_reference_data() -> DatasetReferenceData:
     return DatasetReferenceData(
         provenancestatement=get_and_map_provenance_statements(),
@@ -63,7 +49,6 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         referencetypes=get_and_map_reference_types(),
         openlicenses=get_and_map_open_licenses(),
         location=get_and_map_locations(),
-        media_types=get_and_map_media_types(),
     )
 
 
@@ -235,36 +220,3 @@ def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
 def get_and_map_role_types() -> Optional[Dict[str, ReferenceDataCode]]:
     role_types = get_reference_data("/digdir/role-types").get("roleTypes")
     return parse_reference_codes(role_types)
-
-
-def get_and_map_media_types() -> Optional[Dict[str, MediaTypeOrExtent]]:
-    media_types = {}
-    iana_codes = get_reference_data("/iana/media-types").get("mediaTypes")
-    if iana_codes is not None:
-        for code in iana_codes:
-            media_type_uri = str(code["uri"]) if code.get("uri") else None
-            if media_type_uri:
-                media_types[
-                    remove_scheme_and_trailing_slash(media_type_uri)
-                ] = MediaTypeOrExtent(
-                    uri=code.get("uri"),
-                    name=f"{code.get('name')}",
-                    code=f"{code.get('type')}/{code.get('subType')}",
-                    type=MediaTypeOrExtentType.MEDIA_TYPE,
-                )
-
-    file_types = get_reference_data("/eu/file-types").get("fileTypes")
-    if file_types is not None:
-        for file_type in file_types:
-            file_type_uri = str(file_type["uri"]) if file_type.get("uri") else None
-            if file_type_uri:
-                media_types[
-                    remove_scheme_and_trailing_slash(file_type_uri)
-                ] = MediaTypeOrExtent(
-                    uri=file_type.get("uri"),
-                    name=f"{file_type.get('code')}",
-                    code=f"{file_type.get('code')}",
-                    type=MediaTypeOrExtentType.FILE_TYPE,
-                )
-
-    return media_types if len(media_types) > 0 else None

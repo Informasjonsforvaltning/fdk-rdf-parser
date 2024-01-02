@@ -37,10 +37,8 @@ from .rdf_utils import (
 )
 from .reference_data import (
     extend_cpsvno_service_with_reference_data,
-    extend_data_service_with_reference_data,
     extend_dataset_with_reference_data,
     extend_info_model_with_reference_data,
-    get_data_service_reference_data,
     get_dataset_reference_data,
     get_info_model_reference_data,
     get_public_service_reference_data,
@@ -51,7 +49,6 @@ def parse_data_services(
     data_service_rdf: str, rdf_format: str = "turtle"
 ) -> Dict[str, DataService]:
     data_services: Dict[str, DataService] = {}
-    reference_data = get_data_service_reference_data()
 
     data_services_graph = Graph().parse(data=data_service_rdf, format=rdf_format)
 
@@ -65,10 +62,6 @@ def parse_data_services(
         ):
             data_service = parse_data_service(
                 data_services_graph, record_uri, primary_topic_uri
-            )
-
-            data_service = extend_data_service_with_reference_data(
-                data_service, reference_data
             )
 
             data_services[primary_topic_uri.toPython()] = data_service

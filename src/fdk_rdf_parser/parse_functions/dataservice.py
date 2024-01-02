@@ -18,7 +18,6 @@ from .catalog import parse_catalog
 from .dcat_resource import parse_dcat_resource
 from .harvest_meta_data import extract_meta_data
 from .media_type import extract_fdk_format
-from .reference_data_code import extract_reference_data_code_list
 from .skos_concept import extract_skos_concept
 
 
@@ -33,9 +32,6 @@ def parse_data_service(
         ),
         endpointDescription=value_set(
             data_services_graph, data_service_uri, dcat_uri("endpointDescription")
-        ),
-        mediaType=extract_reference_data_code_list(
-            data_services_graph, data_service_uri, dcat_uri("mediaType")
         ),
         fdkFormat=extract_fdk_format(data_services_graph, data_service_uri),
         conformsTo=extract_skos_concept(

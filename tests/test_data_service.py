@@ -9,7 +9,6 @@ from fdk_rdf_parser.classes import (
     MediaTypeOrExtent,
     MediaTypeOrExtentType,
     Publisher,
-    ReferenceDataCode,
     SkosConcept,
 )
 
@@ -64,13 +63,6 @@ def test_parse_multiple_data_services(
                 "http://example.com/dette%20skal%20v%C3%A6re%20en%20lenke",
             },
             endpointURL={"http://kaffe.no", "https://kaffemaskin.no"},
-            mediaType=[
-                ReferenceDataCode(
-                    uri="https://www.iana.org/assignments/media-types/text/turtle",
-                    code="text/turtle",
-                    prefLabel={"nb": "text/turtle"},
-                ),
-            ],
             fdkFormat=[
                 MediaTypeOrExtent(
                     uri="https://www.iana.org/assignments/media-types/text/turtle",
@@ -142,6 +134,11 @@ def test_parse_multiple_data_services(
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
+            fdkFormat=[
+                MediaTypeOrExtent(
+                    uri="https://www.iana.org/assignments/media-types/application/not.found"
+                )
+            ],
             catalog=Catalog(
                 id="d6199127-8835-33e1-9108-233cd81e92f9",
                 uri="https://testutgiver.no/catalogs/987654321",

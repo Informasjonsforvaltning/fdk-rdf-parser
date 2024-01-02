@@ -9,7 +9,6 @@ from typing import (
 from .conforms_to import ConformsTo
 from .data_distribution_service import DataDistributionService
 from .media_type import MediaTypeOrExtent
-from .reference_data_code import ReferenceDataCode
 from .skos_concept import SkosConcept
 
 
@@ -24,8 +23,6 @@ class Distribution:
     openLicense: bool = False
     conformsTo: Optional[List[ConformsTo]] = None
     page: Optional[List[SkosConcept]] = None
-    mediaType: Optional[List[ReferenceDataCode]] = None
-    format: Optional[Set[str]] = None
     fdkFormat: Optional[List[MediaTypeOrExtent]] = None
     compressFormat: Optional[MediaTypeOrExtent] = None
     packageFormat: Optional[MediaTypeOrExtent] = None
