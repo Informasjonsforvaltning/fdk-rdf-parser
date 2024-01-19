@@ -39,9 +39,6 @@ def extend_dataset_with_reference_data(
     dataset.language = extend_reference_data_code_list(
         dataset.language, ref_data.linguisticsystem
     )
-    dataset.spatial = extend_reference_data_code_list(
-        dataset.spatial, ref_data.location
-    )
     dataset.distribution = extend_distributions(
         dataset.distribution, ref_data.openlicenses
     )

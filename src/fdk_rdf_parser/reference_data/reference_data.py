@@ -18,14 +18,12 @@ class DatasetReferenceData:
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
     openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
-    location: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 @dataclass
 class InformationModelReferenceData:
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
-    location: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 @dataclass
@@ -48,7 +46,6 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         linguisticsystem=get_and_map_linguistic_system(),
         referencetypes=get_and_map_reference_types(),
         openlicenses=get_and_map_open_licenses(),
-        location=get_and_map_locations(),
     )
 
 
@@ -56,7 +53,6 @@ def get_info_model_reference_data() -> InformationModelReferenceData:
     return InformationModelReferenceData(
         linguisticsystem=get_and_map_linguistic_system(),
         openlicenses=get_and_map_open_licenses(),
-        location=get_and_map_locations(),
     )
 
 
@@ -87,66 +83,6 @@ def parse_reference_codes(
         }
     else:
         return None
-
-
-def parse_locations(
-    nasjoner: Optional[List[Dict]],
-    fylker: Optional[List[Dict]],
-    kommuner: Optional[List[Dict]],
-) -> Optional[Dict[str, ReferenceDataCode]]:
-    locations = dict()
-    if nasjoner is not None:
-        for nasjon in nasjoner:
-            locations[
-                remove_scheme_and_trailing_slash(str(nasjon.get("uri")))
-            ] = ReferenceDataCode(
-                uri=str(nasjon.get("uri")) if nasjon.get("uri") is not None else None,
-                code=str(nasjon.get("nasjonsnummer"))
-                if nasjon.get("nasjonsnummer") is not None
-                else None,
-                prefLabel={"no": str(nasjon["nasjonsnavn"])}
-                if nasjon.get("nasjonsnavn") is not None
-                else None,
-            )
-    if fylker is not None:
-        for fylke in fylker:
-            locations[
-                remove_scheme_and_trailing_slash(str(fylke.get("uri")))
-            ] = ReferenceDataCode(
-                uri=str(fylke.get("uri")) if fylke.get("uri") is not None else None,
-                code=str(fylke.get("fylkesnummer"))
-                if fylke.get("fylkesnummer") is not None
-                else None,
-                prefLabel={"no": str(fylke["fylkesnavn"])}
-                if fylke.get("fylkesnavn") is not None
-                else None,
-            )
-    if kommuner is not None:
-        for kommune in kommuner:
-            locations[
-                remove_scheme_and_trailing_slash(str(kommune.get("uri")))
-            ] = ReferenceDataCode(
-                uri=str(kommune.get("uri")) if kommune.get("uri") is not None else None,
-                code=str(kommune.get("kommunenummer"))
-                if kommune.get("kommunenummer") is not None
-                else None,
-                prefLabel={"no": str(kommune["kommunenavnNorsk"])}
-                if kommune.get("kommunenavnNorsk") is not None
-                else None,
-            )
-
-    return locations if len(locations) > 0 else None
-
-
-def get_and_map_locations() -> Optional[Dict[str, ReferenceDataCode]]:
-    nasjoner = get_reference_data("/geonorge/administrative-enheter/nasjoner").get(
-        "nasjoner"
-    )
-    fylker = get_reference_data("/geonorge/administrative-enheter/fylker").get("fylker")
-    kommuner = get_reference_data("/geonorge/administrative-enheter/kommuner").get(
-        "kommuner"
-    )
-    return parse_locations(nasjoner, fylker, kommuner)
 
 
 def get_and_map_frequencies() -> Optional[Dict[str, ReferenceDataCode]]:

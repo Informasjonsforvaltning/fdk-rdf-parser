@@ -140,31 +140,6 @@ def test_extend_language() -> None:
     )
 
 
-def test_extend_spatial() -> None:
-    parsed_dataset = Dataset(
-        spatial=[
-            ReferenceDataCode(
-                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54"
-            )
-        ]
-    )
-
-    expected = Dataset(
-        spatial=[
-            ReferenceDataCode(
-                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/54",
-                code="54",
-                prefLabel={"no": "Troms og Finnmark"},
-            )
-        ]
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
 def test_handles_open_licenses_with_missing_reference_data() -> None:
     parsed_dataset = Dataset(
         distribution=[

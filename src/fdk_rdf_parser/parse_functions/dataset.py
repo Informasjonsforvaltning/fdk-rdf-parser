@@ -43,12 +43,10 @@ from .distribution import extract_distributions
 from .harvest_meta_data import extract_meta_data
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
-from .reference_data_code import (
-    extract_reference_data_code,
-    extract_reference_data_code_list,
-)
+from .reference_data_code import extract_reference_data_code
 from .references import extract_references
 from .skos_concept import extract_skos_concept
+from .spatial import extract_dct_spatial_list
 from .subject import extract_subjects
 from .temporal import extract_temporal
 
@@ -71,9 +69,7 @@ def parse_dataset(
             datasets_graph, dataset_uri, dcat_uri("distribution")
         ),
         sample=extract_distributions(datasets_graph, dataset_uri, adms_uri("sample")),
-        spatial=extract_reference_data_code_list(
-            datasets_graph, dataset_uri, DCTERMS.spatial
-        ),
+        spatial=extract_dct_spatial_list(datasets_graph, dataset_uri),
         source=object_value(datasets_graph, dataset_uri, dcat_ap_no_uri("source")),
         objective=value_translations(
             datasets_graph, dataset_uri, dcat_ap_no_uri("objective")

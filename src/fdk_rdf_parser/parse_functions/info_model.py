@@ -30,6 +30,7 @@ from .harvest_meta_data import extract_meta_data
 from .model_element import parse_model_element
 from .model_property import parse_model_property
 from .reference_data_code import extract_reference_data_code_list
+from .spatial import extract_dct_spatial_list
 from .temporal import extract_temporal
 
 
@@ -52,9 +53,7 @@ def parse_information_model(
         informationModelIdentifier=object_value(
             graph, info_model_uri, model_dcat_ap_no_uri("informationModelIdentifier")
         ),
-        spatial=extract_reference_data_code_list(
-            graph, info_model_uri, DCTERMS.spatial
-        ),
+        spatial=extract_dct_spatial_list(graph, info_model_uri),
         temporal=extract_temporal(graph, info_model_uri),
         isPartOf=object_value(graph, info_model_uri, DCTERMS.isPartOf),
         hasPart=object_value(graph, info_model_uri, DCTERMS.hasPart),

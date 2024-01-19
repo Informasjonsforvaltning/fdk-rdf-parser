@@ -36,12 +36,6 @@ def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
         )
     elif "open-licenses" in url:
         mock.json.return_value = json.load(open("./tests/json_data/openlicenses.json"))
-    elif "nasjoner" in url:
-        mock.json.return_value = json.load(open("./tests/json_data/nasjoner.json"))
-    elif "fylker" in url:
-        mock.json.return_value = json.load(open("./tests/json_data/fylker.json"))
-    elif "kommuner" in url:
-        mock.json.return_value = json.load(open("./tests/json_data/kommuner.json"))
     elif "schema/week-days" in url:
         mock.json.return_value = json.load(open("./tests/json_data/weekdays.json"))
     elif "adms/statuses" in url:
