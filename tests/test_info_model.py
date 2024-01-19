@@ -88,6 +88,11 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         modelldcatno:informationModelIdentifier
                 "https://www.digdir.no/diversemodell" .
 
+<https://data.geonorge.no/administrativeEnheter/nasjon/id/173163>
+        a               dct:Location;
+        dct:identifier  "173163";
+        dct:title       "Norge" .
+
 <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png>
         a           foaf:Document ;
         dct:format  <http://publications.europa.eu/resource/authority/file-type/PNG> ;
@@ -194,7 +199,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                 ReferenceDataCode(
                     uri="https://data.geonorge.no/administrativeEnheter/nasjon/id/173163",
                     code="173163",
-                    prefLabel={"no": "Norge"},
+                    prefLabel={"nb": "Norge"},
                 )
             ],
             isPartOf="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#AltMuligModell",

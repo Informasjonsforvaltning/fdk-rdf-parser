@@ -286,12 +286,17 @@ def test_parse_dataset() -> None:
                 dcat:endpointDescription
                     <https://testdirektoratet.no/openapi/dataset/0.yaml> ;
                 dct:spatial
-                    <https://data.geonorge.no/administrativeEnheter/fylke/id/173142> ;
+                    <https://data.geonorge.no/administrativeEnheter/fylke/id/34> ;
                 dct:subject
                     <https://testdirektoratet.no/model/concept/0> ,
                     <https://testdirektoratet.no/model/concept/1> ;
                 foaf:page
                     <https://testdirektoratet.no> .
+
+        <https://data.geonorge.no/administrativeEnheter/fylke/id/34>
+                a               dct:Location;
+                dct:identifier  "34";
+                dct:title       "Innlandet" .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
                 a                  dcat:CatalogRecord ;
@@ -325,7 +330,9 @@ def test_parse_dataset() -> None:
         ),
         spatial=[
             ReferenceDataCode(
-                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/173142"
+                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/34",
+                code="34",
+                prefLabel={"nb": "Innlandet"},
             )
         ],
     )
