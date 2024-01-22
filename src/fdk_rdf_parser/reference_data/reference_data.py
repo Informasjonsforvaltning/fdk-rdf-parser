@@ -17,13 +17,11 @@ class DatasetReferenceData:
     frequency: Optional[Dict[str, ReferenceDataCode]] = None
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
-    openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 @dataclass
 class InformationModelReferenceData:
     linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
-    openlicenses: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 @dataclass
@@ -45,14 +43,12 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         frequency=get_and_map_frequencies(),
         linguisticsystem=get_and_map_linguistic_system(),
         referencetypes=get_and_map_reference_types(),
-        openlicenses=get_and_map_open_licenses(),
     )
 
 
 def get_info_model_reference_data() -> InformationModelReferenceData:
     return InformationModelReferenceData(
         linguisticsystem=get_and_map_linguistic_system(),
-        openlicenses=get_and_map_open_licenses(),
     )
 
 
@@ -100,11 +96,6 @@ def get_and_map_provenance_statements() -> Optional[Dict[str, ReferenceDataCode]
 def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:
     reference_types = get_reference_data("/reference-types").get("referenceTypes")
     return parse_reference_codes(reference_types)
-
-
-def get_and_map_open_licenses() -> Optional[Dict[str, ReferenceDataCode]]:
-    open_licenses = get_reference_data("/open-licenses").get("openLicenses")
-    return parse_reference_codes(open_licenses)
 
 
 def get_and_map_linguistic_system() -> Optional[Dict[str, ReferenceDataCode]]:

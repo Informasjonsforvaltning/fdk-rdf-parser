@@ -1,6 +1,5 @@
 from fdk_rdf_parser.classes import (
     Dataset,
-    Distribution,
     Reference,
     ReferenceDataCode,
     SkosConcept,
@@ -131,97 +130,6 @@ def test_extend_language() -> None:
                     "no": "Engelsk",
                 },
             )
-        ]
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
-def test_handles_open_licenses_with_missing_reference_data() -> None:
-    parsed_dataset = Dataset(
-        distribution=[
-            Distribution(
-                license=[
-                    SkosConcept(uri="http://data.norge.no/nlod/"),
-                    SkosConcept(
-                        uri="http://creativecommons.org/licenses/by/4.0/",
-                        prefLabel={"en": "Is not overwritten"},
-                    ),
-                ]
-            ),
-            Distribution(
-                license=[
-                    SkosConcept(
-                        uri="http://creativesnobs.org/licenses/",
-                        prefLabel={"en": "Is not open"},
-                    )
-                ]
-            ),
-            Distribution(),
-        ]
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, DatasetReferenceData())
-        == parsed_dataset
-    )
-
-
-def test_extend_open_licenses() -> None:
-    parsed_dataset = Dataset(
-        distribution=[
-            Distribution(
-                license=[
-                    SkosConcept(uri="http://data.norge.no/nlod/"),
-                    SkosConcept(
-                        uri="http://creativecommons.org/licenses/by/4.0/",
-                        prefLabel={"en": "Is not overwritten"},
-                    ),
-                ]
-            ),
-            Distribution(
-                license=[
-                    SkosConcept(
-                        uri="http://creativesnobs.org/licenses/",
-                        prefLabel={"en": "Is not open"},
-                    )
-                ]
-            ),
-            Distribution(),
-        ]
-    )
-
-    expected = Dataset(
-        distribution=[
-            Distribution(
-                license=[
-                    SkosConcept(
-                        uri="http://data.norge.no/nlod/",
-                        prefLabel={
-                            "no": "Norsk lisens for offentlige data",
-                            "en": "Norwegian Licence for Open Government Data",
-                        },
-                    ),
-                    SkosConcept(
-                        uri="http://creativecommons.org/licenses/by/4.0/",
-                        prefLabel={"en": "Is not overwritten"},
-                    ),
-                ],
-                openLicense=True,
-            ),
-            Distribution(
-                license=[
-                    SkosConcept(
-                        uri="http://creativesnobs.org/licenses/",
-                        prefLabel={"en": "Is not open"},
-                    )
-                ],
-                openLicense=False,
-            ),
-            Distribution(),
         ]
     )
 

@@ -1,16 +1,22 @@
-from typing import List
+from typing import List, Optional
 
 from rdflib import (
+    BNode,
     Graph,
     URIRef,
 )
 from rdflib.namespace import (
+    DC,
     DCTERMS,
     FOAF,
     OWL,
+    SKOS,
 )
 
-from fdk_rdf_parser.classes import InformationModel
+from fdk_rdf_parser.classes import (
+    InformationModel,
+    ReferenceDataCode,
+)
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     model_dcat_ap_no_uri,
@@ -29,7 +35,6 @@ from .format import extract_formats
 from .harvest_meta_data import extract_meta_data
 from .model_element import parse_model_element
 from .model_property import parse_model_property
-from .reference_data_code import extract_reference_data_code_list
 from .spatial import extract_dct_spatial_list
 from .temporal import extract_temporal
 
@@ -47,9 +52,7 @@ def parse_information_model(
         harvest=extract_meta_data(graph, fdk_record_uri),
         catalog=parse_catalog(graph, fdk_record_uri),
         conformsTo=extract_dct_standard_list(graph, info_model_uri, DCTERMS.conformsTo),
-        license=extract_reference_data_code_list(
-            graph, info_model_uri, DCTERMS.license
-        ),
+        license=extract_license_list(graph, info_model_uri),
         informationModelIdentifier=object_value(
             graph, info_model_uri, model_dcat_ap_no_uri("informationModelIdentifier")
         ),
@@ -148,3 +151,23 @@ def add_properties_to_model(
                     info_model = add_elements_to_model(info_model, graph, element_refs)
 
     return info_model
+
+
+def extract_license_list(
+    graph: Graph, subject: URIRef
+) -> Optional[List[ReferenceDataCode]]:
+    license_list = []
+    ref_list = resource_list(graph, subject, DCTERMS.license)
+    for license_ref in ref_list:
+        license = ReferenceDataCode(
+            uri=license_ref.toPython() if not isinstance(license_ref, BNode) else None,
+            code=object_value(graph, license_ref, DC.identifier),
+            prefLabel=value_translations(graph, license_ref, SKOS.prefLabel),
+        )
+        if (
+            license.uri is not None
+            or license.code is not None
+            or license.prefLabel is not None
+        ):
+            license_list.append(license)
+    return license_list if len(license_list) > 0 else None

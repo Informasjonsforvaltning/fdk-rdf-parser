@@ -703,6 +703,7 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/123>
                 a                  dcat:CatalogRecord ;
@@ -712,6 +713,10 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
+        <http://publications.europa.eu/resource/authority/licence/NLOD_2_0>
+            a           skos:Concept;
+            skos:prefLabel     "Norsk lisens for offentlige data"@no , "Norwegian Licence for Open Government Data"@en .
+
         <https://testdirektoratet.no/model/dataset/0>
             a                  dcat:Dataset ;
             dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
@@ -720,7 +725,7 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
         <https://example.com/open-distribution>
             a               dcat:Distribution ;
             dct:format      "HTML" , [ dct:title    "CSV" ] ;
-            dct:license     <https://data.norge.no/nlod/> ;
+            dct:license     <http://publications.europa.eu/resource/authority/licence/NLOD_2_0> ;
             dcat:accessURL  <http://example.com/access-url> .
     """
     expected = {
@@ -742,14 +747,13 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
                     accessURL={"http://example.com/access-url"},
                     license=[
                         SkosConcept(
-                            uri="https://data.norge.no/nlod/",
+                            uri="http://publications.europa.eu/resource/authority/licence/NLOD_2_0",
                             prefLabel={
                                 "no": "Norsk lisens for offentlige data",
                                 "en": "Norwegian Licence for Open Government Data",
                             },
                         )
                     ],
-                    openLicense=True,
                     fdkFormat=[
                         MediaTypeOrExtent(
                             code="HTML", type=MediaTypeOrExtentType.UNKNOWN
