@@ -109,36 +109,6 @@ def test_extend_accrual_periodicity() -> None:
     )
 
 
-def test_extend_language() -> None:
-    parsed_dataset = Dataset(
-        language=[
-            ReferenceDataCode(
-                uri="http://publications.europa.eu/resource/authority/language/ENG"
-            )
-        ]
-    )
-
-    expected = Dataset(
-        language=[
-            ReferenceDataCode(
-                uri="http://publications.europa.eu/resource/authority/language/ENG",
-                code="ENG",
-                prefLabel={
-                    "en": "English",
-                    "nb": "Engelsk",
-                    "nn": "Engelsk",
-                    "no": "Engelsk",
-                },
-            )
-        ]
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
 def test_extend_references() -> None:
     parsed_dataset = Dataset(
         references=[

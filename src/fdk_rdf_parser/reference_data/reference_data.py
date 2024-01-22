@@ -15,18 +15,11 @@ class DatasetReferenceData:
     provenancestatement: Optional[Dict[str, ReferenceDataCode]] = None
     rightsstatement: Optional[Dict[str, ReferenceDataCode]] = None
     frequency: Optional[Dict[str, ReferenceDataCode]] = None
-    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 @dataclass
-class InformationModelReferenceData:
-    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
-
-
-@dataclass
 class PublicServiceReferenceData:
-    linguisticsystem: Optional[Dict[str, ReferenceDataCode]] = None
     week_days: Optional[Dict[str, ReferenceDataCode]] = None
     statuses: Optional[Dict[str, ReferenceDataCode]] = None
     types: Optional[Dict[str, ReferenceDataCode]] = None
@@ -41,20 +34,12 @@ def get_dataset_reference_data() -> DatasetReferenceData:
         provenancestatement=get_and_map_provenance_statements(),
         rightsstatement=get_and_map_access_rights(),
         frequency=get_and_map_frequencies(),
-        linguisticsystem=get_and_map_linguistic_system(),
         referencetypes=get_and_map_reference_types(),
-    )
-
-
-def get_info_model_reference_data() -> InformationModelReferenceData:
-    return InformationModelReferenceData(
-        linguisticsystem=get_and_map_linguistic_system(),
     )
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
     return PublicServiceReferenceData(
-        linguisticsystem=get_and_map_linguistic_system(),
         week_days=get_and_map_week_days(),
         statuses=get_and_map_statuses(),
         evidence_type=get_and_map_evidence_types(),
@@ -96,13 +81,6 @@ def get_and_map_provenance_statements() -> Optional[Dict[str, ReferenceDataCode]
 def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:
     reference_types = get_reference_data("/reference-types").get("referenceTypes")
     return parse_reference_codes(reference_types)
-
-
-def get_and_map_linguistic_system() -> Optional[Dict[str, ReferenceDataCode]]:
-    linguistic_systems = get_reference_data("/linguistic-systems").get(
-        "linguisticSystems"
-    )
-    return parse_reference_codes(linguistic_systems)
 
 
 def get_and_map_access_rights() -> Optional[Dict[str, ReferenceDataCode]]:

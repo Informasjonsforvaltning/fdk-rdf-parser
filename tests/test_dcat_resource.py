@@ -16,6 +16,7 @@ from fdk_rdf_parser.parse_functions import parse_dcat_resource
 def test_dcat_resource_parser() -> None:
     src = """
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
@@ -39,7 +40,7 @@ def test_dcat_resource_parser() -> None:
         dct:issued                "2019-03-22T13:11:16.546902"^^xsd:dateTime ;
         dct:modified              "2019-03-23T13:11:16.546902"^^xsd:dateTime ;
         dct:language
-            <http://pubs.europa.eu/resource/authority/language/NOR> ;
+            <http://publications.europa.eu/resource/authority/language/NOR> ;
         dcat:landingPage          <https://testdirektoratet.no> ;
         dct:temporal              [ a                          dct:PeriodOfTime ;
                                     dcat:startDate
@@ -53,6 +54,11 @@ def test_dcat_resource_parser() -> None:
                                   <https://testdirektoratet.no/model/concept/1> ;
         dct:type                  "Kodelister" ;
         foaf:page                 <https://testdirektoratet.no> .
+
+<http://publications.europa.eu/resource/authority/language/NOR>
+        a           skos:Concept;
+        dc:identifier      "NOR";
+        skos:prefLabel     "Norwegian"@en , "Norsk"@nb , "Norsk"@nn , "Norsk"@no .
 
 <http://publications.europa.eu/resource/authority/data-theme/GOVE>
         skos:prefLabel	"Forvaltning og offentleg sektor"@nn ;
@@ -130,7 +136,14 @@ def test_dcat_resource_parser() -> None:
         modified="2019-03-23T13:11:16",
         language=[
             ReferenceDataCode(
-                uri="http://pubs.europa.eu/resource/authority/language/NOR"
+                uri="http://publications.europa.eu/resource/authority/language/NOR",
+                code="NOR",
+                prefLabel={
+                    "en": "Norwegian",
+                    "nb": "Norsk",
+                    "nn": "Norsk",
+                    "no": "Norsk",
+                },
             )
         ],
         landingPage={"https://testdirektoratet.no"},

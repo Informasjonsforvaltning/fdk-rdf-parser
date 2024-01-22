@@ -71,7 +71,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:isReplacedBy   digdir:AdresseModell ;
         dct:issued         "2016-09-28T00:00:00+01:00"^^xsd:dateTime ;
         dct:language       <http://publications.europa.eu/resource/authority/language/NOB> ;
-        dct:license        <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
+        dct:license        <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> , [ ] ;
         dct:modified       "2017-09-28T00:00:00+01:00"^^xsd:dateTime ;
         dct:publisher      digdir:Utgiver ;
         dct:spatial        <https://data.geonorge.no/administrativeEnheter/nasjon/id/173163> ;
@@ -88,6 +88,11 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         prof:isProfileOf   <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model> ;
         modelldcatno:informationModelIdentifier
                 "https://www.digdir.no/diversemodell" .
+
+<http://publications.europa.eu/resource/authority/language/NOB>
+        a           skos:Concept;
+        dc:identifier      "NOB";
+        skos:prefLabel     "Norsk Bokmål"@nb , "Norsk Bokmål"@nn , "Norsk Bokmål"@no , "Norwegian Bokmål"@en .
 
 <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0>
         a           skos:Concept;

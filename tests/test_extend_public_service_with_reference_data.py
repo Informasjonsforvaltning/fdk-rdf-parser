@@ -9,38 +9,6 @@ from fdk_rdf_parser.reference_data import extend_cpsvno_service_with_reference_d
 from .testdata import public_service_reference_data
 
 
-def test_extend_media_types() -> None:
-    parsed_public_service = PublicService(
-        language=[
-            ReferenceDataCode(
-                uri="http://publications.europa.eu/resource/authority/language/NOB"
-            ),
-        ],
-    )
-
-    expected = PublicService(
-        language=[
-            ReferenceDataCode(
-                uri="http://publications.europa.eu/resource/authority/language/NOB",
-                code="NOB",
-                prefLabel={
-                    "en": "Norwegian Bokmål",
-                    "nb": "Norsk Bokmål",
-                    "nn": "Norsk Bokmål",
-                    "no": "Norsk Bokmål",
-                },
-            ),
-        ]
-    )
-
-    assert (
-        extend_cpsvno_service_with_reference_data(
-            parsed_public_service, public_service_reference_data
-        )
-        == expected
-    )
-
-
 def test_extend_owned_by_organization_types() -> None:
     parsed_service = Service(
         ownedBy=[
@@ -196,6 +164,39 @@ def test_extend_agent_participations_with_missing_values() -> None:
                         role=None,
                     )
                 ],
+            ),
+        ]
+    )
+
+    assert (
+        extend_cpsvno_service_with_reference_data(
+            parsed_public_service, public_service_reference_data
+        )
+        == expected
+    )
+
+
+def test_extend_type() -> None:
+    parsed_public_service = PublicService(
+        dctType=[
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/main-activity/defence",
+            ),
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/main-activity/non-existing",
+            ),
+        ]
+    )
+
+    expected = PublicService(
+        dctType=[
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/main-activity/defence",
+                code="defence",
+                prefLabel={"en": "Defence"},
+            ),
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/main-activity/non-existing",
             ),
         ]
     )
