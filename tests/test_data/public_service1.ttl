@@ -12,6 +12,7 @@
 <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> a cpsv:PublicService ;
         dct:identifier "1" ;
         dct:title "Ei offentleg teneste"@nb ;
+        dct:language [ ] ;
         dct:description "Ei offentleg teneste som tener som døme til bruk i utvikling"@nn ;
         cv:processingTime "not valid duration type"^^xsd:duration ;
         adms:status <http://is-not-in-ref-data.test> ;

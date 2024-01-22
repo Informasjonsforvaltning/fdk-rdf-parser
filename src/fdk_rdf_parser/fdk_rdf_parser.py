@@ -38,9 +38,7 @@ from .rdf_utils import (
 from .reference_data import (
     extend_cpsvno_service_with_reference_data,
     extend_dataset_with_reference_data,
-    extend_info_model_with_reference_data,
     get_dataset_reference_data,
-    get_info_model_reference_data,
     get_public_service_reference_data,
 )
 
@@ -105,7 +103,6 @@ def parse_information_models(
     info_models_rdf: str, rdf_format: str = "turtle"
 ) -> Dict[str, InformationModel]:
     info_models: Dict[str, InformationModel] = {}
-    reference_data = get_info_model_reference_data()
 
     info_models_graph = Graph().parse(data=info_models_rdf, format=rdf_format)
 
@@ -121,10 +118,6 @@ def parse_information_models(
         ):
             info_model = parse_information_model(
                 info_models_graph, record_uri, primary_topic_uri
-            )
-
-            info_model = extend_info_model_with_reference_data(
-                info_model, reference_data
             )
 
             info_models[primary_topic_uri.toPython()] = info_model

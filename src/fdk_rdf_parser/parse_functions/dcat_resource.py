@@ -24,7 +24,7 @@ from .contactpoint import extract_contact_points
 from .publisher import extract_publisher
 from .reference_data_code import (
     extract_reference_data_code,
-    extract_reference_data_code_list,
+    extract_reference_language_list,
 )
 from .theme import (
     map_data_themes,
@@ -57,7 +57,7 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         issued=date_value(graph, subject, DCTERMS.issued),
         modified=date_value(graph, subject, DCTERMS.modified),
         landingPage=value_set(graph, subject, dcat_uri("landingPage")),
-        language=extract_reference_data_code_list(graph, subject, DCTERMS.language),
+        language=extract_reference_language_list(graph, subject, DCTERMS.language),
     )
 
 

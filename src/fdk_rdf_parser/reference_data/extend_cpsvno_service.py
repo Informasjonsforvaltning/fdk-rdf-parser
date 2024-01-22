@@ -6,10 +6,8 @@ from typing import (
 from fdk_rdf_parser.classes import (
     Agent,
     Channel,
-    CVContactPoint,
     Evidence,
     Organization,
-    Output,
     Participation,
     PublicService,
     Service,
@@ -25,13 +23,6 @@ from .utils import (
 def extend_cpsvno_service_with_reference_data(
     cpsvno_service: Service, ref_data: PublicServiceReferenceData
 ) -> Service:
-    cpsvno_service.language = extend_reference_data_code_list(
-        cpsvno_service.language, ref_data.linguisticsystem
-    )
-    cpsvno_service.contactPoint = extend_cv_contact_points(
-        cpsvno_service.contactPoint, ref_data
-    )
-    cpsvno_service.produces = extend_cv_output(cpsvno_service.produces, ref_data)
     cpsvno_service.admsStatus = (
         extend_reference_data_code(cpsvno_service.admsStatus, ref_data.statuses)
         if cpsvno_service.admsStatus
@@ -56,32 +47,6 @@ def extend_cpsvno_service_with_reference_data(
     return cpsvno_service
 
 
-def extend_cv_contact_points(
-    contact_points: Optional[List[CVContactPoint]], ref_data: PublicServiceReferenceData
-) -> Optional[List[CVContactPoint]]:
-    if contact_points is None:
-        return contact_points
-
-    for contact_point in contact_points:
-        contact_point.language = extend_reference_data_code_list(
-            contact_point.language, ref_data.linguisticsystem
-        )
-    return contact_points
-
-
-def extend_cv_output(
-    outputs: Optional[List[Output]], ref_data: PublicServiceReferenceData
-) -> Optional[List[Output]]:
-    if outputs is None:
-        return outputs
-
-    for output in outputs:
-        output.language = extend_reference_data_code_list(
-            output.language, ref_data.linguisticsystem
-        )
-    return outputs
-
-
 def extend_cv_evidence(
     evidences: Optional[List[Evidence]], ref_data: PublicServiceReferenceData
 ) -> Optional[List[Evidence]]:
@@ -91,9 +56,6 @@ def extend_cv_evidence(
     for evidence in evidences:
         evidence.dctType = extend_reference_data_code_list(
             evidence.dctType, ref_data.evidence_type
-        )
-        evidence.language = extend_reference_data_code_list(
-            evidence.language, ref_data.linguisticsystem
         )
     return evidences
 

@@ -5,53 +5,6 @@ from fdk_rdf_parser.reference_data import (
 )
 
 public_service_reference_data = PublicServiceReferenceData(
-    linguisticsystem={
-        "publications.europa.eu/resource/authority/language": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language",
-            code=None,
-            prefLabel={"en": "Languages Named Authority List"},
-        ),
-        "publications.europa.eu/resource/authority/language/ENG": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/ENG",
-            code="ENG",
-            prefLabel={
-                "en": "English",
-                "nb": "Engelsk",
-                "nn": "Engelsk",
-                "no": "Engelsk",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NOB": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NOB",
-            code="NOB",
-            prefLabel={
-                "en": "Norwegian Bokmål",
-                "nb": "Norsk Bokmål",
-                "nn": "Norsk Bokmål",
-                "no": "Norsk Bokmål",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NNO": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NNO",
-            code="NNO",
-            prefLabel={
-                "en": "Norwegian Nynorsk",
-                "nb": "Norsk Nynorsk",
-                "nn": "Norsk Nynorsk",
-                "no": "Norsk Nynorsk",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NOR": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NOR",
-            code="NOR",
-            prefLabel={"nb": "Norsk", "nn": "Norsk", "no": "Norsk", "en": "Norwegian"},
-        ),
-        "publications.europa.eu/resource/authority/language/SMI": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/SMI",
-            code="SMI",
-            prefLabel={"en": "Sami languages"},
-        ),
-    },
     organization_types={
         "purl.org/adms/publishertype/IndustryConsortium": ReferenceDataCode(
             uri="http://purl.org/adms/publishertype/IndustryConsortium",
@@ -85,6 +38,13 @@ public_service_reference_data = PublicServiceReferenceData(
             uri="https://data.norge.no/vocabulary/role-type#data-provider",
             code="data-provider",
             prefLabel={"nb": "dataleverandør", "en": "data provider"},
+        ),
+    },
+    types={
+        "publications.europa.eu/resource/authority/main-activity/defence": ReferenceDataCode(
+            uri="http://publications.europa.eu/resource/authority/main-activity/defence",
+            code="defence",
+            prefLabel={"en": "Defence"},
         ),
     },
 )
@@ -437,48 +397,6 @@ dataset_reference_data = DatasetReferenceData(
                 "nb": "tre ganger i uken",
                 "en": "three times a week",
             },
-        ),
-    },
-    linguisticsystem={
-        "publications.europa.eu/resource/authority/language/ENG": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/ENG",
-            code="ENG",
-            prefLabel={
-                "nn": "Engelsk",
-                "no": "Engelsk",
-                "nb": "Engelsk",
-                "en": "English",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NNO": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NNO",
-            code="NNO",
-            prefLabel={
-                "nn": "Norsk Nynorsk",
-                "no": "Norsk Nynorsk",
-                "nb": "Norsk Nynorsk",
-                "en": "Norwegian Nynorsk",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NOB": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NOB",
-            code="NOB",
-            prefLabel={
-                "nn": "Norsk Bokmål",
-                "no": "Norsk Bokmål",
-                "nb": "Norsk Bokmål",
-                "en": "Norwegian Bokmål",
-            },
-        ),
-        "publications.europa.eu/resource/authority/language/NOR": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/NOR",
-            code="NOR",
-            prefLabel={"nn": "Norsk", "no": "Norsk", "nb": "Norsk", "en": "Norwegian"},
-        ),
-        "publications.europa.eu/resource/authority/language/SMI": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/language/SMI",
-            code="SMI",
-            prefLabel={"en": "Sami languages"},
         ),
     },
     referencetypes={

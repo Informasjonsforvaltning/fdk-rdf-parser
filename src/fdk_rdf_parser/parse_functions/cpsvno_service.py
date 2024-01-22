@@ -34,13 +34,16 @@ from .cost import extract_costs
 from .dcat_resource import (
     extract_key_words,
     extract_reference_data_code,
-    extract_reference_data_code_list,
 )
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
 from .organization import extract_organizations
 from .output import extract_outputs
+from .reference_data_code import (
+    extract_reference_data_code_list,
+    extract_reference_language_list,
+)
 from .requirement import extract_requirements
 from .rule import extract_rules
 from .skos_concept import extract_skos_concept
@@ -103,7 +106,7 @@ def parse_cpsvno_service(
         isDescribedAt=extract_skos_concept(
             services_graph, cpsvno_service_uri, cv_uri("isDescribedAt")
         ),
-        language=extract_reference_data_code_list(
+        language=extract_reference_language_list(
             services_graph, cpsvno_service_uri, DCTERMS.language
         ),
         holdsRequirement=extract_requirements(services_graph, cpsvno_service_uri),

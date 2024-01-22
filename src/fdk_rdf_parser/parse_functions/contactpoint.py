@@ -14,7 +14,7 @@ from fdk_rdf_parser.classes import (
     DCATContactPoint,
 )
 from fdk_rdf_parser.parse_functions.reference_data_code import (
-    extract_reference_data_code_list,
+    extract_reference_language_list,
 )
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
@@ -97,7 +97,7 @@ def extract_cv_contact_point(
                 email=value_list(graph, resource, cv_uri("email")),
                 telephone=value_list(graph, resource, cv_uri("telephone")),
                 contactPage=value_list(graph, resource, cv_uri("contactPage")),
-                language=extract_reference_data_code_list(
+                language=extract_reference_language_list(
                     graph, resource, vcard_uri("language")
                 ),
             )

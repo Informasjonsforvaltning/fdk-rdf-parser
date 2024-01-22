@@ -27,7 +27,10 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from fdk_rdf_parser.rdf_utils.utils import value_list
-from .dcat_resource import extract_reference_data_code_list
+from .reference_data_code import (
+    extract_reference_data_code_list,
+    extract_reference_language_list,
+)
 
 
 def parse_evidence(graph: Graph, resource: URIRef) -> Evidence:
@@ -45,7 +48,7 @@ def parse_evidence(graph: Graph, resource: URIRef) -> Evidence:
         name=value_translations(graph, resource, DCTERMS.title),
         description=value_translations(graph, resource, DCTERMS.description),
         dctType=extract_reference_data_code_list(graph, resource, DCTERMS.type),
-        language=extract_reference_data_code_list(graph, resource, DCTERMS.language),
+        language=extract_reference_language_list(graph, resource, DCTERMS.language),
         page=value_list(graph, resource, FOAF.page),
     )
 

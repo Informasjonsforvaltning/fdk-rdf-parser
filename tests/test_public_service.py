@@ -283,8 +283,13 @@ def test_complete_public_services(
                     language=[
                         ReferenceDataCode(
                             uri="http://publications.europa.eu/resource/authority/language/NOB",
-                            code=None,
-                            prefLabel=None,
+                            code="NOB",
+                            prefLabel={
+                                "en": "Norwegian Bokmål",
+                                "nb": "Norsk Bokmål",
+                                "nn": "Norsk Bokmål",
+                                "no": "Norsk Bokmål",
+                            },
                         )
                     ],
                     name={"nb": "Lov om behandlingsmåten i forvaltningssaker"},

@@ -2,7 +2,6 @@ from fdk_rdf_parser.classes import Dataset
 from .reference_data import DatasetReferenceData
 from .utils import (
     extend_reference_data_code,
-    extend_reference_data_code_list,
     extend_reference_types,
 )
 
@@ -24,9 +23,6 @@ def extend_dataset_with_reference_data(
         extend_reference_data_code(dataset.accrualPeriodicity, ref_data.frequency)
         if dataset.accrualPeriodicity
         else None
-    )
-    dataset.language = extend_reference_data_code_list(
-        dataset.language, ref_data.linguisticsystem
     )
     dataset.references = extend_reference_types(
         dataset.references, ref_data.referencetypes
