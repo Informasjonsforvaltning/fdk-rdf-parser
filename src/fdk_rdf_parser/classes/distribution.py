@@ -20,7 +20,6 @@ class Distribution:
     downloadURL: Optional[Set[str]] = None
     accessURL: Optional[Set[str]] = None
     license: Optional[List[SkosConcept]] = None
-    openLicense: bool = False
     conformsTo: Optional[List[ConformsTo]] = None
     page: Optional[List[SkosConcept]] = None
     fdkFormat: Optional[List[MediaTypeOrExtent]] = None

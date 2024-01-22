@@ -41,6 +41,7 @@ def test_parse_info_model_no_elements(
 @prefix ex-abstrakt: <http://example.com/test_abstraksjon#> .
 @prefix xkos:  <https://rdf-vocabulary.ddialliance.org/xkos/> .
 @prefix dct:   <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
 @prefix modelldcatno: <https://data.norge.no/vocabulary/modelldcatno#> .
 @prefix digdir: <https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
@@ -70,7 +71,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:isReplacedBy   digdir:AdresseModell ;
         dct:issued         "2016-09-28T00:00:00+01:00"^^xsd:dateTime ;
         dct:language       <http://publications.europa.eu/resource/authority/language/NOB> ;
-        dct:license        <http://creativecommons.org/licenses/by/4.0/deed.no> ;
+        dct:license        <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
         dct:modified       "2017-09-28T00:00:00+01:00"^^xsd:dateTime ;
         dct:publisher      digdir:Utgiver ;
         dct:spatial        <https://data.geonorge.no/administrativeEnheter/nasjon/id/173163> ;
@@ -87,6 +88,11 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         prof:isProfileOf   <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model> ;
         modelldcatno:informationModelIdentifier
                 "https://www.digdir.no/diversemodell" .
+
+<http://publications.europa.eu/resource/authority/licence/CC_BY_4_0>
+        a           skos:Concept;
+        dc:identifier      "CC BY 4.0";
+        skos:prefLabel     "Creative Commons Navngivelse 4.0 Internasjonal"@no , "Creative Commons Attribution 4.0 International"@en .
 
 <https://data.geonorge.no/administrativeEnheter/nasjon/id/173163>
         a               dct:Location;
@@ -186,8 +192,8 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             ],
             license=[
                 ReferenceDataCode(
-                    uri="http://creativecommons.org/licenses/by/4.0/deed.no",
-                    code="CC BY 4.0 DEED",
+                    uri="http://publications.europa.eu/resource/authority/licence/CC_BY_4_0",
+                    code="CC BY 4.0",
                     prefLabel={
                         "no": "Creative Commons Navngivelse 4.0 Internasjonal",
                         "en": "Creative Commons Attribution 4.0 International",
