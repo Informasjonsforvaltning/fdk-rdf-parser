@@ -62,6 +62,16 @@ def filter_reference_data_code(
         return None
 
 
+def parse_reference_code(
+    graph: Graph, code_ref: URIRef, code_predicate: URIRef, label_predicate: URIRef
+) -> ReferenceDataCode:
+    return ReferenceDataCode(
+        uri=code_ref.toPython() if not isinstance(code_ref, BNode) else None,
+        code=object_value(graph, code_ref, code_predicate),
+        prefLabel=value_translations(graph, code_ref, label_predicate),
+    )
+
+
 def extract_reference_language_list(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[ReferenceDataCode]]:
@@ -69,11 +79,7 @@ def extract_reference_language_list(
     ref_list = resource_list(graph, subject, predicate)
     for lang_ref in ref_list:
         lang_list.append(
-            ReferenceDataCode(
-                uri=lang_ref.toPython() if not isinstance(lang_ref, BNode) else None,
-                code=object_value(graph, lang_ref, DC.identifier),
-                prefLabel=value_translations(graph, lang_ref, SKOS.prefLabel),
-            )
+            parse_reference_code(graph, lang_ref, DC.identifier, SKOS.prefLabel)
         )
     return filter_reference_data_code_list(lang_list)
 
@@ -83,11 +89,18 @@ def extract_reference_access_rights(
 ) -> Optional[ReferenceDataCode]:
     rights_ref = graph.value(subject, DCTERMS.accessRights)
     if rights_ref:
-        rights = ReferenceDataCode(
-            uri=rights_ref.toPython() if not isinstance(rights_ref, BNode) else None,
-            code=object_value(graph, rights_ref, DC.identifier),
-            prefLabel=value_translations(graph, rights_ref, SKOS.prefLabel),
-        )
+        rights = parse_reference_code(graph, rights_ref, DC.identifier, SKOS.prefLabel)
         return filter_reference_data_code(rights)
+    else:
+        return None
+
+
+def extract_reference_frequency(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    freq_ref = graph.value(subject, DCTERMS.accrualPeriodicity)
+    if freq_ref:
+        frequency = parse_reference_code(graph, freq_ref, DC.identifier, SKOS.prefLabel)
+        return filter_reference_data_code(frequency)
     else:
         return None

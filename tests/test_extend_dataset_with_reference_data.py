@@ -67,27 +67,6 @@ def test_extend_provenance() -> None:
     )
 
 
-def test_extend_accrual_periodicity() -> None:
-    parsed_dataset = Dataset(
-        accrualPeriodicity=ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL"
-        )
-    )
-
-    expected = Dataset(
-        accrualPeriodicity=ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
-            code="ANNUAL",
-            prefLabel={"nn": "årleg", "no": "årlig", "nb": "årlig", "en": "annual"},
-        )
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
 def test_extend_references() -> None:
     parsed_dataset = Dataset(
         references=[
