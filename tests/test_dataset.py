@@ -276,14 +276,16 @@ def test_does_not_parse_catalog_as_a_dataset(
 def test_parse_dataset() -> None:
     src = """
         @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
                 dct:accrualPeriodicity
-                    <http://publications.europa.eu/resource/authority/freq> ;
+                    <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
                 dct:identifier
                     "adb4cf00-31c8-460c-9563-55f204cf8221" ;
                 dct:publisher
@@ -299,6 +301,10 @@ def test_parse_dataset() -> None:
                     <https://testdirektoratet.no/model/concept/1> ;
                 foaf:page
                     <https://testdirektoratet.no> .
+
+        <http://publications.europa.eu/resource/authority/frequency/ANNUAL>
+            dc:identifier  "ANNUAL";
+            skos:prefLabel  "annual"@en , "årleg"@nn , "årlig"@nb , "årlig"@no .
 
         <https://data.geonorge.no/administrativeEnheter/fylke/id/34>
                 a               dct:Location;
@@ -330,7 +336,9 @@ def test_parse_dataset() -> None:
             Subject(uri="https://testdirektoratet.no/model/concept/1"),
         ],
         accrualPeriodicity=ReferenceDataCode(
-            "http://publications.europa.eu/resource/authority/freq"
+            uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            code="ANNUAL",
+            prefLabel={"en": "annual", "nn": "årleg", "nb": "årlig", "no": "årlig"},
         ),
         provenance=ReferenceDataCode(
             uri="http://data.brreg.no/datakatalog/provinens/tredjepart"

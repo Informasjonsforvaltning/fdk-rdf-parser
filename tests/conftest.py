@@ -20,8 +20,6 @@ def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
         mock.json.return_value = json.load(
             open("./tests/json_data/provenancestatement.json")
         )
-    elif "eu/frequencies" in url:
-        mock.json.return_value = json.load(open("./tests/json_data/frequency.json"))
     elif "reference-types" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/referencetypes.json")

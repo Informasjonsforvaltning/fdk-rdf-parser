@@ -43,7 +43,10 @@ from .distribution import extract_distributions
 from .harvest_meta_data import extract_meta_data
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
-from .reference_data_code import extract_reference_data_code
+from .reference_data_code import (
+    extract_reference_data_code,
+    extract_reference_frequency,
+)
 from .references import extract_references
 from .skos_concept import extract_skos_concept
 from .spatial import extract_dct_spatial_list
@@ -80,9 +83,7 @@ def parse_dataset(
         provenance=extract_reference_data_code(
             datasets_graph, dataset_uri, DCTERMS.provenance
         ),
-        accrualPeriodicity=extract_reference_data_code(
-            datasets_graph, dataset_uri, DCTERMS.accrualPeriodicity
-        ),
+        accrualPeriodicity=extract_reference_frequency(datasets_graph, dataset_uri),
         hasAccuracyAnnotation=quality_annotations.get(
             dqv_iso_uri("Accuracy").toPython()
         ),

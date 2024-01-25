@@ -14,11 +14,6 @@ def extend_dataset_with_reference_data(
         if dataset.provenance
         else None
     )
-    dataset.accrualPeriodicity = (
-        extend_reference_data_code(dataset.accrualPeriodicity, ref_data.frequency)
-        if dataset.accrualPeriodicity
-        else None
-    )
     dataset.references = extend_reference_types(
         dataset.references, ref_data.referencetypes
     )
