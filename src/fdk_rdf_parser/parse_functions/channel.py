@@ -25,7 +25,7 @@ from fdk_rdf_parser.rdf_utils.utils import (
     value_list,
     value_translations,
 )
-from .dcat_resource import extract_reference_data_code
+from .reference_data_code import extract_reference_data_code
 
 
 def extract_channels(

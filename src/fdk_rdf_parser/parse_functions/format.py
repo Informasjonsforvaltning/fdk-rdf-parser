@@ -19,7 +19,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
-from .dcat_resource import extract_reference_data_code
+from .reference_data_code import extract_reference_data_code
 
 
 def extract_formats(graph: Graph, subject: URIRef) -> Optional[List[Format]]:

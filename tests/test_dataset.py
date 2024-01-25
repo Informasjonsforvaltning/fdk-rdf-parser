@@ -32,11 +32,13 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
         @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
         @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
         @prefix rov:   <http://www.w3.org/ns/regorg#> .
+        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
         @prefix fdk:   <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-reasoning-service/main/src/main/resources/ontology/fdk.owl#> .
 
         <https://testdirektoratet.no/model/dataset/0>
@@ -60,6 +62,10 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 dct:spatial         [ <http://www.w3.org/ns/locn#geometry> "gmlLiteral"^^<http://www.opengis.net/ont/geosparql#gmlLiteral> ] ;
                 dct:accessRights    <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
                 dct:relation        <https://testdirektoratet.no/model/dataset/0> .
+
+        <http://publications.europa.eu/resource/authority/access-right/PUBLIC>
+            dc:identifier  "PUBLIC";
+            skos:prefLabel  "public"@en .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
                 a                  dcat:CatalogRecord ;
@@ -183,8 +189,9 @@ def test_adds_catalog_to_dataset(
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://testdirektoratet.no/model/dataset/0>
-                dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
-                a                         dcat:Dataset .
+                a                   dcat:Dataset ;
+                dct:accessRights    [] ;
+                dct:publisher       <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> .
 
         <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
             a                      rov:RegisteredOrganization ;
@@ -700,6 +707,7 @@ def test_qualified_attributions() -> None:
 def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
     src = """
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -721,6 +729,10 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
             a                  dcat:Dataset ;
             dct:accessRights   <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
             dcat:distribution  <https://example.com/open-distribution> .
+
+        <http://publications.europa.eu/resource/authority/access-right/PUBLIC>
+            dc:identifier  "PUBLIC" ;
+            skos:prefLabel  "public"@en .
 
         <https://example.com/open-distribution>
             a               dcat:Distribution ;

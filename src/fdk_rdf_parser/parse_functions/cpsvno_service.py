@@ -31,16 +31,14 @@ from .agent import extract_participating_agents
 from .channel import extract_channels
 from .contactpoint import extract_cv_contact_point
 from .cost import extract_costs
-from .dcat_resource import (
-    extract_key_words,
-    extract_reference_data_code,
-)
+from .dcat_resource import extract_key_words
 from .evidence import extract_evidences
 from .harvest_meta_data import extract_meta_data
 from .legal_resource import extract_legal_resources
 from .organization import extract_organizations
 from .output import extract_outputs
 from .reference_data_code import (
+    extract_reference_data_code,
     extract_reference_data_code_list,
     extract_reference_language_list,
 )

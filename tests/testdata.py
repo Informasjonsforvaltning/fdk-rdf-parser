@@ -80,43 +80,6 @@ dataset_reference_data = DatasetReferenceData(
             prefLabel={"nn": "Vedtak", "nb": "Vedtak", "en": "Governmental decisions"},
         ),
     },
-    rightsstatement={
-        "publications.europa.eu/resource/authority/access-right/CONFIDENTIAL": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/CONFIDENTIAL",
-            code="CONFIDENTIAL",
-            prefLabel={"en": "confidential"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/NON_PUBLIC": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC",
-            code="NON_PUBLIC",
-            prefLabel={"en": "non-public"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/NORMAL": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/NORMAL",
-            code="NORMAL",
-            prefLabel={"en": "normal"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/OP_DATPRO": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/OP_DATPRO",
-            code="OP_DATPRO",
-            prefLabel={"en": "Provisional data"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/PUBLIC": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
-            code="PUBLIC",
-            prefLabel={"en": "public"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/RESTRICTED": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
-            code="RESTRICTED",
-            prefLabel={"en": "restricted"},
-        ),
-        "publications.europa.eu/resource/authority/access-right/SENSITIVE": ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/SENSITIVE",
-            code="SENSITIVE",
-            prefLabel={"en": "sensitive"},
-        ),
-    },
     frequency={
         "publications.europa.eu/resource/authority/frequency/ANNUAL": ReferenceDataCode(
             uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",

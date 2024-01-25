@@ -9,11 +9,6 @@ from .utils import (
 def extend_dataset_with_reference_data(
     dataset: Dataset, ref_data: DatasetReferenceData
 ) -> Dataset:
-    dataset.accessRights = (
-        extend_reference_data_code(dataset.accessRights, ref_data.rightsstatement)
-        if dataset.accessRights
-        else None
-    )
     dataset.provenance = (
         extend_reference_data_code(dataset.provenance, ref_data.provenancestatement)
         if dataset.provenance
