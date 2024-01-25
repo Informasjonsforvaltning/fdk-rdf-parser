@@ -42,27 +42,6 @@ def test_uri_not_present_in_reference_data() -> None:
     )
 
 
-def test_extend_access_rights() -> None:
-    parsed_dataset = Dataset(
-        accessRights=ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
-        )
-    )
-
-    expected = Dataset(
-        accessRights=ReferenceDataCode(
-            uri="http://publications.europa.eu/resource/authority/access-right/RESTRICTED",
-            code="RESTRICTED",
-            prefLabel={"en": "restricted"},
-        )
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
 def test_extend_provenance() -> None:
     parsed_dataset = Dataset(
         provenance=ReferenceDataCode(

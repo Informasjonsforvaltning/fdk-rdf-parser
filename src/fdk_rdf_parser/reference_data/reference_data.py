@@ -13,7 +13,6 @@ from .utils import remove_scheme_and_trailing_slash
 @dataclass
 class DatasetReferenceData:
     provenancestatement: Optional[Dict[str, ReferenceDataCode]] = None
-    rightsstatement: Optional[Dict[str, ReferenceDataCode]] = None
     frequency: Optional[Dict[str, ReferenceDataCode]] = None
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
 
@@ -32,7 +31,6 @@ class PublicServiceReferenceData:
 def get_dataset_reference_data() -> DatasetReferenceData:
     return DatasetReferenceData(
         provenancestatement=get_and_map_provenance_statements(),
-        rightsstatement=get_and_map_access_rights(),
         frequency=get_and_map_frequencies(),
         referencetypes=get_and_map_reference_types(),
     )
@@ -81,11 +79,6 @@ def get_and_map_provenance_statements() -> Optional[Dict[str, ReferenceDataCode]
 def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:
     reference_types = get_reference_data("/reference-types").get("referenceTypes")
     return parse_reference_codes(reference_types)
-
-
-def get_and_map_access_rights() -> Optional[Dict[str, ReferenceDataCode]]:
-    access_rights = get_reference_data("/eu/access-rights").get("accessRights")
-    return parse_reference_codes(access_rights)
 
 
 def get_and_map_week_days() -> Optional[Dict[str, ReferenceDataCode]]:

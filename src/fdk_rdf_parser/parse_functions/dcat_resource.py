@@ -23,7 +23,7 @@ from fdk_rdf_parser.rdf_utils import (
 from .contactpoint import extract_contact_points
 from .publisher import extract_publisher
 from .reference_data_code import (
-    extract_reference_data_code,
+    extract_reference_access_rights,
     extract_reference_language_list,
 )
 from .theme import (
@@ -46,7 +46,7 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         else None,
         descriptionFormatted=formatted_description,
         uri=subject.toPython(),
-        accessRights=extract_reference_data_code(graph, subject, DCTERMS.accessRights),
+        accessRights=extract_reference_access_rights(graph, subject),
         themeUris=value_list(graph, subject, dcat_uri("theme")),
         theme=map_data_themes(graph, theme_refs["data-themes"]),
         losTheme=map_los_themes(graph, theme_refs["los"]),
