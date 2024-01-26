@@ -35,10 +35,6 @@ from .rdf_utils import (
     is_type,
     model_dcat_ap_no_uri,
 )
-from .reference_data import (
-    extend_cpsvno_service_with_reference_data,
-    get_public_service_reference_data,
-)
 
 
 def parse_data_services(
@@ -125,7 +121,6 @@ def parse_public_services(
     public_service_rdf: str, rdf_format: str = "turtle"
 ) -> Dict[str, Service]:
     cpsvno_services: Dict[str, Service] = {}
-    reference_data = get_public_service_reference_data()
 
     cpsvno_services_graph = Graph().parse(data=public_service_rdf, format=rdf_format)
 
@@ -150,10 +145,6 @@ def parse_public_services(
         ):
             cpsvno_service = parse_cpsvno_service(
                 cpsvno_services_graph, catalog_record_uri, primary_topic_uri
-            )
-
-            cpsvno_service = extend_cpsvno_service_with_reference_data(
-                cpsvno_service, reference_data
             )
 
             cpsvno_services[primary_topic_uri.toPython()] = cpsvno_service

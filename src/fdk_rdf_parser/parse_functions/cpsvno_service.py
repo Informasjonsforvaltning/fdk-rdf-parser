@@ -38,8 +38,8 @@ from .organization import extract_organizations
 from .output import extract_outputs
 from .reference_data_code import (
     extract_reference_adms_status,
-    extract_reference_data_code_list,
     extract_reference_language_list,
+    extract_reference_main_activities,
 )
 from .requirement import extract_requirements
 from .rule import extract_rules
@@ -135,9 +135,7 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.subject
         ),
         homepage=value_list(services_graph, cpsvno_service_uri, FOAF.homepage),
-        dctType=extract_reference_data_code_list(
-            services_graph, cpsvno_service_uri, DCTERMS.type
-        ),
+        dctType=extract_reference_main_activities(services_graph, cpsvno_service_uri),
         thematicAreaUris=value_list(
             services_graph, cpsvno_service_uri, cv_uri("thematicArea")
         ),
