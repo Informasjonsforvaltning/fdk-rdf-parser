@@ -26,7 +26,7 @@ from fdk_rdf_parser.rdf_utils.utils import (
     value_list,
     value_translations,
 )
-from .reference_data_code import extract_reference_data_code
+from .reference_data_code import extract_reference_publisher_type
 
 
 def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
@@ -45,9 +45,7 @@ def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
         organization.title = value_translations(graph, organization_uri, SKOS.prefLabel)
         organization.homepage = value_list(graph, organization_uri, FOAF.homepage)
         organization.spatial = value_list(graph, organization_uri, DCTERMS.spatial)
-        organization.orgType = extract_reference_data_code(
-            graph, organization_uri, DCTERMS.type
-        )
+        organization.orgType = extract_reference_publisher_type(graph, organization_uri)
     elif is_type(rov_uri("RegisteredOrganization"), graph, organization_uri):
         organization.name = value_translations(
             graph, organization_uri, rov_uri("legalName")

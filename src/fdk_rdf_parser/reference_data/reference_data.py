@@ -13,13 +13,11 @@ from .utils import remove_scheme_and_trailing_slash
 @dataclass
 class PublicServiceReferenceData:
     types: Optional[Dict[str, ReferenceDataCode]] = None
-    organization_types: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
     return PublicServiceReferenceData(
         types=get_and_map_dct_types(),
-        organization_types=get_and_map_organization_types(),
     )
 
 
@@ -42,10 +40,3 @@ def parse_reference_codes(
 def get_and_map_dct_types() -> Optional[Dict[str, ReferenceDataCode]]:
     dct_types = get_reference_data("/eu/main-activities").get("mainActivities")
     return parse_reference_codes(dct_types)
-
-
-def get_and_map_organization_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    organization_types = get_reference_data("/adms/publisher-types").get(
-        "publisherTypes"
-    )
-    return parse_reference_codes(organization_types)

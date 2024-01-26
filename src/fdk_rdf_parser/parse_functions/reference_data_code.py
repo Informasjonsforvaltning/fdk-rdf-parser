@@ -173,3 +173,17 @@ def extract_reference_channel_type(
         return filter_reference_data_code(channel)
     else:
         return None
+
+
+def extract_reference_publisher_type(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    publisher_type_ref = graph.value(subject, DCTERMS.type)
+    if publisher_type_ref:
+        return filter_reference_data_code(
+            parse_reference_code(
+                graph, publisher_type_ref, SKOS.notation, SKOS.prefLabel
+            )
+        )
+    else:
+        return None
