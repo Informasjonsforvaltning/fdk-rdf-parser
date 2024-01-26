@@ -41,9 +41,11 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
         identifier=value_set(graph, subject, DCTERMS.identifier),
         publisher=extract_publisher(graph, subject),
         title=value_translations(graph, subject, DCTERMS.title),
-        description=description_html_cleaner(formatted_description)
-        if formatted_description
-        else None,
+        description=(
+            description_html_cleaner(formatted_description)
+            if formatted_description
+            else None
+        ),
         descriptionFormatted=formatted_description,
         uri=subject.toPython(),
         accessRights=extract_reference_access_rights(graph, subject),

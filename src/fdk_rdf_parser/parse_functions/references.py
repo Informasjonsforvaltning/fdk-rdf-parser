@@ -50,9 +50,11 @@ def extract_references(graph: Graph, subject: URIRef) -> Optional[List[Reference
                     Reference(
                         referenceType=ReferenceDataCode(uri=predicate.toPython()),
                         source=SkosConcept(
-                            uri=resource.toPython()
-                            if not isinstance(resource, BNode)
-                            else None,
+                            uri=(
+                                resource.toPython()
+                                if not isinstance(resource, BNode)
+                                else None
+                            ),
                             prefLabel=value_translations(graph, resource, RDFS.label),
                         ),
                     )
