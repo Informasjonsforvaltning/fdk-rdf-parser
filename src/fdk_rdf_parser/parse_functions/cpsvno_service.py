@@ -17,7 +17,6 @@ from fdk_rdf_parser.classes import (
     Service,
 )
 from fdk_rdf_parser.rdf_utils import (
-    adms_uri,
     cpsv_uri,
     cv_uri,
     duration_string_value,
@@ -38,7 +37,7 @@ from .legal_resource import extract_legal_resources
 from .organization import extract_organizations
 from .output import extract_outputs
 from .reference_data_code import (
-    extract_reference_data_code,
+    extract_reference_adms_status,
     extract_reference_data_code_list,
     extract_reference_language_list,
 )
@@ -131,9 +130,7 @@ def parse_cpsvno_service(
             services_graph, cpsvno_service_uri, DCTERMS.relation
         ),
         spatial=value_list(services_graph, cpsvno_service_uri, DCTERMS.spatial),
-        admsStatus=extract_reference_data_code(
-            services_graph, cpsvno_service_uri, adms_uri("status")
-        ),
+        admsStatus=extract_reference_adms_status(services_graph, cpsvno_service_uri),
         subject=extract_skos_concept(
             services_graph, cpsvno_service_uri, DCTERMS.subject
         ),

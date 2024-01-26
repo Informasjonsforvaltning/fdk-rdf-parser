@@ -55,6 +55,11 @@
         foaf:homepage <http://testhomepage0.no>, <http://testhomepage1.no> ;
         dcat:keyword "Serveringsbevilling"@nb .
 
+<http://purl.org/adms/status/Completed>
+        a               skos:Concept;
+        skos:notation   "Completed";
+        skos:prefLabel  "Ferdigstilt"@nn , "Ferdigstilt"@nb , "Completed"@en .
+
 <https://data.norge.no/concepts/1>
         a               skos:Concept ;
         skos:prefLabel  "Starte og drive en bedrift"@nb , "Starting business"@en .

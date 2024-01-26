@@ -16,6 +16,7 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import ReferenceDataCode
 from fdk_rdf_parser.rdf_utils import (
+    adms_uri,
     at_uri,
     object_value,
     resource_list,
@@ -118,5 +119,16 @@ def extract_reference_provenance(
             graph, prov_ref, at_uri("authority-code"), SKOS.prefLabel
         )
         return filter_reference_data_code(provenance)
+    else:
+        return None
+
+
+def extract_reference_adms_status(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    status_ref = graph.value(subject, adms_uri("status"))
+    if status_ref:
+        status = parse_reference_code(graph, status_ref, SKOS.notation, SKOS.prefLabel)
+        return filter_reference_data_code(status)
     else:
         return None
