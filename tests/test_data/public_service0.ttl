@@ -146,6 +146,11 @@
         dct:identifier  "1" ;
         cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
 
+<https://data.norge.no/vocabulary/role-type#data-consumer>
+        a               skos:Concept ;
+        dct:identifier  "https://data.norge.no/vocabulary/role-type#data-consumer"^^xsd:anyURI;
+        skos:prefLabel  "data consumer"@en , "datakonsument"@nb .
+
 <http://public-service-publisher.fellesdatakatalog.digdir.no/participation/6>
         a                cv:Participation ;
         cv:role          <https://data.norge.no/concepts/15> ;

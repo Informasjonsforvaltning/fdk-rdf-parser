@@ -43,6 +43,11 @@ def test_multiple_participations_one_agent(
                     dct:identifier   "2" ;
                     cv:hasParticipant <https://data.brreg.no/enhetsregisteret/api/enheter/971526920> .
 
+            <https://data.norge.no/vocabulary/role-type#data-consumer>
+                    a               skos:Concept ;
+                    dct:identifier  "https://data.norge.no/vocabulary/role-type#data-consumer" ;
+                    skos:prefLabel  "data consumer"@en , "datakonsument"@nb .
+
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920>
                     a foaf:Agent ;
                     dct:identifier "971526920" ;
@@ -163,6 +168,11 @@ def test_participation_with_agent_and_organization(
                     dct:description  "Deltagelse med Offentlig Organisasjon"@nb ;
                     dct:identifier   "4" ;
                     cv:hasParticipant <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/987654321> .
+
+            <https://data.norge.no/vocabulary/role-type#data-consumer>
+                    a               skos:Concept ;
+                    dct:identifier  "https://data.norge.no/vocabulary/role-type#data-consumer"^^xsd:anyURI;
+                    skos:prefLabel  "data consumer"@en , "datakonsument"@nb .
 
             <https://data.brreg.no/enhetsregisteret/api/enheter/971526920>
                     a foaf:Agent ;
