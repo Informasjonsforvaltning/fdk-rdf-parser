@@ -15,6 +15,7 @@ from fdk_rdf_parser.parse_functions import parse_dcat_resource
 
 def test_dcat_resource_parser() -> None:
     src = """
+@prefix at:    <http://publications.europa.eu/ontology/authority/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dc:   <http://purl.org/dc/elements/1.1/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -57,7 +58,7 @@ def test_dcat_resource_parser() -> None:
 
 <http://publications.europa.eu/resource/authority/language/NOR>
         a           skos:Concept;
-        dc:identifier      "NOR";
+        at:authority-code      "NOR";
         skos:prefLabel     "Norwegian"@en , "Norsk"@nb , "Norsk"@nn , "Norsk"@no .
 
 <http://publications.europa.eu/resource/authority/data-theme/GOVE>

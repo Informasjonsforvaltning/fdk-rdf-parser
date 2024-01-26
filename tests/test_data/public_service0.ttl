@@ -1,3 +1,4 @@
+@prefix at:    <http://publications.europa.eu/ontology/authority/> .
 @prefix adms: <http://www.w3.org/ns/adms#> .
 @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
 @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
@@ -247,15 +248,15 @@
 
 <http://publications.europa.eu/resource/authority/language/NOB>
         a                  skos:Concept;
-        dc:identifier      "NOB";
+        at:authority-code      "NOB";
         skos:prefLabel     "Norsk Bokmål"@nb , "Norsk Bokmål"@nn , "Norsk Bokmål"@no , "Norwegian Bokmål"@en .
 
 <http://publications.europa.eu/resource/authority/language/NNO>
         a                  skos:Concept;
-        dc:identifier      "NNO";
+        at:authority-code      "NNO";
         skos:prefLabel     "Norsk Nynorsk"@nb , "Norwegian Nynorsk"@en , "Norsk Nynorsk"@nn , "Norsk Nynorsk"@no .
 
 <http://publications.europa.eu/resource/authority/language/ENG>
         a                  skos:Concept;
-        dc:identifier      "ENG";
+        at:authority-code      "ENG";
         skos:prefLabel     "Engelsk"@nb , "Engelsk"@nn , "Engelsk"@no , "English"@en .

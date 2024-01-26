@@ -119,3 +119,7 @@ def org_uri(sub_string: str) -> URIRef:
 
 def euvoc_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://publications.europa.eu/ontology/euvoc#{sub_string}")
+
+
+def at_uri(sub_string: str) -> URIRef:
+    return URIRef(f"http://publications.europa.eu/ontology/authority/{sub_string}")
