@@ -18,10 +18,6 @@ def reference_effect(*args: Any, **kwargs: Any) -> Mock:
 def add_reference_response_to_mock(mock: Mock, url: str) -> Mock:
     if "eu/main-activities" in url:
         mock.json.return_value = json.load(open("./tests/json_data/types.json"))
-    elif "/digdir/service-channel-types" in url:
-        mock.json.return_value = json.load(
-            open("./tests/json_data/serviceChannelTypes.json")
-        )
     elif "adms/publisher-types" in url:
         mock.json.return_value = json.load(
             open("./tests/json_data/publishertypes.json")

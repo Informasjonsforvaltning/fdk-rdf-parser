@@ -115,6 +115,11 @@
         cv:value              0 ;
         dct:identifier        "16" .
 
+<https://data.norge.no/vocabulary/service-channel-type#assistant>
+        a               skos:Concept;
+        dct:identifier  "https://data.norge.no/vocabulary/service-channel-type#assistant"^^xsd:anyURI;
+        skos:prefLabel  "assistant"@en , "assistent"@nb .
+
 <http://public-service-publisher.fellesdatakatalog.digdir.no/channel/2>
         a cv:Channel ;
         cv:ownedBy          <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/1> ;
