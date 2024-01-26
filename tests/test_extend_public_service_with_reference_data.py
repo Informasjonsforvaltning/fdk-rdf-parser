@@ -83,56 +83,6 @@ def test_extend_competent_authority_organization_types() -> None:
     )
 
 
-def test_extend_participation_with_role() -> None:
-    parsed_public_service = PublicService(
-        participatingAgents=[
-            Organization(
-                uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                playsRole=[
-                    Participation(
-                        uri="https://testdirektoratet.no/participations/1",
-                        role=[
-                            ReferenceDataCode(
-                                uri="https://data.norge.no/vocabulary/role-type#data-consumer",
-                            )
-                        ],
-                    )
-                ],
-            ),
-        ]
-    )
-
-    expected = PublicService(
-        participatingAgents=[
-            Organization(
-                uri="https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789",
-                playsRole=[
-                    Participation(
-                        uri="https://testdirektoratet.no/participations/1",
-                        role=[
-                            ReferenceDataCode(
-                                uri="https://data.norge.no/vocabulary/role-type#data-consumer",
-                                code="data-consumer",
-                                prefLabel={
-                                    "nb": "datakonsument",
-                                    "en": "data consumer",
-                                },
-                            ),
-                        ],
-                    )
-                ],
-            )
-        ]
-    )
-
-    assert (
-        extend_cpsvno_service_with_reference_data(
-            parsed_public_service, public_service_reference_data
-        )
-        == expected
-    )
-
-
 def test_extend_agent_participations_with_missing_values() -> None:
     parsed_public_service = PublicService(
         participatingAgents=[

@@ -15,7 +15,6 @@ class PublicServiceReferenceData:
     types: Optional[Dict[str, ReferenceDataCode]] = None
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
     organization_types: Optional[Dict[str, ReferenceDataCode]] = None
-    role_types: Optional[Dict[str, ReferenceDataCode]] = None
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
@@ -23,7 +22,6 @@ def get_public_service_reference_data() -> PublicServiceReferenceData:
         types=get_and_map_dct_types(),
         channel_type=get_and_map_channel_types(),
         organization_types=get_and_map_organization_types(),
-        role_types=get_and_map_role_types(),
     )
 
 
@@ -60,8 +58,3 @@ def get_and_map_organization_types() -> Optional[Dict[str, ReferenceDataCode]]:
         "publisherTypes"
     )
     return parse_reference_codes(organization_types)
-
-
-def get_and_map_role_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    role_types = get_reference_data("/digdir/role-types").get("roleTypes")
-    return parse_reference_codes(role_types)

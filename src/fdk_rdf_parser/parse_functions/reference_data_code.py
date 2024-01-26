@@ -18,6 +18,7 @@ from fdk_rdf_parser.classes import ReferenceDataCode
 from fdk_rdf_parser.rdf_utils import (
     adms_uri,
     at_uri,
+    cv_uri,
     object_value,
     resource_list,
     value_list,
@@ -146,3 +147,15 @@ def extract_reference_evidence_types(
         evidence.code = evidence.code.split("#")[-1] if evidence.code else None
         evidence_list.append(evidence)
     return filter_reference_data_code_list(evidence_list)
+
+
+def extract_reference_role_types(
+    graph: Graph, subject: URIRef
+) -> Optional[List[ReferenceDataCode]]:
+    role_list = []
+    ref_list = resource_list(graph, subject, cv_uri("role"))
+    for role_ref in ref_list:
+        role = parse_reference_code(graph, role_ref, DCTERMS.identifier, SKOS.prefLabel)
+        role.code = role.code.split("#")[-1] if role.code else None
+        role_list.append(role)
+    return filter_reference_data_code_list(role_list)
