@@ -3,7 +3,7 @@
 @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
 @prefix rov:   <http://www.w3.org/ns/regorg#> .
 @prefix ex: <http://example.org/> .
-@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+@prefix at:    <http://publications.europa.eu/ontology/authority/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -29,7 +29,7 @@ ex:budget a dcat:Dataset , dcat:DatasetSeries ;
 
 <http://data.brreg.no/datakatalog/provinens/nasjonal>
         a                  skos:Concept;
-        dc:identifier      "NASJONAL";
+        at:authority-code      "NASJONAL";
         skos:prefLabel     "Autoritativ kilde"@nn , "Autoritativ kilde"@nb , "Authoritativ source"@en .
 
 ex:budget-2018 a dcat:Dataset ;

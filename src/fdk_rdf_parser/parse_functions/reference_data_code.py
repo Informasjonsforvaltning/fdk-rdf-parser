@@ -16,6 +16,7 @@ from rdflib.namespace import (
 
 from fdk_rdf_parser.classes import ReferenceDataCode
 from fdk_rdf_parser.rdf_utils import (
+    at_uri,
     object_value,
     resource_list,
     value_list,
@@ -79,7 +80,9 @@ def extract_reference_language_list(
     ref_list = resource_list(graph, subject, predicate)
     for lang_ref in ref_list:
         lang_list.append(
-            parse_reference_code(graph, lang_ref, DC.identifier, SKOS.prefLabel)
+            parse_reference_code(
+                graph, lang_ref, at_uri("authority-code"), SKOS.prefLabel
+            )
         )
     return filter_reference_data_code_list(lang_list)
 
@@ -112,7 +115,7 @@ def extract_reference_provenance(
     prov_ref = graph.value(subject, DCTERMS.provenance)
     if prov_ref:
         provenance = parse_reference_code(
-            graph, prov_ref, DC.identifier, SKOS.prefLabel
+            graph, prov_ref, at_uri("authority-code"), SKOS.prefLabel
         )
         return filter_reference_data_code(provenance)
     else:

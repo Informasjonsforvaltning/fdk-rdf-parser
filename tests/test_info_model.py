@@ -34,6 +34,7 @@ def test_parse_info_model_no_elements(
     mock_reference_data_client: Mock,
 ) -> None:
     src = """@prefix adms:  <http://www.w3.org/ns/adms#> .
+@prefix at:    <http://publications.europa.eu/ontology/authority/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
@@ -91,7 +92,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
 
 <http://publications.europa.eu/resource/authority/language/NOB>
         a           skos:Concept;
-        dc:identifier      "NOB";
+        at:authority-code      "NOB";
         skos:prefLabel     "Norsk Bokmål"@nb , "Norsk Bokmål"@nn , "Norsk Bokmål"@no , "Norwegian Bokmål"@en .
 
 <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0>
