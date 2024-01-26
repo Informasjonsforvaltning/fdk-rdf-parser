@@ -23,11 +23,6 @@ from .utils import (
 def extend_cpsvno_service_with_reference_data(
     cpsvno_service: Service, ref_data: PublicServiceReferenceData
 ) -> Service:
-    cpsvno_service.admsStatus = (
-        extend_reference_data_code(cpsvno_service.admsStatus, ref_data.statuses)
-        if cpsvno_service.admsStatus
-        else None
-    )
     cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
     cpsvno_service.dctType = extend_reference_data_code_list(
         cpsvno_service.dctType, ref_data.types
