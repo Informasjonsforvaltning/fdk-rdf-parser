@@ -163,6 +163,11 @@
         dct:type         <https://data.norge.no/vocabulary/evidence-type#attestation> ;
         foaf:page        <https://example.org/exDokumentasjonsSide> .
 
+<https://data.norge.no/vocabulary/evidence-type#attestation>
+        a                  skos:Concept;
+        dct:identifier     "https://data.norge.no/vocabulary/evidence-type#attestation"^^xsd:anyURI;
+        skos:prefLabel     "attestation"@en , "attest"@nb .
+
 <http://public-service-publisher.fellesdatakatalog.digdir.no/evidence/2>
         a                dcat:Dataset ;
         dct:description  "Annen dokumentasjon"@nb ;

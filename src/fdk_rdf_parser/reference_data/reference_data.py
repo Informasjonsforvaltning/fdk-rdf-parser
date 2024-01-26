@@ -13,7 +13,6 @@ from .utils import remove_scheme_and_trailing_slash
 @dataclass
 class PublicServiceReferenceData:
     types: Optional[Dict[str, ReferenceDataCode]] = None
-    evidence_type: Optional[Dict[str, ReferenceDataCode]] = None
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
     organization_types: Optional[Dict[str, ReferenceDataCode]] = None
     role_types: Optional[Dict[str, ReferenceDataCode]] = None
@@ -21,7 +20,6 @@ class PublicServiceReferenceData:
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
     return PublicServiceReferenceData(
-        evidence_type=get_and_map_evidence_types(),
         types=get_and_map_dct_types(),
         channel_type=get_and_map_channel_types(),
         organization_types=get_and_map_organization_types(),
@@ -62,11 +60,6 @@ def get_and_map_organization_types() -> Optional[Dict[str, ReferenceDataCode]]:
         "publisherTypes"
     )
     return parse_reference_codes(organization_types)
-
-
-def get_and_map_evidence_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    evidence_types = get_reference_data("/digdir/evidence-types").get("evidenceTypes")
-    return parse_reference_codes(evidence_types)
 
 
 def get_and_map_role_types() -> Optional[Dict[str, ReferenceDataCode]]:
