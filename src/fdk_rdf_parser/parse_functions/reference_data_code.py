@@ -159,3 +159,17 @@ def extract_reference_role_types(
         role.code = role.code.split("#")[-1] if role.code else None
         role_list.append(role)
     return filter_reference_data_code_list(role_list)
+
+
+def extract_reference_channel_type(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    channel_ref = graph.value(subject, DCTERMS.type)
+    if channel_ref:
+        channel = parse_reference_code(
+            graph, channel_ref, DCTERMS.identifier, SKOS.prefLabel
+        )
+        channel.code = channel.code.split("#")[-1] if channel.code else None
+        return filter_reference_data_code(channel)
+    else:
+        return None
