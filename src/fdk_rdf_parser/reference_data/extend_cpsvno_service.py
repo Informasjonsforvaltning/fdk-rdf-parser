@@ -6,7 +6,6 @@ from typing import (
 from fdk_rdf_parser.classes import (
     Agent,
     Channel,
-    Evidence,
     Organization,
     Participation,
     PublicService,
@@ -23,7 +22,6 @@ from .utils import (
 def extend_cpsvno_service_with_reference_data(
     cpsvno_service: Service, ref_data: PublicServiceReferenceData
 ) -> Service:
-    cpsvno_service.hasInput = extend_cv_evidence(cpsvno_service.hasInput, ref_data)
     cpsvno_service.dctType = extend_reference_data_code_list(
         cpsvno_service.dctType, ref_data.types
     )
@@ -40,19 +38,6 @@ def extend_cpsvno_service_with_reference_data(
         )
 
     return cpsvno_service
-
-
-def extend_cv_evidence(
-    evidences: Optional[List[Evidence]], ref_data: PublicServiceReferenceData
-) -> Optional[List[Evidence]]:
-    if evidences is None:
-        return None
-
-    for evidence in evidences:
-        evidence.dctType = extend_reference_data_code_list(
-            evidence.dctType, ref_data.evidence_type
-        )
-    return evidences
 
 
 def extend_channels(

@@ -132,3 +132,17 @@ def extract_reference_adms_status(
         return filter_reference_data_code(status)
     else:
         return None
+
+
+def extract_reference_evidence_types(
+    graph: Graph, subject: URIRef
+) -> Optional[List[ReferenceDataCode]]:
+    evidence_list = []
+    ref_list = resource_list(graph, subject, DCTERMS.type)
+    for evidence_ref in ref_list:
+        evidence = parse_reference_code(
+            graph, evidence_ref, DCTERMS.identifier, SKOS.prefLabel
+        )
+        evidence.code = evidence.code.split("#")[-1] if evidence.code else None
+        evidence_list.append(evidence)
+    return filter_reference_data_code_list(evidence_list)
