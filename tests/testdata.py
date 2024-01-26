@@ -50,36 +50,6 @@ public_service_reference_data = PublicServiceReferenceData(
 )
 
 dataset_reference_data = DatasetReferenceData(
-    provenancestatement={
-        "data.brreg.no/datakatalog/provinens/bruker": ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/bruker",
-            code="BRUKER",
-            prefLabel={
-                "nn": "Brukerinnsamlede data",
-                "nb": "Brukerinnsamlede data",
-                "en": "User collection",
-            },
-        ),
-        "data.brreg.no/datakatalog/provinens/nasjonal": ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/nasjonal",
-            code="NASJONAL",
-            prefLabel={
-                "nn": "Autoritativ kilde",
-                "nb": "Autoritativ kilde",
-                "en": "Authoritativ source",
-            },
-        ),
-        "data.brreg.no/datakatalog/provinens/tredjepart": ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/tredjepart",
-            code="TREDJEPART",
-            prefLabel={"nn": "Tredjepart", "nb": "Tredjepart", "en": "Third party"},
-        ),
-        "data.brreg.no/datakatalog/provinens/vedtak": ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/vedtak",
-            code="VEDTAK",
-            prefLabel={"nn": "Vedtak", "nb": "Vedtak", "en": "Governmental decisions"},
-        ),
-    },
     referencetypes={
         "purl.org/dc/terms/hasVersion": ReferenceDataCode(
             uri="http://purl.org/dc/terms/hasVersion",

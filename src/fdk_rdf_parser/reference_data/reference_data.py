@@ -12,7 +12,6 @@ from .utils import remove_scheme_and_trailing_slash
 
 @dataclass
 class DatasetReferenceData:
-    provenancestatement: Optional[Dict[str, ReferenceDataCode]] = None
     referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
 
 
@@ -29,7 +28,6 @@ class PublicServiceReferenceData:
 
 def get_dataset_reference_data() -> DatasetReferenceData:
     return DatasetReferenceData(
-        provenancestatement=get_and_map_provenance_statements(),
         referencetypes=get_and_map_reference_types(),
     )
 
@@ -60,13 +58,6 @@ def parse_reference_codes(
         }
     else:
         return None
-
-
-def get_and_map_provenance_statements() -> Optional[Dict[str, ReferenceDataCode]]:
-    provenance_statements = get_reference_data("/provenance-statements").get(
-        "provenanceStatements"
-    )
-    return parse_reference_codes(provenance_statements)
 
 
 def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:

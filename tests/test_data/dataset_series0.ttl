@@ -3,12 +3,14 @@
 @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
 @prefix rov:   <http://www.w3.org/ns/regorg#> .
 @prefix ex: <http://example.org/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 
 ex:EUCatalog a dcat:Catalog ;
     dct:title "European Data Catalog"@en ;
@@ -24,6 +26,11 @@ ex:budget a dcat:Dataset , dcat:DatasetSeries ;
     dcat:first ex:budget-2018 ;
     dcat:last ex:budget-2020 ;
     .
+
+<http://data.brreg.no/datakatalog/provinens/nasjonal>
+        a                  skos:Concept;
+        dc:identifier      "NASJONAL";
+        skos:prefLabel     "Autoritativ kilde"@nn , "Autoritativ kilde"@nb , "Authoritativ source"@en .
 
 ex:budget-2018 a dcat:Dataset ;
     dct:title "Budget data for year 2018"@en ;

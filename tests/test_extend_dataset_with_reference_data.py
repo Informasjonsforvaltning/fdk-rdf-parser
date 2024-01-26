@@ -42,31 +42,6 @@ def test_uri_not_present_in_reference_data() -> None:
     )
 
 
-def test_extend_provenance() -> None:
-    parsed_dataset = Dataset(
-        provenance=ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/bruker"
-        )
-    )
-
-    expected = Dataset(
-        provenance=ReferenceDataCode(
-            uri="http://data.brreg.no/datakatalog/provinens/bruker",
-            code="BRUKER",
-            prefLabel={
-                "nb": "Brukerinnsamlede data",
-                "nn": "Brukerinnsamlede data",
-                "en": "User collection",
-            },
-        )
-    )
-
-    assert (
-        extend_dataset_with_reference_data(parsed_dataset, dataset_reference_data)
-        == expected
-    )
-
-
 def test_extend_references() -> None:
     parsed_dataset = Dataset(
         references=[

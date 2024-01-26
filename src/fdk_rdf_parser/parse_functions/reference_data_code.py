@@ -104,3 +104,16 @@ def extract_reference_frequency(
         return filter_reference_data_code(frequency)
     else:
         return None
+
+
+def extract_reference_provenance(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    prov_ref = graph.value(subject, DCTERMS.provenance)
+    if prov_ref:
+        provenance = parse_reference_code(
+            graph, prov_ref, DC.identifier, SKOS.prefLabel
+        )
+        return filter_reference_data_code(provenance)
+    else:
+        return None
