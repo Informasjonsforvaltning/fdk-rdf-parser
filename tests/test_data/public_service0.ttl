@@ -55,6 +55,10 @@
         foaf:homepage <http://testhomepage0.no>, <http://testhomepage1.no> ;
         dcat:keyword "Serveringsbevilling"@nb .
 
+<http://publications.europa.eu/resource/authority/main-activity/airport>
+        dc:identifier  "airport";
+        skos:prefLabel  "Airport-related activities"@en .
+
 <http://purl.org/adms/status/Completed>
         a               skos:Concept;
         skos:notation   "Completed";

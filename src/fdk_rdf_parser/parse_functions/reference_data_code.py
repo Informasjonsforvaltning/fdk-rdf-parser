@@ -21,22 +21,8 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
     resource_list,
-    value_list,
     value_translations,
 )
-
-
-def extract_reference_data_code_list(
-    graph: Graph, subject: URIRef, predicate: URIRef
-) -> Optional[List[ReferenceDataCode]]:
-    ref_data_codes = []
-    uri_list = value_list(graph, subject, predicate)
-    if uri_list is None:
-        return None
-    else:
-        for uri in uri_list:
-            ref_data_codes.append(ReferenceDataCode(uri=uri))
-        return ref_data_codes if len(ref_data_codes) > 0 else None
 
 
 def filter_reference_data_code_list(
@@ -192,3 +178,16 @@ def extract_reference_publisher_type(
         )
     else:
         return None
+
+
+def extract_reference_main_activities(
+    graph: Graph, subject: URIRef
+) -> Optional[List[ReferenceDataCode]]:
+    activities = []
+    ref_list = resource_list(graph, subject, DCTERMS.type)
+    for activity_ref in ref_list:
+        activity = parse_reference_code(
+            graph, activity_ref, DC.identifier, SKOS.prefLabel
+        )
+        activities.append(activity)
+    return filter_reference_data_code_list(activities)
