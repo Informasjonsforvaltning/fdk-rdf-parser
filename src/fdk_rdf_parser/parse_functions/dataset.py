@@ -44,8 +44,8 @@ from .harvest_meta_data import extract_meta_data
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
 from .reference_data_code import (
-    extract_reference_data_code,
     extract_reference_frequency,
+    extract_reference_provenance,
 )
 from .references import extract_references
 from .skos_concept import extract_skos_concept
@@ -80,9 +80,7 @@ def parse_dataset(
         page=value_set(datasets_graph, dataset_uri, FOAF.page),
         temporal=extract_temporal(datasets_graph, dataset_uri),
         subject=extract_subjects(datasets_graph, dataset_uri),
-        provenance=extract_reference_data_code(
-            datasets_graph, dataset_uri, DCTERMS.provenance
-        ),
+        provenance=extract_reference_provenance(datasets_graph, dataset_uri),
         accrualPeriodicity=extract_reference_frequency(datasets_graph, dataset_uri),
         hasAccuracyAnnotation=quality_annotations.get(
             dqv_iso_uri("Accuracy").toPython()
