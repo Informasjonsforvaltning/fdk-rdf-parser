@@ -66,7 +66,7 @@ digdir:Utgiver  a       foaf:Agent , owl:NamedIndividual ;
 digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:conformsTo          <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model> ;
         dct:description    "Modell med diverse i. Inneholder modellelementer som AltMuligModell skal peke til."@nb ;
-        dct:hasFormat      <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> ;
+        dct:hasFormat      <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> , <https://format.for/mat> ;
         dct:identifier     "https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell" ;
         dct:isPartOf       digdir:AltMuligModell ;
         dct:isReplacedBy   digdir:AdresseModell ;
@@ -111,6 +111,11 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         dct:language <http://pubs.europa.eu/resource/authority/language/NOR> ;
         rdfs:seeAlso <https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png> ;
         dct:title   "Image of the logical data model (LDM)"@en .
+
+<https://format.for/mat>
+        a           foaf:Document ;
+        dct:format  <http://publications.europa.eu/resource/authority/file-type/JPG> ;
+        dct:title   "Image of test"@en .
 
 <https://statswiki.unece.org/display/gsim/Generic+Statistical+Information+Model>
         a                dct:Standard ;
@@ -234,6 +239,11 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             ],
             hasFormat=[
                 Format(
+                    uri="https://format.for/mat",
+                    title={"en": "Image of test"},
+                    format="http://publications.europa.eu/resource/authority/file-type/JPG",
+                ),
+                Format(
                     uri="https://github.com/statisticsnorway/gsim-raml-schema/blob/master/ssb_gsim_ldm.png",
                     title={"en": "Image of the logical data model (LDM)"},
                     format="http://publications.europa.eu/resource/authority/file-type/PNG",
@@ -241,7 +251,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
                     language=ReferenceDataCode(
                         uri="http://pubs.europa.eu/resource/authority/language/NOR",
                     ),
-                )
+                ),
             ],
             homepage="https://www.difi.no/fagomrader-og-tjenester/digitalisering-og-samordning/nasjonal-arkitektur/informasjonsforvaltning/adresse-felles-informasjonsmodell",
             status="http://purl.org/adms/status/Completed",
