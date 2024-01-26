@@ -302,9 +302,9 @@ def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> 
         status=extract_status(graph, concept_uri),
         application=parse_applications(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),
-        prefLabel=pref_label_list[0]
-        if pref_label_list and len(pref_label_list) > 0
-        else None,
+        prefLabel=(
+            pref_label_list[0] if pref_label_list and len(pref_label_list) > 0 else None
+        ),
         hiddenLabel=parse_label_set(graph, concept_uri, skosxl_uri("hiddenLabel")),
         altLabel=parse_label_set(graph, concept_uri, skosxl_uri("altLabel")),
         contactPoint=contact_points[0] if contact_points else None,

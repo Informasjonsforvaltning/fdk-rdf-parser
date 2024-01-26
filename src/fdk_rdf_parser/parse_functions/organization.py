@@ -31,9 +31,11 @@ from .reference_data_code import extract_reference_data_code
 
 def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
     organization = Organization(
-        uri=organization_uri.toPython()
-        if isinstance(organization_uri, URIRef)
-        else None,
+        uri=(
+            organization_uri.toPython()
+            if isinstance(organization_uri, URIRef)
+            else None
+        ),
         identifier=object_value(graph, organization_uri, DCTERMS.identifier),
     )
     if is_type(org_uri("Organization"), graph, organization_uri) or is_type(

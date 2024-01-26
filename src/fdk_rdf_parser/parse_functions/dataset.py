@@ -97,20 +97,26 @@ def parse_dataset(
         hasRelevanceAnnotation=quality_annotations.get(
             dqv_iso_uri("Relevance").toPython()
         ),
-        legalBasisForRestriction=cpsv_follows["restriction"]
-        if len(cpsv_follows["restriction"]) > 0
-        else extract_skos_concept(
-            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForRestriction")
+        legalBasisForRestriction=(
+            cpsv_follows["restriction"]
+            if len(cpsv_follows["restriction"]) > 0
+            else extract_skos_concept(
+                datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForRestriction")
+            )
         ),
-        legalBasisForProcessing=cpsv_follows["processing"]
-        if len(cpsv_follows["processing"]) > 0
-        else extract_skos_concept(
-            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForProcessing")
+        legalBasisForProcessing=(
+            cpsv_follows["processing"]
+            if len(cpsv_follows["processing"]) > 0
+            else extract_skos_concept(
+                datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForProcessing")
+            )
         ),
-        legalBasisForAccess=cpsv_follows["access"]
-        if len(cpsv_follows["access"]) > 0
-        else extract_skos_concept(
-            datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForAccess")
+        legalBasisForAccess=(
+            cpsv_follows["access"]
+            if len(cpsv_follows["access"]) > 0
+            else extract_skos_concept(
+                datasets_graph, dataset_uri, dcat_ap_no_uri("legalBasisForAccess")
+            )
         ),
         conformsTo=extract_conforms_to(datasets_graph, dataset_uri),
         informationModel=extract_skos_concept(
@@ -128,9 +134,11 @@ def parse_dataset(
         isRelatedToTransportportal=extract_boolean(
             datasets_graph, dataset_uri, fdk_uri("isRelatedToTransportportal")
         ),
-        inSeries=extract_series_info(datasets_graph, URIRef(dataset_series_uri))
-        if dataset_series_uri
-        else None,
+        inSeries=(
+            extract_series_info(datasets_graph, URIRef(dataset_series_uri))
+            if dataset_series_uri
+            else None
+        ),
         prev=object_value(datasets_graph, dataset_uri, dcat_uri("prev")),
     )
 
@@ -148,11 +156,13 @@ def parse_dataset_series(datasets_graph: Graph, dataset_uri: URIRef) -> DatasetS
     prev_dataset_uri = object_value(datasets_graph, dataset_uri, dcat_uri("last"))
     return DatasetSeries(
         last=prev_dataset_uri,
-        datasetsInSeries=extract_datasets_in_series(
-            datasets_graph, dataset_uri.toPython(), prev_dataset_uri
-        )
-        if prev_dataset_uri
-        else None,
+        datasetsInSeries=(
+            extract_datasets_in_series(
+                datasets_graph, dataset_uri.toPython(), prev_dataset_uri
+            )
+            if prev_dataset_uri
+            else None
+        ),
     )
 
 
@@ -227,11 +237,11 @@ def extract_legal_basis_from_cpsv_follows(
             skos_concept = SkosConcept(
                 uri=object_value(datasets_graph, implements_ref, RDFS.seeAlso),
                 extraType=rule_type,
-                prefLabel=value_translations(
-                    datasets_graph, legal_type_ref, SKOS.prefLabel
-                )
-                if legal_type_ref
-                else None,
+                prefLabel=(
+                    value_translations(datasets_graph, legal_type_ref, SKOS.prefLabel)
+                    if legal_type_ref
+                    else None
+                ),
             )
 
             if "ruleForNonDisclosure" in rule_type:
