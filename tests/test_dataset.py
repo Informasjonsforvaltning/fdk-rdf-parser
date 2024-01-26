@@ -133,12 +133,6 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 Reference(
                     referenceType=ReferenceDataCode(
                         uri="http://purl.org/dc/terms/relation",
-                        code="relation",
-                        prefLabel={
-                            "nn": "Er relatert til",
-                            "nb": "Er relatert til",
-                            "en": "Has relation to",
-                        },
                     ),
                     source=SkosConcept(
                         uri="https://testdirektoratet.no/model/dataset/0"

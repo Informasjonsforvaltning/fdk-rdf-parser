@@ -37,8 +37,6 @@ from .rdf_utils import (
 )
 from .reference_data import (
     extend_cpsvno_service_with_reference_data,
-    extend_dataset_with_reference_data,
-    get_dataset_reference_data,
     get_public_service_reference_data,
 )
 
@@ -69,7 +67,6 @@ def parse_data_services(
 
 def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Dataset]:
     datasets_graph = Graph().parse(data=rdf_data, format=rdf_format)
-    reference_data = get_dataset_reference_data()
 
     datasets: Dict[str, Dataset] = {}
 
@@ -87,7 +84,6 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
 
             dataset = Dataset()
             dataset.add_values_from_partial(values=partial_dataset)
-            dataset = extend_dataset_with_reference_data(dataset, reference_data)
 
             if is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri):
                 series = parse_dataset_series(datasets_graph, primary_topic_uri)
