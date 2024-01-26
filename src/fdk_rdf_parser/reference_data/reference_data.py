@@ -11,11 +11,6 @@ from .utils import remove_scheme_and_trailing_slash
 
 
 @dataclass
-class DatasetReferenceData:
-    referencetypes: Optional[Dict[str, ReferenceDataCode]] = None
-
-
-@dataclass
 class PublicServiceReferenceData:
     week_days: Optional[Dict[str, ReferenceDataCode]] = None
     statuses: Optional[Dict[str, ReferenceDataCode]] = None
@@ -24,12 +19,6 @@ class PublicServiceReferenceData:
     channel_type: Optional[Dict[str, ReferenceDataCode]] = None
     organization_types: Optional[Dict[str, ReferenceDataCode]] = None
     role_types: Optional[Dict[str, ReferenceDataCode]] = None
-
-
-def get_dataset_reference_data() -> DatasetReferenceData:
-    return DatasetReferenceData(
-        referencetypes=get_and_map_reference_types(),
-    )
 
 
 def get_public_service_reference_data() -> PublicServiceReferenceData:
@@ -58,11 +47,6 @@ def parse_reference_codes(
         }
     else:
         return None
-
-
-def get_and_map_reference_types() -> Optional[Dict[str, ReferenceDataCode]]:
-    reference_types = get_reference_data("/reference-types").get("referenceTypes")
-    return parse_reference_codes(reference_types)
 
 
 def get_and_map_week_days() -> Optional[Dict[str, ReferenceDataCode]]:
