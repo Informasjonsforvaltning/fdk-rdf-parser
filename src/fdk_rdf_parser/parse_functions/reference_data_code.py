@@ -26,13 +26,6 @@ from fdk_rdf_parser.rdf_utils import (
 )
 
 
-def extract_reference_data_code(
-    graph: Graph, subject: URIRef, predicate: URIRef
-) -> Optional[ReferenceDataCode]:
-    uri = object_value(graph, subject, predicate)
-    return ReferenceDataCode(uri=uri) if uri is not None else None
-
-
 def extract_reference_data_code_list(
     graph: Graph, subject: URIRef, predicate: URIRef
 ) -> Optional[List[ReferenceDataCode]]:
@@ -87,6 +80,18 @@ def extract_reference_language_list(
             )
         )
     return filter_reference_data_code_list(lang_list)
+
+
+def extract_reference_language_code(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> Optional[ReferenceDataCode]:
+    lang_ref = graph.value(subject, predicate)
+    if lang_ref:
+        return filter_reference_data_code(
+            parse_reference_code(graph, lang_ref, DC.identifier, SKOS.prefLabel)
+        )
+    else:
+        return None
 
 
 def extract_reference_access_rights(

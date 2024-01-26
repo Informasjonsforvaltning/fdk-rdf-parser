@@ -19,7 +19,7 @@ from fdk_rdf_parser.rdf_utils import (
     resource_list,
     value_translations,
 )
-from .reference_data_code import extract_reference_data_code
+from .reference_data_code import extract_reference_language_code
 
 
 def extract_formats(graph: Graph, subject: URIRef) -> Optional[List[Format]]:
@@ -31,7 +31,9 @@ def extract_formats(graph: Graph, subject: URIRef) -> Optional[List[Format]]:
                 uri=format_uri,
                 title=value_translations(graph, resource, DCTERMS.title),
                 format=object_value(graph, resource, dct_uri("format")),
-                language=extract_reference_data_code(graph, resource, DCTERMS.language),
+                language=extract_reference_language_code(
+                    graph, resource, DCTERMS.language
+                ),
                 seeAlso=object_value(graph, resource, RDFS.seeAlso),
             )
         )
