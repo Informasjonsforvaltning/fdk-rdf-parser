@@ -21,3 +21,4 @@ class LifeEvent(Event):
         self.mayInitiate = values.mayInitiate
         self.subject = values.subject
         self.distribution = values.distribution
+        self.catalog = values.catalog

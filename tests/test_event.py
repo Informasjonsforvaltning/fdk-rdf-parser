@@ -3,9 +3,11 @@ from unittest.mock import Mock
 from fdk_rdf_parser import parse_events
 from fdk_rdf_parser.classes import (
     BusinessEvent,
+    Catalog,
     Event,
     HarvestMetaData,
     LifeEvent,
+    Publisher,
     SkosConcept,
 )
 
@@ -26,6 +28,26 @@ def test_parse_events(
             @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
             @prefix schema:  <http://schema.org/> .
             @prefix eli: <http://data.europa.eu/eli/ontology#> .
+            @prefix dcatno: <https://data.norge.no/vocabulary/dcatno#> .
+
+
+            <http://localhost:5000/events/catalog>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "catalog" ;
+                dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/event-catalog> ;
+            .
+
+            <http://public-service-publisher.fellesdatakatalog.digdir.no/event-catalog>
+                a                        dcat:Catalog;
+                dct:title                "Hendelseskatalog"@nb ;
+                dct:identifier           "hendelsekatalog-1" ;
+                dct:description          "En fin hendelseskatalog"@nb ;
+                dct:publisher            <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
+                dcatno:containsEvent     <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> ,
+                                         <http://public-service-publisher.fellesdatakatalog.digdir.no/events/2> ;
+            .
 
             <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1> a cv:BusinessEvent ;
                 dct:identifier "1" ;
@@ -83,6 +105,7 @@ def test_parse_events(
                     dct:identifier     "fdk-2" ;
                     dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:isPartOf       <http://localhost:5000/events/catalog> ;
                     foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/2>
             .
 
@@ -91,6 +114,7 @@ def test_parse_events(
                     dct:identifier     "fdk-1" ;
                     dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
                     dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+                    dct:isPartOf       <http://localhost:5000/events/catalog> ;
                     foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/events/1>
             .
 
@@ -115,7 +139,8 @@ def test_parse_events(
                     rov:legalName          "Digitaliseringsdirektoratet" ;
                     foaf:name              "Digitaliseringsdirektoratet"@nn , "Digitaliseringsdirektoratet"@nb , "Norwegian Digitalisation Agency"@en ;
                     rov:orgType            orgtype:ORGL ;
-                    br:orgPath             "/STAT/987654321/123456789" ."""
+                    br:orgPath             "/STAT/987654321/123456789" ;
+            ."""
 
     expected = {
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/1": BusinessEvent(
@@ -153,6 +178,15 @@ def test_parse_events(
                 "https://data.norge.no/concepts/313",
             ],
             specialized_type="business_event",
+            catalog=Catalog(
+                id="catalog",
+                uri="http://public-service-publisher.fellesdatakatalog.digdir.no/event-catalog",
+                title={"nb": "Hendelseskatalog"},
+                description={"nb": "En fin hendelseskatalog"},
+                publisher=Publisher(
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                ),
+            ),
         ),
         "http://public-service-publisher.fellesdatakatalog.digdir.no/events/2": LifeEvent(
             id="fdk-2",
@@ -167,6 +201,15 @@ def test_parse_events(
                 "http://public-service-publisher.fellesdatakatalog.digdir.no/services/1"
             ],
             specialized_type="life_event",
+            catalog=Catalog(
+                id="catalog",
+                uri="http://public-service-publisher.fellesdatakatalog.digdir.no/event-catalog",
+                title={"nb": "Hendelseskatalog"},
+                description={"nb": "En fin hendelseskatalog"},
+                publisher=Publisher(
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                ),
+            ),
         ),
     }
 
