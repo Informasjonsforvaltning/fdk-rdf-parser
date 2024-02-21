@@ -27,6 +27,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_translations,
 )
 from .agent import extract_participating_agents
+from .catalog import parse_catalog
 from .channel import extract_channels
 from .contactpoint import extract_cv_contact_point
 from .cost import extract_costs
@@ -145,6 +146,7 @@ def parse_cpsvno_service(
         participatingAgents=extract_participating_agents(
             services_graph, cpsvno_service_uri
         ),
+        catalog=parse_catalog(services_graph, catalog_record_uri),
     )
 
     if is_type(cpsv_uri("PublicService"), services_graph, cpsvno_service_uri):

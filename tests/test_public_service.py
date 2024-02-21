@@ -4,6 +4,7 @@ from fdk_rdf_parser import parse_public_services
 from fdk_rdf_parser.classes import (
     Address,
     Agent,
+    Catalog,
     Channel,
     Cost,
     CVContactPoint,
@@ -16,6 +17,7 @@ from fdk_rdf_parser.classes import (
     Output,
     Participation,
     PublicService,
+    Publisher,
     ReferenceDataCode,
     Requirement,
     Rule,
@@ -410,6 +412,15 @@ def test_complete_public_services(
                     ],
                 )
             ],
+            catalog=Catalog(
+                id="catalog",
+                uri="http://public-service-publisher.fellesdatakatalog.digdir.no/service-catalog",
+                title={"nb": "Tjenestekatalog"},
+                description={"nb": "En fin tjenestekatalog"},
+                publisher=Publisher(
+                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
+                ),
+            ),
         ),
     }
 

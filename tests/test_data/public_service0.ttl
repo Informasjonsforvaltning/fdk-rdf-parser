@@ -16,6 +16,23 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix dcatno: <https://data.norge.no/vocabulary/dcatno#> .
+
+
+<http://localhost:5000/services/catalog>
+        a                  dcat:CatalogRecord ;
+        dct:identifier     "catalog" ;
+        dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/service-catalog> .
+
+<http://public-service-publisher.fellesdatakatalog.digdir.no/service-catalog>
+        a                        dcat:Catalog;
+        dct:title                "Tjenestekatalog"@nb ;
+        dct:identifier           "tjenestekatalog-1" ;
+        dct:description          "En fin tjenestekatalog"@nb ;
+        dct:publisher            <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> ;
+        dcatno:containsService   <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
 
 <http://public-service-publisher.fellesdatakatalog.digdir.no/services/2> a cpsv:PublicService ;
         cv:hasCompetentAuthority    <http://public-service-publisher.fellesdatakatalog.digdir.no/public-organisation/3> ;
@@ -261,6 +278,7 @@
         dct:identifier     "fdk-1" ;
         dct:issued         "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
         dct:modified       "2020-10-05T13:15:39.831Z"^^xsd:dateTime ;
+        dct:isPartOf       <http://localhost:5000/services/catalog> ;
         foaf:primaryTopic  <http://public-service-publisher.fellesdatakatalog.digdir.no/services/1> .
 
 <https://organization-catalog.fellesdatakatalog.digdir.no/organizations/123456789>
