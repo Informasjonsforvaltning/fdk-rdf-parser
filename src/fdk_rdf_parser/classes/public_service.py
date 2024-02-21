@@ -49,3 +49,4 @@ class PublicService(Service):
         self.losThemes = values.losThemes
         self.euDataThemes = values.euDataThemes
         self.participatingAgents = values.participatingAgents
+        self.catalog = values.catalog

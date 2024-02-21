@@ -11,6 +11,7 @@ from fdk_rdf_parser.classes.theme import (
     LosNode,
 )
 from .agent import Agent
+from .catalog import Catalog
 from .channel import Channel
 from .contactpoint import CVContactPoint
 from .cost import Cost
@@ -63,3 +64,4 @@ class Service:
     euDataThemes: Optional[List[EuDataTheme]] = None
     eurovocThemes: Optional[List[Eurovoc]] = None
     participatingAgents: Optional[List[Agent]] = None
+    catalog: Optional[Catalog] = None
