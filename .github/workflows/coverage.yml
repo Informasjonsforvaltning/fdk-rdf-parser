@@ -5,8 +5,9 @@ jobs:
     name: Coverage
     uses: Informasjonsforvaltning/workflows/.github/workflows/coverage-nox.yaml@main
     with:
-      python_version: '3.9'
+      python_version: "3.9"
       python_architecture: x64
       sessions: tests
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
