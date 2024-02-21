@@ -5,6 +5,7 @@ from typing import (
     Optional,
 )
 
+from .catalog import Catalog
 from .harvest_meta_data import HarvestMetaData
 from .skos_concept import SkosConcept
 
@@ -23,3 +24,4 @@ class Event:
     mayInitiate: Optional[List[str]] = None
     subject: Optional[List[str]] = None
     distribution: Optional[List[str]] = None
+    catalog: Optional[Catalog] = None

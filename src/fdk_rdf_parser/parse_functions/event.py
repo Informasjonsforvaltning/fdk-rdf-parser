@@ -28,6 +28,7 @@ from fdk_rdf_parser.rdf_utils import (
     value_list,
     value_translations,
 )
+from .catalog import parse_catalog
 from .harvest_meta_data import extract_meta_data
 from .skos_concept import extract_skos_concept
 
@@ -86,6 +87,7 @@ def parse_event(
         mayInitiate=value_list(graph, subject, cpsvno_uri("mayInitiate")),
         subject=value_list(graph, subject, DCTERMS.subject),
         distribution=value_list(graph, subject, DCAT.distribution),
+        catalog=parse_catalog(graph, catalog_record_uri),
     )
 
     if is_type(
