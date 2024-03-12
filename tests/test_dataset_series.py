@@ -16,7 +16,10 @@ from fdk_rdf_parser.classes import (
     Publisher,
     ReferenceDataCode,
 )
-from fdk_rdf_parser.fdk_rdf_parser import parse_dataset, parse_dataset_json_serializable
+from fdk_rdf_parser.fdk_rdf_parser import (
+    parse_dataset,
+    parse_dataset_json_serializable,
+)
 from fdk_rdf_parser.parse_functions.dataset import _parse_dataset_series
 
 

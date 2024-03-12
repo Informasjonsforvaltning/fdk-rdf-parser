@@ -28,10 +28,10 @@ from .classes import (
 )
 from .parse_functions import (
     _parse_concept,
+    _parse_data_service,
     _parse_dataset,
     _parse_dataset_series,
     parse_cpsvno_service,
-    parse_data_service,
     parse_event,
     parse_information_model,
 )
@@ -60,7 +60,7 @@ def parse_data_services(
         if primary_topic_uri and is_type(
             dcat_uri("DataService"), data_services_graph, primary_topic_uri
         ):
-            data_service = parse_data_service(
+            data_service = _parse_data_service(
                 data_services_graph, record_uri, primary_topic_uri
             )
 
@@ -248,7 +248,7 @@ def parse_dataset(graph: str, rdf_format: str = "turtle") -> Union[Dataset, None
 
 def parse_dataset_json_serializable(
     graph: str, rdf_format: str = "turtle"
-) -> Union[Dict[Any, Any], None]:
+) -> Union[Dict[str, Any], None]:
     dataset = parse_dataset(graph, rdf_format)
     return asdict(dataset) if dataset else None
 
@@ -261,23 +261,34 @@ def _parse_resource(
 ) -> Union[Any, None]:
     rdf_model = Graph().parse(data=graph, format=rdf_format)
 
-    record_uri = next(
-        rdf_model.subjects(predicate=RDF.type, object=dcat_uri("CatalogRecord")),
-        None,
+    resource_uri = []
+    for rdf_type in resource_rdf_types:
+        subjects = list(rdf_model.subjects(predicate=RDF.type, object=rdf_type))
+        for s in subjects:
+            resource_uri.append(s)
+
+    if len(resource_uri) > 1:
+        raise ValueError("Multiple resources found in graph")
+
+    resource_uri = resource_uri[0] if resource_uri else None
+    if resource_uri is None:
+        return None
+
+    record_uri = list(
+        rdf_model.subjects(predicate=FOAF.primaryTopic, object=resource_uri)
     )
-    if record_uri is None:
+    if len(record_uri) > 1:
+        raise ValueError(
+            "Multiple records with resource as primary topic found in graph"
+        )
+    if not record_uri:
         return None
 
-    primary_topic_uri = rdf_model.value(record_uri, FOAF.primaryTopic)
-    if primary_topic_uri is None or not any(
-        [
-            is_type(rdf_type, rdf_model, primary_topic_uri)
-            for rdf_type in resource_rdf_types
-        ]
-    ):
+    record_uri = record_uri[0]
+    if not is_type(dcat_uri("CatalogRecord"), rdf_model, record_uri):
         return None
 
-    return parse_func(rdf_model, record_uri, primary_topic_uri)
+    return parse_func(rdf_model, record_uri, resource_uri)
 
 
 def parse_concept(graph: str, rdf_format: str = "turtle") -> Union[Concept, None]:
@@ -286,6 +297,21 @@ def parse_concept(graph: str, rdf_format: str = "turtle") -> Union[Concept, None
 
 def parse_concept_json_serializable(
     graph: str, rdf_format: str = "turtle"
-) -> Union[Dict[Any, Any], None]:
+) -> Union[Dict[str, Any], None]:
     concept = parse_concept(graph, rdf_format)
     return asdict(concept) if concept else None
+
+
+def parse_data_service(
+    graph: str, rdf_format: str = "turtle"
+) -> Union[DataService, None]:
+    return _parse_resource(
+        graph, [dcat_uri("DataService")], rdf_format, _parse_data_service
+    )
+
+
+def parse_dataservice_json_serializable(
+    graph: str, rdf_format: str = "turtle"
+) -> Union[Dict[str, Any], None]:
+    data_service = parse_data_service(graph, rdf_format)
+    return asdict(data_service) if data_service else None
