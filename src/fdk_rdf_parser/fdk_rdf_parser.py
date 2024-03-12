@@ -1,12 +1,17 @@
 from dataclasses import asdict
 from typing import (
     Any,
+    Callable,
     Dict,
+    List,
     Optional,
     Union,
 )
 
-from rdflib import Graph
+from rdflib import (
+    Graph,
+    URIRef,
+)
 from rdflib.namespace import (
     FOAF,
     RDF,
@@ -22,9 +27,9 @@ from .classes import (
     Service,
 )
 from .parse_functions import (
+    _parse_concept,
     _parse_dataset,
     _parse_dataset_series,
-    parse_concept,
     parse_cpsvno_service,
     parse_data_service,
     parse_event,
@@ -204,7 +209,7 @@ def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, C
             concepts_graph,
             primary_topic_uri,
         ):
-            concept = parse_concept(concepts_graph, record_uri, primary_topic_uri)
+            concept = _parse_concept(concepts_graph, record_uri, primary_topic_uri)
 
             concepts[primary_topic_uri.toPython()] = concept
 
@@ -246,3 +251,41 @@ def parse_dataset_json_serializable(
 ) -> Union[Dict[Any, Any], None]:
     dataset = parse_dataset(graph, rdf_format)
     return asdict(dataset) if dataset else None
+
+
+def _parse_resource(
+    graph: str,
+    resource_rdf_types: List[URIRef],
+    rdf_format: str,
+    parse_func: Callable[[Graph, URIRef, URIRef], Union[Any, None]],
+) -> Union[Any, None]:
+    rdf_model = Graph().parse(data=graph, format=rdf_format)
+
+    record_uri = next(
+        rdf_model.subjects(predicate=RDF.type, object=dcat_uri("CatalogRecord")),
+        None,
+    )
+    if record_uri is None:
+        return None
+
+    primary_topic_uri = rdf_model.value(record_uri, FOAF.primaryTopic)
+    if primary_topic_uri is None or not any(
+        [
+            is_type(rdf_type, rdf_model, primary_topic_uri)
+            for rdf_type in resource_rdf_types
+        ]
+    ):
+        return None
+
+    return parse_func(rdf_model, record_uri, primary_topic_uri)
+
+
+def parse_concept(graph: str, rdf_format: str = "turtle") -> Union[Concept, None]:
+    return _parse_resource(graph, [SKOS.Concept], rdf_format, _parse_concept)
+
+
+def parse_concept_json_serializable(
+    graph: str, rdf_format: str = "turtle"
+) -> Union[Dict[Any, Any], None]:
+    concept = parse_concept(graph, rdf_format)
+    return asdict(concept) if concept else None

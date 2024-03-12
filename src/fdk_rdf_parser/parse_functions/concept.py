@@ -284,7 +284,9 @@ def parse_label_set(
     return values if len(values) > 0 else None
 
 
-def parse_concept(graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef) -> Concept:
+def _parse_concept(
+    graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef
+) -> Concept:
     concept_temporal_list = extract_temporal(graph, concept_uri)
     concept_temporal = concept_temporal_list[0] if concept_temporal_list else Temporal()
     contact_points = extract_contact_points(graph, concept_uri)

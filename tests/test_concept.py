@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from unittest.mock import Mock
 
 from rdflib import (
@@ -21,7 +22,8 @@ from fdk_rdf_parser.classes.concept import (
     Subject,
     TextAndURI,
 )
-from fdk_rdf_parser.parse_functions import parse_concept
+from fdk_rdf_parser.fdk_rdf_parser import parse_concept, parse_concept_json_serializable
+from fdk_rdf_parser.parse_functions import _parse_concept
 
 
 def test_parse_concepts(mock_reference_data_client: Mock) -> None:
@@ -505,7 +507,7 @@ def test_parse_concept_handles_wrong_collection_type(
         "https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f"
     )
 
-    result = parse_concept(graph, record_uri, concept_uri)
+    result = _parse_concept(graph, record_uri, concept_uri)
 
     assert result == expected
 
@@ -576,6 +578,197 @@ def test_parse_concept_with_old_skosno(
         "https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a"
     )
 
-    result = parse_concept(graph, record_uri, concept_uri)
+    result = _parse_concept(graph, record_uri, concept_uri)
 
     assert result == expected
+
+
+def test_parse_concept(mock_reference_data_client: Mock) -> None:
+    src = """
+    @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+    @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
+    @prefix rov:   <http://www.w3.org/ns/regorg#> .
+    @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+    @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+    @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+    @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+    @prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
+    @prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
+    @prefix uneskos: <http://purl.org/umu/uneskos#> .
+
+    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
+            a               skos:Collection ;
+            rdfs:label      "Concept collection belonging to 910258028" ;
+            dct:identifier  "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028" ;
+            dct:publisher   <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+            skos:member     <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0> .
+
+    <https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "55a38009-e114-301f-aa7c-8b5f09529f0f" ;
+            dct:isPartOf       <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662> ;
+            dct:issued         "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            dct:modified       "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0> .
+
+    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0>
+            a                   skos:Concept ;
+            dct:created        "2023-02-17"^^xsd:date ;
+            dct:identifier      "1843b048-f9af-4665-8e53-3c001d0166c0" ;
+            dct:modified        "2019-12-16"^^xsd:date ;
+            euvoc:status        <http://publications.europa.eu/resource/authority/concept-status/CURRENT> ;
+            dct:publisher       <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+            skos:exactMatch     <http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940> ;
+            skos:closeMatch     <http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940> ;
+            uneskos:memberOf    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ;
+            skosxl:altLabel     [ a                   skosxl:Label ;
+                                skosxl:literalForm  "w"@nb
+                                ] ;
+            skosxl:hiddenLabel  [ ] ;
+            skosxl:prefLabel    [ a                   skosxl:Label ;
+                                skosxl:literalForm  "to"@nb
+                                ] ;
+            skosno:definisjon   [ a           skosno:Definisjon ;
+                                rdfs:label  "dfgfg"@nb ;
+                                dct:audience skosno:blabla ;
+                                skosno:forholdTilKilde  skosno:blabla
+                                ] .
+
+
+    <http://publications.europa.eu/resource/authority/concept-status/CURRENT>
+            skos:prefLabel  "current"@en , "gjeldende"@no , "gjeldande"@nn , "gjeldende"@nb .
+
+
+    <https://data.brreg.no/enhetsregisteret/api/enheter/987654321>
+            a                      rov:RegisteredOrganization ;
+            dct:identifier         "987654321" ;
+            rov:legalName          "Testdirektoratet" ;
+            foaf:name              "Testdirektoratet"@nb ;
+            rov:orgType            orgtype:STAT ;
+            br:orgPath             "/STAT/987654321" .
+
+    <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "5e08611a-4e94-3d8f-9d9f-d3a292ec1662" ;
+            dct:issued         "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            dct:modified       "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ."""
+
+    expected = Concept(
+        id="55a38009-e114-301f-aa7c-8b5f09529f0f",
+        uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f",
+        created="2023-02-17",
+        identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
+        harvest=HarvestMetaData(
+            firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+        ),
+        collection=Collection(
+            id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",
+            uri="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028",
+            label={"nb": "Concept collection belonging to 910258028"},
+            publisher=Publisher(
+                uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
+            ),
+        ),
+        publisher=Publisher(
+            uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
+        ),
+        exactMatch={
+            "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940"
+        },
+        closeMatch={
+            "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940"
+        },
+        memberOf={
+            "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028"
+        },
+        prefLabel={"nb": "to"},
+        status={
+            "en": "current",
+            "no": "gjeldende",
+            "nn": "gjeldande",
+            "nb": "gjeldende",
+        },
+        altLabel=[{"nb": "w"}],
+        definition=Definition(text={"nb": "dfgfg"}),
+        type="concept",
+    )
+
+    result = parse_concept(src)
+
+    assert result == expected
+
+    result_json_serializable = parse_concept_json_serializable(src)
+    assert result_json_serializable == asdict(expected)
+
+
+def test_parse_concept_missing_record_returns_none(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+    @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
+            a               skos:Collection ;
+            rdfs:label      "Concept collection belonging to 910258028" ;
+            dct:identifier  "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028" ;
+            dct:publisher   <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+            skos:member     <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0> .
+
+    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0>
+            a                   skos:Concept ;
+            dct:created        "2023-02-17"^^xsd:date ;
+            dct:identifier      "1843b048-f9af-4665-8e53-3c001d0166c0"
+            .
+    """
+
+    assert parse_concept(src) is None
+    assert parse_concept_json_serializable(src) is None
+
+
+def test_parse_concept_missing_resource_returns_none(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+    @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+    @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+    @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix dct:   <http://purl.org/dc/terms/> .
+    @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+    @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
+            a               skos:Collection ;
+            rdfs:label      "Concept collection belonging to 910258028" ;
+            dct:identifier  "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028" ;
+            dct:publisher   <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
+            skos:member     <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0> .
+
+    <https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "55a38009-e114-301f-aa7c-8b5f09529f0f" ;
+            dct:isPartOf       <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662> ;
+            dct:issued         "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            dct:modified       "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0> .
+
+    <https://concepts.staging.fellesdatakatalog.digdir.no/collections/5e08611a-4e94-3d8f-9d9f-d3a292ec1662>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "5e08611a-4e94-3d8f-9d9f-d3a292ec1662" ;
+            dct:issued         "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            dct:modified       "2021-02-17T09:39:13.293Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ."""
+
+    assert parse_concept(src) is None
+    assert parse_concept_json_serializable(src) is None
