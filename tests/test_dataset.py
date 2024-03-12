@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from typing import Dict
 from unittest.mock import Mock
 
@@ -24,7 +25,8 @@ from fdk_rdf_parser.classes import (
     SkosConcept,
     Subject,
 )
-from fdk_rdf_parser.parse_functions import parse_dataset
+from fdk_rdf_parser.fdk_rdf_parser import parse_dataset, parse_dataset_json_serializable
+from fdk_rdf_parser.parse_functions import _parse_dataset
 
 
 def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
@@ -352,7 +354,7 @@ def test_parse_dataset() -> None:
         "https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca"
     )
 
-    assert parse_dataset(datasets_graph, record_uri, dataset_uri) == expected
+    assert _parse_dataset(datasets_graph, record_uri, dataset_uri) == expected
 
 
 def test_dataset_has_quality_annotations() -> None:
@@ -418,7 +420,7 @@ def test_dataset_has_quality_annotations() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/quality")
 
-    assert parse_dataset(graph, URIRef("record"), subject) == expected
+    assert _parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_legal_basis_fields() -> None:
@@ -475,7 +477,7 @@ def test_legal_basis_fields() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
-    assert parse_dataset(graph, URIRef("record"), subject) == expected
+    assert _parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_informationmodel_and_conformsto() -> None:
@@ -519,7 +521,7 @@ def test_informationmodel_and_conformsto() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
-    assert parse_dataset(graph, URIRef("record"), subject) == expected
+    assert _parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_distribution_and_sample() -> None:
@@ -611,7 +613,7 @@ def test_distribution_and_sample() -> None:
     graph = Graph().parse(data=src, format="turtle")
     subject = URIRef("https://testdirektoratet.no/model/dataset/0")
 
-    assert parse_dataset(graph, URIRef("record"), subject) == expected
+    assert _parse_dataset(graph, URIRef("record"), subject) == expected
 
 
 def test_qualified_attributions() -> None:
@@ -913,22 +915,22 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
             dcat:compressFormat  "text/unknown" ;
             dcat:packageFormat   [ ] .
 
-<https://www.iana.org/assignments/media-types/application/json>
-        a               dct:MediaType;
-        dct:identifier  "application/json";
-        dct:title       "json" .
+        <https://www.iana.org/assignments/media-types/application/json>
+                a               dct:MediaType;
+                dct:identifier  "application/json";
+                dct:title       "json" .
 
-<https://www.iana.org/assignments/media-types/text/html>
-        a               dct:MediaType;
-        dct:identifier  "text/html";
-        dct:title       "html" .
+        <https://www.iana.org/assignments/media-types/text/html>
+                a               dct:MediaType;
+                dct:identifier  "text/html";
+                dct:title       "html" .
 
-<http://publications.europa.eu/resource/authority/file-type/7Z>
-        a                   euvoc:FileType;
-        euvoc:xlNotation    [
-            euvoc:xlCodification  "application/x-7z-compressed";
-            dct:type        <http://publications.europa.eu/resource/authority/notation-type/IANA_MT> ];
-        dc:identifier       "7Z" .
+        <http://publications.europa.eu/resource/authority/file-type/7Z>
+                a                   euvoc:FileType;
+                euvoc:xlNotation    [
+                    euvoc:xlCodification  "application/x-7z-compressed";
+                    dct:type        <http://publications.europa.eu/resource/authority/notation-type/IANA_MT> ];
+                dc:identifier       "7Z" .
     """
     expected = {
         "https://testdirektoratet.no/model/dataset/0": Dataset(
@@ -988,3 +990,121 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
         ),
     }
     assert parse_datasets(src) == expected
+
+
+def test_parse_single_dataset() -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+                dct:accrualPeriodicity
+                    <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
+                dct:identifier
+                    "adb4cf00-31c8-460c-9563-55f204cf8221" ;
+                dct:publisher
+                    <http://data.brreg.no/enhetsregisteret/enhet/987654321> ;
+                dct:provenance
+                    <http://data.brreg.no/datakatalog/provinens/tredjepart> ;
+                dcat:endpointDescription
+                    <https://testdirektoratet.no/openapi/dataset/0.yaml> ;
+                dct:spatial
+                    <https://data.geonorge.no/administrativeEnheter/fylke/id/34> ;
+                dct:subject
+                    <https://testdirektoratet.no/model/concept/0> ,
+                    <https://testdirektoratet.no/model/concept/1> ;
+                foaf:page
+                    <https://testdirektoratet.no> .
+
+        <http://publications.europa.eu/resource/authority/frequency/ANNUAL>
+            dc:identifier  "ANNUAL";
+            skos:prefLabel  "annual"@en , "årleg"@nn , "årlig"@nb , "årlig"@no .
+
+        <https://data.geonorge.no/administrativeEnheter/fylke/id/34>
+                a               dct:Location;
+                dct:identifier  "34";
+                dct:title       "Innlandet" .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "a1c680ca" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-13"^^xsd:date ;
+                foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
+
+    expected = Dataset(
+        id="a1c680ca",
+        harvest=HarvestMetaData(
+            firstHarvested="2020-03-12T11:52:16Z",
+            changed=["2020-03-12T11:52:16Z", "2020-03-13"],
+        ),
+        identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
+        uri="https://testdirektoratet.no/model/dataset/0",
+        publisher=Publisher(
+            uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
+        ),
+        page={"https://testdirektoratet.no"},
+        subject=[
+            Subject(uri="https://testdirektoratet.no/model/concept/0"),
+            Subject(uri="https://testdirektoratet.no/model/concept/1"),
+        ],
+        accrualPeriodicity=ReferenceDataCode(
+            uri="http://publications.europa.eu/resource/authority/frequency/ANNUAL",
+            code="ANNUAL",
+            prefLabel={"en": "annual", "nn": "årleg", "nb": "årlig", "no": "årlig"},
+        ),
+        provenance=ReferenceDataCode(
+            uri="http://data.brreg.no/datakatalog/provinens/tredjepart"
+        ),
+        spatial=[
+            ReferenceDataCode(
+                uri="https://data.geonorge.no/administrativeEnheter/fylke/id/34",
+                code="34",
+                prefLabel={"nb": "Innlandet"},
+            )
+        ],
+    )
+
+    assert parse_dataset(src) == expected
+    assert parse_dataset_json_serializable(src) == asdict(expected)
+
+
+def test_parse_single_dataset_empty_graph_returns_none() -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+    """
+
+    assert parse_dataset(src) is None
+    assert parse_dataset_json_serializable(src) is None
+
+
+def test_parse_single_dataset_missing_primary_topic_returns_none() -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+        <https://testdirektoratet.no/model/dataset/0>
+                a                         dcat:Dataset ;
+        .
+
+        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "a1c680ca" ;
+                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+                dct:modified       "2020-03-13"^^xsd:date ."""
+
+    assert parse_dataset(src) is None
+    assert parse_dataset_json_serializable(src) is None
