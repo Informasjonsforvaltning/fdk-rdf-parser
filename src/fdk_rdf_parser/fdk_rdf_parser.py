@@ -266,7 +266,7 @@ def _parse_resource(
 ) -> ResourceType:
     try:
         parse_result = parse_func(graph, rdf_format)
-    except RdflibParserError as err:
+    except (RdflibParserError, SyntaxError) as err:
         raise ParserError() from err
     if len(parse_result) > 1:
         raise MultipleResourcesError()
