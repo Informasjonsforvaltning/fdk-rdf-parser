@@ -3,7 +3,6 @@ from typing import (
     Any,
     Callable,
     Dict,
-    Optional,
     Union,
 )
 
@@ -163,10 +162,8 @@ def parse_public_services(
     return cpsvno_services
 
 
-def parse_events(
-    event_rdf: str, rdf_format: str = "turtle"
-) -> Dict[str, Optional[Event]]:
-    events: Dict[str, Optional[Event]] = {}
+def parse_events(event_rdf: str, rdf_format: str = "turtle") -> Dict[str, Event]:
+    events: Dict[str, Event] = {}
     graph = Graph().parse(data=event_rdf, format=rdf_format)
 
     for catalog_record_uri in graph.subjects(
@@ -226,11 +223,7 @@ def _parse_resource(
         Callable[
             [Graph, str],
             Dict[str, ResourceType],
-        ],
-        Callable[  # distinct signature for events
-            [Graph, str],
-            Dict[str, Optional[ResourceType]],
-        ],
+        ]
     ],
 ) -> ResourceType:
     try:
@@ -242,8 +235,6 @@ def _parse_resource(
     elif len(parse_result) > 1:
         raise MultipleResourcesError()
     resource = list(parse_result.values())[0]
-    if resource is None:  # special handling for events
-        raise MissingResourceError()
     return resource
 
 

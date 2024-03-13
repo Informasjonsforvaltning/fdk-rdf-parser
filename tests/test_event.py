@@ -1,6 +1,8 @@
 from dataclasses import asdict
 from unittest.mock import Mock
 
+import pytest
+
 from fdk_rdf_parser import (
     parse_event,
     parse_event_as_dict,
@@ -15,6 +17,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     SkosConcept,
 )
+from fdk_rdf_parser.classes.exceptions import MissingResourceError
 
 
 def test_parse_events(
@@ -342,3 +345,26 @@ def test_parse_single_cv_event(
 
     assert parse_event(src) == expected
     assert parse_event_as_dict(src) == asdict(expected)
+
+
+def test_parse_missing_event_raises_exception(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://www.staging.fellesdatakatalog.digdir.no/events/4b75e194-4be7-337c-9950-699d2862c490>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "4b75e194-4be7-337c-9950-699d2862c490" ;
+            dct:issued         "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            dct:modified       "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl> ."""
+
+    with pytest.raises(MissingResourceError):
+        parse_event(src)
+
+    with pytest.raises(MissingResourceError):
+        parse_event_as_dict(src)
