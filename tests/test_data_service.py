@@ -14,7 +14,7 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.fdk_rdf_parser import (
     parse_data_service,
     parse_data_services,
-    parse_dataservice_json_serializable,
+    parse_dataservice_as_dict,
 )
 
 
@@ -221,4 +221,4 @@ def test_parse_single_data_service(
     )
 
     assert parse_data_service(graph) == expected
-    assert parse_dataservice_json_serializable(graph) == asdict(expected)
+    assert parse_dataservice_as_dict(graph) == asdict(expected)

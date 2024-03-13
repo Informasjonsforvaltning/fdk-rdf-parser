@@ -3,21 +3,24 @@ from typing import (
     Any,
     Callable,
     Dict,
-    List,
     Optional,
     Union,
 )
 
-from rdflib import (
-    Graph,
-    URIRef,
-)
+from rdflib import Graph
+from rdflib.exceptions import ParserError as RdflibParserError
 from rdflib.namespace import (
     FOAF,
     RDF,
     SKOS,
 )
 
+from fdk_rdf_parser.classes.exceptions import (
+    MissingResourceError,
+    MultipleResourcesError,
+    ParserError,
+)
+from fdk_rdf_parser.classes.types import ResourceType
 from .classes import (
     Concept,
     DataService,
@@ -255,63 +258,36 @@ def parse_dataset_json_serializable(
 
 def _parse_resource(
     graph: str,
-    resource_rdf_types: List[URIRef],
     rdf_format: str,
-    parse_func: Callable[[Graph, URIRef, URIRef], Union[Any, None]],
-) -> Union[Any, None]:
-    rdf_model = Graph().parse(data=graph, format=rdf_format)
-
-    resource_uri = []
-    for rdf_type in resource_rdf_types:
-        subjects = list(rdf_model.subjects(predicate=RDF.type, object=rdf_type))
-        for s in subjects:
-            resource_uri.append(s)
-
-    if len(resource_uri) > 1:
-        raise ValueError("Multiple resources found in graph")
-
-    resource_uri = resource_uri[0] if resource_uri else None
-    if resource_uri is None:
-        return None
-
-    record_uri = list(
-        rdf_model.subjects(predicate=FOAF.primaryTopic, object=resource_uri)
-    )
-    if len(record_uri) > 1:
-        raise ValueError(
-            "Multiple records with resource as primary topic found in graph"
-        )
-    if not record_uri:
-        return None
-
-    record_uri = record_uri[0]
-    if not is_type(dcat_uri("CatalogRecord"), rdf_model, record_uri):
-        return None
-
-    return parse_func(rdf_model, record_uri, resource_uri)
+    parse_func: Callable[
+        [Graph, str],
+        Dict[str, ResourceType],
+    ],
+) -> ResourceType:
+    try:
+        parse_result = parse_func(graph, rdf_format)
+    except RdflibParserError as err:
+        raise ParserError() from err
+    if len(parse_result) > 1:
+        raise MultipleResourcesError()
+    elif len(parse_result) == 0:
+        raise MissingResourceError()
+    return list(parse_result.values())[0]
 
 
-def parse_concept(graph: str, rdf_format: str = "turtle") -> Union[Concept, None]:
-    return _parse_resource(graph, [SKOS.Concept], rdf_format, _parse_concept)
+def parse_concept(graph: str, rdf_format: str = "turtle") -> Concept:
+    return _parse_resource(graph, rdf_format, parse_concepts)
 
 
-def parse_concept_json_serializable(
-    graph: str, rdf_format: str = "turtle"
-) -> Union[Dict[str, Any], None]:
+def parse_concept_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
     concept = parse_concept(graph, rdf_format)
-    return asdict(concept) if concept else None
+    return asdict(concept)
 
 
-def parse_data_service(
-    graph: str, rdf_format: str = "turtle"
-) -> Union[DataService, None]:
-    return _parse_resource(
-        graph, [dcat_uri("DataService")], rdf_format, _parse_data_service
-    )
+def parse_data_service(graph: str, rdf_format: str = "turtle") -> DataService:
+    return _parse_resource(graph, rdf_format, parse_data_services)
 
 
-def parse_dataservice_json_serializable(
-    graph: str, rdf_format: str = "turtle"
-) -> Union[Dict[str, Any], None]:
+def parse_dataservice_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
     data_service = parse_data_service(graph, rdf_format)
-    return asdict(data_service) if data_service else None
+    return asdict(data_service)
