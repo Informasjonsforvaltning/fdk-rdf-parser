@@ -27,7 +27,7 @@ from fdk_rdf_parser.classes import (
 )
 from fdk_rdf_parser.fdk_rdf_parser import (
     parse_dataset,
-    parse_dataset_json_serializable,
+    parse_dataset_as_dict,
 )
 from fdk_rdf_parser.parse_functions import _parse_dataset
 
@@ -1075,39 +1075,4 @@ def test_parse_single_dataset() -> None:
     )
 
     assert parse_dataset(src) == expected
-    assert parse_dataset_json_serializable(src) == asdict(expected)
-
-
-def test_parse_single_dataset_empty_graph_returns_none() -> None:
-    src = """
-        @prefix dct: <http://purl.org/dc/terms/> .
-        @prefix dc:   <http://purl.org/dc/elements/1.1/> .
-        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
-        @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-    """
-
-    assert parse_dataset(src) is None
-    assert parse_dataset_json_serializable(src) is None
-
-
-def test_parse_single_dataset_missing_primary_topic_returns_none() -> None:
-    src = """
-        @prefix dct: <http://purl.org/dc/terms/> .
-        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
-
-        <https://testdirektoratet.no/model/dataset/0>
-                a                         dcat:Dataset ;
-        .
-
-        <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
-                a                  dcat:CatalogRecord ;
-                dct:identifier     "a1c680ca" ;
-                dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-13"^^xsd:date ."""
-
-    assert parse_dataset(src) is None
-    assert parse_dataset_json_serializable(src) is None
+    assert parse_dataset_as_dict(src) == asdict(expected)

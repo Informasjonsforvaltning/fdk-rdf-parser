@@ -4,7 +4,6 @@ from typing import (
     Callable,
     Dict,
     Optional,
-    Union,
 )
 
 from rdflib import Graph
@@ -219,43 +218,6 @@ def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, C
     return concepts
 
 
-def parse_dataset(graph: str, rdf_format: str = "turtle") -> Union[Dataset, None]:
-    datasets_graph = Graph().parse(data=graph, format=rdf_format)
-
-    record_uri = next(
-        datasets_graph.subjects(predicate=RDF.type, object=dcat_uri("CatalogRecord")),
-        None,
-    )
-    if record_uri is None:
-        return None
-
-    primary_topic_uri = datasets_graph.value(record_uri, FOAF.primaryTopic)
-    if primary_topic_uri is None or not (
-        is_type(dcat_uri("Dataset"), datasets_graph, primary_topic_uri)
-        or is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri)
-    ):
-        return None
-
-    partial_dataset = _parse_dataset(datasets_graph, record_uri, primary_topic_uri)
-
-    dataset = Dataset()
-    dataset.add_values_from_partial(values=partial_dataset)
-
-    if is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri):
-        dataset_series = _parse_dataset_series(datasets_graph, primary_topic_uri)
-        dataset_series.add_values_from_dataset(values=dataset)
-        dataset = dataset_series
-
-    return dataset
-
-
-def parse_dataset_json_serializable(
-    graph: str, rdf_format: str = "turtle"
-) -> Union[Dict[str, Any], None]:
-    dataset = parse_dataset(graph, rdf_format)
-    return asdict(dataset) if dataset else None
-
-
 def _parse_resource(
     graph: str,
     rdf_format: str,
@@ -273,6 +235,15 @@ def _parse_resource(
     elif len(parse_result) == 0:
         raise MissingResourceError()
     return list(parse_result.values())[0]
+
+
+def parse_dataset(graph: str, rdf_format: str = "turtle") -> Dataset:
+    return _parse_resource(graph, rdf_format, parse_datasets)
+
+
+def parse_dataset_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    concept = parse_dataset(graph, rdf_format)
+    return asdict(concept)
 
 
 def parse_concept(graph: str, rdf_format: str = "turtle") -> Concept:

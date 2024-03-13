@@ -18,7 +18,7 @@ from fdk_rdf_parser.classes import (
 )
 from fdk_rdf_parser.fdk_rdf_parser import (
     parse_dataset,
-    parse_dataset_json_serializable,
+    parse_dataset_as_dict,
 )
 from fdk_rdf_parser.parse_functions.dataset import _parse_dataset_series
 
@@ -342,4 +342,4 @@ def test_parse_single_dataset_series(
     )
 
     assert parse_dataset(graph) == expected
-    assert parse_dataset_json_serializable(graph) == asdict(expected)
+    assert parse_dataset_as_dict(graph) == asdict(expected)

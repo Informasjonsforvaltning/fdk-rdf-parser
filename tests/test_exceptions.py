@@ -1,12 +1,16 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
 
 from fdk_rdf_parser.classes.exceptions import (
     MissingResourceError,
     MultipleResourcesError,
     ParserError,
 )
-from fdk_rdf_parser.fdk_rdf_parser import parse_concept, parse_concept_as_dict
+from fdk_rdf_parser.fdk_rdf_parser import (
+    parse_concept,
+    parse_concept_as_dict,
+)
 
 
 def test_parse_concept_missing_resource_raises_exception(
