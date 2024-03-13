@@ -71,7 +71,7 @@ def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[
     )
 
 
-def parse_event(
+def _parse_event(
     graph: Graph, catalog_record_uri: URIRef, subject: URIRef
 ) -> Optional[Event]:
     event = Event(

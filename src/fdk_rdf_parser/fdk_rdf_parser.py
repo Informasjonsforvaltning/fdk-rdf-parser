@@ -4,6 +4,7 @@ from typing import (
     Callable,
     Dict,
     Optional,
+    Union,
 )
 
 from rdflib import Graph
@@ -34,8 +35,8 @@ from .parse_functions import (
     _parse_data_service,
     _parse_dataset,
     _parse_dataset_series,
+    _parse_event,
     _parse_information_model,
-    parse_event,
 )
 from .rdf_utils import (
     cpsv_uri,
@@ -190,7 +191,7 @@ def parse_events(
                 primary_topic_uri,
             )
         ):
-            event = parse_event(graph, catalog_record_uri, primary_topic_uri)
+            event = _parse_event(graph, catalog_record_uri, primary_topic_uri)
 
             events[primary_topic_uri.toPython()] = event
 
@@ -221,20 +222,29 @@ def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, C
 def _parse_resource(
     graph: str,
     rdf_format: str,
-    parse_func: Callable[
-        [Graph, str],
-        Dict[str, ResourceType],
+    parse_func: Union[
+        Callable[
+            [Graph, str],
+            Dict[str, ResourceType],
+        ],
+        Callable[  # distinct signature for events
+            [Graph, str],
+            Dict[str, Optional[ResourceType]],
+        ],
     ],
 ) -> ResourceType:
     try:
         parse_result = parse_func(graph, rdf_format)
     except (RdflibParserError, SyntaxError) as err:
         raise ParserError() from err
-    if len(parse_result) > 1:
-        raise MultipleResourcesError()
-    elif len(parse_result) == 0:
+    if parse_result is None or len(parse_result) == 0:
         raise MissingResourceError()
-    return list(parse_result.values())[0]
+    elif len(parse_result) > 1:
+        raise MultipleResourcesError()
+    resource = list(parse_result.values())[0]
+    if resource is None:  # special handling for events
+        raise MissingResourceError()
+    return resource
 
 
 def parse_dataset(graph: str, rdf_format: str = "turtle") -> Dataset:
@@ -277,3 +287,11 @@ def parse_service(graph: str, rdf_format: str = "turtle") -> Service:
 
 def parse_service_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
     return asdict(parse_service(graph, rdf_format))
+
+
+def parse_event(graph: str, rdf_format: str = "turtle") -> Event:
+    return _parse_resource(graph, rdf_format, parse_events)
+
+
+def parse_event_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_event(graph, rdf_format))

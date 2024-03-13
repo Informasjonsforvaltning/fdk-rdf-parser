@@ -8,6 +8,8 @@ from .fdk_rdf_parser import (
     parse_dataset,
     parse_dataset_as_dict,
     parse_datasets,
+    parse_event,
+    parse_event_as_dict,
     parse_events,
     parse_information_model,
     parse_information_model_as_dict,
