@@ -1,6 +1,11 @@
+from dataclasses import asdict
 from unittest.mock import Mock
 
-from fdk_rdf_parser import parse_public_services
+from fdk_rdf_parser import (
+    parse_public_services,
+    parse_service,
+    parse_service_as_dict,
+)
 from fdk_rdf_parser.classes import (
     Address,
     Agent,
@@ -742,3 +747,186 @@ def test_service_evidence_collection_from_channel(
 
     with open("tests/test_data/service1.ttl", "r") as src:
         assert parse_public_services(src.read()) == expected
+
+
+def test_parse_single_service(
+    mock_reference_data_client: Mock,
+) -> None:
+    expected = Service(
+        id="1fc38c3c-1c86-3161-a9a7-e443fd94d413",
+        uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+        identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
+        title={"en": "Dummy service", "nn": "Dummytjeneste", "nb": "Dummytjeneste"},
+        description={
+            "en": "The text is displayed in English.",
+            "nn": "Teksten blir vist på nynorsk.",
+            "nb": "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå.",
+        },
+        harvest=HarvestMetaData(
+            firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+        ),
+        ownedBy=[
+            Organization(
+                uri="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
+                identifier="https://www.staging.fellesdatakatalog.digdir.no/organizations/exOrganisasjonReduced",
+                name={"nb": "Organisasjon i Brønnøysund"},
+                orgType=ReferenceDataCode(
+                    uri="http://purl.org/adms/publishertype/NonGovernmentalOrganisation",
+                    prefLabel={
+                        "nn": "Ikkje-statleg organisasjon",
+                        "nb": "Ikke-statlig organisasjon",
+                        "en": "Non-Governmental Organisation",
+                    },
+                    code="NonGovernmentalOrganisation",
+                ),
+                spatial=[
+                    "http://publications.europa.eu/resource/authority/country/NOR",
+                    "https://data.geonorge.no/administrativeEnheter/kommune/id/172833",
+                ],
+                homepage=["https://www.bronnoy.organisasjon.no"],
+            ),
+        ],
+        contactPoint=[
+            CVContactPoint(
+                uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exKontaktpunktDummy.ttl",
+                contactType={"nb": "Kontakt test"},
+                email=["mailto:postmottak@example.org"],
+                telephone=["tel:+4712345678"],
+                contactPage=["https://example.org/exKontaktside"],
+                language=[
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/ENG",
+                        code="ENG",
+                        prefLabel={
+                            "en": "English",
+                            "nb": "Engelsk",
+                            "nn": "Engelsk",
+                            "no": "Engelsk",
+                        },
+                    ),
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/NNO",
+                        code="NNO",
+                        prefLabel={
+                            "en": "Norwegian Nynorsk",
+                            "nb": "Norsk Nynorsk",
+                            "nn": "Norsk Nynorsk",
+                            "no": "Norsk Nynorsk",
+                        },
+                    ),
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/NOB",
+                        code="NOB",
+                        prefLabel={
+                            "en": "Norwegian Bokmål",
+                            "nb": "Norsk Bokmål",
+                            "nn": "Norsk Bokmål",
+                            "no": "Norsk Bokmål",
+                        },
+                    ),
+                ],
+            )
+        ],
+        language=[
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/language/ENG",
+                code="ENG",
+                prefLabel={
+                    "en": "English",
+                    "nb": "Engelsk",
+                    "nn": "Engelsk",
+                    "no": "Engelsk",
+                },
+            ),
+            ReferenceDataCode(
+                uri="http://publications.europa.eu/resource/authority/language/NOB",
+                code="NOB",
+                prefLabel={
+                    "en": "Norwegian Bokmål",
+                    "nb": "Norsk Bokmål",
+                    "nn": "Norsk Bokmål",
+                    "no": "Norsk Bokmål",
+                },
+            ),
+        ],
+        produces=[
+            Output(
+                uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl",
+                identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteresultatDummy.ttl",
+                name={
+                    "nb": "Dummy tjenesteresultat",
+                    "nn": "Dummy tjenesteresultat",
+                    "en": "Dummy service result",
+                },
+                description={
+                    "en": "The text is displayed in English.",
+                    "nn": "Teksten blir vist på nynorsk.",
+                    "nb": "Dette er et dummy tjenesteresultat som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til et tjenesteresultat.",
+                },
+                language=[
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/ENG",
+                        code="ENG",
+                        prefLabel={
+                            "nn": "Engelsk",
+                            "no": "Engelsk",
+                            "nb": "Engelsk",
+                            "en": "English",
+                        },
+                    ),
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/NNO",
+                        code="NNO",
+                        prefLabel={
+                            "nn": "Norsk Nynorsk",
+                            "no": "Norsk Nynorsk",
+                            "nb": "Norsk Nynorsk",
+                            "en": "Norwegian Nynorsk",
+                        },
+                    ),
+                    ReferenceDataCode(
+                        uri="http://publications.europa.eu/resource/authority/language/NOB",
+                        code="NOB",
+                        prefLabel={
+                            "nn": "Norsk Bokmål",
+                            "no": "Norsk Bokmål",
+                            "nb": "Norsk Bokmål",
+                            "en": "Norwegian Bokmål",
+                        },
+                    ),
+                ],
+            )
+        ],
+        type="publicservices",
+        thematicAreaUris=[
+            "http://publications.europa.eu/resource/authority/data-theme/GOVE",
+            "https://psi.norge.no/los/tema/naring",
+            "https://psi.norge.no/not/in/los/or/eu",
+        ],
+        losThemes=[
+            LosNode(
+                isTema=True,
+                losPaths=["naring"],
+                name={"nn": "Næring", "nb": "Næring", "en": "Business"},
+                uri="https://psi.norge.no/los/tema/naring",
+                code="naring",
+            ),
+        ],
+        euDataThemes=[
+            EuDataTheme(
+                uri="http://publications.europa.eu/resource/authority/data-theme/GOVE",
+                code="GOVE",
+                title={
+                    "nn": "Forvaltning og offentleg sektor",
+                    "no": "Forvaltning og offentlig sektor",
+                    "nb": "Forvaltning og offentlig sektor",
+                    "en": "Government and public sector",
+                },
+            ),
+        ],
+    )
+
+    with open("tests/test_data/service0.ttl", "r") as turtle_file:
+        src = turtle_file.read()
+        assert parse_service(src) == expected
+        assert parse_service_as_dict(src) == asdict(expected)

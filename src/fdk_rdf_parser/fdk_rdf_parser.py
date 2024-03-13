@@ -30,11 +30,11 @@ from .classes import (
 )
 from .parse_functions import (
     _parse_concept,
+    _parse_cpsvno_service,
     _parse_data_service,
     _parse_dataset,
     _parse_dataset_series,
     _parse_information_model,
-    parse_cpsvno_service,
     parse_event,
 )
 from .rdf_utils import (
@@ -153,7 +153,7 @@ def parse_public_services(
                 primary_topic_uri,
             )
         ):
-            cpsvno_service = parse_cpsvno_service(
+            cpsvno_service = _parse_cpsvno_service(
                 cpsvno_services_graph, catalog_record_uri, primary_topic_uri
             )
 
@@ -269,3 +269,11 @@ def parse_information_model_as_dict(
     graph: str, rdf_format: str = "turtle"
 ) -> Dict[str, Any]:
     return asdict(parse_information_model(graph, rdf_format))
+
+
+def parse_service(graph: str, rdf_format: str = "turtle") -> Service:
+    return _parse_resource(graph, rdf_format, parse_public_services)
+
+
+def parse_service_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_service(graph, rdf_format))

@@ -5,7 +5,7 @@ from .concept import _parse_concept
 from .conforms_to import extract_conforms_to
 from .contactpoint import extract_contact_points
 from .cost import extract_costs
-from .cpsvno_service import parse_cpsvno_service
+from .cpsvno_service import _parse_cpsvno_service
 from .dataservice import _parse_data_service
 from .dataset import (
     _parse_dataset,

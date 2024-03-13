@@ -13,4 +13,6 @@ from .fdk_rdf_parser import (
     parse_information_model_as_dict,
     parse_information_models,
     parse_public_services,
+    parse_service,
+    parse_service_as_dict,
 )
