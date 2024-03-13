@@ -42,7 +42,7 @@ from .spatial import extract_dct_spatial_list
 from .temporal import extract_temporal
 
 
-def parse_information_model(
+def _parse_information_model(
     graph: Graph, fdk_record_uri: URIRef, info_model_uri: URIRef
 ) -> InformationModel:
     subjects = value_set(graph, info_model_uri, DCTERMS.subject)

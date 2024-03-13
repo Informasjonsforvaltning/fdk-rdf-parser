@@ -1,8 +1,16 @@
 from .fdk_rdf_parser import (
+    parse_concept,
+    parse_concept_as_dict,
     parse_concepts,
+    parse_data_service,
     parse_data_services,
+    parse_dataservice_as_dict,
+    parse_dataset,
+    parse_dataset_as_dict,
     parse_datasets,
     parse_events,
+    parse_information_model,
+    parse_information_model_as_dict,
     parse_information_models,
     parse_public_services,
 )

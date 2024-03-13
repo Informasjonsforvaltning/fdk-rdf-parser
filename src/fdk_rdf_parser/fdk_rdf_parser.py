@@ -33,9 +33,9 @@ from .parse_functions import (
     _parse_data_service,
     _parse_dataset,
     _parse_dataset_series,
+    _parse_information_model,
     parse_cpsvno_service,
     parse_event,
-    parse_information_model,
 )
 from .rdf_utils import (
     cpsv_uri,
@@ -118,7 +118,7 @@ def parse_information_models(
             info_models_graph,
             primary_topic_uri,
         ):
-            info_model = parse_information_model(
+            info_model = _parse_information_model(
                 info_models_graph, record_uri, primary_topic_uri
             )
 
@@ -242,8 +242,7 @@ def parse_dataset(graph: str, rdf_format: str = "turtle") -> Dataset:
 
 
 def parse_dataset_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
-    concept = parse_dataset(graph, rdf_format)
-    return asdict(concept)
+    return asdict(parse_dataset(graph, rdf_format))
 
 
 def parse_concept(graph: str, rdf_format: str = "turtle") -> Concept:
@@ -251,8 +250,7 @@ def parse_concept(graph: str, rdf_format: str = "turtle") -> Concept:
 
 
 def parse_concept_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
-    concept = parse_concept(graph, rdf_format)
-    return asdict(concept)
+    return asdict(parse_concept(graph, rdf_format))
 
 
 def parse_data_service(graph: str, rdf_format: str = "turtle") -> DataService:
@@ -260,5 +258,14 @@ def parse_data_service(graph: str, rdf_format: str = "turtle") -> DataService:
 
 
 def parse_dataservice_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
-    data_service = parse_data_service(graph, rdf_format)
-    return asdict(data_service)
+    return asdict(parse_data_service(graph, rdf_format))
+
+
+def parse_information_model(graph: str, rdf_format: str = "turtle") -> InformationModel:
+    return _parse_resource(graph, rdf_format, parse_information_models)
+
+
+def parse_information_model_as_dict(
+    graph: str, rdf_format: str = "turtle"
+) -> Dict[str, Any]:
+    return asdict(parse_information_model(graph, rdf_format))

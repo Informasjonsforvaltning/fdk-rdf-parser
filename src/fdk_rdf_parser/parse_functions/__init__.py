@@ -18,7 +18,7 @@ from .event import parse_event
 from .evidence import extract_evidences
 from .format import extract_formats
 from .harvest_meta_data import extract_meta_data
-from .info_model import parse_information_model
+from .info_model import _parse_information_model
 from .legal_resource import extract_legal_resources
 from .output import extract_outputs
 from .participation import parse_participation
