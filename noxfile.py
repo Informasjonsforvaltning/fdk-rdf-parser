@@ -19,6 +19,23 @@ def tests(session: Session) -> None:
 
 
 @nox_poetry.session(python=["3.9"])
+def cache(session: Session) -> None:
+    """Clear cache."""
+    session.run(
+        "bash",
+        "-c",
+        "for f in $(find . -maxdepth 1 -name '*cache*'); do rm -rf $f; done",
+        external=True,
+    )
+    session.run(
+        "bash",
+        "-c",
+        "for f in $(find . -maxdepth 4 -name '__pycache__'); do rm -rf $f; done",
+        external=True,
+    )
+
+
+@nox_poetry.session(python=["3.9"])
 def lint(session: Session) -> None:
     args = session.posargs or locations
     session.install(
