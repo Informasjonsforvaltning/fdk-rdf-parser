@@ -7,15 +7,17 @@ import nox_poetry
 nox.options.sessions = "lint", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
+python_versions = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
-@nox_poetry.session(python=["3.9"])
+
+@nox_poetry.session(python=python_versions)
 def tests(session: Session) -> None:
     args = session.posargs or ["--cov", "-m", "not e2e"]
     env = {
         "ORGANIZATION_CATALOG_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
     }
     session.install(".", "coverage[toml]", "pytest", "pytest-cov", "pytest-mock")
-    session.run("pytest", env=env, *args)
+    session.run("pytest", *args, env=env)
 
 
 @nox_poetry.session(python=["3.9"])
@@ -96,6 +98,17 @@ def coverage(session: Session) -> None:
 
 
 @nox_poetry.session(python=["3.9"])
+def tests3_9(session: Session) -> None:
+    """Used for generating coverage files for codecov"""
+    args = session.posargs or ["--cov", "-m", "not e2e"]
+    env = {
+        "ORGANIZATION_CATALOG_BASE_URI": "https://organizations.fellesdatakatalog.digdir.no"
+    }
+    session.install(".", "coverage[toml]", "pytest", "pytest-cov", "pytest-mock")
+    session.run("pytest", *args, env=env)
+
+
+@nox_poetry.session(python=python_versions)
 def mypy(session: Session) -> None:
     args = session.posargs or locations
     session.install("mypy")
