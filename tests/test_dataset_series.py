@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from unittest.mock import Mock
 
 from rdflib import (
@@ -15,7 +16,11 @@ from fdk_rdf_parser.classes import (
     Publisher,
     ReferenceDataCode,
 )
-from fdk_rdf_parser.parse_functions.dataset import parse_dataset_series
+from fdk_rdf_parser.fdk_rdf_parser import (
+    parse_dataset,
+    parse_dataset_as_dict,
+)
+from fdk_rdf_parser.parse_functions.dataset import _parse_dataset_series
 
 
 def test_parse_dataset_series(mock_reference_data_client: Mock) -> None:
@@ -237,7 +242,7 @@ def test_parse_dataset_series_abort_on_circular_graph(
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    assert parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
+    assert _parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
 
 
 def test_parse_dataset_series_broken_linked_list(
@@ -286,4 +291,55 @@ def test_parse_dataset_series_broken_linked_list(
     )
 
     graph = Graph().parse(data=src, format="turtle")
-    assert parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
+    assert _parse_dataset_series(graph, URIRef("http://example.org/budget")) == expected
+
+
+def test_parse_single_dataset_series(
+    mock_reference_data_client: Mock,
+) -> None:
+    graph = """
+        @prefix ex: <http://example.org/> .
+        @prefix dcat: <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+
+        <http://localhost:5000/datasets/f1e8443d-910f-3838-87e3-2b5e7ee307a6>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "f1e8443d-910f-3838-87e3-2b5e7ee307a6" ;
+            dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+            dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
+            foaf:primaryTopic  ex:budget .
+
+
+        ex:budget a dcat:Dataset , dcat:DatasetSeries ;
+            dcat:last ex:budget-2020 ;
+            .
+
+        ex:budget-2019 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            .
+
+        ex:budget-2020 a dcat:Dataset ;
+            dcat:inSeries ex:budget ;
+            dcat:prev ex:budget-2019 ;
+            .
+
+    """
+    expected = DatasetSeries(
+        specializedType="datasetSeries",
+        uri="http://example.org/budget",
+        id="f1e8443d-910f-3838-87e3-2b5e7ee307a6",
+        harvest=HarvestMetaData(
+            firstHarvested="2020-03-12T11:52:16Z", changed=["2020-03-12T11:52:16Z"]
+        ),
+        datasetsInSeries=[
+            "http://example.org/budget-2020",
+            "http://example.org/budget-2019",
+        ],
+        last="http://example.org/budget-2020",
+    )
+
+    assert parse_dataset(graph) == expected
+    assert parse_dataset_as_dict(graph) == asdict(expected)

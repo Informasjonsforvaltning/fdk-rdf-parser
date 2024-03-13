@@ -71,7 +71,7 @@ def extract_cpsvno_services(
     return values if len(values) > 0 else None
 
 
-def parse_cpsvno_service(
+def _parse_cpsvno_service(
     services_graph: Graph, catalog_record_uri: URIRef, cpsvno_service_uri: URIRef
 ) -> Service:
     theme_refs = split_theme_refs(

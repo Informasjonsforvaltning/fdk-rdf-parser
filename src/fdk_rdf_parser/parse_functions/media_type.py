@@ -12,7 +12,10 @@ from rdflib import (
     URIRef,
 )
 
-from fdk_rdf_parser.classes import MediaTypeOrExtent, MediaTypeOrExtentType
+from fdk_rdf_parser.classes import (
+    MediaTypeOrExtent,
+    MediaTypeOrExtentType,
+)
 from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     dct_uri,

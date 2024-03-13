@@ -1,6 +1,6 @@
+from dataclasses import asdict
 from unittest.mock import Mock
 
-from fdk_rdf_parser import parse_data_services
 from fdk_rdf_parser.classes import (
     Catalog,
     DataService,
@@ -10,6 +10,11 @@ from fdk_rdf_parser.classes import (
     MediaTypeOrExtentType,
     Publisher,
     SkosConcept,
+)
+from fdk_rdf_parser.fdk_rdf_parser import (
+    parse_data_service,
+    parse_data_services,
+    parse_dataservice_as_dict,
 )
 
 
@@ -152,3 +157,68 @@ def test_parse_multiple_data_services(
 
     with open("tests/test_data/dataservice0.ttl", "r") as src:
         assert parse_data_services(src.read()) == expected
+
+
+def test_parse_single_data_service(
+    mock_reference_data_client: Mock,
+) -> None:
+    graph = """
+        @prefix br:    <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/organization-catalog.owl#> .
+        @prefix orgtype:   <https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalog/main/src/main/resources/ontology/org-type.ttl#> .
+        @prefix dct:   <http://purl.org/dc/terms/> .
+        @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+        @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix rov:   <http://www.w3.org/ns/regorg#> .
+
+        <https://testutgiver.no/dataservices/0>
+                a                         dcat:DataService ;
+                dct:publisher             <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
+                dcat:endpointDescription  <https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml> .
+
+        <https://testutgiver.no/catalogs/987654321>
+                a              dcat:Catalog ;
+                dct:publisher  <https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321> ;
+                dct:title      "Dataservicekatalog2 for Digitaliseringsdirektoratet"@nb ;
+                dcat:service   <https://testutgiver.no/dataservices/0> .
+
+        <https://testdirektoratet.no/catalogs/321>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "d6199127-8835-33e1-9108-233cd81e92f9" ;
+                dct:issued         "2020-06-22T13:39:27.334Z"^^xsd:dateTime ;
+                dct:modified       "2020-06-22T13:39:27.334Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testutgiver.no/catalogs/987654321> .
+
+        <https://testdirektoratet.no/dataservices/000>
+                a                  dcat:CatalogRecord ;
+                dct:identifier     "d1d698ef-267a-3d57-949f-b2bc44657f3e" ;
+                dct:isPartOf       <https://testdirektoratet.no/catalogs/321> ;
+                dct:issued         "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
+                dct:modified       "2020-06-22T13:39:27.353Z"^^xsd:dateTime ;
+                foaf:primaryTopic  <https://testutgiver.no/dataservices/0> .
+    """
+    expected = DataService(
+        publisher=Publisher(
+            uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
+        ),
+        uri="https://testutgiver.no/dataservices/0",
+        id="d1d698ef-267a-3d57-949f-b2bc44657f3e",
+        harvest=HarvestMetaData(
+            firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
+        ),
+        endpointDescription={
+            "https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml"
+        },
+        catalog=Catalog(
+            id="d6199127-8835-33e1-9108-233cd81e92f9",
+            uri="https://testutgiver.no/catalogs/987654321",
+            title={"nb": "Dataservicekatalog2 for Digitaliseringsdirektoratet"},
+            publisher=Publisher(
+                uri="https://organization-catalog.fellesdatakatalog.brreg.no/organizations/987654321",
+            ),
+        ),
+    )
+
+    assert parse_data_service(graph) == expected
+    assert parse_dataservice_as_dict(graph) == asdict(expected)

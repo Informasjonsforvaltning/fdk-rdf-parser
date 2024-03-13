@@ -1,6 +1,13 @@
+from dataclasses import asdict
 from unittest.mock import Mock
 
-from fdk_rdf_parser import parse_events
+import pytest
+
+from fdk_rdf_parser import (
+    parse_event,
+    parse_event_as_dict,
+    parse_events,
+)
 from fdk_rdf_parser.classes import (
     BusinessEvent,
     Catalog,
@@ -10,6 +17,7 @@ from fdk_rdf_parser.classes import (
     Publisher,
     SkosConcept,
 )
+from fdk_rdf_parser.classes.exceptions import MissingResourceError
 
 
 def test_parse_events(
@@ -277,3 +285,86 @@ def test_parse_cv_event(
     }
 
     assert parse_events(src) == expected
+
+
+def test_parse_single_cv_event(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix cpsvno:    <https://data.norge.no/vocabulary/cpsvno#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix cv: <http://data.europa.eu/m8g/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl>
+            a                   cv:Event ;
+            dct:description     "Teksten blir vist på nynorsk."@nn , "The text is displayed in English."@en , "Det er fattet vedtak om å gi skjenkebevilling til «Den beste restauranten AS», for servering av alkoholholdig drikk i gruppe 1, jf. Alkoholloven § 4-2"@nb ;
+            dct:identifier      "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl"^^xsd:anyURI ;
+            dct:subject         <https://data.norge.no/concepts/ad2ab3f9-17a1-4494-b15e-4ba3967a6424> ;
+            dct:title           "Vedtak om skjenkebevilling"@nb ;
+            dct:type            <https://data.norge.no/vocabulary/event-type#administrative-decision-made> ;
+            dcat:distribution   <https://example.org/example-distribusjon> ;
+            cpsvno:mayInitiate  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl> .
+
+        <https://www.staging.fellesdatakatalog.digdir.no/events/4b75e194-4be7-337c-9950-699d2862c490>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "4b75e194-4be7-337c-9950-699d2862c490" ;
+            dct:issued         "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            dct:modified       "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl> ."""
+
+    expected = Event(
+        id="4b75e194-4be7-337c-9950-699d2862c490",
+        uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
+        identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
+        harvest=HarvestMetaData(
+            firstHarvested="2022-05-13T13:04:04Z", changed=["2022-05-13T13:04:04Z"]
+        ),
+        title={"nb": "Vedtak om skjenkebevilling"},
+        description={
+            "nn": "Teksten blir vist på nynorsk.",
+            "en": "The text is displayed in English.",
+            "nb": "Det er fattet vedtak om å gi skjenkebevilling til «Den beste restauranten AS», for servering av alkoholholdig drikk i gruppe 1, jf. Alkoholloven § 4-2",
+        },
+        dctType=[
+            SkosConcept(
+                uri="https://data.norge.no/vocabulary/event-type#administrative-decision-made",
+            )
+        ],
+        associatedBroaderTypes=[
+            "https://data.norge.no/vocabulary/event-type#administrative-decision-made"
+        ],
+        mayInitiate=[
+            "https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl"
+        ],
+        subject=["https://data.norge.no/concepts/ad2ab3f9-17a1-4494-b15e-4ba3967a6424"],
+        distribution=["https://example.org/example-distribusjon"],
+    )
+
+    assert parse_event(src) == expected
+    assert parse_event_as_dict(src) == asdict(expected)
+
+
+def test_parse_missing_event_raises_exception(
+    mock_reference_data_client: Mock,
+) -> None:
+    src = """
+        @prefix dct: <http://purl.org/dc/terms/> .
+        @prefix dcat:  <http://www.w3.org/ns/dcat#> .
+        @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+        <https://www.staging.fellesdatakatalog.digdir.no/events/4b75e194-4be7-337c-9950-699d2862c490>
+            a                  dcat:CatalogRecord ;
+            dct:identifier     "4b75e194-4be7-337c-9950-699d2862c490" ;
+            dct:issued         "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            dct:modified       "2022-05-13T13:04:04.942Z"^^xsd:dateTime ;
+            foaf:primaryTopic  <https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl> ."""
+
+    with pytest.raises(MissingResourceError):
+        parse_event(src)
+
+    with pytest.raises(MissingResourceError):
+        parse_event_as_dict(src)

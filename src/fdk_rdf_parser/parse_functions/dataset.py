@@ -54,7 +54,7 @@ from .subject import extract_subjects
 from .temporal import extract_temporal
 
 
-def parse_dataset(
+def _parse_dataset(
     datasets_graph: Graph, record_uri: URIRef, dataset_uri: URIRef
 ) -> PartialDataset:
     quality_annotations = extract_quality_annotation(datasets_graph, dataset_uri)
@@ -152,7 +152,7 @@ def parse_dataset(
     return dataset
 
 
-def parse_dataset_series(datasets_graph: Graph, dataset_uri: URIRef) -> DatasetSeries:
+def _parse_dataset_series(datasets_graph: Graph, dataset_uri: URIRef) -> DatasetSeries:
     prev_dataset_uri = object_value(datasets_graph, dataset_uri, dcat_uri("last"))
     return DatasetSeries(
         last=prev_dataset_uri,

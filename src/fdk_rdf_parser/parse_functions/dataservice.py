@@ -21,7 +21,7 @@ from .media_type import extract_fdk_format
 from .skos_concept import extract_skos_concept
 
 
-def parse_data_service(
+def _parse_data_service(
     data_services_graph: Graph, record_uri: URIRef, data_service_uri: URIRef
 ) -> DataService:
     data_service = DataService(

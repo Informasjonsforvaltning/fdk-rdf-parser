@@ -1,15 +1,25 @@
+from dataclasses import asdict
 from typing import (
+    Any,
+    Callable,
     Dict,
-    Optional,
+    Union,
 )
 
 from rdflib import Graph
+from rdflib.exceptions import ParserError as RdflibParserError
 from rdflib.namespace import (
     FOAF,
     RDF,
     SKOS,
 )
 
+from fdk_rdf_parser.classes.exceptions import (
+    MissingResourceError,
+    MultipleResourcesError,
+    ParserError,
+)
+from fdk_rdf_parser.classes.types import ResourceType
 from .classes import (
     Concept,
     DataService,
@@ -19,13 +29,13 @@ from .classes import (
     Service,
 )
 from .parse_functions import (
-    parse_concept,
-    parse_cpsvno_service,
-    parse_data_service,
-    parse_dataset,
-    parse_dataset_series,
-    parse_event,
-    parse_information_model,
+    _parse_concept,
+    _parse_cpsvno_service,
+    _parse_data_service,
+    _parse_dataset,
+    _parse_dataset_series,
+    _parse_event,
+    _parse_information_model,
 )
 from .rdf_utils import (
     cpsv_uri,
@@ -52,7 +62,7 @@ def parse_data_services(
         if primary_topic_uri and is_type(
             dcat_uri("DataService"), data_services_graph, primary_topic_uri
         ):
-            data_service = parse_data_service(
+            data_service = _parse_data_service(
                 data_services_graph, record_uri, primary_topic_uri
             )
 
@@ -74,7 +84,7 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
             is_type(dcat_uri("Dataset"), datasets_graph, primary_topic_uri)
             or is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri)
         ):
-            partial_dataset = parse_dataset(
+            partial_dataset = _parse_dataset(
                 datasets_graph, record_uri, primary_topic_uri
             )
 
@@ -82,7 +92,7 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
             dataset.add_values_from_partial(values=partial_dataset)
 
             if is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri):
-                series = parse_dataset_series(datasets_graph, primary_topic_uri)
+                series = _parse_dataset_series(datasets_graph, primary_topic_uri)
                 series.add_values_from_dataset(values=dataset)
                 datasets[primary_topic_uri.toPython()] = series
             else:
@@ -108,7 +118,7 @@ def parse_information_models(
             info_models_graph,
             primary_topic_uri,
         ):
-            info_model = parse_information_model(
+            info_model = _parse_information_model(
                 info_models_graph, record_uri, primary_topic_uri
             )
 
@@ -143,7 +153,7 @@ def parse_public_services(
                 primary_topic_uri,
             )
         ):
-            cpsvno_service = parse_cpsvno_service(
+            cpsvno_service = _parse_cpsvno_service(
                 cpsvno_services_graph, catalog_record_uri, primary_topic_uri
             )
 
@@ -152,10 +162,8 @@ def parse_public_services(
     return cpsvno_services
 
 
-def parse_events(
-    event_rdf: str, rdf_format: str = "turtle"
-) -> Dict[str, Optional[Event]]:
-    events: Dict[str, Optional[Event]] = {}
+def parse_events(event_rdf: str, rdf_format: str = "turtle") -> Dict[str, Event]:
+    events: Dict[str, Event] = {}
     graph = Graph().parse(data=event_rdf, format=rdf_format)
 
     for catalog_record_uri in graph.subjects(
@@ -180,7 +188,7 @@ def parse_events(
                 primary_topic_uri,
             )
         ):
-            event = parse_event(graph, catalog_record_uri, primary_topic_uri)
+            event = _parse_event(graph, catalog_record_uri, primary_topic_uri)
 
             events[primary_topic_uri.toPython()] = event
 
@@ -201,8 +209,80 @@ def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, C
             concepts_graph,
             primary_topic_uri,
         ):
-            concept = parse_concept(concepts_graph, record_uri, primary_topic_uri)
+            concept = _parse_concept(concepts_graph, record_uri, primary_topic_uri)
 
             concepts[primary_topic_uri.toPython()] = concept
 
     return concepts
+
+
+def _parse_resource(
+    graph: str,
+    rdf_format: str,
+    parse_func: Union[
+        Callable[
+            [Graph, str],
+            Dict[str, ResourceType],
+        ]
+    ],
+) -> ResourceType:
+    try:
+        parse_result = parse_func(graph, rdf_format)
+    except (RdflibParserError, SyntaxError) as err:
+        raise ParserError() from err
+    if parse_result is None or len(parse_result) == 0:
+        raise MissingResourceError()
+    elif len(parse_result) > 1:
+        raise MultipleResourcesError()
+    resource = list(parse_result.values())[0]
+    return resource
+
+
+def parse_dataset(graph: str, rdf_format: str = "turtle") -> Dataset:
+    return _parse_resource(graph, rdf_format, parse_datasets)
+
+
+def parse_dataset_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_dataset(graph, rdf_format))
+
+
+def parse_concept(graph: str, rdf_format: str = "turtle") -> Concept:
+    return _parse_resource(graph, rdf_format, parse_concepts)
+
+
+def parse_concept_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_concept(graph, rdf_format))
+
+
+def parse_data_service(graph: str, rdf_format: str = "turtle") -> DataService:
+    return _parse_resource(graph, rdf_format, parse_data_services)
+
+
+def parse_dataservice_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_data_service(graph, rdf_format))
+
+
+def parse_information_model(graph: str, rdf_format: str = "turtle") -> InformationModel:
+    return _parse_resource(graph, rdf_format, parse_information_models)
+
+
+def parse_information_model_as_dict(
+    graph: str, rdf_format: str = "turtle"
+) -> Dict[str, Any]:
+    return asdict(parse_information_model(graph, rdf_format))
+
+
+def parse_service(graph: str, rdf_format: str = "turtle") -> Service:
+    return _parse_resource(graph, rdf_format, parse_public_services)
+
+
+def parse_service_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_service(graph, rdf_format))
+
+
+def parse_event(graph: str, rdf_format: str = "turtle") -> Event:
+    return _parse_resource(graph, rdf_format, parse_events)
+
+
+def parse_event_as_dict(graph: str, rdf_format: str = "turtle") -> Dict[str, Any]:
+    return asdict(parse_event(graph, rdf_format))
