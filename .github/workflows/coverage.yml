@@ -7,7 +7,7 @@ jobs:
     with:
       python_version: "3.9"
       python_architecture: x64
-      sessions: tests
+      sessions: tests3_9
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
