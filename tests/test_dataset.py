@@ -57,7 +57,6 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 dct:identifier     "4667277a" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/1> .
 
         <https://testdirektoratet.no/model/dataset/1>
@@ -76,7 +75,6 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 a                  dcat:CatalogRecord ;
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
@@ -84,7 +82,6 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
                 a                  dcat:CatalogRecord ;
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime .
 
         <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
@@ -100,7 +97,7 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
             id="a1c680ca",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                modified="2020-03-12T11:52:16Z",
             ),
             publisher=Publisher(
                 uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
@@ -123,7 +120,7 @@ def test_parse_multiple_datasets(mock_reference_data_client: Mock) -> None:
             id="4667277a",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                modified="2020-03-12T11:52:16Z",
             ),
             accessRights=ReferenceDataCode(
                 uri="http://publications.europa.eu/resource/authority/access-right/PUBLIC",
@@ -175,7 +172,6 @@ def test_adds_catalog_to_dataset(
                 dct:identifier     "abc123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/catalog/0> .
 
         <https://datasets.fellesdatakatalog.digdir.no/datasets/a1c680ca>
@@ -184,7 +180,6 @@ def test_adds_catalog_to_dataset(
                 dct:isPartOf       <https://datasets.fellesdatakatalog.digdir.no/catalog/abc123> ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-13"^^xsd:date ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://testdirektoratet.no/model/dataset/0>
@@ -205,7 +200,7 @@ def test_adds_catalog_to_dataset(
             id="a1c680ca",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-13"],
+                modified="2020-03-12T11:52:16Z",
             ),
             uri="https://testdirektoratet.no/model/dataset/0",
             publisher=Publisher(
@@ -322,7 +317,7 @@ def test_parse_dataset() -> None:
         id="a1c680ca",
         harvest=HarvestMetaData(
             firstHarvested="2020-03-12T11:52:16Z",
-            changed=["2020-03-12T11:52:16Z", "2020-03-13"],
+            modified="2020-03-12T11:52:16Z",
         ),
         identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
         uri="https://testdirektoratet.no/model/dataset/0",
@@ -725,7 +720,6 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <http://publications.europa.eu/resource/authority/licence/NLOD_2_0>
@@ -757,8 +751,7 @@ def test_https_uri_open_license(mock_reference_data_client: Mock) -> None:
             ),
             id="123",
             harvest=HarvestMetaData(
-                firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                firstHarvested="2020-03-12T11:52:16Z", modified="2020-03-12T11:52:16Z"
             ),
             distribution=[
                 Distribution(
@@ -805,7 +798,6 @@ def test_dcat_ap_no_2_rules(mock_reference_data_client: Mock) -> None:
                 dct:identifier     "123" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-12T11:52:16.123Z"^^xsd:dateTime ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> .
 
         <https://testdirektoratet.no/model/dataset/0>
@@ -845,7 +837,7 @@ def test_dcat_ap_no_2_rules(mock_reference_data_client: Mock) -> None:
             id="123",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                modified="2020-03-12T11:52:16Z",
             ),
             legalBasisForRestriction=[
                 SkosConcept(
@@ -941,7 +933,7 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
             id="123",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                modified="2020-03-12T11:52:16Z",
             ),
             distribution=[
                 Distribution(
@@ -974,7 +966,7 @@ def test_extra_media_types(mock_reference_data_client: Mock) -> None:
             id="321",
             harvest=HarvestMetaData(
                 firstHarvested="2020-03-12T11:52:16Z",
-                changed=["2020-03-12T11:52:16Z", "2020-03-12T11:52:16Z"],
+                modified="2020-03-12T11:52:16Z",
             ),
             distribution=[
                 Distribution(
@@ -1038,14 +1030,13 @@ def test_parse_single_dataset() -> None:
                 dct:identifier     "a1c680ca" ;
                 dct:issued         "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
                 dct:modified       "2020-03-12T11:52:16.122Z"^^xsd:dateTime ;
-                dct:modified       "2020-03-13"^^xsd:date ;
                 foaf:primaryTopic  <https://testdirektoratet.no/model/dataset/0> ."""
 
     expected = Dataset(
         id="a1c680ca",
         harvest=HarvestMetaData(
             firstHarvested="2020-03-12T11:52:16Z",
-            changed=["2020-03-12T11:52:16Z", "2020-03-13"],
+            modified="2020-03-12T11:52:16Z",
         ),
         identifier={"adb4cf00-31c8-460c-9563-55f204cf8221"},
         uri="https://testdirektoratet.no/model/dataset/0",

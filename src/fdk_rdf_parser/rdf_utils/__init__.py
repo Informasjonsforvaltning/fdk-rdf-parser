@@ -31,7 +31,6 @@ from .ns import (
     xkos_uri_v_2,
 )
 from .utils import (
-    date_list,
     date_value,
     duration_string_value,
     is_type,

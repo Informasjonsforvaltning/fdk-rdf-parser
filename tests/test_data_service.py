@@ -61,7 +61,7 @@ def test_parse_multiple_data_services(
             ],
             id="2",
             harvest=HarvestMetaData(
-                firstHarvested="2020-08-07T09:56:01Z", changed=["2020-08-07T10:02:26Z"]
+                firstHarvested="2020-08-07T09:56:01Z", modified="2020-08-07T10:02:26Z"
             ),
             endpointDescription={
                 "http://example.com/Dette%20er%20en%20test",
@@ -108,7 +108,7 @@ def test_parse_multiple_data_services(
             uri="https://testutgiver.no/dataservices/0",
             id="d1d698ef-267a-3d57-949f-b2bc44657f3e",
             harvest=HarvestMetaData(
-                firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
+                firstHarvested="2020-06-22T13:39:27Z", modified="2020-06-22T13:39:27Z"
             ),
             endpointDescription={
                 "https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml"
@@ -135,7 +135,7 @@ def test_parse_multiple_data_services(
             ],
             id="1",
             harvest=HarvestMetaData(
-                firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
+                firstHarvested="2020-06-22T13:39:27Z", modified="2020-06-22T13:39:27Z"
             ),
             endpointDescription={"http://example.com/"},
             endpointURL={"https://vg.no"},
@@ -205,7 +205,7 @@ def test_parse_single_data_service(
         uri="https://testutgiver.no/dataservices/0",
         id="d1d698ef-267a-3d57-949f-b2bc44657f3e",
         harvest=HarvestMetaData(
-            firstHarvested="2020-06-22T13:39:27Z", changed=["2020-06-22T13:39:27Z"]
+            firstHarvested="2020-06-22T13:39:27Z", modified="2020-06-22T13:39:27Z"
         ),
         endpointDescription={
             "https://raw.githubusercontent.com/Informasjonsforvaltning/fdk-api-harvester/master/src/main/resources/specification/fdk-api-harvester.yaml"
