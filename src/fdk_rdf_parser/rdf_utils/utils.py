@@ -134,18 +134,6 @@ def date_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str
         return None
 
 
-def date_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[str]]:
-    values = []
-    for obj in graph.objects(subject, predicate):
-        date_object = obj.toPython()
-        if isinstance(date_object, datetime):
-            values.append(datetime_isoformat(date_object))
-        elif isinstance(date_object, date):
-            values.append(date_isoformat(date_object))
-    values.sort()
-    return values if len(values) > 0 else None
-
-
 def string_to_float(str_value: str) -> Optional[float]:
     dot_split = str_value.split(".")
     comma_split = str_value.split(",")

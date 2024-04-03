@@ -6,7 +6,6 @@ from rdflib.namespace import DCTERMS
 
 from fdk_rdf_parser.classes import HarvestMetaData
 from fdk_rdf_parser.rdf_utils import (
-    date_list,
     date_value,
 )
 
@@ -14,5 +13,5 @@ from fdk_rdf_parser.rdf_utils import (
 def extract_meta_data(graph: Graph, subject: URIRef) -> HarvestMetaData:
     return HarvestMetaData(
         firstHarvested=date_value(graph, subject, DCTERMS.issued),
-        changed=date_list(graph, subject, DCTERMS.modified),
+        modified=date_value(graph, subject, DCTERMS.modified),
     )

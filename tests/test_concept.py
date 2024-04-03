@@ -251,7 +251,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             created="2023-02-17",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
             harvest=HarvestMetaData(
-                firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+                firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
             ),
             collection=Collection(
                 id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",
@@ -319,7 +319,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/fc8baf8d-6146-3b69-93c5-52bd41592c4e",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190",
             harvest=HarvestMetaData(
-                firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+                firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
             ),
             collection=Collection(
                 id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",
@@ -348,7 +348,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/71f860be-ad4c-3ae7-8344-c0b727d4d3b0",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/9f25b5ad-8aa7-4233-853b-7434e20aeaef",
             harvest=HarvestMetaData(
-                firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+                firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
             ),
             collection=Collection(
                 id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",
@@ -387,7 +387,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3",
             harvest=HarvestMetaData(
-                firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+                firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
             ),
             collection=Collection(
                 id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",
@@ -421,7 +421,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/bb4a8fa6-16ba-3dc9-92e6-42773dc985de",
             identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/c4ae179e-6a3a-42bc-85a2-1e32d75fc013",
             harvest=HarvestMetaData(
-                firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+                firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
             ),
             publisher=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
@@ -497,7 +497,7 @@ def test_parse_concept_handles_wrong_collection_type(
         uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f",
         identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
         harvest=HarvestMetaData(
-            firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+            firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
         ),
         type="concept",
     )
@@ -557,7 +557,7 @@ def test_parse_concept_with_old_skosno(
         uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/35367473-a4c0-3f55-bbdb-fcdbffb6f67a",
         identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3",
         harvest=HarvestMetaData(
-            firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+            firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
         ),
         publisher=Publisher(
             uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
@@ -669,7 +669,7 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
         created="2023-02-17",
         identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
         harvest=HarvestMetaData(
-            firstHarvested="2021-02-17T09:39:13Z", changed=["2021-02-17T09:39:13Z"]
+            firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
         ),
         collection=Collection(
             id="5e08611a-4e94-3d8f-9d9f-d3a292ec1662",

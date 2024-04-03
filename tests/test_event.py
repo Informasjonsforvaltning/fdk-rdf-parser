@@ -156,7 +156,7 @@ def test_parse_events(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/1",
             identifier="1",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             title={"nb": "Starte og drive restaurant"},
             description={
@@ -201,7 +201,7 @@ def test_parse_events(
             uri="http://public-service-publisher.fellesdatakatalog.digdir.no/events/2",
             identifier="2",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             title={"nb": "Oppgjør etter dødsfall"},
             description={"nb": "Elektronisk prosess for oppgjør etter dødsfall."},
@@ -258,7 +258,7 @@ def test_parse_cv_event(
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
             harvest=HarvestMetaData(
-                firstHarvested="2022-05-13T13:04:04Z", changed=["2022-05-13T13:04:04Z"]
+                firstHarvested="2022-05-13T13:04:04Z", modified="2022-05-13T13:04:04Z"
             ),
             title={"nb": "Vedtak om skjenkebevilling"},
             description={
@@ -320,7 +320,7 @@ def test_parse_single_cv_event(
         uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
         identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exHendelse.ttl",
         harvest=HarvestMetaData(
-            firstHarvested="2022-05-13T13:04:04Z", changed=["2022-05-13T13:04:04Z"]
+            firstHarvested="2022-05-13T13:04:04Z", modified="2022-05-13T13:04:04Z"
         ),
         title={"nb": "Vedtak om skjenkebevilling"},
         description={

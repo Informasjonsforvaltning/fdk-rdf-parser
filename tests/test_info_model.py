@@ -194,7 +194,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
             ],
             id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+                firstHarvested="2020-10-13T11:35:47Z", modified="2020-10-13T11:35:47Z"
             ),
             conformsTo=[
                 DctStandard(
@@ -386,7 +386,7 @@ digdir:Katalog  a           dcat:Catalog , owl:NamedIndividual ;
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
             id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+                firstHarvested="2020-10-13T11:35:47Z", modified="2020-10-13T11:35:47Z"
             ),
             catalog=Catalog(
                 id="03953a9d-5b6b-34ec-b41c-dcdcb21874d9",
@@ -684,7 +684,7 @@ def test_parse_handles_escaped_double_quote(
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
             id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+                firstHarvested="2020-10-13T11:35:47Z", modified="2020-10-13T11:35:47Z"
             ),
             type="informationmodels",
         )
@@ -729,7 +729,7 @@ def test_parse_handles_newline(
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/model-publisher/master/src/model/model-catalog.ttl#Diversemodell",
             id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+                firstHarvested="2020-10-13T11:35:47Z", modified="2020-10-13T11:35:47Z"
             ),
             type="informationmodels",
         )
@@ -1085,7 +1085,7 @@ digdir:Diversemodell  a    modelldcatno:InformationModel , owl:NamedIndividual ;
         ],
         id="77e07f69-5fb4-30c7-afca-bffe179dc3b3",
         harvest=HarvestMetaData(
-            firstHarvested="2020-10-13T11:35:47Z", changed=["2020-10-13T11:35:47Z"]
+            firstHarvested="2020-10-13T11:35:47Z", modified="2020-10-13T11:35:47Z"
         ),
         conformsTo=[
             DctStandard(

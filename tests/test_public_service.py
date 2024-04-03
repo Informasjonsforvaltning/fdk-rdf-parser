@@ -78,7 +78,7 @@ def test_complete_public_services(
                 )
             ],
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             keyword=[{"nb": "Serveringsbevilling"}],
             sector=[
@@ -463,7 +463,7 @@ def test_parse_multiple_public_services(
                 )
             ],
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             type="publicservices",
         ),
@@ -481,7 +481,7 @@ def test_parse_multiple_public_services(
                 )
             ],
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             type="publicservices",
         ),
@@ -495,7 +495,7 @@ def test_parse_multiple_public_services(
             },
             hasCompetentAuthority=None,
             harvest=HarvestMetaData(
-                firstHarvested="2020-10-05T13:15:39Z", changed=["2020-10-05T13:15:39Z"]
+                firstHarvested="2020-10-05T13:15:39Z", modified="2020-10-05T13:15:39Z"
             ),
             type="publicservices",
         ),
@@ -520,7 +520,7 @@ def test_parse_cpsvno_services(
                 "nb": "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå.",
             },
             harvest=HarvestMetaData(
-                firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+                firstHarvested="2022-05-18T11:26:51Z", modified="2022-05-18T11:26:51Z"
             ),
             ownedBy=[
                 Organization(
@@ -697,7 +697,7 @@ def test_service_evidence_collection_from_channel(
             uri="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
             identifier="https://raw.githubusercontent.com/Informasjonsforvaltning/cpsv-ap-no/develop/examples/exTjenesteDummy.ttl",
             harvest=HarvestMetaData(
-                firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+                firstHarvested="2022-05-18T11:26:51Z", modified="2022-05-18T11:26:51Z"
             ),
             type="publicservices",
             hasInput=[
@@ -763,7 +763,7 @@ def test_parse_single_service(
             "nb": "Dette er en dummytjeneste som kan brukes i forbindelse med testing av CPSV-AP-NO når det er behov for en relasjon til en tjeneste som det ikke finnes eksempel på ennå.",
         },
         harvest=HarvestMetaData(
-            firstHarvested="2022-05-18T11:26:51Z", changed=["2022-05-18T11:26:51Z"]
+            firstHarvested="2022-05-18T11:26:51Z", modified="2022-05-18T11:26:51Z"
         ),
         ownedBy=[
             Organization(
