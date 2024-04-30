@@ -35,7 +35,6 @@ from fdk_rdf_parser.rdf_utils import (
     euvoc_uri,
     is_type,
     object_value,
-    skosno_old_uri,
     skosno_uri,
     skosxl_uri,
     uneskos_uri,
@@ -59,8 +58,6 @@ def parse_text_and_uri(graph: Graph, subject: URIRef) -> TextAndURI:
 def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[TextAndURI]:
     range_list = []
     for range_ref in graph.objects(definition_ref, skosno_uri("omfang")):
-        range_list.append(parse_text_and_uri(graph, range_ref))
-    for range_ref in graph.objects(definition_ref, skosno_old_uri("omfang")):
         range_list.append(parse_text_and_uri(graph, range_ref))
     return range_list[0] if len(range_list) == 1 else None
 
@@ -116,11 +113,6 @@ def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
 
 def extract_source_relationship(graph: Graph, definition_ref: URIRef) -> Optional[str]:
     uri = object_value(graph, definition_ref, skosno_uri("forholdTilKilde"))
-    uri = (
-        uri
-        if uri
-        else object_value(graph, definition_ref, skosno_old_uri("forholdTilKilde"))
-    )
     if not uri:
         return None
     if "sitatFraKilde" in uri:
@@ -148,10 +140,6 @@ def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
 def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition]:
     definitions = []
     for definition_ref in graph.objects(concept_uri, skosno_uri("definisjon")):
-        definitions.append(parse_definition(graph, definition_ref))
-    for definition_ref in graph.objects(
-        concept_uri, skosno_old_uri("betydningsbeskrivelse")
-    ):
         definitions.append(parse_definition(graph, definition_ref))
     return definitions[0] if len(definitions) > 0 else None
 
@@ -267,8 +255,6 @@ def parse_applications(
 ) -> Optional[List[Dict[str, str]]]:
     applications = []
     for application in graph.objects(concept_uri, skosno_uri("bruksområde")):
-        applications.append(create_application_language_dict(application))
-    for application in graph.objects(concept_uri, skosno_old_uri("bruksområde")):
         applications.append(create_application_language_dict(application))
     return applications if len(applications) > 0 else None
 
