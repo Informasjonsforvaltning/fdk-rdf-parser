@@ -97,10 +97,6 @@ def skosno_uri(sub_string: str) -> URIRef:
     return URIRef(f"https://data.norge.no/vocabulary/skosno#{sub_string}")
 
 
-def skosno_old_uri(sub_string: str) -> URIRef:
-    return URIRef(f"http://difi.no/skosno#{sub_string}")
-
-
 def skosxl_uri(sub_string: str) -> URIRef:
     return URIRef(f"http://www.w3.org/2008/05/skos-xl#{sub_string}")
 
