@@ -133,7 +133,6 @@ def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
         sourceRelationship=extract_source_relationship(graph, definition_ref),
         range=extract_range(graph, definition_ref),
         sources=extract_sources(graph, definition_ref),
-        lastUpdated=date_value(graph, definition_ref, DCTERMS.modified),
     )
 
 
@@ -250,15 +249,6 @@ def create_application_language_dict(application: URIRef) -> Dict[str, str]:
     return dict
 
 
-def parse_applications(
-    graph: Graph, concept_uri: URIRef
-) -> Optional[List[Dict[str, str]]]:
-    applications = []
-    for application in graph.objects(concept_uri, skosno_uri("bruksområde")):
-        applications.append(create_application_language_dict(application))
-    return applications if len(applications) > 0 else None
-
-
 def parse_label_set(
     graph: Graph, concept_uri: URIRef, predicate: URIRef
 ) -> Optional[List[Dict[str, str]]]:
@@ -288,7 +278,6 @@ def _parse_concept(
         publisher=extract_publisher(graph, concept_uri),
         subject=extract_subjects(graph, concept_uri),
         status=extract_status(graph, concept_uri),
-        application=parse_applications(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),
         prefLabel=(
             pref_label_list[0] if pref_label_list and len(pref_label_list) > 0 else None
