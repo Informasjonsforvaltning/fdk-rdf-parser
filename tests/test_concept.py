@@ -147,7 +147,6 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:identifier     "9f25b5ad-8aa7-4233-853b-7434e20aeaef" ;
         dct:modified       "2020-02-14"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
-        skosno:bruksområde "arbeid" ;
         dct:subject        "jobb" , "work"@en , <https://catalog-admin-service.staging.fellesdatakatalog.digdir.no/123456789/concepts/subjects#3> ;
         dct:subject        [ a                   skos:Concept ;
                              skos:prefLabel      "bnode subject"@en
@@ -223,7 +222,6 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosno:definisjon  [ a           skosno:Definisjon ;
                              rdfs:label  "klesplagg for hode og hender"@nb
                            ] ;
-        skosno:bruksområde "hjem"@nb ;
         dcat:contactPoint             [ a                   vcard:Organization ;
                                         vcard:hasEmail      <mailto:informasjonsforvaltning@brreg.no> ;
                                         vcard:hasTelephone  <tel:+4775007500>
@@ -361,7 +359,6 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             publisher=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
-            application=[{"nb": "arbeid"}],
             subject=[
                 Subject(label={"nb": "jobb"}),
                 Subject(label={"en": "work"}),
@@ -426,7 +423,6 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             publisher=Publisher(
                 uri="https://data.brreg.no/enhetsregisteret/api/enheter/910258028",
             ),
-            application=[{"nb": "hjem"}],
             prefLabel={"nn": "lua og sokka"},
             contactPoint=DCATContactPoint(
                 email="informasjonsforvaltning@brreg.no",
