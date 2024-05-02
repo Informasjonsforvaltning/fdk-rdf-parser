@@ -36,6 +36,7 @@ from fdk_rdf_parser.rdf_utils import (
     has_value_on_predicate,
     is_type,
     object_value,
+    resource_list,
     skosno_uri,
     skosxl_uri,
     uneskos_uri,
@@ -126,7 +127,7 @@ def extract_source_relationship(graph: Graph, definition_ref: URIRef) -> Optiona
         return None
 
 
-def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
+def parse_definition_deprecated(graph: Graph, definition_ref: URIRef) -> Definition:
     return Definition(
         text=value_translations(graph, definition_ref, RDFS.label),
         remark=value_translations(graph, definition_ref, SKOS.scopeNote),
@@ -137,11 +138,20 @@ def parse_definition(graph: Graph, definition_ref: URIRef) -> Definition:
     )
 
 
+def parse_skos_definition(graph: Graph, concept_ref: URIRef) -> Definition:
+    return Definition(text=value_translations(graph, concept_ref, SKOS.definition))
+
+
 def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition]:
-    definitions = []
-    for definition_ref in graph.objects(concept_uri, skosno_uri("definisjon")):
-        definitions.append(parse_definition(graph, definition_ref))
-    return definitions[0] if len(definitions) > 0 else None
+    definition: Optional[Definition] = None
+    if has_value_on_predicate(graph, concept_uri, SKOS.definition):
+        definition = parse_skos_definition(graph, concept_uri)
+    else:
+        definition_refs = resource_list(graph, concept_uri, skosno_uri("definisjon"))
+        if len(definition_refs) > 0:
+            definition = parse_definition_deprecated(graph, definition_refs[0])
+
+    return definition
 
 
 def parse_associative_relation_deprecated(
@@ -257,15 +267,6 @@ def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Colle
                 ),
             )
     return None
-
-
-def create_application_language_dict(application: URIRef) -> Dict[str, str]:
-    dict = {}
-    if application.language:
-        dict[application.language] = application.toPython()
-    else:
-        dict["nb"] = application.toPython()
-    return dict
 
 
 def parse_label_set(
