@@ -81,7 +81,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                               skosxl:literalForm  "to"@nb
                             ] ;
         skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
-                                  dct:description         "Beskrivelse"@nb ;
+                                  skosno:relationRole       "RelationRole"@nb ;
                                   skos:related  <http://begrepskatalogen/begrep/organisasjon>
                                 ] ;
         skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
@@ -282,7 +282,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             definition=Definition(text={"nb": "dfgfg"}),
             associativeRelation=[
                 AssociativeRelation(
-                    description={"nb": "Beskrivelse"},
+                    description={"nb": "RelationRole"},
                     related="http://begrepskatalogen/begrep/organisasjon",
                 ),
                 AssociativeRelation(
