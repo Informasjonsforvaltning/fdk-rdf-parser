@@ -562,11 +562,7 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             skosxl:prefLabel    [ a                   skosxl:Label ;
                                 skosxl:literalForm  "to"@nb
                                 ] ;
-            skosno:definisjon   [ a           skosno:Definisjon ;
-                                rdfs:label  "dfgfg"@nb ;
-                                dct:audience skosno:blabla ;
-                                skosno:forholdTilKilde  skosno:blabla
-                                ] .
+            skos:definition     "skos_definition"@nb .
 
 
     <http://publications.europa.eu/resource/authority/concept-status/CURRENT>
@@ -624,7 +620,7 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             "nb": "gjeldende",
         },
         altLabel=[{"nb": "w"}],
-        definition=Definition(text={"nb": "dfgfg"}),
+        definition=Definition(text={"nb": "skos_definition"}),
         type="concept",
     )
 
