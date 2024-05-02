@@ -32,6 +32,7 @@ from .ns import (
 from .utils import (
     date_value,
     duration_string_value,
+    has_value_on_predicate,
     is_type,
     linguistic_system_keywords,
     object_number_value,

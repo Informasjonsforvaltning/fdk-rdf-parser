@@ -33,6 +33,7 @@ from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
     euvoc_uri,
+    has_value_on_predicate,
     is_type,
     object_value,
     skosno_uri,
@@ -143,12 +144,23 @@ def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition
     return definitions[0] if len(definitions) > 0 else None
 
 
-def parse_associative_relation(
+def parse_associative_relation_deprecated(
     graph: Graph, associative_relation_ref: URIRef
 ) -> AssociativeRelation:
     return AssociativeRelation(
         description=value_translations(
             graph, associative_relation_ref, DCTERMS.description
+        ),
+        related=object_value(graph, associative_relation_ref, SKOS.related),
+    )
+
+
+def parse_associative_relation(
+    graph: Graph, associative_relation_ref: URIRef
+) -> AssociativeRelation:
+    return AssociativeRelation(
+        description=value_translations(
+            graph, associative_relation_ref, skosno_uri("relationRole")
         ),
         related=object_value(graph, associative_relation_ref, SKOS.related),
     )
@@ -161,9 +173,16 @@ def extract_associative_relations(
     for associative_relation_ref in graph.objects(
         concept_uri, skosno_uri("assosiativRelasjon")
     ):
-        associative_relations.append(
-            parse_associative_relation(graph, associative_relation_ref)
-        )
+        if has_value_on_predicate(
+            graph, associative_relation_ref, skosno_uri("relationRole")
+        ):
+            associative_relations.append(
+                parse_associative_relation(graph, associative_relation_ref)
+            )
+        else:
+            associative_relations.append(
+                parse_associative_relation_deprecated(graph, associative_relation_ref)
+            )
     return associative_relations if len(associative_relations) > 0 else None
 
 
