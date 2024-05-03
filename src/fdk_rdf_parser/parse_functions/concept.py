@@ -7,6 +7,7 @@ from typing import (
 from rdflib import (
     BNode,
     Graph,
+    RDF,
     URIRef,
 )
 from rdflib.namespace import (
@@ -64,10 +65,28 @@ def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[TextAndURI]:
     return range_list[0] if len(range_list) == 1 else None
 
 
-def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextAndURI]]:
+def extract_sources_deprecated(
+    graph: Graph, definition_ref: URIRef
+) -> Optional[List[TextAndURI]]:
     sources = []
     for source_ref in graph.objects(definition_ref, DCTERMS.source):
         sources.append(parse_text_and_uri(graph, source_ref))
+    return sources if len(sources) > 0 else None
+
+
+def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextAndURI]]:
+    sources = []
+    for source_ref in graph.objects(definition_ref, DCTERMS.source):
+        sources.append(
+            TextAndURI(
+                text=None,
+                uri=(
+                    source_ref.toPython()
+                    if source_ref and not isinstance(source_ref, BNode)
+                    else None
+                ),
+            )
+        )
     return sources if len(sources) > 0 else None
 
 
@@ -101,7 +120,9 @@ def extract_status(graph: Graph, concept_ref: URIRef) -> Optional[Dict[str, str]
     return status if len(status) > 0 else None
 
 
-def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
+def extract_target_group_deprecated(
+    graph: Graph, definition_ref: URIRef
+) -> Optional[str]:
     uri = object_value(graph, definition_ref, DCTERMS.audience)
     if not uri:
         return None
@@ -113,7 +134,9 @@ def extract_target_group(graph: Graph, definition_ref: URIRef) -> Optional[str]:
         return None
 
 
-def extract_source_relationship(graph: Graph, definition_ref: URIRef) -> Optional[str]:
+def extract_source_relationship_deprecated(
+    graph: Graph, definition_ref: URIRef
+) -> Optional[str]:
     uri = object_value(graph, definition_ref, skosno_uri("forholdTilKilde"))
     if not uri:
         return None
@@ -131,9 +154,22 @@ def parse_definition_deprecated(graph: Graph, definition_ref: URIRef) -> Definit
     return Definition(
         text=value_translations(graph, definition_ref, RDFS.label),
         remark=value_translations(graph, definition_ref, SKOS.scopeNote),
-        targetGroup=extract_target_group(graph, definition_ref),
-        sourceRelationship=extract_source_relationship(graph, definition_ref),
+        targetGroup=extract_target_group_deprecated(graph, definition_ref),
+        sourceRelationship=extract_source_relationship_deprecated(
+            graph, definition_ref
+        ),
         range=extract_range(graph, definition_ref),
+        sources=extract_sources_deprecated(graph, definition_ref),
+    )
+
+
+def parse_euvoc_definition(graph: Graph, definition_ref: URIRef) -> Definition:
+    return Definition(
+        text=value_translations(graph, definition_ref, RDF.value),
+        targetGroup=object_value(graph, definition_ref, DCTERMS.audience),
+        sourceRelationship=object_value(
+            graph, definition_ref, skosno_uri("relationshipWithSource")
+        ),
         sources=extract_sources(graph, definition_ref),
     )
 
@@ -144,7 +180,11 @@ def parse_skos_definition(graph: Graph, concept_ref: URIRef) -> Definition:
 
 def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition]:
     definition: Optional[Definition] = None
-    if has_value_on_predicate(graph, concept_uri, SKOS.definition):
+    if has_value_on_predicate(graph, concept_uri, euvoc_uri("xlDefinition")):
+        definition_refs = resource_list(graph, concept_uri, euvoc_uri("xlDefinition"))
+        if len(definition_refs) > 0:
+            definition = parse_euvoc_definition(graph, definition_refs[0])
+    elif has_value_on_predicate(graph, concept_uri, SKOS.definition):
         definition = parse_skos_definition(graph, concept_uri)
     else:
         definition_refs = resource_list(graph, concept_uri, skosno_uri("definisjon"))

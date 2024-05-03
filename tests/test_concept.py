@@ -104,11 +104,11 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                                   skosno:inndelingskriterium  "Inndelingskriterium"@nb ;
                                   xkos:specializes    <http://begrepskatalogen/begrep/bestikk>
                                 ] ;
-        skosno:definisjon   [ a           skosno:Definisjon ;
-                              rdfs:label  "dfgfg"@nb ;
-                              dct:audience skosno:blabla ;
-                              skosno:forholdTilKilde  skosno:blabla
-                            ] .
+        euvoc:xlDefinition      [ a  euvoc:XlNote ;
+                                  rdf:value  "euvoc_definition"@nb ;
+                                  dct:audience <https://data.norge.no/vocabulary/audience-type#public> ;
+                                  skosno:relationshipWithSource <https://data.norge.no/vocabulary/relationship-with-source-type#self-composed>
+                                ] .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190>
         a                  skos:Concept ;
@@ -279,7 +279,11 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 "nb": "gjeldende",
             },
             altLabel=[{"nb": "w"}],
-            definition=Definition(text={"nb": "dfgfg"}),
+            definition=Definition(
+                text={"nb": "euvoc_definition"},
+                targetGroup="https://data.norge.no/vocabulary/audience-type#public",
+                sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
+            ),
             associativeRelation=[
                 AssociativeRelation(
                     description={"nb": "RelationRole"},
