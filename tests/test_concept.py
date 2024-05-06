@@ -566,7 +566,11 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             skosxl:prefLabel    [ a                   skosxl:Label ;
                                 skosxl:literalForm  "to"@nb
                                 ] ;
-            skos:definition     "skos_definition"@nb .
+            skos:definition     "skos_definition"@nb ;
+            skosno:valueRange
+                                  "test-nn"@nn,
+                                  "test",
+                                  <https://range.com> .
 
 
     <http://publications.europa.eu/resource/authority/concept-status/CURRENT>
@@ -593,6 +597,11 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
         uri="https://concepts.staging.fellesdatakatalog.digdir.no/concepts/55a38009-e114-301f-aa7c-8b5f09529f0f",
         created="2023-02-17",
         identifier="https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0",
+        range=[
+            TextAndURI(text={"nn": "test-nn"}),
+            TextAndURI(text={"nb": "test"}),
+            TextAndURI(uri="https://range.com"),
+        ],
         harvest=HarvestMetaData(
             firstHarvested="2021-02-17T09:39:13Z", modified="2021-02-17T09:39:13Z"
         ),
