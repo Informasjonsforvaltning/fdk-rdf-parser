@@ -7,6 +7,7 @@ from typing import (
 from rdflib import (
     BNode,
     Graph,
+    Literal,
     RDF,
     URIRef,
 )
@@ -58,11 +59,28 @@ def parse_text_and_uri(graph: Graph, subject: URIRef) -> TextAndURI:
     )
 
 
-def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[TextAndURI]:
+def extract_range_deprecated(
+    graph: Graph, definition_ref: URIRef
+) -> Optional[TextAndURI]:
     range_list = []
     for range_ref in graph.objects(definition_ref, skosno_uri("omfang")):
         range_list.append(parse_text_and_uri(graph, range_ref))
     return range_list[0] if len(range_list) == 1 else None
+
+
+def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[List[TextAndURI]]:
+    range_list = []
+    for range_obj in graph.objects(definition_ref, skosno_uri("valueRange")):
+        value = TextAndURI()
+        if isinstance(range_obj, URIRef):
+            value.uri = range_obj.toPython()
+        elif isinstance(range_obj, Literal):
+            if range_obj.language:
+                value.text = {range_obj.language: range_obj.toPython()}
+            else:
+                value.text = {"nb": range_obj.toPython()}
+        range_list.append(value)
+    return range_list if len(range_list) > 0 else None
 
 
 def extract_sources_deprecated(
@@ -158,7 +176,7 @@ def parse_definition_deprecated(graph: Graph, definition_ref: URIRef) -> Definit
         sourceRelationship=extract_source_relationship_deprecated(
             graph, definition_ref
         ),
-        range=extract_range(graph, definition_ref),
+        range=extract_range_deprecated(graph, definition_ref),
         sources=extract_sources_deprecated(graph, definition_ref),
     )
 
@@ -358,4 +376,6 @@ def _parse_concept(
         exactMatch=value_set(graph, concept_uri, SKOS.exactMatch),
         closeMatch=value_set(graph, concept_uri, SKOS.closeMatch),
         memberOf=value_set(graph, concept_uri, uneskos_uri("memberOf")),
+        remark=parse_label_set(graph, concept_uri, SKOS.scopeNote),
+        range=extract_range(graph, concept_uri),
     )

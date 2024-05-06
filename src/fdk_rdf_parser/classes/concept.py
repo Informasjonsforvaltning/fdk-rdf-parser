@@ -29,10 +29,10 @@ class TextAndURI:
 @dataclass
 class Definition:
     text: Optional[Dict[str, str]] = None
-    remark: Optional[Dict[str, str]] = None
+    remark: Optional[Dict[str, str]] = None  # Deprecated
     targetGroup: Optional[str] = None
     sourceRelationship: Optional[str] = None
-    range: Optional[TextAndURI] = None
+    range: Optional[TextAndURI] = None  # Deprecated
     sources: Optional[List[TextAndURI]] = None
     lastUpdated: Optional[str] = None
 
@@ -91,4 +91,6 @@ class Concept:
     exactMatch: Optional[Set[str]] = None
     closeMatch: Optional[Set[str]] = None
     memberOf: Optional[Set[str]] = None
+    remark: Optional[List[Dict[str, str]]] = None
+    range: Optional[List[TextAndURI]] = None
     type: str = "concept"  # used by elasticsearch for indexing
