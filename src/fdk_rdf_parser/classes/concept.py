@@ -79,6 +79,7 @@ class Concept:
     altLabel: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[DCATContactPoint] = None
     definition: Optional[Definition] = None
+    definitions: Optional[List[Definition]] = None
     seeAlso: Optional[Set[str]] = None
     isReplacedBy: Optional[Set[str]] = None
     replaces: Optional[Set[str]] = None

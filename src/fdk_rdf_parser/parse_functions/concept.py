@@ -79,7 +79,8 @@ def extract_range(graph: Graph, definition_ref: URIRef) -> Optional[List[TextAnd
                 value.text = {range_obj.language: range_obj.toPython()}
             else:
                 value.text = {"nb": range_obj.toPython()}
-        range_list.append(value)
+        if value.uri is not None or value.text is not None:
+            range_list.append(value)
     return range_list if len(range_list) > 0 else None
 
 
@@ -196,20 +197,48 @@ def parse_skos_definition(graph: Graph, concept_ref: URIRef) -> Definition:
     return Definition(text=value_translations(graph, concept_ref, SKOS.definition))
 
 
-def extract_definition(graph: Graph, concept_uri: URIRef) -> Optional[Definition]:
-    definition: Optional[Definition] = None
+def extract_definitions(
+    graph: Graph, concept_uri: URIRef
+) -> Optional[List[Definition]]:
+    definitions: List[Definition] = list()
     if has_value_on_predicate(graph, concept_uri, euvoc_uri("xlDefinition")):
-        definition_refs = resource_list(graph, concept_uri, euvoc_uri("xlDefinition"))
-        if len(definition_refs) > 0:
-            definition = parse_euvoc_definition(graph, definition_refs[0])
+        for definition_ref in resource_list(
+            graph, concept_uri, euvoc_uri("xlDefinition")
+        ):
+            definitions.append(parse_euvoc_definition(graph, definition_ref))
     elif has_value_on_predicate(graph, concept_uri, SKOS.definition):
-        definition = parse_skos_definition(graph, concept_uri)
+        definitions.append(parse_skos_definition(graph, concept_uri))
     else:
-        definition_refs = resource_list(graph, concept_uri, skosno_uri("definisjon"))
-        if len(definition_refs) > 0:
-            definition = parse_definition_deprecated(graph, definition_refs[0])
+        for definition_ref in resource_list(
+            graph, concept_uri, skosno_uri("definisjon")
+        ):
+            definitions.append(parse_definition_deprecated(graph, definition_ref))
 
-    return definition
+    if definitions:
+        return definitions
+    return None
+
+
+def definition_has_not_target_group(definition: Definition) -> bool:
+    if definition.targetGroup is None:
+        return True
+    else:
+        return False
+
+
+def get_first_definition_with_no_target_group(
+    definitions: Optional[List[Definition]],
+) -> Optional[Definition]:
+    if definitions is not None:
+        filtered_definitions = list(
+            filter(definition_has_not_target_group, definitions)
+        )
+        if filtered_definitions:
+            return filtered_definitions[0]
+        else:
+            return definitions[0]
+    else:
+        return None
 
 
 def parse_associative_relation_deprecated(
@@ -346,6 +375,7 @@ def _parse_concept(
     contact_points = extract_contact_points(graph, concept_uri)
 
     pref_label_list = parse_label_set(graph, concept_uri, skosxl_uri("prefLabel"))
+    definition_list = extract_definitions(graph, concept_uri)
 
     return Concept(
         id=object_value(graph, fdk_record_uri, DCTERMS.identifier),
@@ -363,7 +393,8 @@ def _parse_concept(
         hiddenLabel=parse_label_set(graph, concept_uri, skosxl_uri("hiddenLabel")),
         altLabel=parse_label_set(graph, concept_uri, skosxl_uri("altLabel")),
         contactPoint=contact_points[0] if contact_points else None,
-        definition=extract_definition(graph, concept_uri),
+        definition=get_first_definition_with_no_target_group(definition_list),
+        definitions=definition_list,
         seeAlso=value_set(graph, concept_uri, RDFS.seeAlso),
         isReplacedBy=value_set(graph, concept_uri, DCTERMS.isReplacedBy),
         replaces=value_set(graph, concept_uri, DCTERMS.replaces),

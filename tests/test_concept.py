@@ -104,11 +104,17 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                                   skosno:inndelingskriterium  "Inndelingskriterium"@nb ;
                                   xkos:specializes    <http://begrepskatalogen/begrep/bestikk>
                                 ] ;
-        euvoc:xlDefinition      [ a  euvoc:XlNote ;
-                                  rdf:value  "euvoc_definition"@nb ;
+        euvoc:xlDefinition       [ a           euvoc:XlNote ;
+                                  rdf:value  "def-1"@nb ;
+                                  dct:source <https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14> ;
+                                  skosno:relationshipWithSource  <https://data.norge.no/vocabulary/relationship-with-source-type#self-composed>
+                                ] ;
+        euvoc:xlDefinition       [ a           euvoc:XlNote ;
+                                  rdf:value  "def-2"@nb ;
                                   dct:audience <https://data.norge.no/vocabulary/audience-type#public> ;
-                                  skosno:relationshipWithSource <https://data.norge.no/vocabulary/relationship-with-source-type#self-composed>
-                                ] .
+                                  skosno:relationshipWithSource  <https://data.norge.no/vocabulary/relationship-with-source-type#self-composed>
+                                ] ;
+        skosno:valueRange       [ ]  .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190>
         a                  skos:Concept ;
@@ -128,7 +134,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                              dct:source              []  ;
                              dct:audience skosno:fagspesialist ;
                              skosno:forholdTilKilde  skosno:egendefinert
-                           ] .
+                           ] ;
+        skosno:definisjon  [ a           skosno:Definisjon ;
+                              rdfs:label  "ugyldig-audience-og-forholdtilkilde"@nb ;
+                              dct:audience skosno:ugyldig ;
+                              skosno:forholdTilKilde  skosno:ugyldig
+                            ] .
 
 
 <http://publications.europa.eu/resource/authority/concept-status/CURRENT>
@@ -280,10 +291,30 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             },
             altLabel=[{"nb": "w"}],
             definition=Definition(
-                text={"nb": "euvoc_definition"},
-                targetGroup="https://data.norge.no/vocabulary/audience-type#public",
+                text={"nb": "def-1"},
                 sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
+                sources=[
+                    TextAndURI(
+                        uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14"
+                    )
+                ],
             ),
+            definitions=[
+                Definition(
+                    text={"nb": "def-1"},
+                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
+                    sources=[
+                        TextAndURI(
+                            uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14"
+                        )
+                    ],
+                ),
+                Definition(
+                    text={"nb": "def-2"},
+                    targetGroup="https://data.norge.no/vocabulary/audience-type#public",
+                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
+                ),
+            ],
             associativeRelation=[
                 AssociativeRelation(
                     description={"nb": "RelationRole"},
@@ -337,12 +368,18 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             prefLabel={"nb": "midtbaneanker"},
             status={"nb": "status nb", "en": "status en"},
             altLabel=[{"nb": "stabilisator"}],
-            definition=Definition(
-                text={"nb": "en stabil stabilisator på midten"},
-                sourceRelationship="egendefinert",
-                targetGroup="fagspesialist",
-                sources=[TextAndURI(uri=None, text=None)],
-            ),
+            definition=Definition(text={"nb": "ugyldig-audience-og-forholdtilkilde"}),
+            definitions=[
+                Definition(
+                    text={"nb": "en stabil stabilisator på midten"},
+                    sourceRelationship="egendefinert",
+                    targetGroup="fagspesialist",
+                    sources=[TextAndURI(uri=None, text=None)],
+                ),
+                Definition(
+                    text={"nb": "ugyldig-audience-og-forholdtilkilde"},
+                ),
+            ],
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/9f25b5ad-8aa7-4233-853b-7434e20aeaef": Concept(
@@ -381,6 +418,19 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                     )
                 ],
             ),
+            definitions=[
+                Definition(
+                    text={
+                        "nn": "eit skriftstykke, eit skriftleg utgreiing og inneheld informasjon. Eit dokument er meint for kommunikasjon eller lagring av data. "
+                    },
+                    sourceRelationship="basertPåKilde",
+                    sources=[
+                        TextAndURI(
+                            uri="http://example.com/", text={"nb": "Noe sted et sted"}
+                        )
+                    ],
+                )
+            ],
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/523ff894-638b-44a2-a4fd-3e96a5a8a5a3": Concept(
@@ -415,6 +465,14 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 sourceRelationship="sitatFraKilde",
                 range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
             ),
+            definitions=[
+                Definition(
+                    text={"nb": "Et begrep som en bruke til å teste med"},
+                    targetGroup="allmennheten",
+                    sourceRelationship="sitatFraKilde",
+                    range=TextAndURI(uri="http://example.com/", text={"nb": "test"}),
+                )
+            ],
             type="concept",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/c4ae179e-6a3a-42bc-85a2-1e32d75fc013": Concept(
@@ -435,6 +493,11 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             definition=Definition(
                 text={"nb": "klesplagg for hode og hender"},
             ),
+            definitions=[
+                Definition(
+                    text={"nb": "klesplagg for hode og hender"},
+                )
+            ],
             seeAlso={
                 "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0",
                 "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940",
@@ -633,7 +696,14 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             "nb": "gjeldende",
         },
         altLabel=[{"nb": "w"}],
-        definition=Definition(text={"nb": "skos_definition"}),
+        definition=Definition(
+            text={"nb": "skos_definition"},
+        ),
+        definitions=[
+            Definition(
+                text={"nb": "skos_definition"},
+            )
+        ],
         type="concept",
     )
 
