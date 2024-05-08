@@ -35,6 +35,7 @@ from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
     euvoc_uri,
+    has_literal_value_on_predicate,
     has_value_on_predicate,
     is_type,
     object_value,
@@ -356,15 +357,24 @@ def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Colle
     return None
 
 
-def parse_label_set(
-    graph: Graph, concept_uri: URIRef, predicate: URIRef
+def extract_labels(
+    graph: Graph, concept_uri: URIRef, predicate: URIRef, predicate_deprecated: URIRef
 ) -> Optional[List[Dict[str, str]]]:
-    values = []
-    for label in graph.objects(concept_uri, predicate):
-        literal_form = value_translations(graph, label, skosxl_uri("literalForm"))
-        if literal_form:
-            values.append(literal_form)
-    return values if len(values) > 0 else None
+    labels = list()
+    if has_literal_value_on_predicate(graph, concept_uri, predicate):
+        main_labels = value_translations(graph, concept_uri, predicate)
+        labels.append(main_labels) if main_labels is not None else None
+
+    else:
+        deprecated_labels = [
+            value_translations(graph, label, skosxl_uri("literalForm"))
+            for label in graph.objects(concept_uri, predicate_deprecated)
+        ]
+
+        for label in deprecated_labels:
+            labels.append(label) if label is not None else None
+
+    return labels if len(labels) > 0 else None
 
 
 def _parse_concept(
@@ -374,7 +384,9 @@ def _parse_concept(
     concept_temporal = concept_temporal_list[0] if concept_temporal_list else Temporal()
     contact_points = extract_contact_points(graph, concept_uri)
 
-    pref_label_list = parse_label_set(graph, concept_uri, skosxl_uri("prefLabel"))
+    pref_label_list = extract_labels(
+        graph, concept_uri, SKOS.prefLabel, skosxl_uri("prefLabel")
+    )
     definition_list = extract_definitions(graph, concept_uri)
 
     return Concept(
@@ -390,8 +402,12 @@ def _parse_concept(
         prefLabel=(
             pref_label_list[0] if pref_label_list and len(pref_label_list) > 0 else None
         ),
-        hiddenLabel=parse_label_set(graph, concept_uri, skosxl_uri("hiddenLabel")),
-        altLabel=parse_label_set(graph, concept_uri, skosxl_uri("altLabel")),
+        hiddenLabel=extract_labels(
+            graph, concept_uri, SKOS.hiddenLabel, skosxl_uri("hiddenLabel")
+        ),
+        altLabel=extract_labels(
+            graph, concept_uri, SKOS.altLabel, skosxl_uri("altLabel")
+        ),
         contactPoint=contact_points[0] if contact_points else None,
         definition=get_first_definition_with_no_target_group(definition_list),
         definitions=definition_list,
@@ -407,6 +423,6 @@ def _parse_concept(
         exactMatch=value_set(graph, concept_uri, SKOS.exactMatch),
         closeMatch=value_set(graph, concept_uri, SKOS.closeMatch),
         memberOf=value_set(graph, concept_uri, uneskos_uri("memberOf")),
-        remark=parse_label_set(graph, concept_uri, SKOS.scopeNote),
+        remark=extract_labels(graph, concept_uri, SKOS.scopeNote, SKOS.scopeNote),
         range=extract_range(graph, concept_uri),
     )
