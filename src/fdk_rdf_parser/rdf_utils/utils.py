@@ -19,6 +19,7 @@ from isodate import (
 from rdflib import (
     BNode,
     Graph,
+    Literal,
     URIRef,
 )
 from rdflib.namespace import (
@@ -37,6 +38,13 @@ def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
 
 def has_value_on_predicate(graph: Graph, subject: URIRef, predicate: URIRef) -> bool:
     return graph.value(subject, predicate) is not None
+
+
+def has_literal_value_on_predicate(
+    graph: Graph, subject: URIRef, predicate: URIRef
+) -> bool:
+    value = graph.value(subject, predicate)
+    return isinstance(value, Literal)
 
 
 def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:

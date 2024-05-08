@@ -77,6 +77,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                               skosxl:literalForm  "w"@nb
                             ] ;
         skosxl:hiddenLabel  [ ] ;
+        skos:hiddenLabel    "hidden"@nb ;
         skosxl:prefLabel    [ a                   skosxl:Label ;
                               skosxl:literalForm  "to"@nb
                             ] ;
@@ -289,6 +290,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 "nn": "gjeldande",
                 "nb": "gjeldende",
             },
+            hiddenLabel=[{"nb": "hidden"}],
             altLabel=[{"nb": "w"}],
             definition=Definition(
                 text={"nb": "def-1"},
@@ -622,9 +624,7 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             skos:exactMatch     <http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940> ;
             skos:closeMatch     <http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940> ;
             uneskos:memberOf    <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028> ;
-            skosxl:altLabel     [ a                   skosxl:Label ;
-                                skosxl:literalForm  "w"@nb
-                                ] ;
+            skos:altLabel       "altLabel"@nb, "altLabel2"@en ;
             skosxl:hiddenLabel  [ ] ;
             skosxl:prefLabel    [ a                   skosxl:Label ;
                                 skosxl:literalForm  "to"@nb
@@ -695,7 +695,7 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             "nn": "gjeldande",
             "nb": "gjeldende",
         },
-        altLabel=[{"nb": "w"}],
+        altLabel=[{"nb": "altLabel", "en": "altLabel2"}],
         definition=Definition(
             text={"nb": "skos_definition"},
         ),
