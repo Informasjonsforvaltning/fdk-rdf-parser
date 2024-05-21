@@ -8,7 +8,7 @@ authors = ["NilsOveTen <nils.ove.tendenes@digdir.no>"]
 python = ">=3.8.1,<4.0"
 rdflib = "^7.0.0"
 isodate = "^0.6.1"
-requests = "^2.31.0"
+requests = "^2.32.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.2.0"
