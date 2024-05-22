@@ -92,6 +92,6 @@ class Concept:
     exactMatch: Optional[Set[str]] = None
     closeMatch: Optional[Set[str]] = None
     memberOf: Optional[Set[str]] = None
-    remark: Optional[List[Dict[str, str]]] = None
+    remark: Optional[Dict[str, str]] = None
     range: Optional[List[TextAndURI]] = None
     type: str = "concept"  # used by elasticsearch for indexing

@@ -423,6 +423,6 @@ def _parse_concept(
         exactMatch=value_set(graph, concept_uri, SKOS.exactMatch),
         closeMatch=value_set(graph, concept_uri, SKOS.closeMatch),
         memberOf=value_set(graph, concept_uri, uneskos_uri("memberOf")),
-        remark=extract_labels(graph, concept_uri, SKOS.scopeNote, SKOS.scopeNote),
+        remark=value_translations(graph, concept_uri, SKOS.scopeNote),
         range=extract_range(graph, concept_uri),
     )
