@@ -81,13 +81,9 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosxl:prefLabel    [ a                   skosxl:Label ;
                               skosxl:literalForm  "to"@nb
                             ] ;
-        skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
+        skosno:isFromConceptIn    [ rdf:type                skosno:AssociativeConceptRelation ;
                                   skosno:relationRole       "RelationRole"@nb ;
-                                  skos:related  <http://begrepskatalogen/begrep/organisasjon>
-                                ] ;
-        skosno:assosiativRelasjon [ rdf:type                skosno:AssosiativRelasjon ;
-                                  dct:description         "Beskrivelse"@nb ;
-                                  skos:related  <http://begrepskatalogen/begrep/virksomhet>
+                                  skosno:hasToConcept  <http://begrepskatalogen/begrep/organisasjon>
                                 ] ;
         skosno:partitivRelasjon [ rdf:type                    skosno:PartitivRelasjon ;
                                   dct:description  "Inndelingskriterium"@nb ;
@@ -123,6 +119,9 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:modified       "2020-09-08"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         dct:subject        [ ] ;
+        skosno:assosiativRelasjon    [ rdf:type                skosno:AssosiativRelasjon ;
+                                       dct:description         "Beskrivelse"@nb ;
+                                       skos:related  <http://begrepskatalogen/begrep/virksomhet> ] ;
         euvoc:status       "status nb" , "status en"@en ;
         skosxl:altLabel    [ a                   skosxl:Label ;
                              skosxl:literalForm  "stabilisator"@nb
@@ -303,6 +302,11 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             ),
             definitions=[
                 Definition(
+                    text={"nb": "def-2"},
+                    targetGroup="https://data.norge.no/vocabulary/audience-type#public",
+                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
+                ),
+                Definition(
                     text={"nb": "def-1"},
                     sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
                     sources=[
@@ -311,21 +315,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                         )
                     ],
                 ),
-                Definition(
-                    text={"nb": "def-2"},
-                    targetGroup="https://data.norge.no/vocabulary/audience-type#public",
-                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
-                ),
             ],
             associativeRelation=[
                 AssociativeRelation(
                     description={"nb": "RelationRole"},
                     related="http://begrepskatalogen/begrep/organisasjon",
-                ),
-                AssociativeRelation(
-                    description={"nb": "Beskrivelse"},
-                    related="http://begrepskatalogen/begrep/virksomhet",
-                ),
+                )
             ],
             partitiveRelation=[
                 PartitiveRelation(
@@ -369,6 +364,12 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             ),
             prefLabel={"nb": "midtbaneanker"},
             status={"nb": "status nb", "en": "status en"},
+            associativeRelation=[
+                AssociativeRelation(
+                    description={"nb": "Beskrivelse"},
+                    related="http://begrepskatalogen/begrep/virksomhet",
+                ),
+            ],
             altLabel=[{"nb": "stabilisator"}],
             definition=Definition(text={"nb": "ugyldig-audience-og-forholdtilkilde"}),
             definitions=[
@@ -501,10 +502,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 )
             ],
             seeAlso={
-                "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0",
                 "http://begrepskatalogen/begrep/20b2e2ab-9fe1-11e5-a9f8-e4115b280940",
-                "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190",
                 "http://begrepskatalogen/begrep/20b2e2aa-9fe1-11e5-a9f8-e4115b280940",
+                "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0",
+                "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190",
             },
             isReplacedBy={
                 "http://begrepskatalogen/begrep/be5d8b8b-c3fb-11e9-8d53-005056825ca0"

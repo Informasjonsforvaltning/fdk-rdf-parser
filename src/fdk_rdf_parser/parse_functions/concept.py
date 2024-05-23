@@ -260,7 +260,9 @@ def parse_associative_relation(
         description=value_translations(
             graph, associative_relation_ref, skosno_uri("relationRole")
         ),
-        related=object_value(graph, associative_relation_ref, SKOS.related),
+        related=object_value(
+            graph, associative_relation_ref, skosno_uri("hasToConcept")
+        ),
     )
 
 
@@ -268,16 +270,18 @@ def extract_associative_relations(
     graph: Graph, concept_uri: URIRef
 ) -> Optional[List[AssociativeRelation]]:
     associative_relations = []
-    for associative_relation_ref in graph.objects(
-        concept_uri, skosno_uri("assosiativRelasjon")
-    ):
-        if has_value_on_predicate(
-            graph, associative_relation_ref, skosno_uri("relationRole")
+
+    if has_value_on_predicate(graph, concept_uri, skosno_uri("isFromConceptIn")):
+        for associative_relation_ref in graph.objects(
+            concept_uri, skosno_uri("isFromConceptIn")
         ):
             associative_relations.append(
                 parse_associative_relation(graph, associative_relation_ref)
             )
-        else:
+    else:
+        for associative_relation_ref in graph.objects(
+            concept_uri, skosno_uri("assosiativRelasjon")
+        ):
             associative_relations.append(
                 parse_associative_relation_deprecated(graph, associative_relation_ref)
             )
