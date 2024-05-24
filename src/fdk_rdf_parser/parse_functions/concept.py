@@ -340,6 +340,15 @@ def extract_generic_relations(
     return generic_relations if len(generic_relations) > 0 else None
 
 
+def extract_collection_label(
+    graph: Graph, collection_uri: URIRef
+) -> Optional[Dict[str, str]]:
+    if has_literal_value_on_predicate(graph, collection_uri, DCTERMS.title):
+        return value_translations(graph, collection_uri, DCTERMS.title)
+    else:
+        return value_translations(graph, collection_uri, RDFS.label)
+
+
 def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
     collection_record_uri = graph.value(concept_record_uri, DCTERMS.isPartOf)
 
@@ -352,7 +361,7 @@ def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Colle
             return Collection(
                 id=object_value(graph, collection_record_uri, DCTERMS.identifier),
                 publisher=extract_publisher(graph, collection_uri),
-                label=value_translations(graph, collection_uri, RDFS.label),
+                label=extract_collection_label(graph, collection_uri),
                 uri=collection_uri.toPython(),
                 description=value_translations(
                     graph, collection_uri, DCTERMS.description
