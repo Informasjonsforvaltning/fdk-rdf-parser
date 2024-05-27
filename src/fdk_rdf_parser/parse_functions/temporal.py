@@ -14,6 +14,7 @@ from fdk_rdf_parser.classes import Temporal
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
+    euvoc_uri,
     owl_time_uri,
     resource_list,
     schema_uri,
@@ -57,6 +58,24 @@ def extract_temporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
         )
 
     return values if len(values) > 0 else None
+
+
+def extract_temporal_skos(graph: Graph, subject: URIRef) -> Temporal:
+    temporal = Temporal()
+
+    start_value = date_value(graph, subject, euvoc_uri("startDate"))
+    end_value = date_value(graph, subject, euvoc_uri("endDate"))
+
+    deprecated_resource = graph.value(subject, DCTERMS.temporal)
+    if start_value or end_value:
+        temporal = Temporal(startDate=start_value, endDate=end_value)
+    elif deprecated_resource is not None:
+        start_value = date_value(graph, deprecated_resource, schema_uri("startDate"))
+        end_value = date_value(graph, deprecated_resource, schema_uri("endDate"))
+
+        temporal = Temporal(startDate=start_value, endDate=end_value)
+
+    return temporal
 
 
 def extract_owl_time_instant(graph: Graph, subject: Any) -> Optional[str]:
