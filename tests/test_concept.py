@@ -47,6 +47,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 @prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
 @prefix uneskos: <http://purl.org/umu/uneskos#> .
+@prefix schema:  <http://schema.org/> .
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028>
         a               skos:Collection ;
@@ -65,6 +66,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
 
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/1843b048-f9af-4665-8e53-3c001d0166c0>
         a                   skos:Concept ;
+        dct:temporal        [ a           dct:PeriodOfTime ;
+                                schema:startDate "2020-05-29"^^xsd:date;
+                                schema:endDate "2021-05-29"^^xsd:date;
+                                ] ;
         dct:created        "2023-02-17"^^xsd:date ;
         dct:identifier      "1843b048-f9af-4665-8e53-3c001d0166c0" ;
         dct:modified        "2019-12-16"^^xsd:date ;
@@ -302,11 +307,6 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             ),
             definitions=[
                 Definition(
-                    text={"nb": "def-2"},
-                    targetGroup="https://data.norge.no/vocabulary/audience-type#public",
-                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
-                ),
-                Definition(
                     text={"nb": "def-1"},
                     sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
                     sources=[
@@ -314,6 +314,11 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                             uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14"
                         )
                     ],
+                ),
+                Definition(
+                    text={"nb": "def-2"},
+                    targetGroup="https://data.norge.no/vocabulary/audience-type#public",
+                    sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
                 ),
             ],
             associativeRelation=[
@@ -343,6 +348,8 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 ),
             ],
             type="concept",
+            validFromIncluding="2020-05-29",
+            validToIncluding="2021-05-29",
         ),
         "https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190": Concept(
             id="fc8baf8d-6146-3b69-93c5-52bd41592c4e",
@@ -634,7 +641,9 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             skosno:valueRange
                                   "test-nn"@nn,
                                   "test",
-                                  <https://range.com> .
+                                  <https://range.com> ;
+            euvoc:startDate       "2020-05-29"^^xsd:date;
+            euvoc:endDate         "2021-05-29"^^xsd:date .
 
 
     <http://publications.europa.eu/resource/authority/concept-status/CURRENT>
@@ -706,6 +715,8 @@ def test_parse_concept(mock_reference_data_client: Mock) -> None:
             )
         ],
         type="concept",
+        validFromIncluding="2020-05-29",
+        validToIncluding="2021-05-29",
     )
 
     result = parse_concept(src)

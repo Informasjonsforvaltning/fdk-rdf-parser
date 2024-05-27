@@ -18,10 +18,7 @@ from rdflib.namespace import (
     SKOS,
 )
 
-from fdk_rdf_parser.classes import (
-    Concept,
-    Temporal,
-)
+from fdk_rdf_parser.classes import Concept
 from fdk_rdf_parser.classes.concept import (
     AssociativeRelation,
     Collection,
@@ -50,7 +47,7 @@ from fdk_rdf_parser.rdf_utils import (
 from .contactpoint import extract_contact_points
 from .harvest_meta_data import extract_meta_data
 from .publisher import extract_publisher
-from .temporal import extract_temporal
+from .temporal import extract_temporal_skos
 
 
 def parse_text_and_uri(graph: Graph, subject: URIRef) -> TextAndURI:
@@ -393,8 +390,8 @@ def extract_labels(
 def _parse_concept(
     graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef
 ) -> Concept:
-    concept_temporal_list = extract_temporal(graph, concept_uri)
-    concept_temporal = concept_temporal_list[0] if concept_temporal_list else Temporal()
+
+    concept_temporal = extract_temporal_skos(graph, concept_uri)
     contact_points = extract_contact_points(graph, concept_uri)
 
     pref_label_list = extract_labels(
