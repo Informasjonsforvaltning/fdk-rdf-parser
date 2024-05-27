@@ -318,6 +318,22 @@ def parse_generic_relation(
 ) -> GenericRelation:
     return GenericRelation(
         divisioncriterion=value_translations(
+            graph, generic_relation_ref, DCTERMS.description
+        ),
+        generalizes=object_value(
+            graph, generic_relation_ref, skosno_uri("hasSpecificConcept")
+        ),
+        specializes=object_value(
+            graph, generic_relation_ref, skosno_uri("hasGenericConcept")
+        ),
+    )
+
+
+def parse_generic_relation_deprecated(
+    graph: Graph, generic_relation_ref: URIRef
+) -> GenericRelation:
+    return GenericRelation(
+        divisioncriterion=value_translations(
             graph, generic_relation_ref, skosno_uri("inndelingskriterium")
         ),
         generalizes=object_value(
@@ -333,10 +349,23 @@ def extract_generic_relations(
     graph: Graph, concept_uri: URIRef
 ) -> Optional[List[GenericRelation]]:
     generic_relations = []
-    for generic_relation_ref in graph.objects(
-        concept_uri, skosno_uri("generiskRelasjon")
+
+    if has_value_on_predicate(
+        graph, concept_uri, skosno_uri("hasGenericConceptRelation")
     ):
-        generic_relations.append(parse_generic_relation(graph, generic_relation_ref))
+        for generic_relation_ref in graph.objects(
+            concept_uri, skosno_uri("hasGenericConceptRelation")
+        ):
+            generic_relations.append(
+                parse_generic_relation(graph, generic_relation_ref)
+            )
+    else:
+        for generic_relation_ref in graph.objects(
+            concept_uri, skosno_uri("generiskRelasjon")
+        ):
+            generic_relations.append(
+                parse_generic_relation_deprecated(graph, generic_relation_ref)
+            )
     return generic_relations if len(generic_relations) > 0 else None
 
 
