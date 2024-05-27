@@ -127,6 +127,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         skosno:assosiativRelasjon    [ rdf:type                skosno:AssosiativRelasjon ;
                                        dct:description         "Beskrivelse"@nb ;
                                        skos:related  <http://begrepskatalogen/begrep/virksomhet> ] ;
+        skosno:hasGenericConceptRelation [
+                                  rdf:type  skosno:GenericConceptRelation ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  skosno:hasSpecificConcept    <http://begrepskatalogen/begrep/biffbestikk>
+                                ] ;
+        skosno:hasGenericConceptRelation [
+                                  rdf:type  skosno:GenericConceptRelation ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  skosno:hasGenericConcept    <http://begrepskatalogen/begrep/bestikk>
+                                ] ;
         euvoc:status       "status nb" , "status en"@en ;
         skosxl:altLabel    [ a                   skosxl:Label ;
                              skosxl:literalForm  "stabilisator"@nb
@@ -375,6 +385,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 AssociativeRelation(
                     description={"nb": "Beskrivelse"},
                     related="http://begrepskatalogen/begrep/virksomhet",
+                ),
+            ],
+            genericRelation=[
+                GenericRelation(
+                    divisioncriterion={"nb": "Inndelingskriterium"},
+                    generalizes="http://begrepskatalogen/begrep/biffbestikk",
+                ),
+                GenericRelation(
+                    divisioncriterion={"nb": "Inndelingskriterium"},
+                    specializes="http://begrepskatalogen/begrep/bestikk",
                 ),
             ],
             altLabel=[{"nb": "stabilisator"}],
