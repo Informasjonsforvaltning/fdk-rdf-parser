@@ -119,6 +119,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:modified       "2020-09-08"^^xsd:date ;
         dct:publisher      <https://data.brreg.no/enhetsregisteret/api/enheter/910258028> ;
         dct:subject        [ ] ;
+        skosno:hasPartitiveConceptRelation [
+                                  rdf:type  skosno:PartitiveConceptRelation ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  skosno:hasPartitiveConcept     <http://begrepskatalogen/begrep/blad>
+                                ] ;
+        skosno:hasPartitiveConceptRelation [
+                                  rdf:type  skosno:PartitiveConceptRelation ;
+                                  dct:description  "Inndelingskriterium"@nb ;
+                                  skosno:hasComprehensiveConcept     <http://begrepskatalogen/begrep/tre>
+                                ] ;
         skosno:assosiativRelasjon    [ rdf:type                skosno:AssosiativRelasjon ;
                                        dct:description         "Beskrivelse"@nb ;
                                        skos:related  <http://begrepskatalogen/begrep/virksomhet> ] ;
@@ -364,6 +374,16 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
             ),
             prefLabel={"nb": "midtbaneanker"},
             status={"nb": "status nb", "en": "status en"},
+            partitiveRelation=[
+                PartitiveRelation(
+                    description={"nb": "Inndelingskriterium"},
+                    hasPart="http://begrepskatalogen/begrep/blad",
+                ),
+                PartitiveRelation(
+                    description={"nb": "Inndelingskriterium"},
+                    isPartOf="http://begrepskatalogen/begrep/tre",
+                ),
+            ],
             associativeRelation=[
                 AssociativeRelation(
                     description={"nb": "Beskrivelse"},

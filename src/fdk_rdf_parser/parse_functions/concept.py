@@ -295,6 +295,22 @@ def parse_partitive_relation(
         description=value_translations(
             graph, partitive_relation_ref, DCTERMS.description
         ),
+        hasPart=object_value(
+            graph, partitive_relation_ref, skosno_uri("hasPartitiveConcept")
+        ),
+        isPartOf=object_value(
+            graph, partitive_relation_ref, skosno_uri("hasComprehensiveConcept")
+        ),
+    )
+
+
+def parse_partitive_relation_deprecated(
+    graph: Graph, partitive_relation_ref: URIRef
+) -> PartitiveRelation:
+    return PartitiveRelation(
+        description=value_translations(
+            graph, partitive_relation_ref, DCTERMS.description
+        ),
         hasPart=object_value(graph, partitive_relation_ref, DCTERMS.hasPart),
         isPartOf=object_value(graph, partitive_relation_ref, DCTERMS.isPartOf),
     )
@@ -304,12 +320,23 @@ def extract_partitive_relations(
     graph: Graph, concept_uri: URIRef
 ) -> Optional[List[PartitiveRelation]]:
     partitive_relations = []
-    for partitive_relation_ref in graph.objects(
-        concept_uri, skosno_uri("partitivRelasjon")
+    if has_value_on_predicate(
+        graph, concept_uri, skosno_uri("hasPartitiveConceptRelation")
     ):
-        partitive_relations.append(
-            parse_partitive_relation(graph, partitive_relation_ref)
-        )
+        for partitive_relation_ref in graph.objects(
+            concept_uri, skosno_uri("hasPartitiveConceptRelation")
+        ):
+            partitive_relations.append(
+                parse_partitive_relation(graph, partitive_relation_ref)
+            )
+    else:
+        for partitive_relation_ref in graph.objects(
+            concept_uri, skosno_uri("partitivRelasjon")
+        ):
+            partitive_relations.append(
+                parse_partitive_relation_deprecated(graph, partitive_relation_ref)
+            )
+
     return partitive_relations if len(partitive_relations) > 0 else None
 
 
