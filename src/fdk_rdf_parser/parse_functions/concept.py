@@ -46,7 +46,10 @@ from fdk_rdf_parser.rdf_utils import (
 )
 from .contactpoint import extract_contact_points
 from .harvest_meta_data import extract_meta_data
-from .publisher import extract_publisher
+from .publisher import (
+    extract_creator,
+    extract_publisher,
+)
 from .temporal import extract_temporal_skos
 
 
@@ -462,6 +465,7 @@ def _parse_concept(
         harvest=extract_meta_data(graph, fdk_record_uri),
         collection=parse_collection(graph, fdk_record_uri),
         publisher=extract_publisher(graph, concept_uri),
+        creator=extract_creator(graph, concept_uri),
         subject=extract_subjects(graph, concept_uri),
         status=extract_status(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),

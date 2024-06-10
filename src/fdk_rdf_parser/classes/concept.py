@@ -70,6 +70,7 @@ class Concept:
     harvest: Optional[HarvestMetaData] = None
     collection: Optional[Collection] = None
     publisher: Optional[Publisher] = None
+    creator: Optional[Publisher] = None
     subject: Optional[List[Subject]] = None
     status: Optional[Dict[str, str]] = None
     application: Optional[List[Dict[str, str]]] = None

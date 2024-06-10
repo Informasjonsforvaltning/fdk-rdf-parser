@@ -26,6 +26,11 @@ def extract_publisher(graph: Graph, subject: URIRef) -> Optional[Publisher]:
     return parse_publisher(graph, publisher) if publisher else None
 
 
+def extract_creator(graph: Graph, subject: URIRef) -> Optional[Publisher]:
+    creator = graph.value(subject, DCTERMS.creator)
+    return parse_publisher(graph, creator) if creator else None
+
+
 def parse_publisher(graph: Graph, publisher: URIRef) -> Publisher:
     org_form = object_value(graph, publisher, rov_uri("orgType"))
     publisher = Publisher(
