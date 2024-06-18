@@ -17,7 +17,6 @@ from isodate import (
     datetime_isoformat,
 )
 from rdflib import (
-    BNode,
     Graph,
     Literal,
     URIRef,
@@ -26,9 +25,17 @@ from rdflib.namespace import (
     DCTERMS,
     RDF,
 )
+from rdflib.term import Node
 
 
-def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
+def node_value(node: Node) -> Optional[str]:
+    if isinstance(node, Literal) or isinstance(node, URIRef):
+        return node.toPython()
+    else:
+        return None
+
+
+def is_type(t: URIRef, graph: Graph, topic: Node) -> bool:
     for type_uri_ref in resource_list(graph, topic, RDF.type):
         if type_uri_ref == t:
             return True
@@ -36,77 +43,78 @@ def is_type(t: URIRef, graph: Graph, topic: URIRef) -> bool:
     return False
 
 
-def has_value_on_predicate(graph: Graph, subject: URIRef, predicate: URIRef) -> bool:
+def has_value_on_predicate(graph: Graph, subject: Node, predicate: URIRef) -> bool:
     return graph.value(subject, predicate) is not None
 
 
 def has_literal_value_on_predicate(
-    graph: Graph, subject: URIRef, predicate: URIRef
+    graph: Graph, subject: Node, predicate: URIRef
 ) -> bool:
     value = graph.value(subject, predicate)
     return isinstance(value, Literal)
 
 
-def object_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Any]:
-    value = graph.value(subject, predicate)
-    return value.toPython() if value and not isinstance(value, BNode) else None
+def object_value(graph: Graph, subject: Node, predicate: URIRef) -> Optional[Any]:
+    return node_value(graph.value(subject, predicate))
 
 
 def duration_string_value(
-    graph: Graph, subject: URIRef, predicate: URIRef
+    graph: Graph, subject: Node, predicate: URIRef
 ) -> Optional[str]:
     value = graph.value(subject, predicate)
     return (
         str(value)
         if value
-        and not isinstance(value, BNode)
+        and isinstance(value, Literal)
         and isinstance(value.toPython(), timedelta)
         else None
     )
 
 
 def object_number_value(
-    graph: Graph, subject: URIRef, predicate: URIRef
+    graph: Graph, subject: Node, predicate: URIRef
 ) -> Optional[Any]:
     value = graph.value(subject, predicate)
     return (
         value.toPython()
-        if not isinstance(value, BNode)
+        if isinstance(value, Literal)
         and isinstance(string_to_float(str(value)), numbers.Number)
         else None
     )
 
 
-def value_list(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[List[Any]]:
+def value_list(graph: Graph, subject: Node, predicate: URIRef) -> Optional[List[Any]]:
     values = []
     for obj in graph.objects(subject, predicate):
-        if not isinstance(obj, BNode):
-            values.append(obj.toPython())
+        value = node_value(obj)
+        if value is not None:
+            values.append(value)
     values.sort()
     return values if len(values) > 0 else None
 
 
-def value_set(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[Set[Any]]:
+def value_set(graph: Graph, subject: Node, predicate: URIRef) -> Optional[Set[Any]]:
     values = set()
     for obj in graph.objects(subject, predicate):
-        if not isinstance(obj, BNode):
-            values.add(obj.toPython())
+        value = node_value(obj)
+        if value is not None:
+            values.add(value)
     return values if len(values) > 0 else None
 
 
 def value_translations(
-    graph: Graph, subject: URIRef, predicate: URIRef
+    graph: Graph, subject: Node, predicate: URIRef
 ) -> Optional[Dict[str, str]]:
     values = {}
     for obj in graph.objects(subject, predicate):
-        if obj.language:
+        if isinstance(obj, Literal) and obj.language:
             values[obj.language] = obj.toPython()
         else:
-            values["nb"] = obj.toPython()
+            values["nb"] = node_value(obj)
     return values if len(values) > 0 else None
 
 
-def resource_list(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]:
+def resource_list(graph: Graph, subject: Node, predicate: URIRef) -> List[Any]:
     values = []
     for obj in graph.objects(subject, predicate):
         values.append(obj)
@@ -114,7 +122,7 @@ def resource_list(graph: Graph, subject: URIRef, predicate: URIRef) -> List[Any]
     return values
 
 
-def uri_or_identifier_list(graph: Graph, subjects: List[URIRef]) -> Optional[List[str]]:
+def uri_or_identifier_list(graph: Graph, subjects: List[Node]) -> Optional[List[str]]:
     values = []
     for subject_ref in subjects:
         value = uri_or_identifier(graph, subject_ref)
@@ -124,7 +132,7 @@ def uri_or_identifier_list(graph: Graph, subjects: List[URIRef]) -> Optional[Lis
     return values if len(values) > 0 else None
 
 
-def uri_or_identifier(graph: Graph, subject: URIRef) -> Optional[str]:
+def uri_or_identifier(graph: Graph, subject: Node) -> Optional[str]:
     return (
         subject.toPython()
         if isinstance(subject, URIRef)
@@ -132,10 +140,10 @@ def uri_or_identifier(graph: Graph, subject: URIRef) -> Optional[str]:
     )
 
 
-def date_value(graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
+def date_value(graph: Graph, subject: Node, predicate: URIRef) -> Optional[str]:
     value = graph.value(subject, predicate)
     if value:
-        date_object = value.toPython()
+        date_object = node_value(value)
         if isinstance(date_object, datetime):
             return datetime_isoformat(date_object)
         elif isinstance(date_object, date):

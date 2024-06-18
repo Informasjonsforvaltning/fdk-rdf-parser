@@ -6,6 +6,7 @@ from rdflib.namespace import (
     DCTERMS,
     FOAF,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import DataService
 from fdk_rdf_parser.rdf_utils import (
@@ -22,7 +23,7 @@ from .skos_concept import extract_skos_concept
 
 
 def _parse_data_service(
-    data_services_graph: Graph, record_uri: URIRef, data_service_uri: URIRef
+    data_services_graph: Graph, record_uri: Node, data_service_uri: URIRef
 ) -> DataService:
     data_service = DataService(
         id=object_value(data_services_graph, record_uri, DCTERMS.identifier),

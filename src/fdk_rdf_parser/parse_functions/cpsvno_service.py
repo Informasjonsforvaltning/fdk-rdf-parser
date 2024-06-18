@@ -11,6 +11,7 @@ from rdflib.namespace import (
     DCTERMS,
     FOAF,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import (
     PublicService,
@@ -72,7 +73,7 @@ def extract_cpsvno_services(
 
 
 def _parse_cpsvno_service(
-    services_graph: Graph, catalog_record_uri: URIRef, cpsvno_service_uri: URIRef
+    services_graph: Graph, catalog_record_uri: Node, cpsvno_service_uri: URIRef
 ) -> Service:
     theme_refs = split_theme_refs(
         services_graph, cpsvno_service_uri, cv_uri("thematicArea")

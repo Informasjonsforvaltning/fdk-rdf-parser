@@ -36,6 +36,7 @@ from .utils import (
     has_value_on_predicate,
     is_type,
     linguistic_system_keywords,
+    node_value,
     object_number_value,
     object_value,
     resource_list,

@@ -11,6 +11,7 @@ from rdflib.namespace import (
     DCTERMS,
     FOAF,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import (
@@ -21,7 +22,7 @@ from fdk_rdf_parser.rdf_utils import (
 )
 
 
-def extract_publisher(graph: Graph, subject: URIRef) -> Optional[Publisher]:
+def extract_publisher(graph: Graph, subject: Node) -> Optional[Publisher]:
     publisher = graph.value(subject, DCTERMS.publisher)
     return parse_publisher(graph, publisher) if publisher else None
 
@@ -31,7 +32,7 @@ def extract_creator(graph: Graph, subject: URIRef) -> Optional[Publisher]:
     return parse_publisher(graph, creator) if creator else None
 
 
-def parse_publisher(graph: Graph, publisher: URIRef) -> Publisher:
+def parse_publisher(graph: Graph, publisher: Node) -> Publisher:
     org_form = object_value(graph, publisher, rov_uri("orgType"))
     publisher = Publisher(
         uri=publisher.toPython() if isinstance(publisher, URIRef) else None,

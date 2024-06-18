@@ -19,6 +19,7 @@ from fdk_rdf_parser.parse_functions.reference_data_code import (
 from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     dcat_uri,
+    node_value,
     object_value,
     resource_list,
     value_list,
@@ -60,9 +61,9 @@ def extract_has_telephone(graph: Graph, subject: Any) -> Optional[Any]:
     if tel_ref:
         tel_value = object_value(graph, tel_ref, vcard_uri("hasValue"))
         if tel_value is None:
-            tel_value = tel_ref.toPython()
+            tel_value = node_value(tel_ref)
 
-        if "tel:" in tel_value:
+        if tel_value is not None and "tel:" in tel_value:
             return tel_value[4:]
         else:
             return tel_value
@@ -75,9 +76,9 @@ def extract_has_email(graph: Graph, subject: Any) -> Optional[Any]:
     if mail_ref:
         email = object_value(graph, mail_ref, vcard_uri("hasValue"))
         if email is None:
-            email = mail_ref.toPython()
+            email = node_value(mail_ref)
 
-        if "mailto:" in email:
+        if email is not None and "mailto:" in email:
             return email[7:]
         else:
             return email

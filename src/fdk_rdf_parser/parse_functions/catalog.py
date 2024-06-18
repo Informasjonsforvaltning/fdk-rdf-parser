@@ -1,13 +1,11 @@
 from typing import Optional
 
-from rdflib import (
-    Graph,
-    URIRef,
-)
+from rdflib import Graph
 from rdflib.namespace import (
     DCTERMS,
     FOAF,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import Catalog
 from fdk_rdf_parser.rdf_utils import (
@@ -19,15 +17,15 @@ from fdk_rdf_parser.rdf_utils import (
 from .publisher import extract_publisher
 
 
-def parse_catalog(graph: Graph, child_record_uri: URIRef) -> Optional[Catalog]:
+def parse_catalog(graph: Graph, child_record_uri: Node) -> Optional[Catalog]:
     catalog_record_uri = graph.value(child_record_uri, DCTERMS.isPartOf)
 
     if catalog_record_uri and is_type(
         dcat_uri("CatalogRecord"), graph, catalog_record_uri
     ):
-        catalog_uri = graph.value(catalog_record_uri, FOAF.primaryTopic)
+        catalog_uri: Optional[Node] = graph.value(catalog_record_uri, FOAF.primaryTopic)
 
-        if catalog_uri and is_type(dcat_uri("Catalog"), graph, catalog_uri):
+        if catalog_uri is not None and is_type(dcat_uri("Catalog"), graph, catalog_uri):
             return Catalog(
                 id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
                 publisher=extract_publisher(graph, catalog_uri),

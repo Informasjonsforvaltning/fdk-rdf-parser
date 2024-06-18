@@ -17,6 +17,7 @@ from rdflib.namespace import (
     RDFS,
     SKOS,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import Concept
 from fdk_rdf_parser.classes.concept import (
@@ -53,7 +54,7 @@ from .publisher import (
 from .temporal import extract_temporal_skos
 
 
-def parse_text_and_uri(graph: Graph, subject: URIRef) -> TextAndURI:
+def parse_text_and_uri(graph: Graph, subject: Node) -> TextAndURI:
     return TextAndURI(
         text=value_translations(graph, subject, RDFS.label),
         uri=object_value(graph, subject, RDFS.seeAlso),
@@ -113,16 +114,16 @@ def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextA
 def extract_subjects(graph: Graph, concept_ref: URIRef) -> Optional[List[Subject]]:
     subjects = []
     for subject_node in graph.objects(concept_ref, DCTERMS.subject):
-        label: Optional[Dict[str, str]]
-        if isinstance(subject_node, BNode) or isinstance(subject_node, URIRef):
-            label = value_translations(graph, subject_node, SKOS.prefLabel)
-        else:
-            label = dict()
+        label: Dict[str, str] = dict()
+        if isinstance(subject_node, Literal):
             if subject_node.language:
                 label[subject_node.language] = subject_node.toPython()
             else:
                 label["nb"] = subject_node.toPython()
-        if label and len(label) > 0:
+        else:
+            translations = value_translations(graph, subject_node, SKOS.prefLabel)
+            label = translations if translations else dict()
+        if len(label) > 0:
             subjects.append(Subject(label=label))
     return subjects if len(subjects) > 0 else None
 
@@ -130,13 +131,14 @@ def extract_subjects(graph: Graph, concept_ref: URIRef) -> Optional[List[Subject
 def extract_status(graph: Graph, concept_ref: URIRef) -> Optional[Dict[str, str]]:
     status: Dict[str, str] = dict()
     for subject_node in graph.objects(concept_ref, euvoc_uri("status")):
-        if isinstance(subject_node, BNode) or isinstance(subject_node, URIRef):
-            return value_translations(graph, subject_node, SKOS.prefLabel)
-        else:
+        if isinstance(subject_node, Literal):
             if subject_node.language:
                 status[subject_node.language] = subject_node.toPython()
             else:
                 status["nb"] = subject_node.toPython()
+        else:
+            translations = value_translations(graph, subject_node, SKOS.prefLabel)
+            status = translations if translations else dict()
     return status if len(status) > 0 else None
 
 
@@ -243,7 +245,7 @@ def get_first_definition_with_no_target_group(
 
 
 def parse_associative_relation_deprecated(
-    graph: Graph, associative_relation_ref: URIRef
+    graph: Graph, associative_relation_ref: Node
 ) -> AssociativeRelation:
     return AssociativeRelation(
         description=value_translations(
@@ -254,7 +256,7 @@ def parse_associative_relation_deprecated(
 
 
 def parse_associative_relation(
-    graph: Graph, associative_relation_ref: URIRef
+    graph: Graph, associative_relation_ref: Node
 ) -> AssociativeRelation:
     return AssociativeRelation(
         description=value_translations(
@@ -289,7 +291,7 @@ def extract_associative_relations(
 
 
 def parse_partitive_relation(
-    graph: Graph, partitive_relation_ref: URIRef
+    graph: Graph, partitive_relation_ref: Node
 ) -> PartitiveRelation:
     return PartitiveRelation(
         description=value_translations(
@@ -305,7 +307,7 @@ def parse_partitive_relation(
 
 
 def parse_partitive_relation_deprecated(
-    graph: Graph, partitive_relation_ref: URIRef
+    graph: Graph, partitive_relation_ref: Node
 ) -> PartitiveRelation:
     return PartitiveRelation(
         description=value_translations(
@@ -340,9 +342,7 @@ def extract_partitive_relations(
     return partitive_relations if len(partitive_relations) > 0 else None
 
 
-def parse_generic_relation(
-    graph: Graph, generic_relation_ref: URIRef
-) -> GenericRelation:
+def parse_generic_relation(graph: Graph, generic_relation_ref: Node) -> GenericRelation:
     return GenericRelation(
         divisioncriterion=value_translations(
             graph, generic_relation_ref, DCTERMS.description
@@ -357,7 +357,7 @@ def parse_generic_relation(
 
 
 def parse_generic_relation_deprecated(
-    graph: Graph, generic_relation_ref: URIRef
+    graph: Graph, generic_relation_ref: Node
 ) -> GenericRelation:
     return GenericRelation(
         divisioncriterion=value_translations(
@@ -397,7 +397,7 @@ def extract_generic_relations(
 
 
 def extract_collection_label(
-    graph: Graph, collection_uri: URIRef
+    graph: Graph, collection_uri: Node
 ) -> Optional[Dict[str, str]]:
     if has_literal_value_on_predicate(graph, collection_uri, DCTERMS.title):
         return value_translations(graph, collection_uri, DCTERMS.title)
@@ -405,13 +405,15 @@ def extract_collection_label(
         return value_translations(graph, collection_uri, RDFS.label)
 
 
-def parse_collection(graph: Graph, concept_record_uri: URIRef) -> Optional[Collection]:
+def parse_collection(graph: Graph, concept_record_uri: Node) -> Optional[Collection]:
     collection_record_uri = graph.value(concept_record_uri, DCTERMS.isPartOf)
 
     if collection_record_uri and is_type(
         dcat_uri("CatalogRecord"), graph, collection_record_uri
     ):
-        collection_uri = graph.value(collection_record_uri, FOAF.primaryTopic)
+        collection_uri: Optional[Node] = graph.value(
+            collection_record_uri, FOAF.primaryTopic
+        )
 
         if collection_uri and is_type(SKOS.Collection, graph, collection_uri):
             return Collection(
@@ -446,9 +448,7 @@ def extract_labels(
     return labels if len(labels) > 0 else None
 
 
-def _parse_concept(
-    graph: Graph, fdk_record_uri: URIRef, concept_uri: URIRef
-) -> Concept:
+def _parse_concept(graph: Graph, fdk_record_uri: Node, concept_uri: URIRef) -> Concept:
 
     concept_temporal = extract_temporal_skos(graph, concept_uri)
     contact_points = extract_contact_points(graph, concept_uri)
