@@ -13,6 +13,7 @@ from rdflib.namespace import (
     DCTERMS,
     SKOS,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import ReferenceDataCode
 from fdk_rdf_parser.rdf_utils import (
@@ -45,7 +46,7 @@ def filter_reference_data_code(
 
 
 def parse_reference_code(
-    graph: Graph, code_ref: URIRef, code_predicate: URIRef, label_predicate: URIRef
+    graph: Graph, code_ref: Node, code_predicate: URIRef, label_predicate: URIRef
 ) -> ReferenceDataCode:
     return ReferenceDataCode(
         uri=code_ref.toPython() if not isinstance(code_ref, BNode) else None,

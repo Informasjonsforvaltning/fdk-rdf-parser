@@ -13,6 +13,7 @@ from rdflib.namespace import (
     DCTERMS,
     SKOS,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import (
     BusinessEvent,
@@ -71,7 +72,7 @@ def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[
     )
 
 
-def _parse_event(graph: Graph, catalog_record_uri: URIRef, subject: URIRef) -> Event:
+def _parse_event(graph: Graph, catalog_record_uri: Node, subject: URIRef) -> Event:
     event = Event(
         id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
         uri=subject.toPython(),

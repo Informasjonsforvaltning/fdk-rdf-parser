@@ -4,10 +4,10 @@ from typing import (
 )
 
 from rdflib import (
-    BNode,
     DC,
     DCTERMS,
     Graph,
+    Literal,
     RDF,
     URIRef,
 )
@@ -68,7 +68,9 @@ def extract_media_type(
     value = graph.value(subject, predicate)
     if not value:
         return None
-    elif isinstance(value, BNode) or isinstance(value, URIRef):
+    elif isinstance(value, Literal):
+        return MediaTypeOrExtent(code=value.toPython())
+    else:
         uri = value.toPython() if isinstance(value, URIRef) else None
         media_type = MediaTypeOrExtent(
             uri=uri,
@@ -77,8 +79,6 @@ def extract_media_type(
             type=media_type_type(graph, value),
         )
         return media_type if media_type_is_valid(media_type) else None
-    else:
-        return MediaTypeOrExtent(code=value.toPython())
 
 
 def extract_media_type_list(
@@ -86,7 +86,9 @@ def extract_media_type_list(
 ) -> Optional[List[MediaTypeOrExtent]]:
     media_types = []
     for obj in graph.objects(subject, predicate):
-        if isinstance(obj, BNode) or isinstance(obj, URIRef):
+        if isinstance(obj, Literal):
+            media_types.append(MediaTypeOrExtent(code=obj.toPython()))
+        else:
             uri = obj.toPython() if isinstance(obj, URIRef) else None
             media_type = MediaTypeOrExtent(
                 uri=uri,
@@ -96,8 +98,6 @@ def extract_media_type_list(
             )
             if media_type_is_valid(media_type):
                 media_types.append(media_type)
-        else:
-            media_types.append(MediaTypeOrExtent(code=obj.toPython()))
     return media_types if len(media_types) > 0 else None
 
 

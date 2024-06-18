@@ -6,7 +6,7 @@ from typing import (
     Union,
 )
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.exceptions import ParserError as RdflibParserError
 from rdflib.namespace import (
     FOAF,
@@ -59,8 +59,10 @@ def parse_data_services(
     ):
         primary_topic_uri = data_services_graph.value(record_uri, FOAF.primaryTopic)
 
-        if primary_topic_uri and is_type(
-            dcat_uri("DataService"), data_services_graph, primary_topic_uri
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and is_type(dcat_uri("DataService"), data_services_graph, primary_topic_uri)
         ):
             data_service = _parse_data_service(
                 data_services_graph, record_uri, primary_topic_uri
@@ -80,9 +82,13 @@ def parse_datasets(rdf_data: str, rdf_format: str = "turtle") -> Dict[str, Datas
         predicate=RDF.type, object=dcat_uri("CatalogRecord")
     ):
         primary_topic_uri = datasets_graph.value(record_uri, FOAF.primaryTopic)
-        if primary_topic_uri is not None and (
-            is_type(dcat_uri("Dataset"), datasets_graph, primary_topic_uri)
-            or is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri)
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and (
+                is_type(dcat_uri("Dataset"), datasets_graph, primary_topic_uri)
+                or is_type(dcat_uri("DatasetSeries"), datasets_graph, primary_topic_uri)
+            )
         ):
             partial_dataset = _parse_dataset(
                 datasets_graph, record_uri, primary_topic_uri
@@ -113,10 +119,14 @@ def parse_information_models(
     ):
         primary_topic_uri = info_models_graph.value(record_uri, FOAF.primaryTopic)
 
-        if primary_topic_uri and is_type(
-            model_dcat_ap_no_uri("InformationModel"),
-            info_models_graph,
-            primary_topic_uri,
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and is_type(
+                model_dcat_ap_no_uri("InformationModel"),
+                info_models_graph,
+                primary_topic_uri,
+            )
         ):
             info_model = _parse_information_model(
                 info_models_graph, record_uri, primary_topic_uri
@@ -141,16 +151,20 @@ def parse_public_services(
             catalog_record_uri, FOAF.primaryTopic
         )
 
-        if primary_topic_uri and (
-            is_type(
-                cpsvno_uri("Service"),
-                cpsvno_services_graph,
-                primary_topic_uri,
-            )
-            or is_type(
-                cpsv_uri("PublicService"),
-                cpsvno_services_graph,
-                primary_topic_uri,
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and (
+                is_type(
+                    cpsvno_uri("Service"),
+                    cpsvno_services_graph,
+                    primary_topic_uri,
+                )
+                or is_type(
+                    cpsv_uri("PublicService"),
+                    cpsvno_services_graph,
+                    primary_topic_uri,
+                )
             )
         ):
             cpsvno_service = _parse_cpsvno_service(
@@ -171,21 +185,25 @@ def parse_events(event_rdf: str, rdf_format: str = "turtle") -> Dict[str, Event]
     ):
         primary_topic_uri = graph.value(catalog_record_uri, FOAF.primaryTopic)
 
-        if primary_topic_uri and (
-            is_type(
-                cv_uri("Event"),
-                graph,
-                primary_topic_uri,
-            )
-            or is_type(
-                cv_uri("BusinessEvent"),
-                graph,
-                primary_topic_uri,
-            )
-            or is_type(
-                cv_uri("LifeEvent"),
-                graph,
-                primary_topic_uri,
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and (
+                is_type(
+                    cv_uri("Event"),
+                    graph,
+                    primary_topic_uri,
+                )
+                or is_type(
+                    cv_uri("BusinessEvent"),
+                    graph,
+                    primary_topic_uri,
+                )
+                or is_type(
+                    cv_uri("LifeEvent"),
+                    graph,
+                    primary_topic_uri,
+                )
             )
         ):
             event = _parse_event(graph, catalog_record_uri, primary_topic_uri)
@@ -204,10 +222,14 @@ def parse_concepts(concepts_rdf: str, rdf_format: str = "turtle") -> Dict[str, C
     ):
         primary_topic_uri = concepts_graph.value(record_uri, FOAF.primaryTopic)
 
-        if primary_topic_uri and is_type(
-            SKOS.Concept,
-            concepts_graph,
-            primary_topic_uri,
+        if (
+            primary_topic_uri is not None
+            and isinstance(primary_topic_uri, URIRef)
+            and is_type(
+                SKOS.Concept,
+                concepts_graph,
+                primary_topic_uri,
+            )
         ):
             concept = _parse_concept(concepts_graph, record_uri, primary_topic_uri)
 

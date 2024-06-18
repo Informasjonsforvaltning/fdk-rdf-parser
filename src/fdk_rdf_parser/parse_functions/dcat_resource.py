@@ -10,11 +10,13 @@ from rdflib import (
     URIRef,
 )
 from rdflib.namespace import DCTERMS
+from rdflib.term import Literal
 
 from fdk_rdf_parser.classes import PartialDcatResource
 from fdk_rdf_parser.rdf_utils import (
     date_value,
     dcat_uri,
+    node_value,
     object_value,
     value_list,
     value_set,
@@ -67,10 +69,10 @@ def extract_key_words(graph: Graph, subject: URIRef) -> Optional[List[Dict[str, 
     values = []
     for keyword in graph.objects(subject, dcat_uri("keyword")):
         translation = {}
-        if keyword.language:
+        if isinstance(keyword, Literal) and keyword.language:
             translation[keyword.language] = keyword.toPython()
         else:
-            translation["nb"] = keyword.toPython()
+            translation["nb"] = node_value(keyword)
         values.append(translation)
     return values if len(values) > 0 else None
 

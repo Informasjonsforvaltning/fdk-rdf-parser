@@ -15,6 +15,7 @@ from rdflib.namespace import (
     RDFS,
     SKOS,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import (
     DatasetSeries,
@@ -55,7 +56,7 @@ from .temporal import extract_temporal
 
 
 def _parse_dataset(
-    datasets_graph: Graph, record_uri: URIRef, dataset_uri: URIRef
+    datasets_graph: Graph, record_uri: Node, dataset_uri: URIRef
 ) -> PartialDataset:
     quality_annotations = extract_quality_annotation(datasets_graph, dataset_uri)
     cpsv_follows = extract_legal_basis_from_cpsv_follows(datasets_graph, dataset_uri)
@@ -233,13 +234,15 @@ def extract_legal_basis_from_cpsv_follows(
         rule_type = object_value(datasets_graph, legal_resource, DCTERMS.type)
         implements_ref = datasets_graph.value(legal_resource, cpsv_uri("implements"))
         if rule_type and implements_ref:
-            legal_type_ref = datasets_graph.value(implements_ref, DCTERMS.type)
+            legal_type_ref: Optional[Node] = datasets_graph.value(
+                implements_ref, DCTERMS.type
+            )
             skos_concept = SkosConcept(
                 uri=object_value(datasets_graph, implements_ref, RDFS.seeAlso),
                 extraType=rule_type,
                 prefLabel=(
                     value_translations(datasets_graph, legal_type_ref, SKOS.prefLabel)
-                    if legal_type_ref
+                    if legal_type_ref is not None
                     else None
                 ),
             )

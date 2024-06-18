@@ -15,6 +15,7 @@ from rdflib.namespace import (
     OWL,
     SKOS,
 )
+from rdflib.term import Node
 
 from fdk_rdf_parser.classes import (
     InformationModel,
@@ -43,7 +44,7 @@ from .temporal import extract_temporal
 
 
 def _parse_information_model(
-    graph: Graph, fdk_record_uri: URIRef, info_model_uri: URIRef
+    graph: Graph, fdk_record_uri: Node, info_model_uri: URIRef
 ) -> InformationModel:
     subjects = value_set(graph, info_model_uri, DCTERMS.subject)
     model_element_refs = resource_list(
