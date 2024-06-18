@@ -12,6 +12,7 @@ from .organization import Organization
 @dataclass
 class PublicService(Service):
     hasCompetentAuthority: Optional[List[Organization]] = None
+    specializedType = "publicService"
 
     def add_cpsvno_service_values(self: Any, values: Service) -> None:
         self.id = values.id
