@@ -16,6 +16,7 @@ from rdflib.namespace import (
 from fdk_rdf_parser.classes import LegalResource
 from fdk_rdf_parser.rdf_utils import (
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -26,10 +27,9 @@ def extract_legal_resources(
 ) -> Optional[List[LegalResource]]:
     values = []
     for resource in resource_list(graph, subject, predicate):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             LegalResource(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 dctTitle=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
                 seeAlso=value_list(graph, resource, RDFS.seeAlso),

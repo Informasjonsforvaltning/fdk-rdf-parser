@@ -17,6 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
     dct_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 from .reference_data_code import extract_reference_language_code
@@ -25,10 +26,9 @@ from .reference_data_code import extract_reference_language_code
 def extract_formats(graph: Graph, subject: URIRef) -> Optional[List[Format]]:
     values = []
     for resource in resource_list(graph, subject, DCTERMS.hasFormat):
-        format_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Format(
-                uri=format_uri,
+                uri=resource_uri_value(resource),
                 title=value_translations(graph, resource, DCTERMS.title),
                 format=object_value(graph, resource, dct_uri("format")),
                 language=extract_reference_language_code(

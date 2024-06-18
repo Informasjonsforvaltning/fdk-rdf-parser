@@ -13,6 +13,7 @@ from fdk_rdf_parser.rdf_utils import (
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     uri_or_identifier,
     uri_or_identifier_list,
     value_set,
@@ -21,9 +22,7 @@ from fdk_rdf_parser.rdf_utils import (
 
 
 def parse_model_property(graph: Graph, prop_ref: URIRef) -> ModelProperty:
-    prop_uri = None
-    if isinstance(prop_ref, URIRef):
-        prop_uri = prop_ref.toPython()
+    prop_uri = resource_uri_value(prop_ref)
 
     has_type_refs = resource_list(graph, prop_ref, model_dcat_ap_no_uri("hasType"))
     has_some_refs = resource_list(graph, prop_ref, model_dcat_ap_no_uri("hasSome"))

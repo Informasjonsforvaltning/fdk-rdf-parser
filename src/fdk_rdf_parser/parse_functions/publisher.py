@@ -17,6 +17,7 @@ from fdk_rdf_parser.classes import Publisher
 from fdk_rdf_parser.rdf_utils import (
     br_uri,
     object_value,
+    resource_uri_value,
     rov_uri,
     value_translations,
 )
@@ -35,7 +36,7 @@ def extract_creator(graph: Graph, subject: URIRef) -> Optional[Publisher]:
 def parse_publisher(graph: Graph, publisher: Node) -> Publisher:
     org_form = object_value(graph, publisher, rov_uri("orgType"))
     publisher = Publisher(
-        uri=publisher.toPython() if isinstance(publisher, URIRef) else None,
+        uri=resource_uri_value(publisher),
         id=object_value(graph, publisher, DCTERMS.identifier),
         name=object_value(graph, publisher, rov_uri("legalName")),
         orgPath=object_value(graph, publisher, br_uri("orgPath")),

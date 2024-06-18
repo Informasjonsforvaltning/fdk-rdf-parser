@@ -40,6 +40,7 @@ from .utils import (
     object_number_value,
     object_value,
     resource_list,
+    resource_uri_value,
     string_to_float,
     uri_or_identifier,
     uri_or_identifier_list,

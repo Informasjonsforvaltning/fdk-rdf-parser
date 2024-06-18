@@ -18,6 +18,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     node_value,
     object_value,
+    resource_uri_value,
     value_list,
     value_set,
     value_translations,
@@ -49,7 +50,7 @@ def parse_dcat_resource(graph: Graph, subject: URIRef) -> PartialDcatResource:
             else None
         ),
         descriptionFormatted=formatted_description,
-        uri=subject.toPython(),
+        uri=resource_uri_value(subject),
         accessRights=extract_reference_access_rights(graph, subject),
         themeUris=value_list(graph, subject, dcat_uri("theme")),
         theme=map_data_themes(graph, theme_refs["data-themes"]),

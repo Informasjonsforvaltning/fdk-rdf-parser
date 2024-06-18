@@ -6,7 +6,6 @@ from typing import (
 
 from rdflib import (
     Graph,
-    Literal,
     URIRef,
 )
 from rdflib.namespace import (
@@ -19,6 +18,7 @@ from fdk_rdf_parser.classes import SkosConcept
 from fdk_rdf_parser.rdf_utils import (
     object_value,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -39,9 +39,7 @@ def extract_skos_concept(
 ) -> Optional[List[SkosConcept]]:
     values = []
     for skos_concept in resource_list(graph, subject, predicate):
-        skos_concept_uri = None
-        if isinstance(skos_concept, URIRef) or isinstance(skos_concept, Literal):
-            skos_concept_uri = skos_concept.toPython()
+        skos_concept_uri = resource_uri_value(skos_concept)
 
         source_value = object_value(graph, skos_concept, DCTERMS.source)
 

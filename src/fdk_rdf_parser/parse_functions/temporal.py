@@ -17,6 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
     euvoc_uri,
     owl_time_uri,
     resource_list,
+    resource_uri_value,
     schema_uri,
 )
 
@@ -24,9 +25,7 @@ from fdk_rdf_parser.rdf_utils import (
 def extract_temporal(graph: Graph, subject: URIRef) -> Optional[List[Temporal]]:
     values = []
     for temporal_resource in resource_list(graph, subject, DCTERMS.temporal):
-        temporal_uri = None
-        if isinstance(temporal_resource, URIRef):
-            temporal_uri = temporal_resource.toPython()
+        temporal_uri = resource_uri_value(temporal_resource)
 
         start_value = date_value(graph, temporal_resource, dcat_uri("startDate"))
         end_value = date_value(graph, temporal_resource, dcat_uri("endDate"))

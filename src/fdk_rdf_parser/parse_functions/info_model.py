@@ -4,7 +4,6 @@ from typing import (
 )
 
 from rdflib import (
-    BNode,
     Graph,
     URIRef,
 )
@@ -27,6 +26,7 @@ from fdk_rdf_parser.rdf_utils import (
     object_value,
     prof_uri,
     resource_list,
+    resource_uri_value,
     uri_or_identifier,
     uri_or_identifier_list,
     value_set,
@@ -164,7 +164,7 @@ def extract_license_list(
     ref_list = resource_list(graph, subject, DCTERMS.license)
     for license_ref in ref_list:
         license = ReferenceDataCode(
-            uri=license_ref.toPython() if not isinstance(license_ref, BNode) else None,
+            uri=resource_uri_value(license_ref),
             code=object_value(graph, license_ref, DC.identifier),
             prefLabel=value_translations(graph, license_ref, SKOS.prefLabel),
         )

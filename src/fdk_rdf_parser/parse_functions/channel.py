@@ -22,6 +22,7 @@ from fdk_rdf_parser.rdf_utils.ns import (
 )
 from fdk_rdf_parser.rdf_utils.utils import (
     duration_string_value,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -33,10 +34,9 @@ def extract_channels(
 ) -> Optional[List[Channel]]:
     values = []
     for resource in resource_list(graph, subject, predicate):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Channel(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 channelType=extract_reference_channel_type(graph, resource),
                 description=value_translations(graph, resource, DCTERMS.description),

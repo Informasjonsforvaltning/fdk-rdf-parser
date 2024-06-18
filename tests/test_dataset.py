@@ -165,7 +165,7 @@ def test_adds_catalog_to_dataset(
                 dcat:dataset     <https://testdirektoratet.no/model/dataset/0> ;
                 dct:title        "Katalog"@nb ;
                 dct:description  "Beskrivelse av katalog"@nb ;
-                dct:publisher   <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> .
+                dct:publisher   <https://testdirektoratet.no/model/dataset/0/.well-known/skolem/publisher> .
 
         <https://datasets.fellesdatakatalog.digdir.no/catalog/abc123>
                 a                  dcat:CatalogRecord ;
@@ -185,9 +185,9 @@ def test_adds_catalog_to_dataset(
         <https://testdirektoratet.no/model/dataset/0>
                 a                   dcat:Dataset ;
                 dct:accessRights    [] ;
-                dct:publisher       <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789> .
+                dct:publisher       <https://testdirektoratet.no/model/dataset/0/.well-known/skolem/publisher> .
 
-        <https://organizations.fellesdatakatalog.digdir.no/organizations/123456789>
+        <https://testdirektoratet.no/model/dataset/0/.well-known/skolem/publisher>
             a                      rov:RegisteredOrganization ;
             dct:identifier         "123456789" ;
             rov:legalName          "Digitaliseringsdirektoratet" ;
@@ -204,7 +204,6 @@ def test_adds_catalog_to_dataset(
             ),
             uri="https://testdirektoratet.no/model/dataset/0",
             publisher=Publisher(
-                uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                 id="123456789",
                 name="Digitaliseringsdirektoratet",
                 orgPath="/STAT/987654321/123456789",
@@ -221,7 +220,6 @@ def test_adds_catalog_to_dataset(
                 title={"nb": "Katalog"},
                 description={"nb": "Beskrivelse av katalog"},
                 publisher=Publisher(
-                    uri="https://organizations.fellesdatakatalog.digdir.no/organizations/123456789",
                     id="123456789",
                     name="Digitaliseringsdirektoratet",
                     orgPath="/STAT/987654321/123456789",

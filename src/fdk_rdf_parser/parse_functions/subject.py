@@ -16,6 +16,7 @@ from fdk_rdf_parser.classes import Subject
 from fdk_rdf_parser.rdf_utils import (
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 
@@ -25,7 +26,7 @@ def extract_subjects(graph: Graph, dataset_ref: URIRef) -> Optional[List[Subject
     for subject_ref in resource_list(graph, dataset_ref, DCTERMS.subject):
         dataset_subjects.append(
             Subject(
-                uri=subject_ref.toPython() if isinstance(subject_ref, URIRef) else None,
+                uri=resource_uri_value(subject_ref),
                 identifier=object_value(graph, subject_ref, DCTERMS.identifier),
                 prefLabel=value_translations(graph, subject_ref, SKOS.prefLabel),
                 definition=value_translations(graph, subject_ref, SKOS.definition),

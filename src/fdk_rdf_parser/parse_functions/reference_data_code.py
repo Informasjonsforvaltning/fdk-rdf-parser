@@ -4,7 +4,6 @@ from typing import (
 )
 
 from rdflib import (
-    BNode,
     Graph,
     URIRef,
 )
@@ -22,6 +21,7 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 
@@ -49,7 +49,7 @@ def parse_reference_code(
     graph: Graph, code_ref: Node, code_predicate: URIRef, label_predicate: URIRef
 ) -> ReferenceDataCode:
     return ReferenceDataCode(
-        uri=code_ref.toPython() if not isinstance(code_ref, BNode) else None,
+        uri=resource_uri_value(code_ref),
         code=object_value(graph, code_ref, code_predicate),
         prefLabel=value_translations(graph, code_ref, label_predicate),
     )

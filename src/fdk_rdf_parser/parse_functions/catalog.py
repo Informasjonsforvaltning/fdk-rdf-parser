@@ -12,6 +12,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     is_type,
     object_value,
+    resource_uri_value,
     value_translations,
 )
 from .publisher import extract_publisher
@@ -30,7 +31,7 @@ def parse_catalog(graph: Graph, child_record_uri: Node) -> Optional[Catalog]:
                 id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
                 publisher=extract_publisher(graph, catalog_uri),
                 title=value_translations(graph, catalog_uri, DCTERMS.title),
-                uri=catalog_uri.toPython(),
+                uri=resource_uri_value(catalog_uri),
                 description=value_translations(graph, catalog_uri, DCTERMS.description),
             )
     return None
