@@ -33,6 +33,7 @@ from fdk_rdf_parser.rdf_utils import (
     object_value,
     prov_uri,
     resource_list,
+    resource_uri_value,
     value_list,
     value_set,
     value_translations,
@@ -209,7 +210,9 @@ def extract_series_info(datasets_graph: Graph, dataset_series_uri: URIRef) -> In
     series_id = object_value(
         datasets_graph, catalog_record_of_series_uri, DCTERMS.identifier
     )
-    return InSeries(uri=dataset_series_uri.toPython(), title=series_title, id=series_id)
+    return InSeries(
+        uri=resource_uri_value(dataset_series_uri), title=series_title, id=series_id
+    )
 
 
 def extract_boolean(
@@ -238,7 +241,9 @@ def extract_legal_basis_from_cpsv_follows(
                 implements_ref, DCTERMS.type
             )
             skos_concept = SkosConcept(
-                uri=object_value(datasets_graph, implements_ref, RDFS.seeAlso),
+                uri=resource_uri_value(
+                    datasets_graph.value(implements_ref, RDFS.seeAlso)
+                ),
                 extraType=rule_type,
                 prefLabel=(
                     value_translations(datasets_graph, legal_type_ref, SKOS.prefLabel)

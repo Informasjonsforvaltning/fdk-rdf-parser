@@ -17,6 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
     dcat_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     value_set,
     value_translations,
 )
@@ -34,13 +35,9 @@ def extract_distributions(
 ) -> Optional[List[Distribution]]:
     values = []
     for resource in resource_list(graph, subject, predicate):
-        resource_uri = None
-        if isinstance(resource, URIRef):
-            resource_uri = resource.toPython()
-
         values.append(
             Distribution(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 title=value_translations(graph, resource, DCTERMS.title),
                 description=value_translations(graph, resource, DCTERMS.description),
                 downloadURL=value_set(graph, resource, dcat_uri("downloadURL")),

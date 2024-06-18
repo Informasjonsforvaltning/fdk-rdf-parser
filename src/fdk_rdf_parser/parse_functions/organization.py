@@ -23,6 +23,7 @@ from fdk_rdf_parser.rdf_utils import (
 from fdk_rdf_parser.rdf_utils.ns import br_uri
 from fdk_rdf_parser.rdf_utils.utils import (
     is_type,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -31,11 +32,7 @@ from .reference_data_code import extract_reference_publisher_type
 
 def parse_organization(graph: Graph, organization_uri: URIRef) -> Organization:
     organization = Organization(
-        uri=(
-            organization_uri.toPython()
-            if isinstance(organization_uri, URIRef)
-            else None
-        ),
+        uri=resource_uri_value(organization_uri),
         identifier=object_value(graph, organization_uri, DCTERMS.identifier),
     )
     if is_type(org_uri("Organization"), graph, organization_uri) or is_type(

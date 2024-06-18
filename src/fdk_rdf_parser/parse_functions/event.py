@@ -26,6 +26,7 @@ from fdk_rdf_parser.rdf_utils import (
     is_type,
     object_value,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -75,7 +76,7 @@ def extract_broader_types(graph: Graph, event_subject: URIRef) -> Optional[List[
 def _parse_event(graph: Graph, catalog_record_uri: Node, subject: URIRef) -> Event:
     event = Event(
         id=object_value(graph, catalog_record_uri, DCTERMS.identifier),
-        uri=subject.toPython(),
+        uri=resource_uri_value(subject),
         identifier=object_value(graph, subject, DCTERMS.identifier),
         harvest=extract_meta_data(graph, catalog_record_uri),
         title=value_translations(graph, subject, DCTERMS.title),

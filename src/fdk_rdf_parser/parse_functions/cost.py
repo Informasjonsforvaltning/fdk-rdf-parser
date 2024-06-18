@@ -15,6 +15,7 @@ from fdk_rdf_parser.rdf_utils import (
     object_number_value,
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 from .organization import extract_organizations
@@ -23,10 +24,9 @@ from .organization import extract_organizations
 def extract_costs(graph: Graph, subject: URIRef) -> Optional[List[Cost]]:
     values = []
     for resource in resource_list(graph, subject, cv_uri("hasCost")):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Cost(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 description=value_translations(graph, resource, DCTERMS.description),
                 currency=object_value(graph, resource, cv_uri("currency")),

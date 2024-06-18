@@ -24,6 +24,7 @@ from fdk_rdf_parser.rdf_utils import (
     is_type,
     object_value,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -59,10 +60,9 @@ def extract_cpsvno_services(
 ) -> Optional[List[Service]]:
     values = []
     for resource in resource_list(graph, subject, predicate):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Service(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 id=object_value(graph, resource, DCTERMS.identifier),
                 title=value_translations(graph, resource, DCTERMS.title),
@@ -81,7 +81,7 @@ def _parse_cpsvno_service(
 
     service = Service(
         id=object_value(services_graph, catalog_record_uri, DCTERMS.identifier),
-        uri=cpsvno_service_uri.toPython(),
+        uri=resource_uri_value(cpsvno_service_uri),
         identifier=object_value(services_graph, cpsvno_service_uri, DCTERMS.identifier),
         title=value_translations(services_graph, cpsvno_service_uri, DCTERMS.title),
         description=value_translations(

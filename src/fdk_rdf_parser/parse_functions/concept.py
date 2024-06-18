@@ -5,7 +5,6 @@ from typing import (
 )
 
 from rdflib import (
-    BNode,
     Graph,
     Literal,
     RDF,
@@ -38,6 +37,7 @@ from fdk_rdf_parser.rdf_utils import (
     is_type,
     object_value,
     resource_list,
+    resource_uri_value,
     skosno_uri,
     skosxl_uri,
     uneskos_uri,
@@ -57,7 +57,7 @@ from .temporal import extract_temporal_skos
 def parse_text_and_uri(graph: Graph, subject: Node) -> TextAndURI:
     return TextAndURI(
         text=value_translations(graph, subject, RDFS.label),
-        uri=object_value(graph, subject, RDFS.seeAlso),
+        uri=resource_uri_value(graph.value(subject, RDFS.seeAlso)),
     )
 
 
@@ -101,11 +101,7 @@ def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextA
         sources.append(
             TextAndURI(
                 text=None,
-                uri=(
-                    source_ref.toPython()
-                    if source_ref and not isinstance(source_ref, BNode)
-                    else None
-                ),
+                uri=resource_uri_value(source_ref),
             )
         )
     return sources if len(sources) > 0 else None
@@ -420,7 +416,7 @@ def parse_collection(graph: Graph, concept_record_uri: Node) -> Optional[Collect
                 id=object_value(graph, collection_record_uri, DCTERMS.identifier),
                 publisher=extract_publisher(graph, collection_uri),
                 label=extract_collection_label(graph, collection_uri),
-                uri=collection_uri.toPython(),
+                uri=resource_uri_value(collection_uri),
                 description=value_translations(
                     graph, collection_uri, DCTERMS.description
                 ),
@@ -460,7 +456,7 @@ def _parse_concept(graph: Graph, fdk_record_uri: Node, concept_uri: URIRef) -> C
 
     return Concept(
         id=object_value(graph, fdk_record_uri, DCTERMS.identifier),
-        uri=fdk_record_uri.toPython() if fdk_record_uri else None,
+        uri=resource_uri_value(fdk_record_uri),
         identifier=concept_uri.toPython() if concept_uri else None,
         harvest=extract_meta_data(graph, fdk_record_uri),
         collection=parse_collection(graph, fdk_record_uri),

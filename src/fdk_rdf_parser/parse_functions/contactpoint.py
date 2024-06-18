@@ -22,6 +22,7 @@ from fdk_rdf_parser.rdf_utils import (
     node_value,
     object_value,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
     vcard_uri,
@@ -33,13 +34,9 @@ def extract_contact_points(
 ) -> Optional[List[DCATContactPoint]]:
     values = []
     for resource in resource_list(graph, subject, dcat_uri("contactPoint")):
-        resource_uri = None
-        if isinstance(resource, URIRef):
-            resource_uri = resource.toPython()
-
         values.append(
             DCATContactPoint(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 fullname=object_value(graph, resource, vcard_uri("fn")),
                 email=extract_has_email(graph, resource),
                 organizationName=value_translations(
@@ -93,7 +90,7 @@ def extract_cv_contact_point(
     for resource in resource_list(graph, subject, cv_uri("contactPoint")):
         values.append(
             CVContactPoint(
-                uri=resource.toPython() if isinstance(resource, URIRef) else None,
+                uri=resource_uri_value(resource),
                 contactType=value_translations(graph, resource, vcard_uri("category")),
                 email=value_list(graph, resource, cv_uri("email")),
                 telephone=value_list(graph, resource, cv_uri("telephone")),

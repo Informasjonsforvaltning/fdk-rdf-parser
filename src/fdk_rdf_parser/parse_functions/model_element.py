@@ -17,6 +17,7 @@ from fdk_rdf_parser.rdf_utils import (
     model_dcat_ap_no_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     uri_or_identifier_list,
     value_set,
     value_translations,
@@ -28,9 +29,7 @@ SIMPLE_TYPE = model_dcat_ap_no_uri("SimpleType").toPython()
 
 
 def parse_model_element(graph: Graph, element_ref: URIRef) -> ModelElement:
-    element_uri = None
-    if isinstance(element_ref, URIRef):
-        element_uri = element_ref.toPython()
+    element_uri = resource_uri_value(element_ref)
 
     has_property_refs = resource_list(
         graph, element_ref, model_dcat_ap_no_uri("hasProperty")
@@ -67,7 +66,7 @@ def parse_model_code_list(
     for code_ref in graph.subjects(SKOS.inScheme, element_ref):
         codes.append(
             ModelCodeElement(
-                uri=code_ref.toPython() if isinstance(code_ref, URIRef) else None,
+                uri=resource_uri_value(code_ref),
                 identifier=object_value(graph, code_ref, DCTERMS.identifier),
                 prefLabel=value_translations(graph, code_ref, SKOS.prefLabel),
                 inScheme=value_set(graph, code_ref, SKOS.inScheme),

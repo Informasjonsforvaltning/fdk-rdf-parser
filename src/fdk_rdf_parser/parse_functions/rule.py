@@ -14,6 +14,7 @@ from fdk_rdf_parser.rdf_utils import (
     cpsv_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 from fdk_rdf_parser.rdf_utils.utils import value_list
@@ -23,10 +24,9 @@ from .reference_data_code import extract_reference_language_list
 def extract_rules(graph: Graph, subject: URIRef) -> Optional[List[Rule]]:
     values = []
     for resource in resource_list(graph, subject, cpsv_uri("follows")):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Rule(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 description=value_translations(graph, resource, DCTERMS.description),
                 language=extract_reference_language_list(

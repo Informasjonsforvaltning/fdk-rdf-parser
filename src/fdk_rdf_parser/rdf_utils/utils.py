@@ -133,11 +133,8 @@ def uri_or_identifier_list(graph: Graph, subjects: List[Node]) -> Optional[List[
 
 
 def uri_or_identifier(graph: Graph, subject: Node) -> Optional[str]:
-    return (
-        subject.toPython()
-        if isinstance(subject, URIRef)
-        else object_value(graph, subject, DCTERMS.identifier)
-    )
+    uri = resource_uri_value(subject)
+    return uri if uri is not None else object_value(graph, subject, DCTERMS.identifier)
 
 
 def date_value(graph: Graph, subject: Node, predicate: URIRef) -> Optional[str]:
@@ -176,3 +173,13 @@ linguistic_system_keywords: Dict[str, str] = {
     "http://publications.europa.eu/resource/authority/language/NNO": "nn",
     "http://publications.europa.eu/resource/authority/language/ENG": "en",
 }
+
+
+def _is_skolem_uri(uri: Optional[str]) -> bool:
+    return "/.well-known/skolem/" in uri if uri else False
+
+
+def resource_uri_value(resource: Optional[Node]) -> Optional[str]:
+    uri = node_value(resource) if resource else None
+    uri = None if _is_skolem_uri(uri) else uri
+    return uri

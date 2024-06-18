@@ -18,6 +18,7 @@ from fdk_rdf_parser.classes import (
 from fdk_rdf_parser.rdf_utils import (
     fdk_internal_uri,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -28,8 +29,8 @@ los_base = "https://psi.norge.no/los"
 los_theme_url_part = "/tema/"
 
 
-def code_from_theme_uri(uri: str) -> str:
-    return uri.split("/")[-1]
+def code_from_theme_uri(uri: Optional[str]) -> Optional[str]:
+    return uri.split("/")[-1] if uri else None
 
 
 def split_theme_refs(
@@ -40,11 +41,11 @@ def split_theme_refs(
     eurovocs: List[URIRef] = list()
     for resource in resource_list(graph, subject, predicate):
         theme_uri = resource.toPython() if isinstance(resource, URIRef) else None
-        if los_base in theme_uri:
+        if theme_uri and los_base in theme_uri:
             los.append(resource)
-        elif data_theme_base in theme_uri:
+        elif theme_uri and data_theme_base in theme_uri:
             data_themes.append(resource)
-        elif eurovoc_base in theme_uri:
+        elif theme_uri and eurovoc_base in theme_uri:
             eurovocs.append(resource)
 
     return {"los": los, "data-themes": data_themes, "eurovocs": eurovocs}
@@ -53,12 +54,12 @@ def split_theme_refs(
 def map_los_themes(graph: Graph, theme_refs: List[URIRef]) -> Optional[List[LosNode]]:
     values = []
     for resource in theme_refs:
-        los_uri = resource.toPython()
+        los_uri = resource_uri_value(resource)
 
         values.append(
             LosNode(
                 uri=los_uri,
-                isTema=True if los_theme_url_part in los_uri else False,
+                isTema=True if los_uri and los_theme_url_part in los_uri else False,
                 code=code_from_theme_uri(los_uri),
                 name=value_translations(graph, resource, SKOS.prefLabel),
                 losPaths=value_list(graph, resource, fdk_internal_uri("themePath")),
@@ -73,7 +74,7 @@ def map_data_themes(
 ) -> Optional[List[EuDataTheme]]:
     values = []
     for resource in theme_refs:
-        theme_uri = resource.toPython()
+        theme_uri = resource_uri_value(resource)
         values.append(
             EuDataTheme(
                 uri=theme_uri,
@@ -90,7 +91,7 @@ def map_eurovoc_themes(
 ) -> Optional[List[Eurovoc]]:
     values = []
     for resource in theme_refs:
-        theme_uri = resource.toPython()
+        theme_uri = resource_uri_value(resource)
         values.append(
             Eurovoc(
                 uri=theme_uri,

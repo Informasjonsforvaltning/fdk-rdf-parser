@@ -14,6 +14,7 @@ from fdk_rdf_parser.rdf_utils import (
     cv_uri,
     object_value,
     resource_list,
+    resource_uri_value,
     value_list,
     value_translations,
 )
@@ -23,10 +24,9 @@ from .skos_concept import extract_skos_concept
 def extract_requirements(graph: Graph, subject: URIRef) -> Optional[List[Requirement]]:
     values = []
     for resource in resource_list(graph, subject, cv_uri("holdsRequirement")):
-        resource_uri = resource.toPython() if isinstance(resource, URIRef) else None
         values.append(
             Requirement(
-                uri=resource_uri,
+                uri=resource_uri_value(resource),
                 identifier=object_value(graph, resource, DCTERMS.identifier),
                 dctTitle=value_translations(graph, resource, DCTERMS.title),
                 dctType=extract_skos_concept(graph, resource, DCTERMS.type),

@@ -5,7 +5,6 @@ from typing import (
 
 from rdflib import (
     Graph,
-    Literal,
     URIRef,
 )
 from rdflib.namespace import DCTERMS
@@ -14,6 +13,7 @@ from fdk_rdf_parser.classes import ConformsTo
 from fdk_rdf_parser.rdf_utils import (
     object_value,
     resource_list,
+    resource_uri_value,
     value_translations,
 )
 
@@ -21,9 +21,7 @@ from fdk_rdf_parser.rdf_utils import (
 def extract_conforms_to(graph: Graph, subject: URIRef) -> Optional[List[ConformsTo]]:
     values = []
     for conforms_to in resource_list(graph, subject, DCTERMS.conformsTo):
-        conforms_to_uri = None
-        if isinstance(conforms_to, URIRef) or isinstance(conforms_to, Literal):
-            conforms_to_uri = conforms_to.toPython()
+        conforms_to_uri = resource_uri_value(conforms_to)
 
         source_value = object_value(graph, conforms_to, DCTERMS.source)
 
