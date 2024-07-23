@@ -481,14 +481,15 @@ def test_informationmodel_and_conformsto() -> None:
         @prefix dct: <http://purl.org/dc/terms/> .
         @prefix dcat:  <http://www.w3.org/ns/dcat#> .
         @prefix dcatno: <http://difi.no/dcatno#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
         @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
                 dct:conformsTo
-                [ a               skos:Concept ;
-                  dct:source      "https://conformsto.no" ;
-                  dct:title  "conforms to"@en
+                [ a             dct:Standard ;
+                  rdfs:seeAlso  <https://conformsto.no> ;
+                  dct:title     "conforms to"@en
                 ] ;
                 dcatno:informationModel
                 [ a               skos:Concept , dct:Standard ;
