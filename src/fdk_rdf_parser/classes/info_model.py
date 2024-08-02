@@ -21,6 +21,7 @@ from .temporal import Temporal
 @dataclass
 class InformationModel(PartialDcatResource):
     id: Optional[str] = None
+    dctType: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     catalog: Optional[Catalog] = None
     conformsTo: Optional[List[DctStandard]] = None
@@ -58,7 +59,6 @@ class InformationModel(PartialDcatResource):
         self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
-        self.dctType = values.dctType
         self.issued = values.issued
         self.modified = values.modified
         self.language = values.language

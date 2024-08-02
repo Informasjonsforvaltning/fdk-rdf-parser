@@ -25,6 +25,7 @@ from .temporal import Temporal
 @dataclass
 class PartialDataset(PartialDcatResource):
     id: Optional[str] = None
+    dctType: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     accessRightsComment: Optional[List[str]] = None
     distribution: Optional[List[Distribution]] = None
@@ -71,7 +72,6 @@ class PartialDataset(PartialDcatResource):
         self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
-        self.dctType = values.dctType
         self.issued = values.issued
         self.modified = values.modified
         self.landingPage = values.landingPage

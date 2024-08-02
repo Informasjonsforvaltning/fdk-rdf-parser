@@ -27,6 +27,7 @@ def _parse_data_service(
 ) -> DataService:
     data_service = DataService(
         id=object_value(data_services_graph, record_uri, DCTERMS.identifier),
+        dctType=object_value(data_services_graph, data_service_uri, DCTERMS.type),
         harvest=extract_meta_data(data_services_graph, record_uri),
         endpointURL=value_set(
             data_services_graph, data_service_uri, dcat_uri("endpointURL")

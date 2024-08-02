@@ -53,6 +53,7 @@ def _parse_information_model(
 
     info_model = InformationModel(
         id=object_value(graph, fdk_record_uri, DCTERMS.identifier),
+        dctType=object_value(graph, info_model_uri, DCTERMS.type),
         harvest=extract_meta_data(graph, fdk_record_uri),
         catalog=parse_catalog(graph, fdk_record_uri),
         conformsTo=extract_dct_standard_list(graph, info_model_uri, DCTERMS.conformsTo),

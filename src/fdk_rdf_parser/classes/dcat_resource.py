@@ -31,7 +31,6 @@ class PartialDcatResource:
     eurovocThemes: Optional[List[Eurovoc]] = None
     keyword: Optional[List[Dict[str, str]]] = None
     contactPoint: Optional[List[DCATContactPoint]] = None
-    dctType: Optional[str] = None
     issued: Optional[str] = None
     modified: Optional[str] = None
     landingPage: Optional[Set[str]] = None
