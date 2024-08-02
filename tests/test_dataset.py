@@ -997,6 +997,8 @@ def test_parse_single_dataset() -> None:
 
         <https://testdirektoratet.no/model/dataset/0>
                 a                         dcat:Dataset ;
+                dct:type
+                    <http://publications.europa.eu/resource/authority/dataset-type/TEST_DATA> ;
                 dct:accrualPeriodicity
                     <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
                 dct:identifier
@@ -1018,6 +1020,10 @@ def test_parse_single_dataset() -> None:
         <http://publications.europa.eu/resource/authority/frequency/ANNUAL>
             dc:identifier  "ANNUAL";
             skos:prefLabel  "annual"@en , "årleg"@nn , "årlig"@nb , "årlig"@no .
+
+        <http://publications.europa.eu/resource/authority/dataset-type/TEST_DATA>
+            dc:identifier   "TEST_DATA" ;
+            skos:prefLabel  "Testdata"@nn , "Test data"@en , "Testdata"@no , "Testdata"@nb .
 
         <https://data.geonorge.no/administrativeEnheter/fylke/id/34>
                 a               dct:Location;
@@ -1041,6 +1047,16 @@ def test_parse_single_dataset() -> None:
         uri="https://testdirektoratet.no/model/dataset/0",
         publisher=Publisher(
             uri="http://data.brreg.no/enhetsregisteret/enhet/987654321"
+        ),
+        dctType=ReferenceDataCode(
+            uri="http://publications.europa.eu/resource/authority/dataset-type/TEST_DATA",
+            code="TEST_DATA",
+            prefLabel={
+                "en": "Test data",
+                "nn": "Testdata",
+                "nb": "Testdata",
+                "no": "Testdata",
+            },
         ),
         page={"https://testdirektoratet.no"},
         subject=[

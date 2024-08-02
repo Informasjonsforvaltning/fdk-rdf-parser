@@ -46,6 +46,7 @@ from .harvest_meta_data import extract_meta_data
 from .qualified_attribution import extract_qualified_attributions
 from .quality_annotation import extract_quality_annotation
 from .reference_data_code import (
+    extract_reference_dataset_type,
     extract_reference_frequency,
     extract_reference_provenance,
 )
@@ -65,7 +66,7 @@ def _parse_dataset(
 
     dataset = PartialDataset(
         id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
-        dctType=object_value(datasets_graph, dataset_uri, DCTERMS.type),
+        dctType=extract_reference_dataset_type(datasets_graph, dataset_uri),
         admsIdentifier=value_set(datasets_graph, dataset_uri, adms_uri("identifier")),
         harvest=extract_meta_data(datasets_graph, record_uri),
         accessRightsComment=value_list(

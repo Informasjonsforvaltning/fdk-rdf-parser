@@ -103,6 +103,17 @@ def extract_reference_frequency(
         return None
 
 
+def extract_reference_dataset_type(
+    graph: Graph, subject: URIRef
+) -> Optional[ReferenceDataCode]:
+    type_ref = graph.value(subject, DCTERMS.type)
+    if type_ref:
+        dct_type = parse_reference_code(graph, type_ref, DC.identifier, SKOS.prefLabel)
+        return filter_reference_data_code(dct_type)
+    else:
+        return None
+
+
 def extract_reference_provenance(
     graph: Graph, subject: URIRef
 ) -> Optional[ReferenceDataCode]:

@@ -25,7 +25,7 @@ from .temporal import Temporal
 @dataclass
 class PartialDataset(PartialDcatResource):
     id: Optional[str] = None
-    dctType: Optional[str] = None
+    dctType: Optional[ReferenceDataCode] = None
     harvest: Optional[HarvestMetaData] = None
     accessRightsComment: Optional[List[str]] = None
     distribution: Optional[List[Distribution]] = None
