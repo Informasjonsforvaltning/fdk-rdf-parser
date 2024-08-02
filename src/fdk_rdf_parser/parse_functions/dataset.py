@@ -65,6 +65,7 @@ def _parse_dataset(
 
     dataset = PartialDataset(
         id=object_value(datasets_graph, record_uri, DCTERMS.identifier),
+        dctType=object_value(datasets_graph, dataset_uri, DCTERMS.type),
         admsIdentifier=value_set(datasets_graph, dataset_uri, adms_uri("identifier")),
         harvest=extract_meta_data(datasets_graph, record_uri),
         accessRightsComment=value_list(

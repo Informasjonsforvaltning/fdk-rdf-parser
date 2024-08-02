@@ -16,6 +16,7 @@ from .skos_concept import SkosConcept
 @dataclass
 class DataService(PartialDcatResource):
     id: Optional[str] = None
+    dctType: Optional[str] = None
     harvest: Optional[HarvestMetaData] = None
     endpointDescription: Optional[Set[str]] = None
     endpointURL: Optional[Set[str]] = None
@@ -40,7 +41,6 @@ class DataService(PartialDcatResource):
         self.eurovocThemes = values.eurovocThemes
         self.keyword = values.keyword
         self.contactPoint = values.contactPoint
-        self.dctType = values.dctType
         self.issued = values.issued
         self.modified = values.modified
         self.landingPage = values.landingPage

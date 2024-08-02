@@ -148,7 +148,6 @@ def test_dcat_resource_parser() -> None:
             )
         ],
         landingPage={"https://testdirektoratet.no"},
-        dctType="Kodelister",
     )
 
     graph = Graph().parse(data=src, format="turtle")
