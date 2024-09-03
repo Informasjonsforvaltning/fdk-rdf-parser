@@ -100,7 +100,7 @@ def extract_sources(graph: Graph, definition_ref: URIRef) -> Optional[List[TextA
     for source_ref in graph.objects(definition_ref, DCTERMS.source):
         sources.append(
             TextAndURI(
-                text=None,
+                text=value_translations(graph, source_ref, RDFS.label),
                 uri=resource_uri_value(source_ref),
             )
         )

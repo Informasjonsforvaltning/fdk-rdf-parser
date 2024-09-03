@@ -119,6 +119,10 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                                 ] ;
         skosno:valueRange       [ ]  .
 
+<https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14>
+        a           rdfs:Resource ;
+        rdfs:label  "Kildenavn"@nb .
+
 <https://registrering-begrep-api.staging.fellesdatakatalog.digdir.no/910258028/3609b02d-72c5-47e0-a6b8-df0a503cf190>
         a                  skos:Concept ;
         dct:identifier     "3609b02d-72c5-47e0-a6b8-df0a503cf190" ;
@@ -325,7 +329,8 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
                 sources=[
                     TextAndURI(
-                        uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14"
+                        uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14",
+                        text={"nb": "Kildenavn"},
                     )
                 ],
             ),
@@ -335,7 +340,8 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                     sourceRelationship="https://data.norge.no/vocabulary/relationship-with-source-type#self-composed",
                     sources=[
                         TextAndURI(
-                            uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14"
+                            uri="https://lovdata.no/dokument/NL/lov/1997-02-28-19/kap14#kap14",
+                            text={"nb": "Kildenavn"},
                         )
                     ],
                 ),
