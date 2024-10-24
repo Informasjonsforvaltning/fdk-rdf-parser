@@ -43,6 +43,7 @@ from fdk_rdf_parser.rdf_utils import (
     uneskos_uri,
     value_set,
     value_translations,
+    value_translations_list,
     xkos_uri_v_2,
 )
 from .contactpoint import extract_contact_points
@@ -429,8 +430,8 @@ def extract_labels(
 ) -> Optional[List[Dict[str, str]]]:
     labels = list()
     if has_literal_value_on_predicate(graph, concept_uri, predicate):
-        main_labels = value_translations(graph, concept_uri, predicate)
-        labels.append(main_labels) if main_labels is not None else None
+        main_labels = value_translations_list(graph, concept_uri, predicate)
+        labels.extend(main_labels) if main_labels is not None else None
 
     else:
         deprecated_labels = [
