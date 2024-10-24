@@ -114,6 +114,20 @@ def value_translations(
     return values if len(values) > 0 else None
 
 
+def value_translations_list(
+    graph: Graph, subject: Node, predicate: URIRef
+) -> Optional[List[Dict[str, str]]]:
+    values = []
+    for obj in graph.objects(subject, predicate):
+        value = dict()
+        if isinstance(obj, Literal) and obj.language:
+            value[obj.language] = obj.toPython()
+        else:
+            value["nb"] = node_value(obj)
+        values.append(value)
+    return values if len(values) > 0 else None
+
+
 def resource_list(graph: Graph, subject: Node, predicate: URIRef) -> List[Any]:
     values = []
     for obj in graph.objects(subject, predicate):
