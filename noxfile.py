@@ -5,7 +5,7 @@ import nox_poetry
 nox.options.sessions = "lint", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
-python_versions = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+python_versions = ["3.9", "3.10", "3.11", "3.12"]
 
 
 @nox_poetry.session(python=python_versions)
