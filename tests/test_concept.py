@@ -192,9 +192,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
         dct:subject        [ a                   skos:Concept ;
                              skos:prefLabel      "bnode subject"@en
                            ] ;
-        skosxl:prefLabel   [ a                   skosxl:Label ;
-                             skosxl:literalForm  "dokument"@nn
-                           ] ;
+        skos:prefLabel     "dokument"@nn , "dokument"@nb ;
         skosno:definisjon  [ a                       skosno:Definisjon ;
                              rdfs:label              "eit skriftstykke, eit skriftleg utgreiing og inneheld informasjon. Eit dokument er meint for kommunikasjon eller lagring av data. "@nn ;
                              dct:source              [ rdfs:label    "Noe sted et sted"@nb ;
@@ -466,7 +464,7 @@ def test_parse_concepts(mock_reference_data_client: Mock) -> None:
                 Subject(label={"nb": "nb 3", "nn": "nn 3"}),
                 Subject(label={"en": "bnode subject"}),
             ],
-            prefLabel={"nn": "dokument"},
+            prefLabel={"nn": "dokument", "nb": "dokument"},
             definition=Definition(
                 text={
                     "nn": "eit skriftstykke, eit skriftleg utgreiing og inneheld informasjon. Eit dokument er meint for kommunikasjon eller lagring av data. "
