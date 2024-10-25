@@ -425,6 +425,17 @@ def parse_collection(graph: Graph, concept_record_uri: Node) -> Optional[Collect
     return None
 
 
+def extract_pref_label(graph: Graph, concept_uri: URIRef) -> Optional[Dict[str, str]]:
+    if has_literal_value_on_predicate(graph, concept_uri, SKOS.prefLabel):
+        return value_translations(graph, concept_uri, SKOS.prefLabel)
+    else:
+        deprecated_labels = [
+            value_translations(graph, label_ref, skosxl_uri("literalForm"))
+            for label_ref in graph.objects(concept_uri, skosxl_uri("prefLabel"))
+        ]
+        return deprecated_labels[0] if len(deprecated_labels) > 0 else None
+
+
 def extract_labels(
     graph: Graph, concept_uri: URIRef, predicate: URIRef, predicate_deprecated: URIRef
 ) -> Optional[List[Dict[str, str]]]:
@@ -450,9 +461,6 @@ def _parse_concept(graph: Graph, fdk_record_uri: Node, concept_uri: URIRef) -> C
     concept_temporal = extract_temporal_skos(graph, concept_uri)
     contact_points = extract_contact_points(graph, concept_uri)
 
-    pref_label_list = extract_labels(
-        graph, concept_uri, SKOS.prefLabel, skosxl_uri("prefLabel")
-    )
     definition_list = extract_definitions(graph, concept_uri)
 
     return Concept(
@@ -466,9 +474,7 @@ def _parse_concept(graph: Graph, fdk_record_uri: Node, concept_uri: URIRef) -> C
         subject=extract_subjects(graph, concept_uri),
         status=extract_status(graph, concept_uri),
         example=value_translations(graph, concept_uri, SKOS.example),
-        prefLabel=(
-            pref_label_list[0] if pref_label_list and len(pref_label_list) > 0 else None
-        ),
+        prefLabel=extract_pref_label(graph, concept_uri),
         hiddenLabel=extract_labels(
             graph, concept_uri, SKOS.hiddenLabel, skosxl_uri("hiddenLabel")
         ),
