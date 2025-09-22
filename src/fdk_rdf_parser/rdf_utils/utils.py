@@ -156,7 +156,11 @@ def date_value(graph: Graph, subject: Node, predicate: URIRef) -> Optional[str]:
     if value:
         date_object = node_value(value)
         if isinstance(date_object, datetime):
-            return datetime_isoformat(date_object)
+            # Normalize timezone format to use 'Z' instead of '+00:00' for UTC
+            iso_string = datetime_isoformat(date_object)
+            if iso_string.endswith("+00:00"):
+                iso_string = iso_string[:-6] + "Z"
+            return iso_string
         elif isinstance(date_object, date):
             return date_isoformat(date_object)
         else:

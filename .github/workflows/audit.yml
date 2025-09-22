@@ -1,4 +1,7 @@
 name: Audit
+permissions:
+  contents: read
+  security-events: write
 on: push
 jobs:
   audit:
