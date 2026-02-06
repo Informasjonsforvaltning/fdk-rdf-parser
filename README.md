@@ -1,3 +1,15 @@
+
+ ⚠️ **Archived / Deprecated**
+>
+> This repository is no longer maintained.
+> Its functionality has been replaced by:
+
+➡️ https://github.com/Informasjonsforvaltning/fdk-parser-service
+
+
+---
+
+
 # fdk-rdf-parser
 
 This is a pypi-package, [fdk-rdf-parser](https://pypi.org/project/fdk-rdf-parser), that parses rdf-data to python-objects used by [Felles datakatalog](https://data.norge.no)
